@@ -328,6 +328,15 @@ Reponse code: 200
 
 ## **Service discovery**
 
+- **Register service:** POST /serviceregistry/service-discovery/register
+  
+  Request body:
+
+  Response body:
+  
+- **Lookup service:** POST /serviceregistry/service-discovery/lookup
+- **Revoke service:** DELETE /serviceregistry/service-discovery/revoke/{instanceid}
+
 # Management endpoints
 
 ## **Device related**
@@ -1035,6 +1044,77 @@ Response body:
   ~~~
 
 ## **Service definition related**
+
+- **Create service definitions:** POST /serviceregistry/mgmt/service-definitions
+
+Request body:
+  ~~~
+  {
+    "serviceDefinitionNames": [
+      "Fahrenheit-info", "Kelvin-info", "Celsius-info"
+    ]
+  }
+  ~~~
+
+Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "name": "fahrenheit-info",
+        "createdAt": "2024-10-24T21:48:35.519522800Z",
+        "updatedAt": "2024-10-24T21:48:35.519522800Z"
+      },
+      {
+        "name": "kelvin-info",
+        "createdAt": "2024-10-24T21:48:35.553525200Z",
+        "updatedAt": "2024-10-24T21:48:35.553525200Z"
+      },
+      {
+        "name": "celsius-info",
+        "createdAt": "2024-10-24T21:48:35.556578200Z",
+        "updatedAt": "2024-10-24T21:48:35.556578200Z"
+      }
+    ],
+    "count": 3
+  }
+  ~~~
+
+- **Delete service definitions:** DELETE /serviceregistry/mgmt/service-definitions
+  
+  Query parameter: Kelvin-info, info
+
+  ~~~
+  http://localhost:8443/serviceregistry/mgmt/service-definitions?names=Kelvin-info&names=info
+  ~~~
+
+  Response code: 200
+
+- **Query service definitions:** POST /serviceregistry/mgmt/service-definitions/query
+
+  Request body:
+  ~~~
+  {
+    "page": 2,
+    "size": 5,
+    "direction": "ASC",
+    "sortField": "id"
+  }
+  ~~~
+
+  Respone body:
+  ~~~
+  {
+    "entries": [
+      {
+        "name": "celsius-info",
+        "createdAt": "2024-10-24T21:48:36Z",
+        "updatedAt": "2024-10-24T21:48:36Z"
+      }
+    ],
+    "count": 11
+  }
+  ~~~
 ## **Service instance related**
 ## **Interface template related**
 ## **Configurations**
