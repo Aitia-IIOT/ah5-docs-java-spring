@@ -1,0 +1,372 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[4]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{/ \mref{#4}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{system-discovery} % XXX = ServiceName 
+\ArrowheadServiceID{system-discovery} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Rajmund Bocsi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{rbocsi@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{system-discovery} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{system-discovery} service, which enables both application and core/support systems to register ifself to and revoke itself from Local Cloud. It also enables to lookup for systems. System representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. Example of this interaction when a system registers itself because it is a requirement to interact to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+
+The \textbf{system-discovery} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{register} adds new system to the Local Cloud;
+    \item \textit{revoke} removes a system from the Local Cloud;
+    \item \textit{lookup} shows the systems that matches the filtering requirements;
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+An application system can use the \textit{register} operation of \textbf{system-discovery} service to register itself. Before that, the application system can use the \textit{lookup} operation to check whether the it is already registered or not. When a system is removed from the Local Cloud, the \textit{revoke} operation can be called.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+The requester has to identify itself to use any of the operations.
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+Available for anyone within the local cloud.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operations of the service. The \textbf{system-discovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} systems.
+In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\fsubsection{register}{SystemRegistrationRequest}{SystemRegistrationResponse}{ErrorResponse}
+
+The registration data must meet the following criteria:
+
+\begin{itemize}
+    \item System names are case insensitive and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and has to start with a letter (also cannot ends with dash).
+    \item System has to have at least one address (including those that comes from the referenced device, if any). It is recommended to use IP address. 
+    \item Keys in the metadata structure can not contain dot (.) character.
+    \item Systems can register multiple times, but only if there are identical (same version, addresses, metadata and device).
+\end{itemize}
+
+\fsubsection{lookup}{SystemLookupRequest}{SystemLookupResponse}{ErrorResponse}
+
+The lookup data must meet the following criteria:
+
+\begin{itemize}
+    \item If a filter expects a list, there is an OR relation between the elements of a filter.
+    \item There is an AND relation between different kind of filters.
+\end{itemize}
+
+\fsubsection{revoke}{Identity}{OperationStatus}{ErrorResponse}
+
+The input operation data must meet the following criteria:
+
+\begin{itemize}
+    \item With this operation a system can revoke itself.
+\end{itemize}
+
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{system-discovery} service provides to the hosting System are listed.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\msubsection{struct}{SystemRegistrationRequest}
+\label{sec:model:SystemRegistrationRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the system. \\ \hline
+version &\pref{Version} & no & Version of the system. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses of the system.  \\ \hline
+deviceName & \pref{Name} & no & Unique identifier of the device on which the system is running. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+\label{sec:model:Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\msubsection{struct}{Metadata}
+\label{sec:model:Metadata}
+
+An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
+
+\clearpage
+
+\msubsection{struct}{SystemRegistrationResponse}
+\label{sec:model:SystemRegistrationResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+name & \pref{Name} & Unique identifier of the registered system. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the registered system. \\ \hline
+version & \pref{Version} & Version of the system. \\ \hline
+addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the registered system.  \\ \hline
+device & \hyperref[sec:model:DeviceDescriptor]{DeviceDescriptor} & Information about the device on which the system is running. \\ \hline
+createdAt & \pref{DateTime} & System is registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & System is modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AddressDescriptor}
+\label{sec:model:AddressDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+type & \pref{AddressType} & Type of the address. \\ \hline
+address & \pref{Address} & Address. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{DeviceDescriptor}
+\label{sec:model:DeviceDescriptor}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{Name} & Unique identifier of the device. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
+addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
+createdAt & \pref{DateTime} & Device is registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Device is modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ErrorResponse}
+\label{sec:model:ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{SystemLookupRequest}
+\label{sec:model:SystemLookupRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.1cm} | p{4.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+verbose & \pref{Boolean} & no & If true detailed device information also returns (only if the provider supports it). \\ \hline
+systemNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems with any of the specified names. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for systems with any of the specified addresses.   \\ \hline
+addressType &  \pref{AddressType} & no & Requester is looking for systems with the specified type of address. \\ \hline
+metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for systems that are matching the specified metadata requirements.  \\ \hline
+versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for systems with any of the specified versions.   \\ \hline
+deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems that are running on any of the specified devices. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{MetadataRequirements}
+\label{sec:model:MetadataRequirements}
+
+A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
+
+\begin{itemize}
+    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which associated with an embedded object and in this object we are looking for the key named "subkey").
+    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
+    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
+\end{itemize}
+
+\msubsection{struct}{SystemLookupResponse}
+\label{sec:model:SystemLookupResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{6cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:SystemLookupResult]{SystemLookupResult}$>$     & List of system results. \\ \hline
+count & \pref{Number} & Number of returned systems. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{SystemLookupResult}
+\label{sec:model:SystemLookupResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{Name} & Unique identifier of the system. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the system. \\ \hline
+version & \pref{Version} & Version of the system. \\ \hline
+addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the system.  \\ \hline
+device & \hyperref[sec:model:DeviceDescriptor]{DeviceDescriptor} & Information about the device on which the system is running. \\ \hline
+createdAt & \pref{DateTime} & System is registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & System is modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{Address}          & A string representation of the address. \\ \hline
+\pdef{AddressType}      & Any suitable type chosen by the implementor or service. \\ \hline
+\pdef{Boolean}          & One out of \texttt{true} or \texttt{false}. \\ \hline
+\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or number value that indicates whether an operation is a success or a failure. It can be used multiple values for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\pdef{Version}          & Specifies a system version. Version must follows the Semantic Versioning. \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}
