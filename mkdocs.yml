@@ -1,9 +1,13 @@
-site_name: Arrowhead 5 | core-java-spring
+site_name: Arrowhead 5 | java-spring
 repo_name: eclipse-arrowhead
 repo_url: https://github.com/eclipse-arrowhead
 nav:
   - Home: index.md
-  - Core Systems: core_systems.md
+  - Core Systems:
+    - Service Registry: core_systems/service_registry.md
+    - Service Orchestration: core_systems/service_orchestration.md
+    - Service Authorization: core_systems/service_authorization.md
+    - System Authentication: core_systems/system_authentication.md
   - Support Systems: support_systems.md
   - Tutorials: tutorials.md
   - Client Libraries: client_libraries.md
@@ -11,18 +15,22 @@ nav:
 theme:
   name: material
   logo: assets/logo.png
+  favicon: assets/favicon.png
   icon:
       repo: fontawesome/brands/github 
   features:
+    - navigation.instant
     - navigation.tabs
-    - navigation.sections
-    - toc.integrate
+    - navigation.tabs.sticky
+    - navigation.tracking
+    - toc.follow
     - navigation.top
     - search.suggest
     - search.highlight
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
+    - icons
   language: en
   palette:
     - scheme: default
@@ -41,6 +49,11 @@ theme:
 extra:
   generator: false
   social:
-    - icon: fontawesome/brands/github-alt
+    - icon: fontawesome/brands/github
       link: https://github.com/eclipse-arrowhead
 
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
