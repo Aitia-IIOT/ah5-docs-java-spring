@@ -331,10 +331,123 @@ Reponse code: 200
 - **Register service:** POST /serviceregistry/service-discovery/register
   
   Request body:
+  ~~~
+  {
+    "serviceDefinitionName": "celsius-info",
+    "version": "1",
+    "expiresAt": "2030-10-11T14:30:00Z",
+    "metadata": {
+      "frequency": 400
+    },
+    "interfaces": [
+      {
+        "templateName": "generic-https",
+        "protocol": "https",
+        "policy": "NONE",
+        "properties": {
+          "accessAddresses": ["127.0.100.100"],
+          "accessPort": 4040,
+          "basePath": "/celsius-info"
+        }
+      }
+    ]
+  }
+  ~~~
 
   Response body:
+  ~~~
+  {
+    "instanceId": "temperature-provider1::celsius-info::1.0.0",
+    "provider": {
+      "name": "temperature-provider1",
+      "metadata": {
+        "type": "temperature",
+        "scales": [
+          "Kelvin",
+          "Celsius"
+        ],
+        "customizable": false
+      },
+      "version": "2.1.0",
+      "addresses": [
+        {
+          "type": "MAC",
+          "address": "a1:b2:c3:34:55:f6"
+        },
+        {
+          "type": "IPV4",
+          "address": "127.77.66.1"
+        }
+      ],
+      "device": {
+        "name": "thermometer1",
+        "metadata": {
+          "scales": [
+            "Kelvin",
+            "Celsius"
+          ],
+          "max-temperature": {
+            "Kelvin": 310,
+            "Celsius": 40
+          },
+          "min-temperature": {
+            "Kelvin": 260,
+            "Celsius": -10
+          },
+          "appliable": [
+            "spring",
+            "autumn"
+          ]
+        },
+        "addresses": [
+          {
+            "type": "MAC",
+            "address": "81:ef:1a:44:7a:ff"
+          }
+        ],
+        "createdAt": "2024-10-21T18:47:45Z",
+        "updatedAt": "2024-10-21T18:47:45Z"
+      },
+      "createdAt": "2024-10-24T23:44:09Z",
+      "updatedAt": "2024-10-24T23:44:09Z"
+    },
+    "serviceDefinition": {
+      "name": "celsius-info",
+      "createdAt": "2024-10-24T21:48:36Z",
+      "updatedAt": "2024-10-24T21:48:36Z"
+    },
+    "version": "1.0.0",
+    "expiresAt": "2030-10-11T14:30:00Z",
+    "metadata": {
+      "frequency": 400
+    },
+    "interfaces": [
+      {
+        "templateName": "generic-https",
+        "protocol": "https",
+        "policy": "NONE",
+        "properties": {
+          "accessAddresses": [
+            "127.0.100.100"
+          ],
+          "basePath": "/celsius-info",
+          "accessPort": 4040
+        }
+      }
+    ],
+    "createdAt": "2024-10-24T23:47:51.493025200Z",
+    "updatedAt": "2024-10-24T23:47:51.493025200Z"
+  }
+  ~~~
   
 - **Lookup service:** POST /serviceregistry/service-discovery/lookup
+
+  Request body:
+  ~~~
+  ~~~
+
+  Response body:
+
 - **Revoke service:** DELETE /serviceregistry/service-discovery/revoke/{instanceid}
 
 # Management endpoints
@@ -1116,6 +1229,898 @@ Response body:
   }
   ~~~
 ## **Service instance related**
+
+- **Create service instances:** POST /serviceregistry/mgmt/service-instances
+  
+  Request body:
+  ~~~
+  {
+    "instances": [
+      {
+        "systemName": "main-temperature-provider",
+        "serviceDefinitionName": "fahrenheit-info",
+        "version": "1",
+        "expiresAt": "2030-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 300
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-http",
+            "protocol": "http",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": ["127.0.0.14"],
+              "accessPort": 4040,
+              "operations": 
+              {
+                "discover": {"path": "/discover", "method": "GET"}, 
+                "query": {"path": "/query", "method": "POST"}
+              },
+              "basePath": "/info/fahrenheit"
+            }
+          }
+        ]
+      },
+      {
+        "systemName": "main-temperature-provider",
+        "serviceDefinitionName": "celsius-info",
+        "version": "1",
+        "expiresAt": "2030-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 250
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-http",
+            "protocol": "http",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": ["127.0.0.14"],
+              "accessPort": 4040,
+              "basePath": "/info/celsius"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  ~~~
+
+  Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "instanceId": "main-temperature-provider::fahrenheit-info::1.0.0",
+        "provider": {
+          "name": "main-temperature-provider",
+          "metadata": {
+            "type": "temperature",
+            "customizable": true,
+            "scales": [
+              "Fahrenheit",
+              "Kelvin",
+              "Celsius"
+            ]
+          },
+          "version": "2.0.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "128.0.1.2"
+            },
+            {
+              "type": "MAC",
+              "address": "12:34:5a:ff:c9:44"
+            }
+          ],
+          "device": {
+            "name": "thermometer5",
+            "metadata": {
+              "scales": [
+                "Fahrenheit",
+                "Kelvin",
+                "Celsius"
+              ],
+              "max-temperature": {
+                "Kelvin": 310,
+                "Celsius": 40,
+                "Fahrenheit": 140
+              },
+              "min-temperature": {
+                "Fahrenheit": 20,
+                "Kelvin": 260,
+                "Celsius": -10
+              },
+              "appliable": [
+                "spring",
+                "summer",
+                "autumn",
+                "winter"
+              ]
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "81:ef:1a:44:7b:02"
+              }
+            ],
+            "createdAt": "2024-10-22T10:34:10Z",
+            "updatedAt": "2024-10-22T10:34:10Z"
+          },
+          "createdAt": "2024-10-23T21:43:35Z",
+          "updatedAt": "2024-10-23T21:43:35Z"
+        },
+        "serviceDefinition": {
+          "name": "fahrenheit-info",
+          "createdAt": "2024-10-24T21:48:36Z",
+          "updatedAt": "2024-10-24T21:48:36Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2030-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 300
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-http",
+            "protocol": "http",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.0.14"
+              ],
+              "accessPort": 4040,
+              "operations": {
+                "discover": {
+                  "path": "/discover",
+                  "method": "GET"
+                },
+                "query": {
+                  "path": "/query",
+                  "method": "POST"
+                }
+              },
+              "basePath": "/info/fahrenheit"
+            }
+          }
+        ],
+        "createdAt": "2024-10-24T23:07:00.630946400Z",
+        "updatedAt": "2024-10-24T23:07:00.630946400Z"
+      },
+      {
+        "instanceId": "main-temperature-provider::celsius-info::1.0.0",
+        "provider": {
+          "name": "main-temperature-provider",
+          "metadata": {
+            "type": "temperature",
+            "customizable": true,
+            "scales": [
+              "Fahrenheit",
+              "Kelvin",
+              "Celsius"
+            ]
+          },
+          "version": "2.0.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "128.0.1.2"
+            },
+            {
+              "type": "MAC",
+              "address": "12:34:5a:ff:c9:44"
+            }
+          ],
+          "device": {
+            "name": "thermometer5",
+            "metadata": {
+              "scales": [
+                "Fahrenheit",
+                "Kelvin",
+                "Celsius"
+              ],
+              "max-temperature": {
+                "Kelvin": 310,
+                "Celsius": 40,
+                "Fahrenheit": 140
+              },
+              "min-temperature": {
+                "Fahrenheit": 20,
+                "Kelvin": 260,
+                "Celsius": -10
+              },
+              "appliable": [
+                "spring",
+                "summer",
+                "autumn",
+                "winter"
+              ]
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "81:ef:1a:44:7b:02"
+              }
+            ],
+            "createdAt": "2024-10-22T10:34:10Z",
+            "updatedAt": "2024-10-22T10:34:10Z"
+          },
+          "createdAt": "2024-10-23T21:43:35Z",
+          "updatedAt": "2024-10-23T21:43:35Z"
+        },
+        "serviceDefinition": {
+          "name": "celsius-info",
+          "createdAt": "2024-10-24T21:48:36Z",
+          "updatedAt": "2024-10-24T21:48:36Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2030-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 250
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-http",
+            "protocol": "http",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.0.14"
+              ],
+              "accessPort": 4040,
+              "basePath": "/info/celsius"
+            }
+          }
+        ],
+        "createdAt": "2024-10-24T23:07:00.640972600Z",
+        "updatedAt": "2024-10-24T23:07:00.640972600Z"
+      }
+    ],
+    "count": 2
+  }
+  ~~~
+
+- **Update service instances:** PUT /serviceregistry/mgmt/service-instances
+  
+  Request body:
+
+  ~~~
+  {
+    "instances": [
+      {
+        "instanceId": "main-temperature-provider::celsius-info::1.0.0",
+        "expiresAt": "2035-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 350
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-http",
+            "protocol": "http",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": ["127.0.0.14"],
+              "accessPort": 4040,
+              "operations": 
+              {
+                "discover": {"path": "/discover", "method": "GET"}, 
+                "query": {"path": "/query", "method": "POST"}
+              },
+              "basePath": "/info/fahrenheit"
+            }
+          },
+          {
+            "templateName": "generic-https",
+            "protocol": "https",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": ["127.0.0.14"],
+              "accessPort": 4040,
+              "operations": 
+              {
+                "discover": {"path": "/discover", "method": "GET"}, 
+                "query": {"path": "/query", "method": "POST"}
+              },
+              "basePath": "/info/fahrenheit"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  ~~~
+
+  Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "instanceId": "main-temperature-provider::celsius-info::1.0.0",
+        "provider": {
+          "name": "main-temperature-provider",
+          "metadata": {
+            "type": "temperature",
+            "customizable": true,
+            "scales": [
+              "Fahrenheit",
+              "Kelvin",
+              "Celsius"
+            ]
+          },
+          "version": "2.0.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "128.0.1.2"
+            },
+            {
+              "type": "MAC",
+              "address": "12:34:5a:ff:c9:44"
+            }
+          ],
+          "device": {
+            "name": "thermometer5",
+            "metadata": {
+              "scales": [
+                "Fahrenheit",
+                "Kelvin",
+                "Celsius"
+              ],
+              "max-temperature": {
+                "Kelvin": 310,
+                "Celsius": 40,
+                "Fahrenheit": 140
+              },
+              "min-temperature": {
+                "Fahrenheit": 20,
+                "Kelvin": 260,
+                "Celsius": -10
+              },
+              "appliable": [
+                "spring",
+                "summer",
+                "autumn",
+                "winter"
+              ]
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "81:ef:1a:44:7b:02"
+              }
+            ],
+            "createdAt": "2024-10-22T10:34:10Z",
+            "updatedAt": "2024-10-22T10:34:10Z"
+          },
+          "createdAt": "2024-10-23T21:43:35Z",
+          "updatedAt": "2024-10-23T21:43:35Z"
+        },
+        "serviceDefinition": {
+          "name": "celsius-info",
+          "createdAt": "2024-10-24T21:48:36Z",
+          "updatedAt": "2024-10-24T21:48:36Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2035-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 350
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-http",
+            "protocol": "http",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.0.14"
+              ],
+              "accessPort": 4040,
+              "operations": {
+                "discover": {
+                  "path": "/discover",
+                  "method": "GET"
+                },
+                "query": {
+                  "path": "/query",
+                  "method": "POST"
+                }
+              },
+              "basePath": "/info/fahrenheit"
+            }
+          },
+          {
+            "templateName": "generic-https",
+            "protocol": "https",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.0.14"
+              ],
+              "accessPort": 4040,
+              "operations": {
+                "discover": {
+                  "path": "/discover",
+                  "method": "GET"
+                },
+                "query": {
+                  "path": "/query",
+                  "method": "POST"
+                }
+              },
+              "basePath": "/info/fahrenheit"
+            }
+          }
+        ],
+        "createdAt": "2024-10-24T23:07:01Z",
+        "updatedAt": "2024-10-24T23:33:15.443031200Z"
+      }
+    ],
+    "count": 1
+  }
+  ~~~
+
+- **Delete service instances:** DELETE /serviceregistry/mgmt/service-instances
+- **Query service instances:** POST /serviceregistry/mgmt/service-instances/query
+  
+  Request body:
+  ~~~
+  {
+   "pagination": {
+      "page": 0,
+      "size": 10,
+      "direction": "DESC",
+      "sortField": "id"
+    },
+    "instanceIds": [
+    ],
+    "providerNames": [
+      "temperature-provider1", "main-temperature-provider"
+    ],
+    "serviceDefinitionNames": [
+    ],
+    "versions": [
+    ],
+    "alivesAt": "",
+    "metadataRequirementsList": [
+      {
+        "frequency": { "op": "LESS_THAN", "value": 500 }
+      }
+    ],
+    "interfaceTemplateNames": [
+      "generic-http", "generic-https"
+    ],
+    "interfacePropertyRequirementsList": [
+      {
+        "accessAddresses": ["127.0.0.14"],
+        "accessPort": 4040,
+        "basePath": "/info/fahrenheit"
+      },
+      {
+         "accessAddresses" : [ "127.0.100.100" ],
+         "basePath" : "/celsius-info",
+         "accessPort" : 4040
+      }
+    ],
+    "policies": [
+    ]
+  }
+  ~~~
+
+  Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "instanceId": "temperature-provider1::celsius-info::1.0.0",
+        "provider": {
+          "name": "temperature-provider1",
+          "metadata": {
+            "type": "temperature",
+            "scales": [
+              "Kelvin",
+              "Celsius"
+            ],
+            "customizable": false
+          },
+          "version": "2.1.0",
+          "addresses": [
+            {
+              "type": "MAC",
+              "address": "a1:b2:c3:34:55:f6"
+            },
+            {
+              "type": "IPV4",
+              "address": "127.77.66.1"
+            }
+          ],
+          "device": {
+            "name": "thermometer1",
+            "metadata": {
+              "scales": [
+                "Kelvin",
+                "Celsius"
+              ],
+              "max-temperature": {
+                "Kelvin": 310,
+                "Celsius": 40
+              },
+              "min-temperature": {
+                "Kelvin": 260,
+                "Celsius": -10
+              },
+              "appliable": [
+                "spring",
+                "autumn"
+              ]
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "81:ef:1a:44:7a:ff"
+              }
+            ],
+            "createdAt": "2024-10-21T18:47:45Z",
+            "updatedAt": "2024-10-21T18:47:45Z"
+          },
+          "createdAt": "2024-10-24T23:44:09Z",
+          "updatedAt": "2024-10-24T23:44:09Z"
+        },
+        "serviceDefinition": {
+          "name": "celsius-info",
+          "createdAt": "2024-10-24T21:48:36Z",
+          "updatedAt": "2024-10-24T21:48:36Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2030-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 400
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-https",
+            "protocol": "https",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.100.100"
+              ],
+              "basePath": "/celsius-info",
+              "accessPort": 4040
+            }
+          }
+        ],
+        "createdAt": "2024-10-24T23:47:51Z",
+        "updatedAt": "2024-10-24T23:47:51Z"
+      },
+      {
+        "instanceId": "main-temperature-provider::celsius-info::1.0.0",
+        "provider": {
+          "name": "main-temperature-provider",
+          "metadata": {
+            "type": "temperature",
+            "customizable": true,
+            "scales": [
+              "Fahrenheit",
+              "Kelvin",
+              "Celsius"
+            ]
+          },
+          "version": "2.0.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "128.0.1.2"
+            },
+            {
+              "type": "MAC",
+              "address": "12:34:5a:ff:c9:44"
+            }
+          ],
+          "device": {
+            "name": "thermometer5",
+            "metadata": {
+              "scales": [
+                "Fahrenheit",
+                "Kelvin",
+                "Celsius"
+              ],
+              "max-temperature": {
+                "Kelvin": 310,
+                "Celsius": 40,
+                "Fahrenheit": 140
+              },
+              "min-temperature": {
+                "Fahrenheit": 20,
+                "Kelvin": 260,
+                "Celsius": -10
+              },
+              "appliable": [
+                "spring",
+                "summer",
+                "autumn",
+                "winter"
+              ]
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "81:ef:1a:44:7b:02"
+              }
+            ],
+            "createdAt": "2024-10-22T10:34:10Z",
+            "updatedAt": "2024-10-22T10:34:10Z"
+          },
+          "createdAt": "2024-10-23T21:43:35Z",
+          "updatedAt": "2024-10-23T21:43:35Z"
+        },
+        "serviceDefinition": {
+          "name": "celsius-info",
+          "createdAt": "2024-10-24T21:48:36Z",
+          "updatedAt": "2024-10-24T21:48:36Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2035-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 350
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-http",
+            "protocol": "http",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.0.14"
+              ],
+              "accessPort": 4040,
+              "operations": {
+                "discover": {
+                  "path": "/discover",
+                  "method": "GET"
+                },
+                "query": {
+                  "path": "/query",
+                  "method": "POST"
+                }
+               },
+              "basePath": "/info/fahrenheit"
+            }
+          },
+          {
+            "templateName": "generic-https",
+            "protocol": "https",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.0.14"
+              ],
+              "accessPort": 4040,
+              "operations": {
+                "discover": {
+                  "path": "/discover",
+                  "method": "GET"
+                },
+                "query": {
+                  "path": "/query",
+                  "method": "POST"
+                }
+              },
+              "basePath": "/info/fahrenheit"
+            }
+          }
+        ],
+        "createdAt": "2024-10-24T23:07:01Z",
+        "updatedAt": "2024-10-25T01:33:15Z"
+      },
+      {
+        "instanceId": "main-temperature-provider::fahrenheit-info::1.0.0",
+        "provider": {
+          "name": "main-temperature-provider",
+          "metadata": {
+            "type": "temperature",
+            "customizable": true,
+            "scales": [
+              "Fahrenheit",
+              "Kelvin",
+              "Celsius"
+            ]
+          },
+          "version": "2.0.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "128.0.1.2"
+            },
+            {
+              "type": "MAC",
+              "address": "12:34:5a:ff:c9:44"
+            }
+          ],
+          "device": {
+            "name": "thermometer5",
+            "metadata": {
+              "scales": [
+                "Fahrenheit",
+                "Kelvin",
+                "Celsius"
+              ],
+              "max-temperature": {
+                "Kelvin": 310,
+                "Celsius": 40,
+                "Fahrenheit": 140
+              },
+              "min-temperature": {
+                "Fahrenheit": 20,
+                "Kelvin": 260,
+                "Celsius": -10
+              },
+              "appliable": [
+                "spring",
+                "summer",
+                "autumn",
+                "winter"
+              ]
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "81:ef:1a:44:7b:02"
+              }
+            ],
+            "createdAt": "2024-10-22T10:34:10Z",
+            "updatedAt": "2024-10-22T10:34:10Z"
+          },
+          "createdAt": "2024-10-23T21:43:35Z",
+          "updatedAt": "2024-10-23T21:43:35Z"
+        },
+        "serviceDefinition": {
+          "name": "fahrenheit-info",
+          "createdAt": "2024-10-24T21:48:36Z",
+          "updatedAt": "2024-10-24T21:48:36Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2030-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 300
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-http",
+            "protocol": "http",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.0.14"
+              ],
+              "accessPort": 4040,
+              "operations": {
+                "discover": {
+                  "path": "/discover",
+                  "method": "GET"
+                },
+                "query": {
+                  "path": "/query",
+                  "method": "POST"
+                }
+              },
+              "basePath": "/info/fahrenheit"
+            }
+          }
+        ],
+        "createdAt": "2024-10-24T23:07:01Z",
+        "updatedAt": "2024-10-24T23:07:01Z"
+      }
+    ],
+    "count": 3
+  }
+  ~~~
+
 ## **Interface template related**
+
+- **Query interface templates:** POST 
+/serviceregistry/mgmt/interface-templates/query
+
+Request body:
+  ~~~
+  {
+    "pagination": {
+      "page": 0,
+      "size": 2,
+      "direction": "DESC",
+      "sortField": "id"
+    },
+    "templateNames": [
+      "generic-http", "generic-https"
+    ],
+    "protocols": [
+      "http", "https"
+    ]
+  }
+  ~~~
+
+Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "name": "generic-https",
+        "protocol": "https",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          },
+          {
+            "name": "accessPort",
+            "mandatory": true,
+            "validator": "MINMAX",
+            "validatorParams": [
+              "1",
+              "65535"
+            ]
+          },
+          {
+            "name": "basePath",
+            "mandatory": true,
+            "validator": null,
+            "validatorParams": null
+          },
+          {
+            "name": "operations",
+            "mandatory": false,
+            "validator": "HTTP_OPERATIONS",
+            "validatorParams": []
+          }
+        ],
+        "createdAt": "2024-07-10T11:57:12Z",
+        "updatedAt": "2024-10-15T18:15:44Z"
+      },
+      {
+        "name": "generic-http",
+        "protocol": "http",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          },
+          {
+            "name": "accessPort",
+            "mandatory": true,
+            "validator": "MINMAX",
+            "validatorParams": [
+              "1",
+              "65535"
+            ]
+          },
+          {
+            "name": "basePath",
+            "mandatory": true,
+            "validator": null,
+            "validatorParams": null
+          },
+          {
+            "name": "operations",
+            "mandatory": false,
+            "validator": "HTTP_OPERATIONS",
+            "validatorParams": []
+          }
+        ],
+        "createdAt": "2024-07-10T11:57:12Z",
+        "updatedAt": "2024-10-13T22:48:03Z"
+      }
+    ],
+    "count": 2
+  }
+  ~~~
+
+- **Create interface templates:**
+- **Delete interface templates:**
+  
 ## **Configurations**
 ## **Logs**
