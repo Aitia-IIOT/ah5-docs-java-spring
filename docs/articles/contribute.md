@@ -2,11 +2,11 @@
 
 Since Arrowhead project is governed within the Eclipse Foundation, the authors of any contribution must agree and accept the [Eclipse Contributor Agreement ("ECA")](https://www.eclipse.org/legal/ECA.php).
 
-Technically it means that contributors have to have an [Eclipse Fundation Account](https://accounts.eclipse.org/user/register?destination=user/edit) with which the signed ECA is possible to submit! GitHub Pull Requests could be accepted only when all the authors own an Eclipse Foundation Account with the signed ECA!
+Technically it means that contributors need an [Eclipse Fundation Account](https://accounts.eclipse.org/user/register?destination=user/edit) which makes possible to submit a signed ECA! GitHub Pull Requests could be accepted only when all the authors own an Eclipse Foundation Account with the signed ECA!
 
 ### ECA verification
 
-The existance of the signed ECA is verified based on the authors commits. Your local Git client should hold and push the committs with the same email address like the Eclipse Foundation Account was created with. When the email address is different, than the verification process will fail and the Pull Request is not possible to merge. 
+The existence of the signed ECA is verified based on the authors commits. Your local Git client should hold and push the commits with the same email address like the Eclipse Foundation Account was created with. When the email address is different, than the verification process will fail and the Pull Request is not possible to merge. 
 
 #### Configuring Git client
 

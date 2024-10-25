@@ -1,5 +1,5 @@
 # Tutorials
 
-### [How to registery a system?]()
+### [How to register a system?]()
 
 Coming soon...
