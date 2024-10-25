@@ -444,11 +444,93 @@ Reponse code: 200
 
   Request body:
   ~~~
+  {
+    "instanceIds": [ 
+    ],
+    "providerNames": [
+        "temperature-provider1" 
+    ],
+    "serviceDefinitionNames": [
+        "celsius-info"
+    ],
+    "versions": [
+        "1.0.0", "1.0.1"
+    ],
+    "alivesAt": "",
+    "metadataRequirementsList": [
+    ],
+    "interfaceTemplateNames": [
+        "generic-http", "generic-https"
+    ],
+    "interfacePropertyRequirementsList": [
+    ],
+    "policies": [
+    ]
+  }
   ~~~
 
   Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "instanceId": "temperature-provider1::celsius-info::1.0.0",
+        "provider": {
+          "name": "temperature-provider1",
+          "metadata": {
+            "type": "temperature",
+            "scales": [
+              "Kelvin",
+              "Celsius"
+            ],
+            "customizable": false
+          },
+          "version": "2.1.0",
+          "createdAt": "2024-10-24T23:44:09Z",
+          "updatedAt": "2024-10-24T23:44:09Z"
+        },
+        "serviceDefinition": {
+          "name": "celsius-info",
+          "createdAt": "2024-10-24T21:48:36Z",
+          "updatedAt": "2024-10-24T21:48:36Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2030-10-11T14:30:00Z",
+        "metadata": {
+          "frequency": 400,
+          "unrestricted-discovery": true
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-https",
+            "protocol": "https",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "127.0.100.100"
+              ],
+              "basePath": "/celsius-info",
+              "accessPort": 4040
+            }
+          }
+        ],
+        "createdAt": "2024-10-24T23:47:51Z",
+        "updatedAt": "2024-10-25T14:48:04Z"
+      }
+    ],
+    "count": 1
+  }
+  ~~~
 
 - **Revoke service:** DELETE /serviceregistry/service-discovery/revoke/{instanceid}
+  
+  Query parameter: temperature-provider1::celsius-info::1.1.0
+
+  ~~~
+  http://localhost:8443/serviceregistry/service-discovery/revoke/temperature-provider1%3A%3Acelsius-info%3A%3A1.1.0
+  ~~~
+
+  Response code: 200
 
 # Management endpoints
 
@@ -1662,6 +1744,15 @@ Response body:
   ~~~
 
 - **Delete service instances:** DELETE /serviceregistry/mgmt/service-instances
+  
+  Query parameters: main-temperature-provider::celsius-info::1.0.0, main-temperature-provider::fahrenheit-info::1.0.0
+
+  ~~~
+  http://localhost:8443/serviceregistry/mgmt/service-instances?serviceInstances=main-temperature-provider%3A%3Acelsius-info%3A%3A1.0.0&serviceInstances=main-temperature-provider%3A%3Afahrenheit-info%3A%3A1.0.0
+  ~~~
+
+Response code: 200
+
 - **Query service instances:** POST /serviceregistry/mgmt/service-instances/query
   
   Request body:
