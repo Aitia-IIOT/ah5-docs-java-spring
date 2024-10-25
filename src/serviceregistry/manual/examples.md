@@ -223,6 +223,8 @@ This file contains specific examples of what payloads are expected and returned 
 
 - **Lookup system:** /serviceregistry/system-discovery/lookup
   
+  _Query parameter: verbose=true_
+
   Request body:
   ~~~
   {
@@ -437,6 +439,8 @@ Reponse code: 200
   ~~~
   
 - **Lookup service:** POST /serviceregistry/service-discovery/lookup
+
+  _Query parameter: verbose=false_
 
   Request body:
   ~~~
@@ -1168,6 +1172,8 @@ GET /serviceregistry/monitor/echo
 
   - **Query systems:** POST /serviceregistry/mgmt/systems/query
   
+  _Query parameter: verbose=false_
+  
   Request body:
   ~~~
   {
@@ -1811,6 +1817,8 @@ GET /serviceregistry/monitor/echo
   ~~~
 
 - **Query service instances:** POST /serviceregistry/mgmt/service-instances/query
+
+  _Query parameter: verbose=true_
   
   Request body:
   ~~~
