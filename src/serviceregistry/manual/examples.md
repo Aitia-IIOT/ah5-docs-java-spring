@@ -532,6 +532,97 @@ Reponse code: 200
 
   Response code: 200
 
+## **Logs**
+/serviceregistry/mgmt/logs
+
+  Request body:
+  ~~~
+  {
+    "pagination": {
+      "page": 0,
+      "size": 5,
+      "direction": "ASC",
+      "sortField": "entryDate"
+    },
+    "from": "2024-10-23T00:00:00Z",
+    "to": "2024-10-24T00:00:00Z",
+    "severity": "DEBUG",
+    "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener"
+  }
+  ~~~
+
+  Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "logId": "11e0a3ef-9184-11ef-9618-0a0027000004",
+        "entryDate": "2024-10-23T21:16:29.318Z",
+        "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
+        "severity": "INFO",
+        "message": "Core system eu.arrowhead.serviceregistry.ServiceRegistrySystemInfo@2404abe2 revoked 0 service(s).",
+        "exception": ""
+      },
+      {
+        "logId": "1b072b68-9184-11ef-8015-0a0027000004",
+        "entryDate": "2024-10-23T21:16:44.685Z",
+        "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
+        "severity": "INFO",
+        "message": "System name: serviceregistry",
+        "exception": ""
+      },
+      {
+        "logId": "1b092739-9184-11ef-8015-0a0027000004",
+        "entryDate": "2024-10-23T21:16:44.688Z",
+        "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
+        "severity": "INFO",
+        "message": "SSL mode: DISABLED",
+        "exception": ""
+      },
+      {
+        "logId": "1b0c0d6a-9184-11ef-8015-0a0027000004",
+        "entryDate": "2024-10-23T21:16:44.692Z",
+        "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
+        "severity": "INFO",
+        "message": "Authentication policy: DECLARED",
+        "exception": ""
+      },
+      {
+        "logId": "1b8cd62b-9184-11ef-8015-0a0027000004",
+        "entryDate": "2024-10-23T21:16:45.566Z",
+        "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
+        "severity": "INFO",
+        "message": "System serviceregistry published 4 service(s).",
+        "exception": ""
+      }
+    ],
+    "count": 5
+  }
+  ~~~
+
+## **Config**
+GET 
+/serviceregistry/mgmt/get-config
+
+Query parameters: service.discovery.policy, discovery.verbose
+
+~~~
+http://localhost:8443/serviceregistry/mgmt/get-config?keys=service.discovery.policy&keys=discovery.verbose
+~~~
+
+Response body:
+~~~
+  {
+    "map": {
+      "discovery.verbose": "true",
+      "service.discovery.policy": "restricted"
+    }
+  }
+~~~
+
+# Monitor endpoint
+GET /serviceregistry/monitor/echo
+
 # Management endpoints
 
 ## **Device related**
@@ -2299,5 +2390,21 @@ Response body:
 
   Response code: 200
   
-## **Configurations**
-## **Logs**
+# Example for an error response
+
+If the request payload is not syntactically or semantically correct, an error message data tranfer object is returned.
+
+**Example:** 
+
+DELETE /serviceregistry/service-discovery/revoke/{instanceId}
+
+If the instanceId belongs to an other system's service, the sender will receive the following response:
+
+  ~~~
+  {
+    "errorMessage": "Revoking other systems' service is forbidden",
+    "errorCode": 403,
+    "exceptionType": "FORBIDDEN",
+    "origin": "DELETE /serviceregistry/service-discovery/revoke/{instanceId}"
+  }
+  ~~~
