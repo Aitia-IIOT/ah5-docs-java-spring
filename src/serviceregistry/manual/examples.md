@@ -2210,8 +2210,94 @@ Response body:
   }
   ~~~
 
-- **Create interface templates:**
-- **Delete interface templates:**
+- **Create interface templates:** POST /serviceregistry/mgmt/interface-templates
+  
+  Request body:
+  ~~~
+  {
+    "interfaceTemplates": [
+      {
+        "name": "generic-mqtt",
+        "protocol": "tcp",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          },
+          {
+            "name": "accessPort",
+            "mandatory": true,
+            "validator": "MINMAX",
+            "validatorParams": [
+              "1",
+              "65535"
+            ]
+          },
+          {
+            "name": "topic",
+            "mandatory": true
+          },
+          {
+            "name": "clientId",
+            "mandatory": false
+          }
+        ]
+      }
+    ]
+  }
+  ~~~
+
+  Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "name": "generic-mqtt",
+        "protocol": "tcp",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          },
+          {
+            "name": "accessPort",
+            "mandatory": true,
+            "validator": "MINMAX",
+            "validatorParams": [
+              "1",
+              "65535"
+            ]
+          },
+          {
+            "name": "topic",
+            "mandatory": true
+          },
+          {
+            "name": "clientId",
+            "mandatory": false
+          }
+        ],
+        "createdAt": "2024-10-25T13:34:45.241134500Z",
+        "updatedAt": "2024-10-25T13:34:45.241134500Z"
+      }
+    ],
+    "count": 1
+  }
+  ~~~
+
+- **Delete interface templates:** DELETE /serviceregistry/mgmt/interface-templates
+  
+  Query parameters: generic-mqtt, test-template
+
+  ~~~
+  http://localhost:8443/serviceregistry/mgmt/interface-templates?names=generic-mqtt&names=test-template
+  ~~~
+
+  Response code: 200
   
 ## **Configurations**
 ## **Logs**
