@@ -141,8 +141,7 @@ This file contains specific examples of what payloads are expected and returned 
 
 - **Register system:** POST /serviceregistry/system-discovery/register
 
-Request body:
-
+  Request body:
   ~~~
   {
     "metadata": {
@@ -165,8 +164,7 @@ Request body:
   }
   ~~~
 
-Response body:
-
+  Response body:
   ~~~
   {
     "name": "temperature-provider1",
@@ -226,7 +224,6 @@ Response body:
 - **Lookup system:** /serviceregistry/system-discovery/lookup
   
   Request body:
-
   ~~~
   {
     "systemNames": [
@@ -250,7 +247,6 @@ Response body:
   ~~~
 
   Resonse body:
-
   ~~~
   {
     "entries": [
@@ -627,98 +623,6 @@ GET /serviceregistry/monitor/echo
 
 ## **Device related**
 
-- **Query devices:** POST /serviceregistry/mgmt/devices/query
-  
-  Request body:
-
-  ~~~
-  {
-    "pagination": {
-      "page": 1,
-      "size": 2,
-      "direction": "DESC",
-      "sortField": "name"
-    },
-    "deviceNames": [
-      "thermometer1", "thermometer2", "thermometer3", "thermometer4", "thermometer5"
-    ],
-    "addresses": [
-    ],
-    "addressType": "",
-    "metadataRequirementList": [
-      {
-        "appliable": { "op": "CONTAINS", "value": "spring"},
-        "scales": { "op": "CONTAINS", "value": "Fahrenheit" },
-        "max-temperature.Fahrenheit": { "op": "GREATER_THAN", "value": 100}
-      }
-    ]
-  }
-  ~~~
-
-  Response body:
-  ~~~
-  {
-    "entries": [
-      {
-        "name": "thermometer3",
-        "metadata": {
-          "scales": [
-            "Fahrenheit"
-          ],
-          "max-temperature": {
-            "Fahrenheit": 110
-          },
-          "min-temperature": {
-            "Fahrenheit": 0
-          },
-          "appliable": [
-            "winter",
-            "spring",
-            "autumn"
-          ]
-        },
-        "addresses": [
-          {
-            "type": "MAC",
-            "address": "81:ef:1a:44:7b:01"
-          }
-        ],
-        "createdAt": "2024-10-22T10:30:55Z",
-        "updatedAt": "2024-10-22T10:30:55Z"
-      },
-      {
-        "name": "thermometer2",
-        "metadata": {
-          "scales": [
-            "Fahrenheit"
-          ],
-          "max-temperature": {
-            "Fahrenheit": 140
-          },
-          "min-temperature": {
-            "Fahrenheit": 0
-          },
-          "appliable": [
-            "winter",
-            "spring",
-            "summer",
-            "autumn"
-          ]
-        },
-        "addresses": [
-          {
-            "type": "MAC",
-            "address": "81:ef:1a:44:7b:00"
-          }
-        ],
-        "createdAt": "2024-10-22T10:01:19Z",
-        "updatedAt": "2024-10-22T10:01:19Z"
-      }
-    ],
-    "count": 4
-  }
-  ~~~
-
 - **Create devices:** POST /serviceregistry/mgmt/devices
   
   Request body:
@@ -880,6 +784,97 @@ GET /serviceregistry/monitor/echo
   }
   ~~~
 
+- **Query devices:** POST /serviceregistry/mgmt/devices/query
+  
+  Request body:
+  ~~~
+  {
+    "pagination": {
+      "page": 1,
+      "size": 2,
+      "direction": "DESC",
+      "sortField": "name"
+    },
+    "deviceNames": [
+      "thermometer1", "thermometer2", "thermometer3", "thermometer4", "thermometer5"
+    ],
+    "addresses": [
+    ],
+    "addressType": "",
+    "metadataRequirementList": [
+      {
+        "appliable": { "op": "CONTAINS", "value": "spring"},
+        "scales": { "op": "CONTAINS", "value": "Fahrenheit" },
+        "max-temperature.Fahrenheit": { "op": "GREATER_THAN", "value": 100}
+      }
+    ]
+  }
+  ~~~
+
+  Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "name": "thermometer3",
+        "metadata": {
+          "scales": [
+            "Fahrenheit"
+          ],
+          "max-temperature": {
+            "Fahrenheit": 110
+          },
+          "min-temperature": {
+            "Fahrenheit": 0
+          },
+          "appliable": [
+            "winter",
+            "spring",
+            "autumn"
+          ]
+        },
+        "addresses": [
+          {
+            "type": "MAC",
+            "address": "81:ef:1a:44:7b:01"
+          }
+        ],
+        "createdAt": "2024-10-22T10:30:55Z",
+        "updatedAt": "2024-10-22T10:30:55Z"
+      },
+      {
+        "name": "thermometer2",
+        "metadata": {
+          "scales": [
+            "Fahrenheit"
+          ],
+          "max-temperature": {
+            "Fahrenheit": 140
+          },
+          "min-temperature": {
+            "Fahrenheit": 0
+          },
+          "appliable": [
+            "winter",
+            "spring",
+            "summer",
+            "autumn"
+          ]
+        },
+        "addresses": [
+          {
+            "type": "MAC",
+            "address": "81:ef:1a:44:7b:00"
+          }
+        ],
+        "createdAt": "2024-10-22T10:01:19Z",
+        "updatedAt": "2024-10-22T10:01:19Z"
+      }
+    ],
+    "count": 4
+  }
+  ~~~
+
 - **Delete devices:** DELETE /serviceregistry/mgmt/devices
   
   Query parameters: thermometer2, thermometer10
@@ -895,8 +890,7 @@ GET /serviceregistry/monitor/echo
 - **Create systems:** POST 
 /serviceregistry/mgmt/systems
 
-Request body:
-
+  Request body:
   ~~~
   {
     "systems": [
@@ -939,8 +933,7 @@ Request body:
   }
   ~~~
 
-Response body:
-
+  Response body:
   ~~~
   {
     "entries": [
@@ -1027,7 +1020,6 @@ Response body:
   - **Update systems:** PUT /serviceregistry/mgmt/systems
   
   Request body:
-
   ~~~
   {
     "systems": [
@@ -1071,7 +1063,6 @@ Response body:
   ~~~
 
   Response body:
-
   ~~~
   {
     "entries": [
@@ -1175,16 +1166,6 @@ Response body:
   }
   ~~~
 
-  - **Delete systems:** DELETE /serviceregistry/mgmt/systems
-  
-  Query parameters: test-temperature-consumer-1, test-temperature-consumer-2
-
-  ~~~
-  http://localhost:8443/serviceregistry/mgmt/systems?names=test-temperature-consumer-1&names=test-temperature-consumer-1
-  ~~~
-
-  Response code: 200
-
   - **Query systems:** POST /serviceregistry/mgmt/systems/query
   
   Request body:
@@ -1213,7 +1194,6 @@ Response body:
   ~~~
 
   Response body:
-
   ~~~
   {
     "entries": [
@@ -1315,11 +1295,21 @@ Response body:
   }
   ~~~
 
+  - **Delete systems:** DELETE /serviceregistry/mgmt/systems
+  
+  Query parameters: test-temperature-consumer-1, test-temperature-consumer-2
+
+  ~~~
+  http://localhost:8443/serviceregistry/mgmt/systems?names=test-temperature-consumer-1&names=test-temperature-consumer-1
+  ~~~
+
+  Response code: 200
+
 ## **Service definition related**
 
 - **Create service definitions:** POST /serviceregistry/mgmt/service-definitions
 
-Request body:
+  Request body:
   ~~~
   {
     "serviceDefinitionNames": [
@@ -1328,7 +1318,7 @@ Request body:
   }
   ~~~
 
-Response body:
+  Response body:
   ~~~
   {
     "entries": [
@@ -1351,16 +1341,6 @@ Response body:
     "count": 3
   }
   ~~~
-
-- **Delete service definitions:** DELETE /serviceregistry/mgmt/service-definitions
-  
-  Query parameter: Kelvin-info, info
-
-  ~~~
-  http://localhost:8443/serviceregistry/mgmt/service-definitions?names=Kelvin-info&names=info
-  ~~~
-
-  Response code: 200
 
 - **Query service definitions:** POST /serviceregistry/mgmt/service-definitions/query
 
@@ -1387,6 +1367,17 @@ Response body:
     "count": 11
   }
   ~~~
+
+- **Delete service definitions:** DELETE /serviceregistry/mgmt/service-definitions
+  
+  Query parameter: Kelvin-info, info
+
+  ~~~
+  http://localhost:8443/serviceregistry/mgmt/service-definitions?names=Kelvin-info&names=info
+  ~~~
+
+  Response code: 200
+
 ## **Service instance related**
 
 - **Create service instances:** POST /serviceregistry/mgmt/service-instances
@@ -1644,7 +1635,6 @@ Response body:
 - **Update service instances:** PUT /serviceregistry/mgmt/service-instances
   
   Request body:
-
   ~~~
   {
     "instances": [
@@ -1819,16 +1809,6 @@ Response body:
     "count": 1
   }
   ~~~
-
-- **Delete service instances:** DELETE /serviceregistry/mgmt/service-instances
-  
-  Query parameters: main-temperature-provider::celsius-info::1.0.0, main-temperature-provider::fahrenheit-info::1.0.0
-
-  ~~~
-  http://localhost:8443/serviceregistry/mgmt/service-instances?serviceInstances=main-temperature-provider%3A%3Acelsius-info%3A%3A1.0.0&serviceInstances=main-temperature-provider%3A%3Afahrenheit-info%3A%3A1.0.0
-  ~~~
-
-Response code: 200
 
 - **Query service instances:** POST /serviceregistry/mgmt/service-instances/query
   
@@ -2185,107 +2165,17 @@ Response code: 200
   }
   ~~~
 
+- **Delete service instances:** DELETE /serviceregistry/mgmt/service-instances
+  
+  Query parameters: main-temperature-provider::celsius-info::1.0.0, main-temperature-provider::fahrenheit-info::1.0.0
+
+  ~~~
+  http://localhost:8443/serviceregistry/mgmt/service-instances?serviceInstances=main-temperature-provider%3A%3Acelsius-info%3A%3A1.0.0&serviceInstances=main-temperature-provider%3A%3Afahrenheit-info%3A%3A1.0.0
+  ~~~
+
+Response code: 200
+
 ## **Interface template related**
-
-- **Query interface templates:** POST 
-/serviceregistry/mgmt/interface-templates/query
-
-Request body:
-  ~~~
-  {
-    "pagination": {
-      "page": 0,
-      "size": 2,
-      "direction": "DESC",
-      "sortField": "id"
-    },
-    "templateNames": [
-      "generic-http", "generic-https"
-    ],
-    "protocols": [
-      "http", "https"
-    ]
-  }
-  ~~~
-
-Response body:
-  ~~~
-  {
-    "entries": [
-      {
-        "name": "generic-https",
-        "protocol": "https",
-        "propertyRequirements": [
-          {
-            "name": "accessAddresses",
-            "mandatory": true,
-            "validator": "NOT_EMPTY_ADDRESS_LIST",
-            "validatorParams": []
-          },
-          {
-            "name": "accessPort",
-            "mandatory": true,
-            "validator": "MINMAX",
-            "validatorParams": [
-              "1",
-              "65535"
-            ]
-          },
-          {
-            "name": "basePath",
-            "mandatory": true,
-            "validator": null,
-            "validatorParams": null
-          },
-          {
-            "name": "operations",
-            "mandatory": false,
-            "validator": "HTTP_OPERATIONS",
-            "validatorParams": []
-          }
-        ],
-        "createdAt": "2024-07-10T11:57:12Z",
-        "updatedAt": "2024-10-15T18:15:44Z"
-      },
-      {
-        "name": "generic-http",
-        "protocol": "http",
-        "propertyRequirements": [
-          {
-            "name": "accessAddresses",
-            "mandatory": true,
-            "validator": "NOT_EMPTY_ADDRESS_LIST",
-            "validatorParams": []
-          },
-          {
-            "name": "accessPort",
-            "mandatory": true,
-            "validator": "MINMAX",
-            "validatorParams": [
-              "1",
-              "65535"
-            ]
-          },
-          {
-            "name": "basePath",
-            "mandatory": true,
-            "validator": null,
-            "validatorParams": null
-          },
-          {
-            "name": "operations",
-            "mandatory": false,
-            "validator": "HTTP_OPERATIONS",
-            "validatorParams": []
-          }
-        ],
-        "createdAt": "2024-07-10T11:57:12Z",
-        "updatedAt": "2024-10-13T22:48:03Z"
-      }
-    ],
-    "count": 2
-  }
-  ~~~
 
 - **Create interface templates:** POST /serviceregistry/mgmt/interface-templates
   
@@ -2363,6 +2253,102 @@ Response body:
       }
     ],
     "count": 1
+  }
+  ~~~
+
+- **Query interface templates:** POST 
+/serviceregistry/mgmt/interface-templates/query
+
+  Request body:
+  ~~~
+  {
+    "pagination": {
+      "page": 0,
+      "size": 2,
+      "direction": "DESC",
+      "sortField": "id"
+    },
+    "templateNames": [
+      "generic-http", "generic-https"
+    ],
+    "protocols": [
+      "http", "https"
+    ]
+  }
+  ~~~
+
+  Response body:
+  ~~~
+  {
+    "entries": [
+      {
+        "name": "generic-https",
+        "protocol": "https",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          },
+          {
+            "name": "accessPort",
+            "mandatory": true,
+            "validator": "MINMAX",
+            "validatorParams": [
+              "1",
+              "65535"
+            ]
+          },
+          {
+            "name": "basePath",
+            "mandatory": true
+          },
+          {
+            "name": "operations",
+            "mandatory": false,
+            "validator": "HTTP_OPERATIONS",
+            "validatorParams": []
+          }
+        ],
+        "createdAt": "2024-07-10T11:57:12Z",
+        "updatedAt": "2024-10-15T18:15:44Z"
+      },
+      {
+        "name": "generic-http",
+        "protocol": "http",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          },
+          {
+            "name": "accessPort",
+            "mandatory": true,
+            "validator": "MINMAX",
+            "validatorParams": [
+              "1",
+              "65535"
+            ]
+          },
+          {
+            "name": "basePath",
+            "mandatory": true
+          },
+          {
+            "name": "operations",
+            "mandatory": false,
+            "validator": "HTTP_OPERATIONS",
+            "validatorParams": []
+          }
+        ],
+        "createdAt": "2024-07-10T11:57:12Z",
+        "updatedAt": "2024-10-13T22:48:03Z"
+      }
+    ],
+    "count": 2
   }
   ~~~
 
