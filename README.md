@@ -1,2 +1,2 @@
-# ah5-docs-java-spring
-Arrowhead 5th generation documents for java-spring reference implementation
+Built by Material for MkDocs
+https://squidfunk.github.io/mkdocs-material/setup/

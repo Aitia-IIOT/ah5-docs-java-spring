@@ -1,0 +1,46 @@
+site_name: Arrowhead 5 | core-java-spring
+repo_name: eclipse-arrowhead
+repo_url: https://github.com/eclipse-arrowhead
+nav:
+  - Home: index.md
+  - Core Systems: core_systems.md
+  - Support Systems: support_systems.md
+  - Tutorials: tutorials.md
+  - Client Libraries: client_libraries.md
+  - Contribute: contribute.md
+theme:
+  name: material
+  logo: assets/logo.png
+  icon:
+      repo: fontawesome/brands/github 
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: blue
+      accent: green 
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: blue
+      accent: green
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/eclipse-arrowhead
+
