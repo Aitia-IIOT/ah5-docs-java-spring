@@ -957,7 +957,6 @@ Response body:
             "address": "00:00:00:00:00:01"
           }
         ],
-        "device": null,
         "createdAt": "2024-10-23T21:43:34.863607800Z",
         "updatedAt": "2024-10-23T21:43:34.863607800Z"
       },
@@ -1241,11 +1240,7 @@ Response body:
           }
         ],
         "device": {
-          "name": "thermometer5",
-          "metadata": null,
-          "addresses": null,
-          "createdAt": null,
-          "updatedAt": null
+          "name": "thermometer5"
         },
         "createdAt": "2024-10-23T21:43:35Z",
         "updatedAt": "2024-10-23T21:43:35Z"
@@ -1267,11 +1262,7 @@ Response body:
           }
         ],
         "device": {
-          "name": "weather-displayer1",
-          "metadata": null,
-          "addresses": null,
-          "createdAt": null,
-          "updatedAt": null
+          "name": "weather-displayer1"
         },
         "createdAt": "2024-10-23T21:53:08Z",
         "updatedAt": "2024-10-23T23:59:41Z"
@@ -1298,11 +1289,7 @@ Response body:
           }
         ],
         "device": {
-          "name": "thermometer1",
-          "metadata": null,
-          "addresses": null,
-          "createdAt": null,
-          "updatedAt": null
+          "name": "thermometer1"
         },
         "createdAt": "2024-10-23T21:33:05Z",
         "updatedAt": "2024-10-23T21:33:05Z"
@@ -1320,7 +1307,6 @@ Response body:
             "address": "00:00:00:00:00:01"
           }
         ],
-        "device": null,
         "createdAt": "2024-10-23T21:43:35Z",
         "updatedAt": "2024-10-23T21:43:35Z"
       }
@@ -2394,7 +2380,7 @@ Response body:
 
 If the request payload is not syntactically or semantically correct, an error message data tranfer object is returned.
 
-**Example:** 
+**Here is an example for that:** 
 
 DELETE /serviceregistry/service-discovery/revoke/{instanceId}
 
