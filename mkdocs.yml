@@ -3,7 +3,7 @@ repo_name: eclipse-arrowhead
 repo_url: https://github.com/eclipse-arrowhead
 nav:
   - Home:
-    - What is it?: home/what_is_it.md
+    - Welcome: home/welcome.md
     - Implementation: home/implementation.md
     - Getting Started: home/getting_started.md
     - Contribute: home/contribute.md 
@@ -61,6 +61,8 @@ extra:
 
 markdown_extensions:
   - attr_list
+  - toc:
+      toc_depth: 4
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
