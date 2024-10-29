@@ -110,7 +110,7 @@ The \textbf{device-discovery} service contains the following operations:
 \begin{itemize}
     \item \textit{register} adds new devices to the Local Cloud;
     \item \textit{revoke} removes devices from the Local Cloud;
-    \item \textit{lookup} shows the devices that matches the filtering requirements;
+    \item \textit{lookup} lists the devices that matches the filtering requirements;
 \end{itemize}
 
 The rest of this document is organized as follows.
@@ -149,7 +149,7 @@ The registration data must meet the following criteria:
     \item Device names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and has to start with a letter (also cannot ends with dash).
     \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
     \item Keys in the metadata structure can not contain dot (.) character.
-    \item Devices can register multiple times, but only if there are identical (same addresses, same metadata).
+    \item Devices can register multiple times, but only if they are identical (same addresses, same metadata).
 \end{itemize}
 
 \fsubsection{lookup}{DeviceLookupRequest}{DeviceLookupResponse}{ErrorResponse}
@@ -175,8 +175,7 @@ The input operation data must meet the following criteria:
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{device-discovery} service
-provides to the hosting System are listed.
+Here, all data objects that can be part of the \textbf{device-discovery} service are listed and must be respected by the hosting System.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
