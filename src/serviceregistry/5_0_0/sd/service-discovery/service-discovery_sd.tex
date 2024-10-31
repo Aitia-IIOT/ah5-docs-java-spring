@@ -103,7 +103,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{service-discovery} service, which enables both application and core/support systems to register and revoke their service instances to/from Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. Example of this interaction when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+This document describes the \textbf{service-discovery} service, which enables both application and core/support systems to register and revoke their service instances to/from Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
 
 The \textbf{service-discovery} service contains the following operations:
 
@@ -127,7 +127,7 @@ A consumer system can use the \textit{lookup} operation to find the appropriate 
 
 As a general rule, the requester has to identify itself to use any of the operations.
 
-However, there are some special cases when looking for a service instance can be requested anonymously.  For example, when somebody looks for a service instance that has to consume to get an identity (some kind of login).
+However, there are some special cases when looking for a service instance can be requested anonymously.  For example, when somebody looks for a service instance that it has to consume to get an identity (some kind of login).
 
 \subsection{Access policy}
 \label{sec:accesspolicy}
@@ -151,7 +151,7 @@ The registration data must meet the following criteria:
 \begin{itemize}
     \item The requester system has to be present in the Local Cloud.
     \item Service definition names are case insensitive and have to be unique within the Local Cloud.
-    \item Service definition names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and has to start with a letter (also cannot ends with dash).
+    \item Service definition names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
     \item If an expiration date is specified, it cannot points to a past date.
     \item Keys in the metadata structure can not contain dot (.) character.
     \item At least one interface must be specified with its template name, the used policy and all the necessary template-specific properties.
@@ -164,7 +164,7 @@ The registration data must meet the following criteria:
 The lookup data must meet the following criteria:
 
 \begin{itemize}
-    \item If a filter expects a list, there is an OR relation between the elements of a filter.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
     \item There is an AND relation between different kind of filters.
     \item To use this operation, an application system must specify at least one service instance id OR one provider name OR one service definition.
     \item In some Local Clouds, operation \textit{lookup} can be restricted, which means only the "publicly" available service instances are returned. To gain access to a non-public service instance, an application system must use the \textbf{orchestration} service.
@@ -239,11 +239,11 @@ instanceId & \pref{Name} & Unique identifier of the registered service instance.
 provider & \hyperref[sec:model:SystemDescriptor]{SystemDescriptor} & Information about the service instance provider system. \\ \hline
 serviceDefinition & \hyperref[sec:model:ServiceDefinitionDescriptor]{ServiceDefinitionDescriptor} & Information about the service definition. \\ \hline
 version & \pref{Version} & Version of the service instance. \\ \hline
-expiresAt & \pref{DateTime} & The moment of the future from which the service ins\-tance will not available. \\ \hline
+expiresAt & \pref{DateTime} & The moment of the future from which the service ins\-tance will not be available. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the registered service ins\-tance. \\ \hline
 interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
-createdAt & \pref{DateTime} & Service instance is registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Service instance is modified at this timestamp. \\ \hline
+createdAt & \pref{DateTime} & Service instance was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Service instance was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -258,8 +258,8 @@ metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information abou
 version & \pref{Version} & Version of the system. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the system.  \\ \hline
 device & \hyperref[sec:model:DeviceDescriptor]{DeviceDescriptor} & Information about the device on which the system is running. \\ \hline
-createdAt & \pref{DateTime} & System is registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & System is modified at this timestamp. \\ \hline
+createdAt & \pref{DateTime} & System was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & System was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -281,12 +281,12 @@ address & \pref{Address} & Address. \\ \hline
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{4cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
 name & \pref{Name} & Unique identifier of the device. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
-createdAt & \pref{DateTime} & Device is registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Device is modified at this timestamp. \\ \hline
+createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -297,8 +297,8 @@ updatedAt & \pref{DateTime} & Device is modified at this timestamp. \\ \hline
 \begin{tabularx}{\textwidth}{| p{3cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 name & \pref{Name} & Unique identifier of the service definition. \\ \hline
-createdAt & \pref{DateTime} & Service definition is registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Service definition is modified at this timestamp. \\ \hline
+createdAt & \pref{DateTime} & Service definition was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Service definition was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -344,9 +344,9 @@ providerNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking 
 serviceDefinitionNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances with any of the specified service definition names. Mandatory if no serviceInstanceIds nor providerNames are spe\-cified. \\ \hline
 versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for service ins\-tances with any of the specified versions. \\ \hline
 alivesAt & \pref{DateTime} & no & Request is looking for service ins\-tances that will be available at the specified moment of the future. \\ \hline
-metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances that are matching the specified metadata requirements.  \\ \hline
+metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances that are matching any of the specified metadata requirements.  \\ \hline
 interfaceTemplateNames &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & Requester is looking for service ins\-tances with any of the specified interface template names. \\ \hline
-interfacePropertyRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances with interfaces that are matching the specified properties requirements.  \\ \hline
+interfacePropertyRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances with interfaces that are matching any of the specified properties requirements.  \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -392,8 +392,8 @@ version & \pref{Version} & Version of the service instance. \\ \hline
 expiresAt & \pref{DateTime} & The moment of the future from which the service ins\-tance will not available. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the service ins\-tance. \\ \hline
 interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
-createdAt & \pref{DateTime} & Service instance is registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Service instance is modified at this timestamp. \\ \hline
+createdAt & \pref{DateTime} & Service instance was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Service instance was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 
