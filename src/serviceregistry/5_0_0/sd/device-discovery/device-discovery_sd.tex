@@ -103,13 +103,13 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{device-discovery} service, which enables both application and core/support systems to lookup, register and revoke devices on which the Local Cloud's systems are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain use cases (e.g. enabling onboarding) is needed therefore it is an integral part of the implementation of the requirements in Service Registry Core System. Example of this interaction is the Onboarding support system that has the capability to dynamically add new systems (and devices on which those systems are running) to the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+This document describes the \textbf{device-discovery} service, which enables both application and core/support systems to lookup, register and revoke devices on which the Local Cloud's systems are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain use cases (e.g. enabling onboarding) is needed therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction is the Onboarding support system that has the capability to dynamically add new systems (and devices on which those systems are running) to the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
 
 The \textbf{device-discovery} service contains the following operations:
 
 \begin{itemize}
-    \item \textit{register} adds new devices to the Local Cloud;
-    \item \textit{revoke} removes devices from the Local Cloud;
+    \item \textit{register} adds new device to the Local Cloud;
+    \item \textit{revoke} removes a device from the Local Cloud;
     \item \textit{lookup} lists the devices that matches the filtering requirements;
 \end{itemize}
 
@@ -146,7 +146,7 @@ The registration data must meet the following criteria:
 
 \begin{itemize}
     \item Device names are case insensitive and have to be unique within the Local Cloud.
-    \item Device names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and has to start with a letter (also cannot ends with dash).
+    \item Device names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
     \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
     \item Keys in the metadata structure can not contain dot (.) character.
     \item Devices can register multiple times, but only if they are identical (same addresses, same metadata).
@@ -157,7 +157,7 @@ The registration data must meet the following criteria:
 The lookup data must meet the following criteria:
 
 \begin{itemize}
-    \item If a filter expects a list, there is an OR relation between the elements of a filter.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
     \item There is an AND relation between different kind of filters.
 \end{itemize}
 
@@ -209,8 +209,8 @@ status & \pref{OperationStatus} & Status of the operation. \\ \hline
 name & \pref{Name} & Unique identifier of the registered device. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the registered device. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the registered device.  \\ \hline
-createdAt & \pref{DateTime} & Device is registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Device is modified at this timestamp. \\ \hline
+createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -251,7 +251,7 @@ authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester o
 deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for devices with any of the specified names. \\ \hline
 addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for devices with any of the specified addresses.   \\ \hline
 addressType &  \pref{AddressType} & no & Requester is looking for devices with the specified type of address. \\ \hline
-metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for devices that are matching the specified metadata requirements.  \\ \hline
+metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for devices that are matching any of the specified metadata requirements. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -286,8 +286,8 @@ count & \pref{Number} & Number of returned devices. \\ \hline
 name & \pref{Name} & Unique identifier of the device. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
-createdAt & \pref{DateTime} & Device is registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Device is modified at this timestamp. \\ \hline
+createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 

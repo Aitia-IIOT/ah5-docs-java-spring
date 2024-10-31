@@ -18,7 +18,7 @@
 
 \newrobustcmd\fsubsection[3]{
   \addtocounter{subsection}{1}
-  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}function \textcolor{ArrowheadBlue}{#1}}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
   \renewcommand*{\do}[1]{\rref{##1},\ }
   \subsection*{
     \thesubsection\quad
@@ -89,7 +89,7 @@
 \section{Overview}
 \label{sec:overview}
 \color{black}
-This document describes the Service Registry core system, which exists to enable service discovery within an Eclipse Arrowhead Local Cloud (LC). Example of such interactions is a provider system offering some kind of service for use by other systems in the LC. This core system provides the data storage functionality for the information related to the currently and actively offered services within the Local Cloud. It also stores information about the systems that offer and/or can use the previously mentioned services, and optionally data about the devices on which those systems are running.
+This document describes the Service Registry core system, which exists to enable service discovery within an Eclipse Arrowhead Local Cloud (LC). An example of such interactions is a provider system offering some kind of service for use by other systems in the LC. This core system provides the data storage functionality for the information related to the currently and actively offered services within the Local Cloud. It also stores information about the systems that offer and/or can use the previously mentioned services, and optionally data about the devices on which those systems are running.
 
 The rest of this document is organized as follows.
 In Section \ref{sec:prior_art}, we reference major prior art capabilities
@@ -120,7 +120,7 @@ The previous versions of the Service Registry (4.6.x) are very similar to this v
     \item The optional device information storage (and system information storage as well, to an extent) was handled by different systems. In the current version, the Service Registry handles all three level (service instances, systems, devices).
     \item Service access information (e.g. domain name or IP address) was tied to the system that provides that service, and only one such address could be specified. In the current version, service access information is tied to the interface of a service instance, and multiple addresses can be provided.
     \item Service interface representation was very rudimentary, a much sophisticated approach is used in the current version.
-    \item X.509 certificate trust chains was used as authentication mechanism. The current version can support any type of authentication methods by using a dedicate Authentication core system. However, a slightly modified version of X.509 trust chains are still supported.
+    \item X.509 certificate trust chains were used as authentication mechanism. The current version can support any type of authentication methods by using a dedicated Authentication core system. However, a slightly modified version of X.509 trust chains is still supported.
 \end{itemize}
 
 \subsection{How This System Is Meant to Be Used}
@@ -128,7 +128,7 @@ The previous versions of the Service Registry (4.6.x) are very similar to this v
 
 Service Registry is a mandatory core system of Eclipse Arrowhead Local Cloud and is responsible for the fundamental service discovery functionality. Systems and services (and devices) are being discoverable for other systems by consuming the services provided by Service Registry core system.
 
-An application or other core/support system is required to register itself and its services into Service Registry if it is designed to be part of the Local Cloud and to unregister before shutdown or when it does not intend to continue to provide its services.
+An application or other core/support system is required to register itself and its services into Service Registry if it is designed to be a part of the Local Cloud and to unregister before shutdown or when it does not intend to continue providing its services.
 
 \subsection{System functionalities and properties}
 \label{sec:properties}
@@ -140,7 +140,7 @@ Service Registry solves the following needs to fulfill the requirements of servi
     \item Enables the application and other core/support systems to register themselves in order to being part of the Local Cloud.
     \item Enables the application and other core/support systems to unregister themselves from the Local Cloud.
     \item Enables the application and other core/support system to register the device on which the system is running.
-    \item Enables the application and other core/support system to unregister the device on which the system is running (only if no other systems belongs to that device).
+    \item Enables the application and other core/support system to unregister the device on which the system is running (only if no other system belongs to that device).
     \item Enables the application and other core/support systems to publish their services within the Local Cloud.
     \item Enables the application and other core/support systems to revoke their services from the Local Cloud.
     \item Makes the offered services/systems/devices queryable for other systems within the Local Cloud.
@@ -165,7 +165,7 @@ In order to achieve the mentioned functionalities, Service Registry is capable t
 
 \begin{itemize}
     \item Names (device name, system name, service definition name, service instance name, interface name) must be unique in the Local Cloud.
-    \item If the Local Cloud does not contain an Authentication system or not using X.509 certificates, there is no way for the Service Registry to verify the requester system. In that case, the Service Registry will consider the authentication data comes from the requester as valid.
+    \item If the Local Cloud does not contain an Authentication system or does not using X.509 certificates, there is no way for the Service Registry to verify the requester system. In that case, the Service Registry will consider the authentication data that comes from the requester as valid.
     \item If Service Registry's lookup is strict, only "public" services (such as the \textit{orchestration} service) can be queried directly from the Service Registry by the application systems. For any "non-public" services the application systems need to orchestrate. "Public" services should be marked in the Service Registry, for example using a service instance meta data entry.
 \end{itemize}
 
@@ -178,7 +178,7 @@ In order to achieve the mentioned functionalities, Service Registry is capable t
 The purpose of this service is to lookup, publish and revoke provided services. The service is offered for both application and core/support systems. 
 
 \msubsection{service}{system-discovery}
-The purpose of this service is to lookup, publish and revoke systems that are part of (or wants to be part of) the Local Cloud. The service is offered for both application and core/support systems. 
+The purpose of this service is to lookup, publish and revoke systems that are part of (or want to be part of) the Local Cloud. The service is offered for both application and core/support systems. 
 
 \msubsection{service}{device-discovery}
 The purpose of this service is to lookup, publish and revoke devices on which the Local Cloud's systems are running. The service is offered for both application and core/support systems. 
@@ -194,9 +194,9 @@ Recommended service. Its purpose is to give information about the provider syste
 \section{Security}
 \label{sec:security}
 
-For authentication, the Service Registry can utilize an other core system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the Service Registry can accept X.509 certificates for identification. If none of these are available, the Service Registry trusts the requester system self-provided identity.
+For authentication, the Service Registry can utilize an other core system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the Service Registry can accept X.509 certificates for identification. If none of these are available, the Service Registry trusts the requester system's self-provided identity.
 
-For authorization, in strict lookup, the Service Registry only allows to lookup "public" services. Information about all other services (including the \textit{service-registry-management}) are only available through orchestration or using the \textit{service-registry-management} service. Systems can only register/unregister themselves and their services/device. In open mode, all services are available for lookup.
+For authorization, in strict lookup, the Service Registry only allows to lookup "public" services. Information about all other services (including the \textit{service-registry-management}) are only available through orchestration or using the \textit{service-registry-management} service. Systems can only register/unregister themselves and their services/device. In open mode, information about all the services are available for lookup.
 
 The implementation of the Service Registry can decide about the encryption of the connection between the Service Registry and other systems. 
 
