@@ -18,10 +18,7 @@ This file contains specific examples of what payloads are expected and returned 
       "appliable": ["spring", "autumn"]
     },
     "addresses": [
-      {
-        "type": "MAC",
-        "address": "81:ef:1a:44:7a:ff"
-      }
+        "81:ef:1a:44:7a:ff"
     ]
   }
   ~~~
@@ -139,8 +136,26 @@ This file contains specific examples of what payloads are expected and returned 
 
 ##  **System discovery**
 
+**Authentication:** For system related operations, the payload does not contain the system name, because it comes either from an authorization header or an X.509 certificate. 
+
+In the following examples, self-declared authentication is used, so the header should contain the system name with the  _SYSTEM//_ prefix. The system name will be _temperature-provider1_ in the examples. This should be changed to the name of the actual system.
+
+  ~~~
+  -H 'Authorization: Bearer SYSTEM//temperature-provider1' \
+  ~~~
+
+The header is also included in the examples where the system name comes from it.
+
 - **Register system:** POST /serviceregistry/system-discovery/register
 
+  Header:
+  ~~~
+  curl -X 'POST' \
+    'http://localhost:8443/serviceregistry/system-discovery/register' \
+    -H 'accept: application/json' \
+    -H 'Authorization: Bearer SYSTEM//temperature-provider1' \
+    -H 'Content-Type: application/json' \
+  ~~~
   Request body:
   ~~~
   {
@@ -150,16 +165,7 @@ This file contains specific examples of what payloads are expected and returned 
       "customizable": false
     },
     "version": "2.1",
-    "addresses": [
-      {
-        "type": "MAC",
-        "address": "a1:b2:c3:34:55:f6"
-      },
-      {
-        "type": "IPV4",
-        "address": "127.77.66.1"
-      }
-    ],
+    "addresses": ["tp1.greenhouse.com", "192.168.66.1"],
     "deviceName": "thermometer1"
   }
   ~~~
@@ -179,12 +185,8 @@ This file contains specific examples of what payloads are expected and returned 
     "version": "2.1.0",
     "addresses": [
       {
-        "type": "MAC",
-        "address": "a1:b2:c3:34:55:f6"
-      },
-      {
         "type": "IPV4",
-        "address": "127.77.66.1"
+        "address": "192.168.1.2"
       }
     ],
     "device": {
@@ -248,7 +250,7 @@ This file contains specific examples of what payloads are expected and returned 
   }
   ~~~
 
-  Resonse body:
+  Response body:
   ~~~
   {
     "entries": [
@@ -318,6 +320,14 @@ This file contains specific examples of what payloads are expected and returned 
 - **Revoke system:** DELETE 
 /serviceregistry/system-discovery/revoke
 
+Header:
+~~~
+curl -X 'DELETE' \
+  'http://localhost:8443/serviceregistry/system-discovery/revoke' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer SYSTEM//temperature-provider1'
+~~~
+
 ~~~
 http://localhost:8443/serviceregistry/system-discovery/revoke
 ~~~
@@ -343,9 +353,10 @@ Reponse code: 200
         "protocol": "https",
         "policy": "NONE",
         "properties": {
-          "accessAddresses": ["127.0.100.100"],
+          "accessAddresses": ["192.168.100.100"],
           "accessPort": 4040,
-          "basePath": "/celsius-info"
+          "basePath": "/celsius-info",
+          "operations": {"query-temperature": { "method": "get", "path": "/celsius-info"} }
         }
       }
     ]
@@ -369,12 +380,8 @@ Reponse code: 200
       "version": "2.1.0",
       "addresses": [
         {
-          "type": "MAC",
-          "address": "a1:b2:c3:34:55:f6"
-        },
-        {
           "type": "IPV4",
-          "address": "127.77.66.1"
+          "address": "192.168.66.1"
         }
       ],
       "device": {
@@ -426,10 +433,16 @@ Reponse code: 200
         "policy": "NONE",
         "properties": {
           "accessAddresses": [
-            "127.0.100.100"
+            "192.168.100.100"
           ],
-          "basePath": "/celsius-info",
-          "accessPort": 4040
+          "accessPort": 4040,
+          "operations": {
+            "query-temperature": {
+              "path": "/celsius-info",
+              "method": "GET"
+            }
+          },
+          "basePath": "/celsius-info"
         }
       }
     ],
@@ -486,8 +499,8 @@ Reponse code: 200
             "customizable": false
           },
           "version": "2.1.0",
-          "createdAt": "2024-10-24T23:44:09Z",
-          "updatedAt": "2024-10-24T23:44:09Z"
+          "createdAt": "2024-11-03T20:20:50Z",
+          "updatedAt": "2024-11-03T20:20:50Z"
         },
         "serviceDefinition": {
           "name": "celsius-info",
@@ -497,8 +510,8 @@ Reponse code: 200
         "version": "1.0.0",
         "expiresAt": "2030-10-11T14:30:00Z",
         "metadata": {
-          "frequency": 400,
-          "unrestricted-discovery": true
+          "unrestricted-discovery": true,
+          "frequency": 400
         },
         "interfaces": [
           {
@@ -507,15 +520,21 @@ Reponse code: 200
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.100.100"
+                "192.168.100.100"
               ],
-              "basePath": "/celsius-info",
-              "accessPort": 4040
+              "accessPort": 4040,
+              "operations": {
+                "query-temperature": {
+                  "path": "/celsius-info",
+                  "method": "GET"
+                }
+              },
+              "basePath": "/celsius-info"
             }
           }
         ],
-        "createdAt": "2024-10-24T23:47:51Z",
-        "updatedAt": "2024-10-25T14:48:04Z"
+        "createdAt": "2024-11-03T20:21:05Z",
+        "updatedAt": "2024-11-03T21:28:29Z"
       }
     ],
     "count": 1
@@ -560,40 +579,35 @@ Reponse code: 200
         "entryDate": "2024-10-23T21:16:29.318Z",
         "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
         "severity": "INFO",
-        "message": "Core system eu.arrowhead.serviceregistry.ServiceRegistrySystemInfo@2404abe2 revoked 0 service(s).",
-        "exception": ""
+        "message": "Core system eu.arrowhead.serviceregistry.ServiceRegistrySystemInfo@2404abe2 revoked 0 service(s)."
       },
       {
         "logId": "1b072b68-9184-11ef-8015-0a0027000004",
         "entryDate": "2024-10-23T21:16:44.685Z",
         "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
         "severity": "INFO",
-        "message": "System name: serviceregistry",
-        "exception": ""
+        "message": "System name: serviceregistry"
       },
       {
         "logId": "1b092739-9184-11ef-8015-0a0027000004",
         "entryDate": "2024-10-23T21:16:44.688Z",
         "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
         "severity": "INFO",
-        "message": "SSL mode: DISABLED",
-        "exception": ""
+        "message": "SSL mode: DISABLED"
       },
       {
         "logId": "1b0c0d6a-9184-11ef-8015-0a0027000004",
         "entryDate": "2024-10-23T21:16:44.692Z",
         "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
         "severity": "INFO",
-        "message": "Authentication policy: DECLARED",
-        "exception": ""
+        "message": "Authentication policy: DECLARED"
       },
       {
         "logId": "1b8cd62b-9184-11ef-8015-0a0027000004",
         "entryDate": "2024-10-23T21:16:45.566Z",
         "logger": "eu.arrowhead.serviceregistry.init.ServiceRegistryApplicationInitListener",
         "severity": "INFO",
-        "message": "System serviceregistry published 4 service(s).",
-        "exception": ""
+        "message": "System serviceregistry published 4 service(s)."
       }
     ],
     "count": 5
@@ -623,6 +637,12 @@ Response body:
 # Monitor endpoint
 GET /serviceregistry/monitor/echo
 
+Response body:
+
+~~~
+Got it!
+~~~
+
 # Management endpoints
 
 ## **Device related**
@@ -639,12 +659,7 @@ GET /serviceregistry/monitor/echo
           "type": "analogue",
           "displayed-data": ["temperature"]
         },
-        "addresses": [
-          {
-            "type": "MAC",
-            "address": "ab:ff:c8:e1:45:9a"
-          }
-        ]
+        "addresses": ["ab:ff:c8:e1:45:9a"]
       },
       {
         "name": "weather-displayer2",
@@ -652,12 +667,7 @@ GET /serviceregistry/monitor/echo
           "type": "digital",
           "displayed-data": ["wind", "humidity", "temperature"]
         },
-        "addresses": [
-          {
-            "type": "MAC",
-            "address": "ab:ff:c8:e1:45:9b"
-          }
-        ]
+        "addresses": ["ab:ff:c8:e1:45:9b"]
       }
     ]
   }
@@ -720,12 +730,7 @@ GET /serviceregistry/monitor/echo
           "type": "analogue",
           "displayed-data": ["temperature"]
         },
-        "addresses": [
-          {
-            "type": "MAC",
-            "address": "ab:f8:c8:e1:45:95"
-          }
-        ]
+        "addresses": ["ab:f8:c8:e1:45:95"]
       },
       {
         "name": "weather-displayer2",
@@ -733,12 +738,7 @@ GET /serviceregistry/monitor/echo
           "type": "digital",
           "displayed-data": ["wind", "temperature"]
         },
-        "addresses": [
-          {
-            "type": "MAC",
-            "address": "ab:ff:c8:e1:45:9b"
-          }
-        ]
+        "addresses": ["ab:ff:c8:e1:45:9b"]
       }
     ]
   }
@@ -905,12 +905,7 @@ GET /serviceregistry/monitor/echo
           "scales": []
         },
         "version": "",
-        "addresses": [
-          {
-            "type": "MAC",
-            "address": "00:00:00:00:00:01"
-          }
-        ],
+        "addresses": ["ttp.greenhouse.com"],
         "deviceName": ""
       },
       {
@@ -921,16 +916,7 @@ GET /serviceregistry/monitor/echo
           "scales": ["Fahrenheit", "Kelvin", "Celsius"]
         },
         "version": "2",
-        "addresses": [
-          {
-            "type": "IPV4",
-            "address": "128.0.1.2"
-          },
-          {
-            "type": "MAC",
-            "address": "12:34:5a:ff:c9:43"
-          }
-        ],
+        "addresses": ["192.168.1.2", "mtp.greenhouse.com"],
         "deviceName": "thermometer5"
       }
     ]
@@ -950,8 +936,8 @@ GET /serviceregistry/monitor/echo
         "version": "1.0.0",
         "addresses": [
           {
-            "type": "MAC",
-            "address": "00:00:00:00:00:01"
+            "type": "HOSTNAME",
+            "address": "ttp.greenhouse.com"
           }
         ],
         "createdAt": "2024-10-23T21:43:34.863607800Z",
@@ -972,11 +958,11 @@ GET /serviceregistry/monitor/echo
         "addresses": [
           {
             "type": "IPV4",
-            "address": "128.0.1.2"
+            "address": "192.168.1.2"
           },
           {
-            "type": "MAC",
-            "address": "12:34:5a:ff:c9:43"
+            "type": "HOSTNAME",
+            "address": "mtp.greenhouse.com"
           }
         ],
         "device": {
@@ -1034,12 +1020,7 @@ GET /serviceregistry/monitor/echo
           "screen-size": {"width": 600, "height": 350}
         },
         "version": "2.2.1",
-        "addresses": [
-          {
-            "type": "MAC",
-            "address": "2a:cc:67:89:5f:ff"
-          }
-        ],
+        "addresses": ["tc.greenhouse.com"],
         "deviceName": "weather-displayer1"
       },
       {
@@ -1050,16 +1031,7 @@ GET /serviceregistry/monitor/echo
           "scales": ["Fahrenheit", "Kelvin", "Celsius"]
         },
         "version": "2",
-        "addresses": [
-          {
-            "type": "IPV4",
-            "address": "128.0.1.2"
-          },
-          {
-            "type": "MAC",
-            "address": "12:34:5a:ff:c9:44"
-          }
-        ],
+        "addresses": ["192.168.1.2", "mtp.greenhouse.com"],
         "deviceName": "thermometer5"
       }
     ]
@@ -1085,11 +1057,11 @@ GET /serviceregistry/monitor/echo
         "addresses": [
           {
             "type": "IPV4",
-            "address": "128.0.1.2"
+            "address": "192.168.1.2"
           },
           {
-            "type": "MAC",
-            "address": "12:34:5a:ff:c9:44"
+            "type": "HOSTNAME",
+            "address": "mtp.greenhouse.com"
           }
         ],
         "device": {
@@ -1117,12 +1089,12 @@ GET /serviceregistry/monitor/echo
               "winter"
             ]
           },
-          "addresses": [
-            {
-              "type": "MAC",
-              "address": "81:ef:1a:44:7b:02"
-            }
-          ],
+        "addresses": [
+          {
+            "type": "HOSTNAME",
+            "address": "tc.greenhouse.com"
+          }
+        ],
           "createdAt": "2024-10-22T10:34:10Z",
           "updatedAt": "2024-10-22T10:34:10Z"
         },
@@ -1218,11 +1190,11 @@ GET /serviceregistry/monitor/echo
         "addresses": [
           {
             "type": "IPV4",
-            "address": "128.0.1.2"
+            "address": "192.168.1.2"
           },
           {
-            "type": "MAC",
-            "address": "12:34:5a:ff:c9:44"
+            "type": "HOSTNAME",
+            "address": "mtp.greenhouse.com"
           }
         ],
         "device": {
@@ -1243,8 +1215,8 @@ GET /serviceregistry/monitor/echo
         "version": "2.2.1",
         "addresses": [
           {
-            "type": "MAC",
-            "address": "2a:cc:67:89:5f:ff"
+            "type": "HOSTNAME",
+            "address": "tc.greenhouse.com"
           }
         ],
         "device": {
@@ -1266,12 +1238,12 @@ GET /serviceregistry/monitor/echo
         "version": "2.1.0",
         "addresses": [
           {
-            "type": "MAC",
-            "address": "a1:b2:c3:34:55:f6"
+            "type": "HOSTNAME",
+            "address": "tp1.greenhouse.com"
           },
           {
             "type": "IPV4",
-            "address": "127.77.66.1"
+            "address": "192.168.66.1"
           }
         ],
         "device": {
@@ -1289,8 +1261,8 @@ GET /serviceregistry/monitor/echo
         "version": "1.0.0",
         "addresses": [
           {
-            "type": "MAC",
-            "address": "00:00:00:00:00:01"
+            "type": "HOSTNAME",
+            "address": "ttp.greenhouse.com"
           }
         ],
         "createdAt": "2024-10-23T21:43:35Z",
@@ -1406,7 +1378,7 @@ GET /serviceregistry/monitor/echo
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["127.0.0.14"],
+              "accessAddresses": ["192.168.0.14"],
               "accessPort": 4040,
               "operations": 
               {
@@ -1432,7 +1404,7 @@ GET /serviceregistry/monitor/echo
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["127.0.0.14"],
+              "accessAddresses": ["192.168.0.14"],
               "accessPort": 4040,
               "basePath": "/info/celsius"
             }
@@ -1461,16 +1433,16 @@ GET /serviceregistry/monitor/echo
             ]
           },
           "version": "2.0.0",
-          "addresses": [
-            {
-              "type": "IPV4",
-              "address": "128.0.1.2"
-            },
-            {
-              "type": "MAC",
-              "address": "12:34:5a:ff:c9:44"
-            }
-          ],
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.1.2"
+          },
+          {
+            "type": "HOSTNAME",
+            "address": "mtp.greenhouse.com"
+          }
+        ],
           "device": {
             "name": "thermometer5",
             "metadata": {
@@ -1525,7 +1497,7 @@ GET /serviceregistry/monitor/echo
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.0.14"
+                "192.168.0.14"
               ],
               "accessPort": 4040,
               "operations": {
@@ -1559,16 +1531,16 @@ GET /serviceregistry/monitor/echo
             ]
           },
           "version": "2.0.0",
-          "addresses": [
-            {
-              "type": "IPV4",
-              "address": "128.0.1.2"
-            },
-            {
-              "type": "MAC",
-              "address": "12:34:5a:ff:c9:44"
-            }
-          ],
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.1.2"
+          },
+          {
+            "type": "HOSTNAME",
+            "address": "mtp.greenhouse.com"
+          }
+        ],
           "device": {
             "name": "thermometer5",
             "metadata": {
@@ -1623,7 +1595,7 @@ GET /serviceregistry/monitor/echo
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.0.14"
+                "192.168.0.14"
               ],
               "accessPort": 4040,
               "basePath": "/info/celsius"
@@ -1656,7 +1628,7 @@ GET /serviceregistry/monitor/echo
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["127.0.0.14"],
+              "accessAddresses": ["192.168.0.14"],
               "accessPort": 4040,
               "operations": 
               {
@@ -1671,8 +1643,8 @@ GET /serviceregistry/monitor/echo
             "protocol": "https",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["127.0.0.14"],
-              "accessPort": 4040,
+              "accessAddresses": ["192.168.0.14"],
+              "accessPort": 4041,
               "operations": 
               {
                 "discover": {"path": "/discover", "method": "GET"}, 
@@ -1705,16 +1677,16 @@ GET /serviceregistry/monitor/echo
             ]
           },
           "version": "2.0.0",
-          "addresses": [
-            {
-              "type": "IPV4",
-              "address": "128.0.1.2"
-            },
-            {
-              "type": "MAC",
-              "address": "12:34:5a:ff:c9:44"
-            }
-          ],
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.1.2"
+          },
+          {
+            "type": "HOSTNAME",
+            "address": "mtp.greenhouse.com"
+          }
+        ],
           "device": {
             "name": "thermometer5",
             "metadata": {
@@ -1769,7 +1741,7 @@ GET /serviceregistry/monitor/echo
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.0.14"
+                "192.168.0.14"
               ],
               "accessPort": 4040,
               "operations": {
@@ -1791,9 +1763,9 @@ GET /serviceregistry/monitor/echo
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.0.14"
+                "192.168.0.14"
               ],
-              "accessPort": 4040,
+              "accessPort": 4041,
               "operations": {
                 "discover": {
                   "path": "/discover",
@@ -1849,12 +1821,12 @@ GET /serviceregistry/monitor/echo
     ],
     "interfacePropertyRequirementsList": [
       {
-        "accessAddresses": ["127.0.0.14"],
+        "accessAddresses": ["192.168.0.14"],
         "accessPort": 4040,
         "basePath": "/info/fahrenheit"
       },
       {
-         "accessAddresses" : [ "127.0.100.100" ],
+         "accessAddresses" : [ "192.168.100.100" ],
          "basePath" : "/celsius-info",
          "accessPort" : 4040
       }
@@ -1883,12 +1855,12 @@ GET /serviceregistry/monitor/echo
           "version": "2.1.0",
           "addresses": [
             {
-              "type": "MAC",
-              "address": "a1:b2:c3:34:55:f6"
+              "type": "HOSTNAME",
+              "address": "tp1.greenhouse.com"
             },
             {
               "type": "IPV4",
-              "address": "127.77.66.1"
+              "address": "192.168.66.1"
             }
           ],
           "device": {
@@ -1940,7 +1912,7 @@ GET /serviceregistry/monitor/echo
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.100.100"
+                "192.168.100.100"
               ],
               "basePath": "/celsius-info",
               "accessPort": 4040
@@ -1967,11 +1939,11 @@ GET /serviceregistry/monitor/echo
           "addresses": [
             {
               "type": "IPV4",
-              "address": "128.0.1.2"
+              "address": "192.168.1.2"
             },
             {
-              "type": "MAC",
-              "address": "12:34:5a:ff:c9:44"
+              "type": "HOSTNAME",
+              "address": "mtp.greenhouse.com"
             }
           ],
           "device": {
@@ -2028,7 +2000,7 @@ GET /serviceregistry/monitor/echo
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.0.14"
+                "192.168.0.14"
               ],
               "accessPort": 4040,
               "operations": {
@@ -2050,9 +2022,9 @@ GET /serviceregistry/monitor/echo
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.0.14"
+                "192.168.0.14"
               ],
-              "accessPort": 4040,
+              "accessPort": 4041,
               "operations": {
                 "discover": {
                   "path": "/discover",
@@ -2087,11 +2059,11 @@ GET /serviceregistry/monitor/echo
           "addresses": [
             {
               "type": "IPV4",
-              "address": "128.0.1.2"
+              "address": "192.168.1.2"
             },
             {
-              "type": "MAC",
-              "address": "12:34:5a:ff:c9:44"
+              "type": "HOSTNAME",
+              "address": "mtp.greenhouse.com"
             }
           ],
           "device": {
@@ -2148,7 +2120,7 @@ GET /serviceregistry/monitor/echo
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "127.0.0.14"
+                "192.168.0.14"
               ],
               "accessPort": 4040,
               "operations": {
@@ -2302,11 +2274,8 @@ Response code: 200
           {
             "name": "accessPort",
             "mandatory": true,
-            "validator": "MINMAX",
-            "validatorParams": [
-              "1",
-              "65535"
-            ]
+            "validator": "PORT",
+            "validatorParams": []
           },
           {
             "name": "basePath",
@@ -2335,11 +2304,8 @@ Response code: 200
           {
             "name": "accessPort",
             "mandatory": true,
-            "validator": "MINMAX",
-            "validatorParams": [
-              "1",
-              "65535"
-            ]
+            "validator": "PORT",
+            "validatorParams": []
           },
           {
             "name": "basePath",
