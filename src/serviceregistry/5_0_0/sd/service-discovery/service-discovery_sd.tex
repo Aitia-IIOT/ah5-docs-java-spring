@@ -103,7 +103,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{service-discovery} service, which enables both application and core/support systems to register and revoke their service instances to/from Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+This document describes the \textbf{service-discovery} service, which enables both application and core/support systems to register and revoke their service instances to/from the Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction is when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
 
 The \textbf{service-discovery} service contains the following operations:
 
@@ -118,7 +118,7 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-A provider system can use the \textit{register} operation of \textbf{service-discovery} service to register its service instances. When a system is shutting down or stop offering services, it should remove its service instances  from the Local Cloud by using \textit{revoke} operation.
+A provider system can use the \textit{register} operation of \textbf{service-discovery} service to register its service instances. When a system is shutting down or stops offering services, it should remove its service instances from the Local Cloud by using \textit{revoke} operation.
 
 A consumer system can use the \textit{lookup} operation to find the appropriate service instance which it can consume later.
 
@@ -127,12 +127,12 @@ A consumer system can use the \textit{lookup} operation to find the appropriate 
 
 As a general rule, the requester has to identify itself to use any of the operations.
 
-However, there are some special cases when looking for a service instance can be requested anonymously.  For example, when somebody looks for a service instance that it has to consume to get an identity (some kind of login).
+However, there are some special cases when looking for a service instance can be requested anonymously. For example, when somebody looks for a service instance that it has to consume to get an identity (some kind of login).
 
 \subsection{Access policy}
 \label{sec:accesspolicy}
 
-Available for anyone within the local cloud.
+Available for anyone within the Local Cloud.
 
 \newpage
 
@@ -152,10 +152,10 @@ The registration data must meet the following criteria:
     \item The requester system has to be present in the Local Cloud.
     \item Service definition names are case insensitive and have to be unique within the Local Cloud.
     \item Service definition names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
-    \item If an expiration date is specified, it cannot points to a past date.
+    \item If an expiration date is specified, it cannot point to a past date.
     \item Keys in the metadata structure can not contain dot (.) character.
     \item At least one interface must be specified with its template name, the used policy and all the necessary template-specific properties.
-    \item If the specified interface template is not present in the Local Cloud, a protocol is also need to be defined. In some Local Clouds using previously unknown interface templates during the service instance registration may be forbidden and thus rejected.
+    \item If the specified interface template is not present in the Local Cloud, a protocol also has to be defined. In some Local Clouds using previously unknown interface templates during the service instance registration may be forbidden and thus rejected.
     \item Service instances can register multiple times, the appropriate old service instances are discarded.
 \end{itemize}
 
@@ -196,7 +196,7 @@ As a complement to the explicitly defined types in this section, there is also a
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
 serviceDefinitionName & \pref{Name} & yes & The service definition of the instance. \\ \hline
 version & \pref{Version} & no & Version of the service instance. \\ \hline
-expiresAt & \pref{DateTime} & no & The moment of the future from which the service instance will not available. \\ \hline
+expiresAt & \pref{DateTime} & no & The moment of the future from which the service instance will not be available. \\ \hline
 metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the service instance. \\ \hline
 interfaces &  \pref{List}$<$\hyperref[sec:model:ServiceInterfaceRequest]{ServiceInterfaceRequest}$>$ & yes & Available access interfaces of the service instance.  \\ \hline
 \end{tabularx}
@@ -343,7 +343,7 @@ instanceIds &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking fo
 providerNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances that are provided by any of the specified systems. Mandatory if no serviceInstanceIds nor serviceDefinitionNames are spe\-cified. \\ \hline
 serviceDefinitionNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances with any of the specified service definition names. Mandatory if no serviceInstanceIds nor providerNames are spe\-cified. \\ \hline
 versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for service ins\-tances with any of the specified versions. \\ \hline
-alivesAt & \pref{DateTime} & no & Request is looking for service ins\-tances that will be available at the specified moment of the future. \\ \hline
+alivesAt & \pref{DateTime} & no & Requester is looking for service ins\-tances that will be available at the specified moment of the future. \\ \hline
 metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances that are matching any of the specified metadata requirements.  \\ \hline
 interfaceTemplateNames &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & Requester is looking for service ins\-tances with any of the specified interface template names. \\ \hline
 interfacePropertyRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances with interfaces that are matching any of the specified properties requirements.  \\ \hline
@@ -389,7 +389,7 @@ instanceId & \pref{Name} & Unique identifier of the service instance. \\ \hline
 provider & \hyperref[sec:model:SystemDescriptor]{SystemDescriptor} & Information about the service instance provider system. \\ \hline
 serviceDefinition & \hyperref[sec:model:ServiceDefinitionDescriptor]{ServiceDefinitionDescriptor} & Information about the service definition. \\ \hline
 version & \pref{Version} & Version of the service instance. \\ \hline
-expiresAt & \pref{DateTime} & The moment of the future from which the service ins\-tance will not available. \\ \hline
+expiresAt & \pref{DateTime} & The moment of the future from which the service ins\-tance will not be available. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the service ins\-tance. \\ \hline
 interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
 createdAt & \pref{DateTime} & Service instance was registered at this timestamp. \\ \hline
@@ -434,7 +434,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
 \pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{Version}          & Specifies a service instance version. Version must follows the Semantic Versioning. \\ \hline
+\pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning. \\ \hline
 \end{tabularx}
 \end{table}
 
