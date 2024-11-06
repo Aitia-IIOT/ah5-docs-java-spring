@@ -127,7 +127,7 @@ This file contains specific examples of what payloads are expected and returned 
 
 - **Revoke device:** DELETE /serviceregistry/device-discovery/revoke/{name}
   
-  Query parameter: test-weather-displayer
+  Path parameter: test-weather-displayer
   ~~~
   http://localhost:8443/serviceregistry/device-discovery/revoke/test-weather-displayer
   ~~~
@@ -185,8 +185,12 @@ The header is also included in the examples where the system name comes from it.
     "version": "2.1.0",
     "addresses": [
       {
+        "type": "HOSTNAME",
+        "address": "tp1.greenhouse.com"
+      },
+      {
         "type": "IPV4",
-        "address": "192.168.1.2"
+        "address": "192.168.66.1"
       }
     ],
     "device": {
@@ -269,11 +273,11 @@ The header is also included in the examples where the system name comes from it.
         "addresses": [
           {
             "type": "IPV4",
-            "address": "128.0.1.2"
+            "address": "192.168.1.2"
           },
           {
-            "type": "MAC",
-            "address": "12:34:5a:ff:c9:44"
+            "type": "HOSTNAME",
+            "address": "mtp.greenhouse.com"
           }
         ],
         "device": {
@@ -336,6 +340,16 @@ Reponse code: 200
 
 ## **Service discovery**
 
+**Authentication:** For service related operations, the payload does not contain the system name, because it comes either from an authorization header or an X.509 certificate. 
+
+The Service Registry generates the Service Instance ID from the system name. It also uses system name to identify who sent the request.
+
+In the following examples, self-declared authentication is used, so the header should contain the system name with the  _SYSTEM//_ prefix. The system name will be _temperature-provider1_ in the examples.
+
+  ~~~
+  -H 'Authorization: Bearer SYSTEM//temperature-provider1' \
+  ~~~
+
 - **Register service:** POST /serviceregistry/service-discovery/register
   
   Request body:
@@ -353,7 +367,7 @@ Reponse code: 200
         "protocol": "https",
         "policy": "NONE",
         "properties": {
-          "accessAddresses": ["192.168.100.100"],
+          "accessAddresses": ["192.168.66.1"],
           "accessPort": 4040,
           "basePath": "/celsius-info",
           "operations": {"query-temperature": { "method": "get", "path": "/celsius-info"} }
@@ -433,7 +447,7 @@ Reponse code: 200
         "policy": "NONE",
         "properties": {
           "accessAddresses": [
-            "192.168.100.100"
+            "192.168.66.1"
           ],
           "accessPort": 4040,
           "operations": {
@@ -520,7 +534,7 @@ Reponse code: 200
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.100.100"
+                "192.168.66.1"
               ],
               "accessPort": 4040,
               "operations": {
@@ -543,7 +557,7 @@ Reponse code: 200
 
 - **Revoke service:** DELETE /serviceregistry/service-discovery/revoke/{instanceid}
   
-  Query parameter: temperature-provider1::celsius-info::1.1.0
+  Path parameter: temperature-provider1::celsius-info::1.1.0
 
   ~~~
   http://localhost:8443/serviceregistry/service-discovery/revoke/temperature-provider1%3A%3Acelsius-info%3A%3A1.1.0
@@ -730,7 +744,7 @@ Got it!
           "type": "analogue",
           "displayed-data": ["temperature"]
         },
-        "addresses": ["ab:f8:c8:e1:45:95"]
+        "addresses": ["ab:f8:c8:e1:45:96"]
       },
       {
         "name": "weather-displayer2",
@@ -759,11 +773,11 @@ Got it!
         "addresses": [
           {
             "type": "MAC",
-            "address": "ab:f8:c8:e1:45:95"
+            "address": "ab:f8:c8:e1:45:96"
           }
         ],
         "createdAt": "2024-10-22T09:44:20Z",
-        "updatedAt": "2024-10-22T09:44:20Z"
+        "updatedAt": "2024-10-22T14:41:00.839368100Z"
       },
       {
         "name": "weather-displayer2",
@@ -1017,7 +1031,7 @@ Got it!
         "name": "temperature-consumer",
         "metadata": {
           "type": "temperature",
-          "screen-size": {"width": 600, "height": 350}
+          "screen-size": {"width": 620, "height": 350}
         },
         "version": "2.2.1",
         "addresses": ["tc.greenhouse.com"],
@@ -1030,7 +1044,7 @@ Got it!
           "customizable": true,
           "scales": ["Fahrenheit", "Kelvin", "Celsius"]
         },
-        "version": "2",
+        "version": "2.1",
         "addresses": ["192.168.1.2", "mtp.greenhouse.com"],
         "deviceName": "thermometer5"
       }
@@ -1053,7 +1067,7 @@ Got it!
             "Celsius"
           ]
         },
-        "version": "2.0.0",
+        "version": "2.1.0",
         "addresses": [
           {
             "type": "IPV4",
@@ -1089,32 +1103,32 @@ Got it!
               "winter"
             ]
           },
-        "addresses": [
-          {
-            "type": "HOSTNAME",
-            "address": "tc.greenhouse.com"
-          }
-        ],
+          "addresses": [
+            {
+              "type": "MAC",
+              "address": "81:ef:1a:44:7b:02"
+            }
+          ],
           "createdAt": "2024-10-22T10:34:10Z",
           "updatedAt": "2024-10-22T10:34:10Z"
         },
-        "createdAt": "2024-10-23T21:43:35Z",
-        "updatedAt": "2024-10-23T21:43:35Z"
+        "createdAt": "2024-11-03T20:47:36Z",
+        "updatedAt": "2024-11-06T10:14:22.625107800Z"
       },
       {
         "name": "temperature-consumer",
         "metadata": {
           "type": "temperature",
           "screen-size": {
-            "width": 600,
+            "width": 620,
             "height": 350
           }
         },
         "version": "2.2.1",
         "addresses": [
           {
-            "type": "MAC",
-            "address": "2a:cc:67:89:5f:ff"
+            "type": "HOSTNAME",
+            "address": "tc.greenhouse.com"
           }
         ],
         "device": {
@@ -1135,7 +1149,7 @@ Got it!
           "updatedAt": "2024-10-22T09:44:20Z"
         },
         "createdAt": "2024-10-23T21:53:08Z",
-        "updatedAt": "2024-10-23T21:59:41.055898300Z"
+        "updatedAt": "2024-11-06T10:14:22.652566Z"
       }
     ],
     "count": 2
@@ -1378,7 +1392,7 @@ Got it!
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.0.14"],
+              "accessAddresses": ["192.168.1.2"],
               "accessPort": 4040,
               "operations": 
               {
@@ -1404,7 +1418,7 @@ Got it!
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.0.14"],
+              "accessAddresses": ["192.168.1.2"],
               "accessPort": 4040,
               "basePath": "/info/celsius"
             }
@@ -1497,7 +1511,7 @@ Got it!
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.0.14"
+                "192.168.1.2"
               ],
               "accessPort": 4040,
               "operations": {
@@ -1595,7 +1609,7 @@ Got it!
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.0.14"
+                "192.168.1.2"
               ],
               "accessPort": 4040,
               "basePath": "/info/celsius"
@@ -1620,7 +1634,7 @@ Got it!
         "instanceId": "main-temperature-provider::celsius-info::1.0.0",
         "expiresAt": "2035-10-11T14:30:00Z",
         "metadata": {
-          "frequency": 350
+          "frequency": 355
         },
         "interfaces": [
           {
@@ -1628,7 +1642,7 @@ Got it!
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.0.14"],
+              "accessAddresses": ["192.168.1.2"],
               "accessPort": 4040,
               "operations": 
               {
@@ -1643,14 +1657,14 @@ Got it!
             "protocol": "https",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.0.14"],
+              "accessAddresses": ["192.168.1.2"],
               "accessPort": 4041,
               "operations": 
               {
                 "discover": {"path": "/discover", "method": "GET"}, 
                 "query": {"path": "/query", "method": "POST"}
               },
-              "basePath": "/info/fahrenheit"
+              "basePath": "/info/celsius"
             }
           }
         ]
@@ -1676,17 +1690,17 @@ Got it!
               "Celsius"
             ]
           },
-          "version": "2.0.0",
-        "addresses": [
-          {
-            "type": "IPV4",
-            "address": "192.168.1.2"
-          },
-          {
-            "type": "HOSTNAME",
-            "address": "mtp.greenhouse.com"
-          }
-        ],
+          "version": "2.1.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "192.168.1.2"
+            },
+            {
+              "type": "HOSTNAME",
+              "address": "mtp.greenhouse.com"
+            }
+          ],
           "device": {
             "name": "thermometer5",
             "metadata": {
@@ -1721,8 +1735,8 @@ Got it!
             "createdAt": "2024-10-22T10:34:10Z",
             "updatedAt": "2024-10-22T10:34:10Z"
           },
-          "createdAt": "2024-10-23T21:43:35Z",
-          "updatedAt": "2024-10-23T21:43:35Z"
+          "createdAt": "2024-11-03T20:47:36Z",
+          "updatedAt": "2024-11-06T11:14:22Z"
         },
         "serviceDefinition": {
           "name": "celsius-info",
@@ -1732,7 +1746,7 @@ Got it!
         "version": "1.0.0",
         "expiresAt": "2035-10-11T14:30:00Z",
         "metadata": {
-          "frequency": 350
+          "frequency": 355
         },
         "interfaces": [
           {
@@ -1741,7 +1755,7 @@ Got it!
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.0.14"
+                "192.168.1.2"
               ],
               "accessPort": 4040,
               "operations": {
@@ -1763,7 +1777,7 @@ Got it!
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.0.14"
+                "192.168.1.2"
               ],
               "accessPort": 4041,
               "operations": {
@@ -1775,13 +1789,13 @@ Got it!
                   "path": "/query",
                   "method": "POST"
                 }
-              },
-              "basePath": "/info/fahrenheit"
+             },
+              "basePath": "/info/celsius"
             }
           }
         ],
-        "createdAt": "2024-10-24T23:07:01Z",
-        "updatedAt": "2024-10-24T23:33:15.443031200Z"
+        "createdAt": "2024-11-06T10:35:24Z",
+        "updatedAt": "2024-11-06T10:36:03.441349900Z"
       }
     ],
     "count": 1
@@ -1821,12 +1835,12 @@ Got it!
     ],
     "interfacePropertyRequirementsList": [
       {
-        "accessAddresses": ["192.168.0.14"],
+        "accessAddresses": ["192.168.1.2"],
         "accessPort": 4040,
         "basePath": "/info/fahrenheit"
       },
       {
-         "accessAddresses" : [ "192.168.100.100" ],
+         "accessAddresses" : [ "192.168.66.1" ],
          "basePath" : "/celsius-info",
          "accessPort" : 4040
       }
@@ -1912,7 +1926,7 @@ Got it!
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.100.100"
+                "192.168.66.1"
               ],
               "basePath": "/celsius-info",
               "accessPort": 4040
@@ -2000,7 +2014,7 @@ Got it!
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.0.14"
+                "192.168.1.2"
               ],
               "accessPort": 4040,
               "operations": {
@@ -2022,7 +2036,7 @@ Got it!
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.0.14"
+                "192.168.1.2"
               ],
               "accessPort": 4041,
               "operations": {
@@ -2035,7 +2049,7 @@ Got it!
                   "method": "POST"
                 }
               },
-              "basePath": "/info/fahrenheit"
+              "basePath": "/info/celsius"
             }
           }
         ],
@@ -2120,7 +2134,7 @@ Got it!
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.0.14"
+                "192.168.1.2"
               ],
               "accessPort": 4040,
               "operations": {
@@ -2133,7 +2147,7 @@ Got it!
                   "method": "POST"
                 }
               },
-              "basePath": "/info/fahrenheit"
+              "basePath": "/info/celsius"
             }
           }
         ],
