@@ -21,8 +21,8 @@ Learn more: <br />
 
 This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
 
-:material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http/generic-https](../help/api_examples/sr_http_api_examples.md)<br />
+:material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](../help/api_examples/sr_mqtt_api_examples.md)
 
 **revoke**
 
