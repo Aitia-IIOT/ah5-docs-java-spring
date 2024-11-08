@@ -4,19 +4,19 @@
 
 In this demo, we will demonstrate through a concrete example how a system should use the Service Registry endpoints.
 
-Let's say, we have a greenhouse. Inside the greenhouse, there are plantations  divided into blocks, and close to certain blocks, _thermometers_ are placed. We can monitor the temperature, using the _systems_ that run on them.
+Let's say, we have a greenhouse. Inside the greenhouse, there are plantations  divided into blocks, and close to the blocks, _thermometers_ are placed. We can monitor the temperature of the blocks, using the _systems_ that run on the _thermometers_. If the temperature is too extreme, the _systems_ may send a warning to our office.
 
 There are two types of _thermometers_: indoor and outdoor _thermometers_, so we can even monitor the temperature outside the greenhouse.
 
-In our office, there are different _weather displayers_ that can show various data about the weather, such as wind or temperature. The temperature data measured by the thermometers in the greenhouse are sent to these _weather displayers_.
+In our office, there are different _weather displayers_ that can show various data about the weather, such as wind or temperature. The temperature data measured by the thermometers in the greenhouse are sent to these _weather displayers_. We also have _alarms_, this way we are immediately informed of extreme temperatures.
 
 _Thermometers_ can provide information on temperature in Celsius, Fahrenheit or Kelvin scales, but not all _thermometers_ are capable of sending data at all scales.
 
 The concrete entities used in our example can be mapped to Service Registry entities as follows:
 
-- **Devices:** _thermometers_ and _weather displayers_
-- **Systems:** _temperature providers_ running on the _thermometers_, and _temperature consumers_ running on the _weather displayers_
-- **Services:** _Fahrenheit info_, _Kelvin info_ and _Celsius info_, provided by the _temperature providers_ and consumed by the _temperature consumers_
+- **Devices:** _thermometers_, _weather displayers_ and _alarms_
+- **Systems:** _temperature providers_ running on the thermometers, _temperature consumers_ running on the weather displayers, and _alert consumers_ running on the alarms.
+- **Services:** _Fahrenheit info_, _Kelvin info_, _Celsius info_, and _alert service_, provided by the temperature providers and consumed by the temperature consumers and the alert consumers
 
 We will demonstrate the usage of the endpoints via two examples: [example 1](#example-1:-provider) is about a provider system, and [example 2](#example-2:-consumer) is about a consumer system.
 
@@ -25,7 +25,7 @@ We will demonstrate the usage of the endpoints via two examples: [example 1](#ex
 In the following, we'll see how:
 - a **system** called _temperature-provider-2_, 
 - running on the **device** named _thermometer2_,
-- publishes its **services:** _Kelvin-info_ and _Celsius-info_,
+- publishes its **services:** _Kelvin-info_, _Celsius-info_ and _alert-service_
 
 after registering itself into the Local Cloud.
 
@@ -192,13 +192,31 @@ We receive the following response:
 }
 ~~~
 
-### Step 5: Register service instance
+### Step 4: Register service instances
 
-Now that we have our system registered, we can finally register the services it provides. Since we want to serve temperature information in Kelvin and Celsius, we will use the service definitions named kelvin-info and celsius-info.
+The _temperature-provider2_ system that we have just registered provides three services in the Local Cloud:
+- **Kelvin info:** provides temperature information using the Kelvin scale,
+- **Celsius info:** provides temperature information using the Celsius scale,
+- **alert service:** sends an alert if the temperature is extreme (by default, these thresholds are 10 and 25 Celsius, but the consumer can overwrite them).
 
-### Step 6: Revoke service instance
+We will register all these services. For the registration, we have to provide the following information about the services:
+- **service definition name:** We have to use the name of the existing service definitions stored in the Local Cloud. In this example, these are kelvin-info, celsius-info and alert-service.
+- **version:** We will use the default version in all three cases, so we can leave this field blank.
+- **expires at:** This is a timestamp in the future, when the services are no longer funtioning. For temperature information, we set this to 01. 01. 2030, but the alert service expires at 01. 01. 2025. Note that UTC string format must be used here. 
+- **metadata:** This can be customised depending on the service. For Kelvin info and Celsius info, we define the margin of error, which is 0,5 degree in both cases. For alert serivce, the maximum possible delay is given, which is 15 sec.
+- **interfaces:** All the services use http protocol, so we will go with the template named generic-http, that already exists in the Local Cloud. The interfaces provided by the services are the listed below:
+  - Kelvin info:    GET tp2.greenhouse.com:8080/kelvin
+  - Celsius info:   GET tp2.greenhouse.com:8080/celsius
+  - Alert service:  GET tp2.greenhouse.com:8000/alert/subscribe, GET tp2.greenhouse.com:8000/alert/unsubscribe, POST tp2.greenhouse.com:8000/alert
 
-### Step 7:  Revoke the system
+Based on these specifications, the request looks like this:
+
+~~~
+~~~
+
+### Step 5: Revoke service instance
+
+### Step 6:  Revoke the system
 
 ## Example 2: Consumer
 
