@@ -4,11 +4,15 @@
 
 In this demo, we will demonstrate through a concrete example how a system should use the Service Registry endpoints.
 
+![image of the greenhouse](temperature-http-demo-images/greenhouse.jpg)
+
 Let's say, we have a greenhouse. Inside the greenhouse, there are plantations  divided into blocks, and close to the blocks, _thermometers_ are placed. We can monitor the temperature of the blocks, using the _systems_ that run on the _thermometers_. If the temperature is too extreme, the _systems_ may send a warning to our office.
 
 There are two types of _thermometers_: indoor and outdoor _thermometers_, so we can even monitor the temperature outside the greenhouse.
 
-In our office, there are different _weather displayers_ that can show various data about the weather, such as wind or temperature. The temperature data measured by the thermometers in the greenhouse are sent to these _weather displayers_. We also have _alarms_, this way we are immediately informed of extreme temperatures.
+![image of the office](temperature-http-demo-images/office.jpg)
+
+In our office, there are different _weather displayers_ that can show various data about the weather, such as wind or temperature. The temperature data measured by the _thermometers_ in the greenhouse is sent to these _weather displayers_. We also have _alarms_, this way we are immediately informed about extreme temperatures.
 
 _Thermometers_ can provide information on temperature in Celsius, Fahrenheit or Kelvin scales, but not all _thermometers_ are capable of sending data at all scales.
 
@@ -203,11 +207,11 @@ We have to registrer these services one by one.
 
 **1. Kelvin info:** 
 We have to provide the following information:
-- **service definition name:** We have to use the name of the existing service definitions stored in the Local Cloud. In this example, this is kelvin-info.
+- **service definition name:** We have to use the name of one of the existing service definitions stored in the Local Cloud. In this example, this is kelvin-info.
 - **version:** We will use the default version, so we can leave this field blank.
 - **expires at:** This is a timestamp in the future, when the service is no longer funtioning. For Kelvin info, we set this to 01. 01. 2030. 
 - **metadata:** This can be customised depending on the service. For temperature information, we define the margin of error, which is 0,5 degree.
-- **interfaces:** All the services use http protocol, so we will go with the template named generic-http, that already exists in the Local Cloud. Note that in out case, the service discovery interface policy is set to _restricted_, which means that only already existing interface templates can be used. If you set this to _extendable_ or _open_, you can use non-existent interface templates, and they will be created as well. The interface provided by the Kelvin info service is the following:
+- **interfaces:** All the services use http protocol, so we will go with the template named generic-http, that already exists in the Local Cloud. Note that in our case, the service discovery interface policy is set to _restricted_, which means that only already existing interface templates can be used. If you set this to _extendable_ or _open_, you can use non-existent interface templates, and they will be created as well. The interface provided by the Kelvin info service is the following:
   - GET tp2.greenhouse.com:8080/kelvin/query
   
 Based on these specifications, the request looks like this:
@@ -244,7 +248,7 @@ curl -X 'POST' \
 **2. Celsius info:** 
 The only difference with the Kelvin info is the service definition name (celsius-info) and the interface (GET tp2.greenhouse.com:8080/celsius/query). All the other registation data will remain the same.
   
-The request will look like this:
+So the request will look like this:
 
 ~~~
 curl -X 'POST' \
@@ -280,8 +284,8 @@ Our last service will be responsible for sending error messages. The registratio
 - **service definition name:** In this case this is alert-service.
 - **version:** We will use the default version.
 - **expires at:** The alert service expires a bit earlier than the previous ones, so we set this to 01. 01. 2025.
-- **metadata:** For alert serivce, the maximum possible delay is given, which is 15 sec.
-- **interfaces:** The interfaces provided by Alert service are the following:
+- **metadata:** For alert service, the maximum possible delay is given, which is 15 sec.
+- **interfaces:** The interfaces provided by the alert service are the following:
   - GET tp2.greenhouse.com:8000/alert/subscribe 
   - GET tp2.greenhouse.com:8000/alert/unsubscribe
   - POST tp2.greenhouse.com:8000/alert/threshold
@@ -446,9 +450,27 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer SYSTEM//temperature-provider2'
 ~~~
 
+This operation only works, if the service we are deleting is associated with our system. Otherwise, the following error message will be received:
+~~~
+{
+  "errorMessage": "Revoking other systems' service is forbidden",
+  "errorCode": 403,
+  "exceptionType": "FORBIDDEN",
+  "origin": "DELETE /serviceregistry/service-discovery/revoke/{instanceId}"
+}
+~~~
+
 ### Step 6:  Revoke system
 
-Maybe later we want to delete the _provider-system2_ for some reason. We can do this //TODO!! revoke device is!
+Maybe later we want to revoke the _provider-system2_ because we will not use it anymore. We can remove the system from the Local Cloud by using the revoke system operation:
+~~~
+curl -X 'DELETE' \
+  'http://localhost:8443/serviceregistry/system-discovery/revoke' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer SYSTEM//temperature-consumer1'
+~~~
+
+The Service Registry will delete our system.
 
 ## Example 2: Consumer
 
@@ -466,7 +488,7 @@ Similar to the [providers's authentication](##-step-1:-authentication), we will 
 -H 'Authorization: Bearer SYSTEM//temperature-consumer1'
 ~~~
 
-### Step 1: Register device
+### Step 1: Register and revoke device
 
 Before registrating the system, we will register our device, because it doesn't exist in the Local Cloud yet. We provide the following information about the device:
 - **name:** weather-displayer1
@@ -513,14 +535,34 @@ After successful registration, we receive the following response:
 }
 ~~~
 
+If for some reason we want to delete this device in the future, we can do this by sending the following request:
+~~~
+curl -X 'DELETE' \
+  'http://localhost:8443/serviceregistry/device-discovery/revoke/weather-displayer1' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer SYSTEM//temperature-consumer1'
+~~~
+
+Note that this operation will only be successful, if no system is connected to the device anymore. Otherwise you will get the following error message:
+~~~
+{
+  "errorMessage": "At least one system is assigned to this device.",
+  "errorCode": 423,
+  "exceptionType": "LOCKED",
+  "origin": "DELETE /serviceregistry/device-discovery/revoke/{name}"
+}
+~~~
+
+In this example, we will not delete the device yet, because _temperature-consumer1_ runs on it.
+
 ### Step 2: Register system
 
 Now, that we registered the device, we will register the system too with the following data:
 
-- **metadata:** The system uses Kelvin, Celsius and Fahrenheit scales. It is placed indoor and located in room 14. 
-- **version:** This is the second version of this system. We can set is to 2, the Service Registry will normalize it later according to semantic versioning.
+- **metadata:** The system uses Kelvin, Celsius and Fahrenheit scales. It is placed indoor and is located in room 14. 
+- **version:** This is the second version of this system. We can set it to 2, the Service Registry will normalize it later according to semantic versioning.
 - **addresses:** We specify an IP address (192.168.49.1) and the hostname (tc1.greenhouse.com).
-- **device name:** This will be weather-displayer1.
+- **device name:** This will be weather-displayer1, which we registered earlier.
 
 The registation request:
 
@@ -594,3 +636,209 @@ Here is the response we received:
 
 ### Step 3: Lookup services
 
+Let's say that the _temperature-consumer1_ wants to consume the Kelvin info service. We have to perform a lookup operation to find out the service instances registered into the Local Cloud with the corresponding service definition name. We are looking for services, that will not expire until 31. december 2024, and the margin of error is not higher than 1 degree.
+
+We will use the following filters during lookup:
+- **Service definition names:** We are looking for services named kelvin-info.
+- **Alives at:** This should be the UTC string representation of 31. 12. 2024.
+- **Metadata requirements list**: As specified, the margin of error sould be less than or equals to 1. However, the service might not contain this metadata, if the measured temperature is always perfectly accurate. In this case, there has be a _reliabe_ flag which is set to _true_. So we will have two metadata requitements, one is a limit for the margin of error metadata, and the other one is to check the _reliable_ flag. 
+
+We will set the _verbose_ parameter to _true_, because we want all the possible details about the services, so we can make an optimal decision, which one to consume.
+
+As mentioned in [example 1](#step-5-lookup-and-revoke-service), the service discovery policy here is set to OPEN. If the discovery policy is RESTRICTED, we may face some restrictions.
+
+The request looks like this:
+~~~
+curl -X 'POST' \
+  'http://localhost:8443/serviceregistry/service-discovery/lookup?verbose=true' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer SYSTEM//temperature-consumer1' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "instanceIds": [
+  ],
+  "providerNames": [
+  ],
+  "serviceDefinitionNames": [
+    "kelvin-info"
+  ],
+  "versions": [
+  ],
+  "alivesAt": "2024-12-31T00:00:00Z",
+  "metadataRequirementsList": [
+    {
+      "margin-of-error": { "op": "LESS_THAN_OR_EQUALS_TO", "value": 1}
+    },
+    {
+      "reliable": true
+    }
+  ],
+  "interfaceTemplateNames": [
+  ],
+  "interfacePropertyRequirementsList": [
+  ],
+  "policies": [
+  ]
+}'
+~~~
+
+The result contains two entities, temperature-provider2::kelvin-info::1.0.0 and temperature-provider1::kelvin-info::1.0.0:
+~~~
+{
+  "entries": [
+    {
+      "instanceId": "temperature-provider2::kelvin-info::1.0.0",
+      "provider": {
+        "name": "temperature-provider2",
+        "metadata": {
+          "scales": [
+            "Kelvin",
+            "Celsius"
+          ],
+          "location": {
+            "side": "North",
+            "block": 2
+          },
+          "indoor": true
+        },
+        "version": "1.0.0",
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.56.116"
+          },
+          {
+            "type": "HOSTNAME",
+            "address": "tp2.greenhouse.com"
+          }
+        ],
+        "device": {
+          "name": "thermometer2",
+          "metadata": {
+            "scales": [
+              "Kelvin",
+              "Celsius"
+            ],
+            "max-temperature": {
+              "Kelvin": 310,
+              "Celsius": 40
+            },
+            "min-temperature": {
+              "Kelvin": 260,
+              "Celsius": -10
+            }
+          },
+          "addresses": [
+            {
+              "type": "MAC",
+              "address": "81:ef:1a:44:7a:f5"
+            }
+          ],
+          "createdAt": "2024-11-04T01:53:02Z",
+          "updatedAt": "2024-11-04T01:53:02Z"
+        },
+        "createdAt": "2024-11-08T10:21:11Z",
+        "updatedAt": "2024-11-08T10:21:11Z"
+      },
+      "serviceDefinition": {
+        "name": "kelvin-info",
+        "createdAt": "2024-11-08T11:24:43Z",
+        "updatedAt": "2024-11-08T11:24:43Z"
+      },
+      "version": "1.0.0",
+      "expiresAt": "2030-01-01T00:00:00Z",
+      "metadata": {
+        "margin-of-error": 0.5
+      },
+      "interfaces": [
+        {
+          "templateName": "generic-http",
+          "protocol": "http",
+          "policy": "NONE",
+          "properties": {
+            "accessAddresses": [
+              "192.168.56.116",
+              "tp2.greenhouse.com"
+            ],
+            "accessPort": 8080,
+            "operations": {
+              "query-temperature": {
+                "path": "/query",
+                "method": "GET"
+              }
+            },
+            "basePath": "/kelvin"
+          }
+        }
+      ],
+      "createdAt": "2024-11-10T14:24:13Z",
+      "updatedAt": "2024-11-10T22:43:19Z"
+    },
+    {
+      "instanceId": "temperature-provider1::kelvin-info::1.0.0",
+      "provider": {
+        "name": "temperature-provider1",
+        "metadata": {
+          "scales": [
+            "Kelvin"
+          ],
+          "location": {
+            "side": "East",
+            "block": 2
+          },
+          "indoor": false
+        },
+        "version": "1.0.0",
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.56.110"
+          },
+          {
+            "type": "HOSTNAME",
+            "address": "tp1.greenhouse.com"
+          }
+        ],
+        "createdAt": "2024-11-10T16:15:23Z",
+        "updatedAt": "2024-11-10T16:15:23Z"
+      },
+      "serviceDefinition": {
+        "name": "kelvin-info",
+        "createdAt": "2024-11-08T11:24:43Z",
+        "updatedAt": "2024-11-08T11:24:43Z"
+      },
+      "version": "1.0.0",
+      "expiresAt": "2030-05-31T00:00:00Z",
+      "metadata": {
+        "reliable": true
+      },
+      "interfaces": [
+        {
+          "templateName": "generic-http",
+          "protocol": "http",
+          "policy": "NONE",
+          "properties": {
+            "accessAddresses": [
+              "192.168.56.110",
+              "tp1.greenhouse.com"
+            ],
+            "accessPort": 8080,
+            "operations": {
+              "query-temperature": {
+                "path": "/info",
+                "method": "GET"
+              }
+            },
+            "basePath": "/kelvin"
+          }
+        }
+      ],
+      "createdAt": "2024-11-10T21:08:21Z",
+      "updatedAt": "2024-11-10T22:43:19Z"
+    }
+  ],
+  "count": 2
+}
+~~~
+
+Now we are free to choose, which intance of kelvin-info service to consume.
