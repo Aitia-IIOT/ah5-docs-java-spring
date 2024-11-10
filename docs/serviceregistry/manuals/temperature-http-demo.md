@@ -1,4 +1,4 @@
-# Temperature HTTP demo
+# Temperature HTTP Demo
 
 ## Recap
 
@@ -46,7 +46,7 @@ In our example, the authorization header will look like this:
 -H 'Authorization: Bearer SYSTEM//temperature-provider2'
 ~~~
 
-### Step 2: Lookup devices
+### Step 2: Lookup Devices
 
 During registration, the system can specify which device it is running on. In this case, our device is called _thermometer2_. Specifying the device is optional, but let's say, that in our example it is relevant to the operation of _temperature-provider-2_. Therefore, the system first looks up if there is a device with name _thermometer2_ in the Local Cloud, to make sure that the device it is running on is already registered. (Otherwise you must register the device first, as shown in [example 2](#example-2:-consumer).)
 
@@ -106,7 +106,7 @@ Which leads to the following response from the Service Registry:
 
 Since we have an existing entity back, _thermometer2_ is indeed a registered device.
 
-### Step 3: Register system
+### Step 3: Register System
 
 Now we can perform the registration operation of our _temperature-provider2_ system.
 
@@ -198,7 +198,7 @@ We receive the following response:
 }
 ~~~
 
-### Step 4: Register service instances
+### Step 4: Register Service Instances
 
 The _temperature-provider2_ system that we have just registered provides three services in the Local Cloud:
 - **Kelvin info:** provides temperature information using the Kelvin scale,
@@ -327,7 +327,7 @@ curl -X 'POST' \
 }'
 ~~~
 
-### Step 5: Lookup and revoke service 
+### Step 5: Lookup and Revoke Service 
 
 Let's say  we have decided to no longer provide _temperature-provider2_'s  alert service. 
 
@@ -462,7 +462,7 @@ This operation only works, if the service we are deleting is associated with our
 }
 ~~~
 
-### Step 6:  Revoke system
+### Step 6:  Revoke System
 
 Maybe later we want to revoke the _provider-system2_ because we will not use it anymore. We can remove the system from the Local Cloud by using the revoke system operation:
 ~~~
@@ -490,7 +490,7 @@ Similar to the [providers's authentication](##-step-1:-authentication), we will 
 -H 'Authorization: Bearer SYSTEM//temperature-consumer1'
 ~~~
 
-### Step 1: Register and revoke device
+### Step 2: Register and Revoke Device
 
 Before registrating the system, we will register our device, because it doesn't exist in the Local Cloud yet. We provide the following information about the device:
 - **name:** weather-displayer1
@@ -557,7 +557,7 @@ Note that this operation will only be successful, if no system is connected to t
 
 In this example, we will not delete the device yet, because _temperature-consumer1_ runs on it.
 
-### Step 2: Register system
+### Step 3: Register System
 
 Now, that we registered the device, we will register the system too with the following data:
 
@@ -636,7 +636,7 @@ Here is the response we received:
 }
 ~~~
 
-### Step 3: Lookup services
+### Step 4: Lookup Services
 
 Let's say that the _temperature-consumer1_ wants to consume the Kelvin info service. We have to perform a lookup operation to find out the service instances registered into the Local Cloud with the corresponding service definition name. We are looking for services, that will not expire until 31. december 2024, and the margin of error is not higher than 1 degree.
 
