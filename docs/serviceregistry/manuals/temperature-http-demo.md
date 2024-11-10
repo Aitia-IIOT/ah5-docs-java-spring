@@ -841,4 +841,4 @@ The result contains two entities, temperature-provider2::kelvin-info::1.0.0 and 
 }
 ~~~
 
-Now we are free to choose, which intance of kelvin-info service to consume.
+Now we are free to choose, which instance of kelvin-info service to consume.
