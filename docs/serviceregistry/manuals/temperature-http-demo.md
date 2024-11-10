@@ -24,7 +24,7 @@ The concrete entities used in our example can be mapped to Service Registry enti
 - **Systems:** _temperature providers_ running on the thermometers, _temperature consumers_ running on the weather displayers, and _alert consumers_ running on the alarms.
 - **Services:** _Fahrenheit info_, _Kelvin info_, _Celsius info_, and _alert service_, provided by the temperature providers and consumed by the temperature consumers and the alert consumers
 
-We will demonstrate the usage of the endpoints via two examples: [example 1](#example-1:-provider) is about a provider system, and [example 2](##step-1:-register-device) is about a consumer system.
+We will demonstrate the usage of the endpoints via two examples: [example 1](#example-1-provider) is about a provider system, and [example 2](#example-2-consumer) is about a consumer system.
 
 ## Example 1: Provider
 
@@ -48,7 +48,7 @@ In our example, the authorization header will look like this:
 
 ### Step 2: Lookup Devices
 
-During registration, the system can specify which device it is running on. In this case, our device is called _thermometer2_. Specifying the device is optional, but let's say, that in our example it is relevant to the operation of _temperature-provider-2_. Therefore, the system first looks up if there is a device with name _thermometer2_ in the Local Cloud, to make sure that the device it is running on is already registered. (Otherwise you must register the device first, as shown in [example 2](#example-2:-consumer).)
+During registration, the system can specify which device it is running on. In this case, our device is called _thermometer2_. Specifying the device is optional, but let's say, that in our example it is relevant to the operation of _temperature-provider-2_. Therefore, the system first looks up if there is a device with name _thermometer2_ in the Local Cloud, to make sure that the device it is running on is already registered. (Otherwise you must register the device first, as shown in [example 2](#step-2-register-and-revoke-device).)
 
 The request looks like this:
 ~~~
@@ -485,7 +485,7 @@ after registering itself and it's device into the Local Cloud.
 
 ### Step 1: Authentication
 
-Similar to the [providers's authentication](##-step-1:-authentication), we will use _self declared authentication_, and use the following authorization header:
+Similar to the [providers's authentication](#step-1-authentication), we will use _self declared authentication_, and use the following authorization header:
 ~~~
 -H 'Authorization: Bearer SYSTEM//temperature-consumer1'
 ~~~
