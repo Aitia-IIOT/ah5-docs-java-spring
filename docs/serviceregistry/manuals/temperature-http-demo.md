@@ -199,24 +199,128 @@ The _temperature-provider2_ system that we have just registered provides three s
 - **Celsius info:** provides temperature information using the Celsius scale,
 - **alert service:** sends an alert if the temperature is extreme (by default, these thresholds are 10 and 25 Celsius, but the consumer can overwrite them).
 
-We will register all these services. For the registration, we have to provide the following information about the services:
-- **service definition name:** We have to use the name of the existing service definitions stored in the Local Cloud. In this example, these are kelvin-info, celsius-info and alert-service.
-- **version:** We will use the default version in all three cases, so we can leave this field blank.
-- **expires at:** This is a timestamp in the future, when the services are no longer funtioning. For temperature information, we set this to 01. 01. 2030, but the alert service expires at 01. 01. 2025. Note that UTC string format must be used here. 
-- **metadata:** This can be customised depending on the service. For Kelvin info and Celsius info, we define the margin of error, which is 0,5 degree in both cases. For alert serivce, the maximum possible delay is given, which is 15 sec.
-- **interfaces:** All the services use http protocol, so we will go with the template named generic-http, that already exists in the Local Cloud. The interfaces provided by the services are the listed below:
-  - Kelvin info:    GET tp2.greenhouse.com:8080/kelvin
-  - Celsius info:   GET tp2.greenhouse.com:8080/celsius
-  - Alert service:  GET tp2.greenhouse.com:8000/alert/subscribe, GET tp2.greenhouse.com:8000/alert/unsubscribe, POST tp2.greenhouse.com:8000/alert
+We have to registrer these services one by one.
 
+**1. Kelvin info:** 
+We have to provide the following information:
+- **service definition name:** We have to use the name of the existing service definitions stored in the Local Cloud. In this example, this is kelvin-info.
+- **version:** We will use the default version, so we can leave this field blank.
+- **expires at:** This is a timestamp in the future, when the service is no longer funtioning. For Kelvin info, we set this to 01. 01. 2030. 
+- **metadata:** This can be customised depending on the service. For temperature information, we define the margin of error, which is 0,5 degree.
+- **interfaces:** All the services use http protocol, so we will go with the template named generic-http, that already exists in the Local Cloud. The interface provided by the Kelvin info service is the following:
+  - GET tp2.greenhouse.com:8080/kelvin/query
+  
 Based on these specifications, the request looks like this:
 
 ~~~
+curl -X 'POST' \
+  'http://localhost:8443/serviceregistry/service-discovery/register' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer SYSTEM//temperature-provider2' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "serviceDefinitionName": "kelvin-info",
+  "version": "",
+  "expiresAt": "2030-01-01T00:00:00Z",
+  "metadata": {
+    "margin-of-error": 0.5
+  },
+  "interfaces": [
+    {
+      "templateName": "generic-http",
+      "protocol": "http",
+      "policy": "NONE",
+      "properties": {
+        "accessAddresses": ["192.168.56.116", "tp2.greenhouse.com"],
+        "accessPort": 8080,
+        "basePath": "/kelvin",
+        "operations": {"query-temperature": { "method": "get", "path": "/query"} }
+      }
+    }
+  ]
+}'
 ~~~
 
-### Step 5: Revoke service instance
+**2. Celsius info:** 
+The only difference with the Kelvin info is the service definition name (celsius-info) and the interface (GET tp2.greenhouse.com:8080/celsius/query). All the other registation data will remain the same.
+  
+The request will look like this:
 
-### Step 6:  Revoke the system
+~~~
+curl -X 'POST' \
+  'http://localhost:8443/serviceregistry/service-discovery/register' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer SYSTEM//temperature-provider2' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "serviceDefinitionName": "celsius-info",
+  "version": "",
+  "expiresAt": "2030-01-01T00:00:00Z",
+  "metadata": {
+    "margin-of-error": 0.5
+  },
+  "interfaces": [
+    {
+      "templateName": "generic-http",
+      "protocol": "http",
+      "policy": "NONE",
+      "properties": {
+        "accessAddresses": ["192.168.56.116", "tp2.greenhouse.com"],
+        "accessPort": 8080,
+        "basePath": "/celsius",
+        "operations": {"query-temperature": { "method": "get", "path": "/query"} }
+      }
+    }
+  ]
+}'
+~~~
+
+**2. Alert service:** 
+Our last service will be responsible for sending error messages. The registration data is the following:
+- **service definition name:** In this case this is alert-service.
+- **version:** We will use the default version.
+- **expires at:** The alert service expires a bit earlier than the previous ones, so we set this to 01. 01. 2025.
+- **metadata:** For alert serivce, the maximum possible delay is given, which is 15 sec.
+- **interfaces:** The interfaces provided by Alert service are the following:
+  - GET tp2.greenhouse.com:8000/alert/subscribe 
+  - GET tp2.greenhouse.com:8000/alert/unsubscribe
+  - POST tp2.greenhouse.com:8000/alert/threshold
+
+We will register this service with the following request:
+
+~~~
+{
+  "serviceDefinitionName": "alert-service",
+  "version": "",
+  "expiresAt": "2025-01-01T00:00:00Z",
+  "metadata": {
+    "max-delay": {"value": 15, "unit": "sec"}
+  },
+  "interfaces": [
+    {
+      "templateName": "generic-http",
+      "protocol": "http",
+      "policy": "NONE",
+      "properties": {
+        "accessAddresses": ["192.168.56.116", "tp2.greenhouse.com"],
+        "accessPort": 8080,
+        "basePath": "/alert",
+        "operations": {
+          "subscribe": { "method": "get", "path": "/subscribe"},
+          "unsubscribe": { "method": "get", "path": "/unsubscribe"},
+          "set-threshold": { "method": "post", "path": "/threshold"}
+        }
+      }
+    }
+  ]
+}
+~~~
+
+## Step 5: Lookup services
+
+### Step 6: Revoke service 
+
+### Step 7:  Revoke system
 
 ## Example 2: Consumer
 
