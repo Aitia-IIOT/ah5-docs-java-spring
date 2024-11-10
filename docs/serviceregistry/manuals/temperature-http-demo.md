@@ -1,4 +1,4 @@
-# Temperature http demo
+# Temperature HTTP demo
 
 ## Recap
 
@@ -17,6 +17,8 @@ In our office, there are different _weather displayers_ that can show various da
 _Thermometers_ can provide information on temperature in Celsius, Fahrenheit or Kelvin scales, but not all _thermometers_ are capable of sending data at all scales.
 
 The concrete entities used in our example can be mapped to Service Registry entities as follows:
+
+![image of entities](temperature-http-demo-images/entities.jpg)
 
 - **Devices:** _thermometers_, _weather displayers_ and _alarms_
 - **Systems:** _temperature providers_ running on the thermometers, _temperature consumers_ running on the weather displayers, and _alert consumers_ running on the alarms.
