@@ -339,7 +339,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the ope\-ration. \\ \hline
 verbose & \pref{Boolean} & no & If true detailed system and device information also returns (only if the provider supports it). \\ \hline
-instanceIds &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service instances with any of the spe\-cified names. Mandatory if no providerNames nor serviceDefinitionNames are spe\-cified. \\ \hline
+instanceIds &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service instances with any of the spe\-cified identifiers. Mandatory if no providerNames nor serviceDefinitionNames are spe\-cified. \\ \hline
 providerNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances that are provided by any of the specified systems. Mandatory if no serviceInstanceIds nor serviceDefinitionNames are spe\-cified. \\ \hline
 serviceDefinitionNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances with any of the specified service definition names. Mandatory if no serviceInstanceIds nor providerNames are spe\-cified. \\ \hline
 versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for service ins\-tances with any of the specified versions. \\ \hline
