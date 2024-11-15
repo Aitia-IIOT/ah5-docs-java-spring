@@ -8,14 +8,16 @@
 \renewcommand{\dateseparator}{-}
 
 \setlength{\parskip}{1em}
+\hyphenation{Er-ror-Res-pon-se}
 
 %% Special references
 \newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
 \newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
 \newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
 \newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
 
-\newrobustcmd\fsubsection[4]{
+\newrobustcmd\fsubsection[5]{
   \addtocounter{subsection}{1}
   \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
   \renewcommand*{\do}[1]{\rref{##1},\ }
@@ -25,7 +27,8 @@
     \textcolor{ArrowheadBlue}{#1}
     (\notblank{#2}{\mref{#2}}{})
     \notblank{#3}{: \mref{#3}}{}
-    \notblank{#4}{/ \mref{#4}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
   }
   \label{sec:functions:#1}
 }
@@ -140,7 +143,8 @@ In particular, each subsection names an operation, an input type and one or two 
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
 
-\fsubsection{register}{SystemRegistrationRequest}{SystemRegistrationResponse}{ErrorResponse}
+\phantomsection
+\fsubsection{register}{SystemRegistrationRequest}{SystemRegistrationResponse}{}{ErrorResponse}
 
 The registration data must meet the following criteria:
 
@@ -153,7 +157,7 @@ The registration data must meet the following criteria:
     \item Systems can register multiple times, but only if they are identical (same version, addresses, metadata and device).
 \end{itemize}
 
-\fsubsection{lookup}{SystemLookupRequest}{SystemLookupResponse}{ErrorResponse}
+\fsubsection{lookup}{SystemLookupRequest}{SystemLookupResponse}{}{ErrorResponse}
 
 The lookup data must meet the following criteria:
 
@@ -162,7 +166,7 @@ The lookup data must meet the following criteria:
     \item There is an AND relation between different kind of filters.
 \end{itemize}
 
-\fsubsection{revoke}{Identity}{OperationStatus}{ErrorResponse}
+\fsubsection{revoke}{Identity}{}{OperationStatus}{ErrorResponse}
 
 The input operation data must meet the following criteria:
 
@@ -180,8 +184,8 @@ Here, all data objects that can be part of the \textbf{system-discovery} service
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
+\phantomsection
 \msubsection{struct}{SystemRegistrationRequest}
-\label{sec:model:SystemRegistrationRequest}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
@@ -195,19 +199,14 @@ deviceName & \pref{Name} & no & Unique identifier of the device on which the sys
 \end{table}
 
 \msubsection{struct}{Identity}
-\label{sec:model:Identity}
 
 An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
 
 \msubsection{struct}{Metadata}
-\label{sec:model:Metadata}
 
 An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
 
-\clearpage
-
 \msubsection{struct}{SystemRegistrationResponse}
-\label{sec:model:SystemRegistrationResponse}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
@@ -224,7 +223,6 @@ updatedAt & \pref{DateTime} & System was modified at this timestamp. \\ \hline
 \end{table}
 
 \msubsection{struct}{AddressDescriptor}
-\label{sec:model:AddressDescriptor}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
@@ -235,7 +233,6 @@ address & \pref{Address} & Address. \\ \hline
 \end{table}
 
 \msubsection{struct}{DeviceDescriptor}
-\label{sec:model:DeviceDescriptor}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
@@ -249,7 +246,6 @@ updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
 \end{table}
 
 \msubsection{struct}{ErrorResponse}
-\label{sec:model:ErrorResponse}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
@@ -262,27 +258,29 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
 
-\clearpage
-
 \msubsection{struct}{SystemLookupRequest}
-\label{sec:model:SystemLookupRequest}
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.1cm} | p{4.8cm} | p{2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{4.4cm} | p{4.8cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
 verbose & \pref{Boolean} & no & If true detailed device information also returns (only if the provider supports it). \\ \hline
 systemNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems with any of the specified names. \\ \hline
-addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for systems with any of the specified addresses.   \\ \hline
-addressType &  \pref{AddressType} & no & Requester is looking for systems with the specified type of address. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for systems with any of the specified add\-resses.   \\ \hline
+addressType &  \pref{AddressType} & no & Requester is looking for systems with the specified type of add\-ress. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.4cm} | p{4.8cm} | p{2cm} | X |} \hline
 metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for systems that are matching any of the specified metadata requirements.  \\ \hline
 versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for systems with any of the specified versions.   \\ \hline
 deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems that are running on any of the specified devices. \\ \hline
 \end{tabularx}
 \end{table}
 
+
 \msubsection{struct}{MetadataRequirements}
-\label{sec:model:MetadataRequirements}
 
 A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
 
@@ -293,7 +291,6 @@ A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitiv
 \end{itemize}
 
 \msubsection{struct}{SystemLookupResponse}
-\label{sec:model:SystemLookupResponse}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{6cm} | X |} \hline
@@ -304,8 +301,9 @@ count & \pref{Number} & Number of returned systems. \\ \hline
 \end{tabularx}
 \end{table}
 
+\clearpage
+
 \msubsection{struct}{SystemLookupResult}
-\label{sec:model:SystemLookupResult}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
