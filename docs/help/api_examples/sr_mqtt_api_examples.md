@@ -1,16 +1,18 @@
 # Service Registry | MQTT Examples
 
+TODO
+
 ## service-discovery
 
 ### register
 
-Topic:
+##### Topic:
 
 ~~~
 arrowhead/serviceregistry/service-discovery
 ~~~
 
-Request message:
+##### Request message:
 
 ~~~
 {
@@ -47,7 +49,7 @@ Request message:
 }
 ~~~
 
-Response message:
+##### Response message:
 
 ~~~
 {

@@ -264,7 +264,84 @@ http://localhost:8443/serviceregistry/service-discovery/revoke/temperature-provi
 ## system-discovery
 
 ### register
-TODO
+
+**POST /serviceregistry/system-discovery/register**
+
+##### Request body:
+
+~~~
+{
+  "metadata": {
+    "type": "temperature",
+    "scales": ["Kelvin", "Celsius"],
+    "customizable": false
+  },
+  "version": "2.1",
+  "addresses": ["tp1.greenhouse.com", "192.168.66.1"],
+  "deviceName": "thermometer1"
+}
+~~~
+
+##### Response Status:
+
+`201 CREATED`
+
+##### Response Body:
+~~~
+{
+  "name": "temperature-provider1",
+  "metadata": {
+    "type": "temperature",
+    "scales": [
+      "Kelvin",
+      "Celsius"
+    ],
+    "customizable": false
+  },
+  "version": "2.1.0",
+  "addresses": [
+    {
+      "type": "HOSTNAME",
+      "address": "tp1.greenhouse.com"
+    },
+    {
+      "type": "IPV4",
+      "address": "192.168.66.1"
+    }
+  ],
+  "device": {
+    "name": "thermometer1",
+    "metadata": {
+      "scales": [
+        "Kelvin",
+        "Celsius"
+      ],
+      "max-temperature": {
+        "Kelvin": 310,
+        "Celsius": 40
+      },
+      "min-temperature": {
+        "Kelvin": 260,
+        "Celsius": -10
+      },
+      "appliable": [
+        "spring",
+        "autumn"
+      ]
+    },
+    "addresses": [
+      {
+        "type": "MAC",
+        "address": "81:ef:1a:44:7a:ff"
+      }
+    ],
+    "createdAt": "2024-10-21T18:47:45Z",
+    "updatedAt": "2024-10-21T18:47:45Z"
+  },
+  "createdAt": "2024-10-23T21:33:04.585419100Z",
+  "updatedAt": "2024-10-23T21:33:04.585419100Z"
+}
+~~~
 
 ### lookup
 TODO
