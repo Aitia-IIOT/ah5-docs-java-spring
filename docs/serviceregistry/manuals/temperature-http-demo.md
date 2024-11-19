@@ -205,15 +205,15 @@ The _temperature-provider2_ system that we have just registered provides three s
 - **Celsius info:** provides temperature information using the Celsius scale,
 - **alert service:** sends an alert if the temperature is extreme (by default, these thresholds are 10 and 25 Celsius, but the consumer can overwrite them).
 
-We have to registrer these services one by one.
+We have to register these services one by one.
 
 **1. Kelvin info:** 
 We have to provide the following information:
-- **service definition name:** We have to use the name of one of the existing service definitions stored in the Local Cloud. In this example, this is kelvin-info.
+- **service definition name:** In this example, we use kelvin-info, which is already an existing service definition stored in the Local Cloud. You can use a non-existing service definition as well, because in that case, the registration process will create it.
 - **version:** We will use the default version, so we can leave this field blank.
 - **expires at:** This is a timestamp in the future, when the service is no longer funtioning. For Kelvin info, we set this to 01. 01. 2030. 
-- **metadata:** This can be customised depending on the service. For temperature information, we define the margin of error, which is 0,5 degree.
-- **interfaces:** All the services use http protocol, so we will go with the template named generic-http, that already exists in the Local Cloud. Note that in our case, the service discovery interface policy is set to _restricted_, which means that only already existing interface templates can be used. If you set this to _extendable_ or _open_, you can use non-existent interface templates, and they will be created as well. The interface provided by the Kelvin info service is the following:
+- **metadata:** This can be customised depending on the service. For temperature information, we define the margin of error, which is 0.5 degree.
+- **interfaces:** All the services use HTTP protocol, so we will go with the template named generic-http, that already exists in the Local Cloud. Note that in our case, the service discovery interface policy is set to _restricted_, which means that only already existing interface templates can be used. If you set this to _extendable_ or _open_, you can use non-existent interface templates, and they will be created as well. The interface provided by the Kelvin info service is the following:
   - GET tp2.greenhouse.com:8080/kelvin/query
   
 Based on these specifications, the request looks like this:
@@ -240,11 +240,103 @@ curl -X 'POST' \
         "accessAddresses": ["192.168.56.116", "tp2.greenhouse.com"],
         "accessPort": 8080,
         "basePath": "/kelvin",
-        "operations": {"query-temperature": { "method": "get", "path": "/query"} }
+        "operations": {"query-temperature": { "method": "GET", "path": "/query"} }
       }
     }
   ]
 }'
+~~~
+
+After successful operation, we will receive the JSON object representation of the registered service:
+~~~
+{
+  "instanceId": "temperature-provider2::kelvin-info::1.0.0",
+  "provider": {
+    "name": "temperature-provider2",
+    "metadata": {
+      "scales": [
+        "Kelvin",
+        "Celsius"
+      ],
+      "location": {
+        "side": "North",
+        "block": 2
+      },
+      "indoor": true
+    },
+    "version": "1.0.0",
+    "addresses": [
+      {
+        "type": "IPV4",
+        "address": "192.168.56.116"
+      },
+      {
+        "type": "HOSTNAME",
+        "address": "tp2.greenhouse.com"
+      }
+    ],
+    "device": {
+      "name": "thermometer2",
+      "metadata": {
+        "scales": [
+          "Kelvin",
+          "Celsius"
+        ],
+        "max-temperature": {
+          "Kelvin": 310,
+          "Celsius": 40
+        },
+        "min-temperature": {
+          "Kelvin": 260,
+          "Celsius": -10
+        }
+      },
+      "addresses": [
+        {
+          "type": "MAC",
+          "address": "81:ef:1a:44:7a:f5"
+        }
+      ],
+      "createdAt": "2024-11-04T01:53:02Z",
+      "updatedAt": "2024-11-04T01:53:02Z"
+    },
+    "createdAt": "2024-11-08T10:21:11Z",
+    "updatedAt": "2024-11-08T10:21:11Z"
+  },
+  "serviceDefinition": {
+    "name": "kelvin-info",
+    "createdAt": "2024-11-08T11:24:43Z",
+    "updatedAt": "2024-11-08T11:24:43Z"
+  },
+  "version": "1.0.0",
+  "expiresAt": "2030-01-01T00:00:00Z",
+  "metadata": {
+    "margin-of-error": 0.5
+  },
+  "interfaces": [
+    {
+      "templateName": "generic-http",
+      "protocol": "http",
+      "policy": "NONE",
+      "properties": {
+        "accessAddresses": [
+          "192.168.56.116",
+          "tp2.greenhouse.com"
+        ],
+        "accessPort": 8080,
+        "operations": {
+          "query-temperature": {
+            "path": "/query",
+            "method": "GET"
+          }
+        },
+        "basePath": "/kelvin"
+      }
+    }
+  ],
+  "createdAt": "2024-11-19T12:00:07.959849300Z",
+  "updatedAt": "2024-11-19T12:00:07.959849300Z"
+}
 ~~~
 
 **2. Celsius info:** 
@@ -274,22 +366,114 @@ curl -X 'POST' \
         "accessAddresses": ["192.168.56.116", "tp2.greenhouse.com"],
         "accessPort": 8080,
         "basePath": "/celsius",
-        "operations": {"query-temperature": { "method": "get", "path": "/query"} }
+        "operations": {"query-temperature": { "method": "GET", "path": "/query"} }
       }
     }
   ]
 }'
 ~~~
 
-**2. Alert service:** 
+The received response is the following:
+~~~
+{
+  "instanceId": "temperature-provider2::celsius-info::1.0.0",
+  "provider": {
+    "name": "temperature-provider2",
+    "metadata": {
+      "scales": [
+        "Kelvin",
+        "Celsius"
+      ],
+      "location": {
+        "side": "North",
+        "block": 2
+      },
+      "indoor": true
+    },
+    "version": "1.0.0",
+    "addresses": [
+      {
+        "type": "IPV4",
+        "address": "192.168.56.116"
+      },
+      {
+        "type": "HOSTNAME",
+        "address": "tp2.greenhouse.com"
+      }
+    ],
+    "device": {
+      "name": "thermometer2",
+      "metadata": {
+        "scales": [
+          "Kelvin",
+          "Celsius"
+        ],
+        "max-temperature": {
+          "Kelvin": 310,
+          "Celsius": 40
+        },
+        "min-temperature": {
+          "Kelvin": 260,
+          "Celsius": -10
+        }
+      },
+      "addresses": [
+        {
+          "type": "MAC",
+          "address": "81:ef:1a:44:7a:f5"
+        }
+      ],
+      "createdAt": "2024-11-04T01:53:02Z",
+      "updatedAt": "2024-11-04T01:53:02Z"
+    },
+    "createdAt": "2024-11-08T10:21:11Z",
+    "updatedAt": "2024-11-08T10:21:11Z"
+  },
+  "serviceDefinition": {
+    "name": "celsius-info",
+    "createdAt": "2024-10-24T21:48:36Z",
+    "updatedAt": "2024-10-24T21:48:36Z"
+  },
+  "version": "1.0.0",
+  "expiresAt": "2030-01-01T00:00:00Z",
+  "metadata": {
+    "margin-of-error": 0.5
+  },
+  "interfaces": [
+    {
+      "templateName": "generic-http",
+      "protocol": "http",
+      "policy": "NONE",
+      "properties": {
+        "accessAddresses": [
+          "192.168.56.116",
+          "tp2.greenhouse.com"
+        ],
+        "accessPort": 8080,
+        "operations": {
+          "query-temperature": {
+            "path": "/query",
+            "method": "GET"
+          }
+        },
+        "basePath": "/celsius"
+      }
+    }
+  ],
+  "createdAt": "2024-11-19T16:56:06.439181300Z",
+  "updatedAt": "2024-11-19T16:56:06.439181300Z"
+}
+~~~
+
+**3. Alert service:** 
 Our last service will be responsible for sending error messages. The registration data is the following:
 - **service definition name:** In this case this is alert-service.
 - **version:** We will use the default version.
 - **expires at:** The alert service expires a bit earlier than the previous ones, so we set this to 01. 01. 2025.
 - **metadata:** For alert service, the maximum possible delay is given, which is 15 sec.
-- **interfaces:** The interfaces provided by the alert service are the following:
-  - GET tp2.greenhouse.com:8000/alert/subscribe 
-  - GET tp2.greenhouse.com:8000/alert/unsubscribe
+- **interfaces:** The interface's endpoints provided by the alert service are the following:
+  - POST tp2.greenhouse.com:8000/alert/subscribe 
+  - DELETE tp2.greenhouse.com:8000/alert/unsubscribe
   - POST tp2.greenhouse.com:8000/alert/threshold
 
 We will register this service with the following request:
@@ -317,14 +501,117 @@ curl -X 'POST' \
         "accessPort": 8080,
         "basePath": "/alert",
         "operations": {
-          "subscribe": { "method": "get", "path": "/subscribe"},
-          "unsubscribe": { "method": "get", "path": "/unsubscribe"},
-          "set-threshold": { "method": "post", "path": "/threshold"}
+          "subscribe": { "method": "POST", "path": "/subscribe"},
+          "unsubscribe": { "method": "DELETE", "path": "/unsubscribe"},
+          "set-threshold": { "method": "POST", "path": "/threshold"}
         }
       }
     }
   ]
 }'
+~~~
+
+The received answer:
+~~~
+{
+  "instanceId": "temperature-provider2::alert-service::1.0.0",
+  "provider": {
+    "name": "temperature-provider2",
+    "metadata": {
+      "scales": [
+        "Kelvin",
+        "Celsius"
+      ],
+      "location": {
+        "side": "North",
+        "block": 2
+      },
+      "indoor": true
+    },
+    "version": "1.0.0",
+    "addresses": [
+      {
+        "type": "IPV4",
+        "address": "192.168.56.116"
+      },
+      {
+        "type": "HOSTNAME",
+        "address": "tp2.greenhouse.com"
+      }
+    ],
+    "device": {
+      "name": "thermometer2",
+      "metadata": {
+        "scales": [
+          "Kelvin",
+          "Celsius"
+        ],
+        "max-temperature": {
+          "Kelvin": 310,
+          "Celsius": 40
+        },
+        "min-temperature": {
+          "Kelvin": 260,
+          "Celsius": -10
+        }
+      },
+      "addresses": [
+        {
+          "type": "MAC",
+          "address": "81:ef:1a:44:7a:f5"
+        }
+      ],
+      "createdAt": "2024-11-04T01:53:02Z",
+      "updatedAt": "2024-11-04T01:53:02Z"
+    },
+    "createdAt": "2024-11-08T10:21:11Z",
+    "updatedAt": "2024-11-08T10:21:11Z"
+  },
+  "serviceDefinition": {
+    "name": "alert-service",
+    "createdAt": "2024-11-08T15:23:10Z",
+    "updatedAt": "2024-11-08T15:23:10Z"
+  },
+  "version": "1.0.0",
+  "expiresAt": "2025-01-01T00:00:00Z",
+  "metadata": {
+    "max-delay": {
+      "value": 15,
+      "unit": "sec"
+    }
+  },
+  "interfaces": [
+    {
+      "templateName": "generic-http",
+      "protocol": "http",
+      "policy": "NONE",
+      "properties": {
+        "accessAddresses": [
+          "192.168.56.116",
+          "tp2.greenhouse.com"
+        ],
+        "accessPort": 8080,
+        "operations": {
+          "subscribe": {
+            "path": "/subscribe",
+            "method": "POST"
+          },
+          "unsubscribe": {
+            "path": "/unsubscribe",
+            "method": "DELETE"
+          },
+          "set-threshold": {
+            "path": "/threshold",
+            "method": "POST"
+          }
+        },
+        "basePath": "/alert"
+      }
+    }
+  ],
+  "createdAt": "2024-11-19T17:08:47.706960300Z",
+  "updatedAt": "2024-11-19T17:08:47.706960300Z"
+}
 ~~~
 
 ### Step 5: Lookup and Revoke Service 
@@ -390,6 +677,41 @@ The lookup response:
           "indoor": true
         },
         "version": "1.0.0",
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.56.116"
+          },
+          {
+            "type": "HOSTNAME",
+            "address": "tp2.greenhouse.com"
+          }
+        ],
+        "device": {
+          "name": "thermometer2",
+          "metadata": {
+            "scales": [
+              "Kelvin",
+              "Celsius"
+            ],
+            "max-temperature": {
+              "Kelvin": 310,
+              "Celsius": 40
+            },
+            "min-temperature": {
+              "Kelvin": 260,
+              "Celsius": -10
+            }
+          },
+          "addresses": [
+            {
+              "type": "MAC",
+              "address": "81:ef:1a:44:7a:f5"
+            }
+          ],
+          "createdAt": "2024-11-04T01:53:02Z",
+          "updatedAt": "2024-11-04T01:53:02Z"
+        },
         "createdAt": "2024-11-08T10:21:11Z",
         "updatedAt": "2024-11-08T10:21:11Z"
       },
@@ -420,11 +742,11 @@ The lookup response:
             "operations": {
               "subscribe": {
                 "path": "/subscribe",
-                "method": "GET"
+                "method": "POST"
               },
               "unsubscribe": {
                 "path": "/unsubscribe",
-                "method": "GET"
+                "method": "DELETE"
               },
               "set-threshold": {
                 "path": "/threshold",
@@ -435,8 +757,8 @@ The lookup response:
           }
         }
       ],
-      "createdAt": "2024-11-10T14:29:13Z",
-      "updatedAt": "2024-11-10T14:29:13Z"
+      "createdAt": "2024-11-19T17:08:48Z",
+      "updatedAt": "2024-11-19T17:08:48Z"
     }
   ],
   "count": 1
@@ -452,13 +774,15 @@ curl -X 'DELETE' \
   -H 'Authorization: Bearer SYSTEM//temperature-provider2'
 ~~~
 
+Note, the service instance id contains double double colons (::) as separator characters, which is a reserved character in the URL with a special meaning. Because of that, the colon has to be encoded as %3A, that is why we used these in the URL.
+
 This operation only works, if the service we are deleting is associated with our system. Otherwise, the following error message will be received:
 ~~~
 {
   "errorMessage": "Revoking other systems' service is forbidden",
   "errorCode": 403,
   "exceptionType": "FORBIDDEN",
-  "origin": "DELETE /serviceregistry/service-discovery/revoke/{instanceId}"
+  "origin": "DELETE /serviceregistry/service-discovery/revoke/temperature-provider2%3A%3Aalert-service%3A%3A1.0.0"
 }
 ~~~
 
@@ -477,11 +801,11 @@ The Service Registry will delete our system.
 ## Example 2: Consumer
 
 In this example, we'll see how:
-- a **system** called _temperature-consumer-1_, 
+- a **system** called _temperature-consumer1_, 
 - running on the **device** named _weather-displayer1_,
 - looks up for available _Kelvin-info_ **services**,
 
-after registering itself and it's device into the Local Cloud.
+after registering itself and its device into the Local Cloud.
 
 ### Step 1: Authentication
 
@@ -551,7 +875,7 @@ Note that this operation will only be successful, if no system is connected to t
   "errorMessage": "At least one system is assigned to this device.",
   "errorCode": 423,
   "exceptionType": "LOCKED",
-  "origin": "DELETE /serviceregistry/device-discovery/revoke/{name}"
+  "origin": "DELETE /serviceregistry/device-discovery/revoke/weather-displayer1"
 }
 ~~~
 
@@ -643,7 +967,7 @@ Let's say that the _temperature-consumer1_ wants to consume the Kelvin info serv
 We will use the following filters during lookup:
 - **Service definition names:** We are looking for services named kelvin-info.
 - **Alives at:** This should be the UTC string representation of 31. 12. 2024.
-- **Metadata requirements list**: As specified, the margin of error sould be less than or equals to 1. However, the service might not contain this metadata, if the measured temperature is always perfectly accurate. In this case, there has be a _reliabe_ flag which is set to _true_. So we will have two metadata requitements, one is a limit for the margin of error metadata, and the other one is to check the _reliable_ flag. 
+- **Metadata requirements list**: As specified, the margin of error sould be less than or equals to 1. However, the service might not contain this metadata, if the measured temperature is always perfectly accurate. In this case, there has to be a _reliabe_ flag which is set to _true_. So we will have two metadata requitements, one is a limit for the margin of error metadata, and the other one is to check the _reliable_ flag. 
 
 We will set the _verbose_ parameter to _true_, because we want all the possible details about the services, so we can make an optimal decision, which one to consume.
 
