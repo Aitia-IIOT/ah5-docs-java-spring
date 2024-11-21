@@ -1,0 +1,1005 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{float}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+\hyphenation{Er-ror-Res-pon-se}
+\hyphenation{Ser-vi-ce-De-fi-ni-ti-on-List-Res-pon-se}
+\hyphenation{O-pe-ra-ti-on-Sta-tus}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[5]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{service-registry-management} % XXX = ServiceName 
+\ArrowheadServiceID{service-registry-management} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Rajmund Bocsi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{rbocsi@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{service-registry-management} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{service-registry-management} service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) devices, systems, service instances, service definitions and interface templates in bulk. The service also allows to get some information about the hosting system's behavior, such as log entries and configuration settings. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually.
+
+The \textbf{service-registry-management} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{get-log} lists the log entries of the system that matches the filtering requirements;
+    \item \textit{get-config} lists the current values of the specified configuration settings;
+    \item \textit{device-query} lists the devices that match the filtering requirements;
+    \item \textit{device-create} registers the specified devices;
+    \item \textit{device-updates} updates the specified existing devices;
+    \item \textit{device-remove} revokes the specified devices;
+    \item \textit{system-query} lists the systems that match the filtering requirements;
+    \item \textit{system-create} registers the specified systems;
+    \item \textit{system-update} updates the specified existing systems;
+    \item \textit{system-remove} revokes the specified systems;
+    \item \textit{service-definition-query} lists the service definitions;
+    \item \textit{service-definition-create} registers the specified service definitions;
+    \item \textit{service-definition-remove} revokes the specified service definitions;
+    \item \textit{service-query} lists the service instances that match the filtering requirements;
+    \item \textit{service-create} registers the specified service instances;
+    \item \textit{service-update} updates the specified existing service instances;
+    \item \textit{service-remove} revokes the specified service instances;
+    \item \textit{interface-template-query} lists the interface templates that match the filtering requirements;
+    \item \textit{interface-template-create} registers the specified interface templates;
+    \item \textit{interface-template-remove} revokes the specified interface templates;
+    
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+The service's purpose is to handle the various entities of the Service Registry centrally and in bulk. Such entities are devices, systems, service definitions, service instances and interface templates. This approach makes possible that the individual application systems do not have to do anything to be able to work within the Local Cloud.
+
+Application systems should not use this service, only operators (via the Management Tool, for example) or dedicated support systems.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+The requester has to identify itself to use any of the operations.
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+The service is only available for operators, dedicated support systems and those who have the proper authorization rights to consume it.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operations of the service. 
+In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\phantomsection
+\fsubsection{get-log}{LogRequest}{LogResponse}{}{ErrorResponse}
+
+The input data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item If both date parameters are specified (\textit{from}, \textit{to}), the date \textit{from} must precede the date \textit{to}.
+\end{itemize}
+
+\fsubsection{get-config}{ConfigRequest}{ConfigResponse}{}{ErrorResponse}
+
+The input data must meet the following criteria:
+
+\begin{itemize}
+    \item Some configuration settings (e. g. passwords) can not be acquired with this operation. Such setting names will be ignored.
+\end{itemize}
+
+\fsubsection{device-query}{DeviceQueryRequest}{DeviceListResponse}{}{ErrorResponse}
+
+The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
+    \item There is an AND relation between different kind of filters.
+\end{itemize}
+
+\fsubsection{device-create}{DeviceListRequest}{DeviceListResponse}{}{ErrorResponse}
+
+The creation data must meet the following criteria:
+
+\begin{itemize}
+    \item Device names are case insensitive and have to be unique within the Local Cloud.
+    \item Device names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
+    \item Keys in the metadata structure can not contain dot (.) character.
+    \item Multiple devices can be created at once, but it is forbidden to specify devices with the same name.
+    \item It is forbidden to create a device that is already registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{device-update}{DeviceListRequest}{DeviceListResponse}{}{ErrorResponse}
+
+The update data must meet the following criteria:
+
+\begin{itemize}
+    \item Device names are case insensitive and have to be unique within the Local Cloud.
+    \item Device names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
+    \item Keys in the metadata structure can not contain dot (.) character.
+    \item Multiple devices can be updated at once, but it is forbidden to specify devices with the same name.
+    \item It is not possible to update a device that is not registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{device-remove}{DeviceRemoveRequest}{}{OperationStatus}{ErrorResponse}
+
+The input operation data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation can only revoke devices without any system assignment.
+\end{itemize}
+
+\fsubsection{system-query}{SystemQueryRequest}{SystemListResponse}{}{ErrorResponse}
+
+The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
+    \item There is an AND relation between different kind of filters.
+\end{itemize}
+
+\fsubsection{system-create}{SystemListRequest}{SystemListResponse}{}{ErrorResponse}
+
+The creation data must meet the following criteria:
+
+\begin{itemize}
+    \item System names are case insensitive and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item System has to have at least one address (including those that come from the referenced device, if any). It is recommended to use IP address. 
+    \item Keys in the metadata structure can not contain dot (.) character.
+    \item Device, if specified, has to be present in the Local Cloud.
+    \item Multiple systems can be created at once, but it is forbidden to specify systems with the same name.
+    \item It is forbidden to create a system that is already registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{system-update}{SystemListRequest}{SystemListResponse}{}{ErrorResponse}
+
+The update data must meet the following criteria:
+
+\begin{itemize}
+    \item System names are case insensitive and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item System has to have at least one address (including those that come from the referenced device, if any). It is recommended to use IP address. 
+    \item Keys in the metadata structure can not contain dot (.) character.
+    \item Device, if specified, has to be present in the Local Cloud.
+    \item Multiple systems can be updated at once, but it is forbidden to specify systems with the same name.
+    \item It is not possible to update a system that is not registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{system-remove}{SystemRemoveRequest}{}{OperationStatus}{ErrorResponse}
+
+\fsubsection{service-definition-query}{PageRequest}{ServiceDefinitionListResponse}{}{ErrorResponse}
+
+The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+\end{itemize}
+
+\fsubsection{service-definition-create}{ServiceDefinitionListRequest}{ServiceDefinitionListResponse}{}{ErrorResponse}
+
+The creation data must meet the following criteria:
+
+\begin{itemize}
+    \item Service definition names are case insensitive and have to be unique within the Local Cloud.
+    \item Service definition names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item Multiple service definitions can be created at once, but it is forbidden to specify service definitions with the same name.
+    \item It is forbidden to create a service definition that is already registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{service-definition-remove}{ServiceDefinitionRemoveRequest}{}{OperationStatus}{ErrorResponse}
+
+\fsubsection{service-query}{ServiceQueryRequest}{ServiceListResponse}{}{ErrorResponse}
+
+The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
+    \item There is an AND relation between different kind of filters.
+    \item To use this operation, an application system must specify at least one service instance id OR one provider name OR one service definition.
+\end{itemize}
+
+\fsubsection{service-create}{ServiceCreateListRequest}{ServiceListResponse}{}{ErrorResponse}
+
+The creation data must meet the following criteria:
+
+\begin{itemize}
+    \item The provider systems have to be present in the Local Cloud.
+    \item Service definition names are case insensitive and have to be unique within the Local Cloud.
+    \item Service definition names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item If an expiration date is specified, it cannot point to a past date.
+    \item Keys in the metadata structure can not contain dot (.) character.
+    \item For every instance, at least one interface must be specified with its template name, the used policy and all the necessary template-specific properties.
+    \item If a specified interface template is not present in the Local Cloud, a protocol also has to be defined. In some Local Clouds using previously unknown interface templates during the service instance creation may be forbidden and thus rejected.
+    \item Multiple service instances can be created at once, but it is forbidden to specify service instances with the same provider, service definition and version.
+    \item Service instances can be created multiple times, the appropriate old service instances are discarded.
+\end{itemize}
+
+\fsubsection{service-update}{ServiceUpdateListRequest}{ServiceListResponse}{}{ErrorResponse}
+
+The update data must meet the following criteria:
+
+\begin{itemize}
+    \item Only expiration date, metadata and interfaces can be updated with this operation.
+    \item If an expiration date is specified, it cannot point to a past date.
+    \item Keys in the metadata structure can not contain dot (.) character.
+    \item For every instance, at least one interface must be specified with its template name, the used policy and all the necessary template-specific properties.
+    \item If a specified interface template is not present in the Local Cloud, a protocol also has to be defined. In some Local Clouds using previously unknown interface templates during the service instance creation may be forbidden and thus rejected.
+    \item Multiple service instances can be updated at once, but it is forbidden to specify service instances with the same service instance ids.
+    \item It is not possible to update a service instance that is not registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{service-remove}{ServiceRemoveRequest}{}{OperationStatus}{ErrorResponse}
+
+\fsubsection{interface-template-query}{InterfaceTemplateQueryRequest}{InterfaceTemplateListResponse}{}{ErrorResponse}
+
+The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
+    \item There is an AND relation between different kind of filters.
+\end{itemize} 
+
+\fsubsection{interface-template-create}{InterfaceTemplateListRequest}{InterfaceTemplateListResponse}{}{ErrorResponse}
+
+The creation data must meet the following criteria:
+
+\begin{itemize}
+    \item Interface template names are case insensitive and have to be unique within the Local Cloud.
+    \item Protocol names are case insensitive and can contain maximum 63 characters.
+    \item Property names can contain maximum 63 characters and can not contain dot (.) character.
+    \item It is forbidden to specify properties with the same name for the same interface templates.
+    \item Validator is optional, but it is forbidden to specify validator parameters without a validator.
+    \item Multiple interface templates can be created at once, but it is forbidden to specify interface templates with the same name.
+    \item It is forbidden to create an interface template that is already registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{interface-template-remove}{InterfaceTemplateRemoveRequest}{}{OperationStatus}{ErrorResponse}
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{service-registry-management} service
+are listed and must be respected by the hosting System.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\phantomsection
+\msubsection{struct}{LogRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+from & \pref{DateTime} & no & Requester is looking for log entries with timestamp that not precedes this one. \\ \hline
+to & \pref{DateTime} & no & Requester is looking for log entries with timestamp that not succeeds this one. \\ \hline
+severity & \pref{LogSeverity} & no & Requester is looking for log entries with severity that equals to or is higher than the specified one. \\ \hline
+loggerStr &  \pref{String} & no & Requester is looking for log entries with logger whose name contains the specified text. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\msubsection{struct}{LogResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:LogEntry]{LogEntry}$>$ & A page of log entries. \\ \hline
+count & \pref{Number} & Total number of entries that match the filters. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{LogEntry}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+logId & \pref{String} & Unique identifier of the entry. \\ \hline
+entryDate & \pref{DateTime} & The timestamp of the entry. \\ \hline
+logger & \pref{String} & The logger that created the entry. \\ \hline
+severity & \pref{LogSeverity} & The severity of the entry. \\ \hline
+message & \pref{String} & The log message \\ \hline
+exception & \pref{String} & If the log entry is an error, information of the related exception may appear here. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ConfigRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+keys & \pref{List}$<$\pref{Name}$>$ & yes & The names of the requested configuration settings. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ConfigResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+map & \hyperref[sec:model:ConfigMap]{ConfigMap} & The actual values of the requested settings. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ConfigMap}
+
+An \pref{Object} which maps \pref{String} keys to \pref{String} values.
+
+\clearpage
+
+\msubsection{struct}{DeviceQueryRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for devices with any of the specified names. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for devices with any of the specified add\-resses.   \\ \hline
+addressType &  \pref{AddressType} & no & Requester is looking for devices with the specified type of add\-ress. \\ \hline
+metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for devices that are matching any of the specified metadata requirements. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{MetadataRequirements}
+
+A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
+
+\begin{itemize}
+    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which is associated with an embedded object and in this object we are looking for the key named "subkey").
+    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
+    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
+\end{itemize}
+
+\clearpage
+
+\msubsection{struct}{DeviceListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.1cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:DeviceResult]{DeviceResult}$>$ & A page of devices. \\ \hline
+count & \pref{Number} & Total number of devices that match the filters. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{DeviceResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{Name} & Unique identifier of the device. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
+addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
+createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Metadata}
+
+An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
+
+\msubsection{struct}{AddressDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+type & \pref{AddressType} & Type of the address. \\ \hline
+address & \pref{Address} & Address. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{DeviceListRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+devices & \pref{List}$<$\hyperref[sec:model:DeviceRequest]{DeviceRequest}$>$ & yes & A list of devices. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{DeviceRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+name & \pref{Name} & yes & Unique identifier of the device. \\ \hline
+metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the device. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses of the device.  \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{DeviceRemoveRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the devices that need to be removed. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{SystemQueryRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+verbose & \pref{Boolean} & no & If true detailed device information also returns. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+systemNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems with any of the specified names. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for systems with any of the specified add\-resses.   \\ \hline
+addressType &  \pref{AddressType} & no & Requester is looking for systems with the specified type of add\-ress. \\ \hline
+metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for systems that are matching any of the specified metadata requirements.  \\ \hline
+versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for systems with any of the specified versions.   \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
+deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems that are running on any of the specified devices. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{SystemListResponse}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:SystemResult]{SystemResult}$>$ & A page of systems. \\ \hline
+count & \pref{Number} & Total number of systems that match the filters. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{SystemResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{Name} & Unique identifier of the system. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the system. \\ \hline
+version & \pref{Version} & Version of the system. \\ \hline
+addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the system.  \\ \hline
+device & \hyperref[sec:model:DeviceResult]{DeviceResult} & Information about the device on which the system is running. \\ \hline
+createdAt & \pref{DateTime} & System was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & System was modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{SystemListRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+systems & \pref{List}$<$\hyperref[sec:model:SystemRequest]{SystemRequest}$>$ & yes & A list of systems. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{SystemRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+name & \pref{Name} & yes & The name of the system. \\ \hline
+metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the system. \\ \hline
+version &\pref{Version} & no & Version of the system. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses of the system.  \\ \hline
+deviceName & \pref{Name} & no & Unique identifier of the device on which the system is running. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{SystemRemoveRequest}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the systems that need to be removed. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{PageRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceDefinitionListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:ServiceDefinitionResult]{ServiceDefinitionResult}$>$ & A page of service definitions. \\ \hline
+count & \pref{Number} & Total number of service definitions. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceDefinitionResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{Name} & Unique identifier of the service definition. \\ \hline
+createdAt & \pref{DateTime} & Service definition was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Service definition was modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceDefinitionListRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.7cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+serviceDefinitionNames & \pref{List}$<$\pref{Name}$>$ & yes & A list of service definition names. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceDefinitionRemoveRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the service definitions that need to be removed. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceQueryRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{5.6cm} | p{4.9cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the ope\-ration. \\ \hline
+verbose & \pref{Boolean} & no & If true detailed system and device information also returns. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+instanceIds &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service instances with any of the spe\-cified identifiers. Mandatory if no providerNames nor serviceDefinitionNames are spe\-cified. \\ \hline
+providerNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances that are provided by any of the specified systems. Mandatory if no serviceInstanceIds nor serviceDefinitionNames are spe\-cified. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{5.6cm} | p{4.9cm} | p{2cm} | X |} \hline
+serviceDefinitionNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances with any of the specified service definition names. Mandatory if no serviceInstanceIds nor providerNames are spe\-cified. \\ \hline
+versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for service ins\-tances with any of the specified versions. \\ \hline
+alivesAt & \pref{DateTime} & no & Requester is looking for service ins\-tances that will be available at the specified moment of the future. \\ \hline
+metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances that are matching any of the specified metadata requirements.  \\ \hline
+interfaceTemplateNames &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & Requester is looking for service ins\-tances with any of the specified interface template names. \\ \hline
+interfacePropertyRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances with interfaces that are matching any of the specified pro\-perties requirements.  \\ \hline
+policies &  \pref{List}$<$\pref{SecurityPolicy}$>$ & no & Requester is looking for service ins\-tances with any of the specified security policies. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:ServiceResult]{ServiceResult}$>$ & A page of service instances. \\ \hline
+count & \pref{Number} & Total number of service instances that match the filters. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{ServiceResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.8cm} | p{5.2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+instanceId & \pref{Name} & Unique identifier of the service instance. \\ \hline
+provider & \hyperref[sec:model:SystemResult]{SystemResult} & Information about the service instance provider system. \\ \hline
+serviceDefinition & \hyperref[sec:model:ServiceDefinitionResult]{ServiceDefinitionResult} & Information about the service definition. \\ \hline
+version & \pref{Version} & Version of the service instance. \\ \hline
+expiresAt & \pref{DateTime} & The moment of the future from which the service ins\-tance will not be available. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the service ins\-tance. \\ \hline
+interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
+createdAt & \pref{DateTime} & Service instance was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Service instance was modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceInterfaceDescriptor}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+templateName & \pref{InterfaceTemplate} & The name of the interface template that describes the interface structure. \\ \hline
+protocol & \pref{Protocol} & The communication protocol of the interface. \\ \hline
+policy & \pref{SecurityPolicy} & The security of the interface. \\ \hline
+properties &\hyperref[sec:model:Metadata]{Metadata} & Interface template-specific data. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceCreateListRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.6cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+instances & \pref{List}$<$\hyperref[sec:model:ServiceRequest]{ServiceRequest}$>$ & yes & A list of service instances. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.5cm} | p{4.9cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+systemName & \pref{Name} & yes & The provider of the instance. \\ \hline
+serviceDefinitionName & \pref{Name} & yes & The service definition of the instance. \\ \hline
+version & \pref{Version} & no & Version of the service instance. \\ \hline
+expiresAt & \pref{DateTime} & no & The moment of the future from which the service instance will not be available. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.5cm} | p{4.9cm} | p{2cm} | X |} \hline
+metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the service instance. \\ \hline
+interfaces &  \pref{List}$<$\hyperref[sec:model:ServiceInterfaceRequest]{ServiceInterfaceRequest}$>$ & yes & Available access interfaces of the service instance.  \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceInterfaceRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+templateName & \pref{InterfaceTemplate} & yes & The name of the interface template that describes the interface structure. \\ \hline
+protocol & \pref{Protocol} & no (yes) & The communication protocol of the interface. Only mandatory if the interface template is not previously known in the Local Cloud.  \\ \hline
+policy & \pref{SecurityPolicy} & yes & The security of the interface. \\ \hline
+properties &\hyperref[sec:model:Metadata]{Metadata} & yes & Interface template-specific data. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceUpdateListRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{4.7cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+instances & \pref{List}$<$\hyperref[sec:model:ServiceUpdateRequest]{ServiceUpdateRequest}$>$ & yes & A list of service instances. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceUpdateRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{4.9cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+instanceId & \pref{Name} & yes & The unique identifier of the service instance. \\ \hline
+expiresAt & \pref{DateTime} & no & The moment of the future from which the service instance will not be available. \\ \hline
+metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the service ins\-tance. \\ \hline
+interfaces &  \pref{List}$<$\hyperref[sec:model:ServiceInterfaceRequest]{ServiceInterfaceRequest}$>$ & yes & Available access interfaces of the service ins\-tance.  \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceRemoveRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+instances &  \pref{List}$<$\pref{Name}$>$ & yes & Identitifers of the service instances that need to be removed. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{InterfaceTemplateQueryRequest}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the ope\-ration. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+templateNames &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & Requester is looking for interface templates with any of the spe\-cified names. \\ \hline
+protocols &  \pref{List}$<$\pref{Protocol}$>$ & no & Requester is looking for interface templates with any of the specified protocols. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{InterfaceTemplateListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:InterfaceTemplateResult]{InterfaceTemplateResult}$>$ & A page of interface templates. \\ \hline
+count & \pref{Number} & Total number of interface templates that match the filters. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{InterfaceTemplateResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.5cm} | p{6.8cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{Name} & Unique name of the interface template. \\ \hline
+protocol & \pref{Protocol} & Protocol of the interface template. \\ \hline
+propertyRequirements & \pref{List}$<$\hyperref[sec:model:InterfaceTemplatePropertyDescriptor]{InterfaceTemplatePropertyDescriptor}$>$ & Properties of the interface template. \\ \hline
+createdAt & \pref{DateTime} & Interface template was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Interface template was modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{InterfaceTemplatePropertyDescriptor}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.7cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{String} & Name of the property. \\ \hline
+mandatory & \pref{Boolean} & True if the property is mandatory, false if optional. \\ \hline
+validator & \pref{PropertyValidator} & Name of the validator assigned to the property. \\ \hline
+validatorParams & \pref{List}$<$\pref{String}$>$ & Parameter values of the validator (if needed). \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{InterfaceTemplateListRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5.1cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+interfaceTemplates & \pref{List}$<$\hyperref[sec:model:InterfaceTemplateRequest]{InterfaceTemplateRequest}$>$ & yes & A list of interface templates. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{InterfaceTemplateRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.7cm} | p{6.4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+name & \pref{Name} & yes & Unique name of the interface template. \\ \hline
+protocol & \pref{Protocol} & yes & Protocol of the interface template. \\ \hline
+propertyRequirements &  \pref{List}$<$\hyperref[sec:model:InterfaceTemplatePropertyRequest]{InterfaceTemplatePropertyRequest}$>$ & yes & Properties of the interface template. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{InterfaceTemplatePropertyRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.7cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+
+name & \pref{String} & yes & Name of the property. \\ \hline
+mandatory & \pref{Boolean} & yes & True if the property is mandatory, false if optional. \\ \hline
+validator & \pref{PropertyValidator} & no & Name of the validator assigned to the property. \\ \hline
+validatorParams & \pref{List}$<$\pref{String}$>$ & no & Parameter values of the validator. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{InterfaceTemplateRemoveRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+names &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & yes & Names of the interface templates that need to be removed. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{Address}          & A string representation of the address. \\ \hline
+\pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{Boolean}          & One out of true or false. \\ \hline
+\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{InterfaceTemplate} & A string identifier of an interface descriptor. \\ \hline
+\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{LogSeverity}      & The kind and seriousness of a log message. \\ \hline
+\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{PropertyValidator} & An identifier of any suitable validator function chosen by the implementor of service. \\ \hline
+\pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
+\pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning. \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}
