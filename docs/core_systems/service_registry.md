@@ -3,37 +3,37 @@
 This core system provides the data storage functionality for the information related to the currently and actively offered services within the Local Cloud. It also stores information about the systems that offer and/or can use the previously mentioned services, and optionally data about the devices on which those systems are running.
 
 Learn more: <br />
-:material-file-document: [Abstract System Description](todo)
+:material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_0_0/serviceregistry_sysd.pdf)
 
 ## Services
 
 ### service-discovery
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tellus quam, fermentum et urna eget, malesuada placerat eros. Curabitur at tristique arcu, nec rutrum eros. Nam purus nisl, blandit et magna id, rutrum malesuada libero. Curabitur finibus mollis tristique. Ut vehicula erat quis placerat volutpat.
+The purpose of this service is to lookup, register and revoke provided services. The service is offered for both application and core/support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description](todo) <br />
-:material-api: [generic-http](todo) | [generic-https](todo) <br />
-:material-api: [generic-mqtt](todo) | [generic-mqtts](todo) <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-discovery_sd.pdf) <br />
+:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
+:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
 :material-tag: since: v5.0.0 
 
 **register**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation adds new service instance to the Local Cloud.
 
-:material-arrow-right-thin: Example: [generic-http/generic-https](../help/api_examples/sr_http_api_examples.md)<br />
-:material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](../help/api_examples/sr_mqtt_api_examples.md)
+:material-arrow-right-thin: Example: [generic-http/generic-https](../help/api_examples/sr_http_api_examples.md/#register)<br />
+:material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](../help/api_examples/sr_mqtt_api_examples.md/#register)
 
 **revoke**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation removes a service instance from the Local Cloud.
 
 :material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
 
 **lookup**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation lists the service instances that match the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
@@ -42,31 +42,31 @@ This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing eli
 
 ### system-discovery
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+The purpose of this service is to lookup, register and revoke systems that are part of (or want to be part of) the Local Cloud. The service is offered for both application and core/support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description](todo) <br />
-:material-api: [generic-http](todo) | [generic-https](todo) <br />
-:material-api: [generic-mqtt](todo) | [generic-mqtts](todo) <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/system-discovery_sd.pdf) <br />
+:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
+:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
 :material-tag: since: v5.0.0 
 
 **register**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation adds new system to the Local Cloud.
 
 :material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
 
 **revoke**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation removes a system from the Local Cloud.
 
 :material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
 
 **lookup**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation lists the systems that match the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
@@ -75,31 +75,31 @@ This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing eli
 
 ### device-discovery
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+The purpose of this service is to lookup, register and revoke devices on which the Local Cloud’s systems are running. The service is offered for both application and core/support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description](todo) <br />
-:material-api: [generic-http](todo) | [generic-https](todo) <br />
-:material-api: [generic-mqtt](todo) | [generic-mqtts](todo) <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/device-discovery_sd.pdf) <br />
+:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
+:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
 :material-tag: since: v5.0.0 
 
 **register**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation adds new device to the Local Cloud.
 
 :material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
 
 **revoke**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation removes a device from the Local Cloud.
 
 :material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
 
 **lookup**
 
-This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+This service operation lists the devices that match the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic-http/generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt/generic-mqtts](todo)
@@ -108,12 +108,12 @@ This service operation... Lorem ipsum dolor sit amet, consectetur adipiscing eli
 
 ### service-registry-management
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+Its purpose is to manage service definitions, service instances, interfaces, systems and devices in bulk. The different operations provide querying, registering and unregistering functionalities. The service is offered for administrative support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description](todo) <br />
-:material-api: [generic-http](todo) | [generic-https](todo) <br />
-:material-api: [generic-mqtt](todo) | [generic-mqtts](todo) <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-registry-management_sd.pdf) <br />
+:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
+:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
 :material-tag: since: v5.0.0 
 
 TODO
