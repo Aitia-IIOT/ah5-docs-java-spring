@@ -199,4 +199,4 @@ Set this to change the directory of log files.
 
 #### :material-tag: v5.0.0 
 
-- Initial 5th genereation release.
+- Initial 5th generation release.
