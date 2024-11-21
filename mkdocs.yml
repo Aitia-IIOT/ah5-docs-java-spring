@@ -13,6 +13,12 @@ nav:
     - Service Authorization: core_systems/service_authorization.md
     - System Authentication: core_systems/system_authentication.md
   - Support Systems: support_systems.md
+  - API:
+    - Service Registry:
+      - GENERIC-HTTP:
+        - device-discovery: api/serviceregistry/device-discovery-generic-http.md
+      - GENERIC-MQTT:
+        - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
   - Help:
     - Tutorials:
       - Service Registry Demo: help/tutorials/serviceregistry-http-demo.md
