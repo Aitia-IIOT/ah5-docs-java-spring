@@ -17,4 +17,4 @@ Built by Material for MkDocs
 ## Deploy
 
 - run: `mkdocs gh-deploy`
-  - It builds the site and push the site files into the `gh-pages` branch. (This branch should not be edited manually, it exists only for the deployment)
+  - It builds the site and pushes the site files into the `gh-pages` branch. (This branch should not be edited manually, it exists only for the deployment)

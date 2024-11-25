@@ -75,7 +75,7 @@ This service operation lists the systems that match the filtering requirements.
 
 ### device-discovery
 
-The purpose of this service is to lookup, register and revoke devices on which the Local Cloud’s systems are running. The service is offered for both application and core/support systems.
+The purpose of this service is to lookup, register and revoke devices on which the Local Cloud’s systems can run. The service is offered for both application and core/support systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/device-discovery_sd.pdf) <br />
@@ -85,7 +85,7 @@ Learn more: <br />
 
 **register**
 
-This service operation adds new device to the Local Cloud.
+This service operation adds a new device to the Local Cloud.
 
 :material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/device-discovery-generic-mqtt.md/#register) | [generic-https](todo)<br />
 :material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/device-discovery-generic-mqtt.md/#register) | [generic-mqtts](todo)
@@ -108,7 +108,7 @@ This service operation lists the devices that match the filtering requirements.
 
 ### service-registry-management
 
-Its purpose is to manage service definitions, service instances, interfaces, systems and devices in bulk. The different operations provide querying, registering and unregistering functionalities. The service is offered for administrative support systems.
+Its purpose is to manage service definitions, service instances, interfaces, systems and devices in bulk. The different operations provide querying, registering, updating and unregistering functionalities. The service is offered for administrative support systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-registry-management_sd.pdf) <br />
@@ -122,7 +122,7 @@ TODO
 
 The system configuration properties can be found in the `application.properties` file located at `/src/main/resources` folder.
 
-**_Note:_** During the build process this file is going to be built into the executable jar, but also going to be copied next to the jar file. Any modification in the configuration file located next to the executable jar file will overide the built in configuration property value.
+**_Note:_** During the build process this file is going to be built into the executable JAR, but also going to be copied next to the JAR file. Any modification in the configuration file located next to the executable JAR file will override the built in configuration property value.
 
 ### General parameters
 
@@ -174,8 +174,8 @@ TODO
 The logging configuration properties can be found in the `log4j2.xml` file located at `src/main/resources`
 folder.
 
-**_Note:_** During the build process this file is going to be built into the executable jar, but it is also possible to
-override it from by an external file. For that use the following command when starting the system:
+**_Note:_** During the build process this file is going to be built into the executable JAR, but it is also possible to
+override it by an external file. For that use the following command when starting the system:
 ```
 java -jar arrowhead-serviceregistry-x.x.x
      -Dlog4j.configurationFile=path-to-external-file
