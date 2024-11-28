@@ -1,2 +1,20 @@
-# ah5-docs-java-spring
-Arrowhead 5th generation documents for java-spring reference implementation
+# Documentation project for Eclipse Arrowhead 5th generation
+**java-spring reference implementation**
+
+Built by Material for MkDocs
+
+- https://squidfunk.github.io/mkdocs-material/setup/
+- https://www.mkdocs.org/
+
+## Requirements
+- python
+- mkdocs-material | `pip intall mkdocs-material`
+
+## Commands
+
+- start dev server: `mkdocs serve`
+
+## Deploy
+
+- run: `mkdocs gh-deploy`
+  - It builds the site and pushes the site files into the `gh-pages` branch. (This branch should not be edited manually, it exists only for the deployment)

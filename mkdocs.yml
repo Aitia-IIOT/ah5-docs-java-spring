@@ -1,0 +1,74 @@
+site_name: Arrowhead 5 | java-spring
+repo_name: eclipse-arrowhead
+repo_url: https://github.com/eclipse-arrowhead
+nav:
+  - Home:
+    - Welcome: home/welcome.md
+    - Implementation: home/implementation.md
+    - Getting Started: home/getting_started.md
+    - Contribute: home/contribute.md 
+  - Core Systems:
+    - Service Registry: core_systems/service_registry.md
+    - Service Orchestration: core_systems/service_orchestration.md
+    - Service Authorization: core_systems/service_authorization.md
+    - System Authentication: core_systems/system_authentication.md
+  - Support Systems: support_systems.md
+  - API:
+    - Service Registry:
+      - GENERIC-HTTP:
+        - device-discovery: api/serviceregistry/device-discovery-generic-http.md
+      - GENERIC-MQTT:
+        - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
+  - Help:
+    - Tutorials:
+      - Service Registry Demo: help/tutorials/serviceregistry-http-demo.md
+    - Hints: help/hints.md
+    - FAQ: help/faq.md
+  - Client Libraries: client_libraries.md
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  icon:
+      repo: fontawesome/brands/github 
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.tracking
+    - toc.follow
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - icons
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: blue
+      accent: green 
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: blue
+      accent: green
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/eclipse-arrowhead
+
+markdown_extensions:
+  - attr_list
+  - toc:
+      toc_depth: 4
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
