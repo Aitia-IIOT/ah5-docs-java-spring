@@ -1071,6 +1071,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Access Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#client-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-read-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topic read control
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ssl-with-arrowhead-certificate" class="md-nav__link">
     <span class="md-ellipsis">
       SSL with Arrowhead Certificate
@@ -1222,6 +1255,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Access Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#client-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-read-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Topic read control
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ssl-with-arrowhead-certificate" class="md-nav__link">
     <span class="md-ellipsis">
       SSL with Arrowhead Certificate
@@ -1252,6 +1318,71 @@
 <p>Eclipse Mosquitto is an open source (EPL/EDL licensed) message broker that implements the MQTT protocol and is a good choice to use in an Arrowhead Local Cloud when MQTT is required.</p>
 <h2 id="install">Install</h2>
 <p>For the installation possibilities please consult with their <a href="https://mosquitto.org/download/">official site</a>.</p>
+<h2 id="access-control">Access Control</h2>
+<p>In a properly secured Local Cloud, when MQTT is required, the access to the broker and topics should also be controlled. Connecting clients should be authenticated and reading/writing of topics for service providing should be limited to the actual service provider clients.</p>
+<h3 id="client-authentication">Client authentication</h3>
+<p>In order to set up client authentication a "password file" has to be created which contains user name and password combinations for the clients. </p>
+<ul>
+<li>It is recommended that Arrowhead Core Systems have unique credentials.</li>
+<li>It is recommended that service providing application systems have unique credentials.</li>
+<li>It is acceptable that application systems with service consumption purpuse only, share a common credential.</li>
+</ul>
+<p>You can manage the users by using the <code>mosquitto_passwd</code> command (which comes with the broker installation).</p>
+<p><strong>Create the password file with the first user:</strong></p>
+<pre><code>mosquitto_passwd -c /etc/mosquitto/users &lt;username&gt;
+</code></pre>
+<p>You will be prompted to set a password and the <code>users</code> file will be created. Only the hashed version of the password is stored in the file.</p>
+<p><strong>Add additional users to the file (without overwriting it):</strong></p>
+<pre><code>mosquitto_passwd /etc/mosquitto/users &lt;username&gt;
+</code></pre>
+<p><strong>Modify the broker configuration:</strong></p>
+<p>The Mosquitto configuration file usually located at <code>/etc/mosquitto/mosquitto.conf</code>. To enable password authentication add the following lines:</p>
+<pre><code>allow_anonymous false
+password_file /etc/mosquitto/users
+</code></pre>
+<p>After making changes, always restart the broker!</p>
+<h3 id="topic-read-control">Topic read control</h3>
+<p>Having read or write access control on the topics used for service providing ensures, that only the actual service providers are allowed</p>
+<ul>
+<li>to write to a publish kind service topic, and</li>
+<li>to read a request-response kind service topic.</li>
+</ul>
+<p><strong>Create an access control file</strong></p>
+<p>Create an <code>accesctrl</code> file under the <code>/etc/mosquitto</code> folder with a similar content:</p>
+<pre><code># Arrowhead Core Systems
+
+user serviceregistry
+topic read arrowhead/serviceregistry/system-discovery
+topic read arrowhead/serviceregistry/service-discovery
+
+...
+
+# Publish kind service topics
+
+user &lt;username_a&gt;
+topic write &lt;its/specific/service/topic/&gt;
+
+user &lt;username_b&gt;
+topic write &lt;its/specific/service/topic/&gt;
+
+...
+
+# Request-response kind service topics
+
+user &lt;username_c&gt;
+topic read &lt;its/specific/service/topic/&gt;
+
+user &lt;username_d&gt;
+topic read &lt;its/specific/service/topic/&gt;
+
+...
+
+</code></pre>
+<p><strong>Modify the broker configuration:</strong></p>
+<p>The Mosquitto configuration file usually located at <code>/etc/mosquitto/mosquitto.conf</code>. To enable topic access control add the following line:</p>
+<pre><code>acl_file /etc/mosquitto/accesctrl
+</code></pre>
+<p>After making changes, always restart the broker!</p>
 <h2 id="ssl-with-arrowhead-certificate">SSL with Arrowhead Certificate</h2>
 <p>Using <a href="../../certificate-profiles/#broker-profile">Arrowhead compliant broker certificate</a> makes your MQTT Broker part of your Local Cloud when secure network communication (SSL) is required. However the certificates in the default <code>PKCS#12</code> format (<code>broker.p12</code> file for example) can't be directly utilized by the Eclipse Mosquitto. It requires a separated CA certificate file, a public certificate file and a private key file what you can extract from your <code>PKCS#12</code> file with the help of the following <a href="https://openssl-library.org/">openssl library</a> commands:</p>
 <p><strong>Extract the CA certificate:</strong></p>
@@ -1278,6 +1409,7 @@
 certfile /path/to/public.crt
 keyfile /path/to/private.key
 </code></pre>
+<p>After making changes, always restart the broker!</p>
 
 
 
