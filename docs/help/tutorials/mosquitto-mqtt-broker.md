@@ -42,7 +42,7 @@ Mosquitto will prompt for the private key password on startup. To avoid this (in
 openssl rsa -in private.key -out private.key
 ```
 
-**At the end of this process your mosquitto configuration file should contain something similar:**
+**At the end of this process your Mosquitto configuration file should contain something similar:**
 
 ```
 cafile /path/to/ca.crt

@@ -10,7 +10,7 @@ There are nine arrowhead certificate profiles defined and depicted in the follow
 
 ![image of the certificate profile hierarchy](../assets/pics/certificate_profiles.png)
 
-The certificates must contain its profile indentifiers as a Distinguished Name Qualifier (DN).
+The certificates must contain their profile identifiers as a Distinguished Name Qualifier (DN).
 
 Profile | Identifier
 --- | ---
@@ -55,7 +55,7 @@ Key Usage | Yes | Bits `keyCertSign` and `cRLSign` must be set.
 ## Gate Profile
 
 A Gate certificate is associated with a message relay or bus that exists to guarantee delivery of messages
-between the local clouds of distinct organizations. Its existence means that such messages can sent over a
+between the local clouds of distinct organizations. Its existence means that such messages can be sent over a
 secure transport.
 
 **Issuer**
@@ -85,7 +85,7 @@ Subject Alternative Name | No | At least one IP address, DNS name or other ident
 
 ## Organization Profile
 
-An Organization certificate is maintained by a single organization, allowing it to manage the certificates of its own local clouds.
+An Organization certificate is maintained by a single organization, allowing it to manage the certificates of their own local clouds.
 
 **Issuer**
 
@@ -157,7 +157,7 @@ Subject Alternative Name | No | At least one IP address, DNS name or other ident
 
 ## On-Boarding Profile
 
-An On-Boarding certificate allows for a device in an Arrowhead local cloud to request a new device certificate. It is used both or either to provision new devices and/or to facilitate renewal of certificates as they are about to
+An On-Boarding certificate allows for a device in an Arrowhead local cloud to request a new device certificate. It is used for both, either to provide new devices and/or to facilitate renewal of certificates as they are about to
 expire. Certificates adhering to this profile must only be provided to devices known or assumed to be trustworthy.
 
 **Issuer**
@@ -217,7 +217,7 @@ Subject Alternative Name | No | At least one IP address, DNS name or other ident
 
 ## Broker Profile
 
-A Broker certificate is associated with a message broker that exists to guarantee deleivery of messages between the systems within a Local Cloud when secured publish-subscribe
+A Broker certificate is associated with a message broker that exists to guarantee delivery of messages between the systems within a Local Cloud when secured publish-subscribe
 communication strategy is required (like MQTT protocol).
 
 **Issuer**
