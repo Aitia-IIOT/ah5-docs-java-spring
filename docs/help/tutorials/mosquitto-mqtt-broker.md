@@ -16,7 +16,7 @@ In order to set up client authentication a "password file" has to be created whi
 
 - It is recommended that Arrowhead Core Systems have unique credentials.
 - It is recommended that service providing application systems have unique credentials.
-- It is acceptable that application systems with service consumption purpuse only, share a common credential.
+- It is acceptable that application systems with service consumption purpose only, share a common credential.
 
 You can manage the users by using the `mosquitto_passwd` command (which comes with the broker installation).
 
@@ -36,7 +36,7 @@ mosquitto_passwd /etc/mosquitto/users <username>
 
 **Modify the broker configuration:**
 
-The Mosquitto configuration file usually located at `/etc/mosquitto/mosquitto.conf`. To enable password authentication add the following lines:
+The Mosquitto configuration file is usually located at `/etc/mosquitto/mosquitto.conf`. To enable password authentication add the following lines:
 
 ```
 allow_anonymous false
@@ -47,7 +47,7 @@ After making changes, always restart the broker!
 
 ### Topic read control
 
-Having read or write access control on the topics used for service providing ensures, that only the actual service providers are allowed
+Having read or write access control on the topics used for service providing ensures that only the actual service providers are allowed
 
 - to write to a publish kind service topic, and
 - to read a request-response kind service topic.
@@ -89,7 +89,7 @@ topic read <its/specific/service/topic/>
 
 **Modify the broker configuration:**
 
-The Mosquitto configuration file usually located at `/etc/mosquitto/mosquitto.conf`. To enable topic access control add the following line:
+The Mosquitto configuration file is usually located at `/etc/mosquitto/mosquitto.conf`. To enable topic access control add the following line:
 
 ```
 acl_file /etc/mosquitto/accesctrl
