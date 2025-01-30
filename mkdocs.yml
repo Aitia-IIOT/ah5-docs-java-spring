@@ -14,11 +14,16 @@ nav:
     - System Authentication: core_systems/system_authentication.md
   - Support Systems: support_systems.md
   - API:
-    - Service Registry:
-      - GENERIC-HTTP:
-        - device-discovery: api/serviceregistry/device-discovery-generic-http.md
-      - GENERIC-MQTT:
-        - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
+    - Interface Descriptions:
+      - Service Registry:
+        - GENERIC-HTTP:
+          - device-discovery: api/serviceregistry/device-discovery-generic-http.md
+        - GENERIC-MQTT:
+          - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md          
+    - Data Models:
+      - DeviceRegistrationRequest: api/data-models/device-registration-request.md
+      - Metadata: api/data-models/metadata.md
+    - Primitives: api/primitives.md
   - Help:
     - Certificate Profiles: help/certificate-profiles.md
     - Tutorials:
