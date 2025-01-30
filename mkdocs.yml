@@ -16,13 +16,19 @@ nav:
   - API:
     - Interface Descriptions:
       - Service Registry:
-        - GENERIC-HTTP:
+        - HTTP:
           - device-discovery: api/serviceregistry/device-discovery-generic-http.md
-        - GENERIC-MQTT:
+        - MQTT:
           - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md          
     - Data Models:
+      - AddressDesriptor: api/data-models/address-descriptor.md
+      - DeviceLookupRequest: api/data-models/device-lookup-request.md
+      - DeviceLookupResult: api/data-models/device-lookup-result.md
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
+      - DeviceRegistrationResponse: api/data-models/device-registration-response.md
+      - ErrorResponse: api/data-models/error-response.md
       - Metadata: api/data-models/metadata.md
+      - MetadataRequirements: api/data-models/metadata-requirements.md
     - Primitives: api/primitives.md
   - Help:
     - Certificate Profiles: help/certificate-profiles.md

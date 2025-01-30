@@ -1,4 +1,5 @@
-# device-discovery GENERIC-MQTT
+# device-discovery IDD
+**GENERIC-MQTT & GENERIC-MQTTS** 
 
 ## Overview
 
