@@ -62,8 +62,8 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responses** with the status code `200 Ok` if called successfully and the device
-entity is already existing or `201 Create` if the entity was newly created. The response also contains a
+The service operation **responses** with the status code `200` if called successfully and the device
+entity is already existing or `201` if the entity was newly created. The response also contains a
 [DeviceRegistrationResponse](../data-models/device-registration-response.md) JSON encoded body.
 
 ```
@@ -93,9 +93,9 @@ entity is already existing or `201 Create` if the entity was newly created. The 
    "updatedAt":"2024-11-04T01:53:02Z"
 }
 ```
-The **error codes** are, `400 Bad Request` if request is malformed, `403 Forbidden` if requester au-
-thentication was unsuccessful, `401 Unauthorized` if the authenticated requester has no permission and
-`500 Internal Server Error` if an unexpected error happens. The error response also contains an
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and
+`500` if an unexpected error happens. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
@@ -134,7 +134,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responses** with the status code `200 Ok` if called successfully and with a [DeviceLookupResponse](../data-models/device-lookup-response.md) JSON encoded body.
+The service operation **responses** with the status code `200` if called successfully and with a [DeviceLookupResponse](../data-models/device-lookup-response.md) JSON encoded body.
 
 ```
 {
@@ -169,7 +169,7 @@ The service operation **responses** with the status code `200 Ok` if called succ
 }
 ```
 
-The error codes are, `400 Bad Request` if request is malformed, `403 Forbidden` if requester authentication was unsuccessful, `401 Unauthorized` if the authenticated requester has no permission and `500 Internal Server` Error if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` Error if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
@@ -189,11 +189,11 @@ DELETE /serviceregistry/device-discovery/revoke/thermometer2 HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 
-The service operation **responses** with the status code `200 Ok` if called successfully and an existing device
-entity was removed and `204 No Content` if no matching entity was found. The success response not contains
+The service operation **responses** with the status code `200` if called successfully and an existing device
+entity was removed and `204` if no matching entity was found. The success response does not contain
 any response body.
 
-The error codes are, `400 Bad Request` if request is malformed, `403 Forbidden` if requester authentication was unsuccessful, `401 Unauthorized` if the authenticated requester has no permission, `423 Locked` if entity is not removable and `500 Internal Server Error` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission, `423` if entity is not removable and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {

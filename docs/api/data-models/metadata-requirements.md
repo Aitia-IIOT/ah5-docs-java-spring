@@ -7,11 +7,11 @@ of the path are delimited with dot character (e.g. in case of ”key.subkey” p
 named ”key” in the metadata, which is associated with an embedded object and in this object we are
 looking for the key named ”subkey”).
 
-- Values are special Objects with two fields: an operation (e.g. less than) and an actual value (e.g. a
+- Values are special Objects with two fields: an "operation" (e.g. less than) and an actual value (e.g. a
 number). A metadata is matching a requirement if the specified operation returns true using the metadata
 value referenced by a key path as first and the actual value as second operands.
 
-- Alternatively, values can be ordinary primitives, lists or Objects. In this case the operation is equals by
+- Alternatively, values can be ordinary primitives, lists or Objects. In this case the "operation" is equals by
 default.
 
 ## Operations

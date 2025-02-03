@@ -11,10 +11,10 @@ String value of a network address type. Could be only `HOSTNAME`, `IPV4`, `IPV6`
 
 ## DateTime
 
-Pinpoints a moment in time in the format of ISO8601 standard `yyyy-mm-ddThh:mm:ssZ`, where ”yyy” denotes
+Pinpoints a moment in time in the format of ISO8601 standard `yyyy-mm-ddThh:MM:ssZ`, where ”yyyy” denotes
 year (4 digits), ”mm” denotes month starting from 01, ”dd” denotes day starting from 01, ”T” is the separator
 between date and time part, ”hh” denotes hour in the 24-hour format (00-23), ”MM” denotes minute (00-59),
-”SS” denotes second (00-59). ”Z” indicates that the time is in UTC. An example of a valid date/time string is
+”ss” denotes second (00-59). ”Z” indicates that the time is in UTC. An example of a valid date/time string is
 ”2024-12-05T12:00:00Z”
 
 ## ErrorType
