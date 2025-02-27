@@ -1,0 +1,445 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+
+\newcommand{\fparam}[1]{\textit{\textcolor{ArrowheadBlue}{#1}}}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1 \label{sec:model:primitives:#1} \label{sec:model:primitives:#1s}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[1]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+  }
+  \label{sec:functions:#1}
+}
+
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{device-discovery GENERIC-HTTP}
+\ArrowheadServiceID{device-discovery}
+\ArrowheadType{Interface Design Description}
+\ArrowheadTypeShort{IDD}
+\ArrowheadVersion{5.0.0}
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Tamás Bordi}
+\ArrowheadStatus{RELEASE}
+\ArrowheadContact{tbordi@aitia.ai}
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+\end{center}
+
+%  \Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document describes the \textbf{GENERIC-HTTP} service interface of \textbf{device-discovery} service, which offers communication via http protocol with JSON payload encoding.
+  \end{abstract}
+  \vspace*{1cm}
+
+\newpage
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+
+This document describes the \textbf{GENERIC-HTTP} service interface of \textbf{device-discovery}, which enables both application and core/support systems to lookup, register and revoke devices on which the Local Cloud’s systems are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain use cases (e.g.
+enabling onboarding) is needed. It's implemented using protocol, encoding as stated in the following table:
+
+\begin{table}[ht!]
+  \centering
+  \begin{tabular}{|l|l|l|l|}
+    \rowcolor{gray!33} Profile type & Type & Version \\ \hline
+    Transfer protocol & HTTP & 1.1 \\ \hline
+    Data encryption & N/A & - \\ \hline
+    Encoding & JSON & RFC 8259 \cite{rfc8259} \\ \hline
+    Compression & N/A & - \\ \hline
+  \end{tabular}
+  \caption{Communication and semantics details}
+  \label{tab:comunication_semantics_profile}
+\end{table}
+
+This document provides the Interface Design Description IDD to the \textit{device-discovery -- Service Description} document.
+For further details about how this service is meant to be used, please consult that document.
+
+The rest of this document describes how to realize the \textbf{device-discovery} service \textbf{GENERIC-HTTP} interface in details.
+
+\newpage
+
+\section{Interface Description}
+\label{sec:functions}
+
+\fsubsection{register}
+
+The service operation request requires an authorization bearer header and a \texttt{DeviceRegistrationRequest} JSON encoded body.
+
+\begin{lstlisting}[language=http,label={lst:register},caption={A \fref{register} request.}]
+POST /serviceregistry/device-registry/register HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+   "name": "string",
+   "metadata": {
+      "additionalProp1": "string",
+      "additionalProp2": {},
+      "additionalProp3": []
+   },
+   "addresses": [
+      "string"
+   ]
+}
+\end{lstlisting}
+
+The service operation responses with the status code \texttt{200 Ok} if called successfully and the device entity is already existing or \texttt{201 Create} if the entity was newly created. The response also contains a \texttt{DeviceRegistrationResponse} JSON encoded body.
+
+\begin{lstlisting}[language=http,label={lst:register_response},caption={A \fref{register} success response.}]
+{
+  "name": "string",
+  "metadata": {
+    "additionalProp1": "string",
+    "additionalProp2": {},
+    "additionalProp3": []
+  },
+  "addresses": [
+    {
+      "type": "string",
+      "address": "string"
+    }
+  ],
+  "createdAt": "string",
+  "updatedAt": "string"
+}
+\end{lstlisting}
+
+The error codes are, \texttt{400 Bad Request} if request is malformed, \texttt{403 Forbidden} if requester authentication was unsuccessful, \texttt{401 Unauthorized} if the authenticated requester has no permission and \texttt{500 Internal Server Error} if an unexpected error happens. The error response also contains an \texttt{ErrorResponse} JSON encoded body.
+
+\begin{lstlisting}[language=http,label={lst:register_response},caption={A \fref{register} error response.}]
+{
+  "errorMessage": "string",
+  "errorCode": 0,
+  "exceptionType": "string",
+  "origin": "string"
+}
+\end{lstlisting}
+
+\fsubsection{lookup}
+
+The service operation request requires an authorization bearer header and may optionally include a \texttt{DeviceLookup
+Request} JSON encoded body.
+
+\begin{lstlisting}[language=http,label={lst:register},caption={A \fref{lookup} request.}]
+POST /serviceregistry/device-registry/lookup HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "deviceNames": [
+    "string"
+  ],
+  "addresses": [
+    "string"
+  ],
+  "addressType": "string",
+  "metadataRequirementList": [
+    {
+      "empty": true,
+      "additionalProp1": {},
+      "additionalProp2": {},
+      "additionalProp3": {}
+    }
+  ]
+}
+\end{lstlisting}
+
+The service operation responses with the status code \texttt{200 Ok} if called successfully and with a \texttt{DeviceLookup
+Response} JSON encoded body.
+
+\begin{lstlisting}[language=http,label={lst:register_response},caption={A \fref{lookup} success response.}]
+{
+  "entries": [
+    {
+      "name": "string",
+      "metadata": {
+        "additionalProp1": "string",
+        "additionalProp2": {},
+        "additionalProp3": []
+      },
+      "addresses": [
+        {
+          "type": "string",
+          "address": "string"
+        }
+      ],
+      "createdAt": "string",
+      "updatedAt": "string"
+    }
+  ],
+  "count": 1
+}
+\end{lstlisting}
+
+\newpage
+
+The error codes are, \texttt{400 Bad Request} if request is malformed, \texttt{403 Forbidden} if requester authentication was unsuccessful, \texttt{401 Unauthorized} if the authenticated requester has no permission and \texttt{500 Internal Server Error} if an unexpected error happens. The error response also contains an \texttt{ErrorResponse} JSON encoded body.
+
+\begin{lstlisting}[language=http,label={lst:register_response},caption={A \fref{lookup} error response.}]
+{
+  "errorMessage": "string",
+  "errorCode": 0,
+  "exceptionType": "string",
+  "origin": "string"
+}
+\end{lstlisting}
+
+\fsubsection{revoke}
+
+The service operation request requires an authorization bearer header and a device \texttt{name} as path parameter.
+
+\begin{lstlisting}[language=http,label={lst:register},caption={A \fref{revoke} request.}]
+DELETE /serviceregistry/device-registry/revoke/<name> HTTP/1.1
+Authorization: Bearer <authorization-info>
+\end{lstlisting}
+
+The service operation responses with the status code \texttt{200 Ok} if called successfully and an existing device entity was removed and \texttt{204 No Content} if no matching entity was found. The success response not contains any response body.
+
+The error codes are, \texttt{400 Bad Request} if request is malformed, \texttt{403 Forbidden} if requester authentication was unsuccessful, \texttt{401 Unauthorized} if the authenticated requester has no permission, \texttt{423 Locked} if entity is not removable and \texttt{500 Internal Server Error} if an unexpected error happens. The error response also contains an \texttt{ErrorResponse} JSON encoded body.
+
+\begin{lstlisting}[language=http,label={lst:register_response},caption={A \fref{revoke} error response.}]
+{
+  "errorMessage": "string",
+  "errorCode": 0,
+  "exceptionType": "string",
+  "origin": "string"
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Data Models}
+\label{sec:model}
+
+Here, all data objects that can be part of the service interface are listed and must be respected by the implementing systems.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is meant to denote a JSON \pref{Object} that must contain certain fields, or names, with values conforming to explicitly named types.
+As a complement to the primary types defined in this section, there is also a list of secondary types in Section \ref{sec:model:primitives}, which are used to represent things like hashes, identifiers and texts.
+
+\msubsection{struct}{DeviceRegistrationRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+name & \pref{Name} & yes & Unique identifier of the device. \\ \hline
+metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the device. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses of the device.  \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Metadata}
+
+An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or \pref{List} values.
+
+\msubsection{struct}{DeviceRegistrationResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{Name} & Unique identifier of the registered device. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the registered device. \\ \hline
+addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the registered device.  \\ \hline
+createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{AddressDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+type & \pref{AddressType} & Type of the address. \\ \hline
+address & \pref{Address} & Address. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. Same as HTTP response code.\\ \hline
+type & \pref{ErrorType} & Type value of the error.\\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{DeviceLookupRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.2cm} | p{4.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for devices with any of the specified names. \\ \hline
+addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for devices with any of the specified add\-resses.   \\ \hline
+addressType &  \pref{AddressType} & no & Requester is looking for devices with the specified type of address. \\ \hline
+metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for devices that are matching any of the spe\-cified metadata requirements. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{MetadataRequirements}
+
+A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
+
+\begin{itemize}
+    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which is associated with an embedded object and in this object we are looking for the key named "subkey").
+    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
+    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
+\end{itemize}
+
+\msubsection{struct}{DeviceLookupResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{6cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:DeviceLookupResult]{DeviceLookupResult}$>$     & List of device results. \\ \hline
+count & \pref{Number} & Number of returned devices. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{DeviceLookupResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+name & \pref{Name} & Unique identifier of the device. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
+addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
+createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsubsection{Primitives}
+\label{sec:model:primitives}
+
+As all message payloads are encoded using the JSON format \cite{bray2014json}, the following primitive constructs, part of that standard, become available.
+Note that the official standard is defined in terms of parsing rules, while this list only concerns syntactic information. 
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\rowcolor{gray!33} JSON Type & Description \\ \hline
+\pdef{Value}                 & Any out of \pref{Object}, \pref{Array}, \pref{String}, \pref{Number}, \pref{Boolean} or \pref{Null}. \\ \hline
+\pdef{Object}$<$A$>$         & An unordered collection of $[$\pref{String}: \pref{Value}$]$ pairs, where each \pref{Value} conforms to type A. \\ \hline
+\pdef{Array}$<$A$>$          & An ordered collection of \pref{Value} elements, where each element conforms to type A. \\ \hline
+\pdef{String}                & An arbitrary UTF-8 string. \\ \hline
+\pdef{Number}                & Any IEEE 754 binary64 floating point number \cite{cowlishaw2019floating}, except for \textit{+Inf}, \textit{-Inf} and \textit{NaN}. \\ \hline
+\pdef{Boolean}               & One out of \texttt{true} or \texttt{false}. \\ \hline
+\pdef{Null}                  & Must be \texttt{null}. \\ \hline
+\end{tabularx}
+\end{table}
+
+With these primitives now available, we proceed to define all the types specified in the \textbf{device-discovery} SD document without a direct equivalent among the JSON types.
+Concretely, we define the \textbf{device-discovery} SD primitives either as \textit{aliases} or \textit{structs}.
+An \textit{alias} is a renaming of an existing type, but with some further details about how it is intended to be used.
+Structs are described in the beginning of the parent section.
+
+\subsubsection{alias \pdef{Address} = \pref{String}}
+
+A string representation of a network address. An address can be a version 4 IP address, a version 6 IP address, DNS name or MAC address.
+
+\subsubsection{alias \pdef{AddressType} = \pref{String}}
+String value of a network address type. Could be only \texttt{HOSTNAME}, \texttt{IPV4}, \texttt{IPV6} or \texttt{MAC}.
+
+\subsubsection{alias \pdef{DateTime} = \pref{String}}
+
+Pinpoints a moment in time in the format of ISO8601 standard "yyyy-mm-ddThh:mm:ssZ", where "yyy" denotes year (4 digits), "mm" denotes month starting from 01, "dd" denotes day starting from 01, "T" is the separator between date and time part, "hh" denotes hour in the 24-hour format (00-23), "MM" denotes minute (00-59), "SS" denotes second (00-59). "Z" indicates that the time is in UTC.
+An example of a valid date/time string is "2024-12-05T12:00:00Z"
+
+\subsubsection{alias \pdef{ErrorType} = \pref{String}}
+
+String value of the error type. Could be \texttt{ARROWHEAD}, \texttt{INVALID\_PARAMETER}, \texttt{AUTH}, \texttt{FORBIDDEN}, \texttt{DATA\_NOT\_FOUND}, \texttt{TIMEOUT}, \texttt{LOCKED}, \texttt{INTERNAL\_SERVER\_ERROR} or \texttt{EXTERNAL\_SERVER\_ERROR}.
+
+\subsubsection{alias \pdef{List}$<$A$>$ = \pref{Array}$<$A$>$}
+There is no difference.
+
+\subsubsection{alias \pdef{Name} = \pref{String}}
+
+A \pref{String} indentifier that is intended to be both human and machine-readable.
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & Xxx Yyy \\ \hline
+
+\end{tabularx}
+
+\end{document}
