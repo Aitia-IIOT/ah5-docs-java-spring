@@ -1,0 +1,27 @@
+# Primitives
+
+## Address
+
+A string representation of a network address. An address can be a version 4 IP address, a version 6 IP address,
+DNS name or MAC address.
+
+## AddressType
+
+String value of a network address type. Could be only `HOSTNAME`, `IPV4`, `IPV6` or `MAC`.
+
+## DateTime
+
+Pinpoints a moment in time in the format of ISO8601 standard `yyyy-mm-ddThh:MM:ssZ`, where ”yyyy” denotes
+year (4 digits), ”mm” denotes month starting from 01, ”dd” denotes day starting from 01, ”T” is the separator
+between date and time part, ”hh” denotes hour in the 24-hour format (00-23), ”MM” denotes minute (00-59),
+”ss” denotes second (00-59). ”Z” indicates that the time is in UTC. An example of a valid date/time string is
+”2024-12-05T12:00:00Z”
+
+## ErrorType
+
+String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,
+`TIMEOUT`, `LOCKED`, `INTERNAL_SERVER_ERROR` or `EXTERNAL_SERVER_ERROR`.
+
+## Name
+
+A String indentifier that is intended to be both human and machine-readable.

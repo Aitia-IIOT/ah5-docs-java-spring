@@ -79,8 +79,8 @@ The purpose of this service is to lookup, register and revoke devices on which t
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/device-discovery_sd.pdf) <br />
-:material-api: [generic-http (IDD)](../api/serviceregistry/device-discovery-generic-mqtt.md) | [generic-https (IDD)](todo) <br />
-:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
+:material-api: [generic-http (IDD)](../api/serviceregistry/device-discovery-generic-http.md) | [generic-https (IDD)](../api/serviceregistry/device-discovery-generic-http.md) <br />
+:material-api: [generic-mqtt (IDD)](../api/serviceregistry/device-discovery-generic-mqtt.md) | [generic-mqtts (IDD)](../api/serviceregistry/device-discovery-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **register**
