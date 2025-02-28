@@ -33,6 +33,8 @@ nav:
       - ErrorResponse: api/data-models/error-response.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
+      - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
+      - MQTTResponseTemplate: api/data-models/mqtt-response-template.md
       - SystemLookupRequest: api/data-models/system-lookup-request.md
       - SystemLookupResponse: api/data-models/system-lookup-response.md
       - SystemLookupResult: api/data-models/system-lookup-result.md
