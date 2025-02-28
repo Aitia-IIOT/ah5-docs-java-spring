@@ -26,6 +26,7 @@ nav:
       - AddressDesriptor: api/data-models/address-descriptor.md
       - DeviceDesriptor: api/data-models/device-descriptor.md
       - DeviceLookupRequest: api/data-models/device-lookup-request.md
+      - DeviceLookupResponse: api/data-models/device-lookup-response.md
       - DeviceLookupResult: api/data-models/device-lookup-result.md
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
       - DeviceRegistrationResponse: api/data-models/device-registration-response.md
@@ -36,7 +37,7 @@ nav:
       - SystemLookupResponse: api/data-models/system-lookup-response.md
       - SystemLookupResult: api/data-models/system-lookup-result.md
       - SystemRegistrationRequest: api/data-models/system-registration-request.md
-      - SystemRegistrationResult: api/data-models/system-registration-result.md
+      - SystemRegistrationResponse: api/data-models/system-registration-response.md
     - Primitives: api/primitives.md
   - Help:
     - Certificate Profiles: help/certificate-profiles.md
