@@ -8,7 +8,7 @@ Built by Material for MkDocs
 
 ## Requirements
 - python
-- mkdocs-material | `pip intall mkdocs-material`
+- mkdocs-material | `pip install mkdocs-material`
 
 ## Commands
 

@@ -93,7 +93,7 @@ entity is already existing or `201` if the entity was newly created. The respons
    "updatedAt":"2024-11-04T01:53:02Z"
 }
 ```
-The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and
 `500` if an unexpected error happens. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
