@@ -23,8 +23,8 @@ nav:
           - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
           - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md          
     - Data Models:
-      - AddressDesriptor: api/data-models/address-descriptor.md
-      - DeviceDesriptor: api/data-models/device-descriptor.md
+      - AddressDescriptor: api/data-models/address-descriptor.md
+      - DeviceDescriptor: api/data-models/device-descriptor.md
       - DeviceLookupRequest: api/data-models/device-lookup-request.md
       - DeviceLookupResponse: api/data-models/device-lookup-response.md
       - DeviceLookupResult: api/data-models/device-lookup-result.md
