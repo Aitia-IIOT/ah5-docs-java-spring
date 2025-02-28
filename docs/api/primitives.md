@@ -40,4 +40,4 @@ Decimal number.
 
 ## Version
 
-Specifies a system version. Version must follow the Semantic Versioning.
+Specifies a system version. Version must follow the Semantic Versioning, which means, it consists of three numbers separated by dots. These numbers represent the `MAJOR`, `MINOR` and `PATCH` version. An example: 5.0.0

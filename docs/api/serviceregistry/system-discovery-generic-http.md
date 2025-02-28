@@ -208,7 +208,7 @@ DELETE /serviceregistry/system-discovery/revoke HTTP1.1
 Authorization: Bearer <authorization-info>
 ```
 
-The service operation **responses** with the status code `200` if called successfully and an existing device
+The service operation **responses** with the status code `200` if called successfully and an existing system
 entity was removed and `204` if no matching entity was found. The success response does not contain
 any response body.
 
