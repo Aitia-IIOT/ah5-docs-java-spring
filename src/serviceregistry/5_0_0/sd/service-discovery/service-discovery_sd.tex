@@ -339,12 +339,13 @@ serviceDefinitionNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is
 versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for service ins\-tances with any of the specified versions. \\ \hline
 alivesAt & \pref{DateTime} & no & Requester is looking for service ins\-tances that will be available at the specified moment of the future. \\ \hline
 metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances that are matching any of the specified metadata requirements.  \\ \hline
-interfaceTemplateNames &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & Requester is looking for service ins\-tances with any of the specified interface template names. \\ \hline
+addressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & Requester is looking for service ins\-tances with interfaces whose access addresses are matching any of these types \\ \hline
 \end{tabularx}
 \end{table}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{5.5cm} | p{4.9cm} | p{2cm} | X |} \hline
+interfaceTemplateNames &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & Requester is looking for service ins\-tances with any of the specified interface template names. \\ \hline
 interfacePropertyRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances with interfaces that are matching any of the specified properties requirements.  \\ \hline
 policies &  \pref{List}$<$\pref{SecurityPolicy}$>$ & no & Requester is looking for service ins\-tances with any of the specified security policies. \\ \hline
 \end{tabularx}
@@ -380,12 +381,12 @@ instanceId & \pref{Name} & Unique identifier of the service instance. \\ \hline
 provider & \hyperref[sec:model:SystemDescriptor]{SystemDescriptor} & Information about the service instance provider system. \\ \hline
 serviceDefinition & \hyperref[sec:model:ServiceDefinitionDescriptor]{ServiceDefinitionDescriptor} & Information about the service definition. \\ \hline
 version & \pref{Version} & Version of the service instance. \\ \hline
-expiresAt & \pref{DateTime} & The moment of the future from which the service ins\-tance will not be available. \\ \hline
 \end{tabularx}
 \end{table}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.6cm} | p{5.2cm} | X |} \hline
+expiresAt & \pref{DateTime} & The moment of the future from which the service ins\-tance will not be available. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the service ins\-tance. \\ \hline
 interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
 createdAt & \pref{DateTime} & Service instance was registered at this timestamp. \\ \hline
