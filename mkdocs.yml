@@ -18,10 +18,13 @@ nav:
       - Service Registry:
         - HTTP:
           - device-discovery: api/serviceregistry/device-discovery-generic-http.md
+          - system-discovery: api/serviceregistry/system-discovery-generic-http.md
         - MQTT:
-          - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md          
+          - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
+          - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md          
     - Data Models:
       - AddressDesriptor: api/data-models/address-descriptor.md
+      - DeviceDesriptor: api/data-models/device-descriptor.md
       - DeviceLookupRequest: api/data-models/device-lookup-request.md
       - DeviceLookupResult: api/data-models/device-lookup-result.md
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
@@ -29,6 +32,11 @@ nav:
       - ErrorResponse: api/data-models/error-response.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
+      - SystemLookupRequest: api/data-models/system-lookup-request.md
+      - SystemLookupResponse: api/data-models/system-lookup-response.md
+      - SystemLookupResult: api/data-models/system-lookup-result.md
+      - SystemRegistrationRequest: api/data-models/system-registration-request.md
+      - SystemRegistrationResult: api/data-models/system-registration-result.md
     - Primitives: api/primitives.md
   - Help:
     - Certificate Profiles: help/certificate-profiles.md

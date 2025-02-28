@@ -25,3 +25,11 @@ String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH
 ## Name
 
 A String indentifier that is intended to be both human and machine-readable.
+
+## Version
+
+Specifies a system version. Version must follow the Semantic Versioning.
+
+## Boolean
+
+One out of `true` or `false`.
