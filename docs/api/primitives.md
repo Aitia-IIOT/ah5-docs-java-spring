@@ -9,6 +9,10 @@ DNS name or MAC address.
 
 String value of a network address type. Could be only `HOSTNAME`, `IPV4`, `IPV6` or `MAC`.
 
+## Boolean
+
+One out of `true` or `false`.
+
 ## DateTime
 
 Pinpoints a moment in time in the format of ISO8601 standard `yyyy-mm-ddThh:MM:ssZ`, where ”yyyy” denotes
@@ -25,3 +29,11 @@ String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH
 ## Name
 
 A String indentifier that is intended to be both human and machine-readable.
+
+## Number
+
+Decimal number.
+
+## Version
+
+Specifies a system version. Version must follow the Semantic Versioning, which means, it consists of three numbers separated by dots. These numbers represent the `MAJOR`, `MINOR` and `PATCH` version. An example: 5.0.0
