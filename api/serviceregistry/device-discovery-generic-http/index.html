@@ -12,7 +12,7 @@
         <link rel="prev" href="../../../support_systems/">
       
       
-        <link rel="next" href="../device-discovery-generic-mqtt/">
+        <link rel="next" href="../system-discovery-generic-http/">
       
       
       <link rel="icon" href="../../../assets/favicon.png">
@@ -949,6 +949,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-discovery-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    system-discovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1007,6 +1028,27 @@
   
   <span class="md-ellipsis">
     device-discovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-discovery-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    system-discovery
   </span>
   
 
@@ -1089,7 +1131,28 @@
         
   
   <span class="md-ellipsis">
-    AddressDesriptor
+    AddressDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceDescriptor
   </span>
   
 
@@ -1111,6 +1174,27 @@
   
   <span class="md-ellipsis">
     DeviceLookupRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-lookup-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceLookupResponse
   </span>
   
 
@@ -1237,6 +1321,153 @@
   
   <span class="md-ellipsis">
     MetadataRequirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/mqtt-request-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MQTTRequestTemplate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/mqtt-response-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MQTTResponseTemplate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-lookup-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemLookupRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-lookup-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemLookupResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-lookup-result/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemLookupResult
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-registration-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemRegistrationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-registration-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemRegistrationResponse
   </span>
   
 
@@ -1711,7 +1942,7 @@ Authorization: Bearer &lt;authorization-info&gt;
       }
    },
    &quot;addresses&quot;:[      
-      &quot;address&quot;:&quot;81:ef:1a:44:7a:f5&quot;
+      &quot;81:ef:1a:44:7a:f5&quot;
    ]
 }
 </code></pre>
@@ -1744,14 +1975,14 @@ entity is already existing or <code>201</code> if the entity was newly created. 
    &quot;updatedAt&quot;:&quot;2024-11-04T01:53:02Z&quot;
 }
 </code></pre>
-<p>The <strong>error codes</strong> are, <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful,
+<p>The <strong>error codes</strong> are <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful,
 <code>403</code> if the authenticated requester has no permission and
 <code>500</code> if an unexpected error happens. The error response also contains an
 <a href="../../data-models/error-response/">ErrorResponse</a> JSON encoded body.</p>
 <pre><code>{
     &quot;errorMessage&quot;: &quot;Device name is missing.&quot;,
     &quot;errorCode&quot;: 400,
-    &quot;exceptionType: &quot;INVALID_PARAMETER&quot;,
+    &quot;exceptionType&quot;: &quot;INVALID_PARAMETER&quot;,
     &quot;origin&quot;: &quot;POST /serviceregistry/device-discovery/register&quot;
 }
 </code></pre>
@@ -1814,7 +2045,7 @@ Authorization: Bearer &lt;authorization-info&gt;
 <pre><code>{
     &quot;errorMessage&quot;: &quot;Database operation error.&quot;,
     &quot;errorCode&quot;: 500,
-    &quot;exceptionType: &quot;INTERNAL_SERVER_ERROR&quot;,
+    &quot;exceptionType&quot;: &quot;INTERNAL_SERVER_ERROR&quot;,
     &quot;origin&quot;: &quot;POST /serviceregistry/device-discovery/lookup&quot;
 }
 </code></pre>
@@ -1826,11 +2057,11 @@ Authorization: Bearer &lt;authorization-info&gt;
 <p>The service operation <strong>responses</strong> with the status code <code>200</code> if called successfully and an existing device
 entity was removed and <code>204</code> if no matching entity was found. The success response does not contain
 any response body.</p>
-<p>The error codes are, <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful, <code>403</code> if the authenticated requester has no permission, <code>423</code> if entity is not removable and <code>500</code> if an unexpected error happens. The error response also contains an <a href="../../data-models/error-response/">ErrorResponse</a> JSON encoded body.</p>
+<p>The <strong>error codes</strong> are, <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful, <code>403</code> if the authenticated requester has no permission, <code>423</code> if entity is not removable and <code>500</code> if an unexpected error happens. The error response also contains an <a href="../../data-models/error-response/">ErrorResponse</a> JSON encoded body.</p>
 <pre><code>{
     &quot;errorMessage&quot;: &quot;Database operation error.&quot;,
     &quot;errorCode&quot;: 500,
-    &quot;exceptionType: &quot;INTERNAL_SERVER_ERROR&quot;,
+    &quot;exceptionType&quot;: &quot;INTERNAL_SERVER_ERROR&quot;,
     &quot;origin&quot;: &quot;DELETE /serviceregistry/device-discovery/lookup&quot;
 }
 </code></pre>
