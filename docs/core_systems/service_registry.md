@@ -106,6 +106,18 @@ This service operation lists the devices that match the filtering requirements.
 
 -----
 
+### general-management
+
+Its purpose is to get some information about the hosting system’s behavior, such as log entries and configuration settings. The service is offered for administrative support systems.
+
+Learn more: <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
+:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
+:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
+:material-tag: since: v5.0.0 
+
+-----
+
 ### service-registry-management
 
 Its purpose is to manage service definitions, service instances, interfaces, systems and devices in bulk. The different operations provide querying, registering, updating and unregistering functionalities. The service is offered for administrative support systems.
