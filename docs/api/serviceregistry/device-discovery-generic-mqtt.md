@@ -9,7 +9,7 @@ are running. Device representation is not necessary for the base functionalities
 use cases (e.g. enabling onboarding) is needed. It’s implemented using protocol, encoding as stated in the
 following tables:
 
-**GENERIC-HTTP**
+**GENERIC-MQTT**
 
 Profile type | type | Version
 --- | --- | ---
@@ -18,7 +18,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-HTTPS**
+**GENERIC-MQTTS**
 
 Profile type | type | Version
 --- | --- | ---
@@ -66,7 +66,7 @@ Topic: arrowhead/serviceregistry/device-discovery/register
 }
 ```
 
-The service operation **responses** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and the device entity is already existing or `201` if the entity was newly created. The response template payload is a
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and the device entity is already existing or `201` if the entity was newly created. The response template payload is a
 [DeviceRegistrationResponse](../data-models/device-registration-response.md).
 
 ```
@@ -225,7 +225,7 @@ Topic: arrowhead/serviceregistry/device-discovery/revoke
    "payload":"thermometer2"
 }
 ```
-The service operation **responses** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and an existing device entity was removed and `204` if no matching entity was found. 
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and an existing device entity was removed and `204` if no matching entity was found. 
 
 ```
 {

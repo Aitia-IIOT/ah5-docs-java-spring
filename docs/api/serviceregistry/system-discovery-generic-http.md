@@ -51,7 +51,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responses** with the status code `200` if called successfully and the system
+The service operation **responds** with the status code `200` if called successfully and the system
 entity is already existing or `201` if the entity was newly created. The response also contains a
 [SystemRegistrationResponse](../data-models/system-registration-response.md) JSON encoded body.
 
@@ -148,7 +148,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responses** with the status code `200` if called successfully and with a [SystemLookupResponse](../data-models/system-lookup-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully and with a [SystemLookupResponse](../data-models/system-lookup-response.md) JSON encoded body.
 
 ```
 {
@@ -208,7 +208,7 @@ DELETE /serviceregistry/system-discovery/revoke HTTP1.1
 Authorization: Bearer <authorization-info>
 ```
 
-The service operation **responses** with the status code `200` if called successfully and an existing system
+The service operation **responds** with the status code `200` if called successfully and an existing system
 entity was removed and `204` if no matching entity was found. The success response does not contain
 any response body.
 

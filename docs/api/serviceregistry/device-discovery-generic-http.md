@@ -62,7 +62,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responses** with the status code `200` if called successfully and the device
+The service operation **responds** with the status code `200` if called successfully and the device
 entity is already existing or `201` if the entity was newly created. The response also contains a
 [DeviceRegistrationResponse](../data-models/device-registration-response.md) JSON encoded body.
 
@@ -134,7 +134,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responses** with the status code `200` if called successfully and with a [DeviceLookupResponse](../data-models/device-lookup-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully and with a [DeviceLookupResponse](../data-models/device-lookup-response.md) JSON encoded body.
 
 ```
 {
@@ -189,7 +189,7 @@ DELETE /serviceregistry/device-discovery/revoke/thermometer2 HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 
-The service operation **responses** with the status code `200` if called successfully and an existing device
+The service operation **responds** with the status code `200` if called successfully and an existing device
 entity was removed and `204` if no matching entity was found. The success response does not contain
 any response body.
 
