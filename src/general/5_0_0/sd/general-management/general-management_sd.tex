@@ -108,7 +108,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{general-management} service, which allows (with operator role or proper permissions) to get some information about the hosting system's behavior, such as log entries and configuration settings. An example of this interaction is that an operator uses the Management Tool to revise the log of a system that behaves abnormally.
+This document describes the \textbf{general-management} service, which allows (with operator role or proper permissions) to get some information about the hosting system's behavior, such as log entries and configuration settings. An example of this interaction is when an operator uses the Management Tool to revise the log of a system that behaves abnormally.
 
 The \textbf{general-management} service contains the following operations:
 
@@ -187,8 +187,8 @@ pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is 
 pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
 pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
-from & \pref{DateTime} & no & Requester is looking for log entries with timestamp that not precedes this one. \\ \hline
-to & \pref{DateTime} & no & Requester is looking for log entries with timestamp that not succeeds this one. \\ \hline
+from & \pref{DateTime} & no & Requester is looking for log entries with timestamp that does not precede this one. \\ \hline
+to & \pref{DateTime} & no & Requester is looking for log entries with timestamp that does not succeed this one. \\ \hline
 severity & \pref{LogSeverity} & no & Requester is looking for log entries with severity that equals to or is higher than the specified one. \\ \hline
 loggerStr &  \pref{String} & no & Requester is looking for log entries with logger whose name contains the specified text. \\ \hline
 \end{tabularx}
