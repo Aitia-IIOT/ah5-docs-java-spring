@@ -106,7 +106,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{identity} service, which enables both application and core/support systems to get and release a proof of identity token which also can be verified. Furthermore, it also allows to a system to change its own credentials. A provider system for this service is necessary if other core/support system are using \textit{outsourced} authentication policy. An example of this interaction when an application system get a proof of identity before registering itself into the Service Registry. An other example when the Service Registry verifies the proof of identity before accepting that registration request. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+This document describes the \textbf{identity} service, which enables both application and core/support systems to get and release a proof of identity token which also can be verified. Furthermore, it also allows to a system to change its own credentials. A provider system for this service is necessary if other core/support system are using \textit{outsourced} authentication policy. An example of this interaction when an application system gets a proof of identity before registering itself into the Service Registry. An other example when the Service Registry verifies the proof of identity before accepting that registration request. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
 
 The \textbf{identity} service contains the following operations:
 
@@ -169,7 +169,7 @@ The change data must meet the following criteria:
 
 \begin{itemize}
     \item With this operation a requester system can only change its own credentials and only after a successful authentication.
-    \item This operation is not allows to change the assigned authentication method.
+    \item This operation does not allow to change the assigned authentication method.
     \item System name is mandatory. System names are case insensitive and have to be unique within the Local Cloud.
     \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
     \item New credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed (same requirements are applied than in case of the previous credential map). 
