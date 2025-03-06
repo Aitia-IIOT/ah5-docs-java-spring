@@ -109,7 +109,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{identity-management} service, which enables systems (with operator role or proper permissions) to handle (create, update, remove, query) identities and active sessions (close, query) in bulk. An example of this interaction is that an operator uses the Management Tool to add access to different systems manually.
+This document describes the \textbf{identity-management} service, which enables systems (with operator role or proper permissions) to handle (create, update, remove, query) identities and active sessions (close, query) in bulk. An example of this interaction is when an operator uses the Management Tool to add access to different systems manually.
 
 The \textbf{identity-management} service contains the following operations:
 
@@ -230,8 +230,8 @@ pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 namePart &  \pref{String} & no & Requester is looking for identities with system names containing the specified text. \\ \hline
 isSysop & \pref{Boolean} & no & Requester is looking for identities that have/have not higher level administration rights depending of the specified value. \\ \hline
 createdBy & \pref{Name} & no & Requester is looking for identities that have been created by the specified identity. \\ \hline
-creationFrom &  \pref{DateTime} & no & Requester is looking for identities that created after the specified time. \\ \hline
-creationTo &  \pref{DateTime} & no & Requester is looking for identities that created before the specified time. \\ \hline
+creationFrom &  \pref{DateTime} & no & Requester is looking for identities that were created after the specified time. \\ \hline
+creationTo &  \pref{DateTime} & no & Requester is looking for identities that were created before the specified time. \\ \hline
 hasSession & \pref{Boolean} & no & Requester is looking for identities that have/have not active session at the moment \\ \hline
 \end{tabularx}
 \end{table}
@@ -285,7 +285,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \begin{tabularx}{\textwidth}{| p{3.3cm} | p{3.4cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-authenticationMethod & \pref{AuthenticationMethod} & yes & The authentication method all the identites use. \\ \hline
+authenticationMethod & \pref{AuthenticationMethod} & yes & The authentication method all the identities use. \\ \hline
 identities & \pref{List}$<$\hyperref[sec:model:IdentityRequest]{IdentityRequest}$>$ & yes & A list of identities. \\ \hline
 \end{tabularx}
 \end{table}
@@ -343,8 +343,8 @@ pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
 namePart &  \pref{String} & no & Requester is looking for active sessions of systems with names containing the specified text. \\ \hline
-loginFrom &  \pref{DateTime} & no & Requester is looking for active sessions that created after the specified time. \\ \hline
-loginTo &  \pref{DateTime} & no & Requester is looking for active sessions that created before the specified time. \\ \hline
+loginFrom &  \pref{DateTime} & no & Requester is looking for active sessions that were created after the specified time. \\ \hline
+loginTo &  \pref{DateTime} & no & Requester is looking for active sessions that were created before the specified time. \\ \hline
 \end{tabularx}
 \end{table}
 
