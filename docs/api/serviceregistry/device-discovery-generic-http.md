@@ -57,12 +57,12 @@ Authorization: Bearer <authorization-info>
       }
    },
    "addresses":[      
-      "address":"81:ef:1a:44:7a:f5"
+      "81:ef:1a:44:7a:f5"
    ]
 }
 ```
 
-The service operation **responses** with the status code `200` if called successfully and the device
+The service operation **responds** with the status code `200` if called successfully and the device
 entity is already existing or `201` if the entity was newly created. The response also contains a
 [DeviceRegistrationResponse](../data-models/device-registration-response.md) JSON encoded body.
 
@@ -102,7 +102,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
     "errorMessage": "Device name is missing.",
     "errorCode": 400,
-    "exceptionType: "INVALID_PARAMETER",
+    "exceptionType": "INVALID_PARAMETER",
     "origin": "POST /serviceregistry/device-discovery/register"
 }
 ```
@@ -134,7 +134,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responses** with the status code `200` if called successfully and with a [DeviceLookupResponse](../data-models/device-lookup-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully and with a [DeviceLookupResponse](../data-models/device-lookup-response.md) JSON encoded body.
 
 ```
 {
@@ -175,7 +175,7 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 {
     "errorMessage": "Database operation error.",
     "errorCode": 500,
-    "exceptionType: "INTERNAL_SERVER_ERROR",
+    "exceptionType": "INTERNAL_SERVER_ERROR",
     "origin": "POST /serviceregistry/device-discovery/lookup"
 }
 ```
@@ -189,17 +189,17 @@ DELETE /serviceregistry/device-discovery/revoke/thermometer2 HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 
-The service operation **responses** with the status code `200` if called successfully and an existing device
+The service operation **responds** with the status code `200` if called successfully and an existing device
 entity was removed and `204` if no matching entity was found. The success response does not contain
 any response body.
 
-The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission, `423` if entity is not removable and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission, `423` if entity is not removable and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
     "errorMessage": "Database operation error.",
     "errorCode": 500,
-    "exceptionType: "INTERNAL_SERVER_ERROR",
+    "exceptionType": "INTERNAL_SERVER_ERROR",
     "origin": "DELETE /serviceregistry/device-discovery/lookup"
 }
 ```
