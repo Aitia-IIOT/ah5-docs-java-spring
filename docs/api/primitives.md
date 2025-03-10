@@ -26,6 +26,9 @@ between date and time part, ”hh” denotes hour in the 24-hour format (00-23),
 String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,
 `TIMEOUT`, `LOCKED`, `INTERNAL_SERVER_ERROR` or `EXTERNAL_SERVER_ERROR`.
 
+## InterfaceTemplate
+A string identifier of an interface descriptor.
+
 ## MQTTQoS
 
 QoS in MQTT refers to the level of guarantee for message delivery between the publisher and the subscriber. It can be `0`, `1` or `2` ([learn more](https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels/)).
@@ -37,6 +40,12 @@ A String indentifier that is intended to be both human and machine-readable.
 ## Number
 
 Decimal number.
+
+## Protocol
+A string representation of a communication protocol.
+
+## SecurityPolicy
+Any suitable security policy chosen by the implementor of service.
 
 ## Version
 

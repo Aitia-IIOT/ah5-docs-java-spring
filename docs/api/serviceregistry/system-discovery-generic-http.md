@@ -3,7 +3,7 @@
 ## Overview
 
 This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of system-discovery, which enables both
-application and core/support systems to lookup, register and revoke systems that are part of the Local Cloud.  System representation is mandatory for the base functionalities of a Local Cloud, e.g. the systems have to be registered in order to interact with each other.  The interfaces are implemented using protocol, encoding as stated in the following tables:
+application and core/support systems to lookup, register and revoke systems that are part of the Local Cloud.  System representation is mandatory for the base functionalities of a Local Cloud, e.g. the systems have to be registered in order to interact with each other. The interfaces are implemented using protocol, encoding as stated in the following tables:
 
 ## Interface Description
 
