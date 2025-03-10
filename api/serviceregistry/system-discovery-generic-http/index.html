@@ -612,11 +612,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../core_systems/service_authorization/" class="md-nav__link">
+      <a href="../../../core_systems/authorization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Service Authorization
+    Authorization
   </span>
   
 
@@ -633,11 +633,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../core_systems/system_authentication/" class="md-nav__link">
+      <a href="../../../core_systems/authentication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    System Authentication
+    Authentication
   </span>
   
 
@@ -1088,6 +1088,27 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../authentication_policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication Policy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1099,10 +1120,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1113,8 +1134,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             Data Models
           </label>
@@ -1916,10 +1937,10 @@ application and core/support systems to lookup, register and revoke systems that
 </table>
 <p>Hereby the <strong>Interface Design Description</strong> (IDD) is provided to the <a href="../../../assets/sd/5_0_0/system-discovery_sd.pdf">system-discovery – Service Description</a>. For further details about how this service is meant to be used, please consult that document.</p>
 <h3 id="register">register</h3>
-<p>The service operation <strong>request</strong> requires an authorization bearer header and a <a href="../../data-models/system-registration-request/">SystemRegistrationRequest</a>
+<p>The service operation <strong>request</strong> requires an <a href="../../authentication_policy/#http">identity related header or certfificate</a> and a <a href="../../data-models/system-registration-request/">SystemRegistrationRequest</a>
 JSON encoded body.</p>
 <pre><code>POST /serviceregistry/system-discovery/register HTTP/1.1
-Authorization: Bearer &lt;authorization-info&gt;
+Authorization: Bearer &lt;identity-info&gt;
 
 {
   &quot;metadata&quot;: {
@@ -1935,7 +1956,7 @@ Authorization: Bearer &lt;authorization-info&gt;
   &quot;deviceName&quot;: &quot;thermometer2&quot;
 }
 </code></pre>
-<p>The service operation <strong>responses</strong> with the status code <code>200</code> if called successfully and the system
+<p>The service operation <strong>responds</strong> with the status code <code>200</code> if called successfully and the system
 entity is already existing or <code>201</code> if the entity was newly created. The response also contains a
 <a href="../../data-models/system-registration-response/">SystemRegistrationResponse</a> JSON encoded body.</p>
 <pre><code>{
@@ -2003,9 +2024,9 @@ entity is already existing or <code>201</code> if the entity was newly created. 
 }
 </code></pre>
 <h3 id="lookup">lookup</h3>
-<p>The service operation <strong>request</strong> requires an authorization bearer header. The URI can contain an optional query parameter with the key "<em>verbose</em>" and a <a href="../../primitives/#boolean">Boolean</a> value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a <a href="../../data-models/system-lookup-request/">SystemLookupRequest</a> JSON encoded body.</p>
+<p>The service operation <strong>request</strong> requires an <a href="../../authentication_policy/#http">identity related header or certfificate</a>. The URI can contain an optional query parameter with the key "<em>verbose</em>" and a <a href="../../primitives/#boolean">Boolean</a> value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a <a href="../../data-models/system-lookup-request/">SystemLookupRequest</a> JSON encoded body.</p>
 <pre><code>POST /serviceregistry/system-discovery/lookup?verbose=&lt;verbose-value&gt; HTTP/1.1
-Authorization: Bearer &lt;authorization-info&gt;
+Authorization: Bearer &lt;identity-info&gt;
 
 {
   &quot;systemNames&quot;: [
@@ -2022,7 +2043,7 @@ Authorization: Bearer &lt;authorization-info&gt;
   ]
 }
 </code></pre>
-<p>The service operation <strong>responses</strong> with the status code <code>200</code> if called successfully and with a <a href="../../data-models/system-lookup-response/">SystemLookupResponse</a> JSON encoded body.</p>
+<p>The service operation <strong>responds</strong> with the status code <code>200</code> if called successfully and with a <a href="../../data-models/system-lookup-response/">SystemLookupResponse</a> JSON encoded body.</p>
 <pre><code>{
   &quot;entries&quot;: [
     {
@@ -2068,11 +2089,11 @@ Authorization: Bearer &lt;authorization-info&gt;
 }
 </code></pre>
 <h3 id="revoke">revoke</h3>
-<p>The service operation <strong>request</strong> only requires an authorization bearer header. The name of the system to be revoked will be identified during authentication.</p>
+<p>The service operation <strong>request</strong> only requires an <a href="../../authentication_policy/#http">identity related header or certfificate</a>. The name of the system to be revoked will be identified during authentication.</p>
 <pre><code>DELETE /serviceregistry/system-discovery/revoke HTTP1.1
-Authorization: Bearer &lt;authorization-info&gt;
+Authorization: Bearer &lt;identity-info&gt;
 </code></pre>
-<p>The service operation <strong>responses</strong> with the status code <code>200</code> if called successfully and an existing system
+<p>The service operation <strong>responds</strong> with the status code <code>200</code> if called successfully and an existing system
 entity was removed and <code>204</code> if no matching entity was found. The success response does not contain
 any response body.</p>
 <p>The error codes are, <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful, <code>403</code> if the authenticated requester has no permission and <code>500</code> if an unexpected error happens. The error response also contains an <a href="../../data-models/error-response/">ErrorResponse</a> JSON encoded body.</p>

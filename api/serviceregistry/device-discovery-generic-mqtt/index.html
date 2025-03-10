@@ -612,11 +612,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../core_systems/service_authorization/" class="md-nav__link">
+      <a href="../../../core_systems/authorization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Service Authorization
+    Authorization
   </span>
   
 
@@ -633,11 +633,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../core_systems/system_authentication/" class="md-nav__link">
+      <a href="../../../core_systems/authentication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    System Authentication
+    Authentication
   </span>
   
 
@@ -1088,6 +1088,27 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../authentication_policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication Policy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1099,10 +1120,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1113,8 +1134,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             Data Models
           </label>
@@ -1853,7 +1874,7 @@ application and core/support systems to lookup, register and revoke devices on w
 are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain
 use cases (e.g. enabling onboarding) is needed. It’s implemented using protocol, encoding as stated in the
 following tables:</p>
-<p><strong>GENERIC-HTTP</strong></p>
+<p><strong>GENERIC-MQTT</strong></p>
 <table>
 <thead>
 <tr>
@@ -1885,7 +1906,7 @@ following tables:</p>
 </tr>
 </tbody>
 </table>
-<p><strong>GENERIC-HTTPS</strong></p>
+<p><strong>GENERIC-MQTTS</strong></p>
 <table>
 <thead>
 <tr>
@@ -1920,12 +1941,12 @@ following tables:</p>
 <p>Hereby the <strong>Interface Design Description</strong> (IDD) is provided to the <a href="../../../assets/sd/5_0_0/device-discovery_sd.pdf">device-discovery – Service Description</a>. For further details about how this service is meant to be used, please consult that document.</p>
 <h2 id="interface-description">Interface Description</h2>
 <h3 id="register">register</h3>
-<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the payload is a <a href="../../data-models/device-registration-request/">DeviceRegistrationRequest</a>.</p>
+<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the authentication is a proper <a href="../../authentication_policy/#mqtt">identity info</a> and the payload is a <a href="../../data-models/device-registration-request/">DeviceRegistrationRequest</a>.</p>
 <pre><code>Topic: arrowhead/serviceregistry/device-discovery/register
 
 {
    &quot;traceId&quot;:&quot;&lt;trace-id&gt;&quot;,
-   &quot;authentication&quot;:&quot;&lt;authentication-data&gt;&quot;,
+   &quot;authentication&quot;:&quot;&lt;identity-info&gt;&quot;,
    &quot;responseTopic&quot;:&quot;&lt;response-topic&gt;&quot;,
    &quot;qosRequirement&quot;:&quot;&lt;0|1|2&gt;&quot;,
    &quot;payload&quot;:{
@@ -1950,7 +1971,7 @@ following tables:</p>
    }
 }
 </code></pre>
-<p>The service operation <strong>responses</strong> with an <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> JSON encoded message in which the status code is <code>200</code> if called successfully and the device entity is already existing or <code>201</code> if the entity was newly created. The response template payload is a
+<p>The service operation <strong>responds</strong> with an <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> JSON encoded message in which the status code is <code>200</code> if called successfully and the device entity is already existing or <code>201</code> if the entity was newly created. The response template payload is a
 <a href="../../data-models/device-registration-response/">DeviceRegistrationResponse</a>.</p>
 <pre><code>{
    &quot;status&quot;:&quot;&lt;status-code&gt;&quot;,
@@ -2000,12 +2021,12 @@ following tables:</p>
 }
 </code></pre>
 <h3 id="lookup">lookup</h3>
-<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the payload is a  <a href="../../data-models/device-lookup-request/">DeviceLookupRequest</a>.</p>
+<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the authentication is a proper <a href="../../authentication_policy/#mqtt">identity info</a> and the payload is a  <a href="../../data-models/device-lookup-request/">DeviceLookupRequest</a>.</p>
 <pre><code>Topic: arrowhead/serviceregistry/device-discovery/lookup
 
 {
    &quot;traceId&quot;:&quot;&lt;trace-id&gt;&quot;,
-   &quot;authentication&quot;:&quot;&lt;authentication-data&gt;&quot;,
+   &quot;authentication&quot;:&quot;&lt;identity-info&gt;&quot;,
    &quot;responseTopic&quot;:&quot;&lt;response-topic&gt;&quot;,
    &quot;qosRequirement&quot;:&quot;&lt;0|1|2&gt;&quot;,
    &quot;payload&quot;:{
@@ -2079,18 +2100,18 @@ following tables:</p>
 }
 </code></pre>
 <h3 id="revoke">revoke</h3>
-<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the payload is the <code>device name</code>.</p>
+<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the authentication is a proper <a href="../../authentication_policy/#mqtt">identity info</a> and the payload is the <code>device name</code>.</p>
 <pre><code>Topic: arrowhead/serviceregistry/device-discovery/revoke
 
 {
    &quot;traceId&quot;:&quot;&lt;trace-id&gt;&quot;,
-   &quot;authentication&quot;:&quot;&lt;authentication-data&gt;&quot;,
+   &quot;authentication&quot;:&quot;&lt;identity-info&gt;&quot;,
    &quot;responseTopic&quot;:&quot;&lt;response-topic&gt;&quot;,
    &quot;qosRequirement&quot;:&quot;&lt;0|1|2&gt;&quot;,
    &quot;payload&quot;:&quot;thermometer2&quot;
 }
 </code></pre>
-<p>The service operation <strong>responses</strong> with an <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> JSON encoded message in which the status code is <code>200</code> if called successfully and an existing device entity was removed and <code>204</code> if no matching entity was found. </p>
+<p>The service operation <strong>responds</strong> with an <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> JSON encoded message in which the status code is <code>200</code> if called successfully and an existing device entity was removed and <code>204</code> if no matching entity was found. </p>
 <pre><code>{
    &quot;status&quot;:&quot;&lt;status-code&gt;&quot;,
    &quot;traceId&quot;:&quot;&lt;trace-id&gt;&quot;,

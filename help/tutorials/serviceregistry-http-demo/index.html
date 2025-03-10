@@ -606,11 +606,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../core_systems/service_authorization/" class="md-nav__link">
+      <a href="../../../core_systems/authorization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Service Authorization
+    Authorization
   </span>
   
 
@@ -627,11 +627,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../core_systems/system_authentication/" class="md-nav__link">
+      <a href="../../../core_systems/authentication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    System Authentication
+    Authentication
   </span>
   
 
@@ -980,6 +980,27 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../../api/authentication_policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication Policy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -991,10 +1012,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1005,8 +1026,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             Data Models
           </label>
@@ -2017,7 +2038,7 @@
 </ul>
 <p>after registering itself into the Local Cloud.</p>
 <h3 id="step-1-authentication">Step 1: Authentication</h3>
-<p>First of all, the system should perform some kind of authentication. In Arrowhead 5, there are three ways for a system to authenticate itself: involving an Authentication Core System, using X.509 Certicifates, or telling who they are by themselves. In this example, the last one will be used, which is called <em>self-declared authentication</em>.</p>
+<p>First of all, the system should perform some kind of <a href="../../../api/authentication_policy/">authentication</a>. In this example the <a href="../../../api/authentication_policy/#declared">declared</a> authentication strategy will be used.</p>
 <p>To perform this type of authentication, the system must provide an authentication header for each request. This should consist of the <em>SYSTEM//</em> prefix, followed by the name of the system. </p>
 <p>In our example, the authorization header will look like this:</p>
 <pre><code>-H 'Authorization: Bearer SYSTEM//temperature-provider2'
