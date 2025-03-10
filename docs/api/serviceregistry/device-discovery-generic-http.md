@@ -33,8 +33,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [device-dis
 
 ### register
 
-The service operation **request** requires an authorization bearer header and a [DeviceRegistrationRequest](../data-models/device-registration-request.md)
-JSON encoded body.
+The service operation **request** requires an authorization bearer header and a [DeviceRegistrationRequest](../data-models/device-registration-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/device-registry/register HTTP/1.1
@@ -62,8 +61,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully and the device
-entity is already existing or `201` if the entity was newly created. The response also contains a
+The service operation **responds** with the status code `200` if called successfully and the device entity is already existing or `201` if the entity was newly created. The response also contains a
 [DeviceRegistrationResponse](../data-models/device-registration-response.md) JSON encoded body.
 
 ```
