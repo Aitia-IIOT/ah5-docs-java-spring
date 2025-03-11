@@ -46,30 +46,30 @@ The purpose of this service is to lookup, register and revoke systems that are p
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/system-discovery_sd.pdf) <br />
-:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
-:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
+:material-api: [generic-http (IDD)](../api/serviceregistry/system-discovery-generic-http.md) | [generic-https (IDD)](../api/serviceregistry/system-discovery-generic-http.md) <br />
+:material-api: [generic-mqtt (IDD)](../api/serviceregistry/system-discovery-generic-mqtt.md) | [generic-mqtts (IDD)](../api/serviceregistry/system-discovery-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **register**
 
 This service operation adds new system to the Local Cloud.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/system-discovery-generic-http.md#register) | [generic-https](../api/serviceregistry/system-discovery-generic-http.md#register)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/system-discovery-generic-mqtt.md#register) | [generic-mqtts](../api/serviceregistry/system-discovery-generic-mqtt.md#register)
 
 **revoke**
 
 This service operation removes a system from the Local Cloud.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/system-discovery-generic-http.md#revoke) | [generic-https](../api/serviceregistry/system-discovery-generic-http.md#revoke)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/system-discovery-generic-mqtt.md#revoke) | [generic-mqtts](../api/serviceregistry/system-discovery-generic-mqtt.md#revoke)
 
 **lookup**
 
 This service operation lists the systems that match the filtering requirements.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/system-discovery-generic-http.md#lookup) | [generic-https](../api/serviceregistry/system-discovery-generic-http.md#lookup)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/system-discovery-generic-mqtt.md#lookup) | [generic-mqtts](../api/serviceregistry/system-discovery-generic-mqtt.md#lookup)
 
 -----
 
@@ -87,22 +87,34 @@ Learn more: <br />
 
 This service operation adds a new device to the Local Cloud.
 
-:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/device-discovery-generic-mqtt.md/#register) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/device-discovery-generic-mqtt.md/#register) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/device-discovery-generic-http.md/#register) | [generic-https](../api/serviceregistry/device-discovery-generic-http.md/#register)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/device-discovery-generic-mqtt.md/#register) | [generic-mqtts](../api/serviceregistry/device-discovery-generic-mqtt.md/#register)
 
 **revoke**
 
 This service operation removes a device from the Local Cloud.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/device-discovery-generic-http.md/#revoke) | [generic-https](../api/serviceregistry/device-discovery-generic-http.md/#revoke)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/device-discovery-generic-mqtt.md/#revoke) | [generic-mqtts](../api/serviceregistry/device-discovery-generic-mqtt.md/#revoke)
 
 **lookup**
 
 This service operation lists the devices that match the filtering requirements.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/device-discovery-generic-http.md/#lookup) | [generic-https](../api/serviceregistry/device-discovery-generic-http.md/#lookup)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/device-discovery-generic-mqtt.md/#lookup) | [generic-mqtts](../api/serviceregistry/device-discovery-generic-mqtt.md/#lookup)
+
+-----
+
+### general-management
+
+Its purpose is to get some information about the hosting system’s behavior, such as log entries and configuration settings. The service is offered for administrative support systems.
+
+Learn more: <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
+:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
+:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
+:material-tag: since: v5.0.0 
 
 -----
 
@@ -126,13 +138,7 @@ The system configuration properties can be found in the `application.properties`
 
 ### General parameters
 
-:fontawesome-solid-wrench: **server.address**
-
-IP address of the server.
-
-:fontawesome-solid-wrench: **server.port**
-
-Port number of the server
+See the [general configuration properties](../general/general_config_props.md).
 
 ### Database parameters
 

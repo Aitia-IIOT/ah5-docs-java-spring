@@ -1,0 +1,431 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{float}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+\hyphenation{Er-ror-Res-pon-se}
+\hyphenation{I-den-ti-ty-List-Res-pon-se}
+\hyphenation{O-pe-ra-ti-on-Sta-tus}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[5]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{identity-management} % XXX = ServiceName 
+\ArrowheadServiceID{identity-management} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Rajmund Bocsi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{rbocsi@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{identity-management} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{identity-management} service, which enables systems (with operator role or proper permissions) to handle (create, update, remove, query) identities and active sessions (close, query) in bulk. An example of this interaction is when an operator uses the Management Tool to add access to different systems manually.
+
+The \textbf{identity-management} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{identity-mgmt-query} lists the identities that match the filtering requirements;
+    \item \textit{identity-mgmt-create} creates the specified identities;
+    \item \textit{identity-mgmt-update} updates the specified existing identities;
+    \item \textit{identity-mgmt-remove} removes the specified identities;
+    \item \textit{identity-mgmt-session-query} lists the active sessions that match the filtering requirements;
+    \item \textit{identity-mgmt-session-close} closes (invalidates) the specified active sessions;
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+The service's purpose is to handle the systems' identities and sessions centrally and in bulk. If a Local Cloud supports outsourced authentication, using this service is the only option to make possible for a system to be the part of the Local Cloud.
+
+Application systems should not use this service; only operators (via the Management Tool, for example) or dedicated support systems.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+The requester has to identify itself to use any of the operations.
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+The service is only available for operators, dedicated support systems and those who have the proper authorization rights to consume it.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operation of the service. 
+In particular, each subsection names an operation, an input type, and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\phantomsection
+\fsubsection{identity-mgmt-query}{IdentityQueryRequest}{IdentityListResponse}{}{ErrorResponse}
+
+The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item There is an AND relation between different kind of filters.
+    \item If both boundaries about creation time is specified, the resulted time interval cannot be empty.
+\end{itemize}
+
+\fsubsection{identity-mgmt-create}{IdentityListCreateRequest}{IdentityListResponse}{}{ErrorResponse}
+
+The creation data must meet the following criteria:
+
+\begin{itemize}
+    \item Authentication method should come from a predefined set. The content of this set is implementation-specific.
+    \item System names are case insensitive and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item The requirements of credential map is based on the authentication method, so the related criteria are implementation-specific.
+    \item Multiple identities can be created at once, but it is forbidden to specify systems with the same name.
+    \item It is forbidden to create an identity that is already registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{identity-mgmt-update}{IdentityListUpdateRequest}{IdentityListResponse}{}{ErrorResponse}
+
+The update data must meet the following criteria:
+
+\begin{itemize}
+    \item System names are case insensitive and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item The requirements of credential map is based on the authentication method, so the related criteria are implementation-specific.
+    \item Multiple identities can be updated at once, but it is forbidden to specify systems with the same name.
+    \item All identities must use the same authentication method.
+    \item It is not possible to update an identity that is not registered into the Local Cloud.
+\end{itemize}
+
+\fsubsection{identity-mgmt-remove}{IdentityListRemoveRequest}{}{OperationStatus}{ErrorResponse}
+
+\fsubsection{identity-mgmt-session-query}{IdentitySessionQueryRequest}{IdentitySessionListResponse}{}{ErrorResponse}
+
+The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item There is an AND relation between different kind of filters.
+    \item If both boundaries about login time is specified, the resulted time interval cannot be empty.
+\end{itemize}
+
+\fsubsection{identity-mgmt-session-close}{IdentitySessionListCloseRequest}{}{OperationStatus}{ErrorResponse}
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{identity-management} service
+are listed and must be respected by the hosting System.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\phantomsection
+\msubsection{struct}{IdentityQueryRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+namePart &  \pref{String} & no & Requester is looking for identities with system names containing the specified text. \\ \hline
+isSysop & \pref{Boolean} & no & Requester is looking for identities that have/have not higher level administration rights depending of the specified value. \\ \hline
+createdBy & \pref{Name} & no & Requester is looking for identities that have been created by the specified identity. \\ \hline
+creationFrom &  \pref{DateTime} & no & Requester is looking for identities that were created after the specified time. \\ \hline
+creationTo &  \pref{DateTime} & no & Requester is looking for identities that were created before the specified time. \\ \hline
+hasSession & \pref{Boolean} & no & Requester is looking for identities that have/have not active session at the moment \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\msubsection{struct}{IdentityListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+identities & \pref{List}$<$\hyperref[sec:model:IdentityResult]{IdentityResult}$>$ & A page of identities. \\ \hline
+count & \pref{Number} & Total number of identities that match the filters. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentityResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.3cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+systemName & \pref{Name} & Unique identifier of the identified system. \\ \hline
+authenticationMethod & \pref{AuthenticationMethod} & The authentication method the identity uses. \\ \hline
+sysop & \pref{Boolean} & Determines whether the identified system has higher level administration rights or not. \\ \hline
+createdBy & \pref{Name} & The identity was created by this identified system. \\ \hline
+createdAt & \pref{DateTime} & Identity was created at this timestamp. \\ \hline
+updatedBy & \pref{Name} & The identity was modified by this identified system. \\ \hline
+updatedAt & \pref{DateTime} & Identity was modified at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentityListCreateRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.3cm} | p{3.4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+authenticationMethod & \pref{AuthenticationMethod} & yes & The authentication method all the identities use. \\ \hline
+identities & \pref{List}$<$\hyperref[sec:model:IdentityRequest]{IdentityRequest}$>$ & yes & A list of identities. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{IdentityRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+systemName & \pref{Name} & yes & Unique identifier of the identified system. \\ \hline
+credentials &\hyperref[sec:model:Credentials]{Credentials} & yes & Authentication method-specific credential information of the system. \\ \hline
+sysop & \pref{Boolean} & no & Determines whether the identified system has higher level administration rights or not. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Credentials}
+
+An \pref{Object} which maps \pref{String} keys \pref{String} values.
+
+\msubsection{struct}{IdentityListUpdateRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.3cm} | p{3.4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+identities & \pref{List}$<$\hyperref[sec:model:IdentityRequest]{IdentityRequest}$>$ & yes & A list of identities. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentityListRemoveRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the identities that need to be removed. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentitySessionQueryRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
+namePart &  \pref{String} & no & Requester is looking for active sessions of systems with names containing the specified text. \\ \hline
+loginFrom &  \pref{DateTime} & no & Requester is looking for active sessions that were created after the specified time. \\ \hline
+loginTo &  \pref{DateTime} & no & Requester is looking for active sessions that were created before the specified time. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentitySessionListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+sessions & \pref{List}$<$\hyperref[sec:model:IdentitySessionResult]{IdentitySessionResult}$>$ & A page of sessions. \\ \hline
+count & \pref{Number} & Total number of sessions that match the filters. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentitySessionResult}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.3cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+systemName & \pref{Name} & Unique identifier of the identified system. \\ \hline
+loginTime & \pref{DateTime} & Session was created at this timestamp. \\ \hline
+expirationTime & \pref{DateTime} & Session will expire at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentitySessionListCloseRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the identities whose session must be closed. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{AuthenticationMethod} & A string representation of an authentication method chosen by the implementor of service. \\ \hline
+\pdef{Boolean}          & One out of true or false. \\ \hline
+\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}

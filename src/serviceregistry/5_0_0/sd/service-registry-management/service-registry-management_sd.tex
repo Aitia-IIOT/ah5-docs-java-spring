@@ -109,13 +109,11 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{service-registry-management} service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) devices, systems, service instances, service definitions and interface templates in bulk. The service also allows to get some information about the hosting system's behavior, such as log entries and configuration settings. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually.
+This document describes the \textbf{service-registry-management} service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) devices, systems, service instances, service definitions, and interface templates in bulk. An example of this interaction is when an operator uses the Management Tool to register interface templates, systems, and service instances manually.
 
 The \textbf{service-registry-management} service contains the following operations:
 
 \begin{itemize}
-    \item \textit{get-log} lists the log entries of the system that matches the filtering requirements;
-    \item \textit{get-config} lists the current values of the specified configuration settings;
     \item \textit{device-query} lists the devices that match the filtering requirements;
     \item \textit{device-create} registers the specified devices;
     \item \textit{device-updates} updates the specified existing devices;
@@ -144,7 +142,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 \subsection{How This Service Is Meant to Be Used}
 The service's purpose is to handle the various entities of the Service Registry centrally and in bulk. Such entities are devices, systems, service definitions, service instances and interface templates. This approach makes possible that the individual application systems do not have to do anything to be able to work within the Local Cloud.
 
-Application systems should not use this service, only operators (via the Management Tool, for example) or dedicated support systems.
+Application systems should not use this service; only operators (via the Management Tool, for example) or dedicated support systems.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -161,31 +159,12 @@ The service is only available for operators, dedicated support systems and those
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. 
-In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+This section describes the abstract signatures of each operation of the service. 
+In particular, each subsection names an operation, an input type, and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
 
 \phantomsection
-\fsubsection{get-log}{LogRequest}{LogResponse}{}{ErrorResponse}
-
-The input data must meet the following criteria:
-
-\begin{itemize}
-    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
-    \item If page number is specified, the page size must be specified as well and vice versa.
-    \item In some Local Clouds there is a maximum page size.
-    \item If both date parameters are specified (\textit{from}, \textit{to}), the date \textit{from} must precede the date \textit{to}.
-\end{itemize}
-
-\fsubsection{get-config}{ConfigRequest}{ConfigResponse}{}{ErrorResponse}
-
-The input data must meet the following criteria:
-
-\begin{itemize}
-    \item Some configuration settings (e. g. passwords) can not be acquired with this operation. Such setting names will be ignored.
-\end{itemize}
-
 \fsubsection{device-query}{DeviceQueryRequest}{DeviceListResponse}{}{ErrorResponse}
 
 The query data must meet the following criteria:
@@ -381,93 +360,6 @@ Note that each subsection, which describes one type of object, begins with the \
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
 \phantomsection
-\msubsection{struct}{LogRequest}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
-pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
-pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
-pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
-from & \pref{DateTime} & no & Requester is looking for log entries with timestamp that not precedes this one. \\ \hline
-to & \pref{DateTime} & no & Requester is looking for log entries with timestamp that not succeeds this one. \\ \hline
-severity & \pref{LogSeverity} & no & Requester is looking for log entries with severity that equals to or is higher than the specified one. \\ \hline
-loggerStr &  \pref{String} & no & Requester is looking for log entries with logger whose name contains the specified text. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{Identity}
-
-An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
-
-\msubsection{struct}{LogResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-entries & \pref{List}$<$\hyperref[sec:model:LogEntry]{LogEntry}$>$ & A page of log entries. \\ \hline
-count & \pref{Number} & Total number of entries that match the filters. \\ \hline
-\end{tabularx}
-\end{table}
-
-\clearpage
-
-\msubsection{struct}{LogEntry}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-logId & \pref{String} & Unique identifier of the entry. \\ \hline
-entryDate & \pref{DateTime} & The timestamp of the entry. \\ \hline
-logger & \pref{String} & The logger that created the entry. \\ \hline
-severity & \pref{LogSeverity} & The severity of the entry. \\ \hline
-message & \pref{String} & The log message \\ \hline
-exception & \pref{String} & If the log entry is an error, information of the related exception may appear here. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{ErrorResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-errorMessage & \pref{String} & Description of the error. \\ \hline
-errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
-type & \pref{ErrorType} & Type of the error. \\ \hline
-origin & \pref{String} & Origin of the error. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{ConfigRequest}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-keys & \pref{List}$<$\pref{Name}$>$ & yes & The names of the requested configuration settings. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{ConfigResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-map & \hyperref[sec:model:ConfigMap]{ConfigMap} & The actual values of the requested settings. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{ConfigMap}
-
-An \pref{Object} which maps \pref{String} keys to \pref{String} values.
-
-\clearpage
-
 \msubsection{struct}{DeviceQueryRequest}
 
 \begin{table}[ht!]
@@ -485,6 +377,10 @@ metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirement
 \end{tabularx}
 \end{table}
 
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
 \msubsection{struct}{MetadataRequirements}
 
 A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
@@ -494,8 +390,6 @@ A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitiv
     \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
     \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
 \end{itemize}
-
-\clearpage
 
 \msubsection{struct}{DeviceListResponse}
 
@@ -535,6 +429,21 @@ address & \pref{Address} & Address. \\ \hline
 \end{tabularx}
 \end{table}
 
+\clearpage
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
 \msubsection{struct}{DeviceListRequest}
  
 \begin{table}[ht!]
@@ -544,8 +453,6 @@ authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester o
 devices & \pref{List}$<$\hyperref[sec:model:DeviceRequest]{DeviceRequest}$>$ & yes & A list of devices. \\ \hline
 \end{tabularx}
 \end{table}
-
-\clearpage
 
 \msubsection{struct}{DeviceRequest}
  
@@ -576,6 +483,11 @@ names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the devices that need to 
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
 verbose & \pref{Boolean} & no & If true detailed device information also returns. \\ \hline
 pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
 pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
 pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
@@ -584,11 +496,6 @@ addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for sys
 addressType &  \pref{AddressType} & no & Requester is looking for systems with the specified type of add\-ress. \\ \hline
 metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for systems that are matching any of the specified metadata requirements.  \\ \hline
 versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for systems with any of the specified versions.   \\ \hline
-\end{tabularx}
-\end{table}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.8cm} | p{2cm} | X |} \hline
 deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems that are running on any of the specified devices. \\ \hline
 \end{tabularx}
 \end{table}
@@ -618,6 +525,8 @@ createdAt & \pref{DateTime} & System was registered at this timestamp. \\ \hline
 updatedAt & \pref{DateTime} & System was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
+
+\clearpage
 
 \msubsection{struct}{SystemListRequest}
  
@@ -664,6 +573,8 @@ pageSortField & \pref{String} & no & The identifier of the field which must be u
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 \end{tabularx}
 \end{table}
+
+\clearpage
 
 \msubsection{struct}{ServiceDefinitionListResponse}
 
@@ -715,11 +626,21 @@ names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the service definitions t
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the ope\-ration. \\ \hline
 verbose & \pref{Boolean} & no & If true detailed system and device information also returns. \\ \hline
 pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{5.6cm} | p{4.9cm} | p{2cm} | X |} \hline
 pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
 pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 instanceIds &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service instances with any of the spe\-cified identifiers. Mandatory if no providerNames nor serviceDefinitionNames are spe\-cified. \\ \hline
 providerNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances that are provided by any of the specified systems. Mandatory if no serviceInstanceIds nor serviceDefinitionNames are spe\-cified. \\ \hline
+serviceDefinitionNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances with any of the specified service definition names. Mandatory if no serviceInstanceIds nor providerNames are spe\-cified. \\ \hline
+versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for service ins\-tances with any of the specified versions. \\ \hline
+alivesAt & \pref{DateTime} & no & Requester is looking for service ins\-tances that will be available at the specified moment of the future. \\ \hline
+metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances that are matching any of the specified metadata requirements.  \\ \hline
+addressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & Requester is looking for service ins\-tances with interfaces whose access addresses are matching any of these types \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -727,10 +648,6 @@ providerNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking 
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{5.6cm} | p{4.9cm} | p{2cm} | X |} \hline
-serviceDefinitionNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances with any of the specified service definition names. Mandatory if no serviceInstanceIds nor providerNames are spe\-cified. \\ \hline
-versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for service ins\-tances with any of the specified versions. \\ \hline
-alivesAt & \pref{DateTime} & no & Requester is looking for service ins\-tances that will be available at the specified moment of the future. \\ \hline
-metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances that are matching any of the specified metadata requirements.  \\ \hline
 interfaceTemplateNames &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & Requester is looking for service ins\-tances with any of the specified interface template names. \\ \hline
 interfacePropertyRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances with interfaces that are matching any of the specified pro\-perties requirements.  \\ \hline
 policies &  \pref{List}$<$\pref{SecurityPolicy}$>$ & no & Requester is looking for service ins\-tances with any of the specified security policies. \\ \hline
@@ -748,8 +665,6 @@ count & \pref{Number} & Total number of service instances that match the filters
 \end{tabularx}
 \end{table}
 
-\clearpage
-
 \msubsection{struct}{ServiceResult}
  
 \begin{table}[ht!]
@@ -766,6 +681,8 @@ createdAt & \pref{DateTime} & Service instance was registered at this timestamp.
 updatedAt & \pref{DateTime} & Service instance was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
+
+\clearpage
 
 \msubsection{struct}{ServiceInterfaceDescriptor}
  
@@ -867,6 +784,8 @@ protocols &  \pref{List}$<$\pref{Protocol}$>$ & no & Requester is looking for in
 \end{tabularx}
 \end{table}
 
+\clearpage
+
 \msubsection{struct}{InterfaceTemplateListResponse}
 
 \begin{table}[ht!]
@@ -913,6 +832,8 @@ interfaceTemplates & \pref{List}$<$\hyperref[sec:model:InterfaceTemplateRequest]
 \end{tabularx}
 \end{table}
 
+\clearpage
+
 \msubsection{struct}{InterfaceTemplateRequest}
 
 \begin{table}[ht!]
@@ -923,6 +844,7 @@ protocol & \pref{Protocol} & yes & Protocol of the interface template. \\ \hline
 propertyRequirements &  \pref{List}$<$\hyperref[sec:model:InterfaceTemplatePropertyRequest]{InterfaceTemplatePropertyRequest}$>$ & yes & Properties of the interface template. \\ \hline
 \end{tabularx}
 \end{table}
+
 
 \msubsection{struct}{InterfaceTemplatePropertyRequest}
 
@@ -962,9 +884,13 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
 \pdef{InterfaceTemplate} & A string identifier of an interface descriptor. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
-\pdef{LogSeverity}      & The kind and seriousness of a log message. \\ \hline
 \pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
