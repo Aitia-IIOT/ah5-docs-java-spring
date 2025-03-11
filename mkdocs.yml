@@ -12,7 +12,11 @@ nav:
     - Service Orchestration: core_systems/service_orchestration.md
     - Authorization: core_systems/authorization.md
     - Authentication: core_systems/authentication.md
-  - Support Systems: support_systems.md
+  - Support Systems: 
+    - Blacklist: support_systems/blacklist.md
+    - Configuration: support_systems/configuration.md
+    - QoS Evaluator: support_systems/qos_evaluator.md
+    - Translation Manager: support_systems/translation_manager.md
   - API:
     - Interface Descriptions:
       - Service Registry:
@@ -48,7 +52,6 @@ nav:
       - Service Registry Demo: help/tutorials/serviceregistry-http-demo.md
       - Mosquitto MQTT Broker: help/tutorials/mosquitto-mqtt-broker.md
       - Create Certificates: help/tutorials/create-certificates.md
-    - Hints: help/hints.md
     - FAQ: help/faq.md
   - Client Libraries: client_libraries.md
 theme:
