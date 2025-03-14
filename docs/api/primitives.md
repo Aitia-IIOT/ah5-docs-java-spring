@@ -21,6 +21,9 @@ between date and time part, ”hh” denotes hour in the 24-hour format (00-23),
 ”ss” denotes second (00-59). ”Z” indicates that the time is in UTC. An example of a valid date/time string is
 ”2024-12-05T12:00:00Z”
 
+## Direction
+The direction of a sorting operation. Possible values are the representation of ascending or descending order.
+
 ## ErrorType
 
 String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,

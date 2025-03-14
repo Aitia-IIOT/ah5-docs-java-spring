@@ -318,9 +318,323 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 ```
 
 ### system-query
+
+The service operation **request** requires an authorization bearer header. The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemQueryRequest](../data-models/system-query-request.md) JSON encoded body.
+
+```
+POST /serviceregistry/mgmt/systems/query?verbose=<verbose-value> HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "pagination": {
+    "page": 1,
+    "size": 1,
+    "direction": "ASC",
+    "sortField": ""
+  },
+  "systemNames": [
+  ],
+  "addresses": [
+  ],
+  "addressType": "",
+  "metadataRequirementList": [
+  ],
+  "versions": [
+    "1.1"
+  ],
+  "deviceNames": [
+  ]
+}
+```
+
+The service operation **responds** with the status code `200` if called successfully and with a [SystemListResponse](../data-models/system-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "name": "alert-consumer2",
+      "metadata": {},
+      "version": "1.1.0",
+      "addresses": [
+        {
+          "type": "IPV4",
+          "address": "192.168.1.2"
+        }
+      ],
+      "device": {
+        "name": "alarm2"
+      },
+      "createdAt": "2025-03-14T13:08:22Z",
+      "updatedAt": "2025-03-14T13:08:22Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "The page size cannot be larger than 1000",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceregistry/mgmt/systems/query"
+}
+```
+
 ### system-create
+
+The service operation **request** requires an authorization bearer header a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
+
+```
+POST /serviceregistry/mgmt/systems HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "systems": [
+    {
+      "name": "alert-consumer1",
+      "metadata": {
+      },
+      "version": "1.1",
+      "addresses": [
+        "192.168.1.1"
+      ],
+      "deviceName": "alarm1"
+    },
+    {
+      "name": "alert-consumer2",
+      "metadata": {
+      },
+      "version": "1.1",
+      "addresses": [
+        "192.168.1.2"
+      ],
+      "deviceName": "alarm2"
+    }
+  ]
+}
+```
+The service operation **responds** with the status code `201` if the system entities were successfully created. The response also contains a
+[SystemListResponse](../data-models/system-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "name": "alert-consumer1",
+      "metadata": {},
+      "version": "1.1.0",
+      "addresses": [
+        {
+          "type": "IPV4",
+          "address": "192.168.1.1"
+        }
+      ],
+      "device": {
+        "name": "alarm1",
+        "metadata": {
+          "volume": {
+            "value": 100,
+            "unit": "dB"
+          }
+        },
+        "addresses": [
+          {
+            "type": "MAC",
+            "address": "3a:f7:9c:12:8e:b5"
+          }
+        ],
+        "createdAt": "2025-03-14T13:07:34Z",
+        "updatedAt": "2025-03-14T13:07:34Z"
+      },
+      "createdAt": "2025-03-14T13:08:21.856389Z",
+      "updatedAt": "2025-03-14T13:08:21.856389Z"
+    },
+    {
+      "name": "alert-consumer2",
+      "metadata": {},
+      "version": "1.1.0",
+      "addresses": [
+        {
+          "type": "IPV4",
+          "address": "192.168.1.2"
+        }
+      ],
+      "device": {
+        "name": "alarm2",
+        "metadata": {
+          "volume": {
+            "value": 110,
+            "unit": "dB"
+          }
+        },
+        "addresses": [
+          {
+            "type": "MAC",
+            "address": "3a:f7:9c:12:8e:bb"
+          }
+        ],
+        "createdAt": "2025-03-14T13:07:34Z",
+        "updatedAt": "2025-03-14T13:07:34Z"
+      },
+      "createdAt": "2025-03-14T13:08:21.858647200Z",
+      "updatedAt": "2025-03-14T13:08:21.858647200Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission  and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Systems with names already exist: alert-consumer1, alert-consumer2",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceregistry/mgmt/systems"
+}
+```
+
 ### system-update
+
+The service operation **request** requires an authorization bearer header a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
+
+```
+PUT /serviceregistry/mgmt/systems HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "systems": [
+    {
+      "name": "alert-consumer1",
+      "metadata": {
+      },
+      "version": "1.2",
+      "addresses": [
+        "192.168.1.1"
+      ],
+      "deviceName": "alarm1"
+    },
+    {
+      "name": "alert-consumer2",
+      "metadata": {
+      },
+      "version": "1.2",
+      "addresses": [
+        "192.168.1.2"
+      ],
+      "deviceName": "alarm2"
+    }
+  ]
+}
+```
+
+The service operation **responds** with the status code `200` if the system entities were successfully updated. The response also contains a
+[SystemListResponse](../data-models/system-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "name": "alert-consumer1",
+      "metadata": {},
+      "version": "1.2.0",
+      "addresses": [
+        {
+          "type": "IPV4",
+          "address": "192.168.1.1"
+        }
+      ],
+      "device": {
+        "name": "alarm1",
+        "metadata": {
+          "volume": {
+            "value": 100,
+            "unit": "dB"
+          }
+        },
+        "addresses": [
+          {
+            "type": "MAC",
+            "address": "3a:f7:9c:12:8e:b5"
+          }
+        ],
+        "createdAt": "2025-03-14T13:07:34Z",
+        "updatedAt": "2025-03-14T13:07:34Z"
+      },
+      "createdAt": "2025-03-14T13:08:22Z",
+      "updatedAt": "2025-03-14T13:51:03.159696600Z"
+    },
+    {
+      "name": "alert-consumer2",
+      "metadata": {},
+      "version": "1.2.0",
+      "addresses": [
+        {
+          "type": "IPV4",
+          "address": "192.168.1.2"
+        }
+      ],
+      "device": {
+        "name": "alarm2",
+        "metadata": {
+          "volume": {
+            "value": 110,
+            "unit": "dB"
+          }
+        },
+        "addresses": [
+          {
+            "type": "MAC",
+            "address": "3a:f7:9c:12:8e:bb"
+          }
+        ],
+        "createdAt": "2025-03-14T13:07:34Z",
+        "updatedAt": "2025-03-14T13:07:34Z"
+      },
+      "createdAt": "2025-03-14T13:08:22Z",
+      "updatedAt": "2025-03-14T13:51:03.169626100Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission  and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Duplicated system name: alert-consumer1",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "PUT /serviceregistry/mgmt/systems"
+}
+```
+
 ### system-remove
+
+The service operation **request** requires an authorization bearer header and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the systems to delete.
+
+```
+DELETE /serviceregistry/mgmt/systems?names=alert-consumer1&names=alert-consumer2 HTTP/1.1
+Authorization: Bearer <authorization-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid authorization header",
+  "errorCode": 401,
+  "exceptionType": "AUTH"
+}
+```
 ### service-definition-query
 ### service-definition-create
 ### service-definition-remove

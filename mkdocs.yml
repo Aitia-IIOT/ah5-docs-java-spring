@@ -28,11 +28,16 @@ nav:
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
       - DeviceDescriptor: api/data-models/device-descriptor.md
+      - DeviceListRequest: api/data-models/device-list-request.md
+      - DeviceListResponse: api/data-models/device-list-response.md
       - DeviceLookupRequest: api/data-models/device-lookup-request.md
       - DeviceLookupResponse: api/data-models/device-lookup-response.md
       - DeviceLookupResult: api/data-models/device-lookup-result.md
+      - DeviceQueryRequest: api/data-models/device-query-request.md
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
       - DeviceRegistrationResponse: api/data-models/device-registration-response.md
+      - DeviceRequest: api/data-models/device-request.md
+      - DeviceResult: api/data-models/device-result.md
       - ErrorResponse: api/data-models/error-response.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
@@ -47,11 +52,16 @@ nav:
       - ServiceRegistrationRequest: api/data-models/service-registration-request.md
       - ServiceRegistrationResponse: api/data-models/service-registration-response.md
       - SystemDescriptor: api/data-models/system-descriptor.md
+      - SystemListRequest: api/data-models/system-list-request.md
+      - SystemListResponse: api/data-models/system-list-response.md      
       - SystemLookupRequest: api/data-models/system-lookup-request.md
       - SystemLookupResponse: api/data-models/system-lookup-response.md
       - SystemLookupResult: api/data-models/system-lookup-result.md
+      - SystemQueryRequest: api/data-models/system-query-request.md
       - SystemRegistrationRequest: api/data-models/system-registration-request.md
       - SystemRegistrationResponse: api/data-models/system-registration-response.md
+      - SystemRequest: api/data-models/system-request.md
+      - SystemResponse: api/data-models/system-response.md      
     - Primitives: api/primitives.md
   - Help:
     - Certificate Profiles: help/certificate-profiles.md

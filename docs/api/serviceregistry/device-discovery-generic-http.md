@@ -188,8 +188,7 @@ Authorization: Bearer <authorization-info>
 ```
 
 The service operation **responds** with the status code `200` if called successfully and an existing device
-entity was removed and `204` if no matching entity was found. The success response does not contain
-any response body.
+entity was removed and `204` if no matching entity was found. The success response does not contain any response body.
 
 The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission, `423` if entity is not removable and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
