@@ -29,7 +29,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [service-re
 
 ### device-query
 
-The service operation **request** requires an authorization bearer header and a [DeviceQueryRequest](../data-models/device-query-request.md) JSON encoded body.
+The service operation **request** requires an authorization bearer header and may optionally include a [DeviceQueryRequest](../data-models/device-query-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/devices/query HTTP/1.1
@@ -56,8 +56,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully. The response also contains a
-[DeviceListResponse](../data-models/device-list-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully. The response also contains a [DeviceListResponse](../data-models/device-list-response.md) JSON encoded body.
 
 ```
 {
@@ -637,7 +636,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 ```
 ### service-definition-query
 
-The service operation **request** requires an authorization bearer header and a [PageRequest](../data-models/page-request.md) JSON encoded body.
+The service operation **request** requires an authorization bearer header and may optionally include a [PageRequest](../data-models/page-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/service-definitions/query HTTP/1.1
@@ -1328,7 +1327,7 @@ Authorization: Bearer <authorization-info>
 ```
 The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
 
-The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission, `423` if entity is not removable and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
@@ -1340,6 +1339,186 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 ```
 
 ### interface-template-query
+
+The service operation **request** requires an authorization bearer header and may optionally include an [InterfaceTemplateQueryRequest](../data-models/interface-template-query-request.md) JSON encoded body.
+
+```
+POST /serviceregistry/mgmt/interface-templates/query HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "pagination": {
+    "page": 1,
+    "size": 1,
+    "direction": "ASC",
+    "sortField": "name"
+  },
+  "templateNames": [
+  ],
+  "protocols": [
+    "tcp"
+  ]
+}
+```
+
+The service operation **responds** with the status code `200` called successfully. The response also contains an [InterfaceTemplateListResponse](../data-models/interface-template-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "name": "generic-mqtt",
+      "protocol": "tcp",
+      "propertyRequirements": [
+        {
+          "name": "accessAddresses",
+          "mandatory": true,
+          "validator": "NOT_EMPTY_ADDRESS_LIST",
+          "validatorParams": []
+        },
+        {
+          "name": "accessPort",
+          "mandatory": true,
+          "validator": "PORT",
+          "validatorParams": []
+        },
+        {
+          "name": "baseTopic",
+          "mandatory": true
+        },
+        {
+          "name": "operations",
+          "mandatory": true,
+          "validator": "NOT_EMPTY_STRING_SET",
+          "validatorParams": [
+            "NAME"
+          ]
+        }
+      ],
+      "createdAt": "2024-12-09T18:52:48Z",
+      "updatedAt": "2024-12-09T18:52:48Z"
+    }
+  ],
+  "count": 3
+}
+```
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "type": "about:blank",
+  "title": "Bad Request",
+  "status": 400,
+  "detail": "Failed to read request",
+  "instance": "/serviceregistry/mgmt/interface-templates/query"
+}
+```
+
 ### interface-template-create
+
+The service operation **request** requires an authorization bearer header and an [InterfaceTemplateListRequest](../data-models/interface-template-list-request.md) JSON encoded body.
+
+```
+POST /serviceregistry/mgmt/interface-templates HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "interfaceTemplates": [
+    {
+      "name": "ftp",
+      "protocol": "tcp",
+      "propertyRequirements": [
+        {
+          "name": "accessAddresses",
+          "mandatory": true,
+          "validator": "not_empty_address_list",
+          "validatorParams": [
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sftp",
+      "protocol": "tcp",
+      "propertyRequirements": [
+        {
+          "name": "accessAddresses",
+          "mandatory": true,
+          "validator": "not_empty_address_list",
+          "validatorParams": [
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+The service operation **responds** with the status code `201` if the interface template entities were successfully created. The response also contains an [InterfaceTemplateListResponse](../data-models/interface-template-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "name": "sftp",
+      "protocol": "tcp",
+      "propertyRequirements": [
+        {
+          "name": "accessAddresses",
+          "mandatory": true,
+          "validator": "NOT_EMPTY_ADDRESS_LIST",
+          "validatorParams": []
+        }
+      ],
+      "createdAt": "2025-03-15T23:09:00.882593100Z",
+      "updatedAt": "2025-03-15T23:09:00.882593100Z"
+    },
+    {
+      "name": "ftp",
+      "protocol": "tcp",
+      "propertyRequirements": [
+        {
+          "name": "accessAddresses",
+          "mandatory": true,
+          "validator": "NOT_EMPTY_ADDRESS_LIST",
+          "validatorParams": []
+        }
+      ],
+      "createdAt": "2025-03-15T23:09:00.892877600Z",
+      "updatedAt": "2025-03-15T23:09:00.892877600Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Interface template already exists: ftp",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceregistry/mgmt/interface-templates"
+}
+```
+
 ### interface-template-remove
 
+The service operation **request** requires an authorization bearer header and a List<[InterfaceTemplate](../primitives.md#interfacetemplate)> as path parameter, which contains the string identifier of the interface descriptors that need to be removed.
+
+```
+DELETE /serviceregistry/mgmt/interface-templates?names=ftp&names=sftp HTTP/1.1
+Authorization: Bearer <authorization-info>
+```
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "No authorization header has been provided",
+  "errorCode": 401,
+  "exceptionType": "AUTH"
+}
+```

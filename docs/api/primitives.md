@@ -44,6 +44,9 @@ A String indentifier that is intended to be both human and machine-readable.
 
 Decimal number.
 
+## PropertyValidator
+An identifier of any suitable validator function chosen by the implementor of service.
+
 ## Protocol
 A string representation of a communication protocol.
 

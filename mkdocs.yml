@@ -39,6 +39,13 @@ nav:
       - DeviceRequest: api/data-models/device-request.md
       - DeviceResult: api/data-models/device-result.md
       - ErrorResponse: api/data-models/error-response.md
+      - InterfaceTemplateListRequest: api/data-models/interface-template-list-request.md
+      - InterfaceTemplateListResponse: api/data-models/interface-template-list-response.md
+      - InterfaceTemplatePropertyDescriptor: api/data-models/interface-template-property-descriptor.md
+      - InterfaceTemplatePropertyRequest: api/data-models/interface-template-property-request.md
+      - InterfaceTemplateQueryRequest: api/data-models/interface-template-query-request.md
+      - InterfaceTemplateRequest: api/data-models/interface-template-request.md
+      - InterfaceTemplateResult: api/data-models/interface-template-result.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
@@ -73,7 +80,7 @@ nav:
       - SystemRegistrationRequest: api/data-models/system-registration-request.md
       - SystemRegistrationResponse: api/data-models/system-registration-response.md
       - SystemRequest: api/data-models/system-request.md
-      - SystemResponse: api/data-models/system-response.md      
+      - SystemResult: api/data-models/system-result.md      
     - Primitives: api/primitives.md
   - Help:
     - Certificate Profiles: help/certificate-profiles.md
