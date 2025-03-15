@@ -386,7 +386,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-create
 
-The service operation **request** requires an authorization bearer header a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
+The service operation **request** requires an authorization bearer header and a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/systems HTTP/1.1
@@ -501,7 +501,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-update
 
-The service operation **request** requires an authorization bearer header a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
+The service operation **request** requires an authorization bearer header and a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
 
 ```
 PUT /serviceregistry/mgmt/systems HTTP/1.1
@@ -636,8 +636,130 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 }
 ```
 ### service-definition-query
+
+The service operation **request** requires an authorization bearer header and a [PageRequest](../data-models/page-request.md) JSON encoded body.
+
+```
+POST /serviceregistry/mgmt/service-definitions/query HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "page": 2,
+  "size": 4,
+  "direction": "DESC",
+  "sortField": "name"
+}
+```
+
+The service operation **responds** with the status code `200` if called successfully. The response also contains a [ServiceDefinitionListResponse](../data-models/service-definition-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "name": "orchestration",
+      "createdAt": "2025-03-12T11:07:23Z",
+      "updatedAt": "2025-03-12T11:07:23Z"
+    },
+    {
+      "name": "monitor",
+      "createdAt": "2025-01-31T09:14:54Z",
+      "updatedAt": "2025-01-31T09:14:54Z"
+    },
+    {
+      "name": "kelvin-info2",
+      "createdAt": "2025-03-15T19:47:47Z",
+      "updatedAt": "2025-03-15T19:47:47Z"
+    },
+    {
+      "name": "kelvin-info1",
+      "createdAt": "2025-03-15T19:47:47Z",
+      "updatedAt": "2025-03-15T19:47:47Z"
+    }
+  ],
+  "count": 24
+}
+```
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "type": "about:blank",
+  "title": "Bad Request",
+  "status": 400,
+  "detail": "Failed to read request",
+  "instance": "/serviceregistry/mgmt/service-definitions/query"
+}
+```
+
 ### service-definition-create
+
+The service operation **request** requires an authorization bearer header and a [ServiceDefinitionListRequest](../data-models/service-definition-list-request.md) JSON encoded body.
+
+```
+POST /serviceregistry/mgmt/service-definitions HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "serviceDefinitionNames": [
+    "alert-service1", "alert-service2"
+  ]
+}
+```
+
+The service operation **responds** with the status code `201` if the service definition entities were successfully created. The response also contains a [ServiceDefinitionListResponse](../data-models/service-definition-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "name": "alert-service1",
+      "createdAt": "2025-03-15T19:31:03.728040300Z",
+      "updatedAt": "2025-03-15T19:31:03.728040300Z"
+    },
+    {
+      "name": "alert-service2",
+      "createdAt": "2025-03-15T19:31:03.732592400Z",
+      "updatedAt": "2025-03-15T19:31:03.732592400Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "The specified name does not match the naming convention: alert@service1",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceregistry/mgmt/service-definitions"
+}
+```
+
 ### service-definition-remove
+
+The service operation **request** requires an authorization bearer header and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the service definitions to delete.
+
+```
+DELETE /serviceregistry/mgmt/service-definitions?names=alert-service1&names=alert-service2 HTTP/1.1
+Authorization: Bearer <authorization-info>
+```
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Service definition name list is missing or empty",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "DELETE /serviceregistry/mgmt/service-definitions"
+}
+```
+
 ### service-query
 ### service-create
 ### service-update

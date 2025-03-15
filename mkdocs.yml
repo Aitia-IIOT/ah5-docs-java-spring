@@ -43,7 +43,12 @@ nav:
       - MetadataRequirements: api/data-models/metadata-requirements.md
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
       - MQTTResponseTemplate: api/data-models/mqtt-response-template.md
+      - PageRequest: api/data-models/page-request.md
       - ServiceDefinitionDescriptor: api/data-models/service-definition-descriptor.md
+      - ServiceDefinitionListRequest: api/data-models/service-definition-list-request.md
+      - ServiceDefinitionListResponse: api/data-models/service-definition-list-response.md
+      - ServiceDefinitionRemoveRequest: api/data-models/service-definition-remove-request.md
+      - ServiceDefinitionResult: api/data-models/service-definition-result.md
       - ServiceInterfaceDescriptor: api/data-models/service-interface-descriptor.md
       - ServiceInterfaceRequest: api/data-models/service-interface-request.md
       - ServiceLookupRequest: api/data-models/service-lookup-request.md
