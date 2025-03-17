@@ -1,25 +1,22 @@
 # Authentication
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+Coming soon.
 
 ## Services
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
-
-### identity
-
-TODO
-
-### identity-management
-
-TODO
+Coming soon.
 
 ## Configuration
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum congue neque, in lobortis felis mattis et. Sed tincidunt non urna eleifend posuere. Sed consequat nulla felis, non ultricies massa blandit eu. Nam in eros ac nunc viverra accumsan eu id risus.
+Coming soon.
 
 ## Changelog
 
 #### :material-tag: v5.0.0 
 
-- Initial 5th generation release.
+Related in CL-5.0.0
+
+- [general](../../general/changelogs/cl500#general)
+- [arrowhead-common-utils](../../general/changelogs/cl500#arrowhead-common-utils)
+- [arrowhead-data-transfer-objects](../../general/changelogs/cl500#arrowhead-data-transfer-objects)
+- [arrowhead-authentication](../../general/changelogs/cl500#arrowhead-authentication)

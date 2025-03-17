@@ -1,10 +1,13 @@
 # Releases
 
-#### 5.0.0
+#### :material-tag: 5.0.0
 
-Date | System Name | File | Changelog
---- | --- | --- | --- 
-31/07/2025 | Service Registry | Coming soon... | [CL-5.0.0](../core_systems/service_registry.md/#v500)
-31/07/2025 | Service Orchestration | Coming soon... | [CL-5.0.0](../core_systems/service_orchestration.md/#v500)
-31/07/2025 | Authorization | Coming soon... | [CL-5.0.0](../core_systems/authorization.md/#v500)
-31/07/2025 | Authentication | Coming soon... | [CL-5.0.0](../core_systems/authentication.md/#v500)
+Changelog: [CL-5.0.0](../general/changelogs/cl500.md)
+
+Date | System Name | File
+--- | --- | ---  
+31/07/2025 | Service Registry | Coming soon...
+31/07/2025 | Service Orchestration | Coming soon...
+31/07/2025 | Authorization | Coming soon...
+31/07/2025 | Authentication | Coming soon...
+31/07/2025 | Blacklist | Coming soon...
