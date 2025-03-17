@@ -3,7 +3,7 @@
 ## Overview
 
 This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of service-discovery, which enables both
-application and core/support systems to lookup, register and revoke e their service instances to/from the Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction is when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry. The interfaces are implemented using protocol, encoding as stated in the following tables:
+application and core/support systems to lookup, register and revoke their service instances to/from the Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction is when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry. The interfaces are implemented using protocol, encoding as stated in the following tables:
 
 ## Interface Description
 

@@ -153,7 +153,7 @@ Topic: arrowhead/serviceregistry/device-discovery/lookup
 }
 ```
 
-The service operation **responses** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [DeviceLookupResponse](../data-models/device-lookup-response.md).
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [DeviceLookupResponse](../data-models/device-lookup-response.md).
 
 ```
 {
