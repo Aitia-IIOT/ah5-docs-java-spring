@@ -9,7 +9,9 @@ nav:
     - Contribute: home/contribute.md 
   - Core Systems:
     - Service Registry: core_systems/service_registry.md
-    - Service Orchestration: core_systems/service_orchestration.md
+    - Service Orchestration:
+      - Dynamic: core_systems/service_orchestration_dynamic.md
+      - Flexible-store: core_systems/service_orchestration_flexible_store.md
     - Authorization: core_systems/authorization.md
     - Authentication: core_systems/authentication.md
   - Support Systems: 
