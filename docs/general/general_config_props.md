@@ -12,4 +12,4 @@ IP address of the server.
 
 :fontawesome-solid-wrench: **server.port**
 
-Port number of the server
+Port number of the server.
