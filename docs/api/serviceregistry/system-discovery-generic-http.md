@@ -29,12 +29,12 @@ Hereby the **Interface Design Description** (IDD) is provided to the [system-dis
 
 ### register
 
-The service operation **request** requires an authorization bearer header and a [SystemRegistrationRequest](../data-models/system-registration-request.md)
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [SystemRegistrationRequest](../data-models/system-registration-request.md)
 JSON encoded body.
 
 ```
 POST /serviceregistry/system-discovery/register HTTP/1.1
-Authorization: Bearer <authorization-info>
+Authorization: Bearer <identity-info>
 
 {
   "metadata": {
@@ -126,11 +126,11 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### lookup
 
-The service operation **request** requires an authorization bearer header. The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemLookupRequest](../data-models/system-lookup-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http). The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemLookupRequest](../data-models/system-lookup-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/system-discovery/lookup?verbose=<verbose-value> HTTP/1.1
-Authorization: Bearer <authorization-info>
+Authorization: Bearer <identity-info>
 
 {
   "systemNames": [
@@ -201,11 +201,11 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ### revoke
 
-The service operation **request** only requires an authorization bearer header. The name of the system to be revoked will be identified during authentication.
+The service operation **request** only requires an [identity related header or certfificate](../authentication_policy.md/#http). The name of the system to be revoked will be identified during authentication.
 
 ```
 DELETE /serviceregistry/system-discovery/revoke HTTP1.1
-Authorization: Bearer <authorization-info>
+Authorization: Bearer <identity-info>
 ```
 
 The service operation **responds** with the status code `200` if called successfully and an existing system

@@ -38,7 +38,7 @@ after registering itself into the Local Cloud.
 
 ### Step 1: Authentication
 
-First of all, the system should perform some kind of authentication. In Arrowhead 5, there are three ways for a system to authenticate itself: involving an Authentication Core System, using X.509 Certicifates, or telling who they are by themselves. In this example, the last one will be used, which is called _self-declared authentication_.
+First of all, the system should perform some kind of [authentication](../../api/authentication_policy.md). In this example the [declared](../../api/authentication_policy.md/#declared) authentication strategy will be used.
 
 To perform this type of authentication, the system must provide an authentication header for each request. This should consist of the _SYSTEM//_ prefix, followed by the name of the system. 
 
