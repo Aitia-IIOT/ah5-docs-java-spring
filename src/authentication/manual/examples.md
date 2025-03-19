@@ -63,7 +63,7 @@ This file contains specific examples of what payloads are expected and returned 
 
 ## **Verify**
 
-  To use this operation requester must identify itself by providing its own identity token in the Authorization header.
+  To use this operation, the requester must identify itself by providing its own identity token in the Authorization header.
   
   ~~~
   -H 'Authorization: Bearer IDENTITY-TOKEN//9333c248-7b16-478c-b6c8-605abbbc361a'
@@ -90,7 +90,7 @@ This file contains specific examples of what payloads are expected and returned 
 
 # Identity Management endpoints
 
-  To use any of the following operations requester must identify itself by providing its own identity token in the Authorization header.
+  To use any of the following operations, the requester must identify itself by providing its own identity token in the Authorization header.
   
   ~~~
   -H 'Authorization: Bearer IDENTITY-TOKEN//9333c248-7b16-478c-b6c8-605abbbc361a'
