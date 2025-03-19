@@ -32,171 +32,143 @@ Hereby the **Interface Design Description** (IDD) is provided to the [identity â
 
 ### login
 
-The service operation **request** requires a [IdentityRequest](../data-models/identity-request.md) JSON encoded body.
+The service operation **request** requires an [IdentityRequest](../data-models/identity-request.md) JSON encoded body.
 
 ```
-POST /authentication/login HTTP/1.1
+POST /authentication/identity/login HTTP/1.1
 
 {
-   "name":"thermometer2",
-   "metadata":{
-      "scales":[
-         "Kelvin",
-         "Celsius"
-      ],
-      "max-temperature":{
-         "Kelvin":310,
-         "Celsius":40
-      },
-      "min-temperature":{
-         "Kelvin":260,
-         "Celsius":-10
-      }
-   },
-   "addresses":[      
-      "81:ef:1a:44:7a:f5"
-   ]
+  "systemName": "consumer1",
+  "credentials": {
+    "password": "abcdef"
+  }
 }
+
 ```
 
-The service operation **responds** with the status code `200` if called successfully and the device
-entity is already existing or `201` if the entity was newly created. The response also contains a
-[DeviceRegistrationResponse](../data-models/device-registration-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully. The response also contains an
+[IdentityLoginResponse](../data-models/identity-response.md) JSON encoded body.
 
 ```
 {
-   "name":"thermometer2",
-   "metadata":{
-      "scales":[
-         "Kelvin",
-         "Celsius"
-      ],
-      "max-temperature":{
-         "Kelvin":310,
-         "Celsius":40
-      },
-      "min-temperature":{
-         "Kelvin":260,
-         "Celsius":-10
-      }
-   },
-   "addresses":[
-      {
-         "type":"MAC",
-         "address":"81:ef:1a:44:7a:f5"
-      }
-   ],
-   "createdAt":"2024-11-04T01:53:02Z",
-   "updatedAt":"2024-11-04T01:53:02Z"
+  "token": "713bca0b-c550-4cb9-ae60-4852b9ee3669",
+  "expirationTime": "2025-03-07T11:59:01.178225900Z"
 }
 ```
+
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
-`403` if the authenticated requester has no permission and
+`500` if an unexpected error happens. If the Authentication system needs contacting an external server during the login process,
+error code `503` can also be used if there was a problem with the external server.  The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid name and/or credentials",
+  "errorCode": 401,
+  "exceptionType": "AUTH",
+  "origin": "POST /authentication/identity/login"
+}
+```
+
+### logout
+
+The service operation **request** requires an [IdentityRequest](../data-models/identity-request.md) JSON encoded body.
+
+```
+POST /authentication/identity/logout HTTP/1.1
+
+{
+  "systemName": "consumer1",
+  "credentials": {
+    "password": "abcdef"
+  }
+}
+
+```
+
+The service operation **responds** with the status code `200` if called successfully. The response does not contain any
+response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`500` if an unexpected error happens. If the Authentication system needs contacting an external server during the logout process,
+error code `503` can also be used if there was a problem with the external server.  The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid name and/or credentials",
+  "errorCode": 401,
+  "exceptionType": "AUTH",
+  "origin": "POST /authentication/identity/logout"
+}
+```
+
+### change
+
+The service operation **request** requires an [IdentityChangeRequest](../data-models/identity-change-request.md) JSON encoded body.
+
+```
+POST /authentication/identity/change HTTP/1.1
+
+{
+  "systemName": "consumer1",
+  "credentials": {
+    "password": "abcdef"
+  },
+  "newCredentials": {
+    "password": "123456"
+  }
+}
+```
+
+The service operation **responds** with the status code `200` if called successfully. The response does not contain any
+response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`500` if an unexpected error happens. If the Authentication system needs contacting an external server during the credential change process,
+error code `503` can also be used if there was a problem with the external server.  The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Missing credentials",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /authentication/identity/change"
+}
+```
+
+### verify
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and the `token` that has to be verified as a path parameter.
+
+
+```
+GET /authentication/identity/verify/713bca0b-c550-4cb9-ae60-4852b9ee3669 HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The response also contains an
+[IdentityVerifyResponse](../data-models/identity-verify-response.md) JSON encoded body.
+
+```
+{
+  "verified": true,
+  "systemName": "consumer1",
+  "sysop": false,
+  "loginTime": "2025-03-07T11:54:01Z",
+  "expirationTime": "2025-03-07T12:54:01Z"
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `500` if an unexpected error happens. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
-    "errorMessage": "Device name is missing.",
-    "errorCode": 400,
-    "exceptionType": "INVALID_PARAMETER",
-    "origin": "POST /serviceregistry/device-discovery/register"
-}
-```
-
-### lookup
-
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and may optionally include a [DeviceLookupRequest](../data-models/device-lookup-request.md) JSON encoded body.
-
-```
-POST /serviceregistry/device-registry/lookup HTTP/1.1
-Authorization: Bearer <identity-info>
-
-{
-   "deviceNames":[
-      "thermometer2"
-   ],
-   "addresses":[
-      "81:ef:1a:44:7a:f5"
-   ],
-   "addressType":"MAC",
-   "metadataRequirementList":[
-      {
-         "max-temperature.Celsius":{
-            "op":"LESS_THAN",
-            "value":50
-         }
-      }
-   ]
-}
-```
-
-The service operation **responds** with the status code `200` if called successfully and with a [DeviceLookupResponse](../data-models/device-lookup-response.md) JSON encoded body.
-
-```
-{
-   "entries":[
-      {
-         "name":"thermometer2",
-         "metadata":{
-            "scales":[
-               "Kelvin",
-               "Celsius"
-            ],
-            "max-temperature":{
-               "Kelvin":310,
-               "Celsius":40
-            },
-            "min-temperature":{
-               "Kelvin":260,
-               "Celsius":-10
-            }
-         },
-         "addresses":[
-            {
-               "type":"MAC",
-               "address":"81:ef:1a:44:7a:f5"
-            }
-         ],
-         "createdAt":"2024-11-04T01:53:02Z",
-         "updatedAt":"2024-11-04T01:53:02Z"
-      }
-   ],
-   "count":1
-}
-```
-
-The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` Error if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
-
-```
-{
-    "errorMessage": "Database operation error.",
-    "errorCode": 500,
-    "exceptionType": "INTERNAL_SERVER_ERROR",
-    "origin": "POST /serviceregistry/device-discovery/lookup"
-}
-```
-
-### revoke
-
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a device `name` as path parameter.
-
-```
-DELETE /serviceregistry/device-discovery/revoke/thermometer2 HTTP/1.1
-Authorization: Bearer <identity-info>
-```
-
-The service operation **responds** with the status code `200` if called successfully and an existing device
-entity was removed and `204` if no matching entity was found. The success response does not contain
-any response body.
-
-The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission, `423` if entity is not removable and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
-
-```
-{
-    "errorMessage": "Database operation error.",
-    "errorCode": 500,
-    "exceptionType": "INTERNAL_SERVER_ERROR",
-    "origin": "DELETE /serviceregistry/device-discovery/lookup"
+  "errorMessage": "No authorization header has been provided",
+  "errorCode": 401,
+  "exceptionType": "AUTH"
 }
 ```

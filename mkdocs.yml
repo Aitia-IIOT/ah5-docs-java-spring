@@ -36,7 +36,11 @@ nav:
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
       - DeviceRegistrationResponse: api/data-models/device-registration-response.md
       - ErrorResponse: api/data-models/error-response.md
+      - Identity: api/data-models/identity.md
       - IdentityRequest: api/data-models/identity-request.md
+      - IdentityChangeRequest: api/data-models/identity-change-request.md
+      - IdentityResponse: api/data-models/identity-response.md
+      - IdentityVerifyResponse: api/data-models/identity-verify-response.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
