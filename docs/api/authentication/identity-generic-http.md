@@ -1,12 +1,11 @@
-# device-discovery IDD
+# identity IDD
 **GENERIC-HTTP & GENERIC-HTTPS**
 
 ## Overview
 
-This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of device-discovery, which enables both
-application and core/support systems to lookup, register and revoke devices on which the Local Cloud’s systems
-are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain
-use cases (e.g. enabling onboarding) is needed. It’s implemented using protocol, encoding as stated in the
+This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of identity which enables both application and core/support systems to
+get and release a proof of identity token which also can be verified. Furthermore, it also allows a system to
+change its own credentials. It is implemented using protocol, encoding as stated in the
 following tables:
 
 **GENERIC-HTTP**
@@ -27,18 +26,16 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [device-discovery – Service Description](../../assets/sd/5_0_0/device-discovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [identity – Service Description](../../assets/sd/5_0_0/identity_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
-### register
+### login
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [DeviceRegistrationRequest](../data-models/device-registration-request.md)
-JSON encoded body.
+The service operation **request** requires a [IdentityRequest](../data-models/identity-request.md) JSON encoded body.
 
 ```
-POST /serviceregistry/device-discovery/register HTTP/1.1
-Authorization: Bearer <identity-info>
+POST /authentication/login HTTP/1.1
 
 {
    "name":"thermometer2",
@@ -112,7 +109,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and may optionally include a [DeviceLookupRequest](../data-models/device-lookup-request.md) JSON encoded body.
 
 ```
-POST /serviceregistry/device-discovery/lookup HTTP/1.1
+POST /serviceregistry/device-registry/lookup HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {

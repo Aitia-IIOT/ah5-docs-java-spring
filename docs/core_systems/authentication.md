@@ -139,7 +139,7 @@ See the [general configuration properties](../general/general_config_props.md).
 
 :fontawesome-solid-wrench: **spring.datasource.url**
 
-URL to the database.
+Full connection URL to the database.
 
 :fontawesome-solid-wrench: **spring.datasource.username**
 
@@ -156,11 +156,11 @@ and result between client and database.
 
 :fontawesome-solid-wrench: **spring.jpa.show-sql**
 
-Set to true in order to log out the SQL queries.
+Set to `true` in order to log out the SQL queries.
 
 :fontawesome-solid-wrench: **spring.jpa.properties.hibernate.format sql**
 
-Set to true to log out SQL queries in pretty format. (Effective only when 'spring.jpa.show-sql' is 'true')
+Set to `true` to log out SQL queries in pretty format. (Effective only when 'spring.jpa.show-sql' is 'true')
 
 :fontawesome-solid-wrench: **spring.jpa.hibernate.ddl-auto**
 
@@ -168,7 +168,29 @@ Auto initialization of database tables. Value must be always 'none'.
 
 ### Custom parameters
 
-TODO
+:fontawesome-solid-wrench: **authentication.secret.key**
+
+The secret key which is used to prove to the local cloud's Service Registry that this authentication is trusted. This secret key must be present in the Service Registry **authenticator.secret.keys** structure.
+
+:fontawesome-solid-wrench: **enable.management.filter**
+
+Set to `true` to enable automatic authorization for management services.
+
+:fontawesome-solid-wrench: **management.policy**
+
+Defines the access policy for management services. Can be `sysop-only` (only systems with system operator permission can use them), `whitelist` (system operators and those dedicated systems that appear on the **management.whitelist** can use them) or `authorization` (system operators, whitelist members and those system that have permission according to the Authorization system can use them).
+
+:fontawesome-solid-wrench: **management.whitelist**
+
+A list of system names (separated by comma) that can use management services if the **management.policy** is set to `whitelist` or `authorization`.
+
+:fontawesome-solid-wrench: **identity.token.duration**
+
+Validity period of the identity token in seconds (0 or negative value means 100 hundred years).
+
+:fontawesome-solid-wrench: **cleaner.job.interval**
+
+Interval between execution times of the expired session cleaner job in milliseconds.
 
 ### Logging configuration
 
@@ -178,19 +200,19 @@ folder.
 **_Note:_** During the build process this file is going to be built into the executable JAR, but it is also possible to
 override it by an external file. For that use the following command when starting the system:
 ```
-java -jar arrowhead-serviceregistry-x.x.x
+java -jar arrowhead-authentication-5.x.x
      -Dlog4j.configurationFile=path-to-external-file
 ```
 
 :fontawesome-solid-wrench: **JDBC_LEVEL**
 
-Set this to change the level of log messages in the database. Levels: ALL, TRACE, DEBUG, INFO, WARN,
-ERROR, FATAL, OFF.
+Set this to change the level of log messages in the database. Levels: `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`,
+`ERROR`, `FATAL`, `OFF`.
 
-:fontawesome-solid-wrench: **CONSOLE FILE LEVEL**
+:fontawesome-solid-wrench: **CONSOLE_FILE_LEVEL**
 
-Set this to change the level of log messages in consol and the log file. Levels: ALL, TRACE, DEBUG,
-INFO, WARN, ERROR, FATAL, OFF.
+Set this to change the level of log messages in console and the log file. Levels: `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`,
+`ERROR`, `FATAL`, `OFF`.
 
 :fontawesome-solid-wrench: **LOG_DIR**
 

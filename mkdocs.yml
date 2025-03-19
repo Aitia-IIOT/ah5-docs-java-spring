@@ -21,10 +21,14 @@ nav:
           - system-discovery: api/serviceregistry/system-discovery-generic-http.md
         - MQTT:
           - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
-          - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md          
+          - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md     
+      - Authentication:
+        - HTTP:
+          - identity: api/authentication/identity-generic-http.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
+      - Credentials: api/data-models/credentials.md
       - DeviceDescriptor: api/data-models/device-descriptor.md
       - DeviceLookupRequest: api/data-models/device-lookup-request.md
       - DeviceLookupResponse: api/data-models/device-lookup-response.md
@@ -32,6 +36,7 @@ nav:
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
       - DeviceRegistrationResponse: api/data-models/device-registration-response.md
       - ErrorResponse: api/data-models/error-response.md
+      - IdentityRequest: api/data-models/identity-request.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
