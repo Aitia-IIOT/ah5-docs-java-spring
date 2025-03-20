@@ -170,7 +170,7 @@ Auto initialization of database tables. Value must be always 'none'.
 
 :fontawesome-solid-wrench: **authentication.secret.key**
 
-The secret key which is used to prove to the local cloud's Service Registry that this authentication is trusted. This secret key must be present in the Service Registry **authenticator.secret.keys** structure.
+The secret key which is used to prove to the Local Cloud's Service Registry that this authentication is trusted. This secret key must be present in the Service Registry **authenticator.secret.keys** structure.
 
 :fontawesome-solid-wrench: **enable.management.filter**
 
@@ -178,7 +178,7 @@ Set to `true` to enable automatic authorization for management services.
 
 :fontawesome-solid-wrench: **management.policy**
 
-Defines the access policy for management services. Can be `sysop-only` (only systems with system operator permission can use them), `whitelist` (system operators and those dedicated systems that appear on the **management.whitelist** can use them) or `authorization` (system operators, whitelist members and those system that have permission according to the Authorization system can use them).
+Defines the access policy for management services. Can be `sysop-only` (only systems with system operator permission can use them), `whitelist` (system operators and those dedicated systems that appear on the **management.whitelist** can use them) or `authorization` (system operators, whitelist members and those systems that have permission according to the Authorization system can use them).
 
 :fontawesome-solid-wrench: **management.whitelist**
 
@@ -186,7 +186,7 @@ A list of system names (separated by comma) that can use management services if 
 
 :fontawesome-solid-wrench: **identity.token.duration**
 
-Validity period of the identity token in seconds (0 or negative value means 100 hundred years).
+Validity period of the identity token in seconds (0 or negative value means hundred years).
 
 :fontawesome-solid-wrench: **cleaner.job.interval**
 

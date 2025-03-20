@@ -202,7 +202,6 @@ This file contains specific examples of what payloads are expected and returned 
   Request body:
   ~~~
   {
-	"authenticationMethod": "PASSWORD",
 	"identities": [
 	  {
 	    "systemName": "consumer1",
