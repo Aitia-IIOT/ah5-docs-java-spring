@@ -1,4 +1,4 @@
-# IdentityVerifyResponse
+# IdentityResult
 
 Field | Type | Description
 --- | --- | --- 

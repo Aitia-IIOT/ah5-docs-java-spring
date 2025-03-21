@@ -236,3 +236,103 @@ If the Authentication system needs contacting an external server during the upda
   "origin": "PUT /authentication/mgmt/identities"
 }
 ```
+
+### identity-mgmt-remove
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[Name](../primitives.md#name)> as query parameter, which contains the names of systems that needs to be removed.
+```
+DELETE /authentication/mgmt/identities?names=provider1&names=provider2 HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and `500` if an unexpected error happens.
+If the Authentication system needs contacting an external server during the deletion process, error code 503 can also be used if there was a problem with the external server. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid identity token",
+  "errorCode": 401,
+  "exceptionType": "AUTH"
+}
+```
+
+### identity-mgmt-session-query
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and an [IdentitySessionQueryRequest](../data-models/identity-session-query-request.md) JSON encoded body.
+
+```
+POST /authentication/mgmt/sessions HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+  "pagination": {
+    "page": 0,
+    "size": 10,
+    "direction": "ASC",
+    "sortField": "name"
+  },
+  "loginFrom": "2025-03-07T10:00:00Z"
+}
+```
+
+The service operation **responds** with the status code `200` if called successfully. The response also contains an
+[IdentitySessionListResponse](../data-models/identity-session-list-response.md) JSON encoded body.
+
+```
+{
+  "sessions": [
+    {
+      "systemName": "consumer1",
+      "loginTime": "2025-03-07T11:54:01Z",
+      "expirationTime": "2025-03-08T11:59:01Z"
+    },
+    {
+      "systemName": "sysop",
+      "loginTime": "2025-03-07T12:40:54Z",
+      "expirationTime": "2025-03-08T12:45:54Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and
+`500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "If size parameter is defined then page parameter cannot be undefined",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /authentication/mgmt/sessions"
+}
+```
+
+### identity-mgmt-session-close
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[Name](../primitives.md#name)> as query parameter, which contains the names of systems whose sessions needs to be closed.
+
+```
+DELETE /authentication/mgmt/sessions??names=consumer1 HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid identity token",
+  "errorCode": 401,
+  "exceptionType": "AUTH"
+}
+```
