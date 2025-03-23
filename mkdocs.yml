@@ -36,16 +36,14 @@ nav:
       - DeviceQueryRequest: api/data-models/device-query-request.md
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
       - DeviceRegistrationResponse: api/data-models/device-registration-response.md
-      - DeviceRequest: api/data-models/device-request.md
-      - DeviceResult: api/data-models/device-result.md
       - ErrorResponse: api/data-models/error-response.md
+      - InterfaceTemplateDescriptor: api/data-models/interface-template-descriptor.md
       - InterfaceTemplateListRequest: api/data-models/interface-template-list-request.md
       - InterfaceTemplateListResponse: api/data-models/interface-template-list-response.md
       - InterfaceTemplatePropertyDescriptor: api/data-models/interface-template-property-descriptor.md
       - InterfaceTemplatePropertyRequest: api/data-models/interface-template-property-request.md
       - InterfaceTemplateQueryRequest: api/data-models/interface-template-query-request.md
       - InterfaceTemplateRequest: api/data-models/interface-template-request.md
-      - InterfaceTemplateResult: api/data-models/interface-template-result.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
@@ -56,7 +54,7 @@ nav:
       - ServiceDefinitionListRequest: api/data-models/service-definition-list-request.md
       - ServiceDefinitionListResponse: api/data-models/service-definition-list-response.md
       - ServiceDefinitionRemoveRequest: api/data-models/service-definition-remove-request.md
-      - ServiceDefinitionResult: api/data-models/service-definition-result.md
+      - ServiceInstnceDescriptor: api/data-models/service-instance-descriptor.md
       - ServiceInterfaceDescriptor: api/data-models/service-interface-descriptor.md
       - ServiceInterfaceRequest: api/data-models/service-interface-request.md
       - ServiceListResponse: api/data-models/service-list-response.md
@@ -67,7 +65,6 @@ nav:
       - ServiceRegistrationRequest: api/data-models/service-registration-request.md
       - ServiceRegistrationResponse: api/data-models/service-registration-response.md
       - ServiceRequest: api/data-models/service-request.md
-      - ServiceResult: api/data-models/service-result.md
       - ServiceUpdateListRequest: api/data-models/service-update-list-request.md
       - ServiceUpdateRequest: api/data-models/service-update-request.md
       - SystemDescriptor: api/data-models/system-descriptor.md
@@ -80,7 +77,6 @@ nav:
       - SystemRegistrationRequest: api/data-models/system-registration-request.md
       - SystemRegistrationResponse: api/data-models/system-registration-response.md
       - SystemRequest: api/data-models/system-request.md
-      - SystemResult: api/data-models/system-result.md      
     - Primitives: api/primitives.md
   - Help:
     - Certificate Profiles: help/certificate-profiles.md

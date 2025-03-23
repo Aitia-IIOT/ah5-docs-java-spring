@@ -684,11 +684,10 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ```
 {
-  "type": "about:blank",
-  "title": "Bad Request",
-  "status": 400,
-  "detail": "Failed to read request",
-  "instance": "/serviceregistry/mgmt/service-definitions/query"
+  "errorMessage": "Requester has no management permission",
+  "errorCode": 403,
+  "exceptionType": "FORBIDDEN",
+  "origin": "http://localhost:8443/serviceregistry/mgmt/service-definitions/query"
 }
 ```
 
@@ -930,7 +929,8 @@ Authorization: Bearer <authorization-info>
       "interfaces": [
         {
           "templateName": "generic-mqtt",
-          "protocol": "tcp", "policy": "NONE",
+          "protocol": "tcp", 
+          "policy": "NONE",
           "properties": {
             "accessAddresses": ["192.168.1.3"],
             "accessPort": 1883,
@@ -950,7 +950,8 @@ Authorization: Bearer <authorization-info>
       "interfaces": [
         {
           "templateName": "generic-mqtt",
-          "protocol": "tcp", "policy": "NONE",
+          "protocol": "tcp", 
+          "policy": "NONE",
           "properties": {
             "accessAddresses": ["192.168.1.3"],
             "accessPort": 1883,
@@ -1426,7 +1427,7 @@ Authorization: Bearer <authorization-info>
 {
   "interfaceTemplates": [
     {
-      "name": "ftp",
+      "name": "custom-ftp",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1439,7 +1440,7 @@ Authorization: Bearer <authorization-info>
       ]
     },
     {
-      "name": "sftp",
+      "name": "my-awesome-ftp",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1460,7 +1461,7 @@ The service operation **responds** with the status code `201` if the interface t
 {
   "entries": [
     {
-      "name": "sftp",
+      "name": "my-awesome-ftp",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1474,7 +1475,7 @@ The service operation **responds** with the status code `201` if the interface t
       "updatedAt": "2025-03-15T23:09:00.882593100Z"
     },
     {
-      "name": "ftp",
+      "name": "custom-ftp",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1496,7 +1497,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ```
 {
-  "errorMessage": "Interface template already exists: ftp",
+  "errorMessage": "Interface template already exists: custom-ftp",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /serviceregistry/mgmt/interface-templates"
@@ -1508,7 +1509,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 The service operation **request** requires an authorization bearer header and a List<[InterfaceTemplate](../primitives.md#interfacetemplate)> as path parameter, which contains the string identifier of the interface descriptors that need to be removed.
 
 ```
-DELETE /serviceregistry/mgmt/interface-templates?names=ftp&names=sftp HTTP/1.1
+DELETE /serviceregistry/mgmt/interface-templates?names=custom-ftp&names=my-awesome-ftp HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.

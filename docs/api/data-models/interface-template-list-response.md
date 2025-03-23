@@ -2,5 +2,5 @@
 
 Field | Type | Description
 --- | --- | ---
-entries | List<[InterfaceTemplateResult](../data-models/interface-template-result.md)> | A page of interface templates.
-count | [Number](../primitives.md#number) | Total number of interface templates that match the filters.
+entries | List<[InterfaceTemplateDescriptor](../data-models/interface-template-descriptor.md)> | A list of interface templates.
+count | [Number](../primitives.md#number) | The total number of the corresponding interface templates.

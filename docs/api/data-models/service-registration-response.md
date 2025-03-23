@@ -2,7 +2,7 @@
 
 Field | Type | Description
 --- | --- | ---
-instanceId | [Name](../primitives.md#name) | Unique identifier of the registered service instance.
+instanceId | [ServiceInstanceID](../primitives.md#serviceinstanceid) | Unique identifier of the registered service instance.
 provider | [SystemDescriptor](../data-models/system-descriptor.md) | Information about the service instance provider system.
 serviceDefinition | [ServiceDefinitionDescriptor](../data-models/service-definition-descriptor.md) | Information about the service definition.
 version | [Version](../primitives.md#version) | Version of the service instance.

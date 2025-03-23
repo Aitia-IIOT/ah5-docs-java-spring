@@ -2,5 +2,5 @@
 
 Field | Type | Description
 --- | --- | ---
-entries | List<[ServiceResult](../data-models/service-result.md)> | A page of service instances.
-count | [Number](../primitives.md#number) | Total number of service instances that match the filters.
+entries | List<[ServiceInstanceDescriptor](../data-models/service-instance-descriptor.md)> | A list of service instances.
+count | [Number](../primitives.md#number) | The total number of corresponding service instances.

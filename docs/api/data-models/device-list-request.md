@@ -2,4 +2,4 @@
 
 Field | Type | Mandatory | Description
 --- | --- | --- | ---
-devices | List<[DeviceRequest](../data-models/device-request.md)> | yes | A list of devices.
+devices | List<[DeviceRegistrationRequest](../data-models/device-registration-request.md)> | yes | A list of devices.
