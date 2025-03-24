@@ -106,12 +106,12 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{orchestration} service, which provides runtime (late) binding between application systems. Its primary purpose is to find matching services for the consumer’s specification within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds. The matching service instances can be orchestrated with different strategies:
+This document describes the \textbf{orchestration} service, which provides runtime (late) binding between application systems. Its primary purpose is to find matching service instances according to the consumer's needs within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds. The matching service instances can be orchestrated with different strategies:
 
 \begin{itemize}
-    \item \textbf{simple-store:} when the matching service instances are stored and maintained as peer-to-peer rules by higher entities and no actual service details are obtained from the Local Cloud;
-    \item \textbf{flexible-store:} when the service requirements are stored and maintained as service and provider attribute rules by higher entities and actual service details are obtained from the Local Cloud;
-    \item \textbf{dynamic:} when the service requirements are submitted on demand;
+    \item \textbf{simple-store:} when the matching service instances are stored in a database as peer-to-peer rules that are maintained by higher entities and no actual service details are obtained from the Local Cloud;
+    \item \textbf{flexible-store:} when the service requirements are stored in a database as service and provider attribute rules that are maintained by higher entities and actual service details are obtained from the Local Cloud;
+    \item \textbf{dynamic:} when the matching service instances and their actual service details are discovered on the fly from the Local Cloud based on the service requirements specified by the initiator party (consumer system or higher entity).
 \end{itemize}
 
 
@@ -133,8 +133,17 @@ There are two ways to use this service:
 
 \begin{itemize}
     \item \textbf{Pull orchestration:} A consumer system consumes the \textit{pull} operation in order to immediately obtain the matching service instances.
-    \item \textbf{Push orchestration:} A consumer system subscribes for orchestration and as soon as a higher entity triggers a related orchestration process, then the orchestration results - the actual matching service instances - will be sent to the consumer without its request.
+    \item \textbf{Push orchestration:} A consumer system consumes the \textit{subscribe} operation in order to being notified every time when . As soon as a higher entity triggers a related orchestration process, then the orchestration results - the actual matching service instances - will be sent to the consumer without its direct request.
 \end{itemize}
+
+Always the same orchestration process is being performed in case of both method (\textit{pull} and \textit{push}), however the behavior of the orchestration process itself differs between the orchestration strategies.
+
+In case of \textbf{simple-store} strategy the orchestration process results in providing the corresponding service instance identifiers for all of the (or targeted) service definitions associated to the consumer system and stored in the rule database. Multiple rules with different priorities can exist for the same service definition and consuming system. Based on the provided service instance identifiers the consumer system has to perform every other required task to prepare for the successful service consumption. Hence, it has to lookup for all the actual service instance details (like access addresses, service and provider metadata, etc...) by using the \textit{service-discovery} service from the implementing system. Also, service instances are not being filtered on the consumption permissions during the orchestration process and authorization tokens for the service consumptions (if necessary) are also should be requested by the consumer system via the \textit{authorization-token} service from the implementing system.
+(See the \textit{service-discovery} and \textit{authorization-token} SD documents.)
+
+In case of \textbf{flexible-store} strategy the orchestration process results in providing the matching service instances, discovered based on the rules stored in the database for all of the (or targeted) service definitions that are associated to the consumer system. Multiple rules with different priorities can exist for the same service definition and consuming system. Service instances are retrieved with all the actual service and provider details (like access addresses, metadata, etc...) directly from the Local Cloud and are also filtered on the consumption permissions (if necessary). Authorization tokens for the service consumptions (if necessary) are generated in advance and provided within the orchestration results. 
+
+In case of \textbf{dynamic} strategy the orchestration process results in providing the matching service instances, discovered based on the given service requirements for a certain service definition. Service instances are retrieved with all the actual service and provider details (like access addresses, metadata, etc...) directly from the Local Cloud and are also filtered on the consumption permissions (if necessary). Authorization tokens for the service consumptions (if necessary) are generated in advance and provided within the orchestration results. 
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -151,25 +160,23 @@ Available for anyone within the local cloud.
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{device-discovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} devices.
+This section describes the abstract signatures of each operations of the service. The \textbf{orchestration} service is used to perform a \textit{pull} orchestration and  \textit{subscribe}/\textit{unsubscribe} for push orchestrations.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
 
 \phantomsection
-\fsubsection{register}{DeviceRegistrationRequest}{DeviceRegistrationResponse}{}{ErrorResponse}
+\fsubsection{pull}{OrchestrationRequest}{OrchestrationResponse}{}{ErrorResponse}
 
-The registration data must meet the following criteria:
+The behavior of this operation differs between the orchestration strategies:
 
-\begin{itemize}
-    \item Device names are case insensitive and have to be unique within the Local Cloud.
-    \item Device names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
-    \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
-    \item Keys in the metadata structure can not contain dot (.) character.
-    \item Devices can register multiple times, but only if they are identical (same addresses, same metadata).
-\end{itemize}
+In case of \textbf{simple-store} strategy the \textit{pull} operation requires at least the consumer system's identity in order to perform the orchestration process. As a result of the orchestration process the consumer system receives back the matching service instance identifiers sorted by the service definition and priority. Targeting one specific service definition is also possible.
 
-\fsubsection{lookup}{DeviceLookupRequest}{DeviceLookupResponse}{}{ErrorResponse}
+In case of \textbf{flexible-store} strategy the \textit{pull} operation requires at least the consumer system's identity in order to perform the orchestration process. As a result of the orchestration process the consumer system receives back the matching service instances with all the details sorted by the service definition and priority. Targeting one specific service definition is also possible.
+
+In case of \textbf{dynamic} strategy the \textit{pull} operation requires at least the consumer system's identity and the targeted service definition. As a result of the orchestration process the consumer system receives back the matching service instances with all the details.
+
+\fsubsection{subscribe}{OrchestrationSubscriptionRequest}{OrchestrationSubscriptionId}{}{ErrorResponse}
 
 The lookup data must meet the following criteria:
 
@@ -178,7 +185,7 @@ The lookup data must meet the following criteria:
     \item There is an AND relation between different kind of filters.
 \end{itemize}
 
-\fsubsection{revoke}{DeviceRevokeRequest}{}{OperationStatus}{ErrorResponse}
+\fsubsection{unsubscribe}{OrchestrationSubscriptionId}{}{OperationStatus}{ErrorResponse}
 
 The input operation data must meet the following criteria:
 
@@ -192,12 +199,12 @@ The input operation data must meet the following criteria:
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{device-discovery} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{orchestration} service are listed and must be respected by the hosting System.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
 \phantomsection
-\msubsection{struct}{DeviceRegistrationRequest}
+\msubsection{struct}{OrchestrationRequest}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
@@ -217,7 +224,7 @@ An \pref{Object} which describes the identity of a system. It also contains whet
 
 An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
 
-\msubsection{struct}{DeviceRegistrationResponse}
+\msubsection{struct}{OrchestrationResponse}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
@@ -256,7 +263,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{DeviceLookupRequest}
+\msubsection{struct}{OrchestrationSubscriptionRequest}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.2cm} | p{4.8cm} | p{2cm} | X |} \hline
@@ -279,7 +286,7 @@ A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitiv
     \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
 \end{itemize}
 
-\msubsection{struct}{DeviceLookupResponse}
+\msubsection{struct}{OrchestrationSubscriptionId}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{6cm} | X |} \hline
