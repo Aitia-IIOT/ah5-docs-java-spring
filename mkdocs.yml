@@ -10,8 +10,8 @@ nav:
   - Core Systems:
     - Service Registry: core_systems/service_registry.md
     - Service Orchestration: core_systems/service_orchestration.md
-    - Service Authorization: core_systems/service_authorization.md
-    - System Authentication: core_systems/system_authentication.md
+    - Authorization: core_systems/authorization.md
+    - Authentication: core_systems/authentication.md
   - Support Systems: support_systems.md
   - API:
     - Interface Descriptions:
@@ -22,6 +22,7 @@ nav:
         - MQTT:
           - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
           - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md          
+    - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
       - DeviceDescriptor: api/data-models/device-descriptor.md

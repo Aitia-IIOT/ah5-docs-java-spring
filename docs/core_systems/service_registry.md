@@ -138,13 +138,7 @@ The system configuration properties can be found in the `application.properties`
 
 ### General parameters
 
-:fontawesome-solid-wrench: **server.address**
-
-IP address of the server.
-
-:fontawesome-solid-wrench: **server.port**
-
-Port number of the server
+See the [general configuration properties](../general/general_config_props.md).
 
 ### Database parameters
 

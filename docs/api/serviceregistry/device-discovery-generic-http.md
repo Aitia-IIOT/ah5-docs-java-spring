@@ -33,12 +33,12 @@ Hereby the **Interface Design Description** (IDD) is provided to the [device-dis
 
 ### register
 
-The service operation **request** requires an authorization bearer header and a [DeviceRegistrationRequest](../data-models/device-registration-request.md)
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [DeviceRegistrationRequest](../data-models/device-registration-request.md)
 JSON encoded body.
 
 ```
 POST /serviceregistry/device-registry/register HTTP/1.1
-Authorization: Bearer <authorization-info>
+Authorization: Bearer <identity-info>
 
 {
    "name":"thermometer2",
@@ -109,11 +109,11 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### lookup
 
-The service operation **request** requires an authorization bearer header and may optionally include a [DeviceLookupRequest](../data-models/device-lookup-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and may optionally include a [DeviceLookupRequest](../data-models/device-lookup-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/device-registry/lookup HTTP/1.1
-Authorization: Bearer <authorization-info>
+Authorization: Bearer <identity-info>
 
 {
    "deviceNames":[
@@ -182,11 +182,11 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ### revoke
 
-The service operation **request** requires an authorization bearer header and a device `name` as path parameter.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a device `name` as path parameter.
 
 ```
 DELETE /serviceregistry/device-discovery/revoke/thermometer2 HTTP/1.1
-Authorization: Bearer <authorization-info>
+Authorization: Bearer <identity-info>
 ```
 
 The service operation **responds** with the status code `200` if called successfully and an existing device
