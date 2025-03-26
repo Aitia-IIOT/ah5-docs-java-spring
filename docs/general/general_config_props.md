@@ -1,10 +1,10 @@
 # General Configuartion Properties
 
-The following cofiguration properties are applied by (almost) every core and support system:
+The following cofiguration properties are applied by (almost) every Core and Support system:
 
 :fontawesome-solid-wrench: **authentication.policy**
 
-Specifies the applied [authentication policy](../api/authentication_policy.md). Can be `declared`, `certificate` and `outsourced`. 
+Specifies the applied [authentication policy](../api/authentication_policy.md). Can be `declared`, `certificate` or `outsourced`. 
 
 :fontawesome-solid-wrench: **server.address**
 
@@ -72,7 +72,7 @@ Password to the trust store.
 
 :fontawesome-solid-wrench: **disable.hostname.verifier**
 
-If `true`, HTTP client does not check whether the hostname is match one of the serverâ€™s SAN (Subject Alternative Name) in its certificate. This should not be used in a production environment.
+If `true`, HTTP client does not check whether the hostname is match one of the server’s SAN (Subject Alternative Name) in its certificate. This should not be used in a production environment.
 
 :fontawesome-solid-wrench: **mqtt.api.enabled**
 
