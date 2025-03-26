@@ -1,4 +1,4 @@
-# Authentication
+# Service Orchestration (Dynamic)
 
 Coming soon.
 
@@ -19,4 +19,4 @@ Related in CL-5.0.0
 - [general](../../general/changelogs/cl500#general)
 - [arrowhead-common-utils](../../general/changelogs/cl500#arrowhead-common-utils)
 - [arrowhead-data-transfer-objects](../../general/changelogs/cl500#arrowhead-data-transfer-objects)
-- [arrowhead-authentication](../../general/changelogs/cl500#arrowhead-authentication)
+- [arrowhead-serviceorchestration-dynamic](../../general/changelogs/cl500#arrowhead-serviceorchestration-dynamic)
