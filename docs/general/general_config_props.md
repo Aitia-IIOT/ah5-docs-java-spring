@@ -72,7 +72,7 @@ Password to the trust store.
 
 :fontawesome-solid-wrench: **disable.hostname.verifier**
 
-If `true`, HTTP client does not check whether the hostname is match one of the server’s SAN (Subject Alternative Name) in its certificate. This should not be used in a production environment.
+If `true`, HTTP client does not check whether the hostname is match one of the server's SAN (Subject Alternative Name) in its certificate. This should not be used in a production environment.
 
 :fontawesome-solid-wrench: **mqtt.api.enabled**
 
