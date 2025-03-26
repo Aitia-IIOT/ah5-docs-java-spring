@@ -173,7 +173,105 @@ Auto initialization of database tables. Value must be always 'none'.
 
 ### Custom parameters
 
-TODO
+:fontawesome-solid-wrench: **authentication.policy**
+
+Way of authenticating the service requester systems. Can be `declared`, `certificate` or `outsourced`.
+Learn more about the [authentication policies](../api/authentication_policy.md).
+
+:fontawesome-solid-wrench: **authenticator.credentials**
+
+The credentials what this system will use for performing the login operation when the authentication policy is `outsourced`.
+
+```
+authenticator.credentials={\
+	'<credential-name>': '<credential-value>' \
+}
+```
+
+:fontawesome-solid-wrench: **authenticator.secret.keys**
+
+Secret key for the authenticator servers when authentication policy is `outsourced`. The authenticator servers are able to register their authentication related services by providing their associated secret keys.
+
+```
+authenticator.secret.keys={\
+	'<system-name>': '<secret-key>' \
+}
+```
+
+:fontawesome-solid-wrench: **enable.blacklist.filter**
+
+Enable/disable automatic service requester system name verification against to cloud level blacklist. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **force.blacklist.filter**
+
+Whether or not the service requests should be refused when the blacklist server is not responding. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **enable.management.filter**
+
+Enable or disable authorization for accessing to the management services. Can be `true` of `false`.
+
+:fontawesome-solid-wrench: **management.policy**
+
+Way of authorizing the management service requester systems. Can be:
+     
+- `sysop-only`, when the authenticated requester system has _system-operator_ role.
+- `whitelist`, _sysop-only_ and when the authenticated requester system is whitelisted in the _management.whitelist_ configuration property.
+- `authorization`, _sysop-only_ and _whitelist_ and when the authenticated requester system has appropriate permission according to the Authorization Core System.
+
+:fontawesome-solid-wrench: **management.whitelist**
+
+Name of the systems which can access to management services in case of `whitelist` policy is effective.
+
+```
+management.whitelist=<system-name-a>,<system-name-b>
+```
+
+:fontawesome-solid-wrench: **service.discovery.policy**
+
+Behavior of the _service-discovery_ service. Can be:
+
+- `open`, every existing service is directly discoverable.
+- `restricted`, only the public core services are discoverable directly. The other ones must be orchestrated.
+
+:fontawesome-solid-wrench: **service.discovery.direct.access**
+
+Name of systems which always have direct access to the _service-discovery_ service. Only Core or Support systems should be listed here.
+
+```
+service.discovery.direct.access=<system-name-a>,<system-name-b>
+```
+
+:fontawesome-solid-wrench: **discovery.verbose**
+
+Whether or not the _service-discovery_ service should provide system details as well and the _system-discovery_ service should provide device details as well. Can be `true` of `false`.
+
+:fontawesome-solid-wrench: **service.discovery.interface.policy**
+
+Way of handling non existing service interfaces during service registration. Can be:
+
+- `restricted`, when only the already existing interface templates can be used.
+- `extendable`, when new interface template will be created with all the provided properties as mandatory properties.
+- `open`, when new interface template will be created without any further restrictions.
+
+:fontawesome-solid-wrench: **allow.self.addressing**
+
+Whether or not the registration of systems and devices with self-addressing IPv4, IPv6 and hostname addresses are allowed. In case of self-addressing addresses the IP packets cannot be directed from one device to another. Can be `true` of `false`.
+
+:fontawesome-solid-wrench: **allow.non.routable.addressing**
+
+Whether or not the registration of systems and devices with non-routable IPv4 and IPv6 addresses are allowed. In case of non-routable addresses the IP packets cannot be directed from one network to another. Can be `true` of `false`.
+
+:fontawesome-solid-wrench: **service.address.alias**
+
+Alias keys under which the service addresses can appear in the interface properties.
+
+```
+service.address.alias=<alias-1>,<alias-2>
+```
+
+:fontawesome-solid-wrench: **max.page.size**
+
+Specifies the maximum number of records a page can contain in case of pageable service responses.
 
 ### Logging configuration
 
