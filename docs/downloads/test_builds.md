@@ -1,6 +1,6 @@
 # Test Builds
 
-The purpose of test builds is to allow the community to test the release candidates and report possibble issues before the official release of a new version.
+The purpose of test builds is to allow the community to test the release candidates and report possible issues before the official release of a new version.
 
 #### :material-tag: 5.0.0-TESTBUILD-0	
 

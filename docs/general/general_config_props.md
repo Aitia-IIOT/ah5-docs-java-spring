@@ -1,6 +1,6 @@
 # General Configuartion Properties
 
-The following cofiguration properties are applied by every core and support system:
+The following cofiguration properties are applied by every Core and Support system:
 
 :fontawesome-solid-wrench: **authentication.policy**
 
