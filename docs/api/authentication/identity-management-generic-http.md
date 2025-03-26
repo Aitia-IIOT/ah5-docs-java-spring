@@ -319,7 +319,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[Name](../primitives.md#name)> as query parameter, which contains the names of systems whose sessions needs to be closed.
 
 ```
-DELETE /authentication/mgmt/sessions??names=consumer1 HTTP/1.1
+DELETE /authentication/mgmt/sessions?names=consumer1 HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
 
