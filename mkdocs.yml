@@ -24,6 +24,8 @@ nav:
       - General:
         - HTTP:
           - general-management: api/general/general-management-generic-http.md
+        - MQTT:
+          - general-management: api/general/general-management-genetic-mqtt.md
       - Service Registry:
         - HTTP:
           - device-discovery: api/serviceregistry/device-discovery-generic-http.md
