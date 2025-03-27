@@ -47,7 +47,7 @@ This service operation checks the validity of a provided token and acquires info
 
 ### general-management
 
-Its purpose is to get some information about the hosting system’s behavior, such as log entries and configuration settings. The service is offered for administrative support systems.
+Its purpose is to get some information about the hosting system's behavior, such as log entries and configuration settings. The service is offered for administrative support systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
