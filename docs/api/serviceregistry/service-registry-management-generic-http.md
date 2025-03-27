@@ -1,7 +1,7 @@
 # service-registry-management GENERIC-HTTP
 
 ## Overview
-This page describes the service-registry-management service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface template](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually. The interfaces are implemented using protocol, encoding as stated in the following tables:
+This page describes the service-registry-management service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface templates](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually. The interfaces are implemented using protocol, encoding as stated in the following tables:
 
 ## Interface Description
 
@@ -29,7 +29,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [service-re
 
 ### device-query
 
-The service operation **request** requires an authorization bearer header and may optionally include a [DeviceQueryRequest](../data-models/device-query-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and may optionally include a [DeviceQueryRequest](../data-models/device-query-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/devices/query HTTP/1.1
@@ -116,7 +116,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### device-create
 
-The service operation **request** requires an authorization bearer header and a [DeviceListRequest](../data-models/device-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [DeviceListRequest](../data-models/device-list-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/devices HTTP/1.1
@@ -206,7 +206,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### device-update
 
-The service operation **request** requires an authorization bearer header and a [DeviceListRequest](../data-models/device-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [DeviceListRequest](../data-models/device-list-request.md) JSON encoded body.
 
 ```
 PUT /serviceregistry/mgmt/devices HTTP/1.1
@@ -296,7 +296,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### device-remove
 
-The service operation **request** requires an authorization bearer header and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the devices to delete.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the devices to delete.
 
 ```
 DELETE /serviceregistry/mgmt/devices?names=alarm1&names=alarm2 HTTP/1.1
@@ -318,7 +318,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-query
 
-The service operation **request** requires an authorization bearer header. The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemQueryRequest](../data-models/system-query-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http). The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemQueryRequest](../data-models/system-query-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/systems/query?verbose=<verbose-value> HTTP/1.1
@@ -385,7 +385,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-create
 
-The service operation **request** requires an authorization bearer header and a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/systems HTTP/1.1
@@ -500,7 +500,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-update
 
-The service operation **request** requires an authorization bearer header and a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
 
 ```
 PUT /serviceregistry/mgmt/systems HTTP/1.1
@@ -616,7 +616,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-remove
 
-The service operation **request** requires an authorization bearer header and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the systems to delete.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the systems to delete.
 
 ```
 DELETE /serviceregistry/mgmt/systems?names=alert-consumer1&names=alert-consumer2 HTTP/1.1
@@ -636,7 +636,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 ```
 ### service-definition-query
 
-The service operation **request** requires an authorization bearer header and may optionally include a [PageRequest](../data-models/page-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and may optionally include a [PageRequest](../data-models/page-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/service-definitions/query HTTP/1.1
@@ -693,7 +693,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-definition-create
 
-The service operation **request** requires an authorization bearer header and a [ServiceDefinitionListRequest](../data-models/service-definition-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ServiceDefinitionListRequest](../data-models/service-definition-list-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/service-definitions HTTP/1.1
@@ -739,7 +739,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-definition-remove
 
-The service operation **request** requires an authorization bearer header and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the service definitions to delete.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the service definitions to delete.
 
 ```
 DELETE /serviceregistry/mgmt/service-definitions?names=alert-service1&names=alert-service2 HTTP/1.1
@@ -760,7 +760,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-query
 
-The service operation **request** requires an authorization bearer header and a [ServiceQueryRequest](../data-models/service-query-request.md) JSON encoded body. The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed system and device information also returns (only if the provider supports it).
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ServiceQueryRequest](../data-models/service-query-request.md) JSON encoded body. The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed system and device information also returns (only if the provider supports it).
 
 ```
 POST /serviceregistry/mgmt/service-instances/query?verbose=<verbose-value> HTTP/1.1
@@ -910,7 +910,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-create
 
-The service operation **request** requires an authorization bearer header and a [ServiceCreateListRequest](../data-models/service-create-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ServiceCreateListRequest](../data-models/service-create-list-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/service-instances HTTP/1.1
@@ -1118,7 +1118,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-update
 
-The service operation **request** requires an authorization bearer header and a [ServiceUpdateListRequest](../data-models/service-update-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ServiceUpdateListRequest](../data-models/service-update-list-request.md) JSON encoded body.
 
 ```
 PUT /serviceregistry/mgmt/service-instances HTTP/1.1
@@ -1320,7 +1320,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-remove
 
-The service operation **request** requires an authorization bearer header and a List<[Name](../primitives.md#name)> as path parameter, which contains the identitifers of the service instances that need to be removed.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the identitifers of the service instances that need to be removed.
 
 ```
 DELETE /serviceregistry/mgmt/service-instances?serviceInstances=alert-consumer1%3A%3Aalert-service1%3A%3A1.0.0&serviceInstances=alert-consumer2%3A%3Aalert-service1%3A%3A1.0.0 HTTP/1.1
@@ -1341,7 +1341,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### interface-template-query
 
-The service operation **request** requires an authorization bearer header and may optionally include an [InterfaceTemplateQueryRequest](../data-models/interface-template-query-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and may optionally include an [InterfaceTemplateQueryRequest](../data-models/interface-template-query-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/interface-templates/query HTTP/1.1
@@ -1418,7 +1418,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### interface-template-create
 
-The service operation **request** requires an authorization bearer header and an [InterfaceTemplateListRequest](../data-models/interface-template-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and an [InterfaceTemplateListRequest](../data-models/interface-template-list-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/interface-templates HTTP/1.1
@@ -1506,7 +1506,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### interface-template-remove
 
-The service operation **request** requires an authorization bearer header and a List<[InterfaceTemplate](../primitives.md#interfacetemplate)> as path parameter, which contains the string identifier of the interface descriptors that need to be removed.
+The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a List<[InterfaceTemplate](../primitives.md#interfacetemplate)> as path parameter, which contains the string identifier of the interface descriptors that need to be removed.
 
 ```
 DELETE /serviceregistry/mgmt/interface-templates?names=custom-ftp&names=my-awesome-ftp HTTP/1.1
