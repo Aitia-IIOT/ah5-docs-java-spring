@@ -47,7 +47,7 @@ This service operation checks the validity of a provided token and acquires info
 
 ### general-management
 
-Its purpose is to get some information about the hosting systemâ€™s behavior, such as log entries and configuration settings. The service is offered for administrative support systems.
+Its purpose is to get some information about the hosting system’s behavior, such as log entries and configuration settings. The service is offered for administrative support systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
@@ -222,4 +222,9 @@ Set this to change the directory of log files.
 
 #### :material-tag: v5.0.0 
 
-- Initial 5th generation release.
+Related in CL-5.0.0
+
+- [general](../../general/changelogs/cl500#general)
+- [arrowhead-common-utils](../../general/changelogs/cl500#arrowhead-common-utils)
+- [arrowhead-data-transfer-objects](../../general/changelogs/cl500#arrowhead-data-transfer-objects)
+- [arrowhead-authentication](../../general/changelogs/cl500#arrowhead-authentication)

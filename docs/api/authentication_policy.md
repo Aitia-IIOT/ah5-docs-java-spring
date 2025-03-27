@@ -4,13 +4,13 @@ During the interactions with the Arrowhead Core and Support systems, all clients
 
 Three authentication policies are offered: [declared](#declared), [certificate](#certificate) and [outsourced](#outsourced).
 
-The actual policy in force is depending on how the core and support systems are configured. See the `authentication.policy` configuration property under the [general configurations](../general/general_config_props.md).
+The actual policy in force is depending on how the Core and Support systems are configured. See the `authentication.policy` configuration property under the [general configurations](../general/general_config_props.md).
 
 ## Policies
 
 ### declared
 
-Applying the **declared** authentication policy results in **no real identity verification taking place**. The core and supports systems simply accept the identity provided by the application systems. **This policy is not recommended for use in production environment.** 
+Applying the **declared** authentication policy results in **no real identity verification taking place**. The Core and Supports systems simply accept the identity provided by the application systems. **This policy is not recommended for use in production environment.** 
 
 Applicable to [HTTP](#declared-http) and [MQTT](#declared-mqtt) interface protocols.
 

@@ -205,4 +205,9 @@ Set this to change the directory of log files.
 
 #### :material-tag: v5.0.0 
 
-- Initial 5th generation release.
+Related in CL-5.0.0
+
+- [general](../../general/changelogs/cl500#general)
+- [arrowhead-common-utils](../../general/changelogs/cl500#arrowhead-common-utils)
+- [arrowhead-data-transfer-objects](../../general/changelogs/cl500#arrowhead-data-transfer-objects)
+- [arrowhead-serviceregistry](../../general/changelogs/cl500#arrowhead-serviceregistry)
