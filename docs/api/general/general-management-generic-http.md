@@ -31,7 +31,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [general-ma
 
 ### get-log
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [LogRequest](../data-models/log-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [LogRequest](../data-models/log-request.md) JSON encoded body.
 
 ```
 POST /<system-name>/general/mgmt/logs HTTP/1.1
@@ -112,7 +112,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### get-config
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as query parameter, which contains the names of the desired configuration properties.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as query parameter, which contains the names of the desired configuration properties.
 
 ```
 GET /<system-name>/general/mgmt/get-config?keys=management.policy&keys=max.page.size HTTP/1.1
