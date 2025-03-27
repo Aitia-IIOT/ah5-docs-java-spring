@@ -29,7 +29,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [service-di
 
 ### register
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ServiceRegistrationRequest](../data-models/service-registration-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceRegistrationRequest](../data-models/service-registration-request.md)
 JSON encoded body.
 
 ```
@@ -169,7 +169,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### lookup
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http). The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device and system information also returns (only if the provider supports it). The request requires a [SystemLookupRequest](../data-models/service-lookup-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device and system information also returns (only if the provider supports it). The request requires a [SystemLookupRequest](../data-models/service-lookup-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/service-discovery/lookup?verbose=<verbose-value> HTTP/1.1
@@ -321,7 +321,7 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ### revoke
 
-The service operation **request**  requires an [identity related header or certfificate](../authentication_policy.md/#http), and a [Name](../primitives.md#name) as path parameter, which is a unique identifier of the service instance to be deleted.
+The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http), and a [Name](../primitives.md#name) as path parameter, which is a unique identifier of the service instance to be deleted.
 
 ```
 DELETE /serviceregistry/service-discovery/revoke/temperature-provider1%3A%3Acelsius-info%3A%3A1.0.0 HTTP1.1

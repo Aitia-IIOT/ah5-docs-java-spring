@@ -45,9 +45,9 @@ Decimal number.
 
 An identifier of any suitable validator function chosen by the implementor of service. The validators have different kinds of inputs, depending on what to validate. Some validators have optional or mandatory **arguments**. The implemented validators are the following:
 - `NOT_EMPTY_ADDRESS_LIST`: The **input** is a list of [Addresses](#address) and must contain at least one element. The validator checks if the addresses are valid and in alignment with the supported address types and performs normalization. An example for usage: validating HTTP interface access addresses.
-- `NOT_EMPTY_STRING_SET`: The **input** is a list of [Strings](#string) and must contain at least one element. The validator checks if the are not empty and performs normalization. It can be used with the optional `NAME` **argument**. In that case, normalization and validation happens according to the naming convention. An example for usage: validating possible MQTT inerface operations.
-- `PORT`: This validator is meant to be used for ports. The **iput** is an integer that represents a port number. The validator checks if the given value is between 1 and 65535, since in practice all valid port numbers fall within this range.
-- `MINMAX`: The **input** is a [Number](#number). It is mandatory to give two [Strings](#string) as **arguments**, that represent the lower and upper limits of a closed interval. The validator checks if the input falls within the interval. (The `PORT` validator is specific `MINMAX` validator, where the arguments are 1 and 65535.)
+- `NOT_EMPTY_STRING_SET`: The **input** is a list of [Strings](#string) and must contain at least one element. The validator checks if the are not empty and performs normalization. It can be used with the optional `NAME` **argument**. In that case, normalization and validation happens according to the naming convention. An example for usage: validating possible MQTT interface operations.
+- `PORT`: This validator is meant to be used for ports. The **input** is an integer that represents a port number. The validator checks if the given value is between 1 and 65535, since in practice all valid port numbers fall within this range.
+- `MINMAX`: The **input** is a [Number](#number). It is mandatory to give two [Strings](#string) as **arguments**, that represent the lower and upper limits of a closed interval. The validator checks if the input falls within the interval. (The `PORT` validator is a specific `MINMAX` validator, where the arguments are "1" and "65535".)
 - `HTTP_OPERATIONS`: This validator is meant to be used for HTTP operations. The **input** is one or more key-value pair where the keys are [Strings](#string) and the values are also key-value pairs, where the keys are _path_ and _method_. A concrete example:
     ```
             "query-temperature": {
@@ -72,7 +72,7 @@ Any suitable security policy chosen by the implementor of the service. The possi
 
 ## ServiceInstanceID
 
-A string identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by double colons, as follows: `<provider-name>::<service-definition>::<version>`. An example for a valid service instance ID: _alert-consumer1::alert-service1::1.0.0_. (Here the provider name is _alert-consumer1_, the service definition is _alert-service1_, and the version is _1.0.0_.)
+A string identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by double colons, as follows: `<provider-name>::<service-definition>::<version>`. An example for a valid service instance ID: _alert-provider1::alert-service1::1.0.0_. (Here the provider name is _alert-provider1_, the service definition is _alert-service1_, and the version is _1.0.0_.)
 
 ## String
 
