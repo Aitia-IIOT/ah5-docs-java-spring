@@ -33,14 +33,14 @@ Hereby the **Interface Design Description** (IDD) is provided to the [device-dis
 
 ### register
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the payload is a [DeviceRegistrationRequest](../data-models/device-registration-request.md).
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [DeviceRegistrationRequest](../data-models/device-registration-request.md).
 
 ```
 Topic: arrowhead/serviceregistry/device-discovery/register
 
 {
    "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
+   "authentication":"<identity-info>",
    "responseTopic":"<response-topic>",
    "qosRequirement":"<0|1|2>",
    "payload":{
@@ -123,14 +123,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### lookup
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the payload is a  [DeviceLookupRequest](../data-models/device-lookup-request.md).
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a  [DeviceLookupRequest](../data-models/device-lookup-request.md).
 
 ```
 Topic: arrowhead/serviceregistry/device-discovery/lookup
 
 {
    "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
+   "authentication":"<identity-info>",
    "responseTopic":"<response-topic>",
    "qosRequirement":"<0|1|2>",
    "payload":{
@@ -212,14 +212,14 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### revoke
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the payload is the `device name`.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is the `device name`.
 
 ```
 Topic: arrowhead/serviceregistry/device-discovery/revoke
 
 {
    "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
+   "authentication":"<identity-info>",
    "responseTopic":"<response-topic>",
    "qosRequirement":"<0|1|2>",
    "payload":"thermometer2"
