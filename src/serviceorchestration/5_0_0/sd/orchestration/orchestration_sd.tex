@@ -119,7 +119,7 @@ The \textbf{orchestration} service contains the following operations:
 
 \begin{itemize}
     \item \textit{pull} performs the orchestration process and returns the matching service instances;
-    \item \textit{subscribe} creates a subscription that can be triggered anytime to perform the orchestration process and push the matching services for the subscriptor (push orchestration);
+    \item \textit{subscribe} creates a subscription that can be triggered anytime to perform the orchestration process and push the matching service instances for the subscriptor (push orchestration);
     \item \textit{unsubscribe} removes a subscription;
 \end{itemize}
 
@@ -133,7 +133,7 @@ There are two ways to use this service:
 
 \begin{itemize}
     \item \textbf{Pull orchestration:} A consumer system consumes the \textit{pull} operation in order to immediately obtain the matching service instances.
-    \item \textbf{Push orchestration:} A consumer system consumes the \textit{subscribe} operation in order to being notified every time when . As soon as a higher entity triggers a related orchestration process, then the orchestration results - the actual matching service instances - will be sent to the consumer without its direct request.
+    \item \textbf{Push orchestration:} A consumer system consumes the \textit{subscribe} operation in order to receive new orchestration results every time when a higher entity triggers a related orchestration process. Hence, the actual matching service instances are being sent to the consumer without its direct request.
 \end{itemize}
 
 Always the same orchestration process is being performed in case of both method (\textit{pull} and \textit{push}), however the behavior of the orchestration process itself differs between the orchestration strategies.
@@ -178,20 +178,11 @@ In case of \textbf{dynamic} strategy the \textit{pull} operation requires at lea
 
 \fsubsection{subscribe}{OrchestrationSubscriptionRequest}{OrchestrationSubscriptionId}{}{ErrorResponse}
 
-The lookup data must meet the following criteria:
-
-\begin{itemize}
-    \item If a filter expects a list, there is an OR relation between the elements of the filter.
-    \item There is an AND relation between different kind of filters.
-\end{itemize}
+This operation requires at least the consumer's identity, the targeted service definition and a notify interface. The result of this operation is an identifier that refers to the created subscription record. 
 
 \fsubsection{unsubscribe}{OrchestrationSubscriptionId}{}{OperationStatus}{ErrorResponse}
 
-The input operation data must meet the following criteria:
-
-\begin{itemize}
-    \item Devices that have system assignment can not be revoked.
-\end{itemize}
+This operation requires the identifier pointing to the subscription record to be deleted.
 
 
 \clearpage
@@ -207,18 +198,106 @@ As a complement to the explicitly defined types in this section, there is also a
 \msubsection{struct}{OrchestrationRequest}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3.25cm} | p{3.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-name & \pref{Name} & yes & Unique identifier of the device. \\ \hline
-metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the device. \\ \hline
-addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses of the device.  \\ \hline
+orchestrationForm & \hyperref[sec:model:OrchestrationForm]{OrchestrationForm} & yes & Orchestration request details. \\ \hline
 \end{tabularx}
 \end{table}
 
 \msubsection{struct}{Identity}
 
 An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\msubsection{struct}{OrchestrationForm}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.25cm} | p{3.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+serviceRequirement & \hyperref[sec:model:ServiceRequirement]{ServiceRequirement} & yes & Details of the targeted service \\ \hline
+orchestrationFlags & \pref{Set}$<$\hyperref[sec:model:OrchestrationFlag]{OrchestrationFlag}$>$ & no & Set of orchestration flags. \\ \hline
+qosRequirements & \hyperref[sec:model:QoSRequirementMap]{QoSRequirementMap} & no & Quality of service requirements map. \\ \hline
+exclusivityDuration & \pref{Number} & no & The interval the service can be exclusive.  \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{ServiceRequirement}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.8cm} | p{4.7cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+serviceDefinition & \pref{Name} & yes/no & The required service definition name. Mandatory in case of \textbf{dynamic} strategy. \\ \hline
+operations & \pref{List}$<$\pref{Name}$>$ & yes/no & The required service operation names. \newline 
+Exactly one operation must be defined, when the following orchestration flags are true: \newline \texttt{ONLY\_INTERCLOUD}, \texttt{ALLOW\_INTERCLOUD}, \texttt{ALLOW\_TRANSLATION} \\ \hline
+versions & \pref{List}$<$\pref{Version}$>$ & no & The required service versions. \\ \hline 
+alivesAt & \pref{DateTime} & no & The orchestrated service must be alive by this time. \\ \hline
+metadataRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must meet at least to one of the specified metadate reuirement. \\ \hline
+interfaceTemplateNames & \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & The orchestrated service must offer at least one from the specified interface template names. \\ \hline 
+interfaceAddressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & The orchestrated service must offer at least one from the specified interface address types. \\ \hline
+interfacePropertyRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must offer at least one interface that meets with one of the specified property requirements. \\ \hline
+securityPloicies & \pref{List}$<$\pref{SecurityPolicy}$>$ & no & The orchestrated service must meet with one of the specified security policies. \\ \hline
+preferredProviders & \pref{List}$<$\pref{Name}$>$ & no & Provider system names specified here have priority. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{MetadataRequirements}
+
+A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
+
+\begin{itemize}
+    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which is associated with an embedded object and in this object we are looking for the key named "subkey").
+    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
+    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
+\end{itemize}
+
+\msubsection{struct}{OrchestrationFlag}
+
+Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process. Possible values:
+
+\begin{itemize}
+    \item \texttt{MATCHMAKING}:
+    
+    If \texttt{true}, orchestration process includes a matchmaking process in order to return only one matching service instance if any. 
+
+    If \texttt{false}, orchestration process returns all the matching service instance if any. 
+    
+    \item \texttt{ONLY\_PREFERRED}:
+
+    If \texttt{true}, orchestration process considers only those matching service instances that are provided by a preferred provider if any.
+
+    If \texttt{false}, but preferred providers are specified and have matching service instances, than orchestration process considers only those service instances that are provided by a preferred provider. Otherwise, non-preferred providers are considered.
+    
+    \item \texttt{ONLY\_EXCLUSIVE}:
+
+    If \texttt{true}, orchestration process considers only those matching service instances that are allows exclusivity. It automatically results \texttt{MATCHMAKING:true} as well.
+
+    If \texttt{false}, but exclusivity duration is specified and there are matching services with exclusivity allowed, than orchestration process considers only those service instances that allows exclusivity. Otherwise, service instances without exclusivity are considered.
+    
+    \item \texttt{ALLOW\_INTERCLOUD}:
+
+    If \texttt{true}, orchestration process considers matching service instances from neighbor clouds when there are no local hits. Orchestrating from neighbor clouds automatically results \texttt{MATCHMAKING:true}
+
+    If \texttt{false}, orchestration process doesn't consider matching service instances from neighbor clouds when there are no local hits.
+
+    \item \texttt{ONLY\_INTERCLOUD}:
+
+    If \texttt{true}, orchestration process considers matching service instances only from the neighbor clouds. It automatically results \texttt{MATCHMAKING:true} as well.
+
+    If \texttt{false}, orchestration process considers matching service instances from the local could in first hand and only considers matching service instances from the neighbor clouds when \texttt{ALLOW\_INTERCLOUD:true}.
+    
+    \item \texttt{ALLOW\_TRANSLATION}:
+
+    If \texttt{true}, orchestration process considers matching, but non-native service instances when there are no native hits. It automatically results \texttt{MATCHMAKING:true} as well.
+
+     If \texttt{false}, orchestration process considers only native matching service instances.
+    
+\end{itemize}
+
+\msubsection{struct}{QoSRequirementMap}
+
+An \pref{Object} which maps \pref{String} keys \pref{String} values.
 
 \msubsection{struct}{Metadata}
 
@@ -227,18 +306,16 @@ An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or li
 \msubsection{struct}{OrchestrationResponse}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-name & \pref{Name} & Unique identifier of the registered device. \\ \hline
-metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the registered device. \\ \hline
-addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the registered device.  \\ \hline
-createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4.25cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+results & \pref{List}$<$\hyperref[sec:model:OrchestrationResult]{OrchestrationResult}$>$ & List of matching service instances. \\ \hline
+warnings & \pref{List}$<$\hyperref[sec:model:String]{String}$>$ & Warning message list. \\ \hline
 \end{tabularx}
 \end{table}
 
-\clearpage
+\msubsection{struct}{OrchestrationResult}
+
+TODO
 
 \msubsection{struct}{AddressDescriptor}
 
@@ -266,59 +343,22 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \msubsection{struct}{OrchestrationSubscriptionRequest}
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.2cm} | p{4.8cm} | p{2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3.2cm} | p{3.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for devices with any of the specified names. \\ \hline
-addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for devices with any of the specified add\-resses.   \\ \hline
-addressType &  \pref{AddressType} & no & Requester is looking for devices with the specified type of address. \\ \hline
-metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for devices that are matching any of the spe\-cified metadata requirements. \\ \hline
+orchestrationForm & \hyperref[sec:model:OrchestrationForm]{OrchestrationForm} & yes & Orchestration request details. \\ \hline
+notifyInterface & \hyperref[sec:model:NotifyInterface]{NotifyInterface} & yes & Interface details for sending push notifications. \\ \hline
+duration & \pref{Number} & no & The interval while the subscription is active.  \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{MetadataRequirements}
+\msubsection{struct}{NotifyInterface}
 
-A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
-
-\begin{itemize}
-    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which is associated with an embedded object and in this object we are looking for the key named "subkey").
-    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
-    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
-\end{itemize}
+TODO
 
 \msubsection{struct}{OrchestrationSubscriptionId}
 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{6cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-entries & \pref{List}$<$\hyperref[sec:model:DeviceLookupResult]{DeviceLookupResult}$>$     & List of device results. \\ \hline
-count & \pref{Number} & Number of returned devices. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{DeviceLookupResult}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-name & \pref{Name} & Unique identifier of the device. \\ \hline
-metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
-addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
-createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{DeviceRevokeRequest}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-name & \pref{Name} & yes & Unique identifier of the device. \\ \hline
-\end{tabularx}
-\end{table}
+Unique \pref{String} identifier. 
 
 \subsection{Primitives}
 \label{sec:model:primitives}
@@ -334,12 +374,16 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{InterfaceTemplate}& A string identifier of an interface descriptor. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
+\pdef{Set}$<$A$>$       & A collection of items that contains no duplicate elements and each having type A. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
+\pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning.  \\ \hline
 \end{tabularx}
 \end{table}
 
