@@ -25,7 +25,7 @@ nav:
         - HTTP:
           - general-management: api/general/general-management-generic-http.md
         - MQTT:
-          - general-management: api/general/general-management-genetic-mqtt.md
+          - general-management: api/general/general-management-generic-mqtt.md
       - Service Registry:
         - HTTP:
           - device-discovery: api/serviceregistry/device-discovery-generic-http.md
@@ -37,6 +37,8 @@ nav:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
           - identity-management: api/authentication/identity-management-generic-http.md
+        - MQTT:
+          - identity: api/authentication/identity-generic-mqtt.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
