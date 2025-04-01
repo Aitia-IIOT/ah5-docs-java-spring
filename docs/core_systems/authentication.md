@@ -14,7 +14,7 @@ The purpose of this service is to give, verify and invalidates a proof of identi
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/identity_sd.pdf) <br />
 :material-api: [generic-http (IDD)](../api/authentication/identity-generic-http.md) | [generic-https (IDD)](../api/authentication/identity-generic-http.md) <br />
-:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
+:material-api: [generic-mqtt (IDD)](../api/authentication/identity-generic-mqtt.md) | [generic-mqtts (IDD)](../api/authentication/identity-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **login**
@@ -22,28 +22,28 @@ Learn more: <br />
 This service operation acquires a proof of identity token.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-generic-http.md#login) | [generic-https](../api/authentication/identity-generic-http.md#login)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-generic-mqtt.md#login) | [generic-mqtts](../api/authentication/identity-generic-mqtt.md#login)
 
 **logout**
 
 This service operation invalidates a proof of identity token.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-generic-http.md#logout) | [generic-https](../api/authentication/identity-generic-http.md#logout)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-generic-mqtt.md#logout) | [generic-mqtts](../api/authentication/identity-generic-mqtt.md#logout)
 
 **change**
 
 This service operation changes the requester system's own credentials.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-generic-http.md#change) | [generic-https](../api/authentication/identity-generic-http.md#change)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-generic-mqtt.md#change) | [generic-mqtts](../api/authentication/identity-generic-mqtt.md#change)
 
 **verify**
 
 This service operation checks the validity of a provided token and acquires information about the verified system.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-generic-http.md#verify) | [generic-https](../api/authentication/identity-generic-http.md#verify)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-generic-mqtt.md#verify) | [generic-mqtts](../api/authentication/identity-generic-mqtt.md#verify)
 
 ### general-management
 
@@ -51,8 +51,8 @@ Its purpose is to get some information about the hosting system's behavior, such
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
-:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
-:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
+:material-api: [generic-http (IDD)](../api/general/general-management-generic-http.md) | [generic-https (IDD)](../api/general/general-management-generic-http.md) <br />
+:material-api: [generic-mqtt (IDD)](../api/general/general-management-generic-mqtt.md) | [generic-mqtts (IDD)](../api/general/general-management-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **get-log**
@@ -60,14 +60,14 @@ Learn more: <br />
 This service operation lists the log entries of the system that matches the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic-http](../api/general/general-management-generic-http.md#get-log) | [generic-https](../api/general/general-management-generic-http.md#get-log)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/general/general-management-generic-mqtt.md#get-log) | [generic-mqtts](../api/general/general-management-generic-mqtt.md#get-log)
 
 **get-config**
 
 This service operation lists the current values of the specified configuration settings.
 
 :material-arrow-right-thin: Example: [generic-http](../api/general/general-management-generic-http.md#get-config) | [generic-https](../api/general/general-management-generic-http.md#get-config)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/general/general-management-generic-mqtt.md#get-config) | [generic-mqtts](../api/general/general-management-generic-mqtt.md#get-config)
 
 -----
 
@@ -224,7 +224,7 @@ Set this to change the directory of log files.
 
 Related in CL-5.0.0
 
-- [general](../../general/changelogs/cl500#general)
-- [arrowhead-common-utils](../../general/changelogs/cl500#arrowhead-common-utils)
-- [arrowhead-data-transfer-objects](../../general/changelogs/cl500#arrowhead-data-transfer-objects)
-- [arrowhead-authentication](../../general/changelogs/cl500#arrowhead-authentication)
+- [general](../general/changelogs/cl500.md#general)
+- [arrowhead-common-utils](../general/changelogs/cl500.md#arrowhead-common-utils)
+- [arrowhead-data-transfer-objects](../general/changelogs/cl500.md#arrowhead-data-transfer-objects)
+- [arrowhead-authentication](../general/changelogs/cl500.md#arrowhead-authentication)

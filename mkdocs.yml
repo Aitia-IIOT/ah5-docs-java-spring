@@ -57,7 +57,7 @@ nav:
       - IdentityListCreateRequest: api/data-models/identity-list-create-request.md
       - IdentityListResponse: api/data-models/identity-list-response.md
       - IdentityListUpdateRequest: api/data-models/identity-list-update-request.md
-      - IdentityMgmtRequest: api/data-odels/identity-mgmt-request.md
+      - IdentityMgmtRequest: api/data-models/identity-mgmt-request.md
       - IdentityQueryRequest: api/data-models/identity-query-request.md
       - IdentityRequest: api/data-models/identity-request.md
       - IdentityResponse: api/data-models/identity-response.md
