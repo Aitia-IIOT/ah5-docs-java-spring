@@ -37,7 +37,7 @@ The service operation **request** requires an [identity related header or certfi
 JSON encoded body.
 
 ```
-POST /serviceregistry/device-registry/register HTTP/1.1
+POST /serviceregistry/device-discovery/register HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {
@@ -112,7 +112,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and may optionally include a [DeviceLookupRequest](../data-models/device-lookup-request.md) JSON encoded body.
 
 ```
-POST /serviceregistry/device-registry/lookup HTTP/1.1
+POST /serviceregistry/device-discovery/lookup HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {
@@ -182,7 +182,7 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ### revoke
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a device `name` as path parameter.
+The service operation **request** requires an [identity related header or certficate](../authentication_policy.md/#http) and a device `name` as path parameter.
 
 ```
 DELETE /serviceregistry/device-discovery/revoke/thermometer2 HTTP/1.1
