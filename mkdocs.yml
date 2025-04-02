@@ -39,6 +39,7 @@ nav:
           - identity-management: api/authentication/identity-management-generic-http.md
         - MQTT:
           - identity: api/authentication/identity-generic-mqtt.md
+          - identity-management: api/authentication/identity-management-generic-mqtt.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md

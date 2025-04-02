@@ -78,7 +78,7 @@ Its purpose is to manage identities and active sessions in bulk. The different o
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/identity-management_sd.pdf) <br />
 :material-api: [generic-http (IDD)](../api/authentication/identity-management-generic-http.md) | [generic-https (IDD)](../api/authentication/identity-management-generic-http.md) <br />
-:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
+:material-api: [generic-mqtt (IDD)](../api/authentication/identity-management-generic-mqtt.md) | [generic-mqtts (IDD)](../api/authentication/identity-management-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **identity-mgmt-query**
@@ -86,42 +86,42 @@ Learn more: <br />
 This service operation lists the identities that match the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-query) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-query)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-query) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-query)
 
 **identity-mgmt-create**
 
 This service operation creates the specified identities.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-create) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-create)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-create) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-create)
 
 **identity-mgmt-update**
 
 This service operation updates the specified existing identities.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-update) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-update)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-update) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-update)
 
 **identity-mgmt-remove**
 
 This service operation removes the specified identities.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-remove) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-remove)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-remove) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-remove)
 
 **identity-mgmt-session-query**
 
 This service operation lists the active sessions that match the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-query) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-query)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-query) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-query)
 
 **identity-mgmt-session-close**
 
 This service operation closes and the specified active sessions and invalidates the related tokens.
 
 :material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-close) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-close)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-close) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-close)
 
 ## Configuration
 

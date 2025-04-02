@@ -12,7 +12,7 @@ following tables:
 
 Profile type | type | Version
 --- | --- | ---
-Transfer protocol | HTTP | 3.1 and 3.1.1
+Transfer protocol | MQTT | 3.1 and 3.1.1
 Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
@@ -21,7 +21,7 @@ Compression | N/A | -
 
 Profile type | type | Version
 --- | --- | ---
-Transfer protocol | HTTPS | 3.1 and 3.1.1
+Transfer protocol | MQTT | 3.1 and 3.1.1
 Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
