@@ -173,10 +173,6 @@ Auto initialization of database tables. Value must be always 'none'.
 
 ### Custom parameters
 
-:fontawesome-solid-wrench: **authentication.policy**
-
-Way of authenticating the service requester systems. Can be `declared`, `certificate` or `outsourced`.
-
 :fontawesome-solid-wrench: **authenticator.credentials**
 
 The credentials what this system will use for performing the login operation when the authentication policy is `outsourced`.
