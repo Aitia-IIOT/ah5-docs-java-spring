@@ -9,6 +9,10 @@ DNS name or MAC address.
 
 String value of a network address type. Could be only `HOSTNAME`, `IPV4`, `IPV6` or `MAC`.
 
+## AuthenticationMethod
+
+A string representation of an authentication method. Currently, only `PASSWORD` is supported.`
+
 ## Boolean
 
 One out of `true` or `false`.
@@ -21,10 +25,17 @@ between date and time part, ”hh” denotes hour in the 24-hour format (00-23),
 ”ss” denotes second (00-59). ”Z” indicates that the time is in UTC. An example of a valid date/time string is
 ”2024-12-05T12:00:00Z”
 
+## Direction
+The direction of a sorting operation. Possible values are the String representation of ascending (`ASC`) or descending (`DESC`) order.
+
 ## ErrorType
 
 String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,
 `TIMEOUT`, `LOCKED`, `INTERNAL_SERVER_ERROR` or `EXTERNAL_SERVER_ERROR`.
+
+## LogSeverity
+
+Alias for a String value that describes the kind and seriousness of a log message. Could be `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`.
 
 ## MQTTQoS
 
@@ -37,6 +48,9 @@ A String indentifier that is intended to be both human and machine-readable.
 ## Number
 
 Decimal number.
+
+## String
+A chain of UTF-8 characters.
 
 ## Version
 

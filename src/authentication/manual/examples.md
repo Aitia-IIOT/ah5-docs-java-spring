@@ -69,11 +69,11 @@ This file contains specific examples of what payloads are expected and returned 
   -H 'Authorization: Bearer IDENTITY-TOKEN//9333c248-7b16-478c-b6c8-605abbbc361a'
   ~~~
 
-  GET /authentication/identity/{token}
+  GET /authentication/identity/verify/{token}
   
   Path parameter: 713bca0b-c550-4cb9-ae60-4852b9ee3669
   ~~~
-  http://localhost:8444/authentication/identity/713bca0b-c550-4cb9-ae60-4852b9ee3669
+  http://localhost:8444/authentication/identity/verify/713bca0b-c550-4cb9-ae60-4852b9ee3669
   ~~~
 
   Response body:
@@ -202,7 +202,6 @@ This file contains specific examples of what payloads are expected and returned 
   Request body:
   ~~~
   {
-	"authenticationMethod": "PASSWORD",
 	"identities": [
 	  {
 	    "systemName": "consumer1",
