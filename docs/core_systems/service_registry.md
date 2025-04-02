@@ -176,7 +176,6 @@ Auto initialization of database tables. Value must be always 'none'.
 :fontawesome-solid-wrench: **authentication.policy**
 
 Way of authenticating the service requester systems. Can be `declared`, `certificate` or `outsourced`.
-Learn more about the [authentication policies](../api/authentication_policy.md).
 
 :fontawesome-solid-wrench: **authenticator.credentials**
 
@@ -190,7 +189,7 @@ authenticator.credentials={\
 
 :fontawesome-solid-wrench: **authenticator.secret.keys**
 
-Secret key for the authenticator servers when authentication policy is `outsourced`. The authenticator servers are able to register their authentication related services by providing their associated secret keys.
+Secret key for the authenticator servers when authentication policy is `outsourced`. The authenticator servers are able to register their authentication related services by providing their system name hashed with the associated secret key.
 
 ```
 authenticator.secret.keys={\
