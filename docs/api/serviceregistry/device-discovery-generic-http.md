@@ -33,7 +33,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [device-dis
 
 ### register
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [DeviceRegistrationRequest](../data-models/device-registration-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [DeviceRegistrationRequest](../data-models/device-registration-request.md)
 JSON encoded body.
 
 ```
@@ -62,8 +62,7 @@ Authorization: Bearer <identity-info>
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully and the device
-entity is already existing or `201` if the entity was newly created. The response also contains a
+The service operation **responds** with the status code `200` if called successfully and the device entity is already existing or `201` if the entity was newly created. The response also contains a
 [DeviceRegistrationResponse](../data-models/device-registration-response.md) JSON encoded body.
 
 ```
@@ -109,7 +108,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### lookup
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and may optionally include a [DeviceLookupRequest](../data-models/device-lookup-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and may optionally include a [DeviceLookupRequest](../data-models/device-lookup-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/device-discovery/lookup HTTP/1.1
@@ -182,7 +181,7 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ### revoke
 
-The service operation **request** requires an [identity related header or certficate](../authentication_policy.md/#http) and a device `name` as path parameter.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a device `name` as path parameter.
 
 ```
 DELETE /serviceregistry/device-discovery/revoke/thermometer2 HTTP/1.1
@@ -190,8 +189,7 @@ Authorization: Bearer <identity-info>
 ```
 
 The service operation **responds** with the status code `200` if called successfully and an existing device
-entity was removed and `204` if no matching entity was found. The success response does not contain
-any response body.
+entity was removed and `204` if no matching entity was found. The success response does not contain any response body.
 
 The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission, `423` if entity is not removable and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
