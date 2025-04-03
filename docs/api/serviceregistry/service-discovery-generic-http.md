@@ -1,4 +1,5 @@
-# service-discovery GENERIC-HTTP
+# service-discovery IDD
+**GENERIC-HTTP & GENERIC-HTTPS**
 
 ## Overview
 

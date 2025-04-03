@@ -13,30 +13,30 @@ The purpose of this service is to lookup, register and revoke provided services.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-discovery_sd.pdf) <br />
-:material-api: [generic-http (IDD)](todo) | [generic-https (IDD)](todo) <br />
-:material-api: [generic-mqtt (IDD)](todo) | [generic-mqtts (IDD)](todo) <br />
+:material-api: [generic-http (IDD)](../api/serviceregistry/service-discovery-generic-http.md) | [generic-https (IDD)](../api/serviceregistry/service-discovery-generic-http.md) <br />
+:material-api: [generic-mqtt (IDD)](../api/serviceregistry/service-discovery-generic-mqtt.md) | [generic-mqtts (IDD)](../api/serviceregistry/service-discovery-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **register**
 
 This service operation adds new service instance to the Local Cloud.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/service-discovery-generic-http.md#register) | [generic-https](../api/serviceregistry/service-discovery-generic-http.md#register)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/service-discovery-generic-mqtt.md#register) | [generic-mqtts](../api/serviceregistry/service-discovery-generic-mqtt.md#register)
 
 **revoke**
 
 This service operation removes a service instance from the Local Cloud.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/service-discovery-generic-http.md#revoke) | [generic-https](../api/serviceregistry/service-discovery-generic-http.md#revoke)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/service-discovery-generic-mqtt.md#revoke) | [generic-mqtts](../api/serviceregistry/service-discovery-generic-mqtt.md#revoke)
 
 **lookup**
 
 This service operation lists the service instances that match the filtering requirements.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
+:material-arrow-right-thin: Example: [generic-http](../api/serviceregistry/service-discovery-generic-http.md#lookup) | [generic-https](../api/serviceregistry/service-discovery-generic-http.md#lookup)<br />
+:material-arrow-right-thin: Example: [generic-mqtt](../api/serviceregistry/service-discovery-generic-mqtt.md#lookup) | [generic-mqtts](../api/serviceregistry/service-discovery-generic-mqtt.md#lookup)
 
 -----
 

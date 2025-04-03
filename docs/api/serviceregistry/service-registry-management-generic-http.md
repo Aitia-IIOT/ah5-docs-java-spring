@@ -1,4 +1,6 @@
-# service-registry-management GENERIC-HTTP
+# service-registry-management IDD
+
+**GENERIC-HTTP & GENERIC-HTTPS**
 
 ## Overview
 This page describes the service-registry-management service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface templates](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually. The interfaces are implemented using protocol, encoding as stated in the following tables:

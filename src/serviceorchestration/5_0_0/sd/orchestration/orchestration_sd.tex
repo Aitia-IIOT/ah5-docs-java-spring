@@ -217,7 +217,7 @@ An \pref{Object} which describes the identity of a system. It also contains whet
 serviceRequirement & \hyperref[sec:model:ServiceRequirement]{ServiceRequirement} & yes & Details of the targeted service \\ \hline
 orchestrationFlags & \pref{Set}$<$\hyperref[sec:model:OrchestrationFlag]{OrchestrationFlag}$>$ & no & Set of orchestration flags. \\ \hline
 qosRequirements & \hyperref[sec:model:QoSRequirementMap]{QoSRequirementMap} & no & Quality of service requirements map. \\ \hline
-exclusivityDuration & \pref{Number} & no & The interval the service can be exclusive.  \\ \hline
+exclusivityDuration & \pref{Number} & no & The interval the service wanted to be exclusive.  \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -237,7 +237,7 @@ metadataRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{M
 interfaceTemplateNames & \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & The orchestrated service must offer at least one from the specified interface template names. \\ \hline 
 interfaceAddressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & The orchestrated service must offer at least one from the specified interface address types. \\ \hline
 interfacePropertyRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must offer at least one interface that meets with one of the specified property requirements. \\ \hline
-securityPloicies & \pref{List}$<$\pref{SecurityPolicy}$>$ & no & The orchestrated service must meet with one of the specified security policies. \\ \hline
+securityPolicies & \pref{List}$<$\pref{SecurityPolicy}$>$ & no & The orchestrated service must meet with one of the specified security policies. \\ \hline
 preferredProviders & \pref{List}$<$\pref{Name}$>$ & no & Provider system names specified here have priority. \\ \hline
 \end{tabularx}
 \end{table}

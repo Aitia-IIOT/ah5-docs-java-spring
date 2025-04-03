@@ -21,21 +21,21 @@ Learn more: <br />
 
 This service operation performs the orchestration process and returns the matching service instances.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
+:material-arrow-right-thin: Example: [generic-http](../api/serviceorchestration/orchestration-generic-http.md#pull) | [generic-https](../api/serviceorchestration/orchestration-generic-http.md#pull)<br />
 :material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
 
 **subscribe**
 
 This service operation creates a subscription that can be triggered anytime to perform the orchestration process and push the matching service instances for the subscriptor.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
+:material-arrow-right-thin: Example: [generic-http](../api/serviceorchestration/orchestration-generic-http.md#subscribe) | [generic-https](../api/serviceorchestration/orchestration-generic-http.md#subscribe)<br />
 :material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
 
 **unsubscribe**
 
 This service operation removes a subscription.
 
-:material-arrow-right-thin: Example: [generic-http](todo) | [generic-https](todo)<br />
+:material-arrow-right-thin: Example: [generic-http](../api/serviceorchestration/orchestration-generic-http.md#unsubscribe) | [generic-https](../api/serviceorchestration/orchestration-generic-http.md#unsubscribe)<br />
 :material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)
 
 ### orchestration-push-management
