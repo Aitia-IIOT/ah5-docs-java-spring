@@ -74,6 +74,12 @@ Authorization: Bearer <identity-info>
 }
 ```
 
+The service operation **responds** with the status code `200` if called successfully and with a [ServiceOrchestrationResponse](../data-models/service-orchestraion-response.md) JSON encoded body.
+
+```
+TODO
+```
+
 ### subscribe
 
 TODO

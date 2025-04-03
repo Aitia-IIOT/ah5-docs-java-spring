@@ -51,6 +51,7 @@ Decimal number.
 ## PropertyValidator
 
 An identifier of any suitable validator function chosen by the implementor of service. The validators have different kinds of inputs, depending on what to validate. Some validators have optional or mandatory **arguments**. The implemented validators are the following:
+
 - `NOT_EMPTY_ADDRESS_LIST`: The **input** is a list of [Addresses](#address) and must contain at least one element. The validator checks if the addresses are valid and in alignment with the supported address types and performs normalization. An example for usage: validating HTTP interface access addresses.
 - `NOT_EMPTY_STRING_SET`: The **input** is a list of [Strings](#string) and must contain at least one element. The validator checks if the are not empty and performs normalization. It can be used with the optional `NAME` **argument**. In that case, normalization and validation happens according to the naming convention. An example for usage: validating possible MQTT interface operations.
 - `PORT`: This validator is meant to be used for ports. The **input** is an integer that represents a port number. The validator checks if the given value is between 1 and 65535, since in practice all valid port numbers fall within this range.
