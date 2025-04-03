@@ -228,11 +228,11 @@ pageSize & \pref{Number} & no (yes) & The number of entries on the requested pag
 pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 namePart &  \pref{String} & no & Requester is looking for identities with system names containing the specified text. \\ \hline
-isSysop & \pref{Boolean} & no & Requester is looking for identities that have/have not higher level administration rights depending of the specified value. \\ \hline
+isSysop & \pref{Boolean} & no & Requester is looking for identities that have/do not have higher level administration rights depending of the specified value. \\ \hline
 createdBy & \pref{Name} & no & Requester is looking for identities that have been created by the specified identity. \\ \hline
 creationFrom &  \pref{DateTime} & no & Requester is looking for identities that were created after the specified time. \\ \hline
 creationTo &  \pref{DateTime} & no & Requester is looking for identities that were created before the specified time. \\ \hline
-hasSession & \pref{Boolean} & no & Requester is looking for identities that have/have not active session at the moment \\ \hline
+hasSession & \pref{Boolean} & no & Requester is looking for identities that have/do not have active session at the moment \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -297,9 +297,9 @@ identities & \pref{List}$<$\hyperref[sec:model:IdentityRequest]{IdentityRequest}
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-systemName & \pref{Name} & yes & Unique identifier of the identified system. \\ \hline
+systemName & \pref{Name} & yes & Unique identifier of the identifiable system. \\ \hline
 credentials &\hyperref[sec:model:Credentials]{Credentials} & yes & Authentication method-specific credential information of the system. \\ \hline
-sysop & \pref{Boolean} & no & Determines whether the identified system has higher level administration rights or not. \\ \hline
+sysop & \pref{Boolean} & no & Determines whether the identifiable system has higher level administration rights or not. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -351,7 +351,7 @@ loginTo &  \pref{DateTime} & no & Requester is looking for active sessions that 
 \msubsection{struct}{IdentitySessionListResponse}
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3.2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{4.5cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
 sessions & \pref{List}$<$\hyperref[sec:model:IdentitySessionResult]{IdentitySessionResult}$>$ & A page of sessions. \\ \hline

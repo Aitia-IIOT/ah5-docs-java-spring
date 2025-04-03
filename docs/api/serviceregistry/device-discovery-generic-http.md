@@ -37,7 +37,7 @@ The service operation **request** requires an [identity related header or certif
 JSON encoded body.
 
 ```
-POST /serviceregistry/device-registry/register HTTP/1.1
+POST /serviceregistry/device-discovery/register HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {
@@ -111,7 +111,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and may optionally include a [DeviceLookupRequest](../data-models/device-lookup-request.md) JSON encoded body.
 
 ```
-POST /serviceregistry/device-registry/lookup HTTP/1.1
+POST /serviceregistry/device-discovery/lookup HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {

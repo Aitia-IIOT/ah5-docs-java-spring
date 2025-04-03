@@ -21,6 +21,9 @@ nav:
     - Translation Manager: support_systems/translation_manager.md
   - API:
     - Interface Descriptions:
+      - General:
+        - HTTP:
+          - general-management: api/general/general-management-generic-http.md
       - Service Registry:
         - HTTP:
           - device-discovery: api/serviceregistry/device-discovery-generic-http.md
@@ -30,10 +33,17 @@ nav:
         - MQTT:
           - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
           - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md
-          - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md                    
+          - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md   
+      - Authentication:
+        - HTTP:
+          - identity: api/authentication/identity-generic-http.md
+          - identity-management: api/authentication/identity-management-generic-http.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
+      - ConfigMap: api/data-models/config-map.md
+      - ConfigResponse: api/data-models/config-response.md
+      - Credentials: api/data-models/credentials.md
       - DeviceDescriptor: api/data-models/device-descriptor.md
       - DeviceListRequest: api/data-models/device-list-request.md
       - DeviceListResponse: api/data-models/device-list-response.md
@@ -44,39 +54,10 @@ nav:
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
       - DeviceRegistrationResponse: api/data-models/device-registration-response.md
       - ErrorResponse: api/data-models/error-response.md
-      - InterfaceTemplateDescriptor: api/data-models/interface-template-descriptor.md
-      - InterfaceTemplateListRequest: api/data-models/interface-template-list-request.md
-      - InterfaceTemplateListResponse: api/data-models/interface-template-list-response.md
-      - InterfaceTemplatePropertyDescriptor: api/data-models/interface-template-property-descriptor.md
-      - InterfaceTemplatePropertyRequest: api/data-models/interface-template-property-request.md
-      - InterfaceTemplateQueryRequest: api/data-models/interface-template-query-request.md
-      - InterfaceTemplateRequest: api/data-models/interface-template-request.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
       - MQTTResponseTemplate: api/data-models/mqtt-response-template.md
-      - PageRequest: api/data-models/page-request.md
-      - ServiceCreateListRequest: api/data-models/service-create-list-request.md
-      - ServiceDefinitionDescriptor: api/data-models/service-definition-descriptor.md
-      - ServiceDefinitionListRequest: api/data-models/service-definition-list-request.md
-      - ServiceDefinitionListResponse: api/data-models/service-definition-list-response.md
-      - ServiceDefinitionRemoveRequest: api/data-models/service-definition-remove-request.md
-      - ServiceInstnceDescriptor: api/data-models/service-instance-descriptor.md
-      - ServiceInterfaceDescriptor: api/data-models/service-interface-descriptor.md
-      - ServiceInterfaceRequest: api/data-models/service-interface-request.md
-      - ServiceListResponse: api/data-models/service-list-response.md
-      - ServiceLookupRequest: api/data-models/service-lookup-request.md
-      - ServiceLookupResponse: api/data-models/service-lookup-response.md
-      - ServiceLookupResult: api/data-models/service-lookup-result.md
-      - ServiceQueryRequest: api/data-models/service-query-request.md
-      - ServiceRegistrationRequest: api/data-models/service-registration-request.md
-      - ServiceRegistrationResponse: api/data-models/service-registration-response.md
-      - ServiceRequest: api/data-models/service-request.md
-      - ServiceUpdateListRequest: api/data-models/service-update-list-request.md
-      - ServiceUpdateRequest: api/data-models/service-update-request.md
-      - SystemDescriptor: api/data-models/system-descriptor.md
-      - SystemListRequest: api/data-models/system-list-request.md
-      - SystemListResponse: api/data-models/system-list-response.md      
       - SystemLookupRequest: api/data-models/system-lookup-request.md
       - SystemLookupResponse: api/data-models/system-lookup-response.md
       - SystemLookupResult: api/data-models/system-lookup-result.md
