@@ -48,9 +48,6 @@ A String indentifier that is intended to be both human and machine-readable. The
 
 Decimal number.
 
-## String
-A chain of UTF-8 characters.
-
 ## PropertyValidator
 
 An identifier of any suitable validator function chosen by the implementor of service. The validators have different kinds of inputs, depending on what to validate. Some validators have optional or mandatory **arguments**. The implemented validators are the following:
