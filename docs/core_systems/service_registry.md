@@ -175,7 +175,7 @@ Auto initialization of database tables. Value must be always 'none'.
 
 :fontawesome-solid-wrench: **authenticator.credentials**
 
-The credentials what this system will use for performing the login operation when the authentication policy is `outsourced`.
+The credentials that this system will use for performing the login operation when the authentication policy is `outsourced`.
 
 ```
 authenticator.credentials={\
@@ -203,15 +203,15 @@ Whether or not the service requests should be refused when the blacklist server 
 
 :fontawesome-solid-wrench: **enable.management.filter**
 
-Enable or disable authorization for accessing to the management services. Can be `true` of `false`.
+Enable or disable authorization for accessing the management services. Can be `true` of `false`.
 
 :fontawesome-solid-wrench: **management.policy**
 
 Way of authorizing the management service requester systems. Can be:
      
-- `sysop-only`, when the authenticated requester system has _system-operator_ role.
-- `whitelist`, _sysop-only_ and when the authenticated requester system is whitelisted in the _management.whitelist_ configuration property.
-- `authorization`, _sysop-only_ and _whitelist_ and when the authenticated requester system has appropriate permission according to the Authorization Core System.
+- `sysop-only`, when the authenticated requester system has _system-operator_ role that ensures overall management permission.
+- `whitelist`, _sysop-only_ and when the authenticated requester system is whitelisted in the _management.whitelist_ configuration property that ensures overall management permission.
+- `authorization`, _sysop-only_ and _whitelist_ and when the authenticated requester system has appropriate service permission according to the Authorization Core System.
 
 :fontawesome-solid-wrench: **management.whitelist**
 
@@ -238,7 +238,7 @@ service.discovery.direct.access=<system-name-a>,<system-name-b>
 
 :fontawesome-solid-wrench: **discovery.verbose**
 
-Whether or not the _service-discovery_ service should provide system details as well and the _system-discovery_ service should provide device details as well. Can be `true` of `false`.
+Whether or not the _service-discovery_ service should provide system and device details as well and the _system-discovery_ service should provide device details as well. Can be `true` of `false`.
 
 :fontawesome-solid-wrench: **service.discovery.interface.policy**
 
