@@ -27,7 +27,10 @@ nav:
           - system-discovery: api/serviceregistry/system-discovery-generic-http.md
         - MQTT:
           - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
-          - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md          
+          - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md
+      - Service Orchestration:
+        - HTTP:
+          - orchestration: api/serviceorchestration/orchestration-generic-http.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
