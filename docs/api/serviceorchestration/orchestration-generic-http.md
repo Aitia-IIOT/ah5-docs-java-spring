@@ -34,11 +34,43 @@ The service operation **request** requires an [identity related header or certfi
 JSON encoded body.
 
 ```
-POST /serviceregistry/device-registry/register HTTP/1.1
+POST /serviceorchestration/orchestration/pull HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {
-   
+   "serviceRequirement":{
+      "serviceDefinition":"kelvin-info",
+      "operations":[
+         "query-temperature"
+      ],
+      "versions":[],
+      "alivesAt":"2030-01-01T00:00:00Z",
+      "metadataRequirements":[],
+      "interfaceTemplateNames":[
+         "GENERIC-HTTP"
+      ],
+      "interfaceAddressTypes":[
+         "HOSTNAME",
+         "IPV4"
+      ],
+      "interfacePropertyRequirements":[],
+      "securityPolicies":[
+         "TOKEN_AUTH"
+      ],
+      "preferredProviders":[]
+   },
+   "orchestrationFlags":{
+      "MATCHMAKING":"true",
+      "ALLOW_TRANSLATION":"true",
+      "ONLY_PREFERRED":"false",
+      "ONLY_EXCLUSIVE":"false",
+      "ALLOW_INTERCLOUD":"false",
+      "ONLY_INTERCLOUD":"false"
+   },
+   "qosRequirements":{
+      "max-latency-ms":"10"
+   },
+   "exclusivityDuration":600
 }
 ```
 
