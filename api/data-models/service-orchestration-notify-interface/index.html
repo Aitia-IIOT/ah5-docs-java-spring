@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../device-registration-response/">
+        <link rel="prev" href="../service-orchestration-flag/">
       
       
-        <link rel="next" href="../identity-change-request/">
+        <link rel="next" href="../service-orchestration-request/">
       
       
       <link rel="icon" href="../../../assets/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>ErrorResponse - Arrowhead 5 | java-spring</title>
+        <title>ServiceOrchestrationNotifyInterface - Arrowhead 5 | java-spring</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#errorresponse" class="md-skip">
+        <a href="#serviceorchestrationnotifyinterface" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ErrorResponse
+              ServiceOrchestrationNotifyInterface
             
           </span>
         </div>
@@ -1941,19 +1941,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../error-response/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1962,7 +1953,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -2896,10 +2886,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../service-orchestration-notify-interface/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -2908,6 +2907,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -3708,35 +3708,28 @@
   
 
 
-<h1 id="errorresponse">ErrorResponse</h1>
+<h1 id="serviceorchestrationnotifyinterface">ServiceOrchestrationNotifyInterface</h1>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th>Type</th>
+<th>Mandatory</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>errorMessage</td>
-<td>String</td>
-<td>Description of the error.</td>
+<td>protocol</td>
+<td><a href="../../primitives/#protocol">Protocol</a></td>
+<td>yes</td>
+<td>Communication protocol to be used for sending notification.</td>
 </tr>
 <tr>
-<td>errorCode</td>
-<td>Integer</td>
-<td>Numerical code of the error.</td>
-</tr>
-<tr>
-<td>exceptionType</td>
-<td><a href="../../primitives/#errortype">ErrorType</a></td>
-<td>Type value of the error.</td>
-</tr>
-<tr>
-<td>origin</td>
-<td>String</td>
-<td>Origin of the error.</td>
+<td>properties</td>
+<td><a href="../property-map/">PropertyMap</a></td>
+<td>yes</td>
+<td>Interface properties belonged to the specified protocol.</td>
 </tr>
 </tbody>
 </table>
