@@ -1506,7 +1506,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### interface-template-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[InterfaceTemplate](../primitives.md#interfacetemplate)> as path parameter, which contains the string identifier of the interface descriptors that need to be removed.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the string identifier of the interface descriptors that need to be removed.
 
 ```
 DELETE /serviceregistry/mgmt/interface-templates?names=custom-ftp&names=my-awesome-ftp HTTP/1.1

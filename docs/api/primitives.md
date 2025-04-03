@@ -86,6 +86,10 @@ A string identifier of a service instance. It consists of the instance's provide
 
 A chain of UTF-8 characters.
 
+## UUID
+
+A UUID (Universally Unique Identifier) is a 128-bit identifier used to uniquely distinguish objects in distributed systems (e.g.: `550e8400-e29b-41d4-a716-446655440000`)
+
 ## Version
 
 Specifies a system version. Version must follow the Semantic Versioning, which means, it consists of three numbers separated by dots. These numbers represent the `MAJOR`, `MINOR` and `PATCH` version. An example: 5.0.0
