@@ -1,4 +1,4 @@
-# orchestration IDD (dynamic startegy)
+# orchestration IDD (dynamic strategy)
 **GENERIC-HTTP & GENERIC-HTTPS**
 
 ## Overview
