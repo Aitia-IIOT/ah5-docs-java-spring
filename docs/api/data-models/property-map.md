@@ -1,3 +1,3 @@
 # PropertyMap
 
-An Object which maps String keys String values.
+An Object which maps String keys to String values.

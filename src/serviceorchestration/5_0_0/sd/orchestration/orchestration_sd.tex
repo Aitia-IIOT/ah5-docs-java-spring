@@ -214,7 +214,7 @@ An \pref{Object} which describes the identity of a system. It also contains whet
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3.25cm} | p{3.8cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-serviceRequirement & \hyperref[sec:model:ServiceRequirement]{ServiceRequirement} & yes & Details of the targeted service \\ \hline
+serviceRequirement & \hyperref[sec:model:ServiceRequirement]{ServiceRequirement} & yes & Details of the targeted service. \\ \hline
 orchestrationFlags & \pref{Set}$<$\hyperref[sec:model:OrchestrationFlag]{OrchestrationFlag}$>$ & no & Set of orchestration flags. \\ \hline
 qosRequirements & \hyperref[sec:model:QoSRequirementMap]{QoSRequirementMap} & no & Quality of service requirements map. \\ \hline
 exclusivityDuration & \pref{Number} & no & The interval the service wanted to be exclusive.  \\ \hline
@@ -233,7 +233,7 @@ operations & \pref{List}$<$\pref{Name}$>$ & yes/no & The required service operat
 Exactly one operation must be defined, when the following orchestration flags are true: \newline \texttt{ONLY\_INTERCLOUD}, \texttt{ALLOW\_INTERCLOUD}, \texttt{ALLOW\_TRANSLATION} \\ \hline
 versions & \pref{List}$<$\pref{Version}$>$ & no & The required service versions. \\ \hline 
 alivesAt & \pref{DateTime} & no & The orchestrated service must be alive by this time. \\ \hline
-metadataRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must meet at least to one of the specified metadate reuirement. \\ \hline
+metadataRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must meet at least to one of the specified metadata reuirement. \\ \hline
 interfaceTemplateNames & \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & The orchestrated service must offer at least one from the specified interface template names. \\ \hline 
 interfaceAddressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & The orchestrated service must offer at least one from the specified interface address types. \\ \hline
 interfacePropertyRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must offer at least one interface that meets with one of the specified property requirements. \\ \hline
@@ -262,18 +262,24 @@ Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process.
     If \texttt{true}, orchestration process includes a matchmaking process in order to return only one matching service instance if any. 
 
     If \texttt{false}, orchestration process returns all the matching service instance if any. 
+
+    Supporting strategies: \textit{simple-store}, \textit{flexible-store}, \textit{dynamic}
     
     \item \texttt{ONLY\_PREFERRED}:
 
     If \texttt{true}, orchestration process considers only those matching service instances that are provided by a preferred provider if any.
 
-    If \texttt{false}, but preferred providers are specified and have matching service instances, than orchestration process considers only those service instances that are provided by a preferred provider. Otherwise, non-preferred providers are considered.
+    If \texttt{false}, but preferred providers are specified and have matching service instances, then orchestration process considers only those service instances that are provided by a preferred provider. Otherwise, non-preferred providers are considered.
+
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
     
     \item \texttt{ONLY\_EXCLUSIVE}:
 
     If \texttt{true}, orchestration process considers only those matching service instances that are allows exclusivity. It automatically results \texttt{MATCHMAKING:true} as well.
 
-    If \texttt{false}, but exclusivity duration is specified and there are matching services with exclusivity allowed, than orchestration process considers only those service instances that allows exclusivity. Otherwise, service instances without exclusivity are considered.
+    If \texttt{false}, but exclusivity duration is specified and there are matching services with exclusivity allowed, then orchestration process considers only those service instances that allows exclusivity. Otherwise, service instances without exclusivity are considered.
+
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
     
     \item \texttt{ALLOW\_INTERCLOUD}:
 
@@ -281,17 +287,23 @@ Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process.
 
     If \texttt{false}, orchestration process doesn't consider matching service instances from neighbor clouds when there are no local hits.
 
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
+
     \item \texttt{ONLY\_INTERCLOUD}:
 
     If \texttt{true}, orchestration process considers matching service instances only from the neighbor clouds. It automatically results \texttt{MATCHMAKING:true} as well.
 
     If \texttt{false}, orchestration process considers matching service instances from the local could in first hand and only considers matching service instances from the neighbor clouds when \texttt{ALLOW\_INTERCLOUD:true}.
+
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
     
     \item \texttt{ALLOW\_TRANSLATION}:
 
-    If \texttt{true}, orchestration process considers matching, but non-native service instances when there are no native hits. It automatically results \texttt{MATCHMAKING:true} as well.
+    If \texttt{true}, orchestration process considers matching, but non-native service instances when there are no native hits. Matching, but non-native service instance means that all the requirements are fulfilled except the interface related requirements (protocol, data-format, etc.). It automatically results \texttt{MATCHMAKING:true} as well.
 
      If \texttt{false}, orchestration process considers only native matching service instances.
+
+     Supporting strategies: \textit{flexible-store}, \textit{dynamic}
     
 \end{itemize}
 
@@ -324,6 +336,8 @@ metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information abou
 interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
 \end{tabularx}
 \end{table}
+
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceInctanceId} field. 
 
 \msubsection{struct}{Metadata}
 

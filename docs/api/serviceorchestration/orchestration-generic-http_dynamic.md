@@ -1,4 +1,4 @@
-# orchestration IDD
+# orchestration IDD (dynamic startegy)
 **GENERIC-HTTP & GENERIC-HTTPS**
 
 ## Overview
@@ -30,7 +30,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [orchestrat
 
 ### pull
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ServiceOrchestrationRequest](../data-models/service-orchestration-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationRequest](../data-models/service-orchestration-request.md)
 JSON encoded body.
 
 ```
@@ -44,7 +44,7 @@ Authorization: Bearer <identity-info>
          "query-temperature"
       ],
       "versions":[],
-      "alivesAt":"2030-01-01T00:00:00Z",
+      "alivesAt":"2025-10-05T11:35:14Z",
       "metadataRequirements":[],
       "interfaceTemplateNames":[
          "generic-https"
@@ -55,7 +55,7 @@ Authorization: Bearer <identity-info>
       ],
       "interfacePropertyRequirements":[],
       "securityPolicies":[
-         "TOKEN_AUTH"
+         "TIME_LIMITED_TOKEN_AUTH"
       ],
       "preferredProviders":[]
    },
@@ -74,7 +74,7 @@ Authorization: Bearer <identity-info>
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully and with a [ServiceOrchestrationResponse](../data-models/service-orchestraion-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully and with a [ServiceOrchestrationResponse](../data-models/service-orchestration-response.md) JSON encoded body.
 
 ```
 {
@@ -85,7 +85,7 @@ The service operation **responds** with the status code `200` if called successf
          "serviceDefinitition":"kelvin-info",
          "version":"1.0.0",
          "aliveUntil":"2028-11-08T10:21:11Z",
-         "exclusiveUntil":"2024-10-05T11:35:14Z",
+         "exclusiveUntil":"2025-10-05T11:35:14Z",
          "metadata":{
             "margin-of-error":0.5
          },
@@ -93,7 +93,7 @@ The service operation **responds** with the status code `200` if called successf
             {
                "templateName":"generic-https",
                "protocol":"https",
-               "policy":"TOKEN_AUTH",
+               "policy":"TIME_LIMITED_TOKEN_AUTH",
                "properties":{
                   "accessAddresses":[
                      "192.168.56.116",
@@ -134,7 +134,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### subscribe
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [ServiceOrchestrationSubscriptionRequest](../data-models/service-orchestration-subscription-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationSubscriptionRequest](../data-models/service-orchestration-subscription-request.md)
 JSON encoded body.
 
 ```
@@ -151,7 +151,7 @@ Authorization: Bearer <identity-info>
          "versions":[
             
          ],
-         "alivesAt":"2030-01-01T00:00:00Z",
+         "alivesAt":"2025-10-05T11:35:14Z",
          "metadataRequirements":[
             
          ],
@@ -166,7 +166,7 @@ Authorization: Bearer <identity-info>
             
          ],
          "securityPolicies":[
-            "TOKEN_AUTH"
+            "TIME_LIMITED_TOKEN_AUTH"
          ],
          "preferredProviders":[
             

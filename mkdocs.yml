@@ -9,9 +9,9 @@ nav:
     - Contribute: home/contribute.md 
   - Core Systems:
     - Service Registry: core_systems/service_registry.md
-    - Service Orchestration:
-      - Dynamic: core_systems/service_orchestration_dynamic.md
-      - Flexible-store: core_systems/service_orchestration_flexible_store.md
+    - Dynamic Service Orchestration: core_systems/service_orchestration_dynamic.md
+    - Flexible-Store Service Orchestration: core_systems/service_orchestration_flexible_store.md
+    - Simple-Store Service Orchestration: core_systems/service_orchestration_simple_store.md
     - Authorization: core_systems/authorization.md
     - Authentication: core_systems/authentication.md
   - Support Systems: 
@@ -36,7 +36,7 @@ nav:
           - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md   
       - Service Orchestration:
         - HTTP:
-          - orchestration: api/serviceorchestration/orchestration-generic-http.md
+          - orchestration (dynamic): api/serviceorchestration/orchestration-generic-http_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
