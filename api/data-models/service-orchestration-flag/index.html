@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../service-lookup-result/">
+        <link rel="prev" href="../service-orchestration-response/">
       
       
         <link rel="next" href="../service-orchestration-notify-interface/">
@@ -609,50 +609,12 @@
   
   
   
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Service Orchestration
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_2">
-            <span class="md-nav__icon md-icon"></span>
-            Service Orchestration
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../../../core_systems/service_orchestration_dynamic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Dynamic
+    Dynamic Service Orchestration
   </span>
   
 
@@ -673,7 +635,7 @@
         
   
   <span class="md-ellipsis">
-    Flexible-store
+    Flexible-Store Service Orchestration
   </span>
   
 
@@ -683,9 +645,22 @@
 
               
             
-          </ul>
-        </nav>
-      
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../core_systems/service_orchestration_simple_store/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple-Store Service Orchestration
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1431,11 +1406,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../serviceorchestration/orchestration-generic-http/" class="md-nav__link">
+      <a href="../../serviceorchestration/orchestration-generic-http_dynamic/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    orchestration
+    orchestration (dynamic)
   </span>
   
 
@@ -2847,7 +2822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../service-orchestration-response.md" class="md-nav__link">
+      <a href="../service-orchestration-response/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3709,14 +3684,14 @@
 
 
 <h1 id="serviceorchestrationflag">ServiceOrchestrationFlag</h1>
-<p>Specific String:Boolean pair to control the orchestration process. Possible values:</p>
+<p>Specific <a href="../../primitives/#string">String</a>:<a href="../../primitives/#boolean">Boolean</a> pair to control the orchestration process. Possible values:</p>
 <ul>
-<li><code>MATCHMAKING</code>: If <strong>true</strong> orchestration process includes a matchmaking process in order to return only one matching service instance if any. If <strong>false</strong>, orchestration process returns all the matching service instance if any.</li>
-<li><code>ONLY_PREFERRED</code>: If <strong>true</strong>, orchestration process considers only those matching service instances that are provided by a preferred provider if any. If <strong>false</strong>, but preferred providers are specified and have matching service instances, than orchestration process considers only those service instances that are provided by a preferred provider. Otherwise, non-preferred providers are considered.</li>
-<li><code>ONLY_EXCLUSIVE</code>: If <strong>true</strong>, orchestration process considers only those matching service instances that are allows exclusivity. It automatically results <code>MATCHMAKING:true</code> as well. If <strong>false</strong>, but exclusivity duration is specified and there are matching services with exclusivity allowed, than orchestration process considers only those service instances that allows exclusivity. Otherwise, service instances without exclusivity are considered.</li>
+<li><code>MATCHMAKING</code>: If <strong>true</strong> orchestration process includes a matchmaking process in order to return only one matching service instance if any. If <strong>false</strong>, orchestration process returns all the matching service instances if any.</li>
+<li><code>ONLY_PREFERRED</code>: If <strong>true</strong>, orchestration process considers only those matching service instances that are provided by a preferred provider if any. If <strong>false</strong>, but preferred providers are specified and have matching service instances, then orchestration process considers only those service instances that are provided by a preferred provider. Otherwise, non-preferred providers are considered.</li>
+<li><code>ONLY_EXCLUSIVE</code>: If <strong>true</strong>, orchestration process considers only those matching service instances that are allows exclusivity. It automatically results <code>MATCHMAKING:true</code> as well. If <strong>false</strong>, but exclusivity duration is specified and there are matching services with exclusivity allowed, then orchestration process considers only those service instances that allows exclusivity. Otherwise, service instances without exclusivity are considered.</li>
 <li><code>ALLOW_INTERCLOUD</code>: If <strong>true</strong>, orchestration process considers matching service instances from neighbor clouds when there are no local hits. Orchestrating from neighbor clouds automatically results <code>MATCHMAKING:true</code>. If <strong>false</strong>, orchestration process doesn't consider matching service instances from neighbor clouds when there are no local hits.</li>
 <li><code>ONLY_INTERCLOUD</code>: If <strong>true</strong>, orchestration process considers matching service instances only from the neighbor clouds. It automatically results <code>MATCHMAKING:true</code> as well. If <strong>false</strong>, orchestration process considers matching service instances from the local could in first hand and only considers matching service instances from the neighbor clouds when <code>ALLOW_INTERCLOUD:true</code>.</li>
-<li><code>ALLOW_TRANSLATION</code>: If <strong>true</strong>, orchestration process considers matching, but non-native service instances when there are no native hits. It automatically results <code>MATCHMAKING:true</code> as well. If <strong>false</strong>, orchestration process considers only native matching service instances.</li>
+<li><code>ALLOW_TRANSLATION</code>: If <strong>true</strong>, orchestration process considers matching, but non-native (different interface) service instances when there are no native hits. It automatically results <code>MATCHMAKING:true</code> as well. If <strong>false</strong>, orchestration process considers only native matching service instances.</li>
 </ul>
 
 
