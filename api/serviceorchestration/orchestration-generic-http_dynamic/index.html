@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#orchestration-idd-dynamic-startegy" class="md-skip">
+        <a href="#orchestration-idd-dynamic-strategy" class="md-skip">
           Skip to content
         </a>
       
@@ -3827,7 +3827,7 @@
   
 
 
-<h1 id="orchestration-idd-dynamic-startegy">orchestration IDD (dynamic startegy)</h1>
+<h1 id="orchestration-idd-dynamic-strategy">orchestration IDD (dynamic strategy)</h1>
 <p><strong>GENERIC-HTTP &amp; GENERIC-HTTPS</strong></p>
 <h2 id="overview">Overview</h2>
 <p>This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of orchestration, which provides runtime (late) binding between application systems. It’s implemented using protocol, encoding as stated in the
@@ -3995,7 +3995,7 @@ Authorization: Bearer &lt;identity-info&gt;
 <h3 id="subscribe">subscribe</h3>
 <p>The service operation <strong>request</strong> requires an <a href="../../authentication_policy/#http">identity related header or certificate</a> and a <a href="../../data-models/service-orchestration-subscription-request/">ServiceOrchestrationSubscriptionRequest</a>
 JSON encoded body.</p>
-<pre><code>POST /serviceorchestration/orchestration/subscribe HTTP/1.1
+<pre><code>POST /serviceorchestration/orchestration/subscribe?trigger=&lt;trigger-value&gt; HTTP/1.1
 Authorization: Bearer &lt;identity-info&gt;
 
 {
