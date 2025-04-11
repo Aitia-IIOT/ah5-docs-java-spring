@@ -138,7 +138,7 @@ The service operation **request** requires an [identity related header or certif
 JSON encoded body.
 
 ```
-POST /serviceorchestration/orchestration/subscribe HTTP/1.1
+POST /serviceorchestration/orchestration/subscribe?trigger=<trigger-value> HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {

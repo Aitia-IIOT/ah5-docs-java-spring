@@ -178,7 +178,7 @@ In case of \textbf{dynamic} strategy the \textit{pull} operation requires at lea
 
 \fsubsection{subscribe}{OrchestrationSubscriptionRequest}{OrchestrationSubscriptionId}{}{ErrorResponse}
 
-This operation requires at least the consumer's identity, the targeted service definition and a notify interface. The result of this operation is an identifier that refers to the created subscription record. 
+This operation requires at least the consumer's identity, the targeted service definition and a notify interface. The result of this operation is an identifier that refers to the created subscription record. Optionally a push orchestration also can be initiated at the same time.
 
 \fsubsection{unsubscribe}{OrchestrationSubscriptionId}{}{OperationStatus}{ErrorResponse}
 
@@ -221,6 +221,8 @@ exclusivityDuration & \pref{Number} & no & The interval the service wanted to be
 \end{tabularx}
 \end{table}
 
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceRequirement} and \texttt{orchestrationFlags} fields. 
+
 \clearpage
 
 \msubsection{struct}{ServiceRequirement}
@@ -241,6 +243,8 @@ securityPolicies & \pref{List}$<$\pref{SecurityPolicy}$>$ & no & The orchestrate
 preferredProviders & \pref{List}$<$\pref{Name}$>$ & no & Provider system names specified here have priority. \\ \hline
 \end{tabularx}
 \end{table}
+
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceDefinition} field. 
 
 \msubsection{struct}{MetadataRequirements}
 
@@ -379,6 +383,7 @@ authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester o
 orchestrationForm & \hyperref[sec:model:OrchestrationForm]{OrchestrationForm} & yes & Orchestration request details. \\ \hline
 notifyInterface & \hyperref[sec:model:NotifyInterface]{NotifyInterface} & yes & Interface details for sending push notifications. \\ \hline
 duration & \pref{Number} & no & The interval while the subscription is active.  \\ \hline
+trigger & \pref{Boolean} & no & Whether or not a push orchestration should be initiated upon a successful subscription.  \\ \hline
 \end{tabularx}
 \end{table}
 
