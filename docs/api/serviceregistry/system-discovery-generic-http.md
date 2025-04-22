@@ -3,7 +3,7 @@
 ## Overview
 
 This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of system-discovery, which enables both
-application and core/support systems to lookup, register and revoke systems that are part of the Local Cloud.  System representation is mandatory for the base functionalities of a Local Cloud, e.g. the systems have to be registered in order to interact with each other.  The interfaces are implemented using protocol, encoding as stated in the following tables:
+application and core/support systems to lookup, register and revoke systems that are part of the Local Cloud.  System representation is mandatory for the base functionalities of a Local Cloud, e.g. the systems have to be registered in order to interact with each other. The interfaces are implemented using protocol, encoding as stated in the following tables:
 
 ## Interface Description
 
@@ -29,7 +29,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [system-dis
 
 ### register
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http) and a [SystemRegistrationRequest](../data-models/system-registration-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [SystemRegistrationRequest](../data-models/system-registration-request.md)
 JSON encoded body.
 
 ```
@@ -126,7 +126,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### lookup
 
-The service operation **request** requires an [identity related header or certfificate](../authentication_policy.md/#http). The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemLookupRequest](../data-models/system-lookup-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemLookupRequest](../data-models/system-lookup-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/system-discovery/lookup?verbose=<verbose-value> HTTP/1.1
@@ -201,7 +201,7 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ### revoke
 
-The service operation **request** only requires an [identity related header or certfificate](../authentication_policy.md/#http). The name of the system to be revoked will be identified during authentication.
+The service operation **request** only requires an [identity related header or certificate](../authentication_policy.md/#http). The name of the system to be revoked will be identified during authentication.
 
 ```
 DELETE /serviceregistry/system-discovery/revoke HTTP1.1

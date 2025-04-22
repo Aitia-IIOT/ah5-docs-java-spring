@@ -4,7 +4,8 @@ The following cofiguration properties are applied by (almost) every Core and Sup
 
 :fontawesome-solid-wrench: **authentication.policy**
 
-Specifies the applied [authentication policy](../api/authentication_policy.md). Can be `declared`, `certificate` or `outsourced`. 
+Specifies the applied [authentication policy](../api/authentication_policy.md). Can be `declared`, `certificate` or `outsourced`.
+Learn more about the [authentication policies](../api/authentication_policy.md).
 
 :fontawesome-solid-wrench: **server.address**
 
