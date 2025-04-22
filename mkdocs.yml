@@ -24,6 +24,8 @@ nav:
       - General:
         - HTTP:
           - general-management: api/general/general-management-generic-http.md
+        - MQTT:
+          - general-management: api/general/general-management-generic-mqtt.md
       - Service Registry:
         - HTTP:
           - device-discovery: api/serviceregistry/device-discovery-generic-http.md
@@ -38,6 +40,9 @@ nav:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
           - identity-management: api/authentication/identity-management-generic-http.md
+        - MQTT:
+          - identity: api/authentication/identity-generic-mqtt.md
+          - identity-management: api/authentication/identity-management-generic-mqtt.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
@@ -54,6 +59,23 @@ nav:
       - DeviceRegistrationRequest: api/data-models/device-registration-request.md
       - DeviceRegistrationResponse: api/data-models/device-registration-response.md
       - ErrorResponse: api/data-models/error-response.md
+      - Identity: api/data-models/identity.md
+      - IdentityChangeRequest: api/data-models/identity-change-request.md
+      - IdentityListCreateRequest: api/data-models/identity-list-create-request.md
+      - IdentityListResponse: api/data-models/identity-list-response.md
+      - IdentityListUpdateRequest: api/data-models/identity-list-update-request.md
+      - IdentityMgmtRequest: api/data-models/identity-mgmt-request.md
+      - IdentityQueryRequest: api/data-models/identity-query-request.md
+      - IdentityRequest: api/data-models/identity-request.md
+      - IdentityResponse: api/data-models/identity-response.md
+      - IdentityResult: api/data-models/identity-result.md
+      - IdentitySessionListResponse: api/data-models/identity-session-list-response.md
+      - IdentitySessionQueryRequest: api/data-models/identity-session-query-request.md
+      - IdentitySessionResult: api/data-models/identity-session-result.md
+      - IdentityVerifyResponse: api/data-models/identity-verify-response.md
+      - LogEntry: api/data-models/log-entry.md
+      - LogRequest: api/data-models/log-request.md
+      - LogResponse: api/data-models/log-response.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
