@@ -67,7 +67,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 ```
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
-`500` if an unexpected error happens. If the Authentication system needs contacting an external server during the login process,
+`500` if an unexpected error happens. If the Authentication System needs contacting an external server during the login process,
 error code `503` can also be used if there was a problem with the external server.  In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
@@ -105,7 +105,7 @@ Topic: arrowhead/authentication/identity/identity-logout
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully. The response template payload ia empty.
+The service operation **responds** with the status code `200` if called successfully. The response template payload is empty.
 
 ```
 {
@@ -159,7 +159,7 @@ Topic: arrowhead/authentication/identity/identity-change-credentials
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully. The response template payload ia empty.
+The service operation **responds** with the status code `200` if called successfully. The response template payload is empty.
 
 ```
 {
@@ -171,7 +171,7 @@ The service operation **responds** with the status code `200` if called successf
 ```
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
-`500` if an unexpected error happens. If the Authentication system needs contacting an external server during the credential change process,
+`500` if an unexpected error happens. If the Authentication System needs contacting an external server during the credential change process,
 error code `503` can also be used if there was a problem with the external server. In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 

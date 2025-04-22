@@ -9,7 +9,7 @@ Learn more: <br />
 
 ### identity
 
-The purpose of this service is to give, verify and invalidates a proof of identity token. Furthermore, it also allows a system to change its own credentials. The service is offered for both application and core/support systems.
+The purpose of this service is to give, verify and invalidate a proof of identity token. Furthermore, it also allows a system to change its own credentials. The service is offered for both application and Core/Support Systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/identity_sd.pdf) <br />

@@ -4,7 +4,7 @@
 ## Overview
 
 This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of identity-management which enables systems (with operator role or
-proper permissions) to handle (create, update, remove, query) identities and active sessions (close, query) in bulk. It is implemented using protocol, encoding as stated in the
+proper permissions) to handle identities (create, update, remove, query) and active sessions (close, query) in bulk. It is implemented using protocol, encoding as stated in the
 following tables:
 
 **GENERIC-HTTP**
@@ -153,7 +153,7 @@ The service operation **responds** with the status code `201` if called successf
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and `500` if an unexpected error happens.
-If the Authentication system needs contacting an external server during the creation process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
+If the Authentication System needs contacting an external server during the creation process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
@@ -225,7 +225,7 @@ The service operation **responds** with the status code `200` if called successf
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and `500` if an unexpected error happens.
-If the Authentication system needs contacting an external server during the update process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
+If the Authentication System needs contacting an external server during the update process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
@@ -249,7 +249,7 @@ The service operation **responds** with the status code `200` if called successf
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and `500` if an unexpected error happens.
-If the Authentication system needs contacting an external server during the deletion process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
+If the Authentication System needs contacting an external server during the deletion process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```

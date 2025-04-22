@@ -4,7 +4,7 @@
 ## Overview
 
 This page describes the GENERIC-MQTT and GENERIC-MQTTS service interface of identity-management which enables systems (with operator role or
-proper permissions) to handle (create, update, remove, query) identities and active sessions (close, query) in bulk. It is implemented using protocol, encoding as stated in the
+proper permissions) to handle identities (create, update, remove, query) and active sessions (close, query) in bulk. It is implemented using protocol, encoding as stated in the
 following tables:
 
 **GENERIC-MQTT**
@@ -179,7 +179,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and `500` if an unexpected error happens.
-If the Authentication system needs contacting an external server during the creation process, error code `503` can also be used if there was a problem with the external server. In these cases the response template payload is an
+If the Authentication System needs contacting an external server during the creation process, error code `503` can also be used if there was a problem with the external server. In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```
@@ -265,7 +265,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and `500` if an unexpected error happens.
-If the Authentication system needs contacting an external server during the update process, error code `503` can also be used if there was a problem with the external server. In these cases the response template payload is an
+If the Authentication System needs contacting an external server during the update process, error code `503` can also be used if there was a problem with the external server. In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```
@@ -284,7 +284,7 @@ If the Authentication system needs contacting an external server during the upda
 
 ### identity-mgmt-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of systems that needs to be removed.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of systems that need to be removed.
 
 ```
 Topic: arrowhead/authentication/identity/management/identity-mgmt-remove
@@ -298,7 +298,7 @@ Topic: arrowhead/authentication/identity/management/identity-mgmt-remove
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully. The response template payload ia empty.
+The service operation **responds** with the status code `200` if called successfully. The response template payload is empty.
 
 ```
 {
@@ -311,7 +311,7 @@ The service operation **responds** with the status code `200` if called successf
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and `500` if an unexpected error happens.
-If the Authentication system needs contacting an external server during the deletion process, error code `503` can also be used if there was a problem with the external server. In these cases the response template payload is an
+If the Authentication System needs contacting an external server during the deletion process, error code `503` can also be used if there was a problem with the external server. In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```
@@ -398,7 +398,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### identity-mgmt-session-close
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of systems whose sessions needs to be closed.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of systems whose sessions need to be closed.
 
 ```
 Topic: arrowhead/authentication/identity/management/identity-mgmt-session-query
@@ -412,7 +412,7 @@ Topic: arrowhead/authentication/identity/management/identity-mgmt-session-query
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully. The response template payload ia empty.
+The service operation **responds** with the status code `200` if called successfully. The response template payload is empty.
 
 ```
 {
