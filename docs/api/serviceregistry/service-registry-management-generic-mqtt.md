@@ -718,9 +718,144 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### service-definition-query
 
+```
+Topic: arrowhead/serviceregistry/management/service-definition-query
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": {
+    "page": 2,
+    "size": 4,
+    "direction": "DESC",
+    "sortField": "name"
+  }
+}
+```
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "name": "orchestration-lock-management",
+        "createdAt": "2025-03-12T11:07:23Z",
+        "updatedAt": "2025-03-12T11:07:23Z"
+      },
+      {
+        "name": "orchestration-history-management",
+        "createdAt": "2025-03-12T11:07:23Z",
+        "updatedAt": "2025-03-12T11:07:23Z"
+      },
+      {
+        "name": "orchestration",
+        "createdAt": "2025-03-12T11:07:23Z",
+        "updatedAt": "2025-03-12T11:07:23Z"
+      },
+      {
+        "name": "monitor",
+        "createdAt": "2025-01-31T09:14:54Z",
+        "updatedAt": "2025-01-31T09:14:54Z"
+      }
+    ],
+    "count": 26
+  }
+}
+```
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "Direction is invalid. Only ASC or DESC are allowed"
+}
+```
+
 ### service-definition-create
 
+```
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": {
+    "serviceDefinitionNames": [
+      "alert-service1", "alert-service2"
+    ]
+  }
+}
+```
+
+```
+{
+  "status": 201,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "name": "alert-service1",
+        "createdAt": "2025-05-04T21:33:49.344720800Z",
+        "updatedAt": "2025-05-04T21:33:49.344720800Z"
+      },
+      {
+        "name": "alert-service2",
+        "createdAt": "2025-05-04T21:33:49.421567600Z",
+        "updatedAt": "2025-05-04T21:33:49.421567600Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "Service definition names already exists: alert-service1"
+}
+```
+
 ### service-definition-remove
+
+```
+Topic: arrowhead/serviceregistry/management/service-definition-remove
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": ["alert-service1", "alert-service2"]
+}
+```
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": ""
+}
+```
+
+```
+{
+  "status": 401,
+  "traceId": "<trace-id>",
+  "receiver": null,
+  "payload": "Invalid authentication info"
+}
+```
 
 ### service-query
 
