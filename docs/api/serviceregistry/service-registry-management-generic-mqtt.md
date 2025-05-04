@@ -29,7 +29,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [service-re
 
 ### device-query
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [DeviceQueryRequest](../data-models/device-query-request.md).
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an optional [DeviceQueryRequest](../data-models/device-query-request.md).
 
 ```
 Topic: arrowhead/serviceregistry/management/device-query
@@ -331,7 +331,7 @@ Topic: arrowhead/serviceregistry/management/device-remove
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. In this case, the response payload is empty.
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. In this case the response payload is empty.
 
 ```
 {
@@ -354,3 +354,384 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 ```
 
 ### system-query
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an optional [SystemQueryRequest](../data-models/system-query-request.md). The params can contain a [KeyValuePair](../primitives.md/#keyvaluepair) with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it).
+
+```
+Topic: arrowhead/serviceregistry/management/system-query
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "params": {"verbose": <verbose-value>},
+  "payload": {
+    "pagination": {
+      "page": 1,
+      "size": 1,
+      "direction": "ASC",
+      "sortField": ""
+    },
+    "systemNames": [
+    ],
+    "addresses": [
+    ],
+    "addressType": "",
+    "metadataRequirementList": [
+    ],
+    "versions": [
+      "1.1"
+    ],
+    "deviceNames": [
+    ]
+  }
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [SystemListResponse](../data-models/system-list-response.md).
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "name": "alert-consumer2",
+        "metadata": {},
+        "version": "1.1.0",
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.1.2"
+          }
+        ],
+        "createdAt": "2025-03-15T20:22:44Z",
+        "updatedAt": "2025-03-15T20:22:44Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "Sort field is invalid. Only the following are allowed: [id, name, createdAt]"
+}
+```
+
+### system-create
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [SystemListRequest](../data-models/system-list-request.md).
+
+```
+Topic: arrowhead/serviceregistry/management/system-create
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": {
+    "systems": [
+      {
+        "name": "alert-consumer1",
+        "metadata": {
+        },
+        "version": "1.1",
+        "addresses": [
+          "192.168.1.1"
+        ],
+        "deviceName": "alarm1"
+      },
+      {
+        "name": "alert-consumer2",
+        "metadata": {
+        },
+        "version": "1.1",
+        "addresses": [
+          "192.168.1.2"
+        ],
+        "deviceName": "alarm2"
+      }
+    ]
+  }
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if the system entities were successfully created. The response template payload is a [SystemListResponse](../data-models/system-list-response.md).
+
+```
+{
+  "status": 201,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "name": "alert-consumer1",
+        "metadata": {},
+        "version": "1.1.0",
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.1.1"
+          }
+        ],
+        "device": {
+          "name": "alarm1",
+          "metadata": {
+            "volume": {
+              "value": 100,
+              "unit": "dB"
+            }
+          },
+          "addresses": [
+            {
+              "type": "MAC",
+              "address": "4a:f7:9c:12:8e:b5"
+            }
+          ],
+          "createdAt": "2025-05-04T18:51:46Z",
+          "updatedAt": "2025-05-04T18:51:46Z"
+        },
+        "createdAt": "2025-05-04T20:08:37.278728600Z",
+        "updatedAt": "2025-05-04T20:08:37.278728600Z"
+      },
+      {
+        "name": "alert-consumer2",
+        "metadata": {},
+        "version": "1.1.0",
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.1.2"
+          }
+        ],
+        "device": {
+          "name": "alarm2",
+          "metadata": {
+            "volume": {
+              "value": 110,
+              "unit": "dB"
+            }
+          },
+          "addresses": [
+            {
+              "type": "MAC",
+              "address": "4a:f7:9c:12:8e:bb"
+            }
+          ],
+          "createdAt": "2025-05-04T18:51:46Z",
+          "updatedAt": "2025-05-04T18:51:46Z"
+        },
+        "createdAt": "2025-05-04T20:08:37.284276300Z",
+        "updatedAt": "2025-05-04T20:08:37.284276300Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "Systems with names already exist: alert-consumer1, alert-consumer2"
+}
+```
+
+### system-update
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [SystemListRequest](../data-models/system-list-request.md).
+
+```
+Topic: arrowhead/serviceregistry/management/system-update
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": {
+    "systems": [
+      {
+        "name": "alert-consumer1",
+        "metadata": {
+        },
+        "version": "1.2",
+        "addresses": [
+          "192.168.1.1"
+        ],
+        "deviceName": "alarm1"
+      },
+      {
+        "name": "alert-consumer2",
+        "metadata": {
+        },
+        "version": "1.2",
+        "addresses": [
+          "192.168.1.2"
+        ],
+        "deviceName": "alarm2"
+      }
+    ]
+  }
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [SystemListResponse](../data-models/system-list-response.md).
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "name": "alert-consumer1",
+        "metadata": {},
+        "version": "1.2.0",
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.1.1"
+          }
+        ],
+        "device": {
+          "name": "alarm1",
+          "metadata": {
+            "volume": {
+              "value": 100,
+              "unit": "dB"
+            }
+          },
+          "addresses": [
+            {
+              "type": "MAC",
+              "address": "4a:f7:9c:12:8e:b5"
+            }
+          ],
+          "createdAt": "2025-05-04T18:51:46Z",
+          "updatedAt": "2025-05-04T18:51:46Z"
+        },
+        "createdAt": "2025-05-04T20:08:37Z",
+        "updatedAt": "2025-05-04T20:11:20.541557100Z"
+      },
+      {
+        "name": "alert-consumer2",
+        "metadata": {},
+        "version": "1.2.0",
+        "addresses": [
+          {
+            "type": "IPV4",
+            "address": "192.168.1.2"
+          }
+        ],
+        "device": {
+          "name": "alarm2",
+          "metadata": {
+            "volume": {
+              "value": 110,
+              "unit": "dB"
+            }
+          },
+          "addresses": [
+            {
+              "type": "MAC",
+              "address": "4a:f7:9c:12:8e:bb"
+            }
+          ],
+          "createdAt": "2025-05-04T18:51:46Z",
+          "updatedAt": "2025-05-04T18:51:46Z"
+        },
+        "createdAt": "2025-05-04T20:08:37Z",
+        "updatedAt": "2025-05-04T20:11:20.661848200Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "System(s) not exists: alert-consumer1, alert-consumer2"
+}
+```
+
+### system-remove
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the systems to delete.
+
+```
+arrowhead/serviceregistry/management/system-remove
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": ["alert-consumer1", "alert-consumer2"]
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. In this case the response payload is empty.
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": ""
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 401,
+  "traceId": "<trace-id>",
+  "receiver": null,
+  "payload": "Invalid authentication info"
+}
+```
+
+### service-definition-query
+
+### service-definition-create
+
+### service-definition-remove
+
+### service-query
+
+### service-create
+
+### service-update
+
+### service-remove
+
+### interface-template-query
+
+### interface-template-create
+
+### interface-template-remove

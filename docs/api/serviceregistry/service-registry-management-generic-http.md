@@ -411,8 +411,7 @@ Authorization: Bearer <authorization-info>
   ]
 }
 ```
-The service operation **responds** with the status code `201` if the system entities were successfully created. The response also contains a
-[SystemListResponse](../data-models/system-list-response.md) JSON encoded body.
+The service operation **responds** with the status code `201` if the system entities were successfully created. The response also contains a [SystemListResponse](../data-models/system-list-response.md) JSON encoded body.
 
 ```
 {
@@ -527,8 +526,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with the status code `200` if the system entities were successfully updated. The response also contains a
-[SystemListResponse](../data-models/system-list-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if the system entities were successfully updated. The response also contains a [SystemListResponse](../data-models/system-list-response.md) JSON encoded body.
 
 ```
 {
