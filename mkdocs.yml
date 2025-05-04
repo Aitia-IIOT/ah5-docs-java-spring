@@ -35,7 +35,8 @@ nav:
         - MQTT:
           - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
           - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md
-          - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md   
+          - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md
+          - service-registry-management: api/serviceregistry/service-registry-management-generic-mqtt.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
