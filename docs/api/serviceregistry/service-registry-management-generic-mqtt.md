@@ -1030,10 +1030,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
+  "status": 401,
   "traceId": "<trace-id>",
-  "authentication": "SYSTEM//sysop",
-  "responseTopic": "barmi",
-  "qosRequirement": 1
+  "receiver": null,
+  "payload": "Invalid authentication info"
 }
 ```
 
@@ -1506,6 +1506,223 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### interface-template-query
 
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an optional [InterfaceTemplateQueryRequest](../data-models/interface-template-query-request.md).
+
+```
+Topic: arrowhead/serviceregistry/management/interface-template-query
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": {
+    "pagination": {
+      "page": 1,
+      "size": 1,
+      "direction": "ASC",
+      "sortField": "name"
+    },
+    "templateNames": [
+    ],
+    "protocols": [
+      "tcp"
+    ]
+  }
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [InterfaceTemplateListResponse](../data-models/interface-template-list-response.md).
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "name": "generic-mqtt",
+        "protocol": "tcp",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          },
+          {
+            "name": "accessPort",
+            "mandatory": true,
+            "validator": "PORT",
+            "validatorParams": []
+          },
+          {
+            "name": "baseTopic",
+            "mandatory": true
+          },
+          {
+            "name": "operations",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_STRING_SET",
+            "validatorParams": [
+              "NAME"
+            ]
+          }
+        ],
+        "createdAt": "2024-12-09T18:52:48Z",
+        "updatedAt": "2024-12-09T18:52:48Z"
+      }
+    ],
+    "count": 3
+  }
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "Direction is invalid. Only ASC or DESC are allowed"
+}
+```
+
 ### interface-template-create
 
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an [InterfaceTemplateListRequest](../data-models/interface-template-list-request.md).
+
+```
+Topic: arrowhead/serviceregistry/management/interface-template-create
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": {
+    "interfaceTemplates": [
+      {
+        "name": "custom-ftp",
+        "protocol": "tcp",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "not_empty_address_list",
+            "validatorParams": [
+            ]
+          }
+        ]
+      },
+      {
+        "name": "my-awesome-ftp",
+        "protocol": "tcp",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "not_empty_address_list",
+            "validatorParams": [
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if the interface template entities were successfully created. [InterfaceTemplateListResponse](../data-models/interface-template-list-response.md).
+
+```
+{
+  "status": 201,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "name": "custom-ftp",
+        "protocol": "tcp",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          }
+        ],
+        "createdAt": "2025-05-05T10:26:35.426965600Z",
+        "updatedAt": "2025-05-05T10:26:35.426965600Z"
+      },
+      {
+        "name": "my-awesome-ftp",
+        "protocol": "tcp",
+        "propertyRequirements": [
+          {
+            "name": "accessAddresses",
+            "mandatory": true,
+            "validator": "NOT_EMPTY_ADDRESS_LIST",
+            "validatorParams": []
+          }
+        ],
+        "createdAt": "2025-05-05T10:26:35.532789400Z",
+        "updatedAt": "2025-05-05T10:26:35.532789400Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "Interface template already exists: custom-ftp"
+}
+```
+
 ### interface-template-remove
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[InterfaceTemplate](../primitives.md#interfacetemplate)> which contains the string identifier of the interface descriptors that need to be removed.
+
+```
+Topic: arrowhead/serviceregistry/management/interface-template-remove
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": ["custom-ftp", "my-awesome-ftp"]
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. In this case the response payload is empty.
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": ""
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 401,
+  "traceId": "<trace-id>",
+  "receiver": null,
+  "payload": "Invalid authentication info"
+}
+```
