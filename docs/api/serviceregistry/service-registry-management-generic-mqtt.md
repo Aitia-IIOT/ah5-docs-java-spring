@@ -317,7 +317,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### device-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the devices to delete.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of the devices to delete.
 
 ```
 Topic: arrowhead/serviceregistry/management/device-remove
@@ -680,7 +680,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### system-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the systems to delete.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of the systems to delete.
 
 ```
 arrowhead/serviceregistry/management/system-remove
@@ -718,6 +718,8 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### service-definition-query
 
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an optional [PageRequest](../data-models/page-request.md).
+
 ```
 Topic: arrowhead/serviceregistry/management/service-definition-query
 
@@ -734,6 +736,8 @@ Topic: arrowhead/serviceregistry/management/service-definition-query
   }
 }
 ```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [ServiceDefinitionListResponse](../data-models/service-definition-list-response.md).
 
 ```
 {
@@ -768,6 +772,8 @@ Topic: arrowhead/serviceregistry/management/service-definition-query
 }
 ```
 
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
 ```
 {
   "status": 400,
@@ -777,7 +783,9 @@ Topic: arrowhead/serviceregistry/management/service-definition-query
 }
 ```
 
-### service-definition-create
+### service-definition-create 
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [ServiceDefinitionListRequest](../data-models/service-definition-list-request.md).
 
 ```
 {
@@ -792,6 +800,8 @@ Topic: arrowhead/serviceregistry/management/service-definition-query
   }
 }
 ```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [ServiceDefinitionListResponse](../data-models/service-definition-list-response.md).
 
 ```
 {
@@ -816,6 +826,8 @@ Topic: arrowhead/serviceregistry/management/service-definition-query
 }
 ```
 
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
 ```
 {
   "status": 400,
@@ -826,6 +838,8 @@ Topic: arrowhead/serviceregistry/management/service-definition-query
 ```
 
 ### service-definition-remove
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of the service definitions to delete.
 
 ```
 Topic: arrowhead/serviceregistry/management/service-definition-remove
@@ -839,6 +853,8 @@ Topic: arrowhead/serviceregistry/management/service-definition-remove
 }
 ```
 
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. In this case the response payload is empty.
+
 ```
 {
   "status": 200,
@@ -847,6 +863,8 @@ Topic: arrowhead/serviceregistry/management/service-definition-remove
   "payload": ""
 }
 ```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```
 {
