@@ -38,7 +38,7 @@ Association of a key of type [String](#string) and a value of any type. Some exa
 ```
 {
     "verbose": true,
-    "name": "Temperature-provider1",
+    "name": "temperature-provider1",
     "size": 500
 }
 ```
