@@ -317,7 +317,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### device-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of the devices to delete.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> which contains the names of the devices to delete.
 
 ```
 Topic: arrowhead/serviceregistry/management/device-remove
@@ -680,7 +680,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### system-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of the systems to delete.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> which contains the names of the systems to delete.
 
 ```
 arrowhead/serviceregistry/management/system-remove
@@ -839,7 +839,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### service-definition-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of the service definitions to delete.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> which contains the names of the service definitions to delete.
 
 ```
 Topic: arrowhead/serviceregistry/management/service-definition-remove
@@ -877,11 +877,632 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### service-query
 
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [ServiceQueryRequest](../data-models/service-query-request.md). The params can contain a [KeyValuePair](../primitives.md/#keyvaluepair) with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it).
+
+```
+Topic: arrowhead/serviceregistry/management/service-query
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "params": {"verbose": <verbose-value>},
+  "payload": {
+    "pagination": {
+      "page": 0,
+      "size": 2,
+      "direction": "ASC",
+      "sortField": "createdAt"
+    },
+    "instanceIds": [
+    ],
+    "providerNames": [
+    ],
+    "serviceDefinitionNames": [
+      "alert-service1"
+    ],
+    "versions": [
+      "1.0.0", "1.0.1"
+    ],
+    "alivesAt": "2026-01-01T00:00:00Z",
+    "metadataRequirementsList": [
+    ],
+    "addressTypes": [
+    ],
+    "interfaceTemplateNames": [
+      "generic-mqtt"
+    ],
+    "interfacePropertyRequirementsList": [
+      {
+        "operations": { "op": "CONTAINS", "value": "warn"}
+      }
+    ],
+    "policies": [
+      "NONE"
+    ]
+  }
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [ServiceListResponse](../data-models/service-list-response.md).
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "instanceId": "alert-consumer1::alert-service1::1.0.0",
+        "provider": {
+          "name": "alert-consumer1",
+          "metadata": {},
+          "version": "1.1.0",
+          "createdAt": "2025-05-05T09:05:31Z",
+          "updatedAt": "2025-05-05T09:05:31Z"
+        },
+        "serviceDefinition": {
+          "name": "alert-service1",
+          "createdAt": "2025-05-04T21:33:49Z",
+          "updatedAt": "2025-05-04T21:33:49Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2028-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {
+            "value": 200,
+            "unit": "ms"
+          }
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "192.168.1.3"
+              ],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert",
+              "operations": [
+                "alert",
+                "warn",
+                "info"
+              ]
+            }
+          }
+        ],
+        "createdAt": "2025-05-05T09:06:28Z",
+        "updatedAt": "2025-05-05T09:06:28Z"
+      },
+      {
+        "instanceId": "alert-consumer2::alert-service1::1.0.0",
+        "provider": {
+          "name": "alert-consumer2",
+          "metadata": {},
+          "version": "1.1.0",
+          "createdAt": "2025-05-05T09:05:32Z",
+          "updatedAt": "2025-05-05T09:05:32Z"
+        },
+        "serviceDefinition": {
+          "name": "alert-service1",
+          "createdAt": "2025-05-04T21:33:49Z",
+          "updatedAt": "2025-05-04T21:33:49Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2027-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {
+            "value": 200,
+            "unit": "ms"
+          }
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "192.168.1.3"
+              ],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert",
+              "operations": [
+                "warn"
+              ]
+            }
+          }
+        ],
+        "createdAt": "2025-05-05T09:06:28Z",
+        "updatedAt": "2025-05-05T09:06:28Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "traceId": "<trace-id>",
+  "authentication": "SYSTEM//sysop",
+  "responseTopic": "barmi",
+  "qosRequirement": 1
+}
+```
+
 ### service-create
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [ServiceCreateListRequest](../data-models/service-create-list-request.md).
+
+```
+Topic: arrowhead/serviceregistry/management/service-create
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": {
+    "instances": [
+      {
+        "systemName": "alert-consumer1",
+        "serviceDefinitionName": "alert-service1",
+        "version": "",
+        "expiresAt": "2028-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {"value": 200, "unit": "ms"}
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp", 
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": ["192.168.1.3"],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert", "operations": ["alert", "warn"]
+            }
+          }
+        ]
+      },
+      {
+        "systemName": "alert-consumer2",
+        "serviceDefinitionName": "alert-service1",
+        "version": "",
+        "expiresAt": "2027-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {"value": 200, "unit": "ms"}
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp", 
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": ["192.168.1.3"],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert", "operations": ["warn"]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if the service instance entities were created successfully. The response template payload is a [ServiceListResponse](../data-models/service-list-response.md).
+
+```
+{
+  "status": 201,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "instanceId": "alert-consumer1::alert-service1::1.0.0",
+        "provider": {
+          "name": "alert-consumer1",
+          "metadata": {},
+          "version": "1.1.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "192.168.1.1"
+            }
+          ],
+          "device": {
+            "name": "alarm1",
+            "metadata": {
+              "volume": {
+                "value": 100,
+                "unit": "dB"
+              }
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "4a:f7:9c:12:8e:b5"
+              }
+            ],
+            "createdAt": "2025-05-04T18:51:46Z",
+            "updatedAt": "2025-05-04T18:51:46Z"
+          },
+          "createdAt": "2025-05-05T09:05:31Z",
+          "updatedAt": "2025-05-05T09:05:31Z"
+        },
+        "serviceDefinition": {
+          "name": "alert-service1",
+          "createdAt": "2025-05-04T21:33:49Z",
+          "updatedAt": "2025-05-04T21:33:49Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2028-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {
+            "value": 200,
+            "unit": "ms"
+          }
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "192.168.1.3"
+              ],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert",
+              "operations": [
+                "alert",
+                "warn"
+              ]
+            }
+          }
+        ],
+        "createdAt": "2025-05-05T09:06:27.599446600Z",
+        "updatedAt": "2025-05-05T09:06:27.599446600Z"
+      },
+      {
+        "instanceId": "alert-consumer2::alert-service1::1.0.0",
+        "provider": {
+          "name": "alert-consumer2",
+          "metadata": {},
+          "version": "1.1.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "192.168.1.2"
+            }
+          ],
+          "device": {
+            "name": "alarm2",
+            "metadata": {
+              "volume": {
+                "value": 110,
+                "unit": "dB"
+              }
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "4a:f7:9c:12:8e:bb"
+              }
+            ],
+            "createdAt": "2025-05-04T18:51:46Z",
+            "updatedAt": "2025-05-04T18:51:46Z"
+          },
+          "createdAt": "2025-05-05T09:05:32Z",
+          "updatedAt": "2025-05-05T09:05:32Z"
+        },
+        "serviceDefinition": {
+          "name": "alert-service1",
+          "createdAt": "2025-05-04T21:33:49Z",
+          "updatedAt": "2025-05-04T21:33:49Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2027-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {
+            "value": 200,
+            "unit": "ms"
+          }
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "192.168.1.3"
+              ],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert",
+              "operations": [
+                "warn"
+              ]
+            }
+          }
+        ],
+        "createdAt": "2025-05-05T09:06:27.618441200Z",
+        "updatedAt": "2025-05-05T09:06:27.618441200Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "System not exists: alert-consumer1"
+}
+```
 
 ### service-update
 
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [ServiceUpdateListRequest](../data-models/service-update-list-request.md).
+
+```
+Topic: arrowhead/serviceregistry/management/service-update
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": {
+    "instances": [
+      {
+        "instanceId": "alert-consumer1::alert-service1::1.0.0",
+        "expiresAt": "2028-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {"value": 200, "unit": "ms"}
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp", "policy": "NONE",
+            "properties": {
+              "accessAddresses": ["192.168.1.3"],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert", "operations": ["alert", "warn", "info"]
+            }
+          }
+        ]
+      },
+      {
+        "instanceId": "alert-consumer2::alert-service1::1.0.0",
+        "expiresAt": "2027-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {"value": 200, "unit": "ms"}
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp", "policy": "NONE",
+            "properties": {
+              "accessAddresses": ["192.168.1.3"],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert", "operations": ["warn"]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if the service instance entities were updated successfully. The response template payload is a [ServiceListResponse](../data-models/service-list-response.md).
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": {
+    "entries": [
+      {
+        "instanceId": "alert-consumer1::alert-service1::1.0.0",
+        "provider": {
+          "name": "alert-consumer1",
+          "metadata": {},
+          "version": "1.1.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "192.168.1.1"
+            }
+          ],
+          "device": {
+            "name": "alarm1",
+            "metadata": {
+              "volume": {
+                "value": 100,
+                "unit": "dB"
+              }
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "4a:f7:9c:12:8e:b5"
+              }
+            ],
+            "createdAt": "2025-05-04T18:51:46Z",
+            "updatedAt": "2025-05-04T18:51:46Z"
+          },
+          "createdAt": "2025-05-05T09:05:31Z",
+          "updatedAt": "2025-05-05T09:05:31Z"
+        },
+        "serviceDefinition": {
+          "name": "alert-service1",
+          "createdAt": "2025-05-04T21:33:49Z",
+          "updatedAt": "2025-05-04T21:33:49Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2028-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {
+            "value": 200,
+            "unit": "ms"
+          }
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "192.168.1.3"
+              ],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert",
+              "operations": [
+                "alert",
+                "warn",
+                "info"
+              ]
+            }
+          }
+        ],
+        "createdAt": "2025-05-05T09:06:28Z",
+        "updatedAt": "2025-05-05T09:09:58.070188100Z"
+      },
+      {
+        "instanceId": "alert-consumer2::alert-service1::1.0.0",
+        "provider": {
+          "name": "alert-consumer2",
+          "metadata": {},
+          "version": "1.1.0",
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "192.168.1.2"
+            }
+          ],
+          "device": {
+            "name": "alarm2",
+            "metadata": {
+              "volume": {
+                "value": 110,
+                "unit": "dB"
+              }
+            },
+            "addresses": [
+              {
+                "type": "MAC",
+                "address": "4a:f7:9c:12:8e:bb"
+              }
+            ],
+            "createdAt": "2025-05-04T18:51:46Z",
+            "updatedAt": "2025-05-04T18:51:46Z"
+          },
+          "createdAt": "2025-05-05T09:05:32Z",
+          "updatedAt": "2025-05-05T09:05:32Z"
+        },
+        "serviceDefinition": {
+          "name": "alert-service1",
+          "createdAt": "2025-05-04T21:33:49Z",
+          "updatedAt": "2025-05-04T21:33:49Z"
+        },
+        "version": "1.0.0",
+        "expiresAt": "2027-01-01T00:00:00Z",
+        "metadata": {
+          "delay": {
+            "value": 200,
+            "unit": "ms"
+          }
+        },
+        "interfaces": [
+          {
+            "templateName": "generic-mqtt",
+            "protocol": "tcp",
+            "policy": "NONE",
+            "properties": {
+              "accessAddresses": [
+                "192.168.1.3"
+              ],
+              "accessPort": 1883,
+              "baseTopic": "heat-alert",
+              "operations": [
+                "warn"
+              ]
+            }
+          }
+        ],
+        "createdAt": "2025-05-05T09:06:28Z",
+        "updatedAt": "2025-05-05T09:09:58.238440Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 400,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": "Instance id does not exist: alert-consumer1::alert-service1::1.0.0"
+}
+```
 ### service-remove
+
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> which contains the identitifers of the service instances that need to be removed.
+
+```
+Topic: arrowhead/serviceregistry/management/service-remove
+
+{
+  "traceId": "<trace-id>",
+  "authentication": "<identity-info>",
+  "responseTopic": "<response-topic>",
+  "qosRequirement": <0|1|2>,
+  "payload": ["alert-consumer1::alert-service1::1.0.0", "alert-consumer2::alert-service1::1.0.0"]
+}
+```
+
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. In this case the response payload is empty.
+
+```
+{
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "sysop",
+  "payload": ""
+}
+```
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
+
+```
+{
+  "status": 401,
+  "traceId": "<trace-id>",
+  "receiver": null,
+  "payload": "Invalid authentication info"
+}
+```
 
 ### interface-template-query
 
