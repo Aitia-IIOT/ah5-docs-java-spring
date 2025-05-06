@@ -80,10 +80,11 @@ The service operation **responds** with the status code `200` if called successf
 {
    "results":[
       {
-         "serviceId":"temperature-provider2::kelvin-info::1.0.0",
+         "serviceInstanceId":"temperature-provider2::kelvin-info::1.0.0",
          "providerName":"temperature-provider2",
          "serviceDefinitition":"kelvin-info",
          "version":"1.0.0",
+         "cloudIdentitifer":"LOCAL",
          "aliveUntil":"2028-11-08T10:21:11Z",
          "exclusiveUntil":"2025-10-05T11:35:14Z",
          "metadata":{
