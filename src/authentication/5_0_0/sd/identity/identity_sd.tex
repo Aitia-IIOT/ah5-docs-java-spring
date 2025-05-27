@@ -106,7 +106,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{identity} service, which enables both application and core/support systems to get and release a proof of identity token which also can be verified. Furthermore, it also allows a system to change its own credentials. A provider system for this service is necessary if other core/support system are using \textit{outsourced} authentication policy. An example of this interaction when an application system gets a proof of identity before registering itself into the Service Registry. An other example when the Service Registry verifies the proof of identity before accepting that registration request. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+This document describes the \textbf{identity} service, which enables both application and Core/Support systems to get and release a proof of identity token which also can be verified. Furthermore, it also allows a system to change its own credentials. A provider system for this service is necessary if other Core/Support system are using \textit{outsourced} authentication policy. An example of this interaction when an application system gets a proof of identity before registering itself into the ServiceRegistry. An other example when the ServiceRegistry verifies the proof of identity before accepting that registration request. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The \textbf{identity} service contains the following operations:
 
@@ -122,12 +122,12 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-Systems should call the \textit{login} operation to acquire a proof of identity token. To get the necessary information about the \textit{identity} service, systems can lookup for it in the Service Registry without any authentication. When a system wants to use a service of the core/support systems it has to include its token to the request. Core/support systems should use the \textit{verify} operation to check the validation of the identity token and to acquire information about the requester before serving the response. Systems should call the \textit{logout} operation when finishing their work.
+Systems should call the \textit{login} operation to acquire a proof of identity token. To get the necessary information about the \textit{identity} service, systems can lookup for it in the ServiceRegistry without any authentication. When a system wants to use a service of the Core/Support systems it has to include its token to the request. Core/Support systems should use the \textit{verify} operation to check the validation of the identity token and to acquire information about the requester before serving the response. Systems should call the \textit{logout} operation when finishing their work.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
 
-To avoid possible identity theft, it is important that systems only share their identity tokens with trusted systems: these are the core/support systems of the Arrowhead Local Cloud. 
+To avoid possible identity theft, it is important that systems only share their identity tokens with trusted systems: these are the Core/Support systems of the Arrowhead Local Cloud. 
 
 \subsection{Access policy}
 \label{sec:accesspolicy}
@@ -146,38 +146,38 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{login}{IdentityRequest}{IdentityLoginResponse}{}{ErrorResponse}
 
-The login data must meet the following criteria:
+Operation \textit{login} acquires a proof of identity token. The login data must meet the following criteria:
 
 \begin{itemize}
-    \item System name is mandatory. System names are case insensitive and have to be unique within the Local Cloud.
+    \item System name is mandatory. System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
     \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
 \end{itemize}
 
 \fsubsection{logout}{IdentityRequest}{}{OperationStatus}{ErrorResponse}
 
-The logout data must meet the following criteria:
+Operation \textit{logout} invalidates a proof of identity token. The logout data must meet the following criteria:
 
 \begin{itemize}
     \item It requires the same input data as \textit{login} operation to avoid the possibility of session invalidation by an outside actor (without proper permissions). 
-    \item System name is mandatory. System names are case insensitive and have to be unique within the Local Cloud.
+    \item System name is mandatory. System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
     \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
 \end{itemize}
 
 \fsubsection{change}{IdentityChangeRequest}{}{OperationStatus}{ErrorResponse}
 
-The change data must meet the following criteria:
+Operation \textit{change} changes the credentials. The change data must meet the following criteria:
 
 \begin{itemize}
     \item With this operation a requester system can only change its own credentials and only after a successful authentication.
     \item This operation does not allow to change the assigned authentication method.
-    \item System name is mandatory. System names are case insensitive and have to be unique within the Local Cloud.
+    \item System name is mandatory. System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
     \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
     \item New credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed (same requirements are applied than in case of the previous credential map). 
 \end{itemize}
 
 \fsubsection{verify}{IdentityVerifyRequest}{IdentityVerifyResponse}{}{ErrorResponse}
 
-The input data must meet the following criteria:
+Operation \textit{verify} checks the validity of a provided token and acquires information about the verified system. The input data must meet the following criteria:
 
 \begin{itemize}
     \item The requester must have a valid identity to use this operation
@@ -188,7 +188,7 @@ The input data must meet the following criteria:
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{identity} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{identity} service are listed and must be respected by the hosting system.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
@@ -198,7 +198,7 @@ As a complement to the explicitly defined types in this section, there is also a
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-systemName & \pref{Name} & yes & The requester of the operation. \\ \hline
+systemName & \pref{SystemName} & yes & The requester of the operation. \\ \hline
 credentials & \hyperref[sec:model:Credentials]{Credentials} & yes & Credential information related to the system. \\ \hline
 \end{tabularx}
 \end{table}
@@ -240,7 +240,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \pref{Name} & yes & The requester of the operation. \\ \hline
+systemName & \pref{SystemName} & yes & The requester of the operation. \\ \hline
 credentials & \hyperref[sec:model:Credentials]{Credentials} & yes & Credential information related to the system. \\ \hline
 newCredentials &\hyperref[sec:model:Credentials]{Credentials} & yes & The new credential information that replaces the current one. \\ \hline
 \end{tabularx}
@@ -263,7 +263,7 @@ token &\hyperref[sec:model:Identity]{Identity} & yes & The target identity token
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
 verified & \pref{Boolean} & The result of the verification. \\ \hline
-systemName & \pref{Name} & The name of the verified system. Empty if the verification was unsuccessful. \\ \hline
+systemName & \pref{SystemName} & The name of the verified system. Empty if the verification was unsuccessful. \\ \hline
 sysop & \pref{Boolean} & A flag that determines whether the verified system has higher level administrative rights. Empty if the verification was unsuccessful. \\ \hline
 loginTime & \pref{DateTime} & The system started its active session at this time. Empty if the verification was unsuccessful. \\ \hline
 expirationTime & \pref{DateTime} & The verified token is valid until this time. Empty if the verification was unsuccessful. \\ \hline
@@ -283,11 +283,11 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Boolean}          & One out of true or false. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
-\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline
 \end{tabularx}
 \end{table}
 

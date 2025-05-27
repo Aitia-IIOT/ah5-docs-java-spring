@@ -1,14 +1,14 @@
 # identity IDD
-**GENERIC-MQTT & GENERIC-MQTTS**
+**generic_mqtt & generic_mqtts**
 
 ## Overview
 
-This page describes the GENERIC-MQTT and GENERIC-MQTTS service interface of identity which enables both application and core/support systems to
+This page describes the generic_mqtt and generic_mqtts service interface of identity which enables both application and Core/Support systems to
 get and release a proof of identity token which also can be verified. Furthermore, it also allows a system to
 change its own credentials. It is implemented using protocol, encoding as stated in the
 following tables:
 
-**GENERIC-MQTT**
+**generic_mqtt**
 
 Profile type | type | Version
 --- | --- | ---
@@ -17,7 +17,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-MQTTS**
+**generic_mqtts**
 
 Profile type | type | Version
 --- | --- | ---
@@ -42,7 +42,7 @@ Topic: arrowhead/authentication/identity/identity-login
   "responseTopic": "<response-topic>",
   "qosRequirement": "<0|1|2>",
   "payload": {
-    "systemName": "consumer1",
+    "systemName": "Consumer1",
     "credentials": {
       "password": "abcdef"
     }
@@ -51,7 +51,7 @@ Topic: arrowhead/authentication/identity/identity-login
 ```
 
 The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is an
-[IdentityLoginResponse](../data-models/identity-response.md).
+[IdentityLoginResponse](../data-models/identity-login-response.md).
 
 
 ```
@@ -97,7 +97,7 @@ Topic: arrowhead/authentication/identity/identity-logout
   "responseTopic": "<response-topic>",
   "qosRequirement": "<0|1|2>",
   "payload": {
-    "systemName": "consumer1",
+    "systemName": "Consumer1",
     "credentials": {
       "password": "abcdef"
     }
@@ -148,7 +148,7 @@ Topic: arrowhead/authentication/identity/identity-change-credentials
   "responseTopic": "<response-topic>",
   "qosRequirement": "<0|1|2>",
   "payload": {
-    "systemName": "consumer1",
+    "systemName": "Consumer1",
     "credentials": {
       "password": "abcdef"
     },
@@ -217,7 +217,7 @@ The service operation **responds** with the status code `200` if called successf
   "receiver": "<receiver-system-identifier>",
   "payload": {
     "verified": true,
-    "systemName": "consumer1",
+    "systemName": "Consumer1",
     "sysop": false,
     "loginTime": "2025-03-07T11:54:01Z",
     "expirationTime": "2025-03-07T12:54:01Z"

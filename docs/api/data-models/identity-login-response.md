@@ -1,4 +1,4 @@
-# IdentityResponse
+# IdentityLoginResponse
 
 Field | Type | Description
 --- | --- | --- 

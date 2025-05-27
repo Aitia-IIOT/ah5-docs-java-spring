@@ -85,6 +85,10 @@ A string identifier of a service instance. It consists of the instance's provide
 
 A chain of UTF-8 characters.
 
+## SystemName
+
+A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the PascalCase naming convention. The identifier maximum length is 63 characters.
+
 ## Version
 
 Specifies a system version. Version must follow the Semantic Versioning, which means, it consists of three numbers separated by dots. These numbers represent the `MAJOR`, `MINOR` and `PATCH` version. An example: 5.0.0

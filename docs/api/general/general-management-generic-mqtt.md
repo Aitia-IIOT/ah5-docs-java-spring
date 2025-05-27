@@ -1,13 +1,13 @@
-# general-management IDD
-**GENERIC-MQTT & GENERIC-MQTTS**
+# generalManagement IDD
+**generic_mqtt & generic_mqtts**
 
 ## Overview
 
-This page describes the GENERIC-MQTT and GENERIC-MQTTS service interface of general-management which allows (with operator role or proper permissions)
+This page describes the generic_mqtt and generic_mqtts service interface of general-management which allows (with operator role or proper permissions)
 to get some information about the hosting system’s behavior, such as log entries and configuration settings. It is implemented using protocol, encoding as stated in the
 following tables:
 
-**GENERIC-MQTT**
+**generic_mqtt**
 
 Profile type | type | Version
 --- | --- | ---
@@ -16,7 +16,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-MQTTS**
+**generic_mqtts**
 
 Profile type | type | Version
 --- | --- | ---
@@ -25,7 +25,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [general-management – Service Description](../../assets/sd/5_0_0/general-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [generalManagement – Service Description](../../assets/sd/5_0_0/general-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 

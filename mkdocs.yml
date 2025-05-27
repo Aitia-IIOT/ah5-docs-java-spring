@@ -23,9 +23,9 @@ nav:
     - Interface Descriptions:
       - General:
         - HTTP:
-          - general-management: api/general/general-management-generic-http.md
+          - generalManagement: api/general/general-management-generic-http.md
         - MQTT:
-          - general-management: api/general/general-management-generic-mqtt.md
+          - generalManagement: api/general/general-management-generic-mqtt.md
       - Service Registry:
         - HTTP:
           - device-discovery: api/serviceregistry/device-discovery-generic-http.md
@@ -39,10 +39,10 @@ nav:
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
-          - identity-management: api/authentication/identity-management-generic-http.md
+          - identityManagement: api/authentication/identity-management-generic-http.md
         - MQTT:
           - identity: api/authentication/identity-generic-mqtt.md
-          - identity-management: api/authentication/identity-management-generic-mqtt.md
+          - identityManagement: api/authentication/identity-management-generic-mqtt.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
@@ -64,10 +64,10 @@ nav:
       - IdentityListCreateRequest: api/data-models/identity-list-create-request.md
       - IdentityListResponse: api/data-models/identity-list-response.md
       - IdentityListUpdateRequest: api/data-models/identity-list-update-request.md
+      - IdentityLoginResponse: api/data-models/identity-login-response.md
       - IdentityMgmtRequest: api/data-models/identity-mgmt-request.md
       - IdentityQueryRequest: api/data-models/identity-query-request.md
       - IdentityRequest: api/data-models/identity-request.md
-      - IdentityResponse: api/data-models/identity-response.md
       - IdentityResult: api/data-models/identity-result.md
       - IdentitySessionListResponse: api/data-models/identity-session-list-response.md
       - IdentitySessionQueryRequest: api/data-models/identity-session-query-request.md
