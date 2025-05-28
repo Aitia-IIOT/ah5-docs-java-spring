@@ -167,8 +167,8 @@ If flexible store or dynamic orchestration strategy is used, the following are t
     \item (\textit{Condition}: Authorization system is present in the Local Cloud): orchestration service automatically adds every necessary tokens to the response (if the related provider requires it);
     \item (\textit{Condition}: Gatekeeper system is present in the Local Cloud): inter-cloud orchestration is possible;
     \item (\textit{Condition}: Gatekeeper and Gatepath system is present in the Local Cloud): inter-cloud orchestration is possible even between two closed local clouds and the necessary communication tunnel will be built during the orchestration process;
-    \item (\textit{Condition}: Quality-of-Service Management system is present in the Local Cloud): during orchestration Quality-of-Service requirements can be considered;
-    \item (\textit{Condition}: Translation system is present in the Local Cloud): protocol and data model translation can be used to fulfill orchestration requirements.
+    \item (\textit{Condition}: Quality-of-Service Evaluator system is present in the Local Cloud): during orchestration Quality-of-Service requirements can be considered;
+    \item (\textit{Condition}: Translation Manager system is present in the Local Cloud): protocol and data model translation can be used to fulfill orchestration requirements.
 \end{itemize}
 
 \subsubsection {Data stored by the system}
@@ -177,7 +177,8 @@ In order to achieve the mentioned functionalities, Service Orchestration is capa
 \begin{itemize}
     \item \textbf{Simple orchestration rules} (\textit{only used in the simple store orchestration strategy}): A rule consists a consumer system name, a service definition name, a service instance name and a priority. Multiple service instance can assign to the same consumer-service definition pair as long as the priority is different.
     \item \textbf{Flexible orchestration rules} (\textit{only used in the flexible store orchestration strategy}): A rule consists a consumer system name and/or consumer system metadata requirements, a provider system name (with cloud identification data, if the provider is in an other cloud) and/or provider system metadata requirements, a service definition name, an optional service interface requirement, optional service metadata requirements, optional minimum and maximum service version requirements and an optional priority.
-    \item \textbf{Provider reservations} (\textit{only used in the flexible store and dynamic orchestration strategies}): A storage to manage ongoing provider reservations. It consists a consumer system name, a reserved provider name and a timestamp which marks the end of reservation.
+    \item \textbf{Orchestration locks}: A storage to manage ongoing provider reservations or manual orchestration locks. It consists of a service instance ID, the owner system name and a timestamp which marks the end of lock.
+    \item \textbf{Orchestration history}: A storage to save data about the performed orchestration processes. It consists of an orchestration type, a requester system name, a target system name, a service definition and a timestamp.
 \end{itemize}
 
 \subsection{Important Delimitations}
@@ -207,8 +208,11 @@ Recommended service (and only if the Service Orchestration system is using the s
 \msubsection{service}{flexible-store-management}
 Recommended service (and only if the Service Orchestration system is using the flexible store strategy). The purpose of this service is to add, remove and query flexible store orchestration rules in bulk. The service is offered for core/support systems.
 
-\msubsection{service}{reservation-management}
-Recommended service (and only if the Service Orchestration system is using the flexible store or dynamic strategy). The purpose of this service is to add, remove and query active reservations. The service is offered for core/support systems.
+\msubsection{service}{orchestration-lock-management}
+The purpose of this service is to add, remove and query active orchestration locks. An orchestration lock can be made automatically during the orchestration process in order to reserve an actual service (only if the Service Orchestration system is using the dynamic or flexible store strategy) or manually if a higher entity with management access has any reason to prevent a service from being orchestrated. The service is offered for core/support systems.
+
+\msubsection{service}{orchestration-history-management}
+Recommended service. Its purpose is to give information about the orchestration processes performed by the system. The service is offered for core/support systems.
 
 \msubsection{service}{monitor}
 Recommended service. Its purpose is to give information about the provider system. The service is offered for both application and core/support systems. 
@@ -223,7 +227,7 @@ For authentication, the Service Orchestration utilizes an other core system, the
 For authorization, the system uses an other core system, the Authorization system to decide whether a consumer can use its services or not. If the Authorization core system is not present in the Local Cloud, then the Service Orchestration allows for anyone in the local cloud to use its services. The following service operations can always be used without any authorization rules:
 
 \begin{itemize}
-    \item \textit{orchestration} service's \textit{orchestration-pull} operation,
+    \item \textit{orchestration} service's \textit{pull} operation,
     \item \textit{orchestration} service's \textit{subscribe} operation,
     \item \textit{orchestration} service's \textit{unsubscribe} operation.
 \end{itemize}

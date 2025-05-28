@@ -9,9 +9,9 @@ nav:
     - Contribute: home/contribute.md 
   - Core Systems:
     - Service Registry: core_systems/service_registry.md
-    - Service Orchestration:
-      - Dynamic: core_systems/service_orchestration_dynamic.md
-      - Flexible-store: core_systems/service_orchestration_flexible_store.md
+    - Dynamic Service Orchestration: core_systems/service_orchestration_dynamic.md
+    - Flexible-Store Service Orchestration: core_systems/service_orchestration_flexible_store.md
+    - Simple-Store Service Orchestration: core_systems/service_orchestration_simple_store.md
     - Authorization: core_systems/authorization.md
     - Authentication: core_systems/authentication.md
   - Support Systems: 
@@ -36,6 +36,9 @@ nav:
           - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
           - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md
           - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md   
+      - Service Orchestration:
+        - HTTP:
+          - orchestration (dynamic): api/serviceorchestration/orchestration-generic-http_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
@@ -73,13 +76,54 @@ nav:
       - IdentitySessionQueryRequest: api/data-models/identity-session-query-request.md
       - IdentitySessionResult: api/data-models/identity-session-result.md
       - IdentityVerifyResponse: api/data-models/identity-verify-response.md
+      - InterfaceTemplateDescriptor: api/data-models/interface-template-descriptor.md
+      - InterfaceTemplateListRequest: api/data-models/interface-template-list-request.md
+      - InterfaceTemplateListResponse: api/data-models/interface-template-list-response.md
+      - InterfaceTemplatePropertyDescriptor: api/data-models/interface-template-property-descriptor.md
+      - InterfaceTemplatePropertyRequest: api/data-models/interface-template-property-request.md
+      - InterfaceTemplateQueryRequest: api/data-models/interface-template-query-request.md
+      - InterfaceTemplateRequest: api/data-models/interface-template-request.md
+      - LogEntry: api/data-models/log-entry.md
+      - LogRequest: api/data-models/log-request.md
+      - LogResponse: api/data-models/log-response.md
       - LogEntry: api/data-models/log-entry.md
       - LogRequest: api/data-models/log-request.md
       - LogResponse: api/data-models/log-response.md
       - Metadata: api/data-models/metadata.md
       - MetadataRequirements: api/data-models/metadata-requirements.md
+      - Metadata: api/data-models/metadata.md
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
       - MQTTResponseTemplate: api/data-models/mqtt-response-template.md
+      - PageRequest: api/data-models/page-request.md
+      - PropertyMap: api/data-models/property-map.md
+      - ServiceCreateListRequest: api/data-models/service-create-list-request.md
+      - ServiceDefinitionDescriptor: api/data-models/service-definition-descriptor.md
+      - ServiceDefinitionListRequest: api/data-models/service-definition-list-request.md
+      - ServiceDefinitionListResponse: api/data-models/service-definition-list-response.md
+      - ServiceDefinitionRemoveRequest: api/data-models/service-definition-remove-request.md
+      - ServiceInstanceDescriptor: api/data-models/service-instance-descriptor.md
+      - ServiceInterfaceDescriptor: api/data-models/service-interface-descriptor.md
+      - ServiceInterfaceRequest: api/data-models/service-interface-request.md
+      - ServiceListResponse: api/data-models/service-list-response.md
+      - ServiceLookupRequest: api/data-models/service-lookup-request.md
+      - ServiceLookupResponse: api/data-models/service-lookup-response.md
+      - ServiceLookupResult: api/data-models/service-lookup-result.md
+      - ServiceOrchestrationResponse: api/data-models/service-orchestration-response.md
+      - ServiceOrchestrationFlag: api/data-models/service-orchestration-flag.md
+      - ServiceOrchestrationNotifyInterface: api/data-models/service-orchestration-notify-interface.md
+      - ServiceOrchestrationRequest: api/data-models/service-orchestration-request.md
+      - ServiceOrchestrationRequirement: api/data-models/service-orchestration-requirement.md
+      - ServiceOrchestrationResult: api/data-models/service-orchestration-result.md
+      - ServiceOrchestrationSubscriptionRequest: api/data-models/service-orchestration-subscription-request.md
+      - ServiceQueryRequest: api/data-models/service-query-request.md
+      - ServiceRegistrationRequest: api/data-models/service-registration-request.md
+      - ServiceRegistrationResponse: api/data-models/service-registration-response.md
+      - ServiceRequest: api/data-models/service-request.md
+      - ServiceUpdateListRequest: api/data-models/service-update-list-request.md
+      - ServiceUpdateRequest: api/data-models/service-update-request.md
+      - SystemDescriptor: api/data-models/system-descriptor.md
+      - SystemListRequest: api/data-models/system-list-request.md
+      - SystemListResponse: api/data-models/system-list-response.md
       - SystemLookupRequest: api/data-models/system-lookup-request.md
       - SystemLookupResponse: api/data-models/system-lookup-response.md
       - SystemLookupResult: api/data-models/system-lookup-result.md

@@ -1,4 +1,5 @@
-# system-discovery GENERIC-HTTP
+# system-discovery IDD
+**GENERIC-HTTP & GENERIC-HTTPS**
 
 ## Overview
 
