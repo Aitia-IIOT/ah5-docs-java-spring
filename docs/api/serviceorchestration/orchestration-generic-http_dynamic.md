@@ -1,12 +1,11 @@
 # orchestration IDD (dynamic strategy)
-**GENERIC-HTTP & GENERIC-HTTPS**
+**generic_http & generic_https**
 
 ## Overview
 
-This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of orchestration, which provides runtime (late) binding between application systems. It’s implemented using protocol, encoding as stated in the
-following tables:
+This page describes the generic_http and generic_https service interface of orchestration, which provides runtime (late) binding between application systems. It’s implemented using protocol, encoding as stated in the following tables:
 
-**GENERIC-HTTP**
+**generic_http**
 
 Profile type | type | Version
 --- | --- | ---
@@ -15,7 +14,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-HTTPS**
+**generic_https**
 
 Profile type | type | Version
 --- | --- | ---
@@ -30,8 +29,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [orchestrat
 
 ### pull
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationRequest](../data-models/service-orchestration-request.md)
-JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationRequest](../data-models/service-orchestration-request.md) JSON encoded body.
 
 ```
 POST /serviceorchestration/orchestration/pull HTTP/1.1
@@ -39,7 +37,7 @@ Authorization: Bearer <identity-info>
 
 {
    "serviceRequirement":{
-      "serviceDefinition":"kelvin-info",
+      "serviceDefinition":"kelvinInfo",
       "operations":[
          "query-temperature"
       ],
@@ -47,7 +45,7 @@ Authorization: Bearer <identity-info>
       "alivesAt":"2025-10-05T11:35:14Z",
       "metadataRequirements":[],
       "interfaceTemplateNames":[
-         "generic-https"
+         "generic_https"
       ],
       "interfaceAddressTypes":[
          "HOSTNAME",
@@ -80,9 +78,9 @@ The service operation **responds** with the status code `200` if called successf
 {
    "results":[
       {
-         "serviceInstanceId":"temperature-provider2::kelvin-info::1.0.0",
-         "providerName":"temperature-provider2",
-         "serviceDefinitition":"kelvin-info",
+         "serviceInstanceId":"TemperatureProvider2|kelvinInfo|1.0.0",
+         "providerName":"TemperatureProvider2",
+         "serviceDefinitition":"kelvinInfo",
          "version":"1.0.0",
          "cloudIdentitifer":"LOCAL",
          "aliveUntil":"2028-11-08T10:21:11Z",
@@ -92,7 +90,7 @@ The service operation **responds** with the status code `200` if called successf
          },
          "interfaces":[
             {
-               "templateName":"generic-https",
+               "templateName":"generic_https",
                "protocol":"https",
                "policy":"TIME_LIMITED_TOKEN_AUTH",
                "properties":{
@@ -145,7 +143,7 @@ Authorization: Bearer <identity-info>
 {
    "orchestrationRequest":{
       "serviceRequirement":{
-         "serviceDefinition":"kelvin-info",
+         "serviceDefinition":"kelvinInfo",
          "operations":[
             "query-temperature"
          ],
@@ -157,7 +155,7 @@ Authorization: Bearer <identity-info>
             
          ],
          "interfaceTemplateNames":[
-            "generic-https"
+            "generic_https"
          ],
          "interfaceAddressTypes":[
             "HOSTNAME",

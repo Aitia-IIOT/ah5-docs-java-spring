@@ -16,6 +16,10 @@ A string representation of an authentication method. Currently, only `PASSWORD` 
 
 One out of `true` or `false`.
 
+## CloudIdentifier
+
+A string identifier of a Local Cloud. It consists of the cloud name and cloud operator separated by a pipe, as follows: `<CloudName>|<OperatorName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the operator name is _AitiaInc_.)
+
 ## DateTime
 
 Pinpoints a moment in time in the format of ISO8601 standard `yyyy-mm-ddThh:MM:ssZ`, where ”yyyy” denotes
@@ -32,6 +36,10 @@ The direction of a sorting operation. Possible values are the String representat
 String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,
 `TIMEOUT`, `LOCKED`, `INTERNAL_SERVER_ERROR` or `EXTERNAL_SERVER_ERROR`.
 
+## InterfaceName
+
+A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
+
 ## LogSeverity
 
 Alias for a String value that describes the kind and seriousness of a log message. Could be `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`.
@@ -47,6 +55,10 @@ A String indentifier that is intended to be both human and machine-readable. The
 ## Number
 
 Decimal number.
+
+## OperationName
+
+A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## PropertyValidator
 
@@ -78,9 +90,13 @@ A string representation of a communication protocol. Examples: _http_, _https_, 
 
 Any suitable security policy chosen by the implementor of the service. The possible values are: `NONE`, `CERT_AUTH`, `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `JSON_WEB_TOKEN_AUTH`.
 
+## ServiceName
+
+A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
+
 ## ServiceInstanceID
 
-A string identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by double colons, as follows: `<provider-name>::<service-definition>::<version>`. An example for a valid service instance ID: _alert-provider1::alert-service1::1.0.0_. (Here the provider name is _alert-provider1_, the service definition is _alert-service1_, and the version is _1.0.0_.)
+A string identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by pipes, as follows: `<provider-name>|<service-definition>|<version>`. An example for a valid service instance ID: _AlertPprovider1|alertService1|1.0.0_. (Here the provider name is _AlertProvider1_, the service definition is _alertService1_, and the version is _1.0.0_.)
 
 ## String
 
