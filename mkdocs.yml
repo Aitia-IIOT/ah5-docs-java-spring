@@ -133,6 +133,7 @@ nav:
       - SystemRequest: api/data-models/system-request.md
     - Primitives: api/primitives.md
   - Help:
+    - Naming Convention: help/naming-convention.md
     - Certificate Profiles: help/certificate-profiles.md
     - Tutorials:
       - Service Registry Demo: help/tutorials/serviceregistry-http-demo.md
