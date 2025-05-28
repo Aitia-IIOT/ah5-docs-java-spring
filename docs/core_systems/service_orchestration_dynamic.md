@@ -26,7 +26,7 @@ This service operation performs the orchestration process and returns the matchi
 
 **subscribe**
 
-This service operation creates a subscription that can be triggered anytime to perform the orchestration process and push the matching service instances for the subscriptor.
+This service operation creates a subscription that can be triggered anytime to perform the orchestration process and push the matching service instances for the subscriber.
 
 :material-arrow-right-thin: Example: [generic-http](../api/serviceorchestration/orchestration-generic-http_dynamic.md#subscribe) | [generic-https](../api/serviceorchestration/orchestration-generic-http_dynamic.md#subscribe)<br />
 :material-arrow-right-thin: Example: [generic-mqtt](todo) | [generic-mqtts](todo)

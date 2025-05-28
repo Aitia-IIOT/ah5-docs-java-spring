@@ -1,4 +1,4 @@
-# ServiceviceOrchestrationResponse
+# ServiceOrchestrationResponse
 
 Field | Type | Description
 --- | --- | ---
