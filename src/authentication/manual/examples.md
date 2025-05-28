@@ -11,7 +11,7 @@ This file contains specific examples of what payloads are expected and returned 
   Request body: 
   ~~~
   {
-    "systemName": "consumer1",
+    "systemName": "Consumer1",
     "credentials": {
       "password": "abcdef"
     }
@@ -33,7 +33,7 @@ This file contains specific examples of what payloads are expected and returned 
   Request body: 
   ~~~
   {
-	"systemName": "consumer1",
+	"systemName": "Consumer1",
 	"credentials": {
 	  "password": "abcdef"
 	},
@@ -52,7 +52,7 @@ This file contains specific examples of what payloads are expected and returned 
   Request body: 
   ~~~
   {
-	"systemName": "consumer1",
+	"systemName": "Consumer1",
 	"credentials": {
 	  "password": "123456"
 	}
@@ -81,7 +81,7 @@ This file contains specific examples of what payloads are expected and returned 
   ~~~
   {
 	"verified": true,
-	"systemName": "consumer1",
+	"systemName": "Consumer1",
 	"sysop": false,
 	"loginTime": "2025-03-07T11:54:01Z",
 	"expirationTime": "2025-03-07T12:54:01Z"
@@ -106,14 +106,14 @@ This file contains specific examples of what payloads are expected and returned 
 	"authenticationMethod": "PASSWORD",
 	"identities": [
 	  {
-	    "systemName": "consumer1",
+	    "systemName": "Consumer1",
 		"credentials": {
 		  "password": "abcdef"
 		},
 		"sysop": false
 	  },
 	  {
-		"systemName": "provider1",
+		"systemName": "Provider1",
 		"credentials": {
 		  "password": "123456"
 		},
@@ -128,21 +128,21 @@ This file contains specific examples of what payloads are expected and returned 
   {
     "identities": [
       {
-        "systemName": "consumer1",
+        "systemName": "Consumer1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:52:30Z"
       },
       {
-        "systemName": "provider1",
+        "systemName": "Provider1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:52:30Z"
       }
     ],
@@ -163,7 +163,7 @@ This file contains specific examples of what payloads are expected and returned 
       "direction": "ASC",
       "sortField": "name"
     },
-    "createdBy": "sysop",
+    "createdBy": "Sysop",
     "creationFrom": "2025-03-07T06:00:00Z"
   }
   ~~~
@@ -173,21 +173,21 @@ This file contains specific examples of what payloads are expected and returned 
   {
     "identities": [
       {
-        "systemName": "consumer1",
+        "systemName": "Consumer1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:52:30Z"
       },
       {
-        "systemName": "provider1",
+        "systemName": "Provider1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:52:30Z"
       }
     ],
@@ -204,14 +204,14 @@ This file contains specific examples of what payloads are expected and returned 
   {
 	"identities": [
 	  {
-	    "systemName": "consumer1",
+	    "systemName": "Consumer1",
 		"credentials": {
 		  "password": "123456"
 		},
 		"sysop": false
 	  },
 	  {
-		"systemName": "provider1",
+		"systemName": "Provider1",
 		"credentials": {
 		  "password": "123456"
 		},
@@ -226,21 +226,21 @@ This file contains specific examples of what payloads are expected and returned 
   {
     "identities": [
       {
-        "systemName": "consumer1",
+        "systemName": "Consumer1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:59:01"
       },
       {
-        "systemName": "provider1",
+        "systemName": "Provider1",
         "authenticationMethod": "PASSWORD",
         "sysop": true,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:59:01Z"
       }
     ],
@@ -252,10 +252,10 @@ This file contains specific examples of what payloads are expected and returned 
 
   DELETE /authentication/mgmt/identities
   
-  Query parameters: provider1, provider2
+  Query parameters: Provider1, Provider2
   
   ~~~
-  http://localhost:8444/authentication/mgmt/identities?names=provider1&names=provider2
+  http://localhost:8444/authentication/mgmt/identities?names=Provider1&names=Provider2
   ~~~
 
   Response code: 200
@@ -282,12 +282,12 @@ This file contains specific examples of what payloads are expected and returned 
   {
     "sessions": [
       {
-        "systemName": "consumer1",
+        "systemName": "Consumer1",
         "loginTime": "2025-03-07T11:54:01Z",
         "expirationTime": "2025-03-08T11:59:01Z"
       },
       {
-        "systemName": "sysop",
+        "systemName": "Sysop",
         "loginTime": "2025-03-07T12:40:54Z",
         "expirationTime": "2025-03-08T12:45:54Z"
       }
@@ -300,10 +300,10 @@ This file contains specific examples of what payloads are expected and returned 
 
   DELETE /authentication/mgmt/sessions
   
-  Query parameters: consumer1
+  Query parameters: Consumer1
   
   ~~~
-  http://localhost:8444/authentication/mgmt/sessions?names=consumer1
+  http://localhost:8444/authentication/mgmt/sessions?names=Consumer1
   ~~~
 
   Response code: 200

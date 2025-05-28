@@ -1,14 +1,14 @@
 # identity IDD
-**GENERIC-HTTP & GENERIC-HTTPS**
+**generic_http & generic_https**
 
 ## Overview
 
-This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of identity which enables both application and core/support systems to
+This page describes the generic_http and generic_https service interface of identity which enables both application and Core/Support systems to
 get and release a proof of identity token which also can be verified. Furthermore, it also allows a system to
 change its own credentials. It is implemented using protocol, encoding as stated in the
 following tables:
 
-**GENERIC-HTTP**
+**generic_http**
 
 Profile type | type | Version
 --- | --- | ---
@@ -17,7 +17,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-HTTPS**
+**generic_https**
 
 Profile type | type | Version
 --- | --- | ---
@@ -38,7 +38,7 @@ The service operation **request** requires an [IdentityRequest](../data-models/i
 POST /authentication/identity/login HTTP/1.1
 
 {
-  "systemName": "consumer1",
+  "systemName": "Consumer1",
   "credentials": {
     "password": "abcdef"
   }
@@ -47,7 +47,7 @@ POST /authentication/identity/login HTTP/1.1
 ```
 
 The service operation **responds** with the status code `200` if called successfully. The response also contains an
-[IdentityLoginResponse](../data-models/identity-response.md) JSON encoded body.
+[IdentityLoginResponse](../data-models/identity-login-response.md) JSON encoded body.
 
 ```
 {
@@ -78,7 +78,7 @@ The service operation **request** requires an [IdentityRequest](../data-models/i
 POST /authentication/identity/logout HTTP/1.1
 
 {
-  "systemName": "consumer1",
+  "systemName": "Consumer1",
   "credentials": {
     "password": "abcdef"
   }
@@ -111,7 +111,7 @@ The service operation **request** requires an [IdentityChangeRequest](../data-mo
 POST /authentication/identity/change HTTP/1.1
 
 {
-  "systemName": "consumer1",
+  "systemName": "Consumer1",
   "credentials": {
     "password": "abcdef"
   },
@@ -154,7 +154,7 @@ The service operation **responds** with the status code `200` if called successf
 ```
 {
   "verified": true,
-  "systemName": "consumer1",
+  "systemName": "Consumer1",
   "sysop": false,
   "loginTime": "2025-03-07T11:54:01Z",
   "expirationTime": "2025-03-07T12:54:01Z"

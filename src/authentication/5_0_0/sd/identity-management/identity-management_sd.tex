@@ -52,8 +52,8 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{identity-management} % XXX = ServiceName 
-\ArrowheadServiceID{identity-management} % ID name of service
+\ArrowheadTitle{identityManagement} % XXX = ServiceName 
+\ArrowheadServiceID{identityManagement} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
@@ -85,7 +85,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{identity-management} service. 
+    This document provides service description for the \textbf{identityManagement} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -109,9 +109,9 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{identity-management} service, which enables systems (with operator role or proper permissions) to handle (create, update, remove, query) identities and active sessions (close, query) in bulk. An example of this interaction is when an operator uses the Management Tool to add access to different systems manually.
+This document describes the \textbf{identityManagement} service, which enables systems (with operator role or proper permissions) to handle (create, update, remove, query) identities and active sessions (close, query) in bulk. An example of this interaction is when an operator uses the Management Tool to add access to different systems manually.
 
-The \textbf{identity-management} service contains the following operations:
+The \textbf{identityManagement} service contains the following operations:
 
 \begin{itemize}
     \item \textit{identity-mgmt-query} lists the identities that match the filtering requirements;
@@ -129,7 +129,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 \subsection{How This Service Is Meant to Be Used}
 The service's purpose is to handle the systems' identities and sessions centrally and in bulk. If a Local Cloud supports outsourced authentication, using this service is the only option to make possible for a system to be the part of the Local Cloud.
 
-Application systems should not use this service; only operators (via the Management Tool, for example) or dedicated support systems.
+Application systems should not use this service; only operators (via the Management Tool, for example) or dedicated Support systems.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -139,7 +139,7 @@ The requester has to identify itself to use any of the operations.
 \subsection{Access policy}
 \label{sec:accesspolicy}
 
-The service is only available for operators, dedicated support systems and those who have the proper authorization rights to consume it.
+The service is only available for operators, dedicated Support systems and those who have the proper authorization rights to consume it.
 
 \newpage
 
@@ -154,7 +154,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{identity-mgmt-query}{IdentityQueryRequest}{IdentityListResponse}{}{ErrorResponse}
 
-The query data must meet the following criteria:
+Operation \textit{identity-mgmt-query} lists the identities that match the filtering requirements. The query data must meet the following criteria:
 
 \begin{itemize}
     \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
@@ -166,12 +166,12 @@ The query data must meet the following criteria:
 
 \fsubsection{identity-mgmt-create}{IdentityListCreateRequest}{IdentityListResponse}{}{ErrorResponse}
 
-The creation data must meet the following criteria:
+Operation \textit{identity-mgmt-create} creates the specified identities. The creation data must meet the following criteria:
 
 \begin{itemize}
     \item Authentication method should come from a predefined set. The content of this set is implementation-specific.
-    \item System names are case insensitive and have to be unique within the Local Cloud.
-    \item System names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item The requirements of credential map is based on the authentication method, so the related criteria are implementation-specific.
     \item Multiple identities can be created at once, but it is forbidden to specify systems with the same name.
     \item It is forbidden to create an identity that is already registered into the Local Cloud.
@@ -179,11 +179,11 @@ The creation data must meet the following criteria:
 
 \fsubsection{identity-mgmt-update}{IdentityListUpdateRequest}{IdentityListResponse}{}{ErrorResponse}
 
-The update data must meet the following criteria:
+Operation \textit{identity-mgmt-update} updates the specified existing identities. The update data must meet the following criteria:
 
 \begin{itemize}
-    \item System names are case insensitive and have to be unique within the Local Cloud.
-    \item System names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item The requirements of credential map is based on the authentication method, so the related criteria are implementation-specific.
     \item Multiple identities can be updated at once, but it is forbidden to specify systems with the same name.
     \item All identities must use the same authentication method.
@@ -192,9 +192,11 @@ The update data must meet the following criteria:
 
 \fsubsection{identity-mgmt-remove}{IdentityListRemoveRequest}{}{OperationStatus}{ErrorResponse}
 
+Operation \textit{identity-mgmt-remove} removes the specified identities.
+
 \fsubsection{identity-mgmt-session-query}{IdentitySessionQueryRequest}{IdentitySessionListResponse}{}{ErrorResponse}
 
-The query data must meet the following criteria:
+Operation \textit{identity-mgmt-session-query} lists the active sessions that match the filtering requirements. The query data must meet the following criteria:
 
 \begin{itemize}
     \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
@@ -206,13 +208,15 @@ The query data must meet the following criteria:
 
 \fsubsection{identity-mgmt-session-close}{IdentitySessionListCloseRequest}{}{OperationStatus}{ErrorResponse}
 
+Operation \textit{identity-mgmt-session-close} closes (invalidates) the specified active sessions.
+
 \clearpage
 
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{identity-management} service
-are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{identityManagement} service
+are listed and must be respected by the hosting system.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
@@ -229,7 +233,7 @@ pageSortField & \pref{String} & no & The identifier of the field which must be u
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 namePart &  \pref{String} & no & Requester is looking for identities with system names containing the specified text. \\ \hline
 isSysop & \pref{Boolean} & no & Requester is looking for identities that have/do not have higher level administration rights depending of the specified value. \\ \hline
-createdBy & \pref{Name} & no & Requester is looking for identities that have been created by the specified identity. \\ \hline
+createdBy & \pref{SystemName} & no & Requester is looking for identities that have been created by the specified identity. \\ \hline
 creationFrom &  \pref{DateTime} & no & Requester is looking for identities that were created after the specified time. \\ \hline
 creationTo &  \pref{DateTime} & no & Requester is looking for identities that were created before the specified time. \\ \hline
 hasSession & \pref{Boolean} & no & Requester is looking for identities that have/do not have active session at the moment \\ \hline
@@ -256,12 +260,12 @@ count & \pref{Number} & Total number of identities that match the filters. \\ \h
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3.3cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-systemName & \pref{Name} & Unique identifier of the identified system. \\ \hline
+systemName & \pref{SystemName} & Unique identifier of the identified system. \\ \hline
 authenticationMethod & \pref{AuthenticationMethod} & The authentication method the identity uses. \\ \hline
 sysop & \pref{Boolean} & Determines whether the identified system has higher level administration rights or not. \\ \hline
-createdBy & \pref{Name} & The identity was created by this identified system. \\ \hline
+createdBy & \pref{SystemName} & The identity was created by this identified system. \\ \hline
 createdAt & \pref{DateTime} & Identity was created at this timestamp. \\ \hline
-updatedBy & \pref{Name} & The identity was modified by this identified system. \\ \hline
+updatedBy & \pref{SystemName} & The identity was modified by this identified system. \\ \hline
 updatedAt & \pref{DateTime} & Identity was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
@@ -297,7 +301,7 @@ identities & \pref{List}$<$\hyperref[sec:model:IdentityRequest]{IdentityRequest}
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-systemName & \pref{Name} & yes & Unique identifier of the identifiable system. \\ \hline
+systemName & \pref{SystemName} & yes & Unique identifier of the identifiable system. \\ \hline
 credentials &\hyperref[sec:model:Credentials]{Credentials} & yes & Authentication method-specific credential information of the system. \\ \hline
 sysop & \pref{Boolean} & no & Determines whether the identifiable system has higher level administration rights or not. \\ \hline
 \end{tabularx}
@@ -323,7 +327,7 @@ identities & \pref{List}$<$\hyperref[sec:model:IdentityRequest]{IdentityRequest}
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the identities that need to be removed. \\ \hline
+names &  \pref{List}$<$\pref{SystemName}$>$ & yes & Names of the identities that need to be removed. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -364,7 +368,7 @@ count & \pref{Number} & Total number of sessions that match the filters. \\ \hli
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3.3cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-systemName & \pref{Name} & Unique identifier of the identified system. \\ \hline
+systemName & \pref{SystemName} & Unique identifier of the identified system. \\ \hline
 loginTime & \pref{DateTime} & Session was created at this timestamp. \\ \hline
 expirationTime & \pref{DateTime} & Session will expire at this timestamp. \\ \hline
 \end{tabularx}
@@ -376,7 +380,7 @@ expirationTime & \pref{DateTime} & Session will expire at this timestamp. \\ \hl
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-names &  \pref{List}$<$\pref{Name}$>$ & yes & Names of the identities whose session must be closed. \\ \hline
+names &  \pref{List}$<$\pref{SystemName}$>$ & yes & Names of the identities whose session must be closed. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -395,12 +399,11 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
-\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\end{tabularx}
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline\end{tabularx}
 \end{table}
 
 \newpage

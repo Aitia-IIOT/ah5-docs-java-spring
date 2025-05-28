@@ -13,115 +13,115 @@ The purpose of this service is to give, verify and invalidate a proof of identit
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/identity_sd.pdf) <br />
-:material-api: [generic-http (IDD)](../api/authentication/identity-generic-http.md) | [generic-https (IDD)](../api/authentication/identity-generic-http.md) <br />
-:material-api: [generic-mqtt (IDD)](../api/authentication/identity-generic-mqtt.md) | [generic-mqtts (IDD)](../api/authentication/identity-generic-mqtt.md) <br />
+:material-api: [generic_http (IDD)](../api/authentication/identity-generic-http.md) | [generic_https (IDD)](../api/authentication/identity-generic-http.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/authentication/identity-generic-mqtt.md) | [generic_mqtts (IDD)](../api/authentication/identity-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **login**
 
 This service operation acquires a proof of identity token.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-generic-http.md#login) | [generic-https](../api/authentication/identity-generic-http.md#login)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-generic-mqtt.md#login) | [generic-mqtts](../api/authentication/identity-generic-mqtt.md#login)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-generic-http.md#login) | [generic_https](../api/authentication/identity-generic-http.md#login)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-generic-mqtt.md#login) | [generic_mqtts](../api/authentication/identity-generic-mqtt.md#login)
 
 **logout**
 
 This service operation invalidates a proof of identity token.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-generic-http.md#logout) | [generic-https](../api/authentication/identity-generic-http.md#logout)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-generic-mqtt.md#logout) | [generic-mqtts](../api/authentication/identity-generic-mqtt.md#logout)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-generic-http.md#logout) | [generic_https](../api/authentication/identity-generic-http.md#logout)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-generic-mqtt.md#logout) | [generic_mqtts](../api/authentication/identity-generic-mqtt.md#logout)
 
 **change**
 
 This service operation changes the requester system's own credentials.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-generic-http.md#change) | [generic-https](../api/authentication/identity-generic-http.md#change)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-generic-mqtt.md#change) | [generic-mqtts](../api/authentication/identity-generic-mqtt.md#change)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-generic-http.md#change) | [generic_https](../api/authentication/identity-generic-http.md#change)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-generic-mqtt.md#change) | [generic_mqtts](../api/authentication/identity-generic-mqtt.md#change)
 
 **verify**
 
 This service operation checks the validity of a provided token and acquires information about the verified system.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-generic-http.md#verify) | [generic-https](../api/authentication/identity-generic-http.md#verify)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-generic-mqtt.md#verify) | [generic-mqtts](../api/authentication/identity-generic-mqtt.md#verify)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-generic-http.md#verify) | [generic_https](../api/authentication/identity-generic-http.md#verify)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-generic-mqtt.md#verify) | [generic_mqtts](../api/authentication/identity-generic-mqtt.md#verify)
 
-### general-management
+### generalManagement
 
-Its purpose is to get some information about the hosting system's behavior, such as log entries and configuration settings. The service is offered for administrative support systems.
+Its purpose is to get some information about the hosting system's behavior, such as log entries and configuration settings. The service is offered for administrative Support systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
-:material-api: [generic-http (IDD)](../api/general/general-management-generic-http.md) | [generic-https (IDD)](../api/general/general-management-generic-http.md) <br />
-:material-api: [generic-mqtt (IDD)](../api/general/general-management-generic-mqtt.md) | [generic-mqtts (IDD)](../api/general/general-management-generic-mqtt.md) <br />
+:material-api: [generic_http (IDD)](../api/general/general-management-generic-http.md) | [generic_https (IDD)](../api/general/general-management-generic-http.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/general/general-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/general/general-management-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **get-log**
 
 This service operation lists the log entries of the system that matches the filtering requirements.
 
-:material-arrow-right-thin: Example: [generic-http](../api/general/general-management-generic-http.md#get-log) | [generic-https](../api/general/general-management-generic-http.md#get-log)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/general/general-management-generic-mqtt.md#get-log) | [generic-mqtts](../api/general/general-management-generic-mqtt.md#get-log)
+:material-arrow-right-thin: Example: [generic_http](../api/general/general-management-generic-http.md#get-log) | [generic_https](../api/general/general-management-generic-http.md#get-log)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/general/general-management-generic-mqtt.md#get-log) | [generic_mqtts](../api/general/general-management-generic-mqtt.md#get-log)
 
 **get-config**
 
 This service operation lists the current values of the specified configuration settings.
 
-:material-arrow-right-thin: Example: [generic-http](../api/general/general-management-generic-http.md#get-config) | [generic-https](../api/general/general-management-generic-http.md#get-config)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/general/general-management-generic-mqtt.md#get-config) | [generic-mqtts](../api/general/general-management-generic-mqtt.md#get-config)
+:material-arrow-right-thin: Example: [generic_http](../api/general/general-management-generic-http.md#get-config) | [generic_https](../api/general/general-management-generic-http.md#get-config)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/general/general-management-generic-mqtt.md#get-config) | [generic_mqtts](../api/general/general-management-generic-mqtt.md#get-config)
 
 -----
 
-### identity-management
+### identityManagement
 
-Its purpose is to manage identities and active sessions in bulk. The different operations provide querying, creating, updating and removing functionalities. The service is offered for administrative support systems.
+Its purpose is to manage identities and active sessions in bulk. The different operations provide querying, creating, updating and removing functionalities. The service is offered for administrative Support systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/identity-management_sd.pdf) <br />
-:material-api: [generic-http (IDD)](../api/authentication/identity-management-generic-http.md) | [generic-https (IDD)](../api/authentication/identity-management-generic-http.md) <br />
-:material-api: [generic-mqtt (IDD)](../api/authentication/identity-management-generic-mqtt.md) | [generic-mqtts (IDD)](../api/authentication/identity-management-generic-mqtt.md) <br />
+:material-api: [generic_http (IDD)](../api/authentication/identity-management-generic-http.md) | [generic_https (IDD)](../api/authentication/identity-management-generic-http.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/authentication/identity-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/authentication/identity-management-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **identity-mgmt-query**
 
 This service operation lists the identities that match the filtering requirements.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-query) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-query)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-query) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-query)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-management-generic-http.md#identity-mgmt-query) | [generic_https](../api/authentication/identity-management-generic-http.md#identity-mgmt-query)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-query) | [generic_mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-query)
 
 **identity-mgmt-create**
 
 This service operation creates the specified identities.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-create) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-create)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-create) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-create)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-management-generic-http.md#identity-mgmt-create) | [generic_https](../api/authentication/identity-management-generic-http.md#identity-mgmt-create)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-create) | [generic_mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-create)
 
 **identity-mgmt-update**
 
 This service operation updates the specified existing identities.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-update) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-update)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-update) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-update)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-management-generic-http.md#identity-mgmt-update) | [generic_https](../api/authentication/identity-management-generic-http.md#identity-mgmt-update)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-update) | [generic_mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-update)
 
 **identity-mgmt-remove**
 
 This service operation removes the specified identities.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-remove) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-remove)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-remove) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-remove)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-management-generic-http.md#identity-mgmt-remove) | [generic_https](../api/authentication/identity-management-generic-http.md#identity-mgmt-remove)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-remove) | [generic_mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-remove)
 
 **identity-mgmt-session-query**
 
 This service operation lists the active sessions that match the filtering requirements.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-query) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-query)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-query) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-query)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-query) | [generic_https](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-query)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-query) | [generic_mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-query)
 
 **identity-mgmt-session-close**
 
 This service operation closes and the specified active sessions and invalidates the related tokens.
 
-:material-arrow-right-thin: Example: [generic-http](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-close) | [generic-https](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-close)<br />
-:material-arrow-right-thin: Example: [generic-mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-close) | [generic-mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-close)
+:material-arrow-right-thin: Example: [generic_http](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-close) | [generic_https](../api/authentication/identity-management-generic-http.md#identity-mgmt-session-close)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-close) | [generic_mqtts](../api/authentication/identity-management-generic-mqtt.md#identity-mgmt-session-close)
 
 ## Configuration
 
@@ -170,7 +170,7 @@ Auto initialization of database tables. Value must be always 'none'.
 
 :fontawesome-solid-wrench: **authentication.secret.key**
 
-The secret key which is used to prove to the Local Cloud's Service Registry that this authentication is trusted. This secret key must be present in the Service Registry **authenticator.secret.keys** structure.
+The secret key which is used to prove to the Local Cloud's ServiceRegistry that this authentication is trusted. This secret key must be present in the Service Registry **authenticator.secret.keys** structure.
 
 :fontawesome-solid-wrench: **enable.management.filter**
 
@@ -178,7 +178,7 @@ Set to `true` to enable automatic authorization for management services.
 
 :fontawesome-solid-wrench: **management.policy**
 
-Defines the access policy for management services. Can be `sysop-only` (only systems with system operator permission can use them), `whitelist` (system operators and those dedicated systems that appear on the **management.whitelist** can use them) or `authorization` (system operators, whitelist members and those systems that have permission according to the Authorization system can use them).
+Defines the access policy for management services. Can be `sysop-only` (only systems with system operator permission can use them), `whitelist` (system operators and those dedicated systems that appear on the **management.whitelist** can use them) or `authorization` (system operators, whitelist members and those systems that have permission according to the ConsumerAuthorization system can use them).
 
 :fontawesome-solid-wrench: **management.whitelist**
 
