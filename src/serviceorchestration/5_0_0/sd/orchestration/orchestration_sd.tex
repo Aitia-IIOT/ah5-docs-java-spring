@@ -1,0 +1,460 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+\hyphenation{Er-ror-Res-pon-se}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[5]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{orchestration} % XXX = ServiceName 
+\ArrowheadServiceID{orchestration} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Tamás Bordi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{tbordi@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{orchestration} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{orchestration} service, which provides runtime (late) binding between application systems. Its primary purpose is to find matching service instances according to the consumer's needs within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds. The matching service instances can be orchestrated with different strategies:
+
+\begin{itemize}
+    \item \textbf{simple-store:} when the matching service instances are stored in a database as peer-to-peer rules that are maintained by higher entities and no actual service details are obtained from the Local Cloud;
+    \item \textbf{flexible-store:} when the service requirements are stored in a database as service and provider attribute rules that are maintained by higher entities and actual service details are obtained from the Local Cloud;
+    \item \textbf{dynamic:} when the matching service instances and their actual service details are discovered on the fly from the Local Cloud based on the service requirements specified by the initiator party (consumer system or higher entity).
+\end{itemize}
+
+
+The \textbf{orchestration} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{pull} performs the orchestration process and returns the matching service instances;
+    \item \textit{subscribe} creates a subscription that can be triggered anytime to perform the orchestration process and push the matching service instances for the subscriptor (push orchestration);
+    \item \textit{unsubscribe} removes a subscription;
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+
+There are two ways to use this service:
+
+\begin{itemize}
+    \item \textbf{Pull orchestration:} A consumer system consumes the \textit{pull} operation in order to immediately obtain the matching service instances.
+    \item \textbf{Push orchestration:} A consumer system consumes the \textit{subscribe} operation in order to receive new orchestration results every time when a higher entity triggers a related orchestration process. Hence, the actual matching service instances are being sent to the consumer without its direct request.
+\end{itemize}
+
+Always the same orchestration process is being performed in case of both method (\textit{pull} and \textit{push}), however the behavior of the orchestration process itself differs between the orchestration strategies.
+
+In case of \textbf{simple-store} strategy the orchestration process results in providing the corresponding service instance identifiers for all of the (or targeted) service definitions associated to the consumer system and stored in the rule database. Multiple rules with different priorities can exist for the same service definition and consuming system. Based on the provided service instance identifiers the consumer system has to perform every other required task to prepare for the successful service consumption. Hence, it has to lookup for all the actual service instance details (like access addresses, service and provider metadata, etc...) by using the \textit{service-discovery} service from the implementing system. Also, service instances are not being filtered on the consumption permissions during the orchestration process and authorization tokens for the service consumptions (if necessary) are also should be requested by the consumer system via the \textit{authorization-token} service from the implementing system.
+(See the \textit{service-discovery} and \textit{authorization-token} SD documents.)
+
+In case of \textbf{flexible-store} strategy the orchestration process results in providing the matching service instances, discovered based on the rules stored in the database for all of the (or targeted) service definitions that are associated to the consumer system. Multiple rules with different priorities can exist for the same service definition and consuming system. Service instances are retrieved with all the actual service and provider details (like access addresses, metadata, etc...) directly from the Local Cloud and are also filtered on the consumption permissions (if necessary). Authorization tokens for the service consumptions (if necessary) are generated in advance and provided within the orchestration results. 
+
+In case of \textbf{dynamic} strategy the orchestration process results in providing the matching service instances, discovered based on the given service requirements for a certain service definition. Service instances are retrieved with all the actual service and provider details (like access addresses, metadata, etc...) directly from the Local Cloud and are also filtered on the consumption permissions (if necessary). Authorization tokens for the service consumptions (if necessary) are generated in advance and provided within the orchestration results. 
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+The consumer has to identify itself to use any of the operations.
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+Available for anyone within the local cloud.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operations of the service. The \textbf{orchestration} service is used to perform a \textit{pull} orchestration and  \textit{subscribe}/\textit{unsubscribe} for push orchestrations.
+In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\phantomsection
+\fsubsection{pull}{OrchestrationRequest}{OrchestrationResponse}{}{ErrorResponse}
+
+The behavior of this operation differs between the orchestration strategies:
+
+In case of \textbf{simple-store} strategy the \textit{pull} operation requires at least the consumer system's identity in order to perform the orchestration process. As a result of the orchestration process the consumer system receives back the matching service instance identifiers sorted by the service definition and priority. Targeting one specific service definition is also possible.
+
+In case of \textbf{flexible-store} strategy the \textit{pull} operation requires at least the consumer system's identity in order to perform the orchestration process. As a result of the orchestration process the consumer system receives back the matching service instances with all the details sorted by the service definition and priority. Targeting one specific service definition is also possible.
+
+In case of \textbf{dynamic} strategy the \textit{pull} operation requires at least the consumer system's identity and the targeted service definition. As a result of the orchestration process the consumer system receives back the matching service instances with all the details.
+
+\fsubsection{subscribe}{OrchestrationSubscriptionRequest}{OrchestrationSubscriptionId}{}{ErrorResponse}
+
+This operation requires at least the consumer's identity, the targeted service definition and a notify interface. The result of this operation is an identifier that refers to the created subscription record. Optionally a push orchestration also can be initiated at the same time.
+
+\fsubsection{unsubscribe}{OrchestrationSubscriptionId}{}{OperationStatus}{ErrorResponse}
+
+This operation requires the identifier pointing to the subscription record to be deleted.
+
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{orchestration} service are listed and must be respected by the hosting System.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\phantomsection
+\msubsection{struct}{OrchestrationRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.25cm} | p{3.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+orchestrationForm & \hyperref[sec:model:OrchestrationForm]{OrchestrationForm} & yes & Orchestration request details. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\msubsection{struct}{OrchestrationForm}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.25cm} | p{3.8cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+serviceRequirement & \hyperref[sec:model:ServiceRequirement]{ServiceRequirement} & yes & Details of the targeted service. \\ \hline
+orchestrationFlags & \pref{Set}$<$\hyperref[sec:model:OrchestrationFlag]{OrchestrationFlag}$>$ & no & Set of orchestration flags. \\ \hline
+qosRequirements & \hyperref[sec:model:QoSRequirementMap]{QoSRequirementMap} & no & Quality of service requirements map. \\ \hline
+exclusivityDuration & \pref{Number} & no & The interval the service wanted to be exclusive.  \\ \hline
+\end{tabularx}
+\end{table}
+
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceRequirement} and \texttt{orchestrationFlags} fields. 
+
+\clearpage
+
+\msubsection{struct}{ServiceRequirement}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.8cm} | p{4.7cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+serviceDefinition & \pref{Name} & yes/no & The required service definition name. Mandatory in case of \textbf{dynamic} strategy. \\ \hline
+operations & \pref{List}$<$\pref{Name}$>$ & yes/no & The required service operation names. \newline 
+Exactly one operation must be defined, when the following orchestration flags are true: \newline \texttt{ONLY\_INTERCLOUD}, \texttt{ALLOW\_INTERCLOUD}, \texttt{ALLOW\_TRANSLATION} \\ \hline
+versions & \pref{List}$<$\pref{Version}$>$ & no & The required service versions. \\ \hline 
+alivesAt & \pref{DateTime} & no & The orchestrated service must be alive by this time. \\ \hline
+metadataRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must meet at least to one of the specified metadata requirement. \\ \hline
+interfaceTemplateNames & \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & The orchestrated service must offer at least one from the specified interface template names. \\ \hline 
+interfaceAddressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & The orchestrated service must offer at least one from the specified interface address types. \\ \hline
+interfacePropertyRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must offer at least one interface that meets with one of the specified property requirements. \\ \hline
+securityPolicies & \pref{List}$<$\pref{SecurityPolicy}$>$ & no & The orchestrated service must meet with one of the specified security policies. \\ \hline
+preferredProviders & \pref{List}$<$\pref{Name}$>$ & no & Provider system names specified here have priority. \\ \hline
+\end{tabularx}
+\end{table}
+
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceDefinition} field. 
+
+\msubsection{struct}{MetadataRequirements}
+
+A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
+
+\begin{itemize}
+    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which is associated with an embedded object and in this object we are looking for the key named "subkey").
+    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
+    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
+\end{itemize}
+
+\msubsection{struct}{OrchestrationFlag}
+
+Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process. Possible values:
+
+\begin{itemize}
+    \item \texttt{MATCHMAKING}:
+    
+    If \texttt{true}, orchestration process includes a matchmaking process in order to return only one matching service instance if any. 
+
+    If \texttt{false}, orchestration process returns all the matching service instance if any. 
+
+    Supporting strategies: \textit{simple-store}, \textit{flexible-store}, \textit{dynamic}
+    
+    \item \texttt{ONLY\_PREFERRED}:
+
+    If \texttt{true}, orchestration process considers only those matching service instances that are provided by a preferred provider if any.
+
+    If \texttt{false}, but preferred providers are specified and have matching service instances, then orchestration process considers only those service instances that are provided by a preferred provider. Otherwise, non-preferred providers are considered.
+
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
+    
+    \item \texttt{ONLY\_EXCLUSIVE}:
+
+    If \texttt{true}, orchestration process considers only those matching service instances that are allows exclusivity. It automatically results \texttt{MATCHMAKING:true} as well.
+
+    If \texttt{false}, but exclusivity duration is specified and there are matching services with exclusivity allowed, then orchestration process considers only those service instances that allows exclusivity. Otherwise, service instances without exclusivity are considered.
+
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
+    
+    \item \texttt{ALLOW\_INTERCLOUD}:
+
+    If \texttt{true}, orchestration process considers matching service instances from neighbor clouds when there are no local hits. Orchestrating from neighbor clouds automatically results \texttt{MATCHMAKING:true}
+
+    If \texttt{false}, orchestration process doesn't consider matching service instances from neighbor clouds when there are no local hits.
+
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
+
+    \item \texttt{ONLY\_INTERCLOUD}:
+
+    If \texttt{true}, orchestration process considers matching service instances only from the neighbor clouds. It automatically results \texttt{MATCHMAKING:true} as well.
+
+    If \texttt{false}, orchestration process considers matching service instances from the local could in first hand and only considers matching service instances from the neighbor clouds when \texttt{ALLOW\_INTERCLOUD:true}.
+
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
+    
+    \item \texttt{ALLOW\_TRANSLATION}:
+
+    If \texttt{true}, orchestration process considers matching, but non-native service instances when there are no native hits. Matching, but non-native service instance means that all the requirements are fulfilled except the interface related requirements (protocol, data-format, etc.). It automatically results \texttt{MATCHMAKING:true} as well.
+
+     If \texttt{false}, orchestration process considers only native matching service instances.
+
+     Supporting strategies: \textit{flexible-store}, \textit{dynamic}
+    
+\end{itemize}
+
+\msubsection{struct}{QoSRequirementMap}
+
+An \pref{Object} which maps \pref{String} keys \pref{String} values.
+
+\msubsection{struct}{OrchestrationResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4.25cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+results & \pref{List}$<$\hyperref[sec:model:OrchestrationResult]{OrchestrationResult}$>$ & List of matching service instances. \\ \hline
+warnings & \pref{List}$<$\hyperref[sec:model:String]{String}$>$ & Warning message list. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{OrchestrationResult}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5.1cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+serviceInstanceId & \pref{Name} & Unique identifier of the service instance. \\ \hline
+providerName & \pref{Name} & Unique identifier of the provider system. \\ \hline
+serviceDefinition & \pref{Name} & Unique identifier of the service definition. \\ \hline
+version & \pref{Version} & Version of the service instance. \\ \hline
+aliveUntil & \pref{DateTime} & The service instance is available until this time. \\ \hline
+exclusiveUntil & \pref{DateTime} & The service instance is reserved until this time. \\ \hline
+metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the service instance. \\ \hline
+interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
+\end{tabularx}
+\end{table}
+
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceInctanceId} field. 
+
+\msubsection{struct}{Metadata}
+
+An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
+
+\clearpage
+
+\msubsection{struct}{ServiceInterfaceDescriptor}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+templateName & \pref{InterfaceTemplate} & The name of the interface template that describes the interface structure. \\ \hline
+protocol & \pref{Protocol} & The communication protocol of the interface. \\ \hline
+policy & \pref{SecurityPolicy} & The security of the interface. \\ \hline
+properties &\hyperref[sec:model:Metadata]{Metadata} & Interface template-specific data. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{OrchestrationSubscriptionRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.2cm} | p{3.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+orchestrationForm & \hyperref[sec:model:OrchestrationForm]{OrchestrationForm} & yes & Orchestration request details. \\ \hline
+notifyInterface & \hyperref[sec:model:NotifyInterface]{NotifyInterface} & yes & Interface details for sending push notifications. \\ \hline
+duration & \pref{Number} & no & The interval while the subscription is active.  \\ \hline
+trigger & \pref{Boolean} & no & Whether or not a push orchestration should be initiated upon a successful subscription.  \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{NotifyInterface}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.2cm} | p{4.3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+protocol & \pdef{Protocol} & yes & Communication protocol to be used for sending notification. \\ \hline
+properties & \hyperref[sec:model:NotifyInterfacePropertyMap]{NotifyInterfacePropertyMap} & yes & Interface properties belonged to the specified protocol. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{NotifyInterfacePropertyMap}
+
+An \pref{Object} which maps \pref{String} keys \pref{String} values.
+
+\msubsection{struct}{OrchestrationSubscriptionId}
+
+Unique \pref{String} identifier. 
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{InterfaceTemplate}& A string identifier of an interface descriptor. \\ \hline
+\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
+\pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
+\pdef{Set}$<$A$>$       & A collection of items that contains no duplicate elements and each having type A. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning.  \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}

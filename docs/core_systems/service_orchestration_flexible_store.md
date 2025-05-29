@@ -1,3 +1,3 @@
-# Service Orchestration (Flexible-store)
+# Flexible-Store Service Orchestration
 
 Coming soon.
