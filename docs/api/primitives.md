@@ -86,6 +86,10 @@ A string identifier of a service instance. It consists of the instance's provide
 
 A chain of UTF-8 characters.
 
+## SystemName
+
+A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the PascalCase naming convention. The identifier maximum length is 63 characters.
+
 ## UUID
 
 A UUID (Universally Unique Identifier) is a 128-bit identifier used to uniquely distinguish objects in distributed systems (e.g.: `550e8400-e29b-41d4-a716-446655440000`)

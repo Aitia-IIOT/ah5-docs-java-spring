@@ -1,13 +1,13 @@
-# identity-management IDD
-**GENERIC-MQTT & GENERIC-MQTTS**
+# identityManagement IDD
+**generic_mgtt & generic_mqtts**
 
 ## Overview
 
-This page describes the GENERIC-MQTT and GENERIC-MQTTS service interface of identity-management which enables systems (with operator role or
+This page describes the generic_mqtt and generic_mqtts service interface of identity-management which enables systems (with operator role or
 proper permissions) to handle identities (create, update, remove, query) and active sessions (close, query) in bulk. It is implemented using protocol, encoding as stated in the
 following tables:
 
-**GENERIC-MQTT**
+**generic_mqtt**
 
 Profile type | type | Version
 --- | --- | ---
@@ -16,7 +16,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-MQTTS**
+**generic_mqtts**
 
 Profile type | type | Version
 --- | --- | ---
@@ -25,7 +25,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [identity-management – Service Description](../../assets/sd/5_0_0/identity-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [identityManagement – Service Description](../../assets/sd/5_0_0/identity-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
@@ -48,7 +48,7 @@ Topic: arrowhead/authentication/identity/management/identity-mgmt-query
       "direction": "ASC",
       "sortField": "name"
     },
-    "createdBy": "sysop",
+    "createdBy": "Sysop",
     "creationFrom": "2025-03-07T06:00:00Z"
   }
 }
@@ -65,21 +65,21 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
   "payload": {
     "identities": [
       {
-        "systemName": "consumer1",
+        "systemName": "Consumer1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:52:30Z"
       },
       {
-        "systemName": "provider1",
+        "systemName": "Provider1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:52:30Z"
       }
     ],
@@ -123,14 +123,14 @@ Topic: arrowhead/authentication/identity/management/identity-mgmt-create
     "authenticationMethod": "PASSWORD",
     "identities": [
 	  {
-	    "systemName": "consumer1",
+	    "systemName": "Consumer1",
 	    "credentials": {
 		  "password": "abcdef"
 	    },
 	    "sysop": false
 	  },
 	  {
-	    "systemName": "provider1",
+	    "systemName": "Provider1",
 	    "credentials": {
 		  "password": "123456"
 	    },
@@ -154,21 +154,21 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
   "payload": {
     "identities": [
       {
-        "systemName": "consumer1",
+        "systemName": "Consumer1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:52:30Z"
       },
       {
-        "systemName": "provider1",
+        "systemName": "Provider1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:52:30Z"
       }
     ],
@@ -211,14 +211,14 @@ Topic: arrowhead/authentication/identity/management/identity-mgmt-update
   "payload": {
     "identities": [
 	  {
-	    "systemName": "consumer1",
+	    "systemName": "Consumer1",
 	    "credentials": {
 		  "password": "123456"
 	    },
 	    "sysop": false
 	  },
 	  {
-	    "systemName": "provider1",
+	    "systemName": "Provider1",
 	    "credentials": {
 		  "password": "123456"
 	    },
@@ -240,21 +240,21 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
   "payload": {
     "identities": [
       {
-        "systemName": "consumer1",
+        "systemName": "Consumer1",
         "authenticationMethod": "PASSWORD",
         "sysop": false,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:59:01"
       },
       {
-        "systemName": "provider1",
+        "systemName": "Provider1",
         "authenticationMethod": "PASSWORD",
         "sysop": true,
-        "createdBy": "sysop",
+        "createdBy": "Sysop",
         "createdAt": "2025-03-07T12:52:30Z",
-        "updatedBy": "sysop",
+        "updatedBy": "Sysop",
         "updatedAt": "2025-03-07T12:59:01Z"
       }
     ],
@@ -284,7 +284,7 @@ If the Authentication System needs contacting an external server during the upda
 
 ### identity-mgmt-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of systems that need to be removed.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[SystemName](../primitives.md#systemname)>, which contains the names of systems that need to be removed.
 
 ```
 Topic: arrowhead/authentication/identity/management/identity-mgmt-remove
@@ -294,7 +294,7 @@ Topic: arrowhead/authentication/identity/management/identity-mgmt-remove
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": "<0|1|2>",
-  "payload": [ "provider1", "provider2" ]
+  "payload": [ "Provider1", "Provider2" ]
 }
 ```
 
@@ -362,12 +362,12 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
   "payload": {
     "sessions": [
       {
-        "systemName": "consumer1",
+        "systemName": "Consumer1",
         "loginTime": "2025-03-07T11:54:01Z",
         "expirationTime": "2025-03-08T11:59:01Z"
       },
       {
-        "systemName": "sysop",
+        "systemName": "Sysop",
         "loginTime": "2025-03-07T12:40:54Z",
         "expirationTime": "2025-03-08T12:45:54Z"
       }
@@ -398,7 +398,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### identity-mgmt-session-close
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of systems whose sessions need to be closed.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[SystemName](../primitives.md#systemname)>, which contains the names of systems whose sessions need to be closed.
 
 ```
 Topic: arrowhead/authentication/identity/management/identity-mgmt-session-query
@@ -408,7 +408,7 @@ Topic: arrowhead/authentication/identity/management/identity-mgmt-session-query
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": "<0|1|2>",
-  "payload": [ "consumer1" ]
+  "payload": [ "Consumer1" ]
 }
 ```
 

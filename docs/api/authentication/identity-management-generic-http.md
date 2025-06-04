@@ -1,13 +1,13 @@
-# identity-management IDD
-**GENERIC-HTTP & GENERIC-HTTPS**
+# identityManagement IDD
+**generic_http & generic_https**
 
 ## Overview
 
-This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of identity-management which enables systems (with operator role or
+This page describes the generic_http and generic_https service interface of identity-management which enables systems (with operator role or
 proper permissions) to handle identities (create, update, remove, query) and active sessions (close, query) in bulk. It is implemented using protocol, encoding as stated in the
 following tables:
 
-**GENERIC-HTTP**
+**generic_http**
 
 Profile type | type | Version
 --- | --- | ---
@@ -16,7 +16,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-HTTPS**
+**generic_https**
 
 Profile type | type | Version
 --- | --- | ---
@@ -25,7 +25,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [identity-management – Service Description](../../assets/sd/5_0_0/identity-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [identityManagement – Service Description](../../assets/sd/5_0_0/identity-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
@@ -44,7 +44,7 @@ Authorization: Bearer <identity-info>
     "direction": "ASC",
     "sortField": "name"
   },
-  "createdBy": "sysop",
+  "createdBy": "Sysop",
   "creationFrom": "2025-03-07T06:00:00Z"
 }
 ```
@@ -56,21 +56,21 @@ The service operation **responds** with the status code `200` if called successf
 {
   "identities": [
     {
-      "systemName": "consumer1",
+      "systemName": "Consumer1",
       "authenticationMethod": "PASSWORD",
       "sysop": false,
-      "createdBy": "sysop",
+      "createdBy": "Sysop",
       "createdAt": "2025-03-07T12:52:30Z",
-      "updatedBy": "sysop",
+      "updatedBy": "Sysop",
       "updatedAt": "2025-03-07T12:52:30Z"
     },
     {
-      "systemName": "provider1",
+      "systemName": "Provider1",
       "authenticationMethod": "PASSWORD",
       "sysop": false,
-      "createdBy": "sysop",
+      "createdBy": "Sysop",
       "createdAt": "2025-03-07T12:52:30Z",
-      "updatedBy": "sysop",
+      "updatedBy": "Sysop",
       "updatedAt": "2025-03-07T12:52:30Z"
     }
   ],
@@ -104,14 +104,14 @@ Authorization: Bearer <identity-info>
   "authenticationMethod": "PASSWORD",
   "identities": [
 	{
-	  "systemName": "consumer1",
+	  "systemName": "Consumer1",
 	  "credentials": {
 		"password": "abcdef"
 	  },
 	  "sysop": false
 	},
 	{
-	  "systemName": "provider1",
+	  "systemName": "Provider1",
 	  "credentials": {
 		"password": "123456"
 	  },
@@ -129,21 +129,21 @@ The service operation **responds** with the status code `201` if called successf
 {
   "identities": [
     {
-      "systemName": "consumer1",
+      "systemName": "Consumer1",
       "authenticationMethod": "PASSWORD",
       "sysop": false,
-      "createdBy": "sysop",
+      "createdBy": "Sysop",
       "createdAt": "2025-03-07T12:52:30Z",
-      "updatedBy": "sysop",
+      "updatedBy": "Sysop",
       "updatedAt": "2025-03-07T12:52:30Z"
     },
     {
-      "systemName": "provider1",
+      "systemName": "Provider1",
       "authenticationMethod": "PASSWORD",
       "sysop": false,
-      "createdBy": "sysop",
+      "createdBy": "Sysop",
       "createdAt": "2025-03-07T12:52:30Z",
-      "updatedBy": "sysop",
+      "updatedBy": "Sysop",
       "updatedAt": "2025-03-07T12:52:30Z"
     }
   ],
@@ -176,14 +176,14 @@ Authorization: Bearer <identity-info>
 {
   "identities": [
 	{
-	  "systemName": "consumer1",
+	  "systemName": "Consumer1",
 	  "credentials": {
 		"password": "123456"
 	  },
 	  "sysop": false
 	},
 	{
-	  "systemName": "provider1",
+	  "systemName": "Provider1",
 	  "credentials": {
 		"password": "123456"
 	  },
@@ -201,21 +201,21 @@ The service operation **responds** with the status code `200` if called successf
 {
   "identities": [
     {
-      "systemName": "consumer1",
+      "systemName": "Consumer1",
       "authenticationMethod": "PASSWORD",
       "sysop": false,
-      "createdBy": "sysop",
+      "createdBy": "Sysop",
       "createdAt": "2025-03-07T12:52:30",
-      "updatedBy": "sysop",
+      "updatedBy": "Sysop",
       "updatedAt": "2025-03-07T12:59:01"
     },
     {
-      "systemName": "provider1",
+      "systemName": "Provider1",
       "authenticationMethod": "PASSWORD",
       "sysop": true,
-      "createdBy": "sysop",
+      "createdBy": "Sysop",
       "createdAt": "2025-03-07T12:52:30Z",
-      "updatedBy": "sysop",
+      "updatedBy": "Sysop",
       "updatedAt": "2025-03-07T12:59:01Z"
     }
   ],
@@ -239,9 +239,9 @@ If the Authentication System needs contacting an external server during the upda
 
 ### identity-mgmt-remove
 
-The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[Name](../primitives.md#name)> as query parameter, which contains the names of systems that needs to be removed.
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[SystemName](../primitives.md#systemname)> as query parameter, which contains the names of systems that needs to be removed.
 ```
-DELETE /authentication/mgmt/identities?names=provider1&names=provider2 HTTP/1.1
+DELETE /authentication/mgmt/identities?names=Provider1&names=Provider2 HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
 
@@ -286,12 +286,12 @@ The service operation **responds** with the status code `200` if called successf
 {
   "sessions": [
     {
-      "systemName": "consumer1",
+      "systemName": "Consumer1",
       "loginTime": "2025-03-07T11:54:01Z",
       "expirationTime": "2025-03-08T11:59:01Z"
     },
     {
-      "systemName": "sysop",
+      "systemName": "Sysop",
       "loginTime": "2025-03-07T12:40:54Z",
       "expirationTime": "2025-03-08T12:45:54Z"
     }
@@ -316,10 +316,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### identity-mgmt-session-close
 
-The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[Name](../primitives.md#name)> as query parameter, which contains the names of systems whose sessions needs to be closed.
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[SystemName](../primitives.md#systemname)> as query parameter, which contains the names of systems whose sessions needs to be closed.
 
 ```
-DELETE /authentication/mgmt/sessions?names=consumer1 HTTP/1.1
+DELETE /authentication/mgmt/sessions?names=Consumer1 HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
 
