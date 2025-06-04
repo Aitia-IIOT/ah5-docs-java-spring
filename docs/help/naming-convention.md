@@ -14,7 +14,7 @@ System | PascalCase | `ServiceRegistry`
 Service | camelCase | `serviceDiscovery`
 Service operation | kebab-case | `get-entries`
 Interface | snake_case | `generic_http`
-DEVICE | UPPER_SNAKE_CASE | `MY_DEVICE` 
+Device | UPPER_SNAKE_CASE | `MY_DEVICE` 
 
 ## Composite identifiers
 
@@ -29,7 +29,7 @@ Cloud | CloudName\|OrganizationName | `TestCloud|AitiaInc`
 
 ### X.509 Certificates
 
-The use of Common Name (CN) in X.509 Certificates - which is important in case of [certificate authentication policy](../api/authentication_policy.md#certificate) -  has limited capabilities. To overcome this issue, the common name parts in the certificates have to follow the kebab styling and be delimited by `.` character. The common name will be transformed to the appropriate styling on code level, and from then on this transformed version will be processed.
+The use of Common Name (CN) in X.509 Certificates - which is important in case of [certificate authentication policy](../api/authentication_policy.md#certificate) -  has limited capabilities. To overcome this issue, the common name parts in the certificates can follow the kebab styling and be delimited by `.` character. The common name will be transformed to the appropriate styling on code level, and from then on this transformed version will be processed.
 
 System profile | example
 --- | ---
