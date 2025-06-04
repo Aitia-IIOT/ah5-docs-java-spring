@@ -51,8 +51,8 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{general-management} % XXX = ServiceName 
-\ArrowheadServiceID{general-management} % ID name of service
+\ArrowheadTitle{generalManagement} % XXX = ServiceName 
+\ArrowheadServiceID{generalManagement} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
@@ -84,7 +84,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides a service description for the \textbf{general-management} service. 
+    This document provides a service description for the \textbf{generalManagement} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -108,9 +108,9 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{general-management} service, which allows (with operator role or proper permissions) to get some information about the hosting system's behavior, such as log entries and configuration settings. An example of this interaction is when an operator uses the Management Tool to revise the log of a system that behaves abnormally.
+This document describes the \textbf{generalManagement} service, which allows (with operator role or proper permissions) to get some information about the hosting system's behavior, such as log entries and configuration settings. An example of this interaction is when an operator uses the Management Tool to revise the log of a system that behaves abnormally.
 
-The \textbf{general-management} service contains the following operations:
+The \textbf{generalManagement} service contains the following operations:
 
 \begin{itemize}
     \item \textit{get-log} lists the log entries of the system that matches the filtering requirements;
@@ -124,7 +124,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 \subsection{How This Service Is Meant to Be Used}
 The service's purpose is to getting information about a deployed and running system. 
 
-Application systems should not use this service; only operators (via the Management Tool, for example) or dedicated support systems.
+Application systems should not use this service; only operators (via the Management Tool, for example) or dedicated Support systems.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -134,7 +134,7 @@ The requester has to identify itself to use any of the operations.
 \subsection{Access policy}
 \label{sec:accesspolicy}
 
-The service is only available for operators, dedicated support systems and those who have the proper authorization rights to consume it.
+The service is only available for operators, dedicated Support systems and those who have the proper authorization rights to consume it.
 
 \newpage
 
@@ -149,7 +149,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{get-log}{LogRequest}{LogResponse}{}{ErrorResponse}
 
-The input data must meet the following criteria:
+Operation \textit{get-log} lists the log entries of the system that matches the filtering requirements. The input data must meet the following criteria:
 
 \begin{itemize}
     \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
@@ -160,7 +160,7 @@ The input data must meet the following criteria:
 
 \fsubsection{get-config}{ConfigRequest}{ConfigResponse}{}{ErrorResponse}
 
-The input data must meet the following criteria:
+Operation  \textit{get-config} lists the current values of the specified configuration settings. The input data must meet the following criteria:
 
 \begin{itemize}
     \item Some configuration settings (e. g. passwords) cannot be acquired with this operation. Such setting names will be ignored.
@@ -171,8 +171,8 @@ The input data must meet the following criteria:
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{general-management} service
-are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{generalManagement} service
+are listed and must be respected by the hosting system.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 

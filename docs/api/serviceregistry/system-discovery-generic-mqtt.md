@@ -1,25 +1,22 @@
-# system-discovery GENERIC-MQTT
+# system-discovery IDD
+**GENERIC-MQTT & GENERIC-MQTTS** 
 
 ## Overview
 
-TODO
+Coming soon...
 
 ## Interface Description
 
-TODO
+Coming soon...
 
 ### register
 
-TODO
+Coming soon...
 
 ### lookup
 
-TODO
+Coming soon...
 
 ### revoke
 
-TODO
-
-## Data Models
-
-TODO
+Coming soon...
