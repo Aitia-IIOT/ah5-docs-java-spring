@@ -8,17 +8,17 @@ nav:
     - Getting Started: home/getting_started.md
     - Contribute: home/contribute.md 
   - Core Systems:
-    - Service Registry: core_systems/service_registry.md
-    - Dynamic Service Orchestration: core_systems/service_orchestration_dynamic.md
-    - Flexible-Store Service Orchestration: core_systems/service_orchestration_flexible_store.md
-    - Simple-Store Service Orchestration: core_systems/service_orchestration_simple_store.md
-    - Authorization: core_systems/authorization.md
+    - ServiceRegistry: core_systems/service_registry.md
+    - DynamicServiceOrchestration: core_systems/service_orchestration_dynamic.md
+    - FlexibleStoreServiceOrchestration: core_systems/service_orchestration_flexible_store.md
+    - SimpleStoreServiceOrchestration: core_systems/service_orchestration_simple_store.md
+    - ConsumerAuthorization: core_systems/authorization.md
     - Authentication: core_systems/authentication.md
   - Support Systems: 
     - Blacklist: support_systems/blacklist.md
     - Configuration: support_systems/configuration.md
-    - QoS Evaluator: support_systems/qos_evaluator.md
-    - Translation Manager: support_systems/translation_manager.md
+    - QoSEvaluator: support_systems/qos_evaluator.md
+    - TranslationManager: support_systems/translation_manager.md
   - API:
     - Interface Descriptions:
       - General:
@@ -26,7 +26,7 @@ nav:
           - generalManagement: api/general/general-management-generic-http.md
         - MQTT:
           - generalManagement: api/general/general-management-generic-mqtt.md
-      - Service Registry:
+      - ServiceRegistry:
         - HTTP:
           - device-discovery: api/serviceregistry/device-discovery-generic-http.md
           - system-discovery: api/serviceregistry/system-discovery-generic-http.md
@@ -37,9 +37,9 @@ nav:
           - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md
           - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md
           - service-registry-management: api/serviceregistry/service-registry-management-generic-mqtt.md
-      - Service Orchestration:
+      - DynamicServiceOrchestration:
         - HTTP:
-          - orchestration (dynamic): api/serviceorchestration/orchestration-generic-http_dynamic.md
+          - orchestration: api/serviceorchestration/orchestration-generic-http_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
@@ -136,7 +136,7 @@ nav:
   - Help:
     - Certificate Profiles: help/certificate-profiles.md
     - Tutorials:
-      - Service Registry Demo: help/tutorials/serviceregistry-http-demo.md
+      - ServiceRegistry Demo: help/tutorials/serviceregistry-http-demo.md
       - Mosquitto MQTT Broker: help/tutorials/mosquitto-mqtt-broker.md
       - Create Certificates: help/tutorials/create-certificates.md
     - FAQ: help/faq.md
