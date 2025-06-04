@@ -32,6 +32,17 @@ The direction of a sorting operation. Possible values are the String representat
 String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,
 `TIMEOUT`, `LOCKED`, `INTERNAL_SERVER_ERROR` or `EXTERNAL_SERVER_ERROR`.
 
+## KeyValuePair
+
+Association of a key of type [String](#string) and a value of any type. Some examples:
+```
+{
+    "verbose": true,
+    "name": "temperature-provider1",
+    "size": 500
+}
+```
+
 ## LogSeverity
 
 Alias for a String value that describes the kind and seriousness of a log message. Could be `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`.
