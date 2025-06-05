@@ -18,7 +18,7 @@ One out of `true` or `false`.
 
 ## CloudIdentifier
 
-A string identifier of a Local Cloud. It consists of the cloud name and cloud operator separated by a pipe, as follows: `<CloudName>|<OperatorName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the operator name is _AitiaInc_.)
+A string identifier of a Local Cloud. It consists of the cloud name and the organization name separated by a pipe, as follows: `<CloudName>|<OperatorName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the operator name is _AitiaInc_.)
 
 ## DateTime
 
@@ -38,7 +38,7 @@ String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH
 
 ## InterfaceName
 
-A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
 
 ## LogSeverity
 
@@ -58,7 +58,7 @@ Decimal number.
 
 ## OperationName
 
-A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the kebab-case naming convention. The identifier maximum length is 63 characters.
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## PropertyValidator
 
@@ -92,7 +92,7 @@ Any suitable security policy chosen by the implementor of the service. The possi
 
 ## ServiceName
 
-A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## ServiceInstanceID
 
