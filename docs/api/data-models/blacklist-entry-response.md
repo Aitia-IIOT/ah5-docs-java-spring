@@ -1,4 +1,4 @@
-# BlacklistLookupResult
+# BlacklisEntryResponse
 
 Field | Type | Description
 --- | --- | --- 

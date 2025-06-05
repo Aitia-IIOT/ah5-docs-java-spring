@@ -3,8 +3,7 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of discovery which enables both application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system blacklisted. 
-Note that a blacklist entry is in force if it is active and its expiration date is still in the future. (Therefore active entries are not necessary in force.)
+This page describes the generic_http and generic_https service interface of discovery which enables both application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system blacklisted.
 This service interface is implemented using protocol, encoding as stated in the following tables:
 
 **generic_http**
@@ -37,7 +36,7 @@ The service operation **request** requires an [identity related header or certif
 GET /blacklist/lookup HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
-The service operation **responds** with the status code `200` if called successfully and with a [BlacklistLookupResponse](../data-models/blacklist-lookup-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully and with a [BlacklistEntryListResponse](../data-models/blacklist-entry-list-response.md) JSON encoded body.
 
 ```
 {
@@ -80,8 +79,7 @@ The service operation **responds** with the status code `200` if called successf
 false
 ```
 
-The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the requested resource is forbidden from the requester and `500` if an unexpected error happens. The error response also contains an
-[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {

@@ -47,6 +47,10 @@ Association of a key of type [String](#string) and a value of any type. Some exa
 
 Alias for a String value that describes the kind and seriousness of a log message. Could be `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`.
 
+## Mode
+
+Specifies whether the queried records should have the _active_ flag set. The possible values are: `ALL`, `ACTIVES`, `INACTIVES`.
+
 ## MQTTQoS
 
 QoS in MQTT refers to the level of guarantee for message delivery between the publisher and the subscriber. It can be `0`, `1` or `2` ([learn more](https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels/)).
