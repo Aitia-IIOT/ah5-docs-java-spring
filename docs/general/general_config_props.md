@@ -17,15 +17,15 @@ Port number of the server for HTTP(S) protocol.
 
 :fontawesome-solid-wrench: **domain.name**
 
-The address the system will use to register itself into the local cloud's ServiceRegistry.
+The address the system will use to register itself into the Local Cloud's ServiceRegistry.
 
 :fontawesome-solid-wrench: **service.registry.address**
 
-HTTP(S) Access address of the local cloud's Service Registry system. In case of the ServiceRegistry itself, this property is not specified.
+HTTP(S) Access address of the local cloud's ServiceRegistry system. In case of the ServiceRegistry itself, this property is not specified.
 
 :fontawesome-solid-wrench: **service.registry.port**
 
-HTTP(S) Access port of the local cloud's Service Registry system. In case of the ServiceRegistry itself, this property is not specified.
+HTTP(S) Access port of the Local Cloud's ServiceRegistry system. In case of the ServiceRegistry itself, this property is not specified.
 
 :fontawesome-solid-wrench: **log.all.request.and.response**
 

@@ -40,6 +40,17 @@ String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH
 
 A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
 
+## KeyValuePair
+
+Association of a key of type [String](#string) and a value of any type. Some examples:
+```
+{
+    "verbose": true,
+    "name": "temperature-provider1",
+    "size": 500
+}
+```
+
 ## LogSeverity
 
 Alias for a String value that describes the kind and seriousness of a log message. Could be `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`.
