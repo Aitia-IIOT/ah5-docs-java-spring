@@ -47,6 +47,13 @@ nav:
         - MQTT:
           - identity: api/authentication/identity-generic-mqtt.md
           - identityManagement: api/authentication/identity-management-generic-mqtt.md
+      - Blacklist:
+        - HTTP:
+          - discovery: api/blacklist/discovery-generic-http.md
+          - management: api/blacklist/management-generic-http.md
+        - MQTT:
+          - discovery: api/blacklist/discovery-generic-mqtt.md
+          - management: api/blacklist/management-generic-mqtt.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
