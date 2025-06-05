@@ -3,9 +3,9 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of discovery which enables both application and Core/Support systems to query the active blacklist entries that apply to them, or check if a system blacklisted.
-It is implemented using protocol, encoding as stated in the
-following tables:
+This page describes the generic_http and generic_https service interface of discovery which enables both application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system blacklisted. 
+Note that a blacklist entry is in force if it is active and its expiration date is still in the future. (Therefore active entries are not necessary in force.)
+This service interface is implemented using protocol, encoding as stated in the following tables:
 
 **generic_http**
 
@@ -31,12 +31,13 @@ Hereby the **Interface Design Description** (IDD) is provided to the discovery s
 
 ### lookup
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http).
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The name of the system to perform lookup for will be identified during authentication.
 
 ```
 GET /blacklist/lookup HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
+The service operation **responds** with the status code `200` if called successfully and with a [BlacklistLookupResponse](../data-models/blacklist-lookup-response.md) JSON encoded body.
 
 ```
 {
@@ -53,6 +54,8 @@ Authorization: Bearer <identity-info>
   "count": 1
 }
 ```
+The **error codes** are `401` if the requester authentication was unsuccessful or `500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
@@ -64,14 +67,21 @@ Authorization: Bearer <identity-info>
 
 ### check
 
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [SystemName](../primitives.md#systemname) as path parameter, which identifies the name of the system that the requester wants to know if it is blacklisted.
+
 ```
 GET /blacklist/check/AlertConsumer1 HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
 
+The service operation **responds** with the status code `200` if called successfully and a [Boolean](../primitives.md#boolean) value.
+
 ```
 false
 ```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the requested resource is forbidden from the requester and `500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {

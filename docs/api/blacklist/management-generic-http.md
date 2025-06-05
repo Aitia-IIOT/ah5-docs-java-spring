@@ -24,6 +24,8 @@ Authorization: Bearer <identity-info>
 }
 ```
 
+Lehet az active true, úgy is, hogy lejárt a record!
+
 ```
 {
   "entries": [
@@ -134,4 +136,12 @@ Authorization: Bearer <identity-info>
 ```
 DELETE /blacklist/mgmt/remove/AlertConsumer1,AlertConsumer2 HTTP/1.1
 Authorization: Bearer <identity-info>
+```
+
+```
+{
+  "errorMessage": "TemperatureProvider1 system is blacklisted",
+  "errorCode": 403,
+  "exceptionType": "FORBIDDEN"
+}
 ```

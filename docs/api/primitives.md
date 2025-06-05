@@ -85,6 +85,10 @@ An identifier of any suitable validator function chosen by the implementor of se
 
 A string representation of a communication protocol. Examples: _http_, _https_, _tcp_, _ssl_...
 
+## Reason
+
+A chain of UTF-8 characters with a maximum length of 1024.
+
 ## SecurityPolicy
 
 Any suitable security policy chosen by the implementor of the service. The possible values are: `NONE`, `CERT_AUTH`, `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `JSON_WEB_TOKEN_AUTH`.
