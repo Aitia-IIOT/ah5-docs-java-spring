@@ -3,7 +3,7 @@
 This Core System exists to find matching service instances according to the consumer’s specification within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds by collaborating with other core/support Systems. 
 
 Learn more: <br />
-:material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_0_0/serviceorchestration_sysd.pdf)
+:material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_0_0/dynamicserviceorchestration_sysd.pdf)
 
 ## Services
 
