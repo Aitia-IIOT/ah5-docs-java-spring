@@ -1,15 +1,15 @@
-# device-discovery IDD
-**GENERIC-HTTP & GENERIC-HTTPS**
+# deviceDiscovery IDD
+**generic_http & generic_https**
 
 ## Overview
 
-This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of device-discovery, which enables both
-application and core/support systems to lookup, register and revoke devices on which the Local Cloud’s systems
+This page describes the generic_http and generic_https service interface of deviceDiscovery, which enables both
+application and Core/Support systems to lookup, register and revoke devices on which the Local Cloud’s systems
 are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain
 use cases (e.g. enabling onboarding) is needed. It’s implemented using protocol, encoding as stated in the
 following tables:
 
-**GENERIC-HTTP**
+**generic_http**
 
 Profile type | type | Version
 --- | --- | ---
@@ -18,7 +18,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-HTTPS**
+**generic_https**
 
 Profile type | type | Version
 --- | --- | ---
@@ -27,7 +27,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [device-discovery – Service Description](../../assets/sd/5_0_0/device-discovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [deviceDiscovery – Service Description](../../assets/sd/5_0_0/device-discovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
@@ -38,25 +38,25 @@ JSON encoded body.
 
 ```
 POST /serviceregistry/device-discovery/register HTTP/1.1
-Authorization: Bearer <identity-info>
+Authorization:  Bearer <identity-info>
 
 {
-   "name":"thermometer2",
-   "metadata":{
-      "scales":[
+   "name": "THERMOMETER2",
+   "metadata": {
+      "scales": [
          "Kelvin",
          "Celsius"
       ],
-      "max-temperature":{
-         "Kelvin":310,
-         "Celsius":40
+      "maxTemperature": {
+         "Kelvin": 310,
+         "Celsius": 40
       },
-      "min-temperature":{
-         "Kelvin":260,
-         "Celsius":-10
+      "minTemperature": {
+         "Kelvin": 260,
+         "Celsius": -10
       }
    },
-   "addresses":[      
+   "addresses": [      
       "81:ef:1a:44:7a:f5"
    ]
 }
@@ -67,29 +67,29 @@ The service operation **responds** with the status code `200` if called successf
 
 ```
 {
-   "name":"thermometer2",
-   "metadata":{
-      "scales":[
+   "name": "THERMOMETER2",
+   "metadata": {
+      "scales": [
          "Kelvin",
          "Celsius"
       ],
-      "max-temperature":{
-         "Kelvin":310,
-         "Celsius":40
+      "maxTemperature": {
+         "Kelvin": 310,
+         "Celsius": 40
       },
-      "min-temperature":{
-         "Kelvin":260,
-         "Celsius":-10
+      "minTemperature": {
+         "Kelvin": 260,
+         "Celsius": -10
       }
    },
-   "addresses":[
+   "addresses": [
       {
-         "type":"MAC",
-         "address":"81:ef:1a:44:7a:f5"
+         "type": "MAC",
+         "address": "81:ef:1a:44:7a:f5"
       }
    ],
-   "createdAt":"2024-11-04T01:53:02Z",
-   "updatedAt":"2024-11-04T01:53:02Z"
+   "createdAt": "2024-11-04T01:53:02Z",
+   "updatedAt": "2024-11-04T01:53:02Z"
 }
 ```
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
@@ -99,10 +99,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-    "errorMessage": "Device name is missing.",
-    "errorCode": 400,
-    "exceptionType": "INVALID_PARAMETER",
-    "origin": "POST /serviceregistry/device-discovery/register"
+    "errorMessage":  "Device name is missing.",
+    "errorCode":  400,
+    "exceptionType":  "INVALID_PARAMETER",
+    "origin":  "POST /serviceregistry/device-discovery/register"
 }
 ```
 
@@ -112,21 +112,21 @@ The service operation **request** requires an [identity related header or certif
 
 ```
 POST /serviceregistry/device-discovery/lookup HTTP/1.1
-Authorization: Bearer <identity-info>
+Authorization:  Bearer <identity-info>
 
 {
-   "deviceNames":[
-      "thermometer2"
+   "deviceNames": [
+      "THERMOMETER2"
    ],
-   "addresses":[
+   "addresses": [
       "81:ef:1a:44:7a:f5"
    ],
-   "addressType":"MAC",
-   "metadataRequirementList":[
+   "addressType": "MAC",
+   "metadataRequirementList": [
       {
-         "max-temperature.Celsius":{
-            "op":"LESS_THAN",
-            "value":50
+         "maxTemperature.Celsius": {
+            "op": "LESS_THAN",
+            "value": 50
          }
       }
    ]
@@ -137,34 +137,34 @@ The service operation **responds** with the status code `200` if called successf
 
 ```
 {
-   "entries":[
+   "entries": [
       {
-         "name":"thermometer2",
-         "metadata":{
-            "scales":[
+         "name": "THERMOMETER2",
+         "metadata": {
+            "scales": [
                "Kelvin",
                "Celsius"
             ],
-            "max-temperature":{
-               "Kelvin":310,
-               "Celsius":40
+            "maxTemperature": {
+               "Kelvin": 310,
+               "Celsius": 40
             },
-            "min-temperature":{
-               "Kelvin":260,
-               "Celsius":-10
+            "minTemperature": {
+               "Kelvin": 260,
+               "Celsius": -10
             }
          },
-         "addresses":[
+         "addresses": [
             {
-               "type":"MAC",
-               "address":"81:ef:1a:44:7a:f5"
+               "type": "MAC",
+               "address": "81:ef:1a:44:7a:f5"
             }
          ],
-         "createdAt":"2024-11-04T01:53:02Z",
-         "updatedAt":"2024-11-04T01:53:02Z"
+         "createdAt": "2024-11-04T01:53:02Z",
+         "updatedAt": "2024-11-04T01:53:02Z"
       }
    ],
-   "count":1
+   "count": 1
 }
 ```
 
@@ -172,20 +172,20 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ```
 {
-    "errorMessage": "Database operation error.",
-    "errorCode": 500,
-    "exceptionType": "INTERNAL_SERVER_ERROR",
-    "origin": "POST /serviceregistry/device-discovery/lookup"
+    "errorMessage":  "Database operation error.",
+    "errorCode":  500,
+    "exceptionType":  "INTERNAL_SERVER_ERROR",
+    "origin":  "POST /serviceregistry/device-discovery/lookup"
 }
 ```
 
 ### revoke
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a device `name` as path parameter.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a device [`name`](../primitives.md#devicename) as path parameter.
 
 ```
-DELETE /serviceregistry/device-discovery/revoke/thermometer2 HTTP/1.1
-Authorization: Bearer <identity-info>
+DELETE /serviceregistry/device-discovery/revoke/THERMOMETER2 HTTP/1.1
+Authorization:  Bearer <identity-info>
 ```
 
 The service operation **responds** with the status code `200` if called successfully and an existing device
@@ -195,9 +195,9 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ```
 {
-    "errorMessage": "Database operation error.",
-    "errorCode": 500,
-    "exceptionType": "INTERNAL_SERVER_ERROR",
-    "origin": "DELETE /serviceregistry/device-discovery/lookup"
+    "errorMessage":  "Database operation error.",
+    "errorCode":  500,
+    "exceptionType":  "INTERNAL_SERVER_ERROR",
+    "origin":  "DELETE /serviceregistry/device-discovery/lookup"
 }
 ```

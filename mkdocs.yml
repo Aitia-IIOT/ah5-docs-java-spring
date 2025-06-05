@@ -28,13 +28,13 @@ nav:
           - generalManagement: api/general/general-management-generic-mqtt.md
       - ServiceRegistry:
         - HTTP:
-          - device-discovery: api/serviceregistry/device-discovery-generic-http.md
-          - system-discovery: api/serviceregistry/system-discovery-generic-http.md
+          - deviceDiscovery: api/serviceregistry/device-discovery-generic-http.md
+          - systemDiscovery: api/serviceregistry/system-discovery-generic-http.md
           - service-discovery: api/serviceregistry/service-discovery-generic-http.md
           - service-registry-management: api/serviceregistry/service-registry-management-generic-http.md
         - MQTT:
-          - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
-          - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md
+          - deviceDiscovery: api/serviceregistry/device-discovery-generic-mqtt.md
+          - systemDiscovery: api/serviceregistry/system-discovery-generic-mqtt.md
           - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md
           - service-registry-management: api/serviceregistry/service-registry-management-generic-mqtt.md
       - DynamicServiceOrchestration:
