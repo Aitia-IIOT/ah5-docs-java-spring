@@ -30,7 +30,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the discovery s
 
 ### lookup
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The name of the system to perform lookup for will be identified during authentication.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The name of the system whose active entries to lookup for will be identified during authentication.
 
 ```
 GET /blacklist/lookup HTTP/1.1
