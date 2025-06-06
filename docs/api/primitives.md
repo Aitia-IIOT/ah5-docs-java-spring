@@ -36,6 +36,10 @@ The direction of a sorting operation. Possible values are the **String** represe
 **String** value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,
 `TIMEOUT`, `LOCKED`, `INTERNAL_SERVER_ERROR` or `EXTERNAL_SERVER_ERROR`.
 
+## InterfaceName
+
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
+
 ## KeyValuePair
 
 Association of a key of type [String](#string) and a value of any type. It is represented as a **Map<String, Object\>** Some examples:
@@ -92,6 +96,9 @@ Any suitable security policy chosen by the implementor of the service represente
 ## ServiceInstanceID
 
 A **String** identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by pipe, as follows: `<provider-name>|<service-definition>|<version>`. An example for a valid service instance ID: _AlertProvider1|alertService1|1.0.0_. (Here the provider name is _AlertProvider1_, the service definition is _alertService1_, and the version is _1.0.0_.)
+
+## ServiceName
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## String
 

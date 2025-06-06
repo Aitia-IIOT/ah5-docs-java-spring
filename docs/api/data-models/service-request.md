@@ -2,8 +2,8 @@
 
 Field | Type | Mandatory | Description
 --- | --- | --- | ---
-systemName | [Name](../primitives.md#name) | yes | The provider of the instance.
-serviceDefinitionName | [Name](../primitives.md#name) | yes | The service definition of the instance.
+systemName | [SystemName](../primitives.md#systemname) | yes | The provider of the instance.
+serviceDefinitionName | [ServiceName](../primitives.md#servicename) | yes | The service definition of the instance.
 version | [Version](../primitives.md#version) | no | Version of the service instance.
 expiresAt | [DateTime](../primitives.md#datetime) | no | The moment of the future from which the service instance will not be available.
 metadata | [Metadata](../data-models/metadata.md) | no | Additional information about the service instance.
