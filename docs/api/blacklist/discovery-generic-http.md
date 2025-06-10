@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of discovery which enables both application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system blacklisted.
+This page describes the generic_http and generic_https service interface of discovery which enables both application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system blacklisted. Note that a record is in force if it is `ACTIVE` _and_ not expired.
 This service interface is implemented using protocol, encoding as stated in the following tables:
 
 **generic_http**
@@ -30,7 +30,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the discovery s
 
 ### lookup
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The name of the system whose active entries to lookup for will be identified during authentication.
+The requester can lookup for relevant entries that apply to them and are in force. The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The requester name will be identified during authentication.
 
 ```
 GET /blacklist/lookup HTTP/1.1
@@ -66,14 +66,14 @@ The **error codes** are `401` if the requester authentication was unsuccessful o
 
 ### check
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [SystemName](../primitives.md#systemname) as path parameter, which identifies the name of the system that the requester wants to know if it is blacklisted.
+The requester can check whether a system is on the blacklist. The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [SystemName](../primitives.md#systemname) as path parameter, which identifies the name of the system to check.
 
 ```
 GET /blacklist/check/AlertConsumer1 HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
 
-The service operation **responds** with the status code `200` if called successfully and a [Boolean](../primitives.md#boolean) value.
+The service operation **responds** with the status code `200` if called successfully and a [Boolean](../primitives.md#boolean) value which idicates if the system is blacklisted or not.
 
 ```
 false

@@ -30,8 +30,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the discovery s
 
 ### query
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [BlacklistQueryRequest](../data-models/blacklist-query-request.md)
-JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [BlacklistQueryRequest](../data-models/blacklist-query-request.md) JSON encoded body.
 
 ```
 POST /blacklist/mgmt/query HTTP/1.1
@@ -57,7 +56,6 @@ Authorization: Bearer <identity-info>
 }
 ```
 The service operation **responds** with the status code `200` if called successfully and with a [BlacklistEntryListResponse](../data-models/blacklist-entry-list-response.md) JSON encoded body.
-(Note that expired rules are not in force even if the `ACTIVE` flag is set.)
 
 ```
 {
