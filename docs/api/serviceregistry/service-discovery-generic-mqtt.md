@@ -141,7 +141,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "status": "400",
+  "status": 400,
   "traceId": "<trace-id>",
   "receiver": "temp-provider",
   "payload": {
@@ -260,7 +260,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ```
 {
-  "status": "400",
+  "status": 400,
   "traceId": "trace1",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -292,7 +292,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-  "status": <status-code>,
+  "status": 200,
   "traceId": "<trace-id>",
   "receiver": "TemperatureProvider1",
   "payload": ""
@@ -304,7 +304,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ```
 {
-  "status": "403",
+  "status": 403,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {

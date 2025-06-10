@@ -1,11 +1,12 @@
-# service-registry-management IDD
-**GENERIC-MQTT & GENERIC-MQTTS** 
+# serviceRegistryManagement IDD
+
+**generic_mqtt & generic_mqtts** 
 
 ## Overview
 
-This page describes the GENERIC-MQTT and GENERIC-MQTTS service interface of the service-registry-management service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface templates](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually. The interfaces are implemented using protocol, encoding as stated in the following tables:
+This page describes the generic_mqtt and generic_mqtts service interface of the serviceRegistryManagement service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface templates](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually. The interfaces are implemented using protocol, encoding as stated in the following tables:
 
-**GENERIC-MQTT**
+**generic_mqtt**
 
 Profile type | type | Version
 --- | --- | ---
@@ -14,7 +15,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-MQTTS**
+**generic_mqtts**
 
 Profile type | type | Version
 --- | --- | ---
@@ -23,7 +24,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [service-registry-management – Service Description](../../assets/sd/5_0_0/service-registry-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [serviceRegistryManagement – Service Description](../../assets/sd/5_0_0/service-registry-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
@@ -53,8 +54,8 @@ Topic: arrowhead/serviceregistry/management/device-query
     "addressType": "",
     "metadataRequirementList": [
       {
-        "volume.value": {"op": "GREATER_THAN_OR_EQUALS_TO", "value": 90},
-        "volume.unit": {"op": "EQUALS", "value": "dB"}
+        "volume.value": { "op": "GREATER_THAN_OR_EQUALS_TO", "value": 90 },
+        "volume.unit": { "op": "EQUALS", "value": "dB" }
       }
     ]
   }
@@ -67,11 +68,11 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "alarm1",
+        "name": "ALARM1",
         "metadata": {
           "volume": {
             "value": 100,
@@ -88,7 +89,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         "updatedAt": "2025-05-04T18:51:46Z"
       },
       {
-        "name": "alarm2",
+        "name": "ALARTM2",
         "metadata": {
           "volume": {
             "value": 110,
@@ -116,8 +117,13 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Direction is invalid. Only ASC or DESC are allowed"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Sort field is invalid. Only the following are allowed: [id, name, createdAt]",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/device-query"
+  }
 }
 ```
 
@@ -136,18 +142,18 @@ Topic: arrowhead/serviceregistry/management/device-create
   "payload": {
     "devices": [
       {
-        "name": "alarm1",
+        "name": "ALARM1",
         "metadata": {
-          "volume": { "value": 100, "unit": "dB"}
+          "volume": { "value": 100, "unit": "dB" }
         },
         "addresses": [
           "3a:f7:9c:12:8e:b5"
         ]
       },
       {
-        "name": "alarm2",
+        "name": "ALARM2",
         "metadata": {
-          "volume": { "value": 110, "unit": "dB"}
+          "volume": { "value": 110, "unit": "dB" }
         },
         "addresses": [
           "3a:f7:9c:12:8e:bb"
@@ -164,11 +170,11 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 201,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "alarm1",
+        "name": "ALARM1",
         "metadata": {
           "volume": {
             "value": 100,
@@ -185,7 +191,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         "updatedAt": "2025-05-04T18:51:46.399919700Z"
       },
       {
-        "name": "alarm2",
+        "name": "ALARM2",
         "metadata": {
           "volume": {
             "value": 110,
@@ -213,8 +219,13 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Device with names already exists: alarm1, alarm2"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Device with names already exists: ALARM1, ALARM2",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/device-create"
+  }
 }
 ```
 
@@ -233,18 +244,18 @@ Topic: arrowhead/serviceregistry/management/device-update
   "payload": {
     "devices": [
       {
-        "name": "alarm1",
+        "name": "ALARM1",
         "metadata": {
-          "volume": { "value": 100, "unit": "dB"}
+          "volume": { "value": 100, "unit": "dB" }
         },
         "addresses": [
           "4a:f7:9c:12:8e:b5"
         ]
       },
       {
-        "name": "alarm2",
+        "name": "ALARM2",
         "metadata": {
-          "volume": { "value": 110, "unit": "dB"}
+          "volume": { "value": 110, "unit": "dB" }
         },
         "addresses": [
           "4a:f7:9c:12:8e:bb"
@@ -261,11 +272,11 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "alarm1",
+        "name": "ALARM1",
         "metadata": {
           "volume": {
             "value": 100,
@@ -282,7 +293,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         "updatedAt": "2025-05-04T18:51:46Z"
       },
       {
-        "name": "alarm2",
+        "name": "ALARM2",
         "metadata": {
           "volume": {
             "value": 110,
@@ -310,14 +321,19 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Device(s) not exists: alarm-1, alarm-2"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Device(s) not exists: ALARM001, ALARM002",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/device-update"
+  }
 }
 ```
 
 ### device-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> which contains the names of the devices to delete.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[DeviceName](../primitives.md#devicename)> which contains the names of the devices to delete.
 
 ```
 Topic: arrowhead/serviceregistry/management/device-remove
@@ -327,7 +343,7 @@ Topic: arrowhead/serviceregistry/management/device-remove
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
-  "payload": ["alarm1", "alarm2"]
+  "payload": ["ALARM1", "ALARM2"]
 }
 ```
 
@@ -337,7 +353,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": ""
 }
 ```
@@ -348,8 +364,13 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 423,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "At least one system is assigned to these devices."
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "At least one system is assigned to these devices",
+    "errorCode": 423,
+    "exceptionType": "LOCKED",
+    "origin": "arrowhead/serviceregistry/management/device-remove"
+  }
 }
 ```
 
@@ -365,7 +386,7 @@ Topic: arrowhead/serviceregistry/management/system-query
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
-  "params": {"verbose": <verbose-value>},
+  "params": {"verbose": false},
   "payload": {
     "pagination": {
       "page": 1,
@@ -395,11 +416,11 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "alert-consumer2",
+        "name": "AlertConsumer2",
         "metadata": {},
         "version": "1.1.0",
         "addresses": [
@@ -423,8 +444,13 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Sort field is invalid. Only the following are allowed: [id, name, createdAt]"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "The page size cannot be larger than 1000",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/system-query"
+  }
 }
 ```
 
@@ -443,24 +469,24 @@ Topic: arrowhead/serviceregistry/management/system-create
   "payload": {
     "systems": [
       {
-        "name": "alert-consumer1",
+        "name": "AlertConsumer1",
         "metadata": {
         },
         "version": "1.1",
         "addresses": [
           "192.168.1.1"
         ],
-        "deviceName": "alarm1"
+        "deviceName": "ALARM1"
       },
       {
-        "name": "alert-consumer2",
+        "name": "AlertConsumer2",
         "metadata": {
         },
         "version": "1.1",
         "addresses": [
           "192.168.1.2"
         ],
-        "deviceName": "alarm2"
+        "deviceName": "ALARM2"
       }
     ]
   }
@@ -473,11 +499,11 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 201,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "alert-consumer1",
+        "name": "AlertConsumer1",
         "metadata": {},
         "version": "1.1.0",
         "addresses": [
@@ -487,7 +513,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           }
         ],
         "device": {
-          "name": "alarm1",
+          "name": "ALARM1",
           "metadata": {
             "volume": {
               "value": 100,
@@ -507,7 +533,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         "updatedAt": "2025-05-04T20:08:37.278728600Z"
       },
       {
-        "name": "alert-consumer2",
+        "name": "AlertConsumer2",
         "metadata": {},
         "version": "1.1.0",
         "addresses": [
@@ -517,7 +543,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           }
         ],
         "device": {
-          "name": "alarm2",
+          "name": "ALARM2",
           "metadata": {
             "volume": {
               "value": 110,
@@ -548,8 +574,13 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Systems with names already exist: alert-consumer1, alert-consumer2"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Systems with names already exist: AlertConsumer1, AlertConsumer2",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/system-create"
+  }
 }
 ```
 
@@ -568,24 +599,24 @@ Topic: arrowhead/serviceregistry/management/system-update
   "payload": {
     "systems": [
       {
-        "name": "alert-consumer1",
+        "name": "AlertConsumer1",
         "metadata": {
         },
         "version": "1.2",
         "addresses": [
           "192.168.1.1"
         ],
-        "deviceName": "alarm1"
+        "deviceName": "ALARM1"
       },
       {
-        "name": "alert-consumer2",
+        "name": "AlertConsumer2",
         "metadata": {
         },
         "version": "1.2",
         "addresses": [
           "192.168.1.2"
         ],
-        "deviceName": "alarm2"
+        "deviceName": "ALARM2"
       }
     ]
   }
@@ -598,11 +629,11 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "alert-consumer1",
+        "name": "AlertConsumer1",
         "metadata": {},
         "version": "1.2.0",
         "addresses": [
@@ -612,7 +643,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           }
         ],
         "device": {
-          "name": "alarm1",
+          "name": "ALARM1",
           "metadata": {
             "volume": {
               "value": 100,
@@ -632,7 +663,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         "updatedAt": "2025-05-04T20:11:20.541557100Z"
       },
       {
-        "name": "alert-consumer2",
+        "name": "AlertConsumer2",
         "metadata": {},
         "version": "1.2.0",
         "addresses": [
@@ -642,7 +673,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           }
         ],
         "device": {
-          "name": "alarm2",
+          "name": "ALARM2",
           "metadata": {
             "volume": {
               "value": 110,
@@ -673,14 +704,19 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "System(s) not exists: alert-consumer1, alert-consumer2"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Duplicated system name: AlertConsumer1",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/system-update"
+  }
 }
 ```
 
 ### system-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> which contains the names of the systems to delete.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[SystemName](../primitives.md#systemname)> which contains the names of the systems to delete.
 
 ```
 arrowhead/serviceregistry/management/system-remove
@@ -690,7 +726,7 @@ arrowhead/serviceregistry/management/system-remove
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
-  "payload": ["alert-consumer1", "alert-consumer2"]
+  "payload": ["AlertConsumer1", "AlertConsumer2"]
 }
 ```
 
@@ -700,7 +736,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": ""
 }
 ```
@@ -712,7 +748,11 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "status": 401,
   "traceId": "<trace-id>",
   "receiver": null,
-  "payload": "Invalid authentication info"
+  "payload": {
+    "errorMessage": "Invalid authentication info",
+    "errorCode": 401,
+    "exceptionType": "AUTH"
+  }
 }
 ```
 
@@ -743,16 +783,16 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "orchestration-lock-management",
+        "name": "orchestrationLockManagement",
         "createdAt": "2025-03-12T11:07:23Z",
         "updatedAt": "2025-03-12T11:07:23Z"
       },
       {
-        "name": "orchestration-history-management",
+        "name": "orchestrationHistoryManagement",
         "createdAt": "2025-03-12T11:07:23Z",
         "updatedAt": "2025-03-12T11:07:23Z"
       },
@@ -778,8 +818,13 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Direction is invalid. Only ASC or DESC are allowed"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Direction is invalid. Only ASC or DESC are allowed",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/service-definition-query"
+  }
 }
 ```
 
@@ -788,6 +833,8 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [ServiceDefinitionListRequest](../data-models/service-definition-list-request.md).
 
 ```
+Topic: arrowhead/serviceregistry/management/service-definition-create
+
 {
   "traceId": "<trace-id>",
   "authentication": "<identity-info>",
@@ -795,7 +842,7 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
   "qosRequirement": <0|1|2>,
   "payload": {
     "serviceDefinitionNames": [
-      "alert-service1", "alert-service2"
+      "alertService1", "alertService2"
     ]
   }
 }
@@ -807,16 +854,16 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 201,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "alert-service1",
+        "name": "alertService1",
         "createdAt": "2025-05-04T21:33:49.344720800Z",
         "updatedAt": "2025-05-04T21:33:49.344720800Z"
       },
       {
-        "name": "alert-service2",
+        "name": "alertService2",
         "createdAt": "2025-05-04T21:33:49.421567600Z",
         "updatedAt": "2025-05-04T21:33:49.421567600Z"
       }
@@ -832,14 +879,19 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Service definition names already exists: alert-service1"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Service definition names already exists: alertService1",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/service-definition-create"
+  }
 }
 ```
 
 ### service-definition-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> which contains the names of the service definitions to delete.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[ServiceName](../primitives.md#servicename)> which contains the names of the service definitions to delete.
 
 ```
 Topic: arrowhead/serviceregistry/management/service-definition-remove
@@ -849,7 +901,7 @@ Topic: arrowhead/serviceregistry/management/service-definition-remove
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
-  "payload": ["alert-service1", "alert-service2"]
+  "payload": ["alertService1", "alertService2"]
 }
 ```
 
@@ -859,7 +911,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": ""
 }
 ```
@@ -868,10 +920,15 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "status": 401,
+  "status": 400,
   "traceId": "<trace-id>",
-  "receiver": null,
-  "payload": "Invalid authentication info"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Service definition name list is missing or empty",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/service-definition-remove"
+  }
 }
 ```
 
@@ -887,7 +944,7 @@ Topic: arrowhead/serviceregistry/management/service-query
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
-  "params": {"verbose": <verbose-value>},
+  "params": {"verbose": false},
   "payload": {
     "pagination": {
       "page": 0,
@@ -900,7 +957,7 @@ Topic: arrowhead/serviceregistry/management/service-query
     "providerNames": [
     ],
     "serviceDefinitionNames": [
-      "alert-service1"
+      "alertService1"
     ],
     "versions": [
       "1.0.0", "1.0.1"
@@ -911,11 +968,11 @@ Topic: arrowhead/serviceregistry/management/service-query
     "addressTypes": [
     ],
     "interfaceTemplateNames": [
-      "generic-mqtt"
+      "generic_mqtt"
     ],
     "interfacePropertyRequirementsList": [
       {
-        "operations": { "op": "CONTAINS", "value": "warn"}
+        "operations": { "op": "CONTAINS", "value": "warn" }
       }
     ],
     "policies": [
@@ -931,20 +988,20 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "instanceId": "alert-consumer1::alert-service1::1.0.0",
+        "instanceId": "AlertProvider1|alertService1|1.0.0",
         "provider": {
-          "name": "alert-consumer1",
+          "name": "AlertProvider1",
           "metadata": {},
           "version": "1.1.0",
           "createdAt": "2025-05-05T09:05:31Z",
           "updatedAt": "2025-05-05T09:05:31Z"
         },
         "serviceDefinition": {
-          "name": "alert-service1",
+          "name": "alertService1",
           "createdAt": "2025-05-04T21:33:49Z",
           "updatedAt": "2025-05-04T21:33:49Z"
         },
@@ -958,7 +1015,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
+            "templateName": "generic_mqtt",
             "protocol": "tcp",
             "policy": "NONE",
             "properties": {
@@ -977,51 +1034,9 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         ],
         "createdAt": "2025-05-05T09:06:28Z",
         "updatedAt": "2025-05-05T09:06:28Z"
-      },
-      {
-        "instanceId": "alert-consumer2::alert-service1::1.0.0",
-        "provider": {
-          "name": "alert-consumer2",
-          "metadata": {},
-          "version": "1.1.0",
-          "createdAt": "2025-05-05T09:05:32Z",
-          "updatedAt": "2025-05-05T09:05:32Z"
-        },
-        "serviceDefinition": {
-          "name": "alert-service1",
-          "createdAt": "2025-05-04T21:33:49Z",
-          "updatedAt": "2025-05-04T21:33:49Z"
-        },
-        "version": "1.0.0",
-        "expiresAt": "2027-01-01T00:00:00Z",
-        "metadata": {
-          "delay": {
-            "value": 200,
-            "unit": "ms"
-          }
-        },
-        "interfaces": [
-          {
-            "templateName": "generic-mqtt",
-            "protocol": "tcp",
-            "policy": "NONE",
-            "properties": {
-              "accessAddresses": [
-                "192.168.1.3"
-              ],
-              "accessPort": 1883,
-              "baseTopic": "heat-alert",
-              "operations": [
-                "warn"
-              ]
-            }
-          }
-        ],
-        "createdAt": "2025-05-05T09:06:28Z",
-        "updatedAt": "2025-05-05T09:06:28Z"
       }
     ],
-    "count": 2
+    "count": 1
   }
 }
 ```
@@ -1030,10 +1045,15 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "status": 401,
+  "status": 400,
   "traceId": "<trace-id>",
-  "receiver": null,
-  "payload": "Invalid authentication info"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Sort field is invalid. Only the following are allowed: [id, name, createdAt]",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/service-query"
+  }
 }
 ```
 
@@ -1052,43 +1072,45 @@ Topic: arrowhead/serviceregistry/management/service-create
   "payload": {
     "instances": [
       {
-        "systemName": "alert-consumer1",
-        "serviceDefinitionName": "alert-service1",
+        "systemName": "AlertProvider1",
+        "serviceDefinitionName": "alertService1",
         "version": "",
         "expiresAt": "2028-01-01T00:00:00Z",
         "metadata": {
-          "delay": {"value": 200, "unit": "ms"}
+          "delay": { "value": 200, "unit": "ms" }
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
+            "templateName": "generic_mqtt",
             "protocol": "tcp", 
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.1.3"],
+              "accessAddresses": [ "192.168.1.3" ],
               "accessPort": 1883,
-              "baseTopic": "heat-alert", "operations": ["alert", "warn"]
+              "baseTopic": "heat-alert",
+			  "operations": [ "alert", "warn" ]
             }
           }
         ]
       },
       {
-        "systemName": "alert-consumer2",
-        "serviceDefinitionName": "alert-service1",
+        "systemName": "AlertProvider2",
+        "serviceDefinitionName": "alertService2",
         "version": "",
         "expiresAt": "2027-01-01T00:00:00Z",
         "metadata": {
-          "delay": {"value": 200, "unit": "ms"}
+          "delay": { "value": 200, "unit": "ms" }
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
+            "templateName": "generic_mqtt",
             "protocol": "tcp", 
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.1.3"],
+              "accessAddresses": [ "192.168.1.4" ],
               "accessPort": 1883,
-              "baseTopic": "heat-alert", "operations": ["warn"]
+              "baseTopic": "heat-alert",
+			  "operations": [ "warn" ]
             }
           }
         ]
@@ -1104,13 +1126,13 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 201,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "instanceId": "alert-consumer1::alert-service1::1.0.0",
+        "instanceId": "AlertProvider1|alertService1|1.0.0",
         "provider": {
-          "name": "alert-consumer1",
+          "name": "AlertProvider1",
           "metadata": {},
           "version": "1.1.0",
           "addresses": [
@@ -1120,7 +1142,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
             }
           ],
           "device": {
-            "name": "alarm1",
+            "name": "ALARM1",
             "metadata": {
               "volume": {
                 "value": 100,
@@ -1140,7 +1162,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           "updatedAt": "2025-05-05T09:05:31Z"
         },
         "serviceDefinition": {
-          "name": "alert-service1",
+          "name": "alertService1",
           "createdAt": "2025-05-04T21:33:49Z",
           "updatedAt": "2025-05-04T21:33:49Z"
         },
@@ -1154,7 +1176,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
+            "templateName": "generic_mqtt",
             "protocol": "tcp",
             "policy": "NONE",
             "properties": {
@@ -1174,9 +1196,9 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         "updatedAt": "2025-05-05T09:06:27.599446600Z"
       },
       {
-        "instanceId": "alert-consumer2::alert-service1::1.0.0",
+        "instanceId": "AlertProvider2|alertService1|1.0.0",
         "provider": {
-          "name": "alert-consumer2",
+          "name": "AlertProvider2",
           "metadata": {},
           "version": "1.1.0",
           "addresses": [
@@ -1186,7 +1208,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
             }
           ],
           "device": {
-            "name": "alarm2",
+            "name": "ALARM2",
             "metadata": {
               "volume": {
                 "value": 110,
@@ -1206,7 +1228,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           "updatedAt": "2025-05-05T09:05:32Z"
         },
         "serviceDefinition": {
-          "name": "alert-service1",
+          "name": "alertService2",
           "createdAt": "2025-05-04T21:33:49Z",
           "updatedAt": "2025-05-04T21:33:49Z"
         },
@@ -1220,12 +1242,12 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
+            "templateName": "generic_mqtt",
             "protocol": "tcp",
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.1.3"
+                "192.168.1.4"
               ],
               "accessPort": 1883,
               "baseTopic": "heat-alert",
@@ -1250,8 +1272,13 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "System not exists: alert-consumer1"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Service definition name is empty",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/service-create"
+  }
 }
 ```
 
@@ -1270,37 +1297,41 @@ Topic: arrowhead/serviceregistry/management/service-update
   "payload": {
     "instances": [
       {
-        "instanceId": "alert-consumer1::alert-service1::1.0.0",
+        "instanceId": "AlertProvider1|alertService1|1.0.0",
         "expiresAt": "2028-01-01T00:00:00Z",
         "metadata": {
-          "delay": {"value": 200, "unit": "ms"}
+          "delay": { "value": 200, "unit": "ms" }
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
-            "protocol": "tcp", "policy": "NONE",
+            "templateName": "generic_mqtt",
+            "protocol": "tcp", 
+			"policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.1.3"],
+              "accessAddresses": [ "192.168.1.3" ],
               "accessPort": 1883,
-              "baseTopic": "heat-alert", "operations": ["alert", "warn", "info"]
+              "baseTopic": "heat-alert",
+			  "operations": [ "alert", "warn", "info" ]
             }
           }
         ]
       },
       {
-        "instanceId": "alert-consumer2::alert-service1::1.0.0",
+        "instanceId": "AlertProvider2|alertService2|1.0.0",
         "expiresAt": "2027-01-01T00:00:00Z",
         "metadata": {
-          "delay": {"value": 200, "unit": "ms"}
+          "delay": { "value": 200, "unit": "ms" }
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
-            "protocol": "tcp", "policy": "NONE",
+            "templateName": "generic_mqtt",
+            "protocol": "tcp",
+ű			"policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.1.3"],
+              "accessAddresses": ["192.168.1.4"],
               "accessPort": 1883,
-              "baseTopic": "heat-alert", "operations": ["warn"]
+              "baseTopic": "heat-alert",
+			  "operations": [ "warn" ]
             }
           }
         ]
@@ -1316,13 +1347,13 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "instanceId": "alert-consumer1::alert-service1::1.0.0",
+        "instanceId": "AlertProvider1|alertService1|1.0.0",
         "provider": {
-          "name": "alert-consumer1",
+          "name": "AlertProvider1",
           "metadata": {},
           "version": "1.1.0",
           "addresses": [
@@ -1332,7 +1363,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
             }
           ],
           "device": {
-            "name": "alarm1",
+            "name": "ALARM1",
             "metadata": {
               "volume": {
                 "value": 100,
@@ -1352,7 +1383,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           "updatedAt": "2025-05-05T09:05:31Z"
         },
         "serviceDefinition": {
-          "name": "alert-service1",
+          "name": "alertService1",
           "createdAt": "2025-05-04T21:33:49Z",
           "updatedAt": "2025-05-04T21:33:49Z"
         },
@@ -1366,7 +1397,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
+            "templateName": "generic_mqtt",
             "protocol": "tcp",
             "policy": "NONE",
             "properties": {
@@ -1387,9 +1418,9 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         "updatedAt": "2025-05-05T09:09:58.070188100Z"
       },
       {
-        "instanceId": "alert-consumer2::alert-service1::1.0.0",
+        "instanceId": "AlertProvider2|alertService2|1.0.0",
         "provider": {
-          "name": "alert-consumer2",
+          "name": "AlertProvider2",
           "metadata": {},
           "version": "1.1.0",
           "addresses": [
@@ -1399,7 +1430,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
             }
           ],
           "device": {
-            "name": "alarm2",
+            "name": "ALARM2",
             "metadata": {
               "volume": {
                 "value": 110,
@@ -1419,7 +1450,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           "updatedAt": "2025-05-05T09:05:32Z"
         },
         "serviceDefinition": {
-          "name": "alert-service1",
+          "name": "alertService2",
           "createdAt": "2025-05-04T21:33:49Z",
           "updatedAt": "2025-05-04T21:33:49Z"
         },
@@ -1433,12 +1464,12 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         },
         "interfaces": [
           {
-            "templateName": "generic-mqtt",
+            "templateName": "generic_mqtt",
             "protocol": "tcp",
             "policy": "NONE",
             "properties": {
               "accessAddresses": [
-                "192.168.1.3"
+                "192.168.1.4"
               ],
               "accessPort": 1883,
               "baseTopic": "heat-alert",
@@ -1463,13 +1494,18 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Instance id does not exist: alert-consumer1::alert-service1::1.0.0"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": ""Instance id does not exist: AlertProvider1|alertService1|1.0.1"",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/service-update"
+  }
 }
 ```
 ### service-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)> which contains the identitifers of the service instances that need to be removed.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[ServiceInstanceID](../primitives.md#serviceinstanceid)> which contains the identitifers of the service instances that need to be removed.
 
 ```
 Topic: arrowhead/serviceregistry/management/service-remove
@@ -1479,7 +1515,7 @@ Topic: arrowhead/serviceregistry/management/service-remove
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
-  "payload": ["alert-consumer1::alert-service1::1.0.0", "alert-consumer2::alert-service1::1.0.0"]
+  "payload": ["AlertProvider1|alertService1|1.0.0", "AlertProvider2|alertService2|1.0.0"]
 }
 ```
 
@@ -1489,7 +1525,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": ""
 }
 ```
@@ -1497,10 +1533,15 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "status": 401,
+  "status": 403,
   "traceId": "<trace-id>",
-  "receiver": null,
-  "payload": "Invalid authentication info"
+  "receiver": <receiver-system-identifier>,
+  "payload": {
+    "errorMessage": "Requester has no management permission",
+    "errorCode": 403,
+    "exceptionType": "FORBIDDEN",
+    "origin": "arrowhead/serviceregistry/management/service-remove"
+  }
 }
 ```
 
@@ -1538,11 +1579,11 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "generic-mqtt",
+        "name": "generic_mqtt",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -1566,7 +1607,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
             "mandatory": true,
             "validator": "NOT_EMPTY_STRING_SET",
             "validatorParams": [
-              "NAME"
+              "OPERATION"
             ]
           }
         ],
@@ -1585,8 +1626,13 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Direction is invalid. Only ASC or DESC are allowed"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "The specified interface template name does not match the naming convention: general@mqtt",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/interface-template-query"
+  }
 }
 ```
 
@@ -1605,7 +1651,7 @@ Topic: arrowhead/serviceregistry/management/interface-template-create
   "payload": {
     "interfaceTemplates": [
       {
-        "name": "custom-ftp",
+        "name": "custom_ftp",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -1618,7 +1664,7 @@ Topic: arrowhead/serviceregistry/management/interface-template-create
         ]
       },
       {
-        "name": "my-awesome-ftp",
+        "name": "my_awesome_ftp",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -1641,11 +1687,11 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 201,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": {
     "entries": [
       {
-        "name": "custom-ftp",
+        "name": "custom_ftp",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -1659,7 +1705,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
         "updatedAt": "2025-05-05T10:26:35.426965600Z"
       },
       {
-        "name": "my-awesome-ftp",
+        "name": "my_awesome_ftp",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -1684,14 +1730,19 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "status": 400,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
-  "payload": "Interface template already exists: custom-ftp"
+  "receiver": "<receiver-system-identifier>",
+  "payload": {
+    "errorMessage": "Interface template already exists: custom_ftp",
+    "errorCode": 400,
+    "exceptionType": "INVALID_PARAMETER",
+    "origin": "arrowhead/serviceregistry/management/interface-template-create"
+  }
 }
 ```
 
 ### interface-template-remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[InterfaceTemplate](../primitives.md#interfacetemplate)> which contains the string identifier of the interface descriptors that need to be removed.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[InterfaceName](../primitives.md#interfacename)> which contains the string identifier of the interface descriptors that need to be removed.
 
 ```
 Topic: arrowhead/serviceregistry/management/interface-template-remove
@@ -1701,7 +1752,7 @@ Topic: arrowhead/serviceregistry/management/interface-template-remove
   "authentication": "<identity-info>",
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
-  "payload": ["custom-ftp", "my-awesome-ftp"]
+  "payload": [ "custom_ftp", "my_awesome_ftp" ]
 }
 ```
 
@@ -1711,7 +1762,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "sysop",
+  "receiver": "<receiver-system-identifier>",
   "payload": ""
 }
 ```
