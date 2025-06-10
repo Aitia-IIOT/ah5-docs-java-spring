@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of management which enables which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries.
+This page describes the generic_http and generic_https service interface of management which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries.
 This service interface is implemented using protocol, encoding as stated in the following tables:
 
 **generic_http**

@@ -203,7 +203,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### remove
 
-The requester can check whether a system is on the blacklist. The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and the payload is a List<[SystemName](../primitives.md#systemname)>, which contains the names of the systems to remove from the blacklist. This means that their active entries will be inactivated.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and the payload is a List<[SystemName](../primitives.md#systemname)>, which contains the names of the systems to remove from the blacklist. This means that their active entries will be inactivated.
 
 ```
 Topic: arrowhead/blacklist/management/remove

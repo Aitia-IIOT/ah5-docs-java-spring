@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the generic_mqtt and generic_mqtts service interface of discovery which enables both application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system blacklisted. Note that a record is in force if it is `ACTIVE` _and_ not expired.
+This page describes the generic_mqtt and generic_mqtts service interface of discovery which enables both Application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system blacklisted. Note that a record is in force if it is `ACTIVE` _and_ not expired.
 This service interface is implemented using protocol, encoding as stated in the following tables:
 
 **GENERIC-MQTT**
@@ -68,7 +68,7 @@ The **error codes** are `401` if the requester authentication was unsuccessful o
 
 ```
 {
-  "status":"<status-code>",
+  "status": 401,
   "traceId":"<trace-id>",
   "payload": {
     "errorMessage": "Invalid authentication info",
