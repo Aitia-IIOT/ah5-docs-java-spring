@@ -2185,8 +2185,6 @@ Got it!
 
 Response code: 200
 
-TODO: continue from here
-
 ## **Interface template related**
 
 - **Create interface templates:** POST /serviceregistry/mgmt/interface-templates
@@ -2196,7 +2194,7 @@ TODO: continue from here
   {
     "interfaceTemplates": [
       {
-        "name": "generic-mqtt",
+        "name": "generic_mqtt",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -2233,7 +2231,7 @@ TODO: continue from here
   {
     "entries": [
       {
-        "name": "generic-mqtt",
+        "name": "generic_mqtt",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -2268,8 +2266,7 @@ TODO: continue from here
   }
   ~~~
 
-- **Query interface templates:** POST 
-/serviceregistry/mgmt/interface-templates/query
+- **Query interface templates:** POST /serviceregistry/mgmt/interface-templates/query
 
   Request body:
   ~~~
@@ -2281,7 +2278,7 @@ TODO: continue from here
       "sortField": "id"
     },
     "templateNames": [
-      "generic-http", "generic-https"
+      "generic_http", "generic_https"
     ],
     "protocols": [
       "http", "https"
@@ -2294,7 +2291,7 @@ TODO: continue from here
   {
     "entries": [
       {
-        "name": "generic-https",
+        "name": "generic_https",
         "protocol": "https",
         "propertyRequirements": [
           {
@@ -2324,7 +2321,7 @@ TODO: continue from here
         "updatedAt": "2024-10-15T18:15:44Z"
       },
       {
-        "name": "generic-http",
+        "name": "generic_http",
         "protocol": "http",
         "propertyRequirements": [
           {
@@ -2360,10 +2357,10 @@ TODO: continue from here
 
 - **Delete interface templates:** DELETE /serviceregistry/mgmt/interface-templates
   
-  Query parameters: generic-mqtt, test-template
+  Query parameters: generic_mqtt, test_template
 
   ~~~
-  http://localhost:8443/serviceregistry/mgmt/interface-templates?names=generic-mqtt&names=test-template
+  http://localhost:8443/serviceregistry/mgmt/interface-templates?names=generic_mqtt&names=test_template
   ~~~
 
   Response code: 200
@@ -2376,6 +2373,10 @@ If the request payload is not syntactically or semantically correct, an error me
 
 DELETE /serviceregistry/service-discovery/revoke/{instanceId}
 
+ ~~~
+  http://localhost:8443/serviceregistry/service-discovery/revoke/TemperatureProvider1%7CcelsiusInfo%7C1.0.0
+  ~~~
+
 If the instanceId belongs to an other system's service, the sender will receive the following response:
 
   ~~~
@@ -2383,6 +2384,6 @@ If the instanceId belongs to an other system's service, the sender will receive 
     "errorMessage": "Revoking other systems' service is forbidden",
     "errorCode": 403,
     "exceptionType": "FORBIDDEN",
-    "origin": "DELETE /serviceregistry/service-discovery/revoke/{instanceId}"
+    "origin": "DELETE /serviceregistry/service-discovery/revoke/TemperatureProvider1|celsiusInfo|1.0.0"
   }
   ~~~
