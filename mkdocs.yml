@@ -49,11 +49,11 @@ nav:
           - identityManagement: api/authentication/identity-management-generic-mqtt.md
       - Blacklist:
         - HTTP:
-          - discovery: api/blacklist/discovery-generic-http.md
-          - management: api/blacklist/management-generic-http.md
+          - discovery: api/blacklist/blacklistDiscovery-generic-http.md
+          - management: api/blacklist/blacklistManagement-generic-http.md
         - MQTT:
-          - discovery: api/blacklist/discovery-generic-mqtt.md
-          - management: api/blacklist/management-generic-mqtt.md
+          - discovery: api/blacklist/blacklistDiscovery-generic-mqtt.md
+          - management: api/blacklist/blacklistManagement-generic-mqtt.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md

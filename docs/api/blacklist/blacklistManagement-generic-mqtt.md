@@ -1,12 +1,12 @@
-# management IDD
+# blacklistManagement IDD
 **generic_mqtt & generic_mqtts**
 
 ## Overview
 
-This page describes the generic_mqtt and generic_mqtts service interface of management which enables which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries.
+This page describes the generic_mqtt and generic_mqtts service interface of blacklistManagement which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries.
 This service interface is implemented using protocol, encoding as stated in the following tables:
 
-**GENERIC-MQTT**
+**generic_mqtt**
 
 Profile type | type | Version
 --- | --- | ---
@@ -15,7 +15,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-MQTTS**
+**generic_mqtts**
 
 Profile type | type | Version
 --- | --- | ---
@@ -24,13 +24,13 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the management service.
+Hereby the **Interface Design Description** (IDD) is provided to the [blacklistManagement - Service Description](../../assets/sd/5_0_0/blacklistManagement_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
 ### query
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [BlacklistQueryRequest](../data-models/blacklist-query-request.md) JSON encoded body.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [BlacklistQueryRequest](../data-models/blacklist-query-request.md) JSON encoded body. Note that if _alivesAt_ is set, inactive records will not be returned.
 
 ```
 Topic: arrowhead/blacklist/management/query
@@ -52,7 +52,7 @@ Topic: arrowhead/blacklist/management/query
     ],
     "mode": "ACTIVES",
     "issuers": [
-      "sysop"
+      "Sysop"
     ],
     "revokers": [
     ],

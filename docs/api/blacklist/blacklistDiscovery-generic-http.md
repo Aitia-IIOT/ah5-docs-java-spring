@@ -1,9 +1,9 @@
-# discovery IDD
+# blacklistDiscovery IDD
 **generic_http & generic_https**
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of discovery which enables both Application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system blacklisted. Note that a record is in force if it is `ACTIVE` _and_ not expired.
+This page describes the generic_http and generic_https service interface of blacklistDiscovery which enables both Application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system is blacklisted. Note that a record is in force if it is `ACTIVE` _and_ not expired.
 This service interface is implemented using protocol, encoding as stated in the following tables:
 
 **generic_http**
@@ -24,7 +24,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the discovery service.
+Hereby the **Interface Design Description** (IDD) is provided to the [blacklistDiscovery - Service Description](../../assets/sd/5_0_0/blacklistDiscovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
@@ -86,6 +86,6 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "errorMessage": "The specified system name does not match the naming convention: AlertCon$umer1",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin": "GET /blacklist/check/{systemName}"
+  "origin": "GET /blacklist/check/AlertCon$umer1"
 }
 ```

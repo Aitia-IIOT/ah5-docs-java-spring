@@ -1,9 +1,9 @@
-# management IDD
+# blacklistManagement IDD
 **generic_http & generic_https**
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of management which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries.
+This page describes the generic_http and generic_https service interface of blacklistManagement which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries.
 This service interface is implemented using protocol, encoding as stated in the following tables:
 
 **generic_http**
@@ -24,13 +24,13 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the discovery service.
+Hereby the **Interface Design Description** (IDD) is provided to the [blacklistManagement - Service Description](../../assets/sd/5_0_0/blacklistManagement_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
 ### query
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [BlacklistQueryRequest](../data-models/blacklist-query-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [BlacklistQueryRequest](../data-models/blacklist-query-request.md) JSON encoded body. Note that if _alivesAt_ is set, inactive records will not be returned.
 
 ```
 POST /blacklist/mgmt/query HTTP/1.1
@@ -47,7 +47,7 @@ Authorization: Bearer <identity-info>
   ],
   "mode": "ACTIVES",
   "issuers": [
-    "sysop"
+    "Sysop"
   ],
   "revokers": [
   ],
@@ -169,10 +169,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[SystemName](../primitives.md#systemname)> as path variable, which contains the names of the systems to remove from the blacklist. This means that their active entries will be inactivated.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a query parameter _names_, which is a List<[SystemName](../primitives.md#systemname)>. It contains the names of the systems to remove from the blacklist. This means that their active entries will be inactivated.
 
 ```
-DELETE /blacklist/mgmt/remove/AlertConsumer1,AlertConsumer2 HTTP/1.1
+DELETE /blacklist/mgmt/remove?names=AlertConsumer1&names=AlertConsumer2 HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
 The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
