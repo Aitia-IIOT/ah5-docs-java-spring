@@ -21,14 +21,14 @@ Learn more: <br />
 
 This service operation returns the blacklist entries that are in force and apply to the requester. Note that _lookup_ is enabled even is the requester is blacklisted.
 
-:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistDiscovery-generic-http.md#lookup) | [generic_https](../api/../api/blacklist/blacklistDiscovery-generic-http.md#lookup)<br />
+:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistDiscovery-generic-http.md#lookup) | [generic_https](../api/blacklist/blacklistDiscovery-generic-http.md#lookup)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistDiscovery-generic-mqtt.md#lookup) | [generic_mqtts](../api/blacklist/blacklistDiscovery-generic-mqtt.md#lookup)
 
 **check**
 
 This service operation allows systems to check whether another system is blacklisted.
 
-:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistDiscovery-generic-http.md#check) | [generic_https](../api/../api/blacklist/blacklistDiscovery-generic-http.md#check)<br />
+:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistDiscovery-generic-http.md#check) | [generic_https](../api/blacklist/blacklistDiscovery-generic-http.md#check)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistDiscovery-generic-mqtt.md#check) | [generic_mqtts](../api/blacklist/blacklistDiscovery-generic-mqtt.md#check)
 
 -----
@@ -47,21 +47,21 @@ Learn more: <br />
 
 This service operation returns existing blacklist entries according to the given filters.
 
-:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#query) | [generic_https](../api/../api/blacklist/blacklistManagement-generic-http.md#query)<br />
+:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#query) | [generic_https](../api/blacklist/blacklistManagement-generic-http.md#query)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistManagement-generic-mqtt.md#query) | [generic_mqtts](../api/blacklist/blacklistManagement-generic-mqtt.md#query)
 
 **create**
 
 This service operation creates active blacklist entries in bulk.
 
-:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#create) | [generic_https](../api/../api/blacklist/blacklistManagement-generic-http.md#create)<br />
+:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#create) | [generic_https](../api/blacklist/blacklistManagement-generic-http.md#create)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistManagement-generic-mqtt.md#create) | [generic_mqtts](../api/blacklist/blacklistManagement-generic-mqtt.md#create)
 
 **remove**
 
 This service operation inactivates every entry that applies to the specified systems. Note that this will not remove the entry from the database.
 
-:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#remove) | [generic_https](../api/../api/blacklist/blacklistManagement-generic-http.md#remove)<br />
+:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#remove) | [generic_https](../api/blacklist/blacklistManagement-generic-http.md#remove)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistManagement-generic-mqtt.md#remove) | [generic_mqtts](../api/blacklist/blacklistManagement-generic-mqtt.md#remove)
 
 -----
