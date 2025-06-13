@@ -11,3 +11,4 @@ aliveUntil | [DateTime](../primitives.md#datetime) | The service instance is ava
 exclusiveUntil | [DateTime](../primitives.md#datetime) | The service instance is reserved until this time.
 metadata | [Metadata](../data-models/metadata.md) | Additional information about the service instance.
 interfaces | List<[ServiceInterfaceDescriptor](../data-models/service-interface-descriptor.md)> | Available access interfaces of the service instance.
+authorizationToken |  | Generated authorization tokens if any.

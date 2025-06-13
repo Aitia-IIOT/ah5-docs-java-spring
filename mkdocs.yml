@@ -50,6 +50,8 @@ nav:
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
+      - AuthorizationTokenDescriptor: api/data-models/authorization-token-descriptor.md
+      - AuthorizationTokenMap: api/data-models/authorization-token-map.md
       - ConfigMap: api/data-models/config-map.md
       - ConfigResponse: api/data-models/config-response.md
       - Credentials: api/data-models/credentials.md

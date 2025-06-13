@@ -99,7 +99,7 @@ A string representation of a communication protocol. Examples: _http_, _https_, 
 
 ## SecurityPolicy
 
-Any suitable security policy chosen by the implementor of the service. The possible values are: `NONE`, `CERT_AUTH`, `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `JSON_WEB_TOKEN_AUTH`.
+Any suitable security policy chosen by the implementor of the service. The possible values are: `NONE`, `CERT_AUTH`, `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `BASE64_SELF_CONTAINED_TOKEN_AUTH`, `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, `RSA_SHA512_JSON_WEB_TOKEN_AUTH`.
 
 ## ServiceName
 

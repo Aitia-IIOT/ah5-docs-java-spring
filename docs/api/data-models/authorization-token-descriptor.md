@@ -1,0 +1,3 @@
+# AuthorizationTokenDescriptor
+
+TODO
