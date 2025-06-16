@@ -41,7 +41,7 @@ This service operation lists the requester-created authorization rules that matc
 
 **verify**
 
-This service operation checks whether a consumer has access to a specified service/service operation/event type.
+This service operation checks whether a consumer has access to a provider's specified service/service operation/event type.
 
 :material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#verify) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#verify) TODO<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#verify) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#verify) TODO
@@ -92,11 +92,47 @@ Learn more: <br />
 :material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-management-generic-mqtt.md) TODO<br />
 :material-tag: since: v5.0.0 
 
-TODO: continue from here
+**grant-policies**
+
+This service operation enables a system with proper rights to grant access to various consumers for various provider's services in bulk. It can also be used to grant access to subscribers for various publisher's events with a specific type in bulk.
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#grant-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#grant-policies) TODO<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#grant-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#grant-policies) TODO
+
+**revoke-policies**
+
+This service operation enables a system with proper rights to remove existing authorization policies in bulk without considering policy ownerships.
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#revoke-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#revoke-policies) TODO<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#revoke-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#revoke-policies) TODO
+
+**query-policies**
+
+This service operation lists the authorization rules that match the filtering requirements. This operation can be used to query both provider-owned and management level authorization policies.
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#query-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#query-policies) TODO<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#query-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#query-policies) TODO
+
+**check-policies**
+
+This service operation checks whether consumers have access to providers' specified service/service operation/event type.
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#check-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#check-policies) TODO<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#check-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#check-policies) TODO
+
+### authorizationTokenManagement
+
+The purpose of this service is to manage (generate, revoke, query) authorization tokens in bulk. The service is offered for Core and administrative Support Systems.
+
+Learn more: <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization-token-management_sd.pdf) TODO<br />
+:material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-token-management_sd-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-token-management_sd-generic-http.md) TODO<br />
+:material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-token-management_sd-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-token-management_sd-generic-mqtt.md) TODO<br />
+:material-tag: since: v5.0.0 
+
+TODO fill it with authorizationTokenManagement's operations
 
 -----
-
-TODO: change the configuration section
 
 ## Configuration
 
@@ -107,8 +143,6 @@ The system configuration properties can be found in the `application.properties`
 ### General parameters
 
 See the [general configuration properties](../general/general_config_props.md).
-
-**_Note:_** In case of the Authentication system the property **authentication.policy** has a special value `internal`, which means the system should use its own database during authentication. The property should not be changed.
 
 ### Database parameters
 
@@ -143,9 +177,25 @@ Auto initialization of database tables. Value must be always 'none'.
 
 ### Custom parameters
 
-:fontawesome-solid-wrench: **authentication.secret.key**
+:fontawesome-solid-wrench: **authenticator.credentials**
 
-The secret key which is used to prove to the Local Cloud's ServiceRegistry that this authentication is trusted. This secret key must be present in the Service Registry **authenticator.secret.keys** structure.
+The credentials that this system will use for performing the login operation when the authentication policy is `outsourced`.
+
+```
+authenticator.credentials={\
+	'<credential-name>': '<credential-value>' \
+}
+```
+
+:fontawesome-solid-wrench: **authenticator.secret.keys**
+
+Secret key for the authenticator servers when authentication policy is `outsourced`. The authenticator servers are able to use authorization check services by providing their system name hashed with the associated secret key.
+
+```
+authenticator.secret.keys={\
+	'<system-name>': '<secret-key>' \
+}
+```
 
 :fontawesome-solid-wrench: **enable.management.filter**
 
@@ -153,19 +203,55 @@ Set to `true` to enable automatic authorization for management services.
 
 :fontawesome-solid-wrench: **management.policy**
 
-Defines the access policy for management services. Can be `sysop-only` (only systems with system operator permission can use them), `whitelist` (system operators and those dedicated systems that appear on the **management.whitelist** can use them) or `authorization` (system operators, whitelist members and those systems that have permission according to the ConsumerAuthorization system can use them).
+Defines the access policy for management services. Can be `sysop-only` (only systems with system operator permission can use them), `whitelist` (system operators and those dedicated systems that appear on the **management.whitelist** can use them) or `authorization` (system operators, whitelist members and those systems that have permission according to database-stored policies can use them).
 
 :fontawesome-solid-wrench: **management.whitelist**
 
 A list of system names (separated by comma) that can use management services if the **management.policy** is set to `whitelist` or `authorization`.
 
-:fontawesome-solid-wrench: **identity.token.duration**
+:fontawesome-solid-wrench: **enable.blacklist.filter**
 
-Validity period of the identity token in seconds (0 or negative value means hundred years).
+Enable/disable automatic service requester system name verification against to cloud level blacklist. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **force.blacklist.filter**
+
+Whether or not the service requests should be refused when the blacklist server is not responding. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **blacklist.check.exclude.list**
+
+Comma-separated list that contains systems whose requests is served without checking the cloud level blacklist, even if blacklist is enabled.
+
+:fontawesome-solid-wrench: **max.page.size**
+
+Specifies the maximum number of records a page can contain in case of pageable service responses.
+
+:fontawesome-solid-wrench: **token.max.age**
+
+Determines after how long to delete the tokens from the database (in minutes).
+
+:fontawesome-solid-wrench: **token.time.limit**
+
+Specifies the default duration of time-limited tokens (simple time-limited and self-contained tokens) in seconds.
+
+:fontawesome-solid-wrench: **simple.token.usage.limit**
+
+Maximum token usage default in case of usage-limited simple tokens.
+
+:fontawesome-solid-wrench: **unbounded.token.generation.whitelist**
+
+Comma-separated list that contains the name of systems that can generate tokens for other systems by bypassing their authorization checks.
+
+:fontawesome-solid-wrench: **simple.token.byte.size**
+
+Simple token (time-limited, usage-limited) size in bytes. Cannot be less than 16!
+
+:fontawesome-solid-wrench: **secret.cryptographer.key**
+
+Sensitive data (consumer tokens, provider encryption keys) will be encrypted with this key before writing out into the database. Must be exactly 16 byte long!
 
 :fontawesome-solid-wrench: **cleaner.job.interval**
 
-Interval between execution times of the expired session cleaner job in milliseconds.
+Specifies how often (in miliseconds) to remove the expired and/or old tokens.
 
 ### Logging configuration
 

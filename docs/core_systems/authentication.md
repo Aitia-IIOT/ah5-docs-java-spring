@@ -170,7 +170,7 @@ Auto initialization of database tables. Value must be always 'none'.
 
 :fontawesome-solid-wrench: **authentication.secret.key**
 
-The secret key which is used to prove to the Local Cloud's ServiceRegistry that this authentication is trusted. This secret key must be present in the Service Registry **authenticator.secret.keys** structure.
+The secret key which is used to prove to the Local Cloud's ServiceRegistry that this authentication is trusted. This secret key must be present in the ServiceRegistry **authenticator.secret.keys** structure.
 
 :fontawesome-solid-wrench: **enable.management.filter**
 
