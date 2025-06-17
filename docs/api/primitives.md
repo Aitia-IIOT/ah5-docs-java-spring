@@ -12,6 +12,10 @@ String value of a network address type. Could be only `HOSTNAME`, `IPV4`, `IPV6`
 
 A string representation of an authentication method. Currently, only `PASSWORD` is supported.`
 
+## AuthorizationTargetType
+
+A string value representing the target of the authorization, Can be `SERVICE_DEF` or `EVENT_TYPE`.
+
 ## Boolean
 
 One out of `true` or `false`.
@@ -116,6 +120,10 @@ A chain of UTF-8 characters.
 ## SystemName
 
 A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the PascalCase naming convention. The identifier maximum length is 63 characters.
+
+## TokenType
+
+A String name that groups token technologies by usage characteristics. Can be `USAGE_LIMITED_TOKEN`, `TIME_LIMITED_TOKEN` or `SELF_CONTAINED_TOKEN`.
 
 ## UUID
 

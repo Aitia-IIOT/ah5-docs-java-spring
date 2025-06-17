@@ -44,9 +44,9 @@
 \ArrowheadTypeShort{SysD}
 \ArrowheadVersion{5.0.0}
 \ArrowheadDate{\today}
-\ArrowheadAuthor{Rajmund Bocsi}
+\ArrowheadAuthor{Tamás Bordi}
 \ArrowheadStatus{DRAFT}
-\ArrowheadContact{rbocsi@aitia.ai}
+\ArrowheadContact{tbordi@aitia.ai}
 \ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
 \ArrowheadSetup
 %%
@@ -89,7 +89,7 @@
 \section{Overview}
 \label{sec:overview}
 \color{black}
-This document describes the DynamicServiceOrchestration Core System, which exists to find matching providers for the consumer's specification within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds by collaborating with other Core/Support systems. This can be achieved by various strategies, but the DynamicServiceOrchestration Core System implements the dynamic orchestration strategy. This recommended system may provide the data storage functionality for the information related to matching rules and/or provider reservation.
+This document describes the DynamicServiceOrchestration Core System, which exists to find matching providers for the consumer's specification within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds by collaborating with other Core/Support systems. This can be achieved by various strategies, but the DynamicServiceOrchestration Core System implements the dynamic orchestration strategy. This recommended system may provide the data storage functionality for the information related to provider reservation.
 
 The rest of this document is organized as follows.
 In Section \ref{sec:prior_art}, we reference major prior art capabilities
@@ -102,7 +102,7 @@ of the system.
 In Section \ref{sec:services}, we describe the abstract services produced by the system.
 In Section \ref{sec:security}, we describe the security capabilities
 of the system.
-
+s
 \subsection{Significant Prior Art}
 \label{sec:prior_art}
 
@@ -117,12 +117,10 @@ There are some key differences, even on conceptual level, between the previous v
 \begin{itemize}
     \item The previous versions contained three (or two in earlier versions) kind of orchestration strategies: a store containing simple, peer-to-peer rules, an other store containing more flexible rules and a dynamic orchestration method which used the live data of the Service Registry to achieve its goal. The current version separates the three strategies into three different systems (but with the same orchestration service operations), and the Local Cloud's administrator can decide which strategy to support for their use case.
     \item The previous versions were named the system as Orchestrator. Because this expression has a different meaning in some related domains, it is decided that the current version uses the name \newline {\textless}Strategy{\textgreater}ServiceOrchestration to avoid confusion.
-    \item There was no data storage separation requirement: the Orchestrator's data storage was interconnected to other systems' storage. In the current version, data storage separation is mandatory. 
-    \item You could only create an orchestration rule if all related entities (consumer system, provider system, service definition and interface) are already existed (in the Service Registry's data storage). The current version supports rules referencing non-existent entities for future usage. 
-    \item Only an administrator were able to add and remove rules (in case of simple store orchestration). The current version allows any system (only those with the proper permissions, of course) to add and remove orchestration rules.
-    \item Only the orchestration pull was supported in which the consumer could start an orchestration process for itself. The current version also supports orchestration push: the consumers can subscribe to a service orchestration (or an other support/application system can subscribe them) and after the subscription and whenever a system notifies the Service Orchestration system, it performs the orchestration for the related subscribers.
-    \item The Quality-of-Service (QoS) Manager component was embedded into the Orchestrator (only QoS data comes from a support system). The current version moves these functionalities into a separate support system (which also be responsible to collect and store QoS data).
-    \item X.509 certificate trust chains was used as authentication mechanism. The current version can support any type of authentication methods by using a dedicate Authentication Provider core system. 
+    \item There was no data storage separation requirement: the Orchestrator's data storage was interconnected to other systems' storage. In the current version, data storage separation is mandatory.
+    \item Only the orchestration pull was supported in which the consumer could start an orchestration process for itself. The current version also supports orchestration push: the consumers can subscribe to a service orchestration (or an other Support/Application system can subscribe them) and after the subscription and whenever a system notifies the DynamicServiceOrchestration system, it performs the orchestration for the related subscribers.
+    \item The Quality-of-Service (QoS) Manager component was embedded into the Orchestrator (only QoS data comes from a Support system). The current version moves these functionalities into a separate Support system (which also be responsible to collect and store QoS data).
+    \item X.509 certificate trust chains was used as authentication mechanism. The current version can support any type of authentication methods by using a dedicated Authentication Core system. 
 \end{itemize}
 
 \subsection{How This System Is Meant to Be Used}
@@ -134,7 +132,7 @@ There are two ways to use the offered functionality:
 
 \begin{itemize}
     \item An application that want to consume a service should ask the DynamicServiceOrchestration to find one or more accessible providers that meet the necessary requirements. The DynamicServiceOrchestration returns the information that the application needs to consume the specified service.
-    \item An application can subscribe for orchestration with the necessary requirements (or can be subscribed by an other Application/Support system). The DynamicServiceOrchestration performs the orchestration process and returns the information on the specified channel. Additionally, whenever a system notifies the DynamicServiceOrchestration system, it does the orchestration again and sends the updated information to the subscriber.
+    \item An application can subscribe for orchestration with the necessary requirements (or can be subscribed by an other Application/Support system). Whenever a system notifies the DynamicServiceOrchestration system, it does the orchestration and sends the orchestration information to the subscriber on the specified channel. Optionally, subscribers can ask that an orchestration process run and return immediately after the subscription.
 \end{itemize}
 
 The \textit{information} that is provided to the consumer whenever an orchestration is done depends on the orchestration strategy. In case of dynamic orchestration strategy, the DynamicServiceOrchestration system has to contact with the ServiceRegistry (and optionally with other Core/Support systems) to perform the orchestration so in the response it can return everything what is needed for the consumer to perform a service operation consumption (access details, authorization tokens, etc...).
@@ -148,18 +146,17 @@ DynamicServiceOrchestration solves the following needs to fulfill the requiremen
 \begin{itemize}
     \item Enables the application and Core/Support systems to find the appropriate providers to consume their services.
     \item Enables the application and Core/Support systems to subscribe/unsubscribe to repeated orchestration (orchestration push).
-    \item Enables other application and Core/Support systems to notify the ServiceOrchestration system to re-orchestrate for the related subscribers.
+    \item Enables other application and Core/Support systems to notify the ServiceOrchestration system to orchestrate for the related subscribers.
     \item Enables other application and Core/Support systems to subscribe/unsubscribe consumers to repeated orchestrations.
 \end{itemize}
 
 \subsubsection {Non functional properties of the system}
 
 \begin{itemize}
-    \item (\textit{Condition}: Authentication Provider (AP) is present in the Local Cloud: the DynamicServiceOrchestration system will use AP's service(s) to verify the requester system before responding to its request.
+    \item (\textit{Condition}: Authentication system is present in the Local Cloud: the DynamicServiceOrchestration system will use Authentication system's \textit{identity} service to verify the requester system before responding to its request.
     \item (\textit{Condition}: ConsumerAuthorization system is present in the Local Cloud): if the consumer is not authorized to use a service provider the orchestration service removes the appropriate provider from the response;
     \item (\textit{Condition}: ConsumerAuthorization system is present in the Local Cloud): orchestration service automatically adds every necessary tokens to the response (if the related provider requires it);
-    \item (\textit{Condition}: Gatekeeper system is present in the Local Cloud): inter-cloud orchestration is possible;
-    \item (\textit{Condition}: Gatekeeper and Gatepath system is present in the Local Cloud): inter-cloud orchestration is possible even between two closed local clouds and the necessary communication tunnel will be built during the orchestration process;
+    \item (\textit{Condition}: Gatekeeper and Gatepath system is present in the Local Cloud): inter-cloud orchestration is possible between two Local Clouds and the necessary communication tunnel will be built during the orchestration process;
     \item (\textit{Condition}: Any system with Quality-of-service evaluation capabilities is present in the Local Cloud): during orchestration Quality-of-Service requirements can be considered;
     \item (\textit{Condition}: TranslationManager system is present in the Local Cloud): protocol and data model translation can be used to fulfill orchestration requirements.
 \end{itemize}
@@ -176,7 +173,7 @@ In order to achieve the mentioned functionalities, DynamicServiceOrchestration i
 \label{sec:delimitations}
 
 \begin{itemize}
-    \item If the Local Cloud does not contain an Authentication Provider or does not using X.509 certificates, there is no way for the DynamicServiceOrchestration to verify the requester system. In that case, the DynamicServiceOrchestration will consider the authentication data comes from the requester as valid.
+    \item If the Local Cloud does not contain an Authentication system or does not using X.509 certificates, there is no way for the DynamicServiceOrchestration to verify the requester system. In that case, the DynamicServiceOrchestration will consider the authentication data comes from the requester as valid.
     \item If the Local Cloud does not contain a ServiceRegistry, then DynamicServiceOrchestration system is not able to perform the orchestration process.
     \item To take full advantage of its functionality, other Core/Support systems are required to being deployed.
 \end{itemize} 
@@ -206,9 +203,9 @@ Recommended service. Its purpose is to give information about the provider syste
 \section{Security}
 \label{sec:security}
 
-For authentication, the DynamicServiceOrchestration utilizes an other Core/Support system, the Authentication Provider's service to verify the identities of the requester systems. If no Authentication Provider is deployed into the Local Cloud, the DynamicServiceOrchestration trusts the requester system self-provided identity.
+For authentication, the DynamicServiceOrchestration utilizes an other Core/Support system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the DynamicServiceOrchestration trusts the requester system self-provided identity.
 
-For authorization, the system uses an other Core System, the ConsumerAuthorization system to decide whether a consumer can use its services or not. If the ConsumerAuthorization Core System is not present in the Local Cloud, then the ServiceOrchestration allows for anyone in the Local Cloud to use its services. The following service operations can always be used without any authorization rules:
+For authorization, the system uses an other Core System, the ConsumerAuthorization system to decide whether a consumer can use its services or not. If the ConsumerAuthorization Core System is not present in the Local Cloud, then the DynamicServiceOrchestration may allow for anyone in the Local Cloud to use its services. The following service operations can always be used without any authorization rules:
 
 \begin{itemize}
     \item \textit{orchestration} service's \textit{pull} operation,

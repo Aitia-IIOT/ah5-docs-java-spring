@@ -109,6 +109,16 @@ The service operation **responds** with the status code `200` if called successf
                }
             }
          ]
+         "authorizationTokens": {
+            "TIME_LIMITED_TOKEN_AUTH": {
+               "query-temperature": {
+                  "tokenType": "TIME_LIMITED_TOKEN_AUTH",
+                  "targetType" "SERVICE_DEF",
+                  "token": "dsalefb521vdjkdsae633",
+                  "expiresAt": "2025-10-05T11:35:14Z"
+               }
+            }
+         }
       }
    ],
    "warnings":[
