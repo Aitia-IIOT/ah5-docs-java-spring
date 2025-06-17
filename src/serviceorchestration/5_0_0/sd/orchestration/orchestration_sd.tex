@@ -339,6 +339,7 @@ aliveUntil & \pref{DateTime} & The service instance is available until this time
 exclusiveUntil & \pref{DateTime} & The service instance is reserved until this time. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the service instance. \\ \hline
 interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
+authorizationTokens & \hyperref[sec:model:AuthorizationTokenMap]{AuthorizationTokenMap} & Generated authorization tokens, if any. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -349,6 +350,27 @@ interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{Servi
 An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
 
 \clearpage
+
+\msubsection{struct}{AuthorizationTokenMap}
+
+An \pref{Object} which maps \hyperref[sec:model:Scope]{Scope} and \hyperref[sec:model:AuthorizationTokenDescriptor]{AuthorizationTokenDescriptor} pairs to  \pref{SecurityPolicy} keys.
+
+\msubsection{struct}{Scope}
+
+Can be \pdef{ServiceName} or \pdef{OperationName}.
+
+\msubsection{struct}{AuthorizationTokenDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5.1cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+tokenType & \pref{TokenType} & Type of the given token. \\ \hline
+targetType & \pref{String} & What the token is made for. \\ \hline
+token & \pref{String} & The token itself. \\ \hline
+usageLimit & \pref{Number} & Maximum number of token usage, if any. \\ \hline
+expiresAt & \pref{DateTime} & Token is valid until this time, if any. \\ \hline
+\end{tabularx}
+\end{table}
 
 \msubsection{struct}{ServiceInterfaceDescriptor}
  
@@ -374,6 +396,8 @@ type & \pref{ErrorType} & Type of the error. \\ \hline
 origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
+
+\clearpage
 
 \msubsection{struct}{OrchestrationSubscriptionRequest}
 
@@ -406,6 +430,8 @@ An \pref{Object} which maps \pref{String} keys \pref{String} values.
 
 Unique \pref{String} identifier. 
 
+\clearpage
+
 \subsection{Primitives}
 \label{sec:model:primitives}
 
@@ -420,7 +446,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{CloudID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name, separated by a special delimiter character. Each part must follow PascalCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
-\pdef{InterfaceName}& A string identifier of an interface descriptor. Must following snake_case naming convention. \\ \hline
+\pdef{InterfaceName}& A string identifier of an interface descriptor. Must following snake\_case naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
@@ -433,6 +459,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Set}$<$A$>$       & A collection of items that contains no duplicate elements and each having type A. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
 \pdef{SystemName}             & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline
+\pdef{TokenType}      & A string name that groups token technologies by usage characteristics \\ \hline
 \pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning.  \\ \hline
 \end{tabularx}
 \end{table}
