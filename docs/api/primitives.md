@@ -12,9 +12,21 @@ A **String** representation of a network address. An address can be a version 4 
 
 A **String** representation of an authentication method. Currently, only `PASSWORD` is supported.`
 
+## AuthorizationPolicyType
+
+A **String** representation of the type of the authorization policy. Could be only `ALL` (everybody can use the target in the appropriate cloud), `WHITELIST` (whitelist-based policy), `BLACKLIST` (blacklist-based policy) or `SYS_METADATA` (system-level metadata-based policy).
+
+## AuthorizationTargetType
+
+A **String** representation of the type of target in authorization policies. Could be only `SERVICE_DEF` (for service definitions) or `EVENT_TYPE` (for event types).
+
 ## Boolean
 
 A **boolean** value, one out of `true` or `false`.
+
+## CloudIdentifier
+
+A **String** identifier of a Local Cloud. It consists of the cloud name and the organization name separated by a pipe, as follows: `<CloudName>|<OrganizationName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the organization name is _AitiaInc_.)
 
 ## DateTime
 
@@ -35,6 +47,10 @@ The direction of a sorting operation. Possible values are the **String** represe
 
 **String** value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,
 `TIMEOUT`, `LOCKED`, `INTERNAL_SERVER_ERROR` or `EXTERNAL_SERVER_ERROR`.
+
+## EventTypeName
+
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## InterfaceName
 
@@ -99,6 +115,10 @@ A **String** identifier of a service instance. It consists of the instance's pro
 
 ## ServiceName
 A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
+
+## ServiceOperationName
+
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and dash (-). A name has to start with a letter, cannot ends with a dash and must following the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## String
 

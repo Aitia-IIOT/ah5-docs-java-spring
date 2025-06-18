@@ -9,10 +9,10 @@ nav:
     - Contribute: home/contribute.md 
   - Core Systems:
     - ServiceRegistry: core_systems/service_registry.md
+    - ConsumerAuthorization: core_systems/authorization.md
     - DynamicServiceOrchestration: core_systems/service_orchestration_dynamic.md
     - FlexibleStoreServiceOrchestration: core_systems/service_orchestration_flexible_store.md
     - SimpleStoreServiceOrchestration: core_systems/service_orchestration_simple_store.md
-    - ConsumerAuthorization: core_systems/authorization.md
     - Authentication: core_systems/authentication.md
   - Support Systems: 
     - Blacklist: support_systems/blacklist.md
@@ -37,6 +37,9 @@ nav:
           - systemDiscovery: api/serviceregistry/system-discovery-generic-mqtt.md
           - serviceDiscovery: api/serviceregistry/service-discovery-generic-mqtt.md
           - serviceRegistryManagement: api/serviceregistry/service-registry-management-generic-mqtt.md
+      - ConsumerAuthorization:
+        - HTTP:
+            - authorization: api/consumerauthorization/authorization-generic-http.md
       - DynamicServiceOrchestration:
         - HTTP:
           - orchestration: api/serviceorchestration/orchestration-generic-http_dynamic.md
@@ -50,6 +53,8 @@ nav:
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
+      - AuthorizationGrantRequest: api/data-models/authorization-grant-request.md
+      - AuthorizationPolicyRequest: api/data-models/authorization-policy-request.md
       - ConfigMap: api/data-models/config-map.md
       - ConfigResponse: api/data-models/config-response.md
       - Credentials: api/data-models/credentials.md
@@ -97,6 +102,7 @@ nav:
       - MQTTResponseTemplate: api/data-models/mqtt-response-template.md
       - PageRequest: api/data-models/page-request.md
       - PropertyMap: api/data-models/property-map.md
+      - ScopedPoliciesRequest: api/data-models/scoped-policies-request.md
       - ServiceCreateListRequest: api/data-models/service-create-list-request.md
       - ServiceDefinitionDescriptor: api/data-models/service-definition-descriptor.md
       - ServiceDefinitionListRequest: api/data-models/service-definition-list-request.md

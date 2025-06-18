@@ -13,8 +13,8 @@ Learn more: <br />
 The purpose of this service is to validate service consumption permissions and to lookup, grant and revoke those permissions. The service is offered for both application and Core/Support Systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization_sd.pdf) TODO<br />
-:material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-generic-http.md) TODO<br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization_sd.pdf)<br />
+:material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-generic-http.md)<br />
 :material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-generic-mqtt.md) TODO<br />
 :material-tag: since: v5.0.0 
 
