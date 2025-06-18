@@ -1,6 +1,8 @@
 # Blacklist
 
-This Support system makes it possible for systems with operator role or proper permissions to ban other systems from the Local Cloud. The systems can get some information about the blacklist without proper permissions too. 
+This Support system makes it possible for systems with operator role or proper permissions to ban other systems from the Local Cloud. 
+
+There are operations that provide some information about the blacklist. These are available for every system.
 
 Learn more: <br />
 :material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_0_0/blacklist_sysd.pdf)

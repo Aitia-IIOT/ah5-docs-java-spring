@@ -12,6 +12,10 @@ String value of a network address type. Could be only `HOSTNAME`, `IPV4`, `IPV6`
 
 A string representation of an authentication method. Currently, only `PASSWORD` is supported.`
 
+## BlacklistReason
+
+A chain of UTF-8 characters with a maximum length of 1024.
+
 ## Boolean
 
 One out of `true` or `false`.
@@ -88,10 +92,6 @@ An identifier of any suitable validator function chosen by the implementor of se
 ## Protocol
 
 A string representation of a communication protocol. Examples: _http_, _https_, _tcp_, _ssl_...
-
-## Reason
-
-A chain of UTF-8 characters with a maximum length of 1024.
 
 ## SecurityPolicy
 
