@@ -40,125 +40,56 @@ JSON encoded body.
 TODO: continue
 
 ```
-POST /serviceregistry/service-discovery/register HTTP/1.1
+POST /consumerauthorization/authorization/grant HTTP/1.1
 Authorization: Bearer <authorization-info>
 
 {
-  "serviceDefinitionName": "kelvinInfo",
-  "version": "",
-  "expiresAt": "2030-01-01T00:00:00Z",
-  "metadata": {
-    "marginOfError": 0.5
+  "targetType": "SERVICE_DEF",
+  "target": "kelvinInfo",
+  "description": "query for everyone, config for TemperatureManager only",
+  "defaultPolicy": {
+    "policyType": "ALL"
   },
-  "interfaces": [
-    {
-      "templateName": "generic_http",
-      "protocol": "http",
-      "policy": "NONE",
-      "properties": {
-        "accessAddresses": ["192.168.56.116", "tp2.greenhouse.com"],
-        "accessPort": 8080,
-        "basePath": "/kelvin",
-        "operations": {"query-temperature": { "method": "GET", "path": "/query"} }
-      }
+  "scopedPolicies": {
+    "config": {
+      "policyType": "WHITELIST",
+      "policyList": [
+        "TemperatureManager"
+      ]
     }
-  ]
+  }
 }
 ```
 
-The service operation **responds** with the status code `201` if the service instance entity was created. The response also contains a
-[ServiceRegistrationResponse](../data-models/service-registration-response.md) JSON encoded body.
+The service operation **responds** with the status code `201` if the policy instance entity was created. The response also contains a
+[AuthorizationResponse](../data-models/authorization-policy-response.md) JSON encoded body.
 
 ```
 {
-  "instanceId": "TemperatureProvider2|kelvinInfo|1.0.0",
-  "provider": {
-    "name": "TemperatureProvider2",
-    "metadata": {
-      "scales": [
-        "Kelvin",
-        "Celsius"
-      ],
-      "location": {
-        "side": "North",
-        "block": 2
-      },
-      "indoor": true
-    },
-    "version": "1.0.0",
-    "addresses": [
-      {
-        "type": "IPV4",
-        "address": "192.168.56.116"
-      },
-      {
-        "type": "HOSTNAME",
-        "address": "tp2.greenhouse.com"
-      }
-    ],
-    "device": {
-      "name": "THERMOMETER2",
-      "metadata": {
-        "scales": [
-          "Kelvin",
-          "Celsius"
-        ],
-        "maxTemperature": {
-          "Kelvin": 310,
-          "Celsius": 40
-        },
-        "minTemperature": {
-          "Kelvin": 260,
-          "Celsius": -10
-        }
-      },
-      "addresses": [
-        {
-          "type": "MAC",
-          "address": "81:ef:1a:44:7a:f5"
-        }
-      ],
-      "createdAt": "2024-11-04T01:53:02Z",
-      "updatedAt": "2024-11-04T01:53:02Z"
-    },
-    "createdAt": "2024-11-08T10:21:11Z",
-    "updatedAt": "2024-11-08T10:21:11Z"
+  "instanceId": "PR|LOCAL|TemperatureProvider2|SERVICE_DEF|kelvinInfo",
+  "level": "PROVIDER",
+  "cloud": "LOCAL",
+  "provider": "TemperatureProvider2",
+  "targetType": "SERVICE_DEF",
+  "target": "kelvinInfo",
+  "description": "query for everyone, config for TemperatureManager only",
+  "defaultPolicy": {
+    "policyType": "ALL"
   },
-  "serviceDefinition": {
-    "name": "kelvinInfo",
-    "createdAt": "2024-11-08T11:24:43Z",
-    "updatedAt": "2024-11-08T11:24:43Z"
-  },
-  "version": "1.0.0",
-  "expiresAt": "2030-01-01T00:00:00Z",
-  "metadata": {
-    "marginOfError": 0.5
-  },
-  "interfaces": [
-    {
-      "templateName": "generic_http",
-      "protocol": "http",
-      "policy": "NONE",
-      "properties": {
-        "accessAddresses": [
-          "192.168.56.116",
-          "tp2.greenhouse.com"
-        ],
-        "accessPort": 8080,
-        "operations": {
-          "query-temperature": {
-            "path": "/query",
-            "method": "GET"
-          }
-        },
-        "basePath": "/kelvin"
-      }
+  "scopedPolicies": {
+    "config": {
+      "policyType": "WHITELIST",
+      "policyList": [
+        "TemperatureManager"
+      ]
     }
-  ],
-  "createdAt": "2024-11-19T12:00:07.959849300Z",
-  "updatedAt": "2024-11-19T12:00:07.959849300Z"
+  },
+  "createdBy": "TemperatureProvider2",
+  "createdAt": "2025-06-18T13:51:19.727425900Z"
 }
 ```
+
+TODO: continue
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and

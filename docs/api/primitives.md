@@ -38,7 +38,7 @@ between date and time part, ”hh” denotes hour in the 24-hour format (00-23),
 
 ## DeviceName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are uppercase letters (english alphabet only), numbers and underscore (\_). A name has to start with a letter, cannot end with an underscore and must following the _UPPER\_SNAKE\_CASE_ naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are uppercase letters (english alphabet only), numbers and underscore (\_). A name has to start with a letter, cannot end with an underscore and must follow the _UPPER\_SNAKE\_CASE_ naming convention. The identifier maximum length is 63 characters.
 
 ## Direction
 The direction of a sorting operation. Possible values are the **String** representation of ascending (`ASC`) or descending (`DESC`) order.
@@ -50,11 +50,11 @@ The direction of a sorting operation. Possible values are the **String** represe
 
 ## EventTypeName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## InterfaceName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must follow the snake_case naming convention. The identifier maximum length is 63 characters.
 
 ## KeyValuePair
 
@@ -114,11 +114,11 @@ Any suitable security policy chosen by the implementor of the service represente
 A **String** identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by pipe, as follows: `<provider-name>|<service-definition>|<version>`. An example for a valid service instance ID: _AlertProvider1|alertService1|1.0.0_. (Here the provider name is _AlertProvider1_, the service definition is _alertService1_, and the version is _1.0.0_.)
 
 ## ServiceName
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## ServiceOperationName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and dash (-). A name has to start with a letter, cannot ends with a dash and must following the kebab-case naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and dash (-). A name has to start with a letter, cannot ends with a dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## String
 
@@ -126,7 +126,7 @@ A chain of UTF-8 characters.
 
 ## SystemName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the _PascalCase_ naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the _PascalCase_ naming convention. The identifier maximum length is 63 characters.
 
 ## UUID
 

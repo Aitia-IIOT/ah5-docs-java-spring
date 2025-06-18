@@ -55,6 +55,7 @@ nav:
       - AddressDescriptor: api/data-models/address-descriptor.md
       - AuthorizationGrantRequest: api/data-models/authorization-grant-request.md
       - AuthorizationPolicyRequest: api/data-models/authorization-policy-request.md
+      - AuthorizationPolicyResponse: api/data-models/authorization-policy-response.md
       - ConfigMap: api/data-models/config-map.md
       - ConfigResponse: api/data-models/config-response.md
       - Credentials: api/data-models/credentials.md
