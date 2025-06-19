@@ -13,4 +13,4 @@ An Object which maps [String](../primitives.md#string) `scope`* and [`Authorizat
     }
 }
 ```
-*_scope_: The [OperationName](../primitives.md#operationname) or `*` if the token in the [`AuthorizationTokenDescriptor`](./authorization-token-descriptor.md) is valid for all the operations:  
+*_scope_: The [ServiceOperationName](../primitives.md#serviceoperationname) or [ServiceName](../primitives.md#servicename) if the token in the [`AuthorizationTokenDescriptor`](./authorization-token-descriptor.md) is valid for all the operations:  

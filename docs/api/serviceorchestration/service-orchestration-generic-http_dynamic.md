@@ -1,9 +1,9 @@
-# orchestration IDD (dynamic strategy)
+# serviceOrchestration IDD (dynamic strategy)
 **generic_http & generic_https**
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of orchestration, which provides runtime (late) binding between application systems. It’s implemented using protocol, encoding as stated in the following tables:
+This page describes the generic_http and generic_https service interface of serviceOrchestration, which provides runtime (late) binding between application systems. It’s implemented using protocol, encoding as stated in the following tables:
 
 **generic_http**
 
@@ -23,7 +23,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [orchestration – Service Description](../../assets/sd/5_0_0/orchestration_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [serviceOrchestration – Service Description](../../assets/sd/5_0_0/service-orchestration_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
@@ -112,7 +112,7 @@ The service operation **responds** with the status code `200` if called successf
          "authorizationTokens": {
             "TIME_LIMITED_TOKEN_AUTH": {
                "query-temperature": {
-                  "tokenType": "TIME_LIMITED_TOKEN_AUTH",
+                  "tokenType": "TIME_LIMITED_TOKEN",
                   "targetType" "SERVICE_DEF",
                   "token": "dsalefb521vdjkdsae633",
                   "expiresAt": "2025-10-05T11:35:14Z"

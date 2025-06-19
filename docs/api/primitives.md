@@ -22,7 +22,7 @@ One out of `true` or `false`.
 
 ## CloudIdentifier
 
-A string identifier of a Local Cloud. It consists of the cloud name and the organization name separated by a pipe, as follows: `<CloudName>|<OperatorName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the operator name is _AitiaInc_.)
+A string identifier of a Local Cloud. It consists of the cloud name and the organization name separated by a pipe, as follows: `<CloudName>|<OrganizationName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the organization name is _AitiaInc_.)
 
 ## DateTime
 
@@ -42,7 +42,7 @@ String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH
 
 ## InterfaceName
 
-A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
 
 ## KeyValuePair
 
@@ -70,10 +70,6 @@ A String indentifier that is intended to be both human and machine-readable. The
 ## Number
 
 Decimal number.
-
-## OperationName
-
-A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## PropertyValidator
 
@@ -105,13 +101,17 @@ A string representation of a communication protocol. Examples: _http_, _https_, 
 
 Any suitable security policy chosen by the implementor of the service. The possible values are: `NONE`, `CERT_AUTH`, `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `BASE64_SELF_CONTAINED_TOKEN_AUTH`, `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, `RSA_SHA512_JSON_WEB_TOKEN_AUTH`.
 
+## ServiceInstanceID
+
+A string identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by pipes, as follows: `<provider-name>|<service-definition>|<version>`. An example for a valid service instance ID: _AlertPprovider1|alertService1|1.0.0_. (Here the provider name is _AlertProvider1_, the service definition is _alertService1_, and the version is _1.0.0_.)
+
 ## ServiceName
 
 A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
 
-## ServiceInstanceID
+## ServiceOperationName
 
-A string identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by pipes, as follows: `<provider-name>|<service-definition>|<version>`. An example for a valid service instance ID: _AlertPprovider1|alertService1|1.0.0_. (Here the provider name is _AlertProvider1_, the service definition is _alertService1_, and the version is _1.0.0_.)
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers and dash (`-`). A name has to start with a letter, cannot end with dash and must following the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## String
 

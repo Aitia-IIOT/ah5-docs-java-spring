@@ -3,7 +3,7 @@
 Field | Type | Mandatory | Description
 --- | --- | --- | ---
 serviceDefinition | [ServiceName](../primitives.md#servicename) | yes/no | The required service definition name. Mandatory in case of **dynamic** strategy.
-operations | List<[OperationName](../primitives.md#operationname)> | yes/no | The required service operation names. Exactly one operation must be defined, when the following orchestration flags are true: `ONLY_INTERCLOUD`, `ALLOW_INTERCLOUD`, `ALLOW_TRANSLATION`
+operations | List<[ServiceOperationName](../primitives.md#serviceoperationname)> | yes/no | The required service operation names. Exactly one operation must be defined, when the following orchestration flags are true: `ONLY_INTERCLOUD`, `ALLOW_INTERCLOUD`, `ALLOW_TRANSLATION`
 versions | List<[Version](../primitives.md#version)> | no | The required service versions.
 alivesAt | [DateTime](../primitives.md#datetime) | no | The orchestrated service must be alive by this time.
 metadataRequirements | List<[MetadataRequirements](../data-models/metadata-requirements.md)> | no | The orchestrated service must meet at least one of the specified metadata requirement.

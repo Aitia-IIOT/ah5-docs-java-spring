@@ -183,16 +183,16 @@ In order to achieve the mentioned functionalities, DynamicServiceOrchestration i
 \section{Services produced}
 \label{sec:services}
 
-\msubsection{service}{orchestration}
+\msubsection{service}{serviceOrchestration}
 The purpose of this service is to find information about providers that meet the requirements. It also provided subscription functionality to repeated orchestrations (orchestration push). The service is offered for both application and Core/Support systems. 
 
-\msubsection{service}{orchestrationPushManagement}
+\msubsection{service}{serviceOrchestrationPushManagement}
 The purpose of this service is to manage orchestration push subscriptions in bulk. It also allows to signal the DynamicServiceOrchestration system to orchestrate for the related subscribers. The service is offered for Core/Support systems. 
 
-\msubsection{service}{orchestrationLockManagement}
+\msubsection{service}{serviceOrchestrationLockManagement}
 The purpose of this service is to add, remove and query active orchestration locks. An orchestration lock can be made automatically during the orchestration process in order to reserve an actual service or manually if a higher entity with management access has any reason to prevent a service from being orchestrated. The service is offered for Core/Support systems.
 
-\msubsection{service}{orchestrationHistoryManagement}
+\msubsection{service}{serviceOrchestrationHistoryManagement}
 Recommended service. Its purpose is to give information about the orchestration processes performed by the system. The service is offered for Core/Support systems.
 
 \msubsection{service}{monitor}
@@ -208,9 +208,9 @@ For authentication, the DynamicServiceOrchestration utilizes an other Core/Suppo
 For authorization, the system uses an other Core System, the ConsumerAuthorization system to decide whether a consumer can use its services or not. If the ConsumerAuthorization Core System is not present in the Local Cloud, then the DynamicServiceOrchestration may allow for anyone in the Local Cloud to use its services. The following service operations can always be used without any authorization rules:
 
 \begin{itemize}
-    \item \textit{orchestration} service's \textit{pull} operation,
-    \item \textit{orchestration} service's \textit{subscribe} operation,
-    \item \textit{orchestration} service's \textit{unsubscribe} operation.
+    \item \textit{serviceOrchestration} service's \textit{pull} operation,
+    \item \textit{serviceOrchestration} service's \textit{subscribe} operation,
+    \item \textit{serviceOrchestration} service's \textit{unsubscribe} operation.
 \end{itemize}
 
 Furthermore, if the ConsumerAuthorization system is deployed in the Local Cloud, the DynamicServiceOrchestration system will use the appropriate service to check whether the consumer can consume the required service of a specific provider during the orchestration process.

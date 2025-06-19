@@ -49,8 +49,8 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{orchestration} % XXX = ServiceName 
-\ArrowheadServiceID{orchestration} % ID name of service
+\ArrowheadTitle{serviceOrchestration} % XXX = ServiceName 
+\ArrowheadServiceID{serviceOrchestration} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
@@ -82,7 +82,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{orchestration} service. 
+    This document provides service description for the \textbf{serviceOrchestration} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -106,7 +106,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{orchestration} service, which provides runtime (late) binding between application systems. Its primary purpose is to find matching service instances according to the consumer's needs within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds. The matching service instances can be orchestrated with different strategies:
+This document describes the \textbf{serviceOrchestration} service, which provides runtime (late) binding between application systems. Its primary purpose is to find matching service instances according to the consumer's needs within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds. The matching service instances can be orchestrated with different strategies:
 
 \begin{itemize}
     \item \textbf{simple-store:} when the matching service instances are stored in a database as peer-to-peer rules that are maintained by higher entities and no actual service details are obtained from the Local Cloud;
@@ -115,7 +115,7 @@ This document describes the \textbf{orchestration} service, which provides runti
 \end{itemize}
 
 
-The \textbf{orchestration} service contains the following operations:
+The \textbf{serviceOrchestration} service contains the following operations:
 
 \begin{itemize}
     \item \textit{pull} performs the orchestration process and returns the matching service instances;
@@ -160,7 +160,7 @@ Available for anyone within the local cloud.
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{orchestration} service is used to perform a \textit{pull} orchestration and  \textit{subscribe}/\textit{unsubscribe} for push orchestrations.
+This section describes the abstract signatures of each operations of the service. The \textbf{serviceOrchestration} service is used to perform a \textit{pull} orchestration and  \textit{subscribe}/\textit{unsubscribe} for push orchestrations.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
@@ -190,7 +190,7 @@ This operation requires the identifier pointing to the subscription record to be
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{orchestration} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{serviceOrchestration} service are listed and must be respected by the hosting System.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
@@ -231,7 +231,7 @@ exclusivityDuration & \pref{Number} & no & The interval the service wanted to be
 \begin{tabularx}{\textwidth}{| p{4.8cm} | p{4.7cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 serviceDefinition & \pref{ServiceName} & yes/no & The required service definition name. Mandatory in case of \textbf{dynamic} strategy. \\ \hline
-operations & \pref{List}$<$\pref{OperationName}$>$ & yes/no & The required service operation names. \newline 
+operations & \pref{List}$<$\pref{ServiceOperationName}$>$ & yes/no & The required service operation names. \newline 
 Exactly one operation must be defined, when the following orchestration flags are true: \newline \texttt{ONLY\_INTERCLOUD}, \texttt{ALLOW\_INTERCLOUD}, \texttt{ALLOW\_TRANSLATION} \\ \hline
 versions & \pref{List}$<$\pref{Version}$>$ & no & The required service versions. \\ \hline 
 alivesAt & \pref{DateTime} & no & The orchestrated service must be alive by this time. \\ \hline
@@ -357,7 +357,7 @@ An \pref{Object} which maps \hyperref[sec:model:Scope]{Scope} and \hyperref[sec:
 
 \msubsection{struct}{Scope}
 
-Can be \pdef{ServiceName} or \pdef{OperationName}.
+Can be \pdef{ServiceName} or \pdef{ServiceOperationName}.
 
 \msubsection{struct}{AuthorizationTokenDescriptor}
 
@@ -440,26 +440,26 @@ The concrete interpretations of each of these types and structures must be provi
 
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3.7cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{CloudID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name, separated by a special delimiter character. Each part must follow PascalCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
-\pdef{InterfaceName}& A string identifier of an interface descriptor. Must following snake\_case naming convention. \\ \hline
+\pdef{InterfaceName}& A string identifier of an interface descriptor. Must follow snake\_case naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
-\pdef{OperationName}             & A string identifier that is intended to be both human and machine-readable. Must following kebab-case naming convention. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
 \pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
 \pdef{ServiceInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance's provider name, service definition and version, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline
-\pdef{ServiceName}             & A string identifier that is intended to be both human and machine-readable. Must following camelCase naming convention. \\ \hline
+\pdef{ServiceName}             & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
+\pdef{ServiceOperationName}             & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
 \pdef{Set}$<$A$>$       & A collection of items that contains no duplicate elements and each having type A. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{SystemName}             & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline
-\pdef{TokenType}      & A string name that groups token technologies by usage characteristics \\ \hline
+\pdef{SystemName}             & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\pdef{TokenType}      & A string name that groups token technologies by usage characteristics. \\ \hline
 \pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning.  \\ \hline
 \end{tabularx}
 \end{table}

@@ -7,13 +7,13 @@ Learn more: <br />
 
 ## Services
 
-### orchestration
+### serviceOrchestration
 
 The purpose of this service is to get matching service instances. The service is offered for both application and Core/Support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/orchestration_sd.pdf) <br />
-:material-api: [generic_http (IDD)](../api/serviceorchestration/orchestration-generic-http_dynamic.md) | [generic_https (IDD)](../api/serviceorchestration/orchestration-generic-http_dynamic.md) <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-orchestration_sd.pdf) <br />
+:material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md) <br />
 :material-api: [generic_mqtt (IDD)](todo) | [generic_mqtts (IDD)](todo) <br />
 :material-tag: since: v5.0.0 
 
@@ -21,32 +21,32 @@ Learn more: <br />
 
 This service operation performs the orchestration process and returns the matching service instances.
 
-:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/orchestration-generic-http_dynamic.md#pull) | [generic_https](../api/serviceorchestration/orchestration-generic-http_dynamic.md#pull)<br />
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#pull) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#pull)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](todo) | [generic_mqtts](todo)
 
 **subscribe**
 
 This service operation creates a subscription that can be triggered anytime to perform the orchestration process and push the matching service instances for the subscriber.
 
-:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/orchestration-generic-http_dynamic.md#subscribe) | [generic_https](../api/serviceorchestration/orchestration-generic-http_dynamic.md#subscribe)<br />
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#subscribe) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#subscribe)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](todo) | [generic_mqtts](todo)
 
 **unsubscribe**
 
 This service operation removes a subscription.
 
-:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/orchestration-generic-http_dynamic.md#unsubscribe) | [generic_https](../api/serviceorchestration/orchestration-generic-http_dynamic.md#unsubscribe)<br />
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#unsubscribe) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#unsubscribe)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](todo) | [generic_mqtts](todo)
 
-### orchestrationPushManagement
+### serviceOrchestrationPushManagement
 
 Coming soon.
 
-### orchestrationLockManagement
+### serviceOrchestrationLockManagement
 
 Coming soon.
 
-### orchestrationHistoryManagement
+### serviceOrchestrationHistoryManagement
 
 Coming soon.
 
