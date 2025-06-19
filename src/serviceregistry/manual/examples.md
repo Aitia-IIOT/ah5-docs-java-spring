@@ -13,9 +13,9 @@ This file contains specific examples of what payloads are expected and returned 
   {
     "name": "THERMOMETER1",
     "metadata": {
-      "scales": ["Kelvin", "Celsius"],
-      "maxTemperature": {"Kelvin": 310, "Celsius": 40},
-      "minTemperature": {"Kelvin": 260, "Celsius": -10},
+      "scales": ["kelvin", "celsius"],
+      "maxTemperature": {"kelvin": 310, "celsius": 40},
+      "minTemperature": {"kelvin": 260, "celsius": -10},
       "appliable": ["spring", "autumn"]
     },
     "addresses": [
@@ -30,16 +30,16 @@ This file contains specific examples of what payloads are expected and returned 
     "name": "THERMOMETER1",
     "metadata": {
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "maxTemperature": {
-        "Kelvin": 310,
-        "Celsius": 40
+        "kelvin": 310,
+        "celsius": 40
       },
       "minTemperature": {
-        "Kelvin": 260,
-        "Celsius": -10
+        "kelvin": 260,
+        "celsius": -10
       },
       "appliable": [
         "spring",
@@ -81,16 +81,16 @@ This file contains specific examples of what payloads are expected and returned 
         "name": "THERMOMETER1",
         "metadata": {
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
           "maxTemperature": {
-            "Kelvin": 310,
-            "Celsius": 40
+            "kelvin": 310,
+            "celsius": 40
           },
           "minTemperature": {
-            "Kelvin": 260,
-            "Celsius": -10
+            "kelvin": 260,
+            "celsius": -10
           },
           "appliable": [
             "spring",
@@ -164,7 +164,7 @@ The header is also included in the examples where the system name comes from it.
   {
     "metadata": {
       "type": "temperature",
-      "scales": [ "Kelvin", "Celsius" ],
+      "scales": [ "kelvin", "celsius" ],
       "customizable": false
     },
     "version": "2.1",
@@ -180,8 +180,8 @@ The header is also included in the examples where the system name comes from it.
     "metadata": {
       "type": "temperature",
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "customizable": false
     },
@@ -200,16 +200,16 @@ The header is also included in the examples where the system name comes from it.
       "name": "THERMOMETER1",
       "metadata": {
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "maxTemperature": {
-          "Kelvin": 310,
-          "Celsius": 40
+          "kelvin": 310,
+          "celsius": 40
         },
         "minTemperature": {
-          "Kelvin": 260,
-          "Celsius": -10
+          "kelvin": 260,
+          "celsius": -10
         },
         "appliable": [
           "spring",
@@ -246,7 +246,7 @@ The header is also included in the examples where the system name comes from it.
       {
         "customizable": true,
         "type": "temperature",
-        "scales": { "op": "CONTAINS", "value": "Celsius" }
+        "scales": { "op": "CONTAINS", "value": "celsius" }
       }
     ],
     "versions": [
@@ -267,9 +267,9 @@ The header is also included in the examples where the system name comes from it.
           "type": "temperature",
           "customizable": true,
           "scales": [
-            "Fahrenheit",
-            "Kelvin",
-            "Celsius"
+            "fahrenheit",
+            "kelvin",
+            "celsius"
           ]
         },
         "version": "2.0.0",
@@ -287,19 +287,19 @@ The header is also included in the examples where the system name comes from it.
           "name": "THERMOMETER5",
           "metadata": {
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ],
             "maxTemperature": {
-              "Kelvin": 310,
-              "Celsius": 40,
-              "Fahrenheit": 140
+              "kelvin": 310,
+              "celsius": 40,
+              "fahrenheit": 140
             },
             "minTemperature": {
-              "Fahrenheit": 20,
-              "Kelvin": 260,
-              "Celsius": -10
+              "fahrenheit": 20,
+              "kelvin": 260,
+              "celsius": -10
             },
             "appliable": [
               "spring",
@@ -390,8 +390,8 @@ In the following examples, self-declared authentication is used, so the header s
       "metadata": {
         "type": "temperature",
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "customizable": false
       },
@@ -406,16 +406,16 @@ In the following examples, self-declared authentication is used, so the header s
         "name": "THERMOMETER1",
         "metadata": {
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
           "maxTemperature": {
-            "Kelvin": 310,
-            "Celsius": 40
+            "kelvin": 310,
+            "celsius": 40
           },
           "minTemperature": {
-            "Kelvin": 260,
-            "Celsius": -10
+            "kelvin": 260,
+            "celsius": -10
           },
           "appliable": [
             "spring",
@@ -511,8 +511,8 @@ In the following examples, self-declared authentication is used, so the header s
           "metadata": {
             "type": "temperature",
             "scales": [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "customizable": false
           },
@@ -827,8 +827,8 @@ Got it!
     "metadataRequirementList": [
       {
         "appliable": { "op": "CONTAINS", "value": "spring" },
-        "scales": { "op": "CONTAINS", "value": "Fahrenheit" },
-        "maxTemperature.Fahrenheit": { "op": "GREATER_THAN", "value": 100 }
+        "scales": { "op": "CONTAINS", "value": "fahrenheit" },
+        "maxTemperature.fahrenheit": { "op": "GREATER_THAN", "value": 100 }
       }
     ]
   }
@@ -842,13 +842,13 @@ Got it!
         "name": "THERMOMETER3",
         "metadata": {
           "scales": [
-            "Fahrenheit"
+            "fahrenheit"
           ],
           "maxTemperature": {
-            "Fahrenheit": 110
+            "fahrenheit": 110
           },
           "minTemperature": {
-            "Fahrenheit": 0
+            "fahrenheit": 0
           },
           "appliable": [
             "winter",
@@ -869,13 +869,13 @@ Got it!
         "name": "THERMOMETER2",
         "metadata": {
           "scales": [
-            "Fahrenheit"
+            "fahrenheit"
           ],
           "maxTemperature": {
-            "Fahrenheit": 140
+            "fahrenheit": 140
           },
           "minTemperature": {
-            "Fahrenheit": 0
+            "fahrenheit": 0
           },
           "appliable": [
             "winter",
@@ -931,7 +931,7 @@ Got it!
         "metadata": {
           "type": "temperature",
           "customizable": true,
-          "scales": [ "Fahrenheit", "Kelvin", "Celsius" ]
+          "scales": [ "fahrenheit", "kelvin", "celsius" ]
         },
         "version": "2",
         "addresses": [ "192.168.1.2", "mtp.greenhouse.com" ],
@@ -967,9 +967,9 @@ Got it!
           "type": "temperature",
           "customizable": true,
           "scales": [
-            "Fahrenheit",
-            "Kelvin",
-            "Celsius"
+            "fahrenheit",
+            "kelvin",
+            "celsius"
           ]
         },
         "version": "2.0.0",
@@ -987,19 +987,19 @@ Got it!
           "name": "THERMOMETER5",
           "metadata": {
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ],
             "maxTemperature": {
-              "Kelvin": 310,
-              "Celsius": 40,
-              "Fahrenheit": 140
+              "kelvin": 310,
+              "celsius": 40,
+              "fahrenheit": 140
             },
             "minTemperature": {
-              "Fahrenheit": 20,
-              "Kelvin": 260,
-              "Celsius": -10
+              "fahrenheit": 20,
+              "kelvin": 260,
+              "celsius": -10
             },
             "appliable": [
               "spring",
@@ -1046,7 +1046,7 @@ Got it!
         "metadata": {
           "type": "temperature",
           "customizable": true,
-          "scales": [ "Fahrenheit", "Kelvin", "Celsius" ]
+          "scales": [ "fahrenheit", "kelvin", "celsius" ]
         },
         "version": "2.1",
         "addresses": [ "192.168.1.2", "mtp.greenhouse.com" ],
@@ -1066,9 +1066,9 @@ Got it!
           "type": "temperature",
           "customizable": true,
           "scales": [
-            "Fahrenheit",
-            "Kelvin",
-            "Celsius"
+            "fahrenheit",
+            "kelvin",
+            "celsius"
           ]
         },
         "version": "2.1.0",
@@ -1086,19 +1086,19 @@ Got it!
           "name": "THERMOMETER5",
           "metadata": {
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ],
             "maxTemperature": {
-              "Kelvin": 310,
-              "Celsius": 40,
-              "Fahrenheit": 140
+              "kelvin": 310,
+              "celsius": 40,
+              "fahrenheit": 140
             },
             "minTemperature": {
-              "Fahrenheit": 20,
-              "Kelvin": 260,
-              "Celsius": -10
+              "fahrenheit": 20,
+              "kelvin": 260,
+              "celsius": -10
             },
             "appliable": [
               "spring",
@@ -1199,9 +1199,9 @@ Got it!
           "type": "temperature",
           "customizable": true,
           "scales": [
-            "Fahrenheit",
-            "Kelvin",
-            "Celsius"
+            "fahrenheit",
+            "kelvin",
+            "celsius"
           ]
         },
         "version": "2.0.0",
@@ -1248,8 +1248,8 @@ Got it!
         "metadata": {
           "type": "temperature",
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
           "customizable": false
         },
@@ -1296,7 +1296,7 @@ Got it!
   Query parameters: TestTemperatureConsumer1, TestTemperatureConsumer2
 
   ~~~
-  http://localhost:8443/serviceregistry/mgmt/systems?names=TestTemperatureVonsumer1&names=TestTemperatureConsumer1
+  http://localhost:8443/serviceregistry/mgmt/systems?names=TestTemperatureConsumer1&names=TestTemperatureConsumer1
   ~~~
 
   Response code: 200
@@ -1445,9 +1445,9 @@ Got it!
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.0.0",
@@ -1465,19 +1465,19 @@ Got it!
             "name": "THERMOMETER5",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
               "maxTemperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
               "minTemperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -1538,14 +1538,14 @@ Got it!
       {
         "instanceId": "MainTemperatureProvider|celsiusInfo|1.0.0",
         "provider": {
-          "name": "MainZemperatureProvider",
+          "name": "MainTemperatureProvider",
           "metadata": {
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.0.0",
@@ -1563,19 +1563,19 @@ Got it!
             "name": "THERMOMETER5",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
               "maxTemperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
               "minTemperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -1689,9 +1689,9 @@ Got it!
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.1.0",
@@ -1709,19 +1709,19 @@ Got it!
             "name": "THERMOMETER5",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
               "maxTemperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
               "minTemperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -1871,9 +1871,9 @@ Got it!
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.1.0",
@@ -1891,19 +1891,19 @@ Got it!
             "name": "THERMOMETER5",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
               "maxTemperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
               "minTemperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -1991,9 +1991,9 @@ Got it!
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.1.0",
@@ -2011,19 +2011,19 @@ Got it!
             "name": "THERMOMETER",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
               "maxTemperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
               "minTemperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -2088,8 +2088,8 @@ Got it!
           "metadata": {
             "type": "temperature",
             "scales": [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "customizable": false
           },
@@ -2108,16 +2108,16 @@ Got it!
             "name": "THERMOMETER1",
             "metadata": {
               "scales": [
-                "Kelvin",
-                "Celsius"
+                "kelvin",
+                "celsius"
               ],
               "maxTemperature": {
-                "Kelvin": 310,
-                "Celsius": 40
+                "kelvin": 310,
+                "celsius": 40
               },
               "minTemperature": {
-                "Kelvin": 260,
-                "Celsius": -10
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",

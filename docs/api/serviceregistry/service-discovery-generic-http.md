@@ -70,8 +70,8 @@ The service operation **responds** with the status code `201` if the service ins
     "name": "TemperatureProvider2",
     "metadata": {
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "location": {
         "side": "North",
@@ -94,16 +94,16 @@ The service operation **responds** with the status code `201` if the service ins
       "name": "THERMOMETER2",
       "metadata": {
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "maxTemperature": {
-          "Kelvin": 310,
-          "Celsius": 40
+          "kelvin": 310,
+          "celsius": 40
         },
         "minTemperature": {
-          "Kelvin": 260,
-          "Celsius": -10
+          "kelvin": 260,
+          "celsius": -10
         }
       },
       "addresses": [
@@ -211,8 +211,8 @@ The service operation **responds** with the status code `200` if called successf
         "name": "TemperatureProvider2",
         "metadata": {
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
           "location": {
             "side": "North",
@@ -235,16 +235,16 @@ The service operation **responds** with the status code `200` if called successf
           "name": "THERMOMETER2",
           "metadata": {
             "scales": [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "maxTemperature": {
-              "Kelvin": 310,
-              "Celsius": 40
+              "kelvin": 310,
+              "celsius": 40
             },
             "minTemperature": {
-              "Kelvin": 260,
-              "Celsius": -10
+              "kelvin": 260,
+              "celsius": -10
             }
           },
           "addresses": [

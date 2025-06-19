@@ -172,7 +172,7 @@ Operation \textit{lookup} lists the service instances that match the filtering r
     \item If a filter expects a list, there is an OR relation between the elements of the filter.
     \item There is an AND relation between different kind of filters.
     \item To use this operation, an application system must specify at least one service instance id OR one provider name OR one service definition.
-    \item In some Local Clouds, operation \textit{lookup} can be restricted, which means only the "publicly" available service instances are returned. To gain access to a non-public service instance, an application system must use the \textbf{orchestration} service.
+    \item In some Local Clouds, operation \textit{lookup} can be restricted, which means only the "publicly" available service instances are returned. To gain access to a non-public service instance, an application system must use the \textbf{serviceOrchestration} service.
 \end{itemize}
 
 \fsubsection{revoke}{ServiceRevokeRequest}{}{OperationStatus}{ErrorResponse}
@@ -418,9 +418,9 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{Boolean}          & One out of \texttt{true} or \texttt{false}. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
-\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must following the UPPER\_SNAKE\_CASE naming convention. \\ \hline
+\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must follow the UPPER\_SNAKE\_CASE naming convention. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
-\pdef{InterfaceName}    & A string identifier of an interface descriptor. Must following snake\_case naming convention. \\ \hline
+\pdef{InterfaceName}    & A string identifier of an interface descriptor. Must follow snake\_case naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
@@ -434,9 +434,9 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
-\pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must following camelCase naming convention. \\ \hline
+\pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
 \pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning. \\ \hline
 \end{tabularx}
 \end{table}

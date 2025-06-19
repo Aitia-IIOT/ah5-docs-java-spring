@@ -166,7 +166,7 @@ In order to achieve the mentioned functionalities, ServiceRegistry is capable to
 \begin{itemize}
     \item Names (device name, system name, service definition name, service instance name, interface name) must be unique in the Local Cloud.
     \item If the Local Cloud does not contain an Authentication system or does not using X.509 certificates, there is no way for the ServiceRegistry to verify the requester system. In that case, the ServiceRegistry will consider the authentication data that comes from the requester as valid.
-    \item If ServiceRegistry's lookup is strict, only "public" services (such as the \textit{orchestration} service) can be queried directly from the ServiceRegistry by the application systems. For any "non-public" services the application systems need to orchestrate. "Public" services should be marked in the ServiceRegistry, for example using a service instance meta data entry.
+    \item If ServiceRegistry's lookup is strict, only "public" services (such as the \textit{serviceOrchestration} service) can be queried directly from the ServiceRegistry by the application systems. For any "non-public" services the application systems need to orchestrate. "Public" services should be marked in the ServiceRegistry, for example using a service instance meta data entry.
 \end{itemize}
 
 \newpage

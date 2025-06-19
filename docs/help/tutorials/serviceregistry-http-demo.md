@@ -79,16 +79,16 @@ Which leads to the following response from the ServiceRegistry:
       "name": "THERMOMETER2",
       "metadata": {
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "maxTemperature": {
-          "Kelvin": 310,
-          "Celsius": 40
+          "kelvin": 310,
+          "celsius": 40
         },
         "minTemperature": {
-          "Kelvin": 260,
-          "Celsius": -10
+          "kelvin": 260,
+          "celsius": -10
         }
       },
       "addresses": [
@@ -130,7 +130,7 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{
   "metadata": {
-    "scales": [ "Kelvin", "Celsius" ],
+    "scales": [ "kelvin", "celsius" ],
     "location": { "side": "North", "block": 2 },
     "indoor": true
   },
@@ -150,8 +150,8 @@ We receive the following response:
   "name": "TemperatureProvider2",
   "metadata": {
     "scales": [
-      "Kelvin",
-      "Celsius"
+      "kelvin",
+      "celsius"
     ],
     "location": {
       "side": "North",
@@ -174,16 +174,16 @@ We receive the following response:
     "name": "THERMOMETER2",
     "metadata": {
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "maxTemperature": {
-        "Kelvin": 310,
-        "Celsius": 40
+        "kelvin": 310,
+        "celsius": 40
       },
       "minTemperature": {
-        "Kelvin": 260,
-        "Celsius": -10
+        "kelvin": 260,
+        "celsius": -10
       }
     },
     "addresses": [
@@ -259,8 +259,8 @@ After successful operation, we will receive the JSON object representation of th
     "name": "TemperatureProvider2",
     "metadata": {
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "location": {
         "side": "North",
@@ -283,16 +283,16 @@ After successful operation, we will receive the JSON object representation of th
       "name": "THERMOEMTER2",
       "metadata": {
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "maxTemperature": {
-          "Kelvin": 310,
-          "Celsius": 40
+          "kelvin": 310,
+          "celsius": 40
         },
         "minTemperature": {
-          "Kelvin": 260,
-          "Celsius": -10
+          "kelvin": 260,
+          "celsius": -10
         }
       },
       "addresses": [
@@ -385,8 +385,8 @@ The received response is the following:
     "name": "TemperatureProvider2",
     "metadata": {
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "location": {
         "side": "North",
@@ -409,16 +409,16 @@ The received response is the following:
       "name": "THERMOMETER2",
       "metadata": {
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "maxTemperature": {
-          "Kelvin": 310,
-          "Celsius": 40
+          "kelvin": 310,
+          "celsius": 40
         },
         "minTemperature": {
-          "Kelvin": 260,
-          "Celsius": -10
+          "kelvin": 260,
+          "celsius": -10
         }
       },
       "addresses": [
@@ -525,8 +525,8 @@ The received answer:
     "name": "TemperatureProvider2",
     "metadata": {
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "location": {
         "side": "North",
@@ -549,16 +549,16 @@ The received answer:
       "name": "THERMOMETER2",
       "metadata": {
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "maxTemperature": {
-          "Kelvin": 310,
-          "Celsius": 40
+          "kelvin": 310,
+          "celsius": 40
         },
         "minTemperature": {
-          "Kelvin": 260,
-          "Celsius": -10
+          "kelvin": 260,
+          "celsius": -10
         }
       },
       "addresses": [
@@ -673,8 +673,8 @@ The lookup response:
         "name": "TemperatureProvider2",
         "metadata": {
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
           "location": {
             "side": "North",
@@ -889,7 +889,7 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{
   "metadata": {
-    "scales": [ "Kelvin", "Celsius", "Fahrenheit" ],
+    "scales": [ "kelvin", "celsius", "fahrenheit" ],
     "location": { "room": 14 },
     "indoor": true
   },
@@ -909,9 +909,9 @@ Here is the response we received:
   "name": "TemperatureConsumer1",
   "metadata": {
     "scales": [
-      "Kelvin",
-      "Celsius",
-      "Fahrenheit"
+      "kelvin",
+      "celsius",
+      "fahrenheit"
     ],
     "location": {
       "room": 14
@@ -1011,8 +1011,8 @@ The result contains two entities, TemperatureProvider2|kelvinInfo|1.0.0 and Temp
         "name": "TemperatureProvider2",
         "metadata": {
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
           "location": {
             "side": "North",
@@ -1035,16 +1035,16 @@ The result contains two entities, TemperatureProvider2|kelvinInfo|1.0.0 and Temp
           "name": "THERMOMETER2",
           "metadata": {
             "scales": [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "maxTemperature": {
-              "Kelvin": 310,
-              "Celsius": 40
+              "kelvin": 310,
+              "celsius": 40
             },
             "minTemperature": {
-              "Kelvin": 260,
-              "Celsius": -10
+              "kelvin": 260,
+              "celsius": -10
             }
           },
           "addresses": [
@@ -1099,7 +1099,7 @@ The result contains two entities, TemperatureProvider2|kelvinInfo|1.0.0 and Temp
         "name": "TemperatureProvider1",
         "metadata": {
           "scales": [
-            "Kelvin"
+            "kelvin"
           ],
           "location": {
             "side": "East",

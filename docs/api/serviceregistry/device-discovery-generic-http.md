@@ -44,16 +44,16 @@ Authorization:  Bearer <identity-info>
    "name": "THERMOMETER2",
    "metadata": {
       "scales": [
-         "Kelvin",
-         "Celsius"
+         "kelvin",
+         "celsius"
       ],
       "maxTemperature": {
-         "Kelvin": 310,
-         "Celsius": 40
+         "kelvin": 310,
+         "celsius": 40
       },
       "minTemperature": {
-         "Kelvin": 260,
-         "Celsius": -10
+         "kelvin": 260,
+         "celsius": -10
       }
    },
    "addresses": [      
@@ -70,16 +70,16 @@ The service operation **responds** with the status code `200` if called successf
    "name": "THERMOMETER2",
    "metadata": {
       "scales": [
-         "Kelvin",
-         "Celsius"
+         "kelvin",
+         "celsius"
       ],
       "maxTemperature": {
-         "Kelvin": 310,
-         "Celsius": 40
+         "kelvin": 310,
+         "celsius": 40
       },
       "minTemperature": {
-         "Kelvin": 260,
-         "Celsius": -10
+         "kelvin": 260,
+         "celsius": -10
       }
    },
    "addresses": [
@@ -124,7 +124,7 @@ Authorization:  Bearer <identity-info>
    "addressType": "MAC",
    "metadataRequirementList": [
       {
-         "maxTemperature.Celsius": {
+         "maxTemperature.celsius": {
             "op": "LESS_THAN",
             "value": 50
          }
@@ -142,16 +142,16 @@ The service operation **responds** with the status code `200` if called successf
          "name": "THERMOMETER2",
          "metadata": {
             "scales": [
-               "Kelvin",
-               "Celsius"
+               "kelvin",
+               "celsius"
             ],
             "maxTemperature": {
-               "Kelvin": 310,
-               "Celsius": 40
+               "kelvin": 310,
+               "celsius": 40
             },
             "minTemperature": {
-               "Kelvin": 260,
-               "Celsius": -10
+               "kelvin": 260,
+               "celsius": -10
             }
          },
          "addresses": [
