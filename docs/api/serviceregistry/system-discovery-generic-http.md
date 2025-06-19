@@ -1,14 +1,14 @@
-# system-discovery IDD
-**GENERIC-HTTP & GENERIC-HTTPS**
+# systemDiscovery IDD
+**generic_http & generic_https**
 
 ## Overview
 
-This page describes the GENERIC-HTTP and GENERIC-HTTPS service interface of system-discovery, which enables both
-application and core/support systems to lookup, register and revoke systems that are part of the Local Cloud.  System representation is mandatory for the base functionalities of a Local Cloud, e.g. the systems have to be registered in order to interact with each other. The interfaces are implemented using protocol, encoding as stated in the following tables:
+This page describes the generic_http and generic_https service interface of systemDiscovery, which enables both
+application and Core/Support systems to lookup, register and revoke systems that are part of the Local Cloud.  System representation is mandatory for the base functionalities of a Local Cloud, e.g. the systems have to be registered in order to interact with each other. The interfaces are implemented using protocol, encoding as stated in the following tables:
 
 ## Interface Description
 
-**GENERIC-HTTP**
+**generic_http**
 
 Profile type | type | Version
 --- | --- | ---
@@ -17,7 +17,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-HTTPS**
+**generic_https**
 
 Profile type | type | Version
 --- | --- | ---
@@ -26,7 +26,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [system-discovery – Service Description](../../assets/sd/5_0_0/system-discovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [systemDiscovery – Service Description](../../assets/sd/5_0_0/system-discovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ### register
 
@@ -35,20 +35,20 @@ JSON encoded body.
 
 ```
 POST /serviceregistry/system-discovery/register HTTP/1.1
-Authorization: Bearer <identity-info>
+Authorization:  Bearer <identity-info>
 
 {
-  "metadata": {
-    "scales": ["Kelvin", "Celsius"],
-    "location": {"side": "North", "block": 2},
-    "indoor": true
+  "metadata":  {
+    "scales":  ["kelvin", "celsius"],
+    "location":  {"side":  "North", "block":  2},
+    "indoor":  true
   },
-  "version": "",
-  "addresses": [
+  "version":  "",
+  "addresses":  [
     "192.168.56.116",
     "tp2.greenhouse.com"
   ],
-  "deviceName": "thermometer2"
+  "deviceName":  "THERMOMETER2"
 }
 ```
 
@@ -58,56 +58,56 @@ entity is already existing or `201` if the entity was newly created. The respons
 
 ```
 {
-  "name": "temperature-provider2",
-  "metadata": {
-    "scales": [
-      "Kelvin",
-      "Celsius"
+  "name":  "TemperatureProvider2",
+  "metadata":  {
+    "scales":  [
+      "kelvin",
+      "celsius"
     ],
-    "location": {
-      "side": "North",
-      "block": 2
+    "location":  {
+      "side":  "North",
+      "block":  2
     },
-    "indoor": true
+    "indoor":  true
   },
-  "version": "1.0.0",
-  "addresses": [
+  "version":  "1.0.0",
+  "addresses":  [
     {
-      "type": "IPV4",
-      "address": "192.168.56.116"
+      "type":  "IPV4",
+      "address":  "192.168.56.116"
     },
     {
-      "type": "HOSTNAME",
-      "address": "tp2.greenhouse.com"
+      "type":  "HOSTNAME",
+      "address":  "tp2.greenhouse.com"
     }
   ],
-  "device": {
-    "name": "thermometer2",
-    "metadata": {
-      "scales": [
-        "Kelvin",
-        "Celsius"
+  "device":  {
+    "name":  "THERMOMETER2",
+    "metadata":  {
+      "scales":  [
+        "kelvin",
+        "celsius"
       ],
-      "max-temperature": {
-        "Kelvin": 310,
-        "Celsius": 40
+      "maxTemperature":  {
+        "kelvin":  310,
+        "celsius":  40
       },
-      "min-temperature": {
-        "Kelvin": 260,
-        "Celsius": -10
+      "minTemperature":  {
+        "kelvin":  260,
+        "celsius":  -10
       }
     },
-    "addresses": [
+    "addresses":  [
       {
-        "type": "MAC",
-        "address": "81:ef:1a:44:7a:f5"
+        "type":  "MAC",
+        "address":  "81:ef:1a:44:7a:f5"
       }
     ],
-    "createdAt": "2024-11-04T01:53:02Z",
-    "updatedAt": "2024-11-04T01:53:02Z"
+    "createdAt":  "2024-11-04T01:53:02Z",
+    "updatedAt":  "2024-11-04T01:53:02Z"
   },
-  "createdAt": "2024-11-08T10:21:10.950683800Z",
-  "updatedAt": "2024-11-08T10:21:10.950683800Z"
+  "createdAt":  "2024-11-08T10:21:10.950683800Z",
+  "updatedAt":  "2024-11-08T10:21:10.950683800Z"
 }
 ```
 
@@ -118,10 +118,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage": "Device names do not exist: thermometer2",
-  "errorCode": 400,
-  "exceptionType": "INVALID_PARAMETER",
-  "origin": "POST /serviceregistry/system-discovery/register"
+  "errorMessage":  "Device names do not exist:  THERMOMETER2",
+  "errorCode":  400,
+  "exceptionType":  "INVALID_PARAMETER",
+  "origin":  "POST /serviceregistry/system-discovery/register"
 }
 ```
 
@@ -130,21 +130,21 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemLookupRequest](../data-models/system-lookup-request.md) JSON encoded body.
 
 ```
-POST /serviceregistry/system-discovery/lookup?verbose=<verbose-value> HTTP/1.1
-Authorization: Bearer <identity-info>
+POST /serviceregistry/system-discovery/lookup?verbose=false HTTP/1.1
+Authorization:  Bearer <identity-info>
 
 {
-  "systemNames": [
+  "systemNames":  [
   ],
-  "addresses": [
+  "addresses":  [
   ],
-  "addressType": "",
-  "metadataRequirementList": [
+  "addressType":  "",
+  "metadataRequirementList":  [
   ],
-  "versions": [
+  "versions":  [
   ],
-  "deviceNames": [
-    "thermometer2"
+  "deviceNames":  [
+    "THERMOMETER2"
   ]
 }
 ```
@@ -153,39 +153,39 @@ The service operation **responds** with the status code `200` if called successf
 
 ```
 {
-  "entries": [
+  "entries":  [
     {
-      "name": "temperature-provider1",
-      "metadata": {
-        "scales": [
-          "Kelvin",
-          "Celsius"
+      "name":  "TemperatureProvider1",
+      "metadata":  {
+        "scales":  [
+          "kelvin",
+          "celsius"
         ],
-        "location": {
-          "side": "North",
-          "block": 2
+        "location":  {
+          "side":  "North",
+          "block":  2
         },
-        "indoor": true
+        "indoor":  true
       },
-      "version": "1.0.0",
-      "addresses": [
+      "version":  "1.0.0",
+      "addresses":  [
         {
-          "type": "IPV4",
-          "address": "192.168.56.116"
+          "type":  "IPV4",
+          "address":  "192.168.56.116"
         },
         {
-          "type": "HOSTNAME",
-          "address": "tp2.greenhouse.com"
+          "type":  "HOSTNAME",
+          "address":  "tp2.greenhouse.com"
         }
       ],
-      "device": {
-        "name": "thermometer2"
+      "device":  {
+        "name":  "THERMOMETER2"
       },
-      "createdAt": "2025-02-27T18:32:45Z",
-      "updatedAt": "2025-02-27T18:32:45Z"
+      "createdAt":  "2025-02-27T18:32:45Z",
+      "updatedAt":  "2025-02-27T18:32:45Z"
     }
   ],
-  "count": 1
+  "count":  1
 }
 ```
 
@@ -193,10 +193,10 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ```
 {
-  "errorMessage": "Invalid address type: IPV5",
-  "errorCode": 400,
-  "exceptionType": "INVALID_PARAMETER",
-  "origin": "POST /serviceregistry/system-discovery/lookup"
+  "errorMessage":  "Invalid address type:  IPV5",
+  "errorCode":  400,
+  "exceptionType":  "INVALID_PARAMETER",
+  "origin":  "POST /serviceregistry/system-discovery/lookup"
 }
 ```
 
@@ -206,7 +206,7 @@ The service operation **request** only requires an [identity related header or c
 
 ```
 DELETE /serviceregistry/system-discovery/revoke HTTP1.1
-Authorization: Bearer <identity-info>
+Authorization:  Bearer <identity-info>
 ```
 
 The service operation **responds** with the status code `200` if called successfully and an existing system
@@ -217,8 +217,8 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ```
 {
-  "errorMessage": "No authorization header has been provided",
-  "errorCode": 401,
-  "exceptionType": "AUTH"
+  "errorMessage":  "No authorization header has been provided",
+  "errorCode":  401,
+  "exceptionType":  "AUTH"
 }
 ```

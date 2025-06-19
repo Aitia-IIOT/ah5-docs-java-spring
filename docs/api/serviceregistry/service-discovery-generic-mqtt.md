@@ -1,12 +1,12 @@
-# service-discovery IDD
-**GENERIC-MQTT & GENERIC-MQTTS** 
+# serviceDiscovery IDD
+**generic_mqtt & generic_mqtts** 
 
 ## Overview
 
-This page describes the GENERIC-MQTT and GENERIC-MQTTS service interface of service-discovery, which enables both application and core/support systems to lookup, register and revoke their service instances to/from the Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction is when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry. It’s implemented using protocol, encoding as stated in the
+This page describes the generic_mqtt and generic_mqtts service interface of serviceDiscovery, which enables both application and Core/Support systems to register and revoke their service instances to/from the Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in ServiceRegistry Core System. An example of this interaction is when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry. It’s implemented using protocol, encoding as stated in the
 following tables:
 
-**GENERIC-MQTT**
+**generic_mqtt**
 
 Profile type | type | Version
 --- | --- | ---
@@ -15,7 +15,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-MQTTS**
+**generic_mqtts**
 
 Profile type | type | Version
 --- | --- | ---
@@ -24,7 +24,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [service-discovery – Service Description](../../assets/sd/5_0_0/service-discovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [serviceDiscovery – Service Description](../../assets/sd/5_0_0/service-discovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
@@ -41,15 +41,15 @@ Topic: arrowhead/serviceregistry/service-discovery/register
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
   "payload": {
-    "serviceDefinitionName": "kelvin-info",
+    "serviceDefinitionName": "kelvinInfo",
     "version": "",
     "expiresAt": "2030-01-01T00:00:00Z",
     "metadata": {
-      "margin-of-error": 0.5
+      "marginOfError": 0.5
     },
     "interfaces": [
       {
-        "templateName": "generic-http",
+        "templateName": "generic_http",
         "protocol": "http",
         "policy": "NONE",
         "properties": {
@@ -72,14 +72,14 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
-    "instanceId": "temperature-provider1::kelvin-info::1.0.0",
+    "instanceId": "TemperatureProvider1|kelvinInfo|1.0.0",
     "provider": {
-      "name": "temperature-provider1",
+      "name": "TemperatureProvider1",
       "metadata": {
         "type": "temperature",
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "customizable": false
       },
@@ -98,18 +98,18 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
       "updatedAt": "2025-03-09T18:03:26Z"
     },
     "serviceDefinition": {
-      "name": "kelvin-info",
+      "name": "kelvinInfo",
       "createdAt": "2025-03-16T23:31:20Z",
       "updatedAt": "2025-03-16T23:31:20Z"
     },
     "version": "1.0.0",
     "expiresAt": "2030-01-01T00:00:00Z",
     "metadata": {
-      "margin-of-error": 0.5
+      "marginOfError": 0.5
     },
     "interfaces": [
       {
-        "templateName": "generic-http",
+        "templateName": "generic_http",
         "protocol": "http",
         "policy": "NONE",
         "properties": {
@@ -144,7 +144,11 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "status": 400,
   "traceId": "<trace-id>",
   "receiver": "temp-provider",
-  "payload": "System not exists: temp-provider"
+  "payload": {
+    "errorMessage": "System not exists: TempProvider",
+	"errorCode": 400,
+	"exceptionType": "INVALID_PARAMETER",
+	"origin": "arrowhead/serviceregistry/service-discovery/register"
 }
 ```
 
@@ -165,10 +169,10 @@ Topic: arrowhead/serviceregistry/service-discovery/lookup
     "instanceIds": [
     ],
     "providerNames": [
-      "temperature-provider1"
+      "TemperatureProvider1"
     ],
     "serviceDefinitionNames": [
-      "kelvin-info"
+      "kelvinInfo"
     ],
     "versions": [
       "1.0.0"
@@ -196,14 +200,14 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
   "payload": {
     "entries": [
       {
-        "instanceId": "temperature-provider1::kelvin-info::1.0.0",
+        "instanceId": "TemperatureProvider1|kelvinInfo|1.0.0",
         "provider": {
-          "name": "temperature-provider1",
+          "name": "TemperatureProvider1",
           "metadata": {
             "type": "temperature",
             "scales": [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "customizable": false
           },
@@ -212,18 +216,18 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           "updatedAt": "2025-03-09T18:03:26Z"
         },
         "serviceDefinition": {
-          "name": "kelvin-info",
+          "name": "kelvinInfo",
           "createdAt": "2025-03-16T23:31:20Z",
           "updatedAt": "2025-03-16T23:31:20Z"
         },
         "version": "1.0.0",
         "expiresAt": "2030-01-01T00:00:00Z",
         "metadata": {
-          "margin-of-error": 0.5
+          "marginOfError": 0.5
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
@@ -259,13 +263,18 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
   "status": 400,
   "traceId": "trace1",
   "receiver": "<receiver-system-identifier>",
-  "payload": "Alive time has an invalid time format"
+  "payload": {
+    "errorMessage": "One of the following filters must be used: 'instanceIds', 'providerNames', 'serviceDefinitionNames'",
+	"errorCode": 400,
+	"exceptionType": "INVALID_PARAMETER",
+	"origin": "arrowhead/serviceregistry/service-discovery/lookup"
+  }
 }
 ```
 
 ### revoke
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [Name](../primitives.md#name). This name is a unique identifier of the service instance to be deleted.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [ServiceInstanceID](../primitives.md#serviceinstanceid). This is a unique identifier of the service instance to be deleted.
 
 ```
 Topic: arrowhead/serviceregistry/service-discovery/revoke
@@ -275,7 +284,7 @@ Topic: arrowhead/serviceregistry/service-discovery/revoke
   "authentication": "<authentication-data>",
   "responseTopic": "<response-topic>",
   "qosRequirement": <0|1|2>,
-  "payload": "temperature-provider1::kelvin-info::1.0.0"
+  "payload": "TemperatureProvider1|kelvinInfo|1.0.0"
 }
 ```
 
@@ -283,9 +292,9 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-  "status": <status-code>,
+  "status": 200,
   "traceId": "<trace-id>",
-  "receiver": "temperature-provider1",
+  "receiver": "TemperatureProvider1",
   "payload": ""
 }
 ```
@@ -298,6 +307,11 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
   "status": 403,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
-  "payload": "Revoking other systems' service is forbidden"
+  "payload": {
+    "errorMessage": ""Revoking other systems' service is forbidden"",
+	"errorCode": 403,
+	"exceptionType": "FORBIDDEN",
+	"origin": "arrowhead/serviceregistry/service-discovery/revoke"
+  }
 }
 ```

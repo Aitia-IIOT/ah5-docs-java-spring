@@ -22,7 +22,7 @@ Applicable to [HTTP](#certificate-http) and [MQTT](#certificate-mqtt) interface 
 
 ### outsourced
 
-Applying the **outsourced** authentication policy results in requiring the [identity service](../assets/sd/5_0_0/identity_sd.pdf) being provided by a core/support system within the Local Cloud. This dedicated system can be the offical [Authentication Core System](../core_systems/authentication.md) or any third party solution that implements this service.
+Applying the **outsourced** authentication policy results in requiring the [identity service](../assets/sd/5_0_0/identity_sd.pdf) being provided by a Core/Support system within the Local Cloud. This dedicated system can be the offical [Authentication Core System](../core_systems/authentication.md) or any third party solution that implements this service.
 
 The actual credentials required to be authenticated and to join the Local Cloud always depend on the actual authentication method behind the identity service, but the outcome is always an identity token (and optionally an expiration time) that the authenticated system is required to use to prove its own identity when interacting with the Arrowhead Core and Support systems. 
 
@@ -48,7 +48,7 @@ Example:
 curl -X 'DELETE' \
   'http://localhost:8443/serviceregistry/system-discovery/revoke' \
   -H 'accept: */*' \
-  -H 'Authorization: Bearer SYSTEM//temperature-consumer1'
+  -H 'Authorization: Bearer SYSTEM//TemperatureConsumer1'
 ~~~
 
 #### certificate-http
@@ -85,7 +85,7 @@ curl -X 'DELETE' \
 
 #### declared-mqtt
 
-The [declared](#declared) identiy info is the unique system name itself that must be present in the [authentication field of the MqttRequestTemplate](../api/data-models/mqtt-request-template.md) according to the following scheme: 
+The [declared](#declared) identity info is the unique system name itself that must be present in the [authentication field of the MqttRequestTemplate](../api/data-models/mqtt-request-template.md) according to the following scheme: 
 
 ~~~
 SYSTEM//<system-name>
@@ -98,7 +98,7 @@ Topic: arrowhead/serviceregistry/system-discovery/revoke
 
 {
    "traceId":"abc123",
-   "authentication":"SYSTEM//temperature-consumer1",
+   "authentication":"SYSTEM//TemperatureConsumer1",
    "responseTopic":"my/response/topic",
    "qosRequirement":2
    

@@ -49,8 +49,8 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{system-discovery} % XXX = ServiceName 
-\ArrowheadServiceID{system-discovery} % ID name of service
+\ArrowheadTitle{systemDiscovery} % XXX = ServiceName 
+\ArrowheadServiceID{systemDiscovery} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
@@ -82,7 +82,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{system-discovery} service. 
+    This document provides service description for the \textbf{systemDiscovery} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -106,9 +106,9 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{system-discovery} service, which enables both application and core/support systems to register itself to and revoke itself from Local Cloud. It also enables to lookup for systems. System representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction is when a system registers itself because it is a requirement to interact to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+This document describes the \textbf{systemDiscovery} service, which enables both application and Core/Support systems to register itself to and revoke itself from Local Cloud. It also enables to lookup for systems. System representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in ServiceRegistry Core System. An example of this interaction is when a system registers itself because it is a requirement to interact to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
-The \textbf{system-discovery} service contains the following operations:
+The \textbf{systemDiscovery} service contains the following operations:
 
 \begin{itemize}
     \item \textit{register} adds new system to the Local Cloud;
@@ -121,7 +121,7 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-An application system can use the \textit{register} operation of \textbf{system-discovery} service to register itself. Before that, the application system can use the \textit{lookup} operation to check whether it is already registered or not. When a system is removed from the Local Cloud, the \textit{revoke} operation can be called.
+An application system can use the \textit{register} operation of \textbf{systemDiscovery} service to register itself. Before that, the application system can use the \textit{lookup} operation to check whether it is already registered or not. When a system is removed from the Local Cloud, the \textit{revoke} operation can be called.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -138,7 +138,7 @@ Available for anyone within the local cloud.
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{system-discovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} systems.
+This section describes the abstract signatures of each operations of the service. The \textbf{systemDiscovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} systems.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
@@ -146,11 +146,12 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{register}{SystemRegistrationRequest}{SystemRegistrationResponse}{}{ErrorResponse}
 
-The registration data must meet the following criteria:
+Operation \textit{register} adds new system to the Local Cloud. The registration data must meet the following criteria:
 
 \begin{itemize}
-    \item System names are case insensitive and have to be unique within the Local Cloud.
-    \item System names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item System names are case sensitive, must follow the PascalCase naming
+convention and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet), and numbers, and have to start with a letter.
     \item System has to have at least one address (including those that come from the referenced device, if any). It is recommended to use IP address. 
     \item Keys in the metadata structure can not contain dot (.) character.
     \item Device, if specified, has to be present in the Local Cloud.
@@ -159,7 +160,7 @@ The registration data must meet the following criteria:
 
 \fsubsection{lookup}{SystemLookupRequest}{SystemLookupResponse}{}{ErrorResponse}
 
-The lookup data must meet the following criteria:
+ Operation \textit{lookup} lists the systems that match the filtering requirements. The lookup data must meet the following criteria:
 
 \begin{itemize}
     \item If a filter expects a list, there is an OR relation between the elements of the filter.
@@ -168,19 +169,18 @@ The lookup data must meet the following criteria:
 
 \fsubsection{revoke}{Identity}{}{OperationStatus}{ErrorResponse}
 
-The input operation data must meet the following criteria:
+Operation \textit{revoke} removes a system from the Local Cloud. The input operation data must meet the following criteria:
 
 \begin{itemize}
-    \item With this operation a system can revoke itself.
+    \item With this operation a system can only revoke itself.
 \end{itemize}
-
 
 \clearpage
 
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{system-discovery} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{systemDiscovery} service are listed and must be respected by the hosting system.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
@@ -194,7 +194,7 @@ authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester o
 metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the system. \\ \hline
 version &\pref{Version} & no & Version of the system. \\ \hline
 addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses of the system.  \\ \hline
-deviceName & \pref{Name} & no & Unique identifier of the device on which the system is running. \\ \hline
+deviceName & \pref{DeviceName} & no & Unique identifier of the device on which the system is running. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -212,7 +212,7 @@ An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or li
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-name & \pref{Name} & Unique identifier of the registered system. \\ \hline
+name & \pref{SystemName} & Unique identifier of the registered system. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the registered system. \\ \hline
 version & \pref{Version} & Version of the system. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the registered system.  \\ \hline
@@ -237,7 +237,7 @@ address & \pref{Address} & Address. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-name & \pref{Name} & Unique identifier of the device. \\ \hline
+name & \pref{DeviceName} & Unique identifier of the device. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
 createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
@@ -265,7 +265,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
 verbose & \pref{Boolean} & no & If true detailed device information also returns (only if the provider supports it). \\ \hline
-systemNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems with any of the specified names. \\ \hline
+systemNames &  \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for systems with any of the specified names. \\ \hline
 addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for systems with any of the specified add\-resses.   \\ \hline
 addressType &  \pref{AddressType} & no & Requester is looking for systems with the specified type of add\-ress. \\ \hline
 \end{tabularx}
@@ -275,10 +275,9 @@ addressType &  \pref{AddressType} & no & Requester is looking for systems with t
 \begin{tabularx}{\textwidth}{| p{4.4cm} | p{4.8cm} | p{2cm} | X |} \hline
 metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for systems that are matching any of the specified metadata requirements.  \\ \hline
 versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for systems with any of the specified versions.   \\ \hline
-deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for systems that are running on any of the specified devices. \\ \hline
+deviceNames &  \pref{List}$<$\pref{DeviceName}$>$ & no & Requester is looking for systems that are running on any of the specified devices. \\ \hline
 \end{tabularx}
 \end{table}
-
 
 \msubsection{struct}{MetadataRequirements}
 
@@ -308,7 +307,7 @@ count & \pref{Number} & Number of returned systems. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-name & \pref{Name} & Unique identifier of the system. \\ \hline
+name & \pref{SystemName} & Unique identifier of the system. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the system. \\ \hline
 version & \pref{Version} & Version of the system. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the system.  \\ \hline
@@ -332,13 +331,14 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{Boolean}          & One out of \texttt{true} or \texttt{false}. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must follow the UPPER\_SNAKE\_CASE naming convention. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
-\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
 \pdef{Version}          & Specifies a system version. Version must follow the Semantic Versioning. \\ \hline
 \end{tabularx}
 \end{table}

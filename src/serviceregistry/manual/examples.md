@@ -1,20 +1,21 @@
 # **Examples of data transfer objects sent and received**
 
-This file contains specific examples of what payloads are expected and returned by each endpoint maintained by the service registry.
+This file contains specific examples of what payloads are expected and returned by each endpoint maintained by the ServiceRegistry.
 
 # Discovery endpoints
 
-## **Device discovery**
+## **deviceDiscovery**
+
 - **Register device:** POST /serviceregistry/device-discovery/register
   
   Request body: 
   ~~~
   {
-    "name": "thermometer1",
+    "name": "THERMOMETER1",
     "metadata": {
-      "scales": ["Kelvin", "Celsius"],
-      "max-temperature": {"Kelvin": 310, "Celsius": 40},
-      "min-temperature": {"Kelvin": 260, "Celsius": -10},
+      "scales": ["kelvin", "celsius"],
+      "maxTemperature": {"kelvin": 310, "celsius": 40},
+      "minTemperature": {"kelvin": 260, "celsius": -10},
       "appliable": ["spring", "autumn"]
     },
     "addresses": [
@@ -26,19 +27,19 @@ This file contains specific examples of what payloads are expected and returned 
   Response body:
   ~~~
   {
-    "name": "thermometer1",
+    "name": "THERMOMETER1",
     "metadata": {
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
-      "max-temperature": {
-        "Kelvin": 310,
-        "Celsius": 40
+      "maxTemperature": {
+        "kelvin": 310,
+        "celsius": 40
       },
-      "min-temperature": {
-        "Kelvin": 260,
-        "Celsius": -10
+      "minTemperature": {
+        "kelvin": 260,
+        "celsius": -10
       },
       "appliable": [
         "spring",
@@ -54,6 +55,8 @@ This file contains specific examples of what payloads are expected and returned 
     "createdAt": "2024-10-21T18:47:45.388404800Z",
     "updatedAt": "2024-10-21T18:47:45.388404800Z"
   }
+  ~~~
+  
 - **Lookup device:** POST /serviceregistry/device-discovery/lookup
   
   Request body:
@@ -75,19 +78,19 @@ This file contains specific examples of what payloads are expected and returned 
   {
     "entries": [
       {
-        "name": "thermometer1",
+        "name": "THERMOMETER1",
         "metadata": {
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
-          "max-temperature": {
-            "Kelvin": 310,
-            "Celsius": 40
+          "maxTemperature": {
+            "kelvin": 310,
+            "celsius": 40
           },
-          "min-temperature": {
-            "Kelvin": 260,
-            "Celsius": -10
+          "minTemperature": {
+            "kelvin": 260,
+            "celsius": -10
           },
           "appliable": [
             "spring",
@@ -104,10 +107,10 @@ This file contains specific examples of what payloads are expected and returned 
         "updatedAt": "2024-10-21T18:47:45Z"
       },
       {
-        "name": "weather-displayer1",
+        "name": "WEATHER_DISPLAYER1",
         "metadata": {
           "type": "analogue",
-          "displayed-data": [
+          "displayedData": [
             "temperature"
           ]
         },
@@ -127,21 +130,21 @@ This file contains specific examples of what payloads are expected and returned 
 
 - **Revoke device:** DELETE /serviceregistry/device-discovery/revoke/{name}
   
-  Path parameter: test-weather-displayer
+  Path parameter: TEST_WEATHER_DISPLAYER
   ~~~
-  http://localhost:8443/serviceregistry/device-discovery/revoke/test-weather-displayer
+  http://localhost:8443/serviceregistry/device-discovery/revoke/TEST_WEATHER_DISPLAYER
   ~~~
 
   Response code: 200 
 
-##  **System discovery**
+##  **systemDiscovery**
 
 **Authentication:** For system related operations, the payload does not contain the system name, because it comes either from an authorization header or an X.509 certificate. 
 
-In the following examples, self-declared authentication is used, so the header should contain the system name with the  _SYSTEM//_ prefix. The system name will be _temperature-provider1_ in the examples. This should be changed to the name of the actual system.
+In the following examples, self-declared authentication is used, so the header should contain the system name with the  _SYSTEM//_ prefix. The system name will be _TemperatureProvider1_ in the examples. This should be changed to the name of the actual system.
 
   ~~~
-  -H 'Authorization: Bearer SYSTEM//temperature-provider1' \
+  -H 'Authorization: Bearer SYSTEM//TemperatureProvider1' \
   ~~~
 
 The header is also included in the examples where the system name comes from it.
@@ -153,7 +156,7 @@ The header is also included in the examples where the system name comes from it.
   curl -X 'POST' \
     'http://localhost:8443/serviceregistry/system-discovery/register' \
     -H 'accept: application/json' \
-    -H 'Authorization: Bearer SYSTEM//temperature-provider1' \
+    -H 'Authorization: Bearer SYSTEM//TemperatureProvider1' \
     -H 'Content-Type: application/json' \
   ~~~
   Request body:
@@ -161,24 +164,24 @@ The header is also included in the examples where the system name comes from it.
   {
     "metadata": {
       "type": "temperature",
-      "scales": ["Kelvin", "Celsius"],
+      "scales": [ "kelvin", "celsius" ],
       "customizable": false
     },
     "version": "2.1",
-    "addresses": ["tp1.greenhouse.com", "192.168.66.1"],
-    "deviceName": "thermometer1"
+    "addresses": [ "tp1.greenhouse.com", "192.168.66.1" ],
+    "deviceName": "THERMOMETER1"
   }
   ~~~
 
   Response body:
   ~~~
   {
-    "name": "temperature-provider1",
+    "name": "TemperatureProvider1",
     "metadata": {
       "type": "temperature",
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "customizable": false
     },
@@ -194,19 +197,19 @@ The header is also included in the examples where the system name comes from it.
       }
     ],
     "device": {
-      "name": "thermometer1",
+      "name": "THERMOMETER1",
       "metadata": {
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
-        "max-temperature": {
-          "Kelvin": 310,
-          "Celsius": 40
+        "maxTemperature": {
+          "kelvin": 310,
+          "celsius": 40
         },
-        "min-temperature": {
-          "Kelvin": 260,
-          "Celsius": -10
+        "minTemperature": {
+          "kelvin": 260,
+          "celsius": -10
         },
         "appliable": [
           "spring",
@@ -243,13 +246,13 @@ The header is also included in the examples where the system name comes from it.
       {
         "customizable": true,
         "type": "temperature",
-        "scales": { "op": "CONTAINS", "value": "Celsius" }
+        "scales": { "op": "CONTAINS", "value": "celsius" }
       }
     ],
     "versions": [
     ],
     "deviceNames": [
-      "thermometer1", "thermometer2", "thermometer3", "thermometer5"
+      "THERMOMETER1", "THERMOMETER2", "THERMOMETER3", "THERMOMETER5"
     ]
   }
   ~~~
@@ -259,14 +262,14 @@ The header is also included in the examples where the system name comes from it.
   {
     "entries": [
       {
-        "name": "main-temperature-provider",
+        "name": "MainTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "customizable": true,
           "scales": [
-            "Fahrenheit",
-            "Kelvin",
-            "Celsius"
+            "fahrenheit",
+            "kelvin",
+            "celsius"
           ]
         },
         "version": "2.0.0",
@@ -281,22 +284,22 @@ The header is also included in the examples where the system name comes from it.
           }
         ],
         "device": {
-          "name": "thermometer5",
+          "name": "THERMOMETER5",
           "metadata": {
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ],
-            "max-temperature": {
-              "Kelvin": 310,
-              "Celsius": 40,
-              "Fahrenheit": 140
+            "maxTemperature": {
+              "kelvin": 310,
+              "celsius": 40,
+              "fahrenheit": 140
             },
-            "min-temperature": {
-              "Fahrenheit": 20,
-              "Kelvin": 260,
-              "Celsius": -10
+            "minTemperature": {
+              "fahrenheit": 20,
+              "kelvin": 260,
+              "celsius": -10
             },
             "appliable": [
               "spring",
@@ -321,6 +324,7 @@ The header is also included in the examples where the system name comes from it.
     "count": 1
   }
   ~~~
+  
 - **Revoke system:** DELETE 
 /serviceregistry/system-discovery/revoke
 
@@ -329,7 +333,7 @@ Header:
 curl -X 'DELETE' \
   'http://localhost:8443/serviceregistry/system-discovery/revoke' \
   -H 'accept: */*' \
-  -H 'Authorization: Bearer SYSTEM//temperature-provider1'
+  -H 'Authorization: Bearer SYSTEM//TemperatureProvider1'
 ~~~
 
 ~~~
@@ -338,16 +342,16 @@ http://localhost:8443/serviceregistry/system-discovery/revoke
 
 Reponse code: 200 
 
-## **Service discovery**
+## **serviceDiscovery**
 
 **Authentication:** For service related operations, the payload does not contain the system name, because it comes either from an authorization header or an X.509 certificate. 
 
-The Service Registry generates the Service Instance ID from the system name. It also uses system name to identify who sent the request.
+The ServiceRegistry generates the service instance ID from the system name. It also uses system name to identify who sent the request.
 
-In the following examples, self-declared authentication is used, so the header should contain the system name with the  _SYSTEM//_ prefix. The system name will be _temperature-provider1_ in the examples.
+In the following examples, self-declared authentication is used, so the header should contain the system name with the  _SYSTEM//_ prefix. The system name will be _TemperatureProvider1_ in the examples.
 
   ~~~
-  -H 'Authorization: Bearer SYSTEM//temperature-provider1' \
+  -H 'Authorization: Bearer SYSTEM//TemperatureProvider1' \
   ~~~
 
 - **Register service:** POST /serviceregistry/service-discovery/register
@@ -355,7 +359,7 @@ In the following examples, self-declared authentication is used, so the header s
   Request body:
   ~~~
   {
-    "serviceDefinitionName": "celsius-info",
+    "serviceDefinitionName": "celsiusInfo",
     "version": "1",
     "expiresAt": "2030-10-11T14:30:00Z",
     "metadata": {
@@ -363,7 +367,7 @@ In the following examples, self-declared authentication is used, so the header s
     },
     "interfaces": [
       {
-        "templateName": "generic-https",
+        "templateName": "generic_https",
         "protocol": "https",
         "policy": "NONE",
         "properties": {
@@ -380,14 +384,14 @@ In the following examples, self-declared authentication is used, so the header s
   Response body:
   ~~~
   {
-    "instanceId": "temperature-provider1::celsius-info::1.0.0",
+    "instanceId": "TemperatureProvider1|celsiusInfo|1.0.0",
     "provider": {
-      "name": "temperature-provider1",
+      "name": "TemperatureProvider1",
       "metadata": {
         "type": "temperature",
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "customizable": false
       },
@@ -399,19 +403,19 @@ In the following examples, self-declared authentication is used, so the header s
         }
       ],
       "device": {
-        "name": "thermometer1",
+        "name": "THERMOMETER1",
         "metadata": {
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
-          "max-temperature": {
-            "Kelvin": 310,
-            "Celsius": 40
+          "maxTemperature": {
+            "kelvin": 310,
+            "celsius": 40
           },
-          "min-temperature": {
-            "Kelvin": 260,
-            "Celsius": -10
+          "minTemperature": {
+            "kelvin": 260,
+            "celsius": -10
           },
           "appliable": [
             "spring",
@@ -431,7 +435,7 @@ In the following examples, self-declared authentication is used, so the header s
       "updatedAt": "2024-10-24T23:44:09Z"
     },
     "serviceDefinition": {
-      "name": "celsius-info",
+      "name": "celsiusInfo",
       "createdAt": "2024-10-24T21:48:36Z",
       "updatedAt": "2024-10-24T21:48:36Z"
     },
@@ -442,7 +446,7 @@ In the following examples, self-declared authentication is used, so the header s
     },
     "interfaces": [
       {
-        "templateName": "generic-https",
+        "templateName": "generic_https",
         "protocol": "https",
         "policy": "NONE",
         "properties": {
@@ -475,10 +479,10 @@ In the following examples, self-declared authentication is used, so the header s
     "instanceIds": [ 
     ],
     "providerNames": [
-        "temperature-provider1" 
+        "TemperatureProvider1" 
     ],
     "serviceDefinitionNames": [
-        "celsius-info"
+        "celsiusInfo"
     ],
     "versions": [
         "1.0.0", "1.0.1"
@@ -487,7 +491,7 @@ In the following examples, self-declared authentication is used, so the header s
     "metadataRequirementsList": [
     ],
     "interfaceTemplateNames": [
-        "generic-http", "generic-https"
+        "generic_http", "generic_https"
     ],
     "interfacePropertyRequirementsList": [
     ],
@@ -501,14 +505,14 @@ In the following examples, self-declared authentication is used, so the header s
   {
     "entries": [
       {
-        "instanceId": "temperature-provider1::celsius-info::1.0.0",
+        "instanceId": "TemperatureProvider1|celsiusInfo|1.0.0",
         "provider": {
-          "name": "temperature-provider1",
+          "name": "TemperatureProvider1",
           "metadata": {
             "type": "temperature",
             "scales": [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "customizable": false
           },
@@ -517,19 +521,19 @@ In the following examples, self-declared authentication is used, so the header s
           "updatedAt": "2024-11-03T20:20:50Z"
         },
         "serviceDefinition": {
-          "name": "celsius-info",
+          "name": "celsiusInfo",
           "createdAt": "2024-10-24T21:48:36Z",
           "updatedAt": "2024-10-24T21:48:36Z"
         },
         "version": "1.0.0",
         "expiresAt": "2030-10-11T14:30:00Z",
         "metadata": {
-          "unrestricted-discovery": true,
+          "unrestrictedDiscovery": true,
           "frequency": 400
         },
         "interfaces": [
           {
-            "templateName": "generic-https",
+            "templateName": "generic_https",
             "protocol": "https",
             "policy": "NONE",
             "properties": {
@@ -557,16 +561,17 @@ In the following examples, self-declared authentication is used, so the header s
 
 - **Revoke service:** DELETE /serviceregistry/service-discovery/revoke/{instanceid}
   
-  Path parameter: temperature-provider1::celsius-info::1.1.0
+  Path parameter: TemperatureProvider1|CcelsiusInfo|1.1.0
 
   ~~~
-  http://localhost:8443/serviceregistry/service-discovery/revoke/temperature-provider1%3A%3Acelsius-info%3A%3A1.1.0
+  http://localhost:8443/serviceregistry/service-discovery/revoke/TemperatureProvider1%7CcelsiusInfo%7C1.1.0
   ~~~
 
   Response code: 200
 
 ## **Logs**
-/serviceregistry/mgmt/logs
+
+POST /serviceregistry/mgmt/logs
 
   Request body:
   ~~~
@@ -629,8 +634,8 @@ In the following examples, self-declared authentication is used, so the header s
   ~~~
 
 ## **Config**
-GET 
-/serviceregistry/mgmt/get-config
+
+GET /serviceregistry/mgmt/get-config
 
 Query parameters: service.discovery.policy, discovery.verbose
 
@@ -659,7 +664,7 @@ Got it!
 
 # Management endpoints
 
-## **Device related**
+## **Device-related**
 
 - **Create devices:** POST /serviceregistry/mgmt/devices
   
@@ -668,20 +673,20 @@ Got it!
   {
     "devices": [
       {
-        "name": "weather-displayer1",
+        "name": "WEATHER_DISPLAYER1",
         "metadata": {
           "type": "analogue",
-          "displayed-data": ["temperature"]
+          "displayedData": [ "temperature" ]
         },
-        "addresses": ["ab:ff:c8:e1:45:9a"]
+        "addresses": [ "ab:ff:c8:e1:45:9a" ]
       },
       {
-        "name": "weather-displayer2",
+        "name": "WAETHER_DISPLAYER2",
         "metadata": {
           "type": "digital",
-          "displayed-data": ["wind", "humidity", "temperature"]
+          "displayedData": [ "wind", "humidity", "temperature" ]
         },
-        "addresses": ["ab:ff:c8:e1:45:9b"]
+        "addresses": [ "ab:ff:c8:e1:45:9b" ]
       }
     ]
   }
@@ -692,10 +697,10 @@ Got it!
   {
     "entries": [
       {
-        "name": "weather-displayer1",
+        "name": "WEATHER_DISPLAYER1",
         "metadata": {
           "type": "analogue",
-          "displayed-data": [
+          "displayedData": [
             "temperature"
           ]
         },
@@ -709,10 +714,10 @@ Got it!
         "updatedAt": "2024-10-22T09:44:19.658404700Z"
       },
       {
-        "name": "weather-displayer2",
+        "name": "WEATHER_DISPLAYER2",
         "metadata": {
           "type": "digital",
-          "displayed-data": [
+          "displayedData": [
             "wind",
             "humidity",
             "temperature"
@@ -739,20 +744,20 @@ Got it!
   {
     "devices": [
       {
-        "name": "weather-displayer1",
+        "name": "WEATHER_DISPLAYER1",
         "metadata": {
           "type": "analogue",
-          "displayed-data": ["temperature"]
+          "displayedData": [ "temperature" ]
         },
-        "addresses": ["ab:f8:c8:e1:45:96"]
+        "addresses": [ "ab:f8:c8:e1:45:96" ]
       },
       {
-        "name": "weather-displayer2",
+        "name": "WEATHER_DISPLAYER2",
         "metadata": {
           "type": "digital",
-          "displayed-data": ["wind", "temperature"]
+          "displayedData": [ "wind", "temperature" ]
         },
-        "addresses": ["ab:ff:c8:e1:45:9b"]
+        "addresses": [ "ab:ff:c8:e1:45:9b" ]
       }
     ]
   }
@@ -763,10 +768,10 @@ Got it!
   {
     "entries": [
       {
-        "name": "weather-displayer1",
+        "name": "WEATHER_DISPLAYER2",
         "metadata": {
           "type": "analogue",
-          "displayed-data": [
+          "displayedData": [
             "temperature"
           ]
         },
@@ -780,10 +785,10 @@ Got it!
         "updatedAt": "2024-10-22T14:41:00.839368100Z"
       },
       {
-        "name": "weather-displayer2",
+        "name": "WEATHER_DISPLAYER2",
         "metadata": {
           "type": "digital",
-          "displayed-data": [
+          "displayedData": [
             "wind",
             "temperature"
           ]
@@ -814,16 +819,16 @@ Got it!
       "sortField": "name"
     },
     "deviceNames": [
-      "thermometer1", "thermometer2", "thermometer3", "thermometer4", "thermometer5"
+      "THERMOMETER1", "THERMOMETER2", "THERMOMETER3", "THERMOMETER4", "THERMOMETER5"
     ],
     "addresses": [
     ],
     "addressType": "",
     "metadataRequirementList": [
       {
-        "appliable": { "op": "CONTAINS", "value": "spring"},
-        "scales": { "op": "CONTAINS", "value": "Fahrenheit" },
-        "max-temperature.Fahrenheit": { "op": "GREATER_THAN", "value": 100}
+        "appliable": { "op": "CONTAINS", "value": "spring" },
+        "scales": { "op": "CONTAINS", "value": "fahrenheit" },
+        "maxTemperature.fahrenheit": { "op": "GREATER_THAN", "value": 100 }
       }
     ]
   }
@@ -834,16 +839,16 @@ Got it!
   {
     "entries": [
       {
-        "name": "thermometer3",
+        "name": "THERMOMETER3",
         "metadata": {
           "scales": [
-            "Fahrenheit"
+            "fahrenheit"
           ],
-          "max-temperature": {
-            "Fahrenheit": 110
+          "maxTemperature": {
+            "fahrenheit": 110
           },
-          "min-temperature": {
-            "Fahrenheit": 0
+          "minTemperature": {
+            "fahrenheit": 0
           },
           "appliable": [
             "winter",
@@ -861,16 +866,16 @@ Got it!
         "updatedAt": "2024-10-22T10:30:55Z"
       },
       {
-        "name": "thermometer2",
+        "name": "THERMOMETER2",
         "metadata": {
           "scales": [
-            "Fahrenheit"
+            "fahrenheit"
           ],
-          "max-temperature": {
-            "Fahrenheit": 140
+          "maxTemperature": {
+            "fahrenheit": 140
           },
-          "min-temperature": {
-            "Fahrenheit": 0
+          "minTemperature": {
+            "fahrenheit": 0
           },
           "appliable": [
             "winter",
@@ -895,43 +900,42 @@ Got it!
 
 - **Delete devices:** DELETE /serviceregistry/mgmt/devices
   
-  Query parameters: thermometer2, thermometer10
+  Query parameters: THERMOMETER2, THERMOMETER10
 
   ~~~
-  http://localhost:8443/serviceregistry/mgmt/devices?names=thermometer2&names=thermometer10
+  http://localhost:8443/serviceregistry/mgmt/devices?names=THERMOMETER2&names=THERMOMETER10
   ~~~
 
   Response code: 200
   
-## **System related**
+## **System-related**
 
-- **Create systems:** POST 
-/serviceregistry/mgmt/systems
+- **Create systems:** POST /serviceregistry/mgmt/systems
 
   Request body:
   ~~~
   {
     "systems": [
       {
-        "name": "test-temperature-provider",
+        "name": "TestTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "scales": []
         },
         "version": "",
-        "addresses": ["ttp.greenhouse.com"],
+        "addresses": [ "ttp.greenhouse.com" ],
         "deviceName": ""
       },
       {
-        "name": "main-temperature-provider",
+        "name": "MainTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "customizable": true,
-          "scales": ["Fahrenheit", "Kelvin", "Celsius"]
+          "scales": [ "fahrenheit", "kelvin", "celsius" ]
         },
         "version": "2",
-        "addresses": ["192.168.1.2", "mtp.greenhouse.com"],
-        "deviceName": "thermometer5"
+        "addresses": [ "192.168.1.2", "mtp.greenhouse.com" ],
+        "deviceName": "THERMOMETER5"
       }
     ]
   }
@@ -942,7 +946,7 @@ Got it!
   {
     "entries": [
       {
-        "name": "test-temperature-provider",
+        "name": "TestTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "scales": []
@@ -958,14 +962,14 @@ Got it!
         "updatedAt": "2024-10-23T21:43:34.863607800Z"
       },
       {
-        "name": "main-temperature-provider",
+        "name": "MainTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "customizable": true,
           "scales": [
-            "Fahrenheit",
-            "Kelvin",
-            "Celsius"
+            "fahrenheit",
+            "kelvin",
+            "celsius"
           ]
         },
         "version": "2.0.0",
@@ -980,22 +984,22 @@ Got it!
           }
         ],
         "device": {
-          "name": "thermometer5",
+          "name": "THERMOMETER5",
           "metadata": {
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ],
-            "max-temperature": {
-              "Kelvin": 310,
-              "Celsius": 40,
-              "Fahrenheit": 140
+            "maxTemperature": {
+              "kelvin": 310,
+              "celsius": 40,
+              "fahrenheit": 140
             },
-            "min-temperature": {
-              "Fahrenheit": 20,
-              "Kelvin": 260,
-              "Celsius": -10
+            "minTemperature": {
+              "fahrenheit": 20,
+              "kelvin": 260,
+              "celsius": -10
             },
             "appliable": [
               "spring",
@@ -1028,25 +1032,25 @@ Got it!
   {
     "systems": [
       {
-        "name": "temperature-consumer",
+        "name": "TemperatureConsumer",
         "metadata": {
           "type": "temperature",
-          "screen-size": {"width": 620, "height": 350}
+          "screenSize": { "width": 620, "height": 350 }
         },
         "version": "2.2.1",
-        "addresses": ["tc.greenhouse.com"],
-        "deviceName": "weather-displayer1"
+        "addresses": [ "tc.greenhouse.com" ],
+        "deviceName": "WEATHER_DISPLAYER1"
       },
       {
-        "name": "main-temperature-provider",
+        "name": "MainTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "customizable": true,
-          "scales": ["Fahrenheit", "Kelvin", "Celsius"]
+          "scales": [ "fahrenheit", "kelvin", "celsius" ]
         },
         "version": "2.1",
-        "addresses": ["192.168.1.2", "mtp.greenhouse.com"],
-        "deviceName": "thermometer5"
+        "addresses": [ "192.168.1.2", "mtp.greenhouse.com" ],
+        "deviceName": "THERMOMETER5"
       }
     ]
   }
@@ -1057,14 +1061,14 @@ Got it!
   {
     "entries": [
       {
-        "name": "main-temperature-provider",
+        "name": "MainTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "customizable": true,
           "scales": [
-            "Fahrenheit",
-            "Kelvin",
-            "Celsius"
+            "fahrenheit",
+            "kelvin",
+            "celsius"
           ]
         },
         "version": "2.1.0",
@@ -1079,22 +1083,22 @@ Got it!
           }
         ],
         "device": {
-          "name": "thermometer5",
+          "name": "THERMOMETER5",
           "metadata": {
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ],
-            "max-temperature": {
-              "Kelvin": 310,
-              "Celsius": 40,
-              "Fahrenheit": 140
+            "maxTemperature": {
+              "kelvin": 310,
+              "celsius": 40,
+              "fahrenheit": 140
             },
-            "min-temperature": {
-              "Fahrenheit": 20,
-              "Kelvin": 260,
-              "Celsius": -10
+            "minTemperature": {
+              "fahrenheit": 20,
+              "kelvin": 260,
+              "celsius": -10
             },
             "appliable": [
               "spring",
@@ -1116,10 +1120,10 @@ Got it!
         "updatedAt": "2024-11-06T10:14:22.625107800Z"
       },
       {
-        "name": "temperature-consumer",
+        "name": "TemperatureConsumer",
         "metadata": {
           "type": "temperature",
-          "screen-size": {
+          "screenSize": {
             "width": 620,
             "height": 350
           }
@@ -1132,10 +1136,10 @@ Got it!
           }
         ],
         "device": {
-          "name": "weather-displayer1",
+          "name": "WEATHER_DISPLAYER1",
           "metadata": {
             "type": "analogue",
-            "displayed-data": [
+            "displayedData": [
               "temperature"
             ]
           },
@@ -1179,7 +1183,7 @@ Got it!
         "type": "temperature"
       }
     ],
-    "versions": ["2.0.0", "2.1.0", "2.2.1", "1.0.0"],
+    "versions": [ "2.0.0", "2.1.0", "2.2.1", "1.0.0" ],
     "deviceNames": [
     ]
   }
@@ -1190,14 +1194,14 @@ Got it!
   {
     "entries": [
       {
-        "name": "main-temperature-provider",
+        "name": "MainTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "customizable": true,
           "scales": [
-            "Fahrenheit",
-            "Kelvin",
-            "Celsius"
+            "fahrenheit",
+            "kelvin",
+            "celsius"
           ]
         },
         "version": "2.0.0",
@@ -1212,16 +1216,16 @@ Got it!
           }
         ],
         "device": {
-          "name": "thermometer5"
+          "name": "THERMOMETER5"
         },
         "createdAt": "2024-10-23T21:43:35Z",
         "updatedAt": "2024-10-23T21:43:35Z"
       },
       {
-        "name": "temperature-consumer",
+        "name": "TemperatureConsumer",
         "metadata": {
           "type": "temperature",
-          "screen-size": {
+          "screenSize": {
             "width": 600,
             "height": 350
           }
@@ -1234,18 +1238,18 @@ Got it!
           }
         ],
         "device": {
-          "name": "weather-displayer1"
+          "name": "WEATHER_DISPLAYER1"
         },
         "createdAt": "2024-10-23T21:53:08Z",
         "updatedAt": "2024-10-23T23:59:41Z"
       },
       {
-        "name": "temperature-provider1",
+        "name": "TemperatureProvider1",
         "metadata": {
           "type": "temperature",
           "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
           ],
           "customizable": false
         },
@@ -1261,13 +1265,13 @@ Got it!
           }
         ],
         "device": {
-          "name": "thermometer1"
+          "name": "THERMOMETER1"
         },
         "createdAt": "2024-10-23T21:33:05Z",
         "updatedAt": "2024-10-23T21:33:05Z"
       },
       {
-        "name": "test-temperature-provider",
+        "name": "TestTemperatureProvider",
         "metadata": {
           "type": "temperature",
           "scales": []
@@ -1289,15 +1293,15 @@ Got it!
 
   - **Delete systems:** DELETE /serviceregistry/mgmt/systems
   
-  Query parameters: test-temperature-consumer-1, test-temperature-consumer-2
+  Query parameters: TestTemperatureConsumer1, TestTemperatureConsumer2
 
   ~~~
-  http://localhost:8443/serviceregistry/mgmt/systems?names=test-temperature-consumer-1&names=test-temperature-consumer-1
+  http://localhost:8443/serviceregistry/mgmt/systems?names=TestTemperatureConsumer1&names=TestTemperatureConsumer1
   ~~~
 
   Response code: 200
 
-## **Service definition related**
+## **Service definition-related**
 
 - **Create service definitions:** POST /serviceregistry/mgmt/service-definitions
 
@@ -1305,7 +1309,7 @@ Got it!
   ~~~
   {
     "serviceDefinitionNames": [
-      "Fahrenheit-info", "Kelvin-info", "Celsius-info"
+      "fahrenheitInfo", "kelvinInfo", "celsiusInfo"
     ]
   }
   ~~~
@@ -1315,17 +1319,17 @@ Got it!
   {
     "entries": [
       {
-        "name": "fahrenheit-info",
+        "name": "fahrenheitInfo",
         "createdAt": "2024-10-24T21:48:35.519522800Z",
         "updatedAt": "2024-10-24T21:48:35.519522800Z"
       },
       {
-        "name": "kelvin-info",
+        "name": "kelvinInfo",
         "createdAt": "2024-10-24T21:48:35.553525200Z",
         "updatedAt": "2024-10-24T21:48:35.553525200Z"
       },
       {
-        "name": "celsius-info",
+        "name": "celsiusInfo",
         "createdAt": "2024-10-24T21:48:35.556578200Z",
         "updatedAt": "2024-10-24T21:48:35.556578200Z"
       }
@@ -1351,7 +1355,7 @@ Got it!
   {
     "entries": [
       {
-        "name": "celsius-info",
+        "name": "celsiusInfo",
         "createdAt": "2024-10-24T21:48:36Z",
         "updatedAt": "2024-10-24T21:48:36Z"
       }
@@ -1362,15 +1366,15 @@ Got it!
 
 - **Delete service definitions:** DELETE /serviceregistry/mgmt/service-definitions
   
-  Query parameter: Kelvin-info, info
+  Query parameter: kelvinInfo, info
 
   ~~~
-  http://localhost:8443/serviceregistry/mgmt/service-definitions?names=Kelvin-info&names=info
+  http://localhost:8443/serviceregistry/mgmt/service-definitions?names=kelvinInfo&names=info
   ~~~
 
   Response code: 200
 
-## **Service instance related**
+## **Service instance-related**
 
 - **Create service instances:** POST /serviceregistry/mgmt/service-instances
   
@@ -1379,8 +1383,8 @@ Got it!
   {
     "instances": [
       {
-        "systemName": "main-temperature-provider",
-        "serviceDefinitionName": "fahrenheit-info",
+        "systemName": "MainTemperatureProvider",
+        "serviceDefinitionName": "fahrenheitInfo",
         "version": "1",
         "expiresAt": "2030-10-11T14:30:00Z",
         "metadata": {
@@ -1388,11 +1392,11 @@ Got it!
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.1.2"],
+              "accessAddresses": [ "192.168.1.2" ],
               "accessPort": 4040,
               "operations": 
               {
@@ -1405,8 +1409,8 @@ Got it!
         ]
       },
       {
-        "systemName": "main-temperature-provider",
-        "serviceDefinitionName": "celsius-info",
+        "systemName": "MainTemperatureProvider",
+        "serviceDefinitionName": "celsiusInfo",
         "version": "1",
         "expiresAt": "2030-10-11T14:30:00Z",
         "metadata": {
@@ -1414,11 +1418,11 @@ Got it!
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.1.2"],
+              "accessAddresses": [ "192.168.1.2" ],
               "accessPort": 4040,
               "basePath": "/info/celsius"
             }
@@ -1434,46 +1438,46 @@ Got it!
   {
     "entries": [
       {
-        "instanceId": "main-temperature-provider::fahrenheit-info::1.0.0",
+        "instanceId": "MainTemperatureProvider|fahrenheitInfo|1.0.0",
         "provider": {
-          "name": "main-temperature-provider",
+          "name": "MainTemperatureProvider",
           "metadata": {
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.0.0",
-        "addresses": [
-          {
-            "type": "IPV4",
-            "address": "192.168.1.2"
-          },
-          {
-            "type": "HOSTNAME",
-            "address": "mtp.greenhouse.com"
-          }
-        ],
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "192.168.1.2"
+            },
+            {
+              "type": "HOSTNAME",
+              "address": "mtp.greenhouse.com"
+            }
+          ],
           "device": {
-            "name": "thermometer5",
+            "name": "THERMOMETER5",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
-              "max-temperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+              "maxTemperature": {
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
-              "min-temperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+              "minTemperature": {
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -1495,7 +1499,7 @@ Got it!
           "updatedAt": "2024-10-23T21:43:35Z"
         },
         "serviceDefinition": {
-          "name": "fahrenheit-info",
+          "name": "fahrenheitInfo",
           "createdAt": "2024-10-24T21:48:36Z",
           "updatedAt": "2024-10-24T21:48:36Z"
         },
@@ -1506,7 +1510,7 @@ Got it!
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
@@ -1532,46 +1536,46 @@ Got it!
         "updatedAt": "2024-10-24T23:07:00.630946400Z"
       },
       {
-        "instanceId": "main-temperature-provider::celsius-info::1.0.0",
+        "instanceId": "MainTemperatureProvider|celsiusInfo|1.0.0",
         "provider": {
-          "name": "main-temperature-provider",
+          "name": "MainTemperatureProvider",
           "metadata": {
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.0.0",
-        "addresses": [
-          {
-            "type": "IPV4",
-            "address": "192.168.1.2"
-          },
-          {
-            "type": "HOSTNAME",
-            "address": "mtp.greenhouse.com"
-          }
-        ],
+          "addresses": [
+            {
+              "type": "IPV4",
+              "address": "192.168.1.2"
+            },
+            {
+              "type": "HOSTNAME",
+              "address": "mtp.greenhouse.com"
+            }
+          ],
           "device": {
-            "name": "thermometer5",
+            "name": "THERMOMETER5",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
-              "max-temperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+              "maxTemperature": {
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
-              "min-temperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+              "minTemperature": {
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -1593,7 +1597,7 @@ Got it!
           "updatedAt": "2024-10-23T21:43:35Z"
         },
         "serviceDefinition": {
-          "name": "celsius-info",
+          "name": "celsiusInfo",
           "createdAt": "2024-10-24T21:48:36Z",
           "updatedAt": "2024-10-24T21:48:36Z"
         },
@@ -1604,7 +1608,7 @@ Got it!
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
@@ -1631,18 +1635,18 @@ Got it!
   {
     "instances": [
       {
-        "instanceId": "main-temperature-provider::celsius-info::1.0.0",
+        "instanceId": "MainTemperatureProvider|celsiusInfo|1.0.0",
         "expiresAt": "2035-10-11T14:30:00Z",
         "metadata": {
           "frequency": 355
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
-              "accessAddresses": ["192.168.1.2"],
+              "accessAddresses": [ "192.168.1.2" ],
               "accessPort": 4040,
               "operations": 
               {
@@ -1653,7 +1657,7 @@ Got it!
             }
           },
           {
-            "templateName": "generic-https",
+            "templateName": "generic_https",
             "protocol": "https",
             "policy": "NONE",
             "properties": {
@@ -1678,16 +1682,16 @@ Got it!
   {
     "entries": [
       {
-        "instanceId": "main-temperature-provider::celsius-info::1.0.0",
+        "instanceId": "MainTemperatureProvider|celsiusInfo|1.0.0",
         "provider": {
-          "name": "main-temperature-provider",
+          "name": "MainTemperatureProvider",
           "metadata": {
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.1.0",
@@ -1702,22 +1706,22 @@ Got it!
             }
           ],
           "device": {
-            "name": "thermometer5",
+            "name": "THERMOMETER5",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
-              "max-temperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+              "maxTemperature": {
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
-              "min-temperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+              "minTemperature": {
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -1739,7 +1743,7 @@ Got it!
           "updatedAt": "2024-11-06T11:14:22Z"
         },
         "serviceDefinition": {
-          "name": "celsius-info",
+          "name": "celsiusInfo",
           "createdAt": "2024-10-24T21:48:36Z",
           "updatedAt": "2024-10-24T21:48:36Z"
         },
@@ -1750,7 +1754,7 @@ Got it!
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
@@ -1772,7 +1776,7 @@ Got it!
             }
           },
           {
-            "templateName": "generic-https",
+            "templateName": "generic_https",
             "protocol": "https",
             "policy": "NONE",
             "properties": {
@@ -1818,7 +1822,7 @@ Got it!
     "instanceIds": [
     ],
     "providerNames": [
-      "temperature-provider1", "main-temperature-provider"
+      "TemperatureProvider1", "MainTemperatureProvider"
     ],
     "serviceDefinitionNames": [
     ],
@@ -1831,21 +1835,21 @@ Got it!
       }
     ],
     "interfaceTemplateNames": [
-      "generic-http", "generic-https"
+      "generic_http", "generic_https"
     ],
     "interfacePropertyRequirementsList": [
       {
-        "accessAddresses": ["192.168.1.2"],
+        "accessAddresses": [ "192.168.1.2" ],
         "accessPort": 4040,
         "basePath": "/info/fahrenheit"
       },
       {
-        "accessAddresses": ["192.168.1.2"],
+        "accessAddresses": [ "192.168.1.2" ],
         "accessPort": 4040,
         "basePath": "/info/celsius"
       },
       {
-        "accessAddresses": ["192.168.66.1"],
+        "accessAddresses": [ "192.168.66.1" ],
         "accessPort": 4040,
         "basePath": "/celsius-info"
       }
@@ -1860,16 +1864,16 @@ Got it!
   {
     "entries": [
       {
-        "instanceId": "main-temperature-provider::celsius-info::1.0.0",
+        "instanceId": "MainTemperatureProvider|celsiusInfo|1.0.0",
         "provider": {
-          "name": "main-temperature-provider",
+          "name": "MainTemperatureProvider",
           "metadata": {
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.1.0",
@@ -1884,22 +1888,22 @@ Got it!
             }
           ],
           "device": {
-            "name": "thermometer5",
+            "name": "THERMOMETER5",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
-              "max-temperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+              "maxTemperature": {
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
-              "min-temperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+              "minTemperature": {
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -1932,7 +1936,7 @@ Got it!
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
@@ -1954,7 +1958,7 @@ Got it!
             }
           },
           {
-            "templateName": "generic-https",
+            "templateName": "generic_https",
             "protocol": "https",
             "policy": "NONE",
             "properties": {
@@ -1980,16 +1984,16 @@ Got it!
         "updatedAt": "2024-11-06T11:36:03Z"
       },
       {
-        "instanceId": "main-temperature-provider::fahrenheit-info::1.0.0",
+        "instanceId": "MainTemperatureProvider|fahrenheitInfo|1.0.0",
         "provider": {
-          "name": "main-temperature-provider",
+          "name": "MainTemperatureProvider",
           "metadata": {
             "type": "temperature",
             "customizable": true,
             "scales": [
-              "Fahrenheit",
-              "Kelvin",
-              "Celsius"
+              "fahrenheit",
+              "kelvin",
+              "celsius"
             ]
           },
           "version": "2.1.0",
@@ -2004,22 +2008,22 @@ Got it!
             }
           ],
           "device": {
-            "name": "thermometer5",
+            "name": "THERMOMETER",
             "metadata": {
               "scales": [
-                "Fahrenheit",
-                "Kelvin",
-                "Celsius"
+                "fahrenheit",
+                "kelvin",
+                "celsius"
               ],
-              "max-temperature": {
-                "Kelvin": 310,
-                "Celsius": 40,
-                "Fahrenheit": 140
+              "maxTemperature": {
+                "kelvin": 310,
+                "celsius": 40,
+                "fahrenheit": 140
               },
-              "min-temperature": {
-                "Fahrenheit": 20,
-                "Kelvin": 260,
-                "Celsius": -10
+              "minTemperature": {
+                "fahrenheit": 20,
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -2052,7 +2056,7 @@ Got it!
         },
         "interfaces": [
           {
-            "templateName": "generic-http",
+            "templateName": "generic_http",
             "protocol": "http",
             "policy": "NONE",
             "properties": {
@@ -2078,14 +2082,14 @@ Got it!
         "updatedAt": "2024-11-06T10:35:24Z"
       },
       {
-        "instanceId": "temperature-provider1::celsius-info::1.0.0",
+        "instanceId": "TemperatureProvider1|celsiusInfo|1.0.0",
         "provider": {
-          "name": "temperature-provider1",
+          "name": "TemperatureProvider1",
           "metadata": {
             "type": "temperature",
             "scales": [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "customizable": false
           },
@@ -2101,19 +2105,19 @@ Got it!
             }
           ],
           "device": {
-            "name": "thermometer1",
+            "name": "THERMOMETER1",
             "metadata": {
               "scales": [
-                "Kelvin",
-                "Celsius"
+                "kelvin",
+                "celsius"
               ],
-              "max-temperature": {
-                "Kelvin": 310,
-                "Celsius": 40
+              "maxTemperature": {
+                "kelvin": 310,
+                "celsius": 40
               },
-              "min-temperature": {
-                "Kelvin": 260,
-                "Celsius": -10
+              "minTemperature": {
+                "kelvin": 260,
+                "celsius": -10
               },
               "appliable": [
                 "spring",
@@ -2145,7 +2149,7 @@ Got it!
         },
         "interfaces": [
           {
-            "templateName": "generic-https",
+            "templateName": "generic_https",
             "protocol": "https",
             "policy": "NONE",
             "properties": {
@@ -2173,10 +2177,10 @@ Got it!
 
 - **Delete service instances:** DELETE /serviceregistry/mgmt/service-instances
   
-  Query parameters: main-temperature-provider::celsius-info::1.0.0, main-temperature-provider::fahrenheit-info::1.0.0
+  Query parameters: MainTemperatureProvider|celsiusInfo|1.0.0, MainTemperatureProvider|fahrenheitInfo|1.0.0
 
   ~~~
-  http://localhost:8443/serviceregistry/mgmt/service-instances?serviceInstances=main-temperature-provider%3A%3Acelsius-info%3A%3A1.0.0&serviceInstances=main-temperature-provider%3A%3Afahrenheit-info%3A%3A1.0.0
+  http://localhost:8443/serviceregistry/mgmt/service-instances?serviceInstances=MainTemperatureProvider%7CcelsiusInfo%7C1.0.0&serviceInstances=MainTemperatureProvider%7CahrenheitInfo%7C1.0.0
   ~~~
 
 Response code: 200
@@ -2190,7 +2194,7 @@ Response code: 200
   {
     "interfaceTemplates": [
       {
-        "name": "generic-mqtt",
+        "name": "generic_mqtt",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -2227,7 +2231,7 @@ Response code: 200
   {
     "entries": [
       {
-        "name": "generic-mqtt",
+        "name": "generic_mqtt",
         "protocol": "tcp",
         "propertyRequirements": [
           {
@@ -2262,8 +2266,7 @@ Response code: 200
   }
   ~~~
 
-- **Query interface templates:** POST 
-/serviceregistry/mgmt/interface-templates/query
+- **Query interface templates:** POST /serviceregistry/mgmt/interface-templates/query
 
   Request body:
   ~~~
@@ -2275,7 +2278,7 @@ Response code: 200
       "sortField": "id"
     },
     "templateNames": [
-      "generic-http", "generic-https"
+      "generic_http", "generic_https"
     ],
     "protocols": [
       "http", "https"
@@ -2288,7 +2291,7 @@ Response code: 200
   {
     "entries": [
       {
-        "name": "generic-https",
+        "name": "generic_https",
         "protocol": "https",
         "propertyRequirements": [
           {
@@ -2318,7 +2321,7 @@ Response code: 200
         "updatedAt": "2024-10-15T18:15:44Z"
       },
       {
-        "name": "generic-http",
+        "name": "generic_http",
         "protocol": "http",
         "propertyRequirements": [
           {
@@ -2354,10 +2357,10 @@ Response code: 200
 
 - **Delete interface templates:** DELETE /serviceregistry/mgmt/interface-templates
   
-  Query parameters: generic-mqtt, test-template
+  Query parameters: generic_mqtt, test_template
 
   ~~~
-  http://localhost:8443/serviceregistry/mgmt/interface-templates?names=generic-mqtt&names=test-template
+  http://localhost:8443/serviceregistry/mgmt/interface-templates?names=generic_mqtt&names=test_template
   ~~~
 
   Response code: 200
@@ -2370,6 +2373,10 @@ If the request payload is not syntactically or semantically correct, an error me
 
 DELETE /serviceregistry/service-discovery/revoke/{instanceId}
 
+ ~~~
+  http://localhost:8443/serviceregistry/service-discovery/revoke/TemperatureProvider1%7CcelsiusInfo%7C1.0.0
+  ~~~
+
 If the instanceId belongs to an other system's service, the sender will receive the following response:
 
   ~~~
@@ -2377,6 +2384,6 @@ If the instanceId belongs to an other system's service, the sender will receive 
     "errorMessage": "Revoking other systems' service is forbidden",
     "errorCode": 403,
     "exceptionType": "FORBIDDEN",
-    "origin": "DELETE /serviceregistry/service-discovery/revoke/{instanceId}"
+    "origin": "DELETE /serviceregistry/service-discovery/revoke/TemperatureProvider1|celsiusInfo|1.0.0"
   }
   ~~~

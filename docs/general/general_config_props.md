@@ -21,7 +21,7 @@ The address the system will use to register itself into the Local Cloud's Servic
 
 :fontawesome-solid-wrench: **service.registry.address**
 
-HTTP(S) Access address of the local cloud's ServiceRegistry system. In case of the ServiceRegistry itself, this property is not specified.
+HTTP(S) Access address of the Local Cloud's ServiceRegistry system. In case of the ServiceRegistry itself, this property is not specified.
 
 :fontawesome-solid-wrench: **service.registry.port**
 
@@ -30,6 +30,10 @@ HTTP(S) Access port of the Local Cloud's ServiceRegistry system. In case of the 
 :fontawesome-solid-wrench: **log.all.request.and.response**
 
 Set to `true` in order to show all HTTP requests/responses in debug log.
+
+:fontawesome-solid-wrench: **normalization.mode**
+
+Specifies how to normalize device, system, service definition, service operation, interface template names and cloud identifiers in requests. In `simple` mode, normalization only removes starting and ending whitespaces and it is the requester's responsibility to make sure the various naming conventions are used. In `extended` mode, normalization tries to transform inputs to follow the appropriate naming convention.
 
 :fontawesome-solid-wrench: **server.ssl.enabled**
 
