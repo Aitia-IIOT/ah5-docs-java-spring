@@ -46,7 +46,7 @@ String value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH
 
 ## InterfaceName
 
-A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must following the snake_case naming convention. The identifier maximum length is 63 characters.
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must follow the snake_case naming convention. The identifier maximum length is 63 characters.
 
 ## KeyValuePair
 
@@ -115,11 +115,11 @@ A string identifier of a service instance. It consists of the instance's provide
 
 ## ServiceName
 
-A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the camelCase naming convention. The identifier maximum length is 63 characters.
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## ServiceOperationName
 
-A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers and dash (`-`). A name has to start with a letter, cannot end with dash and must following the kebab-case naming convention. The identifier maximum length is 63 characters.
+A String identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers and dash (`-`). A name has to start with a letter, cannot end with dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## String
 
@@ -127,7 +127,7 @@ A chain of UTF-8 characters.
 
 ## SystemName
 
-A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must following the PascalCase naming convention. The identifier maximum length is 63 characters.
+A String indentifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the PascalCase naming convention. The identifier maximum length is 63 characters.
 
 ## TokenType
 

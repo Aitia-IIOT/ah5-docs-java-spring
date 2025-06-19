@@ -168,7 +168,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{pull}{OrchestrationRequest}{OrchestrationResponse}{}{ErrorResponse}
 
-The behavior of this operation differs between the orchestration strategies:
+Operation \textit{pull}  performs the orchestration process and returns the matching service instances. The behavior of this operation differs between the orchestration strategies:
 
 In case of \textbf{simple-store} strategy the \textit{pull} operation requires at least the consumer system's identity in order to perform the orchestration process. As a result of the orchestration process the consumer system receives back the matching service instance identifiers sorted by the service definition and priority. Targeting one specific service definition is also possible.
 
@@ -178,12 +178,14 @@ In case of \textbf{dynamic} strategy the \textit{pull} operation requires at lea
 
 \fsubsection{subscribe}{OrchestrationSubscriptionRequest}{OrchestrationSubscriptionId}{}{ErrorResponse}
 
-This operation requires at least the consumer's identity, the targeted service definition and a notify interface. The result of this operation is an identifier that refers to the created subscription record. Optionally a push orchestration also can be initiated at the same time.
+Operation \textit{subscribe} creates a subscription record for the targeted service and with the given service requirements. Optionally, the orchestration process can be requested to being triggered upon a successful subscription. 
+\textit{Note:} As long as the subscription exists, the orchestration process to the actual system and for the targeted service can be triggered anytime by an other system with proper privileges and via the \textit{serviceOrchestrationPushManagement} service.
+
+This operation requires at least the consumer's identity, the targeted service definition and a notify interface. The result of this operation is an identifier that refers to the created subscription record.
 
 \fsubsection{unsubscribe}{OrchestrationSubscriptionId}{}{OperationStatus}{ErrorResponse}
 
-This operation requires the identifier pointing to the subscription record to be deleted.
-
+Operation \textit{unsubscribe} requires the subscription identifier and removes the associated subscription record.
 
 \clearpage
 
