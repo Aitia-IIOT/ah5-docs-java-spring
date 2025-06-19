@@ -66,7 +66,7 @@ Authorization: Bearer <identity-info>
       "ONLY_INTERCLOUD":"false"
    },
    "qosRequirements":{
-      "max-latency-ms":"10"
+      "maxLatencyMs":"10"
    },
    "exclusivityDuration":600
 }
@@ -86,7 +86,7 @@ The service operation **responds** with the status code `200` if called successf
          "aliveUntil":"2028-11-08T10:21:11Z",
          "exclusiveUntil":"2025-10-05T11:35:14Z",
          "metadata":{
-            "margin-of-error":0.5
+            "marginOfError":0.5
          },
          "interfaces":[
             {
@@ -190,7 +190,7 @@ Authorization: Bearer <identity-info>
          "ONLY_INTERCLOUD":"false"
       },
       "qosRequirements":{
-         "max-latency-ms":"10"
+         "maxLatencyMs":"10"
       },
       "exclusivityDuration":600
    },
@@ -217,7 +217,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage": "Unsupported notify protocol.",
+  "errorMessage": "Unsupported notify protocol: CoAP",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /serviceorchestration/orchestration/subscribe"
@@ -242,7 +242,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage": "Invalid subscription id.",
+  "errorMessage": "Invalid subscription id",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "DELETE /serviceorchestration/orchestration/unsubscribe"

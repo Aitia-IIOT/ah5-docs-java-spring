@@ -37,11 +37,11 @@ nav:
           - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md
           - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md
           - service-registry-management: api/serviceregistry/service-registry-management-generic-mqtt.md
-      - Service Orchestration:
+      - DynamicServiceOrchestration:
         - HTTP:
-          - serviceOrchestration (dynamic): api/serviceorchestration/service-orchestration-generic-http_dynamic.md
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
         - MQTT:
-          - serviceOrchestration (dynamic): api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
