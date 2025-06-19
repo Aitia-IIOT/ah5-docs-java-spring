@@ -40,7 +40,7 @@ nav:
       - ConsumerAuthorization:
         - HTTP:
             - authorization: api/consumerauthorization/authorization-generic-http.md
-        - MQTT
+        - MQTT:
             - authorization: api/consumerauthorization/authorization-generic-mqtt.md
       - DynamicServiceOrchestration:
         - HTTP:
