@@ -112,7 +112,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### get-config
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as query parameter, which contains the names of the desired configuration properties.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[String](../primitives.md#string)> as query parameter, which contains the names of the desired configuration properties.
 
 ```
 GET /<system-specific-path>/general/mgmt/get-config?keys=management.policy&keys=max.page.size HTTP/1.1
