@@ -154,7 +154,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### lookup
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt). The MQTTRequestTemplate contains a parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device and system information also returns (only if the provider supports it). The payload of the MQTTRequestTemplate is a [ServiceLookupRequest](../data-models/service-lookup-request.md).
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt). The MQTTRequestTemplate can contain an optional parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device and system information also returns (only if the provider supports it). The payload of the MQTTRequestTemplate is a [ServiceLookupRequest](../data-models/service-lookup-request.md).
 
 ```
 Topic: arrowhead/serviceregistry/service-discovery/lookup

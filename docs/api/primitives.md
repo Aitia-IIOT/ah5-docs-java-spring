@@ -20,6 +20,10 @@ A **String** representation of the type of the authorization policy. Could be on
 
 A **String** representation of the type of target in authorization policies. Could be only `SERVICE_DEF` (for service definitions) or `EVENT_TYPE` (for event types).
 
+## BlacklistReason
+
+A chain of UTF-8 characters with a maximum length of 1024.
+
 ## Boolean
 
 A **boolean** value, one out of `true` or `false`.
@@ -70,6 +74,10 @@ Association of a key of type [String](#string) and a value of any type. It is re
 ## LogSeverity
 
 Alias for a **String** value that describes the kind and seriousness of a log message. Could be `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`.
+
+## Mode
+
+Specifies whether the queried records should have the _active_ flag set. The possible values are: `ALL`, `ACTIVES`, `INACTIVES`.
 
 ## MQTTQoS
 

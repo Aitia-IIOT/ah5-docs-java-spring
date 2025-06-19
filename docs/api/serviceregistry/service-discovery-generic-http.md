@@ -170,7 +170,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### lookup
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device and system information also returns (only if the provider supports it). The request requires a [ServiceLookupRequest](../data-models/service-lookup-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device and system information also returns (only if the provider supports it). The request requires a [ServiceLookupRequest](../data-models/service-lookup-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/service-discovery/lookup?verbose=<verbose-value> HTTP/1.1
