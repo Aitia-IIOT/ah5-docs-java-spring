@@ -108,12 +108,12 @@ The service operation **responds** with the status code `200` if called successf
                   "basePath":"/kelvin"
                }
             }
-         ]
+         ],
          "authorizationTokens": {
             "TIME_LIMITED_TOKEN_AUTH": {
                "query-temperature": {
                   "tokenType": "TIME_LIMITED_TOKEN",
-                  "targetType" "SERVICE_DEF",
+                  "targetType": "SERVICE_DEF",
                   "token": "dsalefb521vdjkdsae633",
                   "expiresAt": "2025-10-05T11:35:14Z"
                }
@@ -248,3 +248,4 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "origin": "DELETE /serviceorchestration/orchestration/unsubscribe"
 }
 ```
+

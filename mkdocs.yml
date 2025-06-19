@@ -40,6 +40,8 @@ nav:
       - Service Orchestration:
         - HTTP:
           - serviceOrchestration (dynamic): api/serviceorchestration/service-orchestration-generic-http_dynamic.md
+        - MQTT:
+          - serviceOrchestration (dynamic): api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
