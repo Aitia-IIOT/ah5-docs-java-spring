@@ -91,7 +91,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
    "status":200,
    "traceId":"<trace-id>",
-   "receiver":"tempConsumer",
+   "receiver":"TempConsumer",
    "payload":{
       "results":[
          {
@@ -154,7 +154,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
    "status":400,
    "traceId":"<trace-id>",
-   "receiver":"tempConsumer",
+   "receiver":"TempConsumer",
    "payload":{
       "errorMessage":"QoS requirements are present, but QoS support is not enabled",
       "errorCode":400,
@@ -237,7 +237,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
    "status":200,
    "traceId":"<trace-id>",
-   "receiver":"tempConsumer",
+   "receiver":"TempConsumer",
    "payload":"d4d61873-07db-4e93-a16e-9465852bdabf"
 }
 ```
@@ -251,7 +251,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
    "status":400,
    "traceId":"<trace-id>",
-   "receiver":"tempConsumer",
+   "receiver":"TempConsumer",
    "payload":{
       "errorMessage":"Unsupported notify protocol.",
       "errorCode":400,
@@ -283,7 +283,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 {
   "status":<status-code>,
   "traceId":"<trace-id>",
-  "receiver":"tempConsumer",
+  "receiver":"TempConsumer",
   "payload": ""
 }
 ```
@@ -297,7 +297,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
    "status":400,
    "traceId":"<trace-id>",
-   "receiver":"tempConsumer",
+   "receiver":"TempConsumer",
    "payload":{
       "errorMessage":"Invalid subscription id.",
       "errorCode":400,
