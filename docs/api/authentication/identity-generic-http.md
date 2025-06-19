@@ -58,7 +58,7 @@ The service operation **responds** with the status code `200` if called successf
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `500` if an unexpected error happens. If the Authentication system needs contacting an external server during the login process,
-error code `503` can also be used if there was a problem with the external server.  The error response also contains an
+error code `503` can also be used if there was a problem with the external server. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
@@ -91,7 +91,7 @@ response body.
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `500` if an unexpected error happens. If the Authentication system needs contacting an external server during the logout process,
-error code `503` can also be used if there was a problem with the external server.  The error response also contains an
+error code `503` can also be used if there was a problem with the external server. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
@@ -126,7 +126,7 @@ response body.
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `500` if an unexpected error happens. If the Authentication system needs contacting an external server during the credential change process,
-error code `503` can also be used if there was a problem with the external server.  The error response also contains an
+error code `503` can also be used if there was a problem with the external server. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```

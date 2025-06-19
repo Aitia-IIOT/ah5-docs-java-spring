@@ -200,7 +200,7 @@ folder.
 **_Note:_** During the build process this file is going to be built into the executable JAR, but it is also possible to
 override it by an external file. For that use the following command when starting the system:
 ```
-java -jar arrowhead-authentication-5.x.x
+java -jar arrowhead-authentication-5.x.x.jar
      -Dlog4j.configurationFile=path-to-external-file
 ```
 
