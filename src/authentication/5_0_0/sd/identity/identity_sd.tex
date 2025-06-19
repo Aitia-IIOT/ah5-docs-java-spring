@@ -149,7 +149,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 Operation \textit{login} acquires a proof of identity token. The login data must meet the following criteria:
 
 \begin{itemize}
-    \item System name is mandatory. System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System name is mandatory. System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
     \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
 \end{itemize}
 
@@ -159,7 +159,7 @@ Operation \textit{logout} invalidates a proof of identity token. The logout data
 
 \begin{itemize}
     \item It requires the same input data as \textit{login} operation to avoid the possibility of session invalidation by an outside actor (without proper permissions). 
-    \item System name is mandatory. System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System name is mandatory. System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
     \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
 \end{itemize}
 
@@ -170,7 +170,7 @@ Operation \textit{change} changes the credentials. The change data must meet the
 \begin{itemize}
     \item With this operation a requester system can only change its own credentials and only after a successful authentication.
     \item This operation does not allow to change the assigned authentication method.
-    \item System name is mandatory. System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System name is mandatory. System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
     \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
     \item New credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed (same requirements are applied than in case of the previous credential map). 
 \end{itemize}
@@ -287,7 +287,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
 \end{tabularx}
 \end{table}
 

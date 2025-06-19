@@ -50,8 +50,8 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{service-discovery} % XXX = ServiceName 
-\ArrowheadServiceID{service-discovery} % ID name of service
+\ArrowheadTitle{serviceDiscovery} % XXX = ServiceName 
+\ArrowheadServiceID{serviceDiscovery} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
@@ -83,7 +83,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{service-discovery} service. 
+    This document provides service description for the \textbf{serviceDiscovery} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -107,9 +107,9 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{service-discovery} service, which enables both application and core/support systems to register and revoke their service instances to/from the Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction is when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+This document describes the \textbf{serviceDiscovery} service, which enables both application and Core/Support systems to register and revoke their service instances to/from the Local Cloud. It also enables to lookup for service instances. Service and service instance representation is mandatory for the base functionalities of a Local Cloud therefore it is an integral part of the implementation of the requirements in ServiceRegistry Core System. An example of this interaction is when a provider registers its service instances to offer them to other systems in the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
-The \textbf{service-discovery} service contains the following operations:
+The \textbf{serviceDiscovery} service contains the following operations:
 
 \begin{itemize}
     \item \textit{register} adds new service instance to the Local Cloud;
@@ -122,7 +122,7 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-A provider system can use the \textit{register} operation of \textbf{service-discovery} service to register its service instances. When a system is shutting down or stops offering services, it should remove its service instances from the Local Cloud by using \textit{revoke} operation.
+A provider system can use the \textit{register} operation of \textbf{serviceDiscovery} service to register its service instances. When a system is shutting down or stops offering services, it should remove its service instances from the Local Cloud by using \textit{revoke} operation.
 
 A consumer system can use the \textit{lookup} operation to find the appropriate service instance which it can consume later.
 
@@ -143,7 +143,7 @@ Available for anyone within the Local Cloud.
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{service-discovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} service instances.
+This section describes the abstract signatures of each operations of the service. The \textbf{serviceDiscovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} service instances.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
@@ -151,12 +151,12 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{register}{ServiceRegistrationRequest}{ServiceRegistrationResponse}{}{ErrorResponse}
 
-The registration data must meet the following criteria:
+Operation \textit{register} adds new service instance to the Local Cloud. The registration data must meet the following criteria:
 
 \begin{itemize}
     \item The requester system has to be present in the Local Cloud.
-    \item Service definition names are case insensitive and have to be unique within the Local Cloud.
-    \item Service definition names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item Service definition names are case sensitive, must follow the camelCase naming convention and have to be unique within the Local Cloud.
+    \item Service definition names can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item If an expiration date is specified, it cannot point to a past date.
     \item Keys in the metadata structure can not contain dot (.) character.
     \item At least one interface must be specified with its template name, the used policy and all the necessary template-specific properties.
@@ -166,21 +166,21 @@ The registration data must meet the following criteria:
 
 \fsubsection{lookup}{ServiceLookupRequest}{ServiceLookupResponse}{}{ErrorResponse}
 
-The lookup data must meet the following criteria:
+Operation \textit{lookup} lists the service instances that match the filtering requirements. The lookup data must meet the following criteria:
 
 \begin{itemize}
     \item If a filter expects a list, there is an OR relation between the elements of the filter.
     \item There is an AND relation between different kind of filters.
     \item To use this operation, an application system must specify at least one service instance id OR one provider name OR one service definition.
-    \item In some Local Clouds, operation \textit{lookup} can be restricted, which means only the "publicly" available service instances are returned. To gain access to a non-public service instance, an application system must use the \textbf{orchestration} service.
+    \item In some Local Clouds, operation \textit{lookup} can be restricted, which means only the "publicly" available service instances are returned. To gain access to a non-public service instance, an application system must use the \textbf{serviceOrchestration} service.
 \end{itemize}
 
 \fsubsection{revoke}{ServiceRevokeRequest}{}{OperationStatus}{ErrorResponse}
 
-The input operation data must meet the following criteria:
+Operation \textit{revoke} removes a service instance from the Local Cloud. The input operation data must meet the following criteria:
 
 \begin{itemize}
-    \item With this operation a system can revoke their own service instances.
+    \item With this operation a system can only revoke their own service instances.
 \end{itemize}
 
 \clearpage
@@ -188,7 +188,7 @@ The input operation data must meet the following criteria:
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{service-discovery} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{serviceDiscovery} service are listed and must be respected by the hosting System.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
@@ -199,7 +199,7 @@ As a complement to the explicitly defined types in this section, there is also a
 \begin{tabularx}{\textwidth}{| p{3.6cm} | p{4.9cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-serviceDefinitionName & \pref{Name} & yes & The service definition of the instance. \\ \hline
+serviceDefinitionName & \pref{ServiceName} & yes & The service definition of the instance. \\ \hline
 version & \pref{Version} & no & Version of the service instance. \\ \hline
 expiresAt & \pref{DateTime} & no & The moment of the future from which the service instance will not be available. \\ \hline
 metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the service instance. \\ \hline
@@ -221,7 +221,7 @@ An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or li
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-templateName & \pref{InterfaceTemplate} & yes & The name of the interface template that describes the interface structure. \\ \hline
+templateName & \pref{InterfaceName} & yes & The name of the interface template that describes the interface structure. \\ \hline
 protocol & \pref{Protocol} & no (yes) & The communication protocol of the interface. Only mandatory if the interface template is not previously known in the Local Cloud.  \\ \hline
 policy & \pref{SecurityPolicy} & yes & The security of the interface. \\ \hline
 properties &\hyperref[sec:model:Metadata]{Metadata} & yes & Interface template-specific data. \\ \hline
@@ -236,7 +236,7 @@ properties &\hyperref[sec:model:Metadata]{Metadata} & yes & Interface template-s
 \begin{tabularx}{\textwidth}{| p{2.6cm} | p{5.2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-instanceId & \pref{Name} & Unique identifier of the registered service instance. \\ \hline
+instanceId & \pref{ServiceInstanceID} & Unique identifier of the registered service instance. \\ \hline
 provider & \hyperref[sec:model:SystemDescriptor]{SystemDescriptor} & Information about the service instance provider system. \\ \hline
 serviceDefinition & \hyperref[sec:model:ServiceDefinitionDescriptor]{ServiceDefinitionDescriptor} & Information about the service definition. \\ \hline
 version & \pref{Version} & Version of the service instance. \\ \hline
@@ -253,7 +253,7 @@ updatedAt & \pref{DateTime} & Service instance was modified at this timestamp. \
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-name & \pref{Name} & Unique identifier of the system. \\ \hline
+name & \pref{SystemName} & Unique identifier of the system. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the system. \\ \hline
 version & \pref{Version} & Version of the system. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the system.  \\ \hline
@@ -280,7 +280,7 @@ address & \pref{Address} & Address. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Description \\ \hline
-name & \pref{Name} & Unique identifier of the device. \\ \hline
+name & \pref{DeviceName} & Unique identifier of the device. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
 createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
@@ -293,7 +293,7 @@ updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-name & \pref{Name} & Unique identifier of the service definition. \\ \hline
+name & \pref{ServiceName} & Unique identifier of the service definition. \\ \hline
 createdAt & \pref{DateTime} & Service definition was registered at this timestamp. \\ \hline
 updatedAt & \pref{DateTime} & Service definition was modified at this timestamp. \\ \hline
 \end{tabularx}
@@ -304,7 +304,7 @@ updatedAt & \pref{DateTime} & Service definition was modified at this timestamp.
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Description \\ \hline
-templateName & \pref{InterfaceTemplate} & The name of the interface template that describes the interface structure. \\ \hline
+templateName & \pref{InterfaceName} & The name of the interface template that describes the interface structure. \\ \hline
 protocol & \pref{Protocol} & The communication protocol of the interface. \\ \hline
 policy & \pref{SecurityPolicy} & The security of the interface. \\ \hline
 properties &\hyperref[sec:model:Metadata]{Metadata} & Interface template-specific data. \\ \hline
@@ -333,9 +333,9 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the ope\-ration. \\ \hline
 verbose & \pref{Boolean} & no & If true detailed system and device information also returns (only if the provider supports it). \\ \hline
-instanceIds &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service instances with any of the spe\-cified iden\-tifiers. Mandatory if no providerNames nor serviceDefinitionNames are spe\-cified. \\ \hline
-providerNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances that are provided by any of the specified systems. Mandatory if no serviceInstanceIds nor serviceDefinitionNames are spe\-cified. \\ \hline
-serviceDefinitionNames &  \pref{List}$<$\pref{Name}$>$ & no (yes) & Requester is looking for service ins\-tances with any of the specified service definition names. Mandatory if no serviceInstanceIds nor providerNames are spe\-cified. \\ \hline
+instanceIds &  \pref{List}$<$\pref{ServiceInstanceID}$>$ & no (yes) & Requester is looking for service instances with any of the spe\-cified iden\-tifiers. Mandatory if no providerNames nor serviceDefinitionNames are spe\-cified. \\ \hline
+providerNames &  \pref{List}$<$\pref{SystemName}$>$ & no (yes) & Requester is looking for service ins\-tances that are provided by any of the specified systems. Mandatory if no serviceInstanceIds nor serviceDefinitionNames are spe\-cified. \\ \hline
+serviceDefinitionNames &  \pref{List}$<$\pref{ServiceName}$>$ & no (yes) & Requester is looking for service ins\-tances with any of the specified service definition names. Mandatory if no serviceInstanceIds nor providerNames are spe\-cified. \\ \hline
 versions &  \pref{List}$<$\pref{Version}$>$ & no & Requester is looking for service ins\-tances with any of the specified versions. \\ \hline
 alivesAt & \pref{DateTime} & no & Requester is looking for service ins\-tances that will be available at the specified moment of the future. \\ \hline
 metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances that are matching any of the specified metadata requirements.  \\ \hline
@@ -345,7 +345,7 @@ addressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & Requester is looking f
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{5.5cm} | p{4.9cm} | p{2cm} | X |} \hline
-interfaceTemplateNames &  \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & Requester is looking for service ins\-tances with any of the specified interface template names. \\ \hline
+interfaceTemplateNames &  \pref{List}$<$\pref{InterfaceName}$>$ & no & Requester is looking for service ins\-tances with any of the specified interface template names. \\ \hline
 interfacePropertyRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for service ins\-tances with interfaces that are matching any of the specified properties requirements.  \\ \hline
 policies &  \pref{List}$<$\pref{SecurityPolicy}$>$ & no & Requester is looking for service ins\-tances with any of the specified security policies. \\ \hline
 \end{tabularx}
@@ -377,7 +377,7 @@ count & \pref{Number} & Number of returned service instances. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.6cm} | p{5.2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-instanceId & \pref{Name} & Unique identifier of the service instance. \\ \hline
+instanceId & \pref{ServiceInstanceID} & Unique identifier of the service instance. \\ \hline
 provider & \hyperref[sec:model:SystemDescriptor]{SystemDescriptor} & Information about the service instance provider system. \\ \hline
 serviceDefinition & \hyperref[sec:model:ServiceDefinitionDescriptor]{ServiceDefinitionDescriptor} & Information about the service definition. \\ \hline
 version & \pref{Version} & Version of the service instance. \\ \hline
@@ -397,10 +397,10 @@ updatedAt & \pref{DateTime} & Service instance was modified at this timestamp. \
 \msubsection{struct}{ServiceRevokeRequest}
  
 \begin{table}[H]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-instanceId & \pref{Name} & yes & Unique identifier of the service instance. \\ \hline
+instanceId & \pref{ServiceInstanceID} & yes & Unique identifier of the service instance. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -418,16 +418,25 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{Boolean}          & One out of \texttt{true} or \texttt{false}. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must follow the UPPER\_SNAKE\_CASE naming convention. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
-\pdef{InterfaceTemplate} & A string identifier of an interface descriptor. \\ \hline
+\pdef{InterfaceName}    & A string identifier of an interface descriptor. Must follow snake\_case naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
-\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
 \pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
+\pdef{ServiceInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance's provider name, service definition and version, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
 \pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning. \\ \hline
 \end{tabularx}
 \end{table}

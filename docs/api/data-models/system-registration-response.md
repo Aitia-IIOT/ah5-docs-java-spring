@@ -2,7 +2,7 @@
 
 Field | Type | Description
 --- | --- | --- 
-name | [Name](../primitives.md#name) | Unique identifier of the registered system.
+name | [SystemName](../primitives.md#systemname) | Unique identifier of the registered system.
 metadata | [Metadata](../data-models/metadata.md) | Additional information about the registered system.
 version | [Version](../primitives.md#version) | Version of the registered system.
 addresses | List<[AddressDescriptor](../data-models/address-descriptor.md)> | Different kind of addresses of the registered system.

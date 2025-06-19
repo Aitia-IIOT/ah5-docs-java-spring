@@ -1,13 +1,13 @@
-# service-registry-management IDD
+# serviceRegistryManagement IDD
 
-**GENERIC-HTTP & GENERIC-HTTPS**
+**generic_http & generic_https**
 
 ## Overview
-This page describes the service-registry-management service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface templates](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually. The interfaces are implemented using protocol, encoding as stated in the following tables:
+This page describes the serviceRegistryManagement service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface templates](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually. The interfaces are implemented using protocol, encoding as stated in the following tables:
 
 ## Interface Description
 
-**GENERIC-HTTP**
+**generic_http**
 
 Profile type | type | Version
 --- | --- | ---
@@ -16,7 +16,7 @@ Data encryption | N/A | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-**GENERIC-HTTPS**
+**generic_https**
 
 Profile type | type | Version
 --- | --- | ---
@@ -25,7 +25,7 @@ Data encryption | TLS | -
 Encoding | JSON | RFC 8259
 Compression | N/A | -
 
-Hereby the **Interface Design Description** (IDD) is provided to the [service-registry-management – Service Description](../../assets/sd/5_0_0/service-registry-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [serviceRegistryManagement – Service Description](../../assets/sd/5_0_0/service-registry-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
@@ -64,7 +64,7 @@ The service operation **responds** with the status code `200` if called successf
 {
   "entries": [
     {
-      "name": "alarm1",
+      "name": "ALARM1",
       "metadata": {
         "volume": {
           "value": 100,
@@ -81,7 +81,7 @@ The service operation **responds** with the status code `200` if called successf
       "updatedAt": "2025-03-10T09:09:58Z"
     },
     {
-      "name": "alarm2",
+      "name": "ALARM2",
       "metadata": {
         "volume": {
           "value": 110,
@@ -127,7 +127,7 @@ Authorization: Bearer <authorization-info>
 {
   "devices": [
     {
-      "name": "alarm1",
+      "name": "ALARM1",
       "metadata": {
         "volume": { "value": 100, "unit": "dB"}
       },
@@ -136,7 +136,7 @@ Authorization: Bearer <authorization-info>
       ]
     },
     {
-      "name": "alarm2",
+      "name": "ALARM2",
       "metadata": {
         "volume": { "value": 110, "unit": "dB"}
       },
@@ -154,7 +154,7 @@ The service operation **responds** with the status code `201` if the device enti
 {
   "entries": [
     {
-      "name": "alarm1",
+      "name": "ALARM1",
       "metadata": {
         "volume": {
           "value": 100,
@@ -171,7 +171,7 @@ The service operation **responds** with the status code `201` if the device enti
       "updatedAt": "2025-03-10T09:09:57.989904100Z"
     },
     {
-      "name": "alarm2",
+      "name": "ALARM2",
       "metadata": {
         "volume": {
           "value": 110,
@@ -197,7 +197,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage": "Device with names already exists: alarm1, alarm2",
+  "errorMessage": "Device with names already exists: ALARM1, ALARM2",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /serviceregistry/mgmt/devices"
@@ -215,7 +215,7 @@ Authorization: Bearer <authorization-info>
 {
   "devices": [
     {
-      "name": "alarm1",
+      "name": "ALARM1",
       "metadata": {
         "volume": { "value": 100, "unit": "dB"}
       },
@@ -224,7 +224,7 @@ Authorization: Bearer <authorization-info>
       ]
     },
     {
-      "name": "alarm2",
+      "name": "ALARM2",
       "metadata": {
         "volume": { "value": 110, "unit": "dB"}
       },
@@ -242,7 +242,7 @@ The service operation **responds** with the status code `200` if called successf
 {
   "entries": [
     {
-      "name": "alarm1",
+      "name": "ALARM1",
       "metadata": {
         "volume": {
           "value": 100,
@@ -259,7 +259,7 @@ The service operation **responds** with the status code `200` if called successf
       "updatedAt": "2025-03-10T09:09:58Z"
     },
     {
-      "name": "alarm2",
+      "name": "ALARM2",
       "metadata": {
         "volume": {
           "value": 110,
@@ -284,7 +284,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage": "Device(s) not exists: alarm001, alarm002",
+  "errorMessage": "Device(s) not exists: ALARM001, ALARM002",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "PUT /serviceregistry/mgmt/devices"
@@ -293,10 +293,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### device-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the devices to delete.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[DeviceName](../primitives.md#devicename)> as path parameter, which contains the names of the devices to delete.
 
 ```
-DELETE /serviceregistry/mgmt/devices?names=alarm1&names=alarm2 HTTP/1.1
+DELETE /serviceregistry/mgmt/devices?names=ALARM1&names=ALARM2 HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 
@@ -318,7 +318,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemQueryRequest](../data-models/system-query-request.md) JSON encoded body.
 
 ```
-POST /serviceregistry/mgmt/systems/query?verbose=<verbose-value> HTTP/1.1
+POST /serviceregistry/mgmt/systems/query?verbose=false HTTP/1.1
 Authorization: Bearer <authorization-info>
 
 {
@@ -349,7 +349,7 @@ The service operation **responds** with the status code `200` if called successf
 {
   "entries": [
     {
-      "name": "alert-consumer2",
+      "name": "AlertConsumer2",
       "metadata": {},
       "version": "1.1.0",
       "addresses": [
@@ -359,7 +359,7 @@ The service operation **responds** with the status code `200` if called successf
         }
       ],
       "device": {
-        "name": "alarm2"
+        "name": "ALARM2"
       },
       "createdAt": "2025-03-14T13:08:22Z",
       "updatedAt": "2025-03-14T13:08:22Z"
@@ -382,7 +382,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-create
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
 
 ```
 POST /serviceregistry/mgmt/systems HTTP/1.1
@@ -391,24 +391,24 @@ Authorization: Bearer <authorization-info>
 {
   "systems": [
     {
-      "name": "alert-consumer1",
+      "name": "AlertConsumer1",
       "metadata": {
       },
       "version": "1.1",
       "addresses": [
         "192.168.1.1"
       ],
-      "deviceName": "alarm1"
+      "deviceName": "ALARM1"
     },
     {
-      "name": "alert-consumer2",
+      "name": "AlertConsumer2",
       "metadata": {
       },
       "version": "1.1",
       "addresses": [
         "192.168.1.2"
       ],
-      "deviceName": "alarm2"
+      "deviceName": "ALARM2"
     }
   ]
 }
@@ -419,7 +419,7 @@ The service operation **responds** with the status code `201` if the system enti
 {
   "entries": [
     {
-      "name": "alert-consumer1",
+      "name": "AlertConsumer1",
       "metadata": {},
       "version": "1.1.0",
       "addresses": [
@@ -429,7 +429,7 @@ The service operation **responds** with the status code `201` if the system enti
         }
       ],
       "device": {
-        "name": "alarm1",
+        "name": "ALARM1",
         "metadata": {
           "volume": {
             "value": 100,
@@ -449,7 +449,7 @@ The service operation **responds** with the status code `201` if the system enti
       "updatedAt": "2025-03-14T13:08:21.856389Z"
     },
     {
-      "name": "alert-consumer2",
+      "name": "AlertConsumer2",
       "metadata": {},
       "version": "1.1.0",
       "addresses": [
@@ -459,7 +459,7 @@ The service operation **responds** with the status code `201` if the system enti
         }
       ],
       "device": {
-        "name": "alarm2",
+        "name": "ALARM2",
         "metadata": {
           "volume": {
             "value": 110,
@@ -487,7 +487,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ```
 {
-  "errorMessage": "Systems with names already exist: alert-consumer1, alert-consumer2",
+  "errorMessage": "Systems with names already exist: AlertConsumer1, AlertConsumer2",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /serviceregistry/mgmt/systems"
@@ -496,7 +496,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-update
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [SystemListRequest](../data-models/system-list-request.md) JSON encoded body.
 
 ```
 PUT /serviceregistry/mgmt/systems HTTP/1.1
@@ -505,24 +505,24 @@ Authorization: Bearer <authorization-info>
 {
   "systems": [
     {
-      "name": "alert-consumer1",
+      "name": "AlertConsumer1",
       "metadata": {
       },
       "version": "1.2",
       "addresses": [
         "192.168.1.1"
       ],
-      "deviceName": "alarm1"
+      "deviceName": "ALARM1"
     },
     {
-      "name": "alert-consumer2",
+      "name": "AlertConsumer2",
       "metadata": {
       },
       "version": "1.2",
       "addresses": [
         "192.168.1.2"
       ],
-      "deviceName": "alarm2"
+      "deviceName": "ALARM2"
     }
   ]
 }
@@ -534,7 +534,7 @@ The service operation **responds** with the status code `200` if the system enti
 {
   "entries": [
     {
-      "name": "alert-consumer1",
+      "name": "AlertConsumer1",
       "metadata": {},
       "version": "1.2.0",
       "addresses": [
@@ -544,7 +544,7 @@ The service operation **responds** with the status code `200` if the system enti
         }
       ],
       "device": {
-        "name": "alarm1",
+        "name": "ALARM1",
         "metadata": {
           "volume": {
             "value": 100,
@@ -564,7 +564,7 @@ The service operation **responds** with the status code `200` if the system enti
       "updatedAt": "2025-03-14T13:51:03.159696600Z"
     },
     {
-      "name": "alert-consumer2",
+      "name": "AlertConsumer2",
       "metadata": {},
       "version": "1.2.0",
       "addresses": [
@@ -574,7 +574,7 @@ The service operation **responds** with the status code `200` if the system enti
         }
       ],
       "device": {
-        "name": "alarm2",
+        "name": "ALARM2",
         "metadata": {
           "volume": {
             "value": 110,
@@ -602,7 +602,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ```
 {
-  "errorMessage": "Duplicated system name: alert-consumer1",
+  "errorMessage": "Duplicated system name: AlertConsumer1",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "PUT /serviceregistry/mgmt/systems"
@@ -611,10 +611,10 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the systems to delete.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[SystemName](../primitives.md#systemname)> as path parameter, which contains the names of the systems to delete.
 
 ```
-DELETE /serviceregistry/mgmt/systems?names=alert-consumer1&names=alert-consumer2 HTTP/1.1
+DELETE /serviceregistry/mgmt/systems?names=AlertConsumer1&names=AlertConsumer2 HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 
@@ -661,12 +661,12 @@ The service operation **responds** with the status code `200` if called successf
       "updatedAt": "2025-01-31T09:14:54Z"
     },
     {
-      "name": "kelvin-info2",
+      "name": "kelvinInfo2",
       "createdAt": "2025-03-15T19:47:47Z",
       "updatedAt": "2025-03-15T19:47:47Z"
     },
     {
-      "name": "kelvin-info1",
+      "name": "kelvinInfo1",
       "createdAt": "2025-03-15T19:47:47Z",
       "updatedAt": "2025-03-15T19:47:47Z"
     }
@@ -696,7 +696,7 @@ Authorization: Bearer <authorization-info>
 
 {
   "serviceDefinitionNames": [
-    "alert-service1", "alert-service2"
+    "alertService1", "alertService2"
   ]
 }
 ```
@@ -707,12 +707,12 @@ The service operation **responds** with the status code `201` if the service def
 {
   "entries": [
     {
-      "name": "alert-service1",
+      "name": "alertService1",
       "createdAt": "2025-03-15T19:31:03.728040300Z",
       "updatedAt": "2025-03-15T19:31:03.728040300Z"
     },
     {
-      "name": "alert-service2",
+      "name": "alertService2",
       "createdAt": "2025-03-15T19:31:03.732592400Z",
       "updatedAt": "2025-03-15T19:31:03.732592400Z"
     }
@@ -734,10 +734,10 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-definition-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the names of the service definitions to delete.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[ServiceName](../primitives.md#servicename)> as path parameter, which contains the names of the service definitions to delete.
 
 ```
-DELETE /serviceregistry/mgmt/service-definitions?names=alert-service1&names=alert-service2 HTTP/1.1
+DELETE /serviceregistry/mgmt/service-definitions?names=alertService1&names=alertService2 HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
@@ -758,7 +758,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceQueryRequest](../data-models/service-query-request.md) JSON encoded body. The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed system and device information also returns (only if the provider supports it).
 
 ```
-POST /serviceregistry/mgmt/service-instances/query?verbose=<verbose-value> HTTP/1.1
+POST /serviceregistry/mgmt/service-instances/query?verbose=false HTTP/1.1
 Authorization: Bearer <authorization-info>
 
 {
@@ -773,7 +773,7 @@ Authorization: Bearer <authorization-info>
   "providerNames": [
   ],
   "serviceDefinitionNames": [
-    "alert-service1"
+    "alertService1"
   ],
   "versions": [
     "1.0.0", "1.0.1"
@@ -784,7 +784,7 @@ Authorization: Bearer <authorization-info>
   "addressTypes": [
   ],
   "interfaceTemplateNames": [
-    "generic-mqtt"
+    "generic_mqtt"
   ],
   "interfacePropertyRequirementsList": [
     {
@@ -803,16 +803,16 @@ The service operation **responds** with the status code `200` if called successf
 {
   "entries": [
     {
-      "instanceId": "alert-consumer1::alert-service1::1.0.0",
+      "instanceId": "AlertProvider1|alertService1|1.0.0",
       "provider": {
-        "name": "alert-consumer1",
+        "name": "AlertProvider1",
         "metadata": {},
         "version": "1.1.0",
         "createdAt": "2025-03-15T20:22:44Z",
         "updatedAt": "2025-03-15T20:22:44Z"
       },
       "serviceDefinition": {
-        "name": "alert-service1",
+        "name": "alertService1",
         "createdAt": "2025-03-15T20:21:43Z",
         "updatedAt": "2025-03-15T20:21:43Z"
       },
@@ -826,7 +826,7 @@ The service operation **responds** with the status code `200` if called successf
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp",
           "policy": "NONE",
           "properties": {
@@ -844,51 +844,9 @@ The service operation **responds** with the status code `200` if called successf
       ],
       "createdAt": "2025-03-15T21:52:40Z",
       "updatedAt": "2025-03-15T21:52:40Z"
-    },
-    {
-      "instanceId": "alert-consumer2::alert-service1::1.0.0",
-      "provider": {
-        "name": "alert-consumer2",
-        "metadata": {},
-        "version": "1.1.0",
-        "createdAt": "2025-03-15T20:22:44Z",
-        "updatedAt": "2025-03-15T20:22:44Z"
-      },
-      "serviceDefinition": {
-        "name": "alert-service1",
-        "createdAt": "2025-03-15T20:21:43Z",
-        "updatedAt": "2025-03-15T20:21:43Z"
-      },
-      "version": "1.0.0",
-      "expiresAt": "2027-01-01T00:00:00Z",
-      "metadata": {
-        "delay": {
-          "value": 200,
-          "unit": "ms"
-        }
-      },
-      "interfaces": [
-        {
-          "templateName": "generic-mqtt",
-          "protocol": "tcp",
-          "policy": "NONE",
-          "properties": {
-            "accessAddresses": [
-              "192.168.1.3"
-            ],
-            "accessPort": 1883,
-            "baseTopic": "heat-alert",
-            "operations": [
-              "warn"
-            ]
-          }
-        }
-      ],
-      "createdAt": "2025-03-15T21:52:40Z",
-      "updatedAt": "2025-03-15T21:52:40Z"
-    }
+    }    
   ],
-  "count": 2
+  "count": 1
 }
 ```
 
@@ -914,8 +872,8 @@ Authorization: Bearer <authorization-info>
 {
   "instances": [
     {
-      "systemName": "alert-consumer1",
-      "serviceDefinitionName": "alert-service1",
+      "systemName": "AlertProvider1",
+      "serviceDefinitionName": "alertService1",
       "version": "",
       "expiresAt": "2028-01-01T00:00:00Z",
       "metadata": {
@@ -923,7 +881,7 @@ Authorization: Bearer <authorization-info>
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp", 
           "policy": "NONE",
           "properties": {
@@ -935,8 +893,8 @@ Authorization: Bearer <authorization-info>
       ]
     },
     {
-      "systemName": "alert-consumer2",
-      "serviceDefinitionName": "alert-service1",
+      "systemName": "AlertProvider2",
+      "serviceDefinitionName": "alertService2",
       "version": "",
       "expiresAt": "2027-01-01T00:00:00Z",
       "metadata": {
@@ -944,11 +902,11 @@ Authorization: Bearer <authorization-info>
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp", 
           "policy": "NONE",
           "properties": {
-            "accessAddresses": ["192.168.1.3"],
+            "accessAddresses": ["192.168.1.4"],
             "accessPort": 1883,
             "baseTopic": "heat-alert", "operations": ["warn"]
           }
@@ -964,9 +922,9 @@ The service operation **responds** with the status code `201` if the service ins
 {
   "entries": [
     {
-      "instanceId": "alert-consumer1::alert-service1::1.0.0",
+      "instanceId": "AlertProvider1|alertService1|1.0.0",
       "provider": {
-        "name": "alert-consumer1",
+        "name": "AlertProvider1",
         "metadata": {},
         "version": "1.1.0",
         "addresses": [
@@ -976,7 +934,7 @@ The service operation **responds** with the status code `201` if the service ins
           }
         ],
         "device": {
-          "name": "alarm1",
+          "name": "ALARM1",
           "metadata": {
             "volume": {
               "value": 100,
@@ -996,7 +954,7 @@ The service operation **responds** with the status code `201` if the service ins
         "updatedAt": "2025-03-15T20:22:44Z"
       },
       "serviceDefinition": {
-        "name": "alert-service1",
+        "name": "alertService1",
         "createdAt": "2025-03-15T20:21:43Z",
         "updatedAt": "2025-03-15T20:21:43Z"
       },
@@ -1010,7 +968,7 @@ The service operation **responds** with the status code `201` if the service ins
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp",
           "policy": "NONE",
           "properties": {
@@ -1030,9 +988,9 @@ The service operation **responds** with the status code `201` if the service ins
       "updatedAt": "2025-03-15T21:52:40.389503Z"
     },
     {
-      "instanceId": "alert-consumer2::alert-service1::1.0.0",
+      "instanceId": "AlertProvider2|alertService2|1.0.0",
       "provider": {
-        "name": "alert-consumer2",
+        "name": "AlertProvider2",
         "metadata": {},
         "version": "1.1.0",
         "addresses": [
@@ -1042,7 +1000,7 @@ The service operation **responds** with the status code `201` if the service ins
           }
         ],
         "device": {
-          "name": "alarm2",
+          "name": "ALARM2",
           "metadata": {
             "volume": {
               "value": 110,
@@ -1062,7 +1020,7 @@ The service operation **responds** with the status code `201` if the service ins
         "updatedAt": "2025-03-15T20:22:44Z"
       },
       "serviceDefinition": {
-        "name": "alert-service1",
+        "name": "alertService2",
         "createdAt": "2025-03-15T20:21:43Z",
         "updatedAt": "2025-03-15T20:21:43Z"
       },
@@ -1076,12 +1034,12 @@ The service operation **responds** with the status code `201` if the service ins
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp",
           "policy": "NONE",
           "properties": {
             "accessAddresses": [
-              "192.168.1.3"
+              "192.168.1.4"
             ],
             "accessPort": 1883,
             "baseTopic": "heat-alert",
@@ -1102,12 +1060,12 @@ The service operation **responds** with the status code `201` if the service ins
 The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
+
 {
-  "type": "about:blank",
-  "title": "Bad Request",
-  "status": 400,
-  "detail": "Failed to read request",
-  "instance": "/serviceregistry/mgmt/service-instances"
+  "errorMessage": "Service definition name is empty",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceregistry/mgmt/service-instances"
 }
 ```
 
@@ -1122,14 +1080,14 @@ Authorization: Bearer <authorization-info>
 {
   "instances": [
     {
-      "instanceId": "alert-consumer1::alert-service1::1.0.0",
+      "instanceId": "AlertProvider1|alertService1|1.0.0",
       "expiresAt": "2028-01-01T00:00:00Z",
       "metadata": {
         "delay": {"value": 200, "unit": "ms"}
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp", "policy": "NONE",
           "properties": {
             "accessAddresses": ["192.168.1.3"],
@@ -1140,17 +1098,17 @@ Authorization: Bearer <authorization-info>
       ]
     },
     {
-      "instanceId": "alert-consumer2::alert-service1::1.0.0",
+      "instanceId": "AlertProvider2|alertService2|1.0.0",
       "expiresAt": "2027-01-01T00:00:00Z",
       "metadata": {
         "delay": {"value": 200, "unit": "ms"}
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp", "policy": "NONE",
           "properties": {
-            "accessAddresses": ["192.168.1.3"],
+            "accessAddresses": ["192.168.1.4"],
             "accessPort": 1883,
             "baseTopic": "heat-alert", "operations": ["warn"]
           }
@@ -1167,9 +1125,9 @@ The service operation **responds** with the status code `200` if the service ins
 {
   "entries": [
     {
-      "instanceId": "alert-consumer1::alert-service1::1.0.0",
+      "instanceId": "AlertProvider1|alertService1|1.0.0",
       "provider": {
-        "name": "alert-consumer1",
+        "name": "AlertProvider1",
         "metadata": {},
         "version": "1.1.0",
         "addresses": [
@@ -1179,7 +1137,7 @@ The service operation **responds** with the status code `200` if the service ins
           }
         ],
         "device": {
-          "name": "alarm1",
+          "name": "ALARM1",
           "metadata": {
             "volume": {
               "value": 100,
@@ -1199,7 +1157,7 @@ The service operation **responds** with the status code `200` if the service ins
         "updatedAt": "2025-03-15T20:22:44Z"
       },
       "serviceDefinition": {
-        "name": "alert-service1",
+        "name": "alertService1",
         "createdAt": "2025-03-15T20:21:43Z",
         "updatedAt": "2025-03-15T20:21:43Z"
       },
@@ -1213,7 +1171,7 @@ The service operation **responds** with the status code `200` if the service ins
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp",
           "policy": "NONE",
           "properties": {
@@ -1234,9 +1192,9 @@ The service operation **responds** with the status code `200` if the service ins
       "updatedAt": "2025-03-15T22:30:44.209238800Z"
     },
     {
-      "instanceId": "alert-consumer2::alert-service1::1.0.0",
+      "instanceId": "AlertProvider2|alertService2|1.0.0",
       "provider": {
-        "name": "alert-consumer2",
+        "name": "AlertProvider2",
         "metadata": {},
         "version": "1.1.0",
         "addresses": [
@@ -1246,7 +1204,7 @@ The service operation **responds** with the status code `200` if the service ins
           }
         ],
         "device": {
-          "name": "alarm2",
+          "name": "ALARM2",
           "metadata": {
             "volume": {
               "value": 110,
@@ -1266,7 +1224,7 @@ The service operation **responds** with the status code `200` if the service ins
         "updatedAt": "2025-03-15T20:22:44Z"
       },
       "serviceDefinition": {
-        "name": "alert-service1",
+        "name": "alertService2",
         "createdAt": "2025-03-15T20:21:43Z",
         "updatedAt": "2025-03-15T20:21:43Z"
       },
@@ -1280,12 +1238,12 @@ The service operation **responds** with the status code `200` if the service ins
       },
       "interfaces": [
         {
-          "templateName": "generic-mqtt",
+          "templateName": "generic_mqtt",
           "protocol": "tcp",
           "policy": "NONE",
           "properties": {
             "accessAddresses": [
-              "192.168.1.3"
+              "192.168.1.4"
             ],
             "accessPort": 1883,
             "baseTopic": "heat-alert",
@@ -1309,16 +1267,17 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 {
   "errorMessage": "Instance id is empty",
   "errorCode": 400,
-  "exceptionType": "INVALID_PARAMETER"
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "PUT /serviceregistry/mgmt/service-instances"
 }
 ```
 
 ### service-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the identitifers of the service instances that need to be removed.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[ServiceInstanceID](../primitives.md#serviceinstanceid)> as path parameter, which contains the identitifers of the service instances that need to be removed.
 
 ```
-DELETE /serviceregistry/mgmt/service-instances?serviceInstances=alert-consumer1%3A%3Aalert-service1%3A%3A1.0.0&serviceInstances=alert-consumer2%3A%3Aalert-service1%3A%3A1.0.0 HTTP/1.1
+DELETE /serviceregistry/mgmt/service-instances?serviceInstances=AlertProvider1%7CalertService1%7C1.0.0&serviceInstances=AlertProvider2%7CalertService2%7C1.0.0 HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
@@ -1363,7 +1322,7 @@ The service operation **responds** with the status code `200` called successfull
 {
   "entries": [
     {
-      "name": "generic-mqtt",
+      "name": "generic_mqtt",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1387,7 +1346,7 @@ The service operation **responds** with the status code `200` called successfull
           "mandatory": true,
           "validator": "NOT_EMPTY_STRING_SET",
           "validatorParams": [
-            "NAME"
+            "OPERATION"
           ]
         }
       ],
@@ -1402,12 +1361,12 @@ The service operation **responds** with the status code `200` called successfull
 The **error codes** are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
+"The specified interface template name does not match the naming convention: "
 {
-  "type": "about:blank",
-  "title": "Bad Request",
-  "status": 400,
-  "detail": "Failed to read request",
-  "instance": "/serviceregistry/mgmt/interface-templates/query"
+  "errorMessage": "The specified interface template name does not match the naming convention: general@mqtt",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceregistry/mgmt/interface-templates/query"
 }
 ```
 
@@ -1422,7 +1381,7 @@ Authorization: Bearer <authorization-info>
 {
   "interfaceTemplates": [
     {
-      "name": "custom-ftp",
+      "name": "custom_ftp",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1435,7 +1394,7 @@ Authorization: Bearer <authorization-info>
       ]
     },
     {
-      "name": "my-awesome-ftp",
+      "name": "my_awesome_ftp",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1456,7 +1415,7 @@ The service operation **responds** with the status code `201` if the interface t
 {
   "entries": [
     {
-      "name": "my-awesome-ftp",
+      "name": "my_awesome_ftp",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1470,7 +1429,7 @@ The service operation **responds** with the status code `201` if the interface t
       "updatedAt": "2025-03-15T23:09:00.882593100Z"
     },
     {
-      "name": "custom-ftp",
+      "name": "custom_ftp",
       "protocol": "tcp",
       "propertyRequirements": [
         {
@@ -1492,7 +1451,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ```
 {
-  "errorMessage": "Interface template already exists: custom-ftp",
+  "errorMessage": "Interface template already exists: custom_ftp",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /serviceregistry/mgmt/interface-templates"
@@ -1501,10 +1460,10 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### interface-template-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[Name](../primitives.md#name)> as path parameter, which contains the string identifier of the interface descriptors that need to be removed.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[InterfaceName](../primitives.md#interfacename)> as path parameter, which contains the string identifier of the interface templates that need to be removed.
 
 ```
-DELETE /serviceregistry/mgmt/interface-templates?names=custom-ftp&names=my-awesome-ftp HTTP/1.1
+DELETE /serviceregistry/mgmt/interface-templates?names=custom_ftp&names=my_awesome_ftp HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.

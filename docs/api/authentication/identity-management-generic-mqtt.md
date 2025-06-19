@@ -59,7 +59,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-  "status": "200",
+  "status": 200,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -95,7 +95,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "status": "400",
+  "status": 400,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -148,7 +148,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-  "status": "201",
+  "status": 201,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -184,7 +184,7 @@ If the Authentication System needs contacting an external server during the crea
 
 ```
 {
-  "status": "400",
+  "status": 400,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -234,7 +234,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-  "status": "201",
+  "status": 201,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -270,7 +270,7 @@ If the Authentication System needs contacting an external server during the upda
 
 ```
 {
-  "status": "400",
+  "status": 400,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -302,7 +302,7 @@ The service operation **responds** with the status code `200` if called successf
 
 ```
 {
-  "status": "200",
+  "status": 200,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": ""
@@ -316,7 +316,7 @@ If the Authentication System needs contacting an external server during the dele
 
 ```
 {
-  "status": "401",
+  "status": 401,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -356,7 +356,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-  "status": "200",
+  "status": 200,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -384,7 +384,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "status": "400",
+  "status": 400,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {
@@ -416,7 +416,7 @@ The service operation **responds** with the status code `200` if called successf
 
 ```
 {
-  "status": "200",
+  "status": 200,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": ""
@@ -429,7 +429,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "status": "401",
+  "status": 401,
   "traceId": "<trace-id>",
   "receiver": "<receiver-system-identifier>",
   "payload": {

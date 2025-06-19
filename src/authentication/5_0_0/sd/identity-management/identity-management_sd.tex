@@ -170,7 +170,7 @@ Operation \textit{identity-mgmt-create} creates the specified identities. The cr
 
 \begin{itemize}
     \item Authentication method should come from a predefined set. The content of this set is implementation-specific.
-    \item System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
     \item System names can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item The requirements of credential map is based on the authentication method, so the related criteria are implementation-specific.
     \item Multiple identities can be created at once, but it is forbidden to specify systems with the same name.
@@ -182,7 +182,7 @@ Operation \textit{identity-mgmt-create} creates the specified identities. The cr
 Operation \textit{identity-mgmt-update} updates the specified existing identities. The update data must meet the following criteria:
 
 \begin{itemize}
-    \item System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
     \item System names can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item The requirements of credential map is based on the authentication method, so the related criteria are implementation-specific.
     \item Multiple identities can be updated at once, but it is forbidden to specify systems with the same name.
@@ -403,7 +403,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline\end{tabularx}
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline\end{tabularx}
 \end{table}
 
 \newpage
