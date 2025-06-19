@@ -38,13 +38,45 @@ This service operation removes a subscription.
 :material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#unsubscribe) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#unsubscribe)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](todo) | [generic_mqtts](todo)
 
+-----
+
+### generalManagement
+
+Its purpose is to get some information about the hosting system’s behavior, such as log entries and configuration settings. The service is offered for administrative Support systems.
+
+Learn more: <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
+:material-api: [generic_http (IDD)](../api/general/general-management-generic-http.md) | [generic_https (IDD)](../api/general/general-management-generic-http.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/general/general-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/general/general-management-generic-mqtt.md) <br />
+:material-tag: since: v5.0.0 
+
+**get-log**
+
+This service operation lists the log entries of the system that match the filtering requirements.
+
+:material-arrow-right-thin: Example: [generic_http](../api/general/general-management-generic-http.md#get-log) | [generic_https](../api/general/general-management-generic-http.md#get-log)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/general/general-management-generic-mqtt.md#get-log) | [generic_mqtts](../api/general/general-management-generic-mqtt.md#get-log)
+
+**get-config**
+
+This service operation lists the current values of the specified configuration settings.
+
+:material-arrow-right-thin: Example: [generic_http](../api/general/general-management-generic-http.md#get-config) | [generic_https](../api/general/general-management-generic-http.md#get-config)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/general/general-management-generic-mqtt.md#get-config) | [generic_mqtts](../api/general/general-management-generic-mqtt.md#get-config)
+
+-----
+
 ### serviceOrchestrationPushManagement
 
 Coming soon.
 
+-----
+
 ### serviceOrchestrationLockManagement
 
 Coming soon.
+
+-----
 
 ### serviceOrchestrationHistoryManagement
 
