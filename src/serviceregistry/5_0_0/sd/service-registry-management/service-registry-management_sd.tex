@@ -228,7 +228,7 @@ Operation \textit{system-query} lists the systems that match the filtering requi
 Operation \textit{system-create} registers the specified systems. The creation data must meet the following criteria:
 
 \begin{itemize}
-    \item System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
     \item System names can contain maximum 63 character of letters (english alphabet), and numbers, and have to start with a letter.
     \item System has to have at least one address (including those that come from the referenced device, if any). It is recommended to use IP address. 
     \item Keys in the metadata structure can not contain dot (.) character.
@@ -242,7 +242,7 @@ Operation \textit{system-create} registers the specified systems. The creation d
 Operation \textit{system-update} updates the specified existing systems. The update data must meet the following criteria:
 
 \begin{itemize}
-    \item System names are case sensitive, must following the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
     \item System names can contain maximum 63 character of letters (english alphabet), and numbers, and have to start with a letter.
     \item System has to have at least one address (including those that come from the referenced device, if any). It is recommended to use IP address. 
     \item Keys in the metadata structure can not contain dot (.) character.
@@ -886,7 +886,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{Boolean}          & One out of true or false. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
-\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must following the UPPER\_SNAKE\_CASE naming convention. \\ \hline
+\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must follow the UPPER\_SNAKE\_CASE naming convention. \\ \hline
 \pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \end{tabularx}
@@ -894,7 +894,7 @@ The concrete interpretations of each of these types and structures must be provi
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
-\pdef{InterfaceName}    & A string identifier of an interface descriptor. Must following snake\_case naming convention. \\ \hline
+\pdef{InterfaceName}    & A string identifier of an interface descriptor. Must follow snake\_case naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
@@ -903,9 +903,9 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
 \pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
 \pdef{ServiceInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance's provider name, service definition and version, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline
-\pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must following camelCase naming convention. \\ \hline
+\pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
 \pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning. \\ \hline
 \end{tabularx}
 \end{table}

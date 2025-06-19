@@ -47,16 +47,16 @@ Topic:  arrowhead/serviceregistry/device-discovery/register
       "name": "THERMOMETER2",
       "metadata": {
          "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
          ],
          "maxTemperature": {
-            "Kelvin": 310,
-            "Celsius": 40
+            "kelvin": 310,
+            "celsius": 40
          },
          "minTemperature": {
-            "Kelvin": 260,
-            "Celsius": -10
+            "kelvin": 260,
+            "celsius": -10
          }
       },
       "addresses": [
@@ -78,16 +78,16 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
       "name": "THERMOMETER2",
       "metadata": {
          "scales": [
-            "Kelvin",
-            "Celsius"
+            "kelvin",
+            "celsius"
          ],
          "maxTemperature": {
-            "Kelvin": 310,
-            "Celsius": 40
+            "kelvin": 310,
+            "celsius": 40
          },
          "minTemperature": {
-            "Kelvin": 260,
-            "Celsius": -10
+            "kelvin": 260,
+            "celsius": -10
          }
       },
       "addresses": [
@@ -143,7 +143,7 @@ Topic:  arrowhead/serviceregistry/device-discovery/lookup
       "addressType": "MAC",
       "metadataRequirementList": [
          {
-            "maxTemperature.Celsius": {
+            "maxTemperature.celsius": {
                "op": "LESS_THAN",
                "value": 50
             }
@@ -166,16 +166,16 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
             "name": "THERMOMETER2",
             "metadata": {
                "scales": [
-                  "Kelvin",
-                  "Celsius"
+                  "kelvin",
+                  "celsius"
                ],
                "maxTemperature": {
-                  "Kelvin": 310,
-                  "Celsius": 40
+                  "kelvin": 310,
+                  "celsius": 40
                },
                "minTemperature": {
-                  "Kelvin": 260,
-                  "Celsius": -10
+                  "kelvin": 260,
+                  "celsius": -10
                }
             },
             "addresses": [

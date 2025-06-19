@@ -39,7 +39,7 @@ Authorization:  Bearer <identity-info>
 
 {
   "metadata":  {
-    "scales":  ["Kelvin", "Celsius"],
+    "scales":  ["kelvin", "celsius"],
     "location":  {"side":  "North", "block":  2},
     "indoor":  true
   },
@@ -61,8 +61,8 @@ entity is already existing or `201` if the entity was newly created. The respons
   "name":  "TemperatureProvider2",
   "metadata":  {
     "scales":  [
-      "Kelvin",
-      "Celsius"
+      "kelvin",
+      "celsius"
     ],
     "location":  {
       "side":  "North",
@@ -85,16 +85,16 @@ entity is already existing or `201` if the entity was newly created. The respons
     "name":  "THERMOMETER2",
     "metadata":  {
       "scales":  [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "maxTemperature":  {
-        "Kelvin":  310,
-        "Celsius":  40
+        "kelvin":  310,
+        "celsius":  40
       },
       "minTemperature":  {
-        "Kelvin":  260,
-        "Celsius":  -10
+        "kelvin":  260,
+        "celsius":  -10
       }
     },
     "addresses":  [
@@ -158,8 +158,8 @@ The service operation **responds** with the status code `200` if called successf
       "name":  "TemperatureProvider1",
       "metadata":  {
         "scales":  [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "location":  {
           "side":  "North",

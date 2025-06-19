@@ -42,7 +42,7 @@ Topic:  arrowhead/serviceregistry/system-discovery/register
    "qosRequirement": "<0|1|2>",
    "payload": {
      "metadata":  {
-       "scales":  ["Kelvin", "Celsius"],
+       "scales":  ["kelvin", "celsius"],
        "location":  {"side":  "North", "block":  2},
        "indoor":  true
      },
@@ -68,8 +68,8 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
     "name": "TemperatureProvider2",
     "metadata": {
       "scales": [
-        "Kelvin",
-        "Celsius"
+        "kelvin",
+        "celsius"
       ],
       "location": {
         "side": "North",
@@ -92,16 +92,16 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
       "name": "THERMOMETER2",
       "metadata": {
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "maxTemperature": {
-          "Kelvin": 310,
-          "Celsius": 40
+          "kelvin": 310,
+          "celsius": 40
         },
         "minTemperature": {
-          "Kelvin": 260,
-          "Celsius": -10
+          "kelvin": 260,
+          "celsius": -10
         }
       },
       "addresses": [
@@ -180,8 +180,8 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
          "name":  "TemperatureProvider1",
          "metadata":  {
             "scales":  [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "location":  {
               "side":  "North",

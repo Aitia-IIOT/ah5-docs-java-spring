@@ -149,7 +149,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 Operation \textit{register} adds new system to the Local Cloud. The registration data must meet the following criteria:
 
 \begin{itemize}
-    \item System names are case sensitive, must following the PascalCase naming
+    \item System names are case sensitive, must follow the PascalCase naming
 convention and have to be unique within the Local Cloud.
     \item System names can contain maximum 63 character of letters (english alphabet), and numbers, and have to start with a letter.
     \item System has to have at least one address (including those that come from the referenced device, if any). It is recommended to use IP address. 
@@ -160,7 +160,7 @@ convention and have to be unique within the Local Cloud.
 
 \fsubsection{lookup}{SystemLookupRequest}{SystemLookupResponse}{}{ErrorResponse}
 
-Operation \textit{revoke} removes a system from the Local Cloud. The lookup data must meet the following criteria:
+ Operation \textit{lookup} lists the systems that match the filtering requirements. The lookup data must meet the following criteria:
 
 \begin{itemize}
     \item If a filter expects a list, there is an OR relation between the elements of the filter.
@@ -169,7 +169,7 @@ Operation \textit{revoke} removes a system from the Local Cloud. The lookup data
 
 \fsubsection{revoke}{Identity}{}{OperationStatus}{ErrorResponse}
 
-Operation \textit{lookup} lists the systems that match the filtering requirements. The input operation data must meet the following criteria:
+Operation \textit{revoke} removes a system from the Local Cloud. The input operation data must meet the following criteria:
 
 \begin{itemize}
     \item With this operation a system can only revoke itself.
@@ -331,14 +331,14 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{Boolean}          & One out of \texttt{true} or \texttt{false}. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
-\pdef{DeviceName}             & A string identifier that is intended to be both human and machine-readable. Must following the UPPER\_SNAKE\_CASE naming convention. \\ \hline
+\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must follow the UPPER\_SNAKE\_CASE naming convention. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
 \pdef{Version}          & Specifies a system version. Version must follow the Semantic Versioning. \\ \hline
 \end{tabularx}
 \end{table}

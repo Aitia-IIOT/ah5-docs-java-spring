@@ -33,7 +33,7 @@ Set to `true` in order to show all HTTP requests/responses in debug log.
 
 :fontawesome-solid-wrench: **normalization.mode**
 
-Specifies how to normalize device, system, service definition, service operation, interface template names and cloud identifiers in requests. In `simple` mode, normalization only removes starting and ending whitespaces and the requester's responsibility to make sure the various naming conventions are used. In `extended` mode, normalization tries to transform inputs to follow the appropriate naming convention.
+Specifies how to normalize device, system, service definition, service operation, interface template names and cloud identifiers in requests. In `simple` mode, normalization only removes starting and ending whitespaces and it is the requester's responsibility to make sure the various naming conventions are used. In `extended` mode, normalization tries to transform inputs to follow the appropriate naming convention.
 
 :fontawesome-solid-wrench: **server.ssl.enabled**
 

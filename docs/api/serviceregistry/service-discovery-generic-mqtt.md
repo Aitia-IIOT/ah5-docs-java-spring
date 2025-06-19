@@ -78,8 +78,8 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
       "metadata": {
         "type": "temperature",
         "scales": [
-          "Kelvin",
-          "Celsius"
+          "kelvin",
+          "celsius"
         ],
         "customizable": false
       },
@@ -206,8 +206,8 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
           "metadata": {
             "type": "temperature",
             "scales": [
-              "Kelvin",
-              "Celsius"
+              "kelvin",
+              "celsius"
             ],
             "customizable": false
           },

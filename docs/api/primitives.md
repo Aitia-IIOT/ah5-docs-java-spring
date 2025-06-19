@@ -66,7 +66,7 @@ Association of a key of type [String](#string) and a value of any type. It is re
 ```
 {
     "verbose": true,
-    "name": "temperatureProvider1",
+    "name": "TemperatureProvider1",
     "size": 500
 }
 ```
