@@ -47,9 +47,21 @@ nav:
         - MQTT:
           - identity: api/authentication/identity-generic-mqtt.md
           - identityManagement: api/authentication/identity-management-generic-mqtt.md
+      - Blacklist:
+        - HTTP:
+          - blacklistDiscovery: api/blacklist/blacklistDiscovery-generic-http.md
+          - blacklistManagement: api/blacklist/blacklistManagement-generic-http.md
+        - MQTT:
+          - blacklistDiscovery: api/blacklist/blacklistDiscovery-generic-mqtt.md
+          - blacklistManagement: api/blacklist/blacklistManagement-generic-mqtt.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
+      - BlacklistCreateListRequest: api/data-models/blacklist-create-list-request.md
+      - BlacklistCreateRequest: api/data-models/blacklist-create-request.md
+      - BlacklistEntryListResponse: api/data-models/blacklist-entry-list-response.md
+      - BlacklistEntryResponse: api/data-models/blacklist-entry-response.md
+      - BlacklistQueryRequest: api/data-models/blacklist-query-request.md
       - ConfigMap: api/data-models/config-map.md
       - ConfigResponse: api/data-models/config-response.md
       - Credentials: api/data-models/credentials.md
