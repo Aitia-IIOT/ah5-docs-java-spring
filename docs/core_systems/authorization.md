@@ -15,36 +15,36 @@ The purpose of this service is to validate service consumption permissions and t
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization_sd.pdf)<br />
 :material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-generic-http.md)<br />
-:material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-generic-mqtt.md) TODO<br />
+:material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-generic-mqtt.md)<br />
 :material-tag: since: v5.0.0 
 
 **grant**
 
 This service operation enables a provider to grant access to various consumers to its service. It can also be used by a publisher to grant access to subscribers to its event with a specific type.
 
-:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#grant) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#grant) TODO<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#grant) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#grant) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#grant) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#grant)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#grant) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#grant)
 
 **revoke**
 
 This service operation enables a provider/publisher to remove existing authorization policies that was created by itself.
 
-:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#revoke) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#revoke) TODO<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#revoke) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#revoke) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#revoke) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#revoke)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#revoke) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#revoke)
 
 **lookup**
 
 This service operation lists the requester-created authorization rules that match the filtering requirements.
 
-:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#lookup) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#lookup) TODO<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#lookup) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#lookup) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#lookup) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#lookup)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#lookup) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#lookup)
 
 **verify**
 
 This service operation checks whether a consumer has access to a provider's specified service/service operation/event type.
 
-:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#verify) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#verify) TODO<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#verify) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#verify) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#verify) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#verify)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#verify) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#verify)
 
 ### authorizationToken
 

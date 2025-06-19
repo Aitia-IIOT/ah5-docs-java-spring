@@ -166,7 +166,7 @@ Operation \textit{grant} creates a provider-level authorization policy. The gran
             \item \textit{Blacklist-based}: All consumers of the specified cloud but the specified ones (in a list) can use the specified target/scope.
             \item \textit{System-level metadata-based}: Consumers of the specified cloud with a matching system-level metadata can use the specified target/scope.
         \end{itemize}
-    \item Policies with type \textit{Whitelist-based} or \textit{Blacklist-based} has a mandatory system name list parameter. System names are case sensitive, must following the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Policies with type \textit{Whitelist-based} or \textit{Blacklist-based} has a mandatory system name list parameter. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item Evaluating policies with type \textit{System-level metadata-based} requires an online ServiceRegistry.
 \end{itemize}
 
@@ -196,7 +196,7 @@ Operation \textit{verify} checks whether a consumer can use a provider's service
 
 \begin{itemize}
     \item Only the provider OR a consumer can be the requester of this operation, which means that the appropriate field is optional (the other one is mandatory), however if both provider and consumer is specified, one of them must match with the requester's name.
-    \item Provider and consumer field can contain a system name. System names are case sensitive, must following the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Provider and consumer field can contain a system name. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
     \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
     \item Target type can be service definition or event type. 
@@ -402,7 +402,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{CloudIdentifier} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name that managing the cloud. Each part must follow the PascalCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
-\pdef{EventTypeName}      & A string identifier that is intended to be both human and machine-readable. Must following camelCase naming convention. \\ \hline
+\pdef{EventTypeName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \end{tabularx}
@@ -413,10 +413,10 @@ The concrete interpretations of each of these types and structures must be provi
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
-\pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must following camelCase naming convention. \\ \hline
-\pdef{ServiceOperationName} & A string identifier that is intended to be both human and machine-readable. Must following kebab-case naming convention. \\ \hline
+\pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
+\pdef{ServiceOperationName} & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must following PascalCase naming convention. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
 \end{tabularx}
 \end{table}
 

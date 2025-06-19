@@ -34,10 +34,8 @@ Hereby the **Interface Design Description** (IDD) is provided to the [authorizat
 
 ### grant
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [AuthorizationGrantRequest](../data-models/authorization-grant-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationGrantRequest](../data-models/authorization-grant-request.md)
 JSON encoded body.
-
-TODO: continue
 
 ```
 POST /consumerauthorization/authorization/grant HTTP/1.1
@@ -61,7 +59,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with the status code `201` if the policy instance entity was created. The response also contains a
+The service operation **responds** with 200 if called successfully and the policy instance is already existing or 201 if the entity was newly created. The response also contains an
 [AuthorizationResponse](../data-models/authorization-policy-response.md) JSON encoded body.
 
 ```
@@ -89,8 +87,6 @@ The service operation **responds** with the status code `201` if the policy inst
 }
 ```
 
-TODO: continue
-
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission and
 `500` if an unexpected error happens. The error response also contains an
@@ -98,148 +94,81 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage": "Expiration time has an invalid time format",
+  "errorMessage": "Target is missing"",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin": "POST /serviceregistry/service-discovery/register"
+  "origin": "POST /consumerauthorization/authorization/grant"
+}
+```
+
+### revoke
+
+The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http), and an [AuthorizationPolicyInstanceID](../primitives.md#authorizationpolicyinstanceid) as path parameter, which is a unique identifier of the policy instance to be deleted.
+
+```
+DELETE /consumerauthorization/authorization/revoke/PR%7CLOCAL%7CTemperatureProvider%7CSERVICE_DEF%7CcelsiusInfo HTTP1.1
+Authorization: Bearer <authorization-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully and an existing policy instance entity was removed and `204` if no matching entity was found. The success response does not contain any response body.
+
+The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Revoking other systems' policy is forbidden",
+  "errorCode": 403,
+  "exceptionType": "FORBIDDEN",
+  "origin": "DELETE /consumerauthorization/authorization/revoke/PR|LOCAL|TemperatureProvider2|SERVICE_DEF|kelvinInfo"
 }
 ```
 
 ### lookup
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The URI contains a query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device and system information also returns (only if the provider supports it). The request requires a [ServiceLookupRequest](../data-models/service-lookup-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationLookupRequest](../data-models/authorization-lookup-request.md) JSON encoded body.
 
 ```
-POST /serviceregistry/service-discovery/lookup?verbose=<verbose-value> HTTP/1.1
+POST /consumerauthorization/authorization/lookup HTTP/1.1
 Authorization: Bearer <authorization-info>
 
 {
   "instanceIds": [
   ],
-  "providerNames": [
-    "TemperatureProvider2"
+  "cloudIdentifiers": [
   ],
-  "serviceDefinitionNames": [
-    "alertService"
+  "targetNames": [
+    "kelvinInfo"
   ],
-  "versions": [
-    "1.0.0"
-  ],
-  "alivesAt": "",
-  "metadataRequirementsList": [
-  ],
-  "interfaceTemplateNames": [
-  ],
-  "interfacePropertyRequirementsList": [
-  ],
-  "policies": [
-  ]
+  "targetType": "SERVICE_DEF"
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully and with a [ServiceLookupResponse](../data-models/service-lookup-response.md) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully and with an [AuthorizationPolicyListResponse](../data-models/authorization-policy-list-response.md) JSON encoded body.
 
 ```
 {
   "entries": [
     {
-      "instanceId": "TemperatureProvider2|alertService|1.0.0",
-      "provider": {
-        "name": "TemperatureProvider2",
-        "metadata": {
-          "scales": [
-            "Kelvin",
-            "Celsius"
-          ],
-          "location": {
-            "side": "North",
-            "block": 2
-          },
-          "indoor": true
-        },
-        "version": "1.0.0",
-        "addresses": [
-          {
-            "type": "IPV4",
-            "address": "192.168.56.116"
-          },
-          {
-            "type": "HOSTNAME",
-            "address": "tp2.greenhouse.com"
-          }
-        ],
-        "device": {
-          "name": "THERMOMETER2",
-          "metadata": {
-            "scales": [
-              "Kelvin",
-              "Celsius"
-            ],
-            "maxTemperature": {
-              "Kelvin": 310,
-              "Celsius": 40
-            },
-            "minTemperature": {
-              "Kelvin": 260,
-              "Celsius": -10
-            }
-          },
-          "addresses": [
-            {
-              "type": "MAC",
-              "address": "81:ef:1a:44:7a:f5"
-            }
-          ],
-          "createdAt": "2024-11-04T01:53:02Z",
-          "updatedAt": "2024-11-04T01:53:02Z"
-        },
-        "createdAt": "2024-11-08T10:21:11Z",
-        "updatedAt": "2024-11-08T10:21:11Z"
+      "instanceId": "PR|LOCAL|TemperatureProvider2|SERVICE_DEF|kelvinInfo",
+      "level": "PROVIDER",
+      "cloud": "LOCAL",
+      "provider": "TemperatureProvider2",
+      "targetType": "SERVICE_DEF",
+      "target": "kelvinInfo",
+      "description": "query for everyone, config for TemperatureManager only",
+      "defaultPolicy": {
+        "policyType": "ALL"
       },
-      "serviceDefinition": {
-        "name": "alertService",
-        "createdAt": "2024-11-08T15:23:10Z",
-        "updatedAt": "2024-11-08T15:23:10Z"
-      },
-      "version": "1.0.0",
-      "expiresAt": "2025-01-01T00:00:00Z",
-      "metadata": {
-        "maxDelay": {
-          "value": 15,
-          "unit": "sec"
+      "scopedPolicies": {
+        "config": {
+          "policyType": "WHITELIST",
+          "policyList": [
+            "TemperatureManager"
+          ]
         }
       },
-      "interfaces": [
-        {
-          "templateName": "generic_http",
-          "protocol": "http",
-          "policy": "NONE",
-          "properties": {
-            "accessAddresses": [
-              "192.168.56.116",
-              "tp2.greenhouse.com"
-            ],
-            "accessPort": 8080,
-            "operations": {
-              "subscribe": {
-                "path": "/subscribe",
-                "method": "POST"
-              },
-              "unsubscribe": {
-                "path": "/unsubscribe",
-                "method": "DELETE"
-              },
-              "set-threshold": {
-                "path": "/threshold",
-                "method": "POST"
-              }
-            },
-            "basePath": "/alert"
-          }
-        }
-      ],
-      "createdAt": "2024-11-19T17:08:48Z",
-      "updatedAt": "2024-11-19T17:08:48Z"
+      "createdBy": "TemperatureProvider2",
+      "createdAt": "2025-06-18T13:51:20Z"
     }
   ],
   "count": 1
@@ -250,30 +179,43 @@ The error codes are, `400` if the request is malformed, `401` if the requester a
 
 ```
 {
-  "errorMessage": "One of the following filters must be used: 'instanceIds', 'providerNames', 'serviceDefinitionNames'",
+  "errorMessage": "One of the following filters must be used: 'instanceIds', 'targetNames', 'cloudIdentifiers'",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin": "POST /serviceregistry/service-discovery/lookup"
+  "origin": "POST /consumerauthorization/authorization/lookup"
 }
 ```
 
-### revoke
+### verify
 
-The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http), and a [ServiceInstanceID](../primitives.md#serviceinstanceid) as path parameter, which is a unique identifier of the service instance to be deleted.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationVerifyRequest](../data-models/authorization-verify-request.md) JSON encoded body.
 
 ```
-DELETE /serviceregistry/service-discovery/revoke/TemperatureProvider1%7CcelsiusInfo%7C1.0.0 HTTP1.1
+POST /consumerauthorization/authorization/verify HTTP/1.1
 Authorization: Bearer <authorization-info>
+
+{
+  "provider": "TemperatureProvider2",
+  "consumer": "TemperatureManager",
+  "targetType": "SERVICE_DEF",
+  "target": "kelvinInfo",
+  "scope": "config"
+}
 ```
 
-The service operation **responds** with the status code `200` if called successfully and an existing service instance entity was removed and `204` if no matching entity was found. The success response does not contain any response body.
+The service operation **responds** with the status code `200` if called successfully and with a [Boolean](../primitives.md#boolean) JSON encoded body.
 
-The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+```
+true
+```
+
+The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` Error if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
-  "errorMessage": "No authorization header has been provided",
-  "errorCode": 401,
-  "exceptionType": "AUTH"
+  "errorMessage": "Only the related provider or consumer can use this operation",
+  "errorCode": 403,
+  "exceptionType": "FORBIDDEN",
+  "origin": "POST /consumerauthorization/authorization/verify"
 }
 ```
