@@ -2,7 +2,7 @@
 
 Field | Type | Description
 --- | --- | --- 
-instanceId | [AuthorizationPolicyInstanceID](../primitives.md#authorizationpolicyinstanceid) | Unique identifier of the created policy instance.
+instanceId | [AuthorizationPolicyInstanceID](../primitives.md#authorizationpolicyinstanceid) | Unique identifier of the policy instance.
 authorizationLevel | [AuthorizationLevel](../primitives.md#authorizationlevel) | Level (provider or management) of the policy.
 cloud | [CloudIdentifier](../primitives.md#cloudidentifier) | The cloud of the potential consumers. In case of the Local Cloud the word LOCAL is used.
 provider | [SystemName](../primitives.md#systemname) | The name of the system who provides the target of the rule.
