@@ -1,0 +1,202 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[3]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{Blacklist Support System}
+\ArrowheadType{System Description}
+\ArrowheadTypeShort{SysD}
+\ArrowheadVersion{5.0.0}
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Katinka Jakó}
+\ArrowheadStatus{DRAFT}
+\ArrowheadContact{jako.katinka@aitia.ai}
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides system description for the \textbf{Blacklist Support System}.
+  \end{abstract}
+
+  \vspace*{1cm}
+
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+\color{black}
+This document describes the Blacklist Support system, which makes it possible to ban systems from the Eclipse Arrowhead Local Cloud (LC), so that their requests will not be served. This system provides storage functionality for the blacklist entries that contain information about the ban for each system.
+
+The rest of this document is organized as follows.
+In Section \ref{sec:prior_art}, we reference major prior art capabilities
+of the system.
+In Section \ref{sec:use}, we describe the intended usage of the system.
+In Section \ref{sec:properties}, we describe fundamental properties
+provided by the system.
+In Section \ref{sec:delimitations}, we describe delimitations of capabilities
+of the system.
+In Section \ref{sec:services}, we describe the abstract services produced by the system.
+In Section \ref{sec:security}, we describe the security capabilities
+of the system.
+
+\subsection{Significant Prior Art}
+\label{sec:prior_art}
+
+The strong development on cloud technology and various requirements for digitization and automation has led to the concept of Local Clouds (LC).
+
+\textit{"The concept takes the view that specific geographically local automation tasks should be encapsulated and protected."} \cite{jerker2017localclouds}
+
+One of the main building blocks when realizing such Local Cloud is the capability of centrally and consistently control the blacklist within the given LC, and store who was banned, when and why. The Blacklist Support system was not part of the LC in the previous versions (4.6.x), but it is a recommended Support system in versions 5.0.0 and higher.
+
+
+\subsection{How This System Is Meant to Be Used}
+\label{sec:use}
+
+Blacklist is a recommended Support system of the Eclipse Arrowhead Local Cloud and is responsible to provide a central blacklist functionality by storing the blacklist entries.
+
+\subsection{System functionalities and properties}
+\label{sec:properties}
+
+\subsubsection {Functional properties of the system}
+Blacklist solves the following needs to fulfill the blacklist functionality.
+
+\begin{itemize}
+    \item Enables the application and other Core/Support systems to query the blacklist records that apply to them and are in force.
+    \item Enables the application and other Core/Support systems to check if an arbitrary system is blacklisted.
+\end{itemize}
+
+\subsubsection {Non functional properties of the system}
+-
+
+\subsubsection {Data stored by the system}
+In order to achieve the mentioned functionalities, Blacklist is capable to store the following information set:
+
+\begin{itemize}
+    \item \textbf{Entry}: the name of the banned system and properties of the ban like reason, start date, expiration date, etc...
+\end{itemize}
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+-
+
+\newpage
+
+\section{Services produced}
+\label{sec:services}
+
+\phantomsection
+\msubsection{service}{blacklistDiscovery}
+The purpose of this service is to provide information about the blacklist. This service is offered for both Application and Core/Support systems.
+
+\msubsection{service}{blacklistManagement}
+The purpose of this service is to manage (query, create and remove) blacklist entries in bulk. The service is offered for administrative Support systems.
+
+\msubsection{service}{monitor}
+Recommended service. Its purpose is to give information about the provider system. The service is offered for both application and Core/Support systems.
+
+\newpage
+
+\section{Security}
+\label{sec:security}
+
+For authentication, the Blacklist utilizes an other Core system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the Service Orchestration trusts the requester system self-provided identity.
+
+For authorization, the system uses an other Core system, the Authorization system to decide whether a consumer can use its services or not. If the Authorization Core system is not present in the Local Cloud, then the Blacklist allows for anyone in Local Cloud to use its services. The following service operations can always be used without any authorization rules:
+
+\begin{itemize}
+    \item \textit{blacklistDiscovery} service's \textit{lookup} operation,
+    \item \textit{blacklistDiscovery} service's \textit{check} operation.
+\end{itemize}
+
+The implementation of the Blacklist can decide about the encryption of the connection between the Blacklist and other systems. 
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}
