@@ -84,7 +84,112 @@ Coming soon.
 
 ## Configuration
 
-Coming soon.
+The system configuration properties can be found in the `application.properties` file located at `/src/main/resources` folder.
+
+**_Note:_** During the build process this file is going to be built into the executable JAR, but also going to be copied next to the JAR file. Any modification in the configuration file located next to the executable JAR file will override the built in configuration property value.
+
+### General parameters
+
+See the [general configuration properties](../general/general_config_props.md).
+
+### Database parameters
+
+:fontawesome-solid-wrench: **spring.datasource.url**
+
+URL to the database.
+
+:fontawesome-solid-wrench: **spring.datasource.username**
+
+Username to the database.
+
+:fontawesome-solid-wrench: **spring.datasource.password**
+
+Password to the database.
+
+:fontawesome-solid-wrench: **spring.datasource.driver-class-name**
+
+The driver provides the connection to the database and implements the protocol for transferring the query
+and result between client and database.
+
+:fontawesome-solid-wrench: **spring.jpa.show-sql**
+
+Set to true in order to log out the SQL queries.
+
+:fontawesome-solid-wrench: **spring.jpa.properties.hibernate.format sql**
+
+Set to true to log out SQL queries in pretty format. (Effective only when 'spring.jpa.show-sql' is 'true')
+
+:fontawesome-solid-wrench: **spring.jpa.hibernate.ddl-auto**
+
+Auto initialization of database tables. Value must be always 'none'.
+
+### Custom parameters
+
+:fontawesome-solid-wrench: **authenticator.credentials**
+
+The credentials that this system will use for performing the login operation when the authentication policy is `outsourced`.
+
+```
+authenticator.credentials={\
+	'<credential-name>': '<credential-value>' \
+}
+```
+
+:fontawesome-solid-wrench: **enable.blacklist.filter**
+
+Enable/disable automatic service requester system name verification against to cloud level blacklist. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **force.blacklist.filter**
+
+Whether or not the service requests should be refused when the blacklist server is not responding. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **enable.management.filter**
+
+Enable or disable authorization for accessing the management services. Can be `true` of `false`.
+
+:fontawesome-solid-wrench: **management.policy**
+
+Way of authorizing the management service requester systems. Can be:
+     
+- `sysop-only`, when the authenticated requester system has _system-operator_ role that ensures overall management permission.
+- `whitelist`, _sysop-only_ and when the authenticated requester system is whitelisted in the _management.whitelist_ configuration property that ensures overall management permission.
+- `authorization`, _sysop-only_ and _whitelist_ and when the authenticated requester system has appropriate service permission according to the ConsumerAuthorization Core system.
+
+:fontawesome-solid-wrench: **management.whitelist**
+
+Name of the systems which can access to management services in case of `whitelist` policy is effective.
+
+```
+management.whitelist=<system-name-a>,<system-name-b>
+```
+
+:fontawesome-solid-wrench: **enable.authorization**
+
+Enable or disable consumer authorization cross-checking during the orchestration process.
+
+:fontawesome-solid-wrench: **enable.translation**
+
+Enable or disable automatic interface translation bridge creation between a consumer and a provider during the orchestration process.
+
+:fontawesome-solid-wrench: **enable.qos**
+
+Enable or disable quality-of-service cross-checking during the orchestration process.
+
+:fontawesome-solid-wrench: **enable.intercloud**
+
+Enable or disable automatic gateway tunnel creation between a consumer and a provider from a neighbor cloud during the orchestration process.
+
+:fontawesome-solid-wrench: **orchestration.history.max.age**
+
+Specifies after how long (in days) the orchestration history records can be automatically deleted.
+
+:fontawesome-solid-wrench: **cleaner.job.interval**
+
+Specifies how often (in milisec) the expired subscriptions and the orchestration history records can be automatically deleted and how often the expired orchestration locks can be released.
+
+:fontawesome-solid-wrench: **push.orchestration.max.thread**
+
+Specifies the maximum number of threads that can be allocated to process push orchestration tasks.
 
 ## Changelog
 
