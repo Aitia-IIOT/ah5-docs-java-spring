@@ -134,7 +134,7 @@ A **String** identifier that is intended to be both human and machine-readable. 
 
 ## ServiceOperationName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and dash (-). A name has to start with a letter, cannot ends with a dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and dash (-). A name has to start with a letter, cannot end with a dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## String
 
@@ -143,6 +143,10 @@ A chain of UTF-8 characters.
 ## SystemName
 
 A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the _PascalCase_ naming convention. The identifier maximum length is 63 characters.
+
+## TokenType
+
+A **String** name that groups token technologies by usage characteristics. Can be `USAGE_LIMITED_TOKEN`, `TIME_LIMITED_TOKEN` or `SELF_CONTAINED_TOKEN`.
 
 ## UUID
 

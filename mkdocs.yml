@@ -44,7 +44,9 @@ nav:
             - authorization: api/consumerauthorization/authorization-generic-mqtt.md
       - DynamicServiceOrchestration:
         - HTTP:
-          - serviceOrchestration: api/serviceorchestration/orchestration-generic-http_dynamic.md
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
+        - MQTT:
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
@@ -68,6 +70,8 @@ nav:
       - AuthorizationPolicyListResponse: api/data-models/authorization-policy-list-response.md
       - AuthorizationPolicyRequest: api/data-models/authorization-policy-request.md
       - AuthorizationPolicyResponse: api/data-models/authorization-policy-response.md
+      - AuthorizationTokenDescriptor: api/data-models/authorization-token-descriptor.md
+      - AuthorizationTokenMap: api/data-models/authorization-token-map.md
       - AuthorizationVerifyRequest: api/data-models/authorization-verify-request.md
       - BlacklistCreateListRequest: api/data-models/blacklist-create-list-request.md
       - BlacklistCreateRequest: api/data-models/blacklist-create-request.md
