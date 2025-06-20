@@ -14,7 +14,7 @@ A **String** representation of an authentication method. Currently, only `PASSWO
 
 ## AuthorizationTargetType
 
-A string value representing the target of the authorization, Can be `SERVICE_DEF` or `EVENT_TYPE`.
+A **String** value representing the target of the authorization. Can be `SERVICE_DEF` or `EVENT_TYPE`.
 
 ## BlacklistReason
 
@@ -26,7 +26,7 @@ A **boolean** value, one out of `true` or `false`.
 
 ## CloudIdentifier
 
-A string identifier of a Local Cloud. It consists of the cloud name and the organization name separated by a pipe, as follows: `<CloudName>|<OrganizationName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the organization name is _AitiaInc_.)
+A **String** identifier of a Local Cloud. It consists of the cloud name and the organization name separated by a pipe, as follows: `<CloudName>|<OrganizationName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the organization name is _AitiaInc_.)
 
 ## DateTime
 
@@ -118,7 +118,7 @@ A **String** identifier that is intended to be both human and machine-readable. 
 
 ## ServiceOperationName
 
-A ***String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers and dash (`-`). A name has to start with a letter, cannot end with dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers and dash (`-`). A name has to start with a letter, cannot end with dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## String
 
