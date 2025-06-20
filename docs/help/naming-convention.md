@@ -42,5 +42,5 @@ Device profile | example
 --- | ---
 Required CN | `my-device.my-cloud.my-company.arrowhead.eu`
 Transformed CN | `MY_DEVICE.MyCloud.MyCompany.arrowhead.eu`
-Retrieved System Name | `MY_DEVICE`
+Retrieved Device Name | `MY_DEVICE`
 Retrieved Cloud Identifier | `MyCloud|MyCompany`

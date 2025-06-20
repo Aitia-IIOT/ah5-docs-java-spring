@@ -39,7 +39,9 @@ nav:
           - serviceRegistryManagement: api/serviceregistry/service-registry-management-generic-mqtt.md
       - DynamicServiceOrchestration:
         - HTTP:
-          - orchestration: api/serviceorchestration/orchestration-generic-http_dynamic.md
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
+        - MQTT:
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
@@ -57,6 +59,8 @@ nav:
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
+      - AuthorizationTokenDescriptor: api/data-models/authorization-token-descriptor.md
+      - AuthorizationTokenMap: api/data-models/authorization-token-map.md
       - BlacklistCreateListRequest: api/data-models/blacklist-create-list-request.md
       - BlacklistCreateRequest: api/data-models/blacklist-create-request.md
       - BlacklistEntryListResponse: api/data-models/blacklist-entry-list-response.md

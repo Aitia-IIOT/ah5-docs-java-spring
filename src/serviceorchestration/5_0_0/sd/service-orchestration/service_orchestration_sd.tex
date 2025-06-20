@@ -49,8 +49,8 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{orchestration} % XXX = ServiceName 
-\ArrowheadServiceID{orchestration} % ID name of service
+\ArrowheadTitle{serviceOrchestration} % XXX = ServiceName 
+\ArrowheadServiceID{serviceOrchestration} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
@@ -82,7 +82,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{orchestration} service. 
+    This document provides service description for the \textbf{serviceOrchestration} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -106,7 +106,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{orchestration} service, which provides runtime (late) binding between application systems. Its primary purpose is to find matching service instances according to the consumer's needs within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds. The matching service instances can be orchestrated with different strategies:
+This document describes the \textbf{serviceOrchestration} service, which provides runtime (late) binding between application systems. Its primary purpose is to find matching service instances according to the consumer's needs within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds. The matching service instances can be orchestrated with different strategies:
 
 \begin{itemize}
     \item \textbf{simple-store:} when the matching service instances are stored in a database as peer-to-peer rules that are maintained by higher entities and no actual service details are obtained from the Local Cloud;
@@ -115,7 +115,7 @@ This document describes the \textbf{orchestration} service, which provides runti
 \end{itemize}
 
 
-The \textbf{orchestration} service contains the following operations:
+The \textbf{serviceOrchestration} service contains the following operations:
 
 \begin{itemize}
     \item \textit{pull} performs the orchestration process and returns the matching service instances;
@@ -138,8 +138,8 @@ There are two ways to use this service:
 
 Always the same orchestration process is being performed in case of both method (\textit{pull} and \textit{push}), however the behavior of the orchestration process itself differs between the orchestration strategies.
 
-In case of \textbf{simple-store} strategy the orchestration process results in providing the corresponding service instance identifiers for all of the (or targeted) service definitions associated to the consumer system and stored in the rule database. Multiple rules with different priorities can exist for the same service definition and consuming system. Based on the provided service instance identifiers the consumer system has to perform every other required task to prepare for the successful service consumption. Hence, it has to lookup for all the actual service instance details (like access addresses, service and provider metadata, etc...) by using the \textit{service-discovery} service from the implementing system. Also, service instances are not being filtered on the consumption permissions during the orchestration process and authorization tokens for the service consumptions (if necessary) are also should be requested by the consumer system via the \textit{authorization-token} service from the implementing system.
-(See the \textit{service-discovery} and \textit{authorization-token} SD documents.)
+In case of \textbf{simple-store} strategy the orchestration process results in providing the corresponding service instance identifiers for all of the (or targeted) service definitions associated to the consumer system and stored in the rule database. Multiple rules with different priorities can exist for the same service definition and consuming system. Based on the provided service instance identifiers the consumer system has to perform every other required task to prepare for the successful service consumption. Hence, it has to lookup for all the actual service instance details (like access addresses, service and provider metadata, etc...) by using the \textit{serviceDiscovery} service from the implementing system. Also, service instances are not being filtered on the consumption permissions during the orchestration process and authorization tokens for the service consumptions (if necessary) are also should be requested by the consumer system via the \textit{authorizationToken} service from the implementing system.
+(See the \textit{serviceDiscovery} and \textit{authorizationToken} SD documents.)
 
 In case of \textbf{flexible-store} strategy the orchestration process results in providing the matching service instances, discovered based on the rules stored in the database for all of the (or targeted) service definitions that are associated to the consumer system. Multiple rules with different priorities can exist for the same service definition and consuming system. Service instances are retrieved with all the actual service and provider details (like access addresses, metadata, etc...) directly from the Local Cloud and are also filtered on the consumption permissions (if necessary). Authorization tokens for the service consumptions (if necessary) are generated in advance and provided within the orchestration results. 
 
@@ -160,7 +160,7 @@ Available for anyone within the local cloud.
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{orchestration} service is used to perform a \textit{pull} orchestration and  \textit{subscribe}/\textit{unsubscribe} for push orchestrations.
+This section describes the abstract signatures of each operations of the service. The \textbf{serviceOrchestration} service is used to perform a \textit{pull} orchestration and  \textit{subscribe}/\textit{unsubscribe} for push orchestrations.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
@@ -168,7 +168,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{pull}{OrchestrationRequest}{OrchestrationResponse}{}{ErrorResponse}
 
-The behavior of this operation differs between the orchestration strategies:
+Operation \textit{pull}  performs the orchestration process and returns the matching service instances. The behavior of this operation differs between the orchestration strategies:
 
 In case of \textbf{simple-store} strategy the \textit{pull} operation requires at least the consumer system's identity in order to perform the orchestration process. As a result of the orchestration process the consumer system receives back the matching service instance identifiers sorted by the service definition and priority. Targeting one specific service definition is also possible.
 
@@ -178,19 +178,21 @@ In case of \textbf{dynamic} strategy the \textit{pull} operation requires at lea
 
 \fsubsection{subscribe}{OrchestrationSubscriptionRequest}{OrchestrationSubscriptionId}{}{ErrorResponse}
 
-This operation requires at least the consumer's identity, the targeted service definition and a notify interface. The result of this operation is an identifier that refers to the created subscription record. Optionally a push orchestration also can be initiated at the same time.
+Operation \textit{subscribe} creates a subscription record for the targeted service and with the given service requirements. Optionally, the orchestration process can be requested to being triggered upon a successful subscription. 
+\textit{Note:} As long as the subscription exists, the orchestration process to the actual system and for the targeted service can be triggered anytime by an other system with proper privileges and via the \textit{serviceOrchestrationPushManagement} service.
+
+This operation requires at least the consumer's identity, the targeted service definition and a notify interface. The result of this operation is an identifier that refers to the created subscription record.
 
 \fsubsection{unsubscribe}{OrchestrationSubscriptionId}{}{OperationStatus}{ErrorResponse}
 
-This operation requires the identifier pointing to the subscription record to be deleted.
-
+Operation \textit{unsubscribe} requires the subscription identifier and removes the associated subscription record.
 
 \clearpage
 
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{orchestration} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{serviceOrchestration} service are listed and must be respected by the hosting System.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
@@ -230,17 +232,17 @@ exclusivityDuration & \pref{Number} & no & The interval the service wanted to be
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.8cm} | p{4.7cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-serviceDefinition & \pref{Name} & yes/no & The required service definition name. Mandatory in case of \textbf{dynamic} strategy. \\ \hline
-operations & \pref{List}$<$\pref{Name}$>$ & yes/no & The required service operation names. \newline 
+serviceDefinition & \pref{ServiceName} & yes/no & The required service definition name. Mandatory in case of \textbf{dynamic} strategy. \\ \hline
+operations & \pref{List}$<$\pref{ServiceOperationName}$>$ & yes/no & The required service operation names. \newline 
 Exactly one operation must be defined, when the following orchestration flags are true: \newline \texttt{ONLY\_INTERCLOUD}, \texttt{ALLOW\_INTERCLOUD}, \texttt{ALLOW\_TRANSLATION} \\ \hline
 versions & \pref{List}$<$\pref{Version}$>$ & no & The required service versions. \\ \hline 
 alivesAt & \pref{DateTime} & no & The orchestrated service must be alive by this time. \\ \hline
 metadataRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must meet at least to one of the specified metadata requirement. \\ \hline
-interfaceTemplateNames & \pref{List}$<$\pref{InterfaceTemplate}$>$ & no & The orchestrated service must offer at least one from the specified interface template names. \\ \hline 
+interfaceTemplateNames & \pref{List}$<$\pref{InterfaceName}$>$ & no & The orchestrated service must offer at least one from the specified interface template names. \\ \hline 
 interfaceAddressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & The orchestrated service must offer at least one from the specified interface address types. \\ \hline
 interfacePropertyRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must offer at least one interface that meets with one of the specified property requirements. \\ \hline
 securityPolicies & \pref{List}$<$\pref{SecurityPolicy}$>$ & no & The orchestrated service must meet with one of the specified security policies. \\ \hline
-preferredProviders & \pref{List}$<$\pref{Name}$>$ & no & Provider system names specified here have priority. \\ \hline
+preferredProviders & \pref{List}$<$\pref{SystemName}$>$ & no & Provider system names specified here have priority. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -330,14 +332,16 @@ warnings & \pref{List}$<$\hyperref[sec:model:String]{String}$>$ & Warning messag
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{5.1cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Description \\ \hline
-serviceInstanceId & \pref{Name} & Unique identifier of the service instance. \\ \hline
-providerName & \pref{Name} & Unique identifier of the provider system. \\ \hline
-serviceDefinition & \pref{Name} & Unique identifier of the service definition. \\ \hline
+serviceInstanceId & \pref{ServiceInstanceID} & Unique identifier of the service instance. \\ \hline
+providerName & \pref{SystemName} & Unique identifier of the provider system. \\ \hline
+serviceDefinition & \pref{ServiceName} & Unique identifier of the service definition. \\ \hline
+cloudIdentifier & \pref{CloudID} & Unique identifier of the provider cloud. \\ \hline
 version & \pref{Version} & Version of the service instance. \\ \hline
 aliveUntil & \pref{DateTime} & The service instance is available until this time. \\ \hline
 exclusiveUntil & \pref{DateTime} & The service instance is reserved until this time. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the service instance. \\ \hline
 interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & Available access interfaces of the service instance. \\ \hline
+authorizationTokens & \hyperref[sec:model:AuthorizationTokenMap]{AuthorizationTokenMap} & Generated authorization tokens, if any. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -349,12 +353,33 @@ An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or li
 
 \clearpage
 
+\msubsection{struct}{AuthorizationTokenMap}
+
+An \pref{Object} which maps \hyperref[sec:model:Scope]{Scope} and \hyperref[sec:model:AuthorizationTokenDescriptor]{AuthorizationTokenDescriptor} pairs to  \pref{SecurityPolicy} keys.
+
+\msubsection{struct}{Scope}
+
+Can be \pdef{ServiceName} or \pdef{ServiceOperationName}.
+
+\msubsection{struct}{AuthorizationTokenDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5.1cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+tokenType & \pref{TokenType} & Type of the given token. \\ \hline
+targetType & \pref{String} & What the token is made for. \\ \hline
+token & \pref{String} & The token itself. \\ \hline
+usageLimit & \pref{Number} & Maximum number of token usage, if any. \\ \hline
+expiresAt & \pref{DateTime} & Token is valid until this time, if any. \\ \hline
+\end{tabularx}
+\end{table}
+
 \msubsection{struct}{ServiceInterfaceDescriptor}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Description \\ \hline
-templateName & \pref{InterfaceTemplate} & The name of the interface template that describes the interface structure. \\ \hline
+templateName & \pref{InterfaceName} & The name of the interface template that describes the interface structure. \\ \hline
 protocol & \pref{Protocol} & The communication protocol of the interface. \\ \hline
 policy & \pref{SecurityPolicy} & The security of the interface. \\ \hline
 properties &\hyperref[sec:model:Metadata]{Metadata} & Interface template-specific data. \\ \hline
@@ -373,6 +398,8 @@ type & \pref{ErrorType} & Type of the error. \\ \hline
 origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
+
+\clearpage
 
 \msubsection{struct}{OrchestrationSubscriptionRequest}
 
@@ -405,6 +432,8 @@ An \pref{Object} which maps \pref{String} keys \pref{String} values.
 
 Unique \pref{String} identifier. 
 
+\clearpage
+
 \subsection{Primitives}
 \label{sec:model:primitives}
 
@@ -413,21 +442,26 @@ The concrete interpretations of each of these types and structures must be provi
 
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3.7cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{CloudID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name, separated by a special delimiter character. Each part must follow PascalCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
-\pdef{InterfaceTemplate}& A string identifier of an interface descriptor. \\ \hline
+\pdef{InterfaceName}& A string identifier of an interface descriptor. Must follow snake\_case naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
-\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
 \pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
+\pdef{ServiceInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance's provider name, service definition and version, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline
+\pdef{ServiceName}             & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
+\pdef{ServiceOperationName}             & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
 \pdef{Set}$<$A$>$       & A collection of items that contains no duplicate elements and each having type A. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}             & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\pdef{TokenType}      & A string name that groups token technologies by usage characteristics. \\ \hline
 \pdef{Version}          & Specifies a service instance version. Version must follow the Semantic Versioning.  \\ \hline
 \end{tabularx}
 \end{table}
