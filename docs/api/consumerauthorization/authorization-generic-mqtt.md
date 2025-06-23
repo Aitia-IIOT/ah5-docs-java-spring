@@ -65,7 +65,7 @@ Topic: arrowhead/consumer-authorization/authorization/grant
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and the policy instance is already existing or `201` if the entity was newly created. The response template payload is an [AuthorizationResponse](../data-models/authorization-policy-response.md).
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and the policy instance is already existing or `201` if the entity was newly created. The response template payload is an [AuthorizationPolicyResponse](../data-models/authorization-policy-response.md).
 
 ```
 {
@@ -129,6 +129,7 @@ Topic: arrowhead/consumer-authorization/authorization/revoke
    "responseTopic": "<response-topic>",
    "qosRequirement": "<0|1|2>",
    "payload": "PR|LOCAL|TemperatureProvider|SERVICE_DEF|celsiusInfo"
+}
 ```
 
 The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and an existing policy instance entity was removed and `204` if no matching entity was found. 
@@ -259,7 +260,7 @@ Topic: arrowhead/consumer-authorization/authorization/verify
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is an [a [Boolean](../primitives.md#boolean).
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [Boolean](../primitives.md#boolean).
 
 ```
 {

@@ -60,7 +60,7 @@ Authorization: Bearer <authorization-info>
 ```
 
 The service operation **responds** with 200 if called successfully and the policy instance is already existing or 201 if the entity was newly created. The response also contains an
-[AuthorizationResponse](../data-models/authorization-policy-response.md) JSON encoded body.
+[AuthorizationPolicyResponse](../data-models/authorization-policy-response.md) JSON encoded body.
 
 ```
 {

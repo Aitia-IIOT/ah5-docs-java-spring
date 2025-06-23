@@ -12,5 +12,5 @@ description | [String](../primitives.md#string) | The description of the rule.
 defaultPolicy | [AuthorizationPolicyDescriptor](../data-models/authorization-policy-descriptor.md) | The policy details of the rule which is used when no more specialized policy details are available.
 scopedPolicies | [ScopedPoliciesDescriptor](../data-models/scoped-policies-descriptor.md) | A structure that can contain specialized policy details.
 createdBy | [SystemName](../primitives.md#systemname) | Authorization policy instance was created by this system.
-createdAt | [DateTime](../primitives.md#datetime) | Device was registered at this timestamp.
+createdAt | [DateTime](../primitives.md#datetime) | Authorization policy was registered at this timestamp.
 

@@ -70,7 +70,7 @@ Learn more: <br />
 
 **get-log**
 
-This service operation lists the log entries of the system that matches the filtering requirements.
+This service operation lists the log entries of the system that match the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic_http](../api/general/general-management-generic-http.md#get-log) | [generic_https](../api/general/general-management-generic-http.md#get-log)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/general/general-management-generic-mqtt.md#get-log) | [generic_mqtts](../api/general/general-management-generic-mqtt.md#get-log)
@@ -84,41 +84,41 @@ This service operation lists the current values of the specified configuration s
 
 ### authorizationManagement
 
-The purpose of this service is to manage (query, grant, revoke) authorization rules and validate service consumption permissions in bulk. The service is offered for Core and administrative Support systems.  
+The purpose of this service is to manage (grant, revoke, query, check) authorization rules and validate service consumption permissions in bulk. The service is offered for Core and administrative Support systems.  
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization-management_sd.pdf) TODO<br />
-:material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-management-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-management-generic-http.md) TODO<br />
-:material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-management-generic-mqtt.md) TODO<br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization-management_sd.pdf)<br />
+:material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-management-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-management-generic-http.md)<br />
+:material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-management-generic-mqtt.md)<br />
 :material-tag: since: v5.0.0 
 
 **grant-policies**
 
 This service operation enables a system with proper rights to grant access to various consumers for various provider's services in bulk. It can also be used to grant access to subscribers for various publisher's events with a specific type in bulk.
 
-:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#grant-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#grant-policies) TODO<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#grant-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#grant-policies) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#grant-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#grant-policies)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#grant-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#grant-policies)
 
 **revoke-policies**
 
 This service operation enables a system with proper rights to remove existing authorization policies in bulk without considering policy ownerships.
 
-:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#revoke-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#revoke-policies) TODO<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#revoke-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#revoke-policies) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#revoke-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#revoke-policies)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#revoke-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#revoke-policies)
 
 **query-policies**
 
 This service operation lists the authorization rules that match the filtering requirements. This operation can be used to query both provider-owned and management level authorization policies.
 
-:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#query-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#query-policies) TODO<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#query-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#query-policies) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#query-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#query-policies)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#query-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#query-policies)
 
 **check-policies**
 
 This service operation checks whether consumers have access to providers' specified service/service operation/event type.
 
-:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#check-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#check-policies) TODO<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#check-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#check-policies) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-management-generic-http.md#check-policies) | [generic_https](../api/consumerauthorization/authorization-management-generic-http.md#check-policies)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-management-generic-mqtt.md#check-policies) | [generic_mqtts](../api/consumerauthorization/authorization-management-generic-mqtt.md#check-policies)
 
 ### authorizationTokenManagement
 
