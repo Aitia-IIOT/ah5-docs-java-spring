@@ -49,8 +49,8 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{device-discovery} % XXX = ServiceName 
-\ArrowheadServiceID{device-discovery} % ID name of service
+\ArrowheadTitle{deviceDiscovery} % XXX = ServiceName 
+\ArrowheadServiceID{deviceDiscovery} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
@@ -82,7 +82,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{device-discovery} service. 
+    This document provides service description for the \textbf{deviceDiscovery} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -106,9 +106,9 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{device-discovery} service, which enables both application and core/support systems to lookup, register and revoke devices on which the Local Cloud's systems are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain use cases (e.g. enabling onboarding) is needed therefore it is an integral part of the implementation of the requirements in Service Registry Core System. An example of this interaction is the Onboarding support system that has the capability to dynamically add new systems (and devices on which those systems are running) to the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the Service Registry.
+This document describes the \textbf{deviceDiscovery} service, which enables both application and Core/Support systems to lookup, register and revoke devices on which the Local Cloud's systems are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain use cases (e.g. enabling onboarding) is needed therefore it is an integral part of the implementation of the requirements in ServiceRegistry Core System. An example of this interaction is the Onboarding support system that has the capability to dynamically add new systems (and devices on which those systems are running) to the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
-The \textbf{device-discovery} service contains the following operations:
+The \textbf{deviceDiscovery} service contains the following operations:
 
 \begin{itemize}
     \item \textit{register} adds new device to the Local Cloud;
@@ -121,7 +121,7 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-In some use cases, the topology of the Local Cloud can be important. In these situations, an application system can use the \textit{register} operation of \textbf{device-discovery} service to register the device on which the system is running. Before that, the application system should use the \textit{lookup} operation to check whether the device is already registered or not. When a device is removed from the Local Cloud, the \textit{revoke} operation should be called.
+In some use cases, the topology of the Local Cloud can be important. In these situations, an application system can use the \textit{register} operation of \textbf{deviceDiscovery} service to register the device on which the system is running. Before that, the application system should use the \textit{lookup} operation to check whether the device is already registered or not. When a device is removed from the Local Cloud, the \textit{revoke} operation should be called.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -138,7 +138,7 @@ Available for anyone within the local cloud.
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{device-discovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} devices.
+This section describes the abstract signatures of each operations of the service. The \textbf{deviceDiscovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} devices.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
@@ -146,11 +146,11 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{register}{DeviceRegistrationRequest}{DeviceRegistrationResponse}{}{ErrorResponse}
 
-The registration data must meet the following criteria:
+Operation \textit{register} adds new device to the Local Cloud. The registration data must meet the following criteria:
 
 \begin{itemize}
-    \item Device names are case insensitive and have to be unique within the Local Cloud.
-    \item Device names can contain maximum 63 character of letters (english alphabet), numbers and dash (-), and have to start with a letter (also cannot end with dash).
+    \item Device names are case sensitive, must follow the UPPER\_SNAKE\_CASE naming convention and have to be unique within the Local Cloud.
+    \item Device names can contain maximum 63 character of uppercase letters (english alphabet), numbers and underscore (\_), and have to start with a letter (also cannot end with underscore).
     \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
     \item Keys in the metadata structure can not contain dot (.) character.
     \item Devices can register multiple times, but only if they are identical (same addresses, same metadata).
@@ -158,7 +158,7 @@ The registration data must meet the following criteria:
 
 \fsubsection{lookup}{DeviceLookupRequest}{DeviceLookupResponse}{}{ErrorResponse}
 
-The lookup data must meet the following criteria:
+Operation \textit{lookup} lists the devices that match the filtering requirements. The lookup data must meet the following criteria:
 
 \begin{itemize}
     \item If a filter expects a list, there is an OR relation between the elements of the filter.
@@ -167,19 +167,18 @@ The lookup data must meet the following criteria:
 
 \fsubsection{revoke}{DeviceRevokeRequest}{}{OperationStatus}{ErrorResponse}
 
-The input operation data must meet the following criteria:
+Operation \textit{revoke} removes a device from the Local Cloud. The input operation data must meet the following criteria:
 
 \begin{itemize}
     \item Devices that have system assignment can not be revoked.
 \end{itemize}
-
 
 \clearpage
 
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{device-discovery} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{deviceDiscovery} service are listed and must be respected by the hosting System.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
@@ -190,7 +189,7 @@ As a complement to the explicitly defined types in this section, there is also a
 \begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-name & \pref{Name} & yes & Unique identifier of the device. \\ \hline
+name & \pref{DeviceName} & yes & Unique identifier of the device. \\ \hline
 metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the device. \\ \hline
 addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses of the device.  \\ \hline
 \end{tabularx}
@@ -210,7 +209,7 @@ An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or li
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-name & \pref{Name} & Unique identifier of the registered device. \\ \hline
+name & \pref{DeviceName} & Unique identifier of the registered device. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the registered device. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the registered device.  \\ \hline
 createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
@@ -249,7 +248,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \begin{tabularx}{\textwidth}{| p{4.2cm} | p{4.8cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-deviceNames &  \pref{List}$<$\pref{Name}$>$ & no & Requester is looking for devices with any of the specified names. \\ \hline
+deviceNames &  \pref{List}$<$\pref{DeviceName}$>$ & no & Requester is looking for devices with any of the specified names. \\ \hline
 addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for devices with any of the specified add\-resses.   \\ \hline
 addressType &  \pref{AddressType} & no & Requester is looking for devices with the specified type of address. \\ \hline
 metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for devices that are matching any of the spe\-cified metadata requirements. \\ \hline
@@ -282,7 +281,7 @@ count & \pref{Number} & Number of returned devices. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-name & \pref{Name} & Unique identifier of the device. \\ \hline
+name & \pref{DeviceName} & Unique identifier of the device. \\ \hline
 metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
 addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
 createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
@@ -296,7 +295,7 @@ updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
 \begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-name & \pref{Name} & yes & Unique identifier of the device. \\ \hline
+name & \pref{DeviceName} & yes & Unique identifier of the device. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -313,9 +312,9 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Address}          & A string representation of the address. \\ \hline
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must follow the UPPER\_SNAKE\_CASE naming convention. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
-\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline

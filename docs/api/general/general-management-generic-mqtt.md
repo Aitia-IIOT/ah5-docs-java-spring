@@ -35,7 +35,7 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 
 
 ```
-Topic: arrowhead/authentication/general/management/get-log
+Topic: arrowhead/<system-specific-part>/general/management/get-log
 
 {
   "traceId": "<trace-id>",
@@ -127,10 +127,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### get-config
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[Name](../primitives.md#name)>, which contains the names of the desired configuration properties.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[String](../primitives.md#string)>, which contains the names of the desired configuration properties.
 
 ```
-Topic: arrowhead/authentication/general/management/get-config
+Topic: arrowhead/<system-specific-part>/general/management/get-config
 
 {
   "traceId": "<trace-id>",

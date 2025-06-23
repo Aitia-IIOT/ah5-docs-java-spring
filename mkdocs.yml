@@ -8,17 +8,17 @@ nav:
     - Getting Started: home/getting_started.md
     - Contribute: home/contribute.md 
   - Core Systems:
-    - Service Registry: core_systems/service_registry.md
-    - Dynamic Service Orchestration: core_systems/service_orchestration_dynamic.md
-    - Flexible-Store Service Orchestration: core_systems/service_orchestration_flexible_store.md
-    - Simple-Store Service Orchestration: core_systems/service_orchestration_simple_store.md
-    - Authorization: core_systems/authorization.md
+    - ServiceRegistry: core_systems/service_registry.md
+    - DynamicServiceOrchestration: core_systems/service_orchestration_dynamic.md
+    - FlexibleStoreServiceOrchestration: core_systems/service_orchestration_flexible_store.md
+    - SimpleStoreServiceOrchestration: core_systems/service_orchestration_simple_store.md
+    - ConsumerAuthorization: core_systems/authorization.md
     - Authentication: core_systems/authentication.md
   - Support Systems: 
     - Blacklist: support_systems/blacklist.md
     - Configuration: support_systems/configuration.md
-    - QoS Evaluator: support_systems/qos_evaluator.md
-    - Translation Manager: support_systems/translation_manager.md
+    - QoSEvaluator: support_systems/qos_evaluator.md
+    - TranslationManager: support_systems/translation_manager.md
   - API:
     - Interface Descriptions:
       - General:
@@ -26,20 +26,22 @@ nav:
           - generalManagement: api/general/general-management-generic-http.md
         - MQTT:
           - generalManagement: api/general/general-management-generic-mqtt.md
-      - Service Registry:
+      - ServiceRegistry:
         - HTTP:
-          - device-discovery: api/serviceregistry/device-discovery-generic-http.md
-          - system-discovery: api/serviceregistry/system-discovery-generic-http.md
-          - service-discovery: api/serviceregistry/service-discovery-generic-http.md
-          - service-registry-management: api/serviceregistry/service-registry-management-generic-http.md
+          - deviceDiscovery: api/serviceregistry/device-discovery-generic-http.md
+          - systemDiscovery: api/serviceregistry/system-discovery-generic-http.md
+          - serviceDiscovery: api/serviceregistry/service-discovery-generic-http.md
+          - serviceRegistryManagement: api/serviceregistry/service-registry-management-generic-http.md
         - MQTT:
-          - device-discovery: api/serviceregistry/device-discovery-generic-mqtt.md
-          - system-discovery: api/serviceregistry/system-discovery-generic-mqtt.md
-          - service-discovery: api/serviceregistry/service-discovery-generic-mqtt.md
-          - service-registry-management: api/serviceregistry/service-registry-management-generic-mqtt.md
-      - Service Orchestration:
+          - deviceDiscovery: api/serviceregistry/device-discovery-generic-mqtt.md
+          - systemDiscovery: api/serviceregistry/system-discovery-generic-mqtt.md
+          - serviceDiscovery: api/serviceregistry/service-discovery-generic-mqtt.md
+          - serviceRegistryManagement: api/serviceregistry/service-registry-management-generic-mqtt.md
+      - DynamicServiceOrchestration:
         - HTTP:
-          - orchestration (dynamic): api/serviceorchestration/orchestration-generic-http_dynamic.md
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
+        - MQTT:
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
@@ -49,20 +51,22 @@ nav:
           - identityManagement: api/authentication/identity-management-generic-mqtt.md
       - Blacklist:
         - HTTP:
-          - discovery: api/blacklist/blacklistDiscovery-generic-http.md
-          - management: api/blacklist/blacklistManagement-generic-http.md
+          - blacklistDiscovery: api/blacklist/blacklistDiscovery-generic-http.md
+          - blacklistManagement: api/blacklist/blacklistManagement-generic-http.md
         - MQTT:
-          - discovery: api/blacklist/blacklistDiscovery-generic-mqtt.md
-          - management: api/blacklist/blacklistManagement-generic-mqtt.md
+          - blacklistDiscovery: api/blacklist/blacklistDiscovery-generic-mqtt.md
+          - blacklistManagement: api/blacklist/blacklistManagement-generic-mqtt.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
-      - ConfigMap: api/data-models/config-map.md
+      - AuthorizationTokenDescriptor: api/data-models/authorization-token-descriptor.md
+      - AuthorizationTokenMap: api/data-models/authorization-token-map.md
       - BlacklistCreateListRequest: api/data-models/blacklist-create-list-request.md
       - BlacklistCreateRequest: api/data-models/blacklist-create-request.md
       - BlacklistEntryListResponse: api/data-models/blacklist-entry-list-response.md
       - BlacklistEntryResponse: api/data-models/blacklist-entry-response.md
       - BlacklistQueryRequest: api/data-models/blacklist-query-request.md
+      - ConfigMap: api/data-models/config-map.md
       - ConfigResponse: api/data-models/config-response.md
       - Credentials: api/data-models/credentials.md
       - DeviceDescriptor: api/data-models/device-descriptor.md
@@ -149,7 +153,7 @@ nav:
     - Naming Convention: help/naming-convention.md
     - Certificate Profiles: help/certificate-profiles.md
     - Tutorials:
-      - Service Registry Demo: help/tutorials/serviceregistry-http-demo.md
+      - ServiceRegistry Demo: help/tutorials/serviceregistry-http-demo.md
       - Mosquitto MQTT Broker: help/tutorials/mosquitto-mqtt-broker.md
       - Create Certificates: help/tutorials/create-certificates.md
     - FAQ: help/faq.md

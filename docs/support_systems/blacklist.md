@@ -1,6 +1,8 @@
 # Blacklist
 
-This Support system makes possible for systems with operator role or proper permissions to ban other systems from the Local Cloud. The systems can get some information about the blacklist without proper permissions too. 
+This Support system makes it possible for systems with operator role or proper permissions to ban other systems from the Local Cloud. 
+
+There are operations that provide some information about the blacklist. These are available for every system.
 
 Learn more: <br />
 :material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_0_0/blacklist_sysd.pdf)
@@ -19,7 +21,7 @@ Learn more: <br />
 
 **lookup**
 
-This service operation returns the blacklist entries that are in force and apply to the requester. Note that _lookup_ is enabled even is the requester is blacklisted.
+This service operation returns the blacklist entries that are in force and apply to the requester. Note that _lookup_ is enabled even if the requester is blacklisted.
 
 :material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistDiscovery-generic-http.md#lookup) | [generic_https](../api/blacklist/blacklistDiscovery-generic-http.md#lookup)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistDiscovery-generic-mqtt.md#lookup) | [generic_mqtts](../api/blacklist/blacklistDiscovery-generic-mqtt.md#lookup)

@@ -244,7 +244,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-keys & \pref{List}$<$\pref{Name}$>$ & yes & The names of the requested configuration settings. \\ \hline
+keys & \pref{List}$<$\pref{String}$>$ & yes & The names of the requested configuration settings. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -278,7 +278,6 @@ Concrete interpretations of each of these types and structures must be provided 
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{LogSeverity}      & The kind and seriousness of a log message. \\ \hline
-\pdef{Name}             & A string identifier that is intended to be both human and machine-readable. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
