@@ -107,7 +107,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{authorizationManagement} service, which enables systems (with operator role or proper permissions) to handle (grant, revoke, query, check) authorization policies in bulk. An example of this interaction is that an operator uses the Management Tool to setup authorization policies manually before the related systems even register itself. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This document describes the \textbf{authorizationManagement} service, which enables systems (with operator role or proper permissions) to handle (grant, revoke, query, check) authorization policies in bulk. An example of this interaction is that a higher entity (a dedicated system directly or a human operator indirectly via some tool) consumes this service to setup authorization policies manually before the related systems even register themself. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The \textbf{authorizationManagement} service contains the following operations:
 
@@ -123,9 +123,9 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-The service’s purpose is to handle the authorization policies centrally and in bulk. This approach makes possible that the individual provider systems do not have to do anything to be able to work within the Local Cloud.
+The service’s purpose is to handle the authorization policies centrally and in bulk. This approach makes possible that the individual provider systems do not have to do anything to make their services accessible for the consumers within the Local Cloud.
 
-Application systems should not use this service; only operators (via the Management Tool, for example) or dedicated Core/Support systems.
+Application systems should not use this service; only operators or dedicated Core/Support systems.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -198,7 +198,7 @@ Operation \textit{check-policies} checks whether a consumer can use a provider's
     \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
     \item Target type can be service definition or event type. 
     \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Targets can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
-    \item Scope is optional and only mattered if target type is service definition. In this case, 
+    \item Scope is optional and only matters if target type is service definition. In this case, 
     scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (english alphabet), numbers and dash (-), have to start with a letter and cannot ends with a dash.
 \end{itemize}
 
@@ -392,7 +392,7 @@ consumer & \pref{SystemName} & yes & The name of the system that needs access to
 cloud & \pref{CloudIdentifier} & no & The cloud of the consumer. Optional, if the consumer is in the Local Cloud. \\ \hline
 targetType & \pref{AuthorizationTargetType} & yes & The type of the target (service definition or event type). \\ \hline
 target & \pref{ServiceName} / \pref{EventTypeName} & yes & The name of the target. \\ \hline
-scope & \pref{ServiceOperationName} & no & The service operation that the consumer wants to use. Only mattered when the target is a service definition. \\ \hline
+scope & \pref{ServiceOperationName} & no & The service operation that the consumer wants to use. Only matters when the target is a service definition. \\ \hline
 \end{tabularx}
 \end{table}
 

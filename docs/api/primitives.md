@@ -18,7 +18,7 @@ A **String** representation of an authorization policy's priority level. Could b
 
 ## AuthorizationPolicyInstanceID
 
-A composite **String** identifier that is intended to be both human and machinereadable. It consists of the instance’s level (`PR` for provider and `MGMT` for management), cloud identifier (or the word `LOCAL` in case of the Local Cloud), provider name, target type and target, each separated by a pipe as follows: `<Level>|<CloudIdentifier>|<ProviderName>|<TargetType><Target>`. Each part must follow its related naming convention. An example for a valid policy instance ID: _PR|LOCAL|TemperatureProvider|SERVICE\_DEF|celsiusInfo_. 
+A composite **String** identifier that is intended to be both human and machine-readable. It consists of the instance’s level (`PR` for provider and `MGMT` for management), cloud identifier (or the word `LOCAL` in case of the Local Cloud), provider name, target type and target, each separated by a pipe as follows: `<Level>|<CloudIdentifier>|<ProviderName>|<TargetType><Target>`. Each part must follow its related naming convention. An example for a valid policy instance ID: _PR|LOCAL|TemperatureProvider|SERVICE\_DEF|celsiusInfo_. 
 
 ## AuthorizationPolicyType
 

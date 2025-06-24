@@ -89,7 +89,7 @@
 \section{Overview}
 \label{sec:overview}
 \color{black}
-This document describes the ConsumerAuthorization Core system, which exists to manage and to authorize connections between various systems using authorization rules within an Eclipse Arrowhead Local Cloud (LC). It also provides various token generation functionalities that adds an extra layer of security. 
+This document describes the ConsumerAuthorization Core system, which exists to manage and to authorize connections between various systems using authorization rules within an Eclipse Arrowhead Local Cloud (LC). It also provides various authorization token generation functionalities for service consumptions that adds an extra layer of security.
 
 The rest of this document is organized as follows.
 In Section \ref{sec:prior_art}, we reference major prior art capabilities
@@ -121,7 +121,7 @@ The previous versions of Authorization (4.6.x) are very similar to this version,
     \item You could only create an authorization rule if all related entities (consumer system or cloud, provider system, service definition and interface) are already existed (in the Service Registry's data storage). The current version supports rules referencing non-existent entities for future usage.
     \item Only an administrator were able to use management services. The current version allows that for other \textit{higher level} systems, if they have the right permissions.
     \item Only an administrator were able to add and remove rules. The current version allows providers to set their own rules. However, rules created via the management service are always have priority over the rules created by the providers itself.
-    \item Token generation used tokens that stores authorization information inside the token. These tokens could be checked without the Authorization core system (except a one-time request to acquire the public key of the Authorization system), but made provider implementation a little more difficult. The current version offer simpler tokens as well and provide a service operation to validate those tokens.
+    \item Token generation used tokens that stores authorization information inside the token. These tokens could be checked without the Authorization core system (except a one-time request to acquire the public key of the Authorization system), but made provider implementation a little more difficult. The current version offers simpler tokens as well and provide a service operation to validate those tokens.
     \item In the previous version tokens expired after a certain time (time-base expiration). The current version also provide tokens with usage-based expiration.
     \item X.509 certificate trust chains was used as authentication mechanism. The current version can support any type of authentication methods by communication with a dedicated Authentication Core system.
 \end{itemize}

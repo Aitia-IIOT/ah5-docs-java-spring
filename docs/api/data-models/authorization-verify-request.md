@@ -7,4 +7,4 @@ consumer | [SystemName](../primitives.md#systemname) | no (yes) | The name of th
 cloud | [CloudIdentifier](../primitives.md#cloudidentifier) | no | The cloud of the consumer. Optional, if the consumer is in the Local Cloud.
 targetType | [AuthorizationTargetType](../primitives.md#authorizationtargettype) | yes | The type of the target (service definition or event type).
 target | [ServiceName](../primitives.md#servicename) or [EventTypeName](../primitives.md#eventtypename) | yes | The name of the target.
-scope | [ServiceOperationName](../primitives.md#serviceoperationname) | no | The service operation that the consumer wants to use. Only mattered when the target is a service definition.
+scope | [ServiceOperationName](../primitives.md#serviceoperationname) | no | The service operation that the consumer wants to use. Only matters when the target is a service definition.
