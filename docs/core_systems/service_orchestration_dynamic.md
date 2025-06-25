@@ -22,21 +22,21 @@ Learn more: <br />
 This service operation performs the orchestration process and returns the matching service instances.
 
 :material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#pull) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#pull)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](todo) | [generic_mqtts](todo)
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md#pull) | [generic_mqtts](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md#pull)
 
 **subscribe**
 
 This service operation creates a subscription that can be triggered anytime to perform the orchestration process and push the matching service instances for the subscriber.
 
 :material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#subscribe) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#subscribe)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](todo) | [generic_mqtts](todo)
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md#subscribe) | [generic_mqtts](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md#subscribe)
 
 **unsubscribe**
 
 This service operation removes a subscription.
 
 :material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#unsubscribe) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md#unsubscribe)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](todo) | [generic_mqtts](todo)
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md#unsubscribe) | [generic_mqtts](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md#unsubscribe)
 
 -----
 
