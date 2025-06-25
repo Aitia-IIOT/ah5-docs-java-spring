@@ -14,7 +14,7 @@ The purpose of this service is to get matching service instances. The service is
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-orchestration_sd.pdf) <br />
 :material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md) <br />
-:material-api: [generic_mqtt (IDD)](todo) | [generic_mqtts (IDD)](todo) <br />
+:material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md) <br />
 :material-tag: since: v5.0.0 
 
 **pull**
@@ -68,7 +68,41 @@ This service operation lists the current values of the specified configuration s
 
 ### serviceOrchestrationPushManagement
 
-Coming soon.
+The purpose of the service is to handle the push orchestration related data and activities centrally and in bulk. The service is offered for administrative Support systems.
+
+Learn more: <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-orchestration-push-management_sd.pdf) <br />
+:material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md) <br />
+:material-tag: since: v5.0.0 
+
+**subscribe**
+
+This service operation creates subscriptions in bulk for other consumer systems that can be triggered anytime to perform the orchestration process and push newly orchestrated matching service instances to the subscribed consumers.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#subscribe) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#subscribe)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#subscribe) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#subscribe)
+
+**unsubscribe**
+
+This service operation removes subscriptions in bulk.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#unsubscribe) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#unsubscribe)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#unsubscribe) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#unsubscribe)
+
+**trigger**
+
+This service operation initiates service orchestration processes based on consumer system names or subscription identifiers or creator system names.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#trigger) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#trigger)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#trigger) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#trigger)
+
+**query**
+
+This service operation lists the existing subscriptions that match to the filtering requirements.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#query) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#query)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#query) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#query)
 
 -----
 
