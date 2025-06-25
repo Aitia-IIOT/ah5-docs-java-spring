@@ -174,3 +174,22 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "origin": "POST /serviceorchestration/orchestration/mgmt/push/subscribe"
 }
 ```
+### unsubscribe
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a query parameter _ids_, which is a List<[UUID](../primitives.md#uuid)>. It contains the identifiers of the subscription records to remove.
+
+```
+DELETE /serviceorchestration/orchestration/mgmt/push/unsubscribe?ids=d2fefc6a-f563-40a2-9ce4-3512c2887755&ids=a44ab333-cfb5-420b-a7cf-b327904e243b HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "a44ab333-cfb5-420b-a7cf-b327904e243b is not owned by the requester",
+  "errorCode": 403,
+  "exceptionType": "FORBIDDEN"
+}
+```
