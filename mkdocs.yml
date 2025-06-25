@@ -129,7 +129,10 @@ nav:
       - ServiceLookupResult: api/data-models/service-lookup-result.md
       - ServiceOrchestrationResponse: api/data-models/service-orchestration-response.md
       - ServiceOrchestrationFlag: api/data-models/service-orchestration-flag.md
+      - ServiceOrchestrationJobListResponse: api/data-models/service-orchestration-job-list-response.md
+      - ServiceOrchestrationJobResponse: api/data-models/service-orchestration-job-response.md
       - ServiceOrchestrationNotifyInterface: api/data-models/service-orchestration-notify-interface.md
+      - ServiceOrchestrationPushTriggerRequest:  api/data-models/service-orchestration-push-trigger-request.md
       - ServiceOrchestrationRequest: api/data-models/service-orchestration-request.md
       - ServiceOrchestrationRequirement: api/data-models/service-orchestration-requirement.md
       - ServiceOrchestrationResult: api/data-models/service-orchestration-result.md

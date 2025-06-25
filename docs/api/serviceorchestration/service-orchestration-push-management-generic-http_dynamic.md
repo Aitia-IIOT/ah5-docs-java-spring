@@ -190,6 +190,32 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 {
   "errorMessage": "a44ab333-cfb5-420b-a7cf-b327904e243b is not owned by the requester",
   "errorCode": 403,
-  "exceptionType": "FORBIDDEN"
+  "exceptionType": "FORBIDDEN",
+  "origin": "POST /serviceorchestration/orchestration/mgmt/push/unsubscribe"
+}
+```
+
+## trigger
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationPushTriggerRequest](../data-models/service-orchestration-push-trigger-request.md) JSON encoded body.
+
+```
+TODO
+```
+
+The service operation **responds** with the status code `201` if orchestration jobs were successfully created. The response also contains a [ServiceOrchestrationJobListResponse](../data-models/service-orchestration-job-list-response.md) JSON encoded body.
+
+```
+TODO
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid subscription id: a44ab333-cfb5-420b-a7cf-b327904e243b",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceorchestration/orchestration/mgmt/push/trigger"
 }
 ```
