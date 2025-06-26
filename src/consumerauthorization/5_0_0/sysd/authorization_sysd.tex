@@ -39,7 +39,7 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{Authorization Core System}
+\ArrowheadTitle{ConsumerAuthorization Core System}
 \ArrowheadType{System Description}
 \ArrowheadTypeShort{SysD}
 \ArrowheadVersion{5.0.0}
@@ -71,7 +71,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides system description for the \textbf{Authorization Core System}.
+    This document provides system description for the \textbf{ConsumerAuthorization Core System}.
   \end{abstract}
 
   \vspace*{1cm}
@@ -89,8 +89,7 @@
 \section{Overview}
 \label{sec:overview}
 \color{black}
-This document describes the Authorization core system, which exists to manage and to authorize
-connections between various systems using authorization rules within an Eclipse Arrowhead Local Cloud (LC). It also provides token generation functionalities that adds an extra layer of security. 
+This document describes the ConsumerAuthorization Core system, which exists to manage and to authorize connections between various systems using authorization rules within an Eclipse Arrowhead Local Cloud (LC). It also provides various authorization token generation functionalities for service consumptions that adds an extra layer of security.
 
 The rest of this document is organized as follows.
 In Section \ref{sec:prior_art}, we reference major prior art capabilities
@@ -116,66 +115,68 @@ One of the main building blocks when realizing such Local Cloud is the capabilit
 The previous versions of Authorization (4.6.x) are very similar to this version, however there are some key differences, even on conceptual level:
 
 \begin{itemize}
+    \item We changed the system name to ConsumerAuthorization which is expressing better that authorization rules primarily are about service consumption. 
     \item There was only peer-to-peer authorization rules supported: (system to system's service, or cloud to system in case of inter-cloud rules). The current version allows much more flexible rules.
     \item Systems (or any system of an other cloud) could get a permission to use a specific system's specific service instance with a specific interface. The current version discards the interface restrictions, but allows rules for a specific operation of a service instance, or all operations of a service instance, or event type (on systems that publish such events). 
     \item You could only create an authorization rule if all related entities (consumer system or cloud, provider system, service definition and interface) are already existed (in the Service Registry's data storage). The current version supports rules referencing non-existent entities for future usage.
     \item Only an administrator were able to use management services. The current version allows that for other \textit{higher level} systems, if they have the right permissions.
     \item Only an administrator were able to add and remove rules. The current version allows providers to set their own rules. However, rules created via the management service are always have priority over the rules created by the providers itself.
-    \item Token generation used tokens that stores authorization information inside the token. These tokens could be checked without the Authorization core system (except a one-time request to acquire the public key of the Authorization system), but made provider implementation a little more difficult. The current version uses simpler tokens and provide a service operation to validate those tokens. 
-    \item X.509 certificate trust chains was used as authentication mechanism. The current version can support any type of authentication methods by communication with a dedicated Authentication Provider core system.
+    \item Token generation used tokens that stores authorization information inside the token. These tokens could be checked without the Authorization core system (except a one-time request to acquire the public key of the Authorization system), but made provider implementation a little more difficult. The current version offers simpler tokens as well and provide a service operation to validate those tokens.
+    \item In the previous version tokens expired after a certain time (time-base expiration). The current version also provide tokens with usage-based expiration.
+    \item X.509 certificate trust chains was used as authentication mechanism. The current version can support any type of authentication methods by communication with a dedicated Authentication Core system.
 \end{itemize}
 
 \subsection{How This System Is Meant to Be Used}
 \label{sec:use}
 
-Authorization is a recommended core system of Eclipse Arrowhead LC and is responsible for the fundamental authorization control functionality by storing applicable authorization rules. An intra-cloud rule describes an access policy between a group of consumer systems and a provider system for a given service, service operation or event type, while an inter-cloud rule describes an access policy between a provider system and a group of neighbor clouds.
+ConsumerAuthorization is a recommended Core system of Eclipse Arrowhead LC and is responsible for the fundamental authorization control functionality by storing applicable authorization rules. A rule describes an access policy between a group of consumer systems and a provider system for a given service, service operation or event type.
 
-This core system is also responsible for providing the session control functionality which is achieved by offering a token generation and a token validation service operation. 
+This core system is also responsible for providing the session control functionality which is achieved by offering a token generation and a token validation service operations. 
 
 \subsection{System functionalities and properties}
 \label{sec:properties}
 
 \subsubsection {Functional properties of the system}
 
-Authorization solves the following needs to fulfill the requirements of authorization and session control.
+ConsumerAuthorization solves the following needs to fulfill the requirements of authorization and session control.
 
 \begin{itemize}
     \item Enables the providers to create and remove authorization rules about its services, service operations or published events.
     \item Enables the providers to validate that a consumer can use a specific service operation.
-    \item Enables the core/support systems to validate a consumer can use a specific provider's specific service.
-    \item Enables the core/support systems (e.g. the Event Handler) to validate that a subscriber can receive a specific publisher's event with a specific type.
+    \item Enables the Core/Support systems to validate a consumer can use a specific provider's specific service.
+    \item Enables the Core/Support systems (e.g. the Event Handler) to validate that a subscriber can receive a specific publisher's event with a specific type.
     \item Enables the providers to validate an authorization token.
-    \item Enables the application/core/support systems to generate tokens for a consumer-provider-service triplet (if all service operation is accessible for a consumer) or a consumer-provider-service-operation quadruple.
+    \item Enables the application/Core/Support systems to generate tokens for a consumer-provider-service triplet (if all service operation is accessible for a consumer) or a consumer-provider-service-operation quadruple.
     A token can't be generated if there is no appropriate authorization rule that allows for the consumer to use the specific provider's specific service operation (or all operation of a specific service). 
 \end{itemize}
 
-Authorization allows to specify the following kinds of rules:
+ConsumerAuthorization allows to specify the following kinds of rules:
 
 \begin{itemize}
-    \item A service/service operation/event with a specific type  is accessible to anyone within the local cloud.
-    \item A service/service operation/event with a specific type is accessible to anyone within the local cloud, except a list of consumers (blacklist).
-    \item A service/service operation/event with a specific type is accessible to anyone within the local cloud whose names appear on a given list (whitelist). A peer-to-peer rule can be specified if this list only contains one consumer.
-    \item A service/service operation/event with a specific type is accessible to anyone within the local cloud who meet specified metadata requirements.
-    \item A service/service operation is accessible to anyone from a given neighbor cloud list (inter-cloud whitelist).
+    \item A service/service operation/event with a specific type  is accessible to anyone within the local cloud or a specific neighboring cloud.
+    \item A service/service operation/event with a specific type is accessible to anyone within the local cloud or a specific neighboring cloud, except a list of consumers (blacklist).
+    \item A service/service operation/event with a specific type is accessible to anyone within the local cloud or a specific neighboring cloud whose names appear on a given list (whitelist). A peer-to-peer rule can be specified if this list only contains one consumer.
+    \item A service/service operation/event with a specific type is accessible to anyone within the local cloud or a specific neighboring cloud who meet specified system-level metadata requirements.
 \end{itemize}
 
 \subsubsection {Non functional properties of the system}
-If an Authentication Provider (AP) is present in the Local Cloud, the Authorization will use AP's service(s) to verify a requester system before responding to its request. 
+If an Authentication system is present in the Local Cloud, the ConsumerAuthorization will use its service(s) to verify a requester system before responding to any request. 
 
 \subsubsection {Data stored by the system}
-In order to achieve the mentioned functionalities, Authorization is capable to store the following information set:
+In order to achieve the mentioned functionalities, ConsumerAuthorization is capable to store the following information set:
 
 \begin{itemize}
     \item \textbf{Authorization rules}: the system stores all previously mentioned kinds of permissions.
-    \item \textbf{Authorization tokens}: the system stores generated authorization tokens with related data, such as consumer name, provider name, service definition name, optional service operation, expiration date. Expired tokens can be automatically removed from the data storage.
+    \item \textbf{Authorization tokens}: the system stores generated authorization tokens with related data, such as consumer name, provider name, service definition name, optional service operation, expiration date, usage count left. Expired tokens can be automatically removed from the data storage.
 \end{itemize}
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
 
 \begin{itemize}
-    \item  If the Local Cloud does not contain a Authentication Provider, there is no way for the Authorization to verify the requester system. In that case, the Authorization will consider the authentication data comes from the requester as valid.
-    \item If the Local Cloud does not contain a Service Registry, then rules with system meta data requirements are not supported.
+    \item  If the Local Cloud does not contain an Authentication system, there is no way for the ConsumerAuthorization to verify the requester system. In that case, the ConsumerAuthorization will consider the authentication data comes from the requester as valid.
+    \item If the Local Cloud does not contain a Service Registry, then rules with system metadata requirements are not supported.
+    \item Some of the token types require that the ConsumerAuthorization system has a valid X.509 certificate.
 \end{itemize}
 
 \newpage
@@ -184,23 +185,27 @@ In order to achieve the mentioned functionalities, Authorization is capable to s
 \label{sec:services}
 
 \msubsection{service}{authorization}
-The purpose of this service is to validate service consumption permissions and to list, grant and revoke those permissions.
+The purpose of this service is to validate service consumption permissions and to lookup, grant and revoke those permissions.
 
-\msubsection{service}{authorization-token}
+\msubsection{service}{authorizationToken}
 The purpose of this service is to generate and validate authorization tokens.
 
-\msubsection{service}{authorization-management}
-Its main purpose is to manage authorization rules and validate service consumption permissions in bulk. It also provides querying functionalities for authorization rules and tokens. The service is offered for core and administrative support systems.  
+\msubsection{service}{authorizationManagement}
+Its purpose is to manage (query, grant, revoke) authorization rules and validate service consumption permissions in bulk. The service is offered for Core and administrative Support systems.  
+
+\msubsection{service}{authorizationTokenManagement}
+
+Its purpose is to manage (query, generate, revoke) authorization tokens. The service is offered for Core and administrative Support systems.  
 
 \msubsection{service}{monitor}
-Recommended service. Its purpose is to give information about the provider system. The service is offered for both application and core/support systems.
+Recommended service. Its purpose is to give information about the provider system. The service is offered for both application and Core/Support systems.
 
 \newpage
 
 \section{Security}
 \label{sec:security}
 
-For authentication, the Authorization utilizes an other core system, the Authentication Provider's service to verify the identities of the requester systems. If no Authentication Provider is deployed into the Local Cloud, the Authorization trusts the requester system self-provided identity.
+For authentication, the ConsumerAuthorization utilizes an other Core system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the ConsumerAuthorization trusts the requester system self-provided identity.
 
 For authorization, the system uses its own data storage. The following service operations can be used without any authorization rules:
 
@@ -208,11 +213,15 @@ For authorization, the system uses its own data storage. The following service o
     \item \textit{authorization} service's \textit{validate} operation,
     \item \textit{authorization} service's \textit{grant} operation,
     \item \textit{authorization} service's \textit{revoke} operation,
-    \item \textit{authorization} service's \textit{get} operation,
-    \item \textit{authorization-token} service's \textit{validate-token} operation.
+    \item \textit{authorization} service's \textit{lookup} operation,
+    \item \textit{authorizationToken} service's \textit{generate} operation.
+    \item \textit{authorizationToken} service's \textit{validate} operation.
+    \item \textit{authorizationToken} service's \textit{get-public-key} operation.
+    \item \textit{authorizationToken} service's \textit{register-encryption-key} operation.
+    \item \textit{authorizationToken} service's \textit{unregister-encryption-key} operation.
 \end{itemize}
 
-The implementation of the Authorization can decide about the encryption of the connection between the Authorization and other systems. 
+The implementation of the ConsumerAuthorization can decide about the encryption of the connection between the ConsumerAuthorization and other systems. 
  
 \newpage
 

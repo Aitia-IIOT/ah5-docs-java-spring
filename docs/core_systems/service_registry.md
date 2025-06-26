@@ -339,6 +339,10 @@ Enable/disable automatic service requester system name verification against to c
 
 Whether or not the service requests should be refused when the blacklist server is not responding. Can be `true` or `false`.
 
+:fontawesome-solid-wrench: **blacklist.check.exclude.list**
+
+Comma-separated list that contains systems whose requests is served without checking the cloud level blacklist, even if blacklist is enabled.
+
 :fontawesome-solid-wrench: **enable.management.filter**
 
 Enable or disable authorization for accessing the management services. Can be `true` of `false`.
