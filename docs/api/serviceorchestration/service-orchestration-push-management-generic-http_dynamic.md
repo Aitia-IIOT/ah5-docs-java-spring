@@ -3,8 +3,7 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of serviceOrchestrationPushManagement, which enables systems to manage data and activities related to the push type of service orchestration.
-process in bulk. It’s implemented using protocol, encoding as stated in the following tables:
+This page describes the generic_http and generic_https service interface of serviceOrchestrationPushManagement, which enables systems to manage data and activities related to the push type of service orchestration process in bulk. It’s implemented using protocol, encoding as stated in the following tables:
 
 **generic_http**
 
