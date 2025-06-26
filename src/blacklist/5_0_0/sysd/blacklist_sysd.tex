@@ -127,10 +127,11 @@ Blacklist solves the following needs to fulfill the blacklist functionality.
 \begin{itemize}
     \item Enables the application and other Core/Support systems to query the blacklist records that apply to them and are in force.
     \item Enables the application and other Core/Support systems to check if an arbitrary system is blacklisted.
+    \item Enables administrative Support systems to manage (query, create, remove) the blacklist entries.
 \end{itemize}
 
 \subsubsection {Non functional properties of the system}
--
+If an Authentication system is present in the Local Cloud, the Blacklist system will use its service(s) to verify a requester system before responding to any request. This verification is skipped when the requester is a system operator, or the request is a lookup for the identity service.
 
 \subsubsection {Data stored by the system}
 In order to achieve the mentioned functionalities, Blacklist is capable to store the following information set:
@@ -141,7 +142,9 @@ In order to achieve the mentioned functionalities, Blacklist is capable to store
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
--
+\begin{itemize}
+    \item If the Local Cloud does not contain an Authentication system, there is no way for the Blacklist to verify the requester system. In that case, the Blacklist system will consider the authentication data that comes from the requester as valid.
+\end{itemize}
 
 \newpage
 
@@ -150,7 +153,7 @@ In order to achieve the mentioned functionalities, Blacklist is capable to store
 
 \phantomsection
 \msubsection{service}{blacklistDiscovery}
-The purpose of this service is to provide information about the blacklist. This service is offered for both Application and Core/Support systems.
+The purpose of this service is to provide information about the blacklist. This service is offered for both application and Core/Support systems.
 
 \msubsection{service}{blacklistManagement}
 The purpose of this service is to manage (query, create and remove) blacklist entries in bulk. The service is offered for administrative Support systems.
@@ -163,9 +166,9 @@ Recommended service. Its purpose is to give information about the provider syste
 \section{Security}
 \label{sec:security}
 
-For authentication, the Blacklist utilizes an other Core system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the Service Orchestration trusts the requester system self-provided identity.
+For authentication, the Blacklist utilizes an other Core system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the Blacklist trusts the requester system self-provided identity.
 
-For authorization, the system uses an other Core system, the Authorization system to decide whether a consumer can use its services or not. If the Authorization Core system is not present in the Local Cloud, then the Blacklist allows for anyone in Local Cloud to use its services. The following service operations can always be used without any authorization rules:
+For authorization, the system uses an other Core system, the ConsumerAuthorization system to decide whether a consumer can use its services or not. If the ConsumerAuthorization Core system is not present in the Local Cloud, then the Blacklist allows for anyone in Local Cloud to use its services. The following service operations can always be used without any authorization rules:
 
 \begin{itemize}
     \item \textit{blacklistDiscovery} service's \textit{lookup} operation,

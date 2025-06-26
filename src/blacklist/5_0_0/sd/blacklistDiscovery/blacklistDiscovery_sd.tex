@@ -106,7 +106,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{blacklistDiscovery} service, which enables both application and Core/Support systems to get information about the Local Cloud's centrally managed Blacklist. The possible operations provide lookup for relevant blacklist entries for a system and enable to check if an other system is blacklisted within the LC. To enable other systems to use, to consume it, this service needs to be offered through the Blacklist Support system.
+This document describes the \textbf{blacklistDiscovery} service, which enables both application and Core/Support systems to get information about the Local Cloud's centrally managed Blacklist. The possible operations provide lookup for relevant blacklist entries for a system and enable to check if an other system is blacklisted within the LC. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The \textbf{blacklistDiscovery} service contains the following operations:
 
@@ -154,8 +154,11 @@ Operation \textit{lookup} returns the blacklist entries that are in force and ap
 
 \fsubsection{check}{CheckRequest}{CheckResponse}{}{ErrorResponse}
 
-Operation \textit{check} returns if an arbitrary system is on the blacklist.
-
+Operation \textit{check} returns if an arbitrary system is on the blacklist. The input operation data must meet the following criteria:
+\begin{itemize}
+    \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (english alphabet), and numbers, and have to start with a letter.
+\end{itemize}
 \clearpage
 
 \section{Information Model}
@@ -166,25 +169,6 @@ Note that each subsection, which describes one type of object, begins with the \
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
 \phantomsection
-\msubsection{struct}{CheckRequest}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-name & \pref{SystemName} & yes & Unique identifier of system to check. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{CheckResponse}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-isBlacklisted & \pref{Boolean} & Indicates if the system is on the blacklist or not. \\ \hline
-\end{tabularx}
-\end{table}
 
 \msubsection{struct}{Identity}
 
@@ -210,11 +194,11 @@ count & \pref{Number} & The total number of corresponding entries. \\ \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 systemName & \pref{SystemName} & Unique identifier of the blacklisted system. \\ \hline
 createdBy & \pref{SystemName} & Unique identifier of the system that created the record. \\ \hline
-revokedBy & \pref{SystemName} & Unique identifier of the system that revoked the record. \\ \hline
+revokedBy & \pref{SystemName} & Unique identifier of the system that revoked the record. Only appears if the record was revoked. \\ \hline
 createdAt & \pref{DateTime} & Blacklist record was created at this timestamp. \\ \hline
 updatedAt & \pref{DateTime} & Blacklist record was updated at this timestamp. \\ \hline
 reason & \pref{String} & The system was blacklisted because of this reason. \\ \hline
-expiresAt & \pref{DateTime} & Blacklist record expires at this timestamp. \\ \hline
+expiresAt & \pref{DateTime} & Blacklist record expires at this timestamp. Only appears if the record can expire. \\ \hline
 active & \pref{Boolean} & Indicates if the rule defined by the entry is active. Only false if the rule has been explicitly revoked. \\ \hline
 
 \end{tabularx}
@@ -233,6 +217,28 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
 
+\msubsection{struct}{CheckRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+name & \pref{SystemName} & yes & Unique identifier of system to check. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{CheckResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+isBlacklisted & \pref{Boolean} & Indicates if the system is on the blacklist or not. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
 \subsection{Primitives}
 \label{sec:model:primitives}
 
@@ -245,6 +251,7 @@ The concrete interpretations of each of these types and structures must be provi
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{Boolean}          & One out of true or false. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline

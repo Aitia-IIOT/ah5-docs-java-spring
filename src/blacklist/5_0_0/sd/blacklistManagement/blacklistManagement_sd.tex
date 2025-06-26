@@ -106,7 +106,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{blacklistManagement} service, which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries in bulk.
+This document describes the \textbf{blacklistManagement} service, which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries in bulk. An example of this interaction is when an operator bans a consumer because it is flooding the Local Cloud with thousands of requests. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The \textbf{blacklistManagement} service contains the following operations:
 
@@ -184,6 +184,75 @@ Note that each subsection, which describes one type of object, begins with the \
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
 \phantomsection
+
+\msubsection{struct}{BlacklistQueryRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3.5cm} | p{1.75cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+systemNames & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that apply to systems with any of the specified names. \\ \hline
+mode & \pref{Mode} & no & Requester is looking for blacklist entries with the specified activity. \\ \hline
+issuers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that were created by systems with any of the specified names. \\ \hline
+revokers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that were revoked by systems with any of the specified names. \\ \hline
+reason & \pref{String} & no & Requester is looking for blacklist entries that were created for the specified reason or the reason contains this text. \\ \hline
+alivesAt & \pref{DateTime} & no & Requester is looking for active blacklist records that are not expired at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\clearpage
+
+\msubsection{struct}{BlacklistEntryListResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:BlacklistEntryResponse]{BlacklistEntryResponse}$>$ & List of blacklist entry results. \\ \hline
+count & \pref{Number} & The total number of corresponding entries. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{BlacklistEntryResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+systemName & \pref{SystemName} & Unique identifier of the blacklisted system. \\ \hline
+createdBy & \pref{SystemName} & Unique identifier of the system that created the record. \\ \hline
+revokedBy & \pref{SystemName} & Unique identifier of the system that revoked the record. Only appears if the record was revoked. \\ \hline
+createdAt & \pref{DateTime} & Blacklist record was created at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Blacklist record was updated at this timestamp. \\ \hline
+reason & \pref{String} & The system was blacklisted because of this reason. \\ \hline
+expiresAt & \pref{DateTime} & Blacklist record expires at this timestamp. Only appears if the record can expire. \\ \hline
+active & \pref{Boolean} & Indicates if the rule defined by the entry is active. Only false if the rule has been explicitly revoked. \\ \hline
+
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
 \msubsection{struct}{BlacklistCreateListRequest}
  
 \begin{table}[ht!]
@@ -205,52 +274,6 @@ reason & \pref{String} & yes & The system is blacklisted because of this reason.
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{BlacklistEntryListResponse}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-entries & \pref{List}$<$\hyperref[sec:model:BlacklistEntryResponse]{BlacklistEntryResponse}$>$ & List of blacklist entry results. \\ \hline
-count & \pref{Number} & The total number of corresponding entries. \\ \hline
-\end{tabularx}
-\end{table}
-
-\clearpage
-
-\msubsection{struct}{BlacklistEntryResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-systemName & \pref{SystemName} & Unique identifier of the blacklisted system. \\ \hline
-createdBy & \pref{SystemName} & Unique identifier of the system that created the record. \\ \hline
-revokedBy & \pref{SystemName} & Unique identifier of the system that revoked the record. \\ \hline
-createdAt & \pref{DateTime} & Blacklist record was created at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Blacklist record was updated at this timestamp. \\ \hline
-reason & \pref{String} & The system was blacklisted because of this reason. \\ \hline
-expiresAt & \pref{DateTime} & Blacklist record expires at this timestamp. \\ \hline
-active & \pref{Boolean} & Indicates if the rule defined by the entry is active. Only false if the rule has been explicitly revoked. \\ \hline
-
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{BlacklistQueryRequest}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3.5cm} | p{1.75cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-pagination & \hyperref[sec:model:PageRequest]{PageRequest} & no & Paging information about the queried blacklist entries. \\ \hline
-systemNames & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that apply to systems with any of the specified names. \\ \hline
-mode & \pref{Mode} & no & Requester is looking for blacklist entries with the specified activity. \\ \hline
-issuers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that were created by systems with any of the specified names. \\ \hline
-revokers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that were revoked by systems with any of the specified names. \\ \hline
-reason & \pref{String} & no & Requester is looking for blacklist entries that were created for the specified reason or the reason contains this text. \\ \hline
-alivesAt & \pref{DateTime} & no & Requester is looking for active blacklist records that are not expired at this timestamp. \\ \hline
-\end{tabularx}
-\end{table}
-
 \msubsection{struct}{BlacklistRemoveRequest}
  
 \begin{table}[ht!]
@@ -262,35 +285,6 @@ systemNames & \pref{List}$<$\pref{SystemName}$>$ & yes & The names of the system
 \end{table}
 
 \clearpage
-
-\msubsection{struct}{ErrorResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-errorMessage & \pref{String} & Description of the error. \\ \hline
-errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
-type & \pref{ErrorType} & Type of the error. \\ \hline
-origin & \pref{String} & Origin of the error. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{Identity}
-
-An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
-
-\msubsection{struct}{PageRequest}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
-pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
-pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
-pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
-\end{tabularx}
-\end{table}
 
 \subsection{Primitives}
 \label{sec:model:primitives}
@@ -304,6 +298,8 @@ The concrete interpretations of each of these types and structures must be provi
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{Boolean}          & One out of true or false. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Mode}             & Specifies whether the queried records should have the \textit{active} flag set. The possible values are: ALL, ACTIVES, INACTIVES. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
