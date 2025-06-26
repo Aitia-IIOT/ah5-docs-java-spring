@@ -95,7 +95,7 @@ Authorization: Bearer <identity-info>
 }
 ```
 
-The service operation **responds** with the status code `201` if subscriptions were successfully created. he response also contains a [ServiceOrchestrationSubscriptionListResponse](../data-models/service-orchestration-subscription-list-response.md) JSON encoded body.
+The service operation **responds** with the status code `201` if subscriptions were successfully created. The response also contains a [ServiceOrchestrationSubscriptionListResponse](../data-models/service-orchestration-subscription-list-response.md) JSON encoded body.
 
 ```
 {
@@ -195,18 +195,44 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 }
 ```
 
-## trigger
+### trigger
 
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationPushTriggerRequest](../data-models/service-orchestration-push-trigger-request.md) JSON encoded body.
 
 ```
-TODO
+POST /serviceorchestration/orchestration/mgmt/push/trigger HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+   "targetSystems":[
+      "TemperatureConsumer"
+   ],
+   "subscriptionIds":[
+      
+   ]
+}
 ```
 
 The service operation **responds** with the status code `201` if orchestration jobs were successfully created. The response also contains a [ServiceOrchestrationJobListResponse](../data-models/service-orchestration-job-list-response.md) JSON encoded body.
 
 ```
-TODO
+{
+   "jobs":[
+      {
+         "id":"1fac8a1c-aa4b-456e-b501-01289035fcc6",
+         "status":"IN_PROGRESS",
+         "type":"PUSH",
+         "requesterSystem":"TemperatureSensorManager",
+         "targetSystem":"TemperatureConsumer",
+         "serviceDefinition":"kelvinInfo",
+         "subscriptionId":"d2fefc6a-f563-40a2-9ce4-3512c2887755",
+         "message":"",
+         "createdAt":"2025-10-05T11:30:14Z",
+         "startedAt":"2025-10-05T11:30:17Z",
+         "finishedAt":"2025-10-05T11:31:11Z"
+      }
+   ]
+}
 ```
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
@@ -217,5 +243,109 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /serviceorchestration/orchestration/mgmt/push/trigger"
+}
+```
+
+### query
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationSubscriptionQueryRequest](../data-models/service-orchestration-subscription-query-request.md) JSON encoded body.
+
+```
+POST /serviceorchestration/orchestration/mgmt/push/query HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+   "pagination":{
+      "page":0,
+      "size":20,
+      "direction":"ASC",
+      "sortField":"createdAt"
+   },
+   "ownerSystems":[
+      "TemperatureSensorManager"
+   ],
+   "targetSystems":[
+      "TemperatureConsumer"
+   ],
+   "serviceDefinitions":[
+      "kelvinInfo"
+   ]
+}
+```
+
+The service operation **responds** with the status code `200` if subscriptions were successfully queried. The response also contains a [ServiceOrchestrationSubscriptionListResponse](../data-models/service-orchestration-subscription-list-response.md) JSON encoded body.
+
+```
+{
+   "entries":[
+      {
+         "id":"d2fefc6a-f563-40a2-9ce4-3512c2887755",
+         "ownerSystemName":"TemperatureSensorManager",
+         "targetSystemName":"TemperatureConsumer",
+         "orchestrationRequest":{
+            "serviceRequirement":{
+               "serviceDefinition":"kelvinInfo",
+               "operations":[
+                  "query-temperature"
+               ],
+               "versions":[
+                  
+               ],
+               "alivesAt":"2025-10-05T11:35:14Z",
+               "metadataRequirements":[
+                  
+               ],
+               "interfaceTemplateNames":[
+                  "generic_https"
+               ],
+               "interfaceAddressTypes":[
+                  "HOSTNAME",
+                  "IPV4"
+               ],
+               "interfacePropertyRequirements":[
+                  
+               ],
+               "securityPolicies":[
+                  "TIME_LIMITED_TOKEN_AUTH"
+               ],
+               "preferredProviders":[
+                  
+               ]
+            },
+            "orchestrationFlags":{
+               "MATCHMAKING":"true",
+               "ALLOW_TRANSLATION":"true",
+               "ONLY_PREFERRED":"false",
+               "ONLY_EXCLUSIVE":"false",
+               "ALLOW_INTERCLOUD":"false",
+               "ONLY_INTERCLOUD":"false"
+            },
+            "qosRequirements":{
+               "maxLatencyMs":"10"
+            },
+            "exclusivityDuration":600
+         },
+         "notifyInterface":{
+            "protocol":"mqtt",
+            "properties":{
+               "topic":"arrowhead/orchestration-push"
+            }
+         },
+         "expiredAt":"2025-10-08T11:35:14Z",
+         "createdAt":"2025-10-05T11:30:14Z"
+      }
+   ],
+   "count":1
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Owner system list contains empty element",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceorchestration/orchestration/mgmt/push/query"
 }
 ```

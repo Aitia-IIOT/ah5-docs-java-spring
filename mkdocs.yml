@@ -139,6 +139,7 @@ nav:
       - ServiceOrchestrationSubscriberListRequest: api/data-models/service-orchestration-subscriber-list-request.md
       - ServiceOrchestrationSubscriberRequest: api/data-models/service-orchestration-subscriber-request.md
       - ServiceOrchestrationSubscriptionListResponse: api/data-models/service-orchestration-subscription-list-response.md
+      - ServiceOrchestrationSubscriptionQueryRequest: api/data-models/service-orchestration-subscription-query-request.md
       - ServiceOrchestrationSubscriptionRequest: api/data-models/service-orchestration-subscription-request.md
       - ServiceOrchestrationSubscriptionResponse: api/data-models/service-orchestration-subscription-response.md
       - ServiceQueryRequest: api/data-models/service-query-request.md
