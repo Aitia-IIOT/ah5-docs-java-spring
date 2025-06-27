@@ -426,11 +426,7 @@ properties & \hyperref[sec:model:NotifyInterfacePropertyMap]{NotifyInterfaceProp
 
 \msubsection{struct}{NotifyInterfacePropertyMap}
 
-An \pref{Object} which maps \pref{String} keys \pref{String} values.
-
-\msubsection{struct}{OrchestrationSubscriptionId}
-
-Unique \pref{String} identifier. 
+An \pref{Object} which maps \pref{String} keys \pref{String} values. 
 
 \clearpage
 
@@ -442,7 +438,7 @@ The concrete interpretations of each of these types and structures must be provi
 
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3.7cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{4.3cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{CloudID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name, separated by a special delimiter character. Each part must follow PascalCase naming convention. \\ \hline
@@ -453,6 +449,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{OrchestrationSubscriptionId} & Unique string identifier. \\ \hline
 \pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
 \pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
 \pdef{ServiceInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance's provider name, service definition and version, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline

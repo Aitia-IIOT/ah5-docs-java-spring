@@ -178,7 +178,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
    "traceId":"<trace-id>",
    "receiver":"TemperatureSensorManager",
    "payload":{
-      "errorMessage":"Subscription request list is empty.",
+      "errorMessage":"Subscription request list is empty",
       "errorCode":400,
       "exceptionType":"INVALID_PARAMETER",
       "origin":"arrowhead/serviceorchestration/orchestration/management/push/subscribe"
@@ -275,7 +275,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
             "message":"",
             "createdAt":"2025-10-05T11:30:14Z",
             "startedAt":"2025-10-05T11:30:17Z",
-            "finishedAt":"2025-10-05T11:31:11Z"
+            "finishedAt":""
          }
       ]
    }
