@@ -167,7 +167,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage": "Subscription request list is empty.",
+  "errorMessage": "Subscription request list is empty",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /serviceorchestration/orchestration/mgmt/push/subscribe"
@@ -228,7 +228,7 @@ The service operation **responds** with the status code `201` if orchestration j
          "message":"",
          "createdAt":"2025-10-05T11:30:14Z",
          "startedAt":"2025-10-05T11:30:17Z",
-         "finishedAt":"2025-10-05T11:31:11Z"
+         "finishedAt":""
       }
    ]
 }

@@ -92,7 +92,7 @@ This service operation removes subscriptions in bulk.
 
 **trigger**
 
-This service operation initiates service orchestration processes based on consumer system names or subscription identifiers or creator system names.
+This service operation initiates service orchestration processes based on consumer system names, subscription identifiers or creator system names.
 
 :material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#trigger) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#trigger)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#trigger) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#trigger)
@@ -171,11 +171,11 @@ authenticator.credentials={\
 
 :fontawesome-solid-wrench: **enable.blacklist.filter**
 
-Enable/disable automatic service requester system name verification against to cloud level blacklist. Can be `true` or `false`.
+Enable/disable automatic service requester system name verification against to cloud level blacklist, and also the provider candidate system names during the orchestration process. Can be `true` or `false`.
 
 :fontawesome-solid-wrench: **force.blacklist.filter**
 
-Whether or not the service requests should be refused when the blacklist server is not responding. Can be `true` or `false`.
+Whether or not the service requests should be refused when the blacklist server is not responding, and whether the provider candidates should be dropped during the orchstration process or not. Can be `true` or `false`.
 
 :fontawesome-solid-wrench: **enable.management.filter**
 
@@ -207,11 +207,11 @@ Enable or disable automatic interface translation bridge creation between a cons
 
 :fontawesome-solid-wrench: **enable.qos**
 
-Enable or disable quality-of-service cross-checking during the orchestration process.
+Enable or disable Quality-of-Service cross-checking during the orchestration process.
 
 :fontawesome-solid-wrench: **enable.intercloud**
 
-Enable or disable automatic gateway tunnel creation between a consumer and a provider from a neighbor cloud during the orchestration process.
+Enable or disable automatic gatepath creation between a consumer and a provider from a neighbor cloud during the orchestration process.
 
 :fontawesome-solid-wrench: **orchestration.history.max.age**
 

@@ -52,10 +52,6 @@ The direction of a sorting operation. Possible values are the **String** represe
 
 A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must follow the snake_case naming convention. The identifier maximum length is 63 characters.
 
-## JobStatus
-
-Alias for a **String** value that describes the actual state of a job. Can be: `PENDING`, `IN_PROGRESS`, `DONE`, `ERROR`.
-
 ## KeyValuePair
 
 Association of a key of type [String](#string) and a value of any type. It is represented as a **Map<String, Object\>** Some examples:
@@ -123,6 +119,10 @@ A **String** identifier that is intended to be both human and machine-readable. 
 ## ServiceOperationName
 
 A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers and dash (`-`). A name has to start with a letter, cannot end with dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
+
+## ServiceOrchestrationJobStatus
+
+Alias for a **String** value that describes the actual state of a job. Can be: `PENDING`, `IN_PROGRESS`, `DONE`, `ERROR`.
 
 ## ServiceOrchestrationType
 
