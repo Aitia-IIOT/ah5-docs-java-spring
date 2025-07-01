@@ -64,6 +64,10 @@ The direction of a sorting operation. Possible values are the **String** represe
 
 A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
 
+## IdentityToken
+
+A unique and expiring **String** data issued by a central component to verify a system's identity during the interactions with the trusted Core and Support systems, allowing access without sharing the credentials with each and every Core/Support system at each and every interaction.  
+
 ## InterfaceName
 
 A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must follow the snake_case naming convention. The identifier maximum length is 63 characters.
