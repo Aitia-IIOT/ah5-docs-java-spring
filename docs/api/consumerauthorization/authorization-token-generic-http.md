@@ -78,7 +78,7 @@ GET /consumerauthorization/authorization-token/verify/dsalefb521vdjkdsae633 HTTP
 Authorization: Bearer <authorization-info>
 ```
 
-The service operation **responds** with 200 if called successfully and token has been checked. The response also contains an [AuthorizationTokenVerifyResponse](../data-models/authorization-token-verify-response.md) JSON encoded body.
+The service operation **responds** with `200` if called successfully and token has been checked. The response also contains an [AuthorizationTokenVerifyResponse](../data-models/authorization-token-verify-response.md) JSON encoded body.
 
 ```
 {
@@ -111,7 +111,7 @@ GET /consumerauthorization/authorization-token/public-key/dsalefb521vdjkdsae633 
 Authorization: Bearer <authorization-info>
 ```
 
-The service operation **responds** with 200 if called successfully and public key is retrieved. The response also contains a [PublicKey](../primitives.md#publickey) plain text body.
+The service operation **responds** with `200` if called successfully and public key is retrieved. The response also contains a [PublicKey](../primitives.md#publickey) plain text body.
 
 ```
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7D8z7doc95vY0uAx8JXwvrcl+Q7MykFoFIF1tn4fesvPIXo5eCGDS8FCONW0S5igQ+l00GdN/SlE0o85lI08TvepGEkTOtm1J+hsAHRD65OpPTjzWDVzP4+GzjZSUJl41iBDSW1YHgiFG8P2TqaTqNScrfLtKyekSzy/m24uh+zX5tjNoJ4GdSUeTNttHUuCH39MBxEo5E6KpzFGbC4105WHIH1MGWozOrZ3k7udvCLbCTvZ8PFtbDN4Ymjir0PE+6E2N4I+kagL1Py/DmNpKvLLI6m+YWJh2ErOAc56ThVvbCDeLOihacb26Y9Icrda1jOa30/xGsS3CmFLIpZjWwIDAQAB
@@ -142,7 +142,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with 201 if called successfully and the record has been created. The response might contains a Base64 [String](../primitives.md#string) cryptographic addition plain text body (depending on the specified [EncryptionAlgorithmName](../primitives.md#encryptionalgorithmname)).
+The service operation **responds** with `201` if called successfully and the record has been created. The response might contains a Base64 [String](../primitives.md#string) cryptographic addition plain text body (depending on the specified [EncryptionAlgorithmName](../primitives.md#encryptionalgorithmname)).
 
 ```
 41iBDSW1YHgiFG8P2TqaTqNScrfLtKye
