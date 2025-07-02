@@ -40,9 +40,11 @@ nav:
       - ConsumerAuthorization:
         - HTTP:
             - authorization: api/consumerauthorization/authorization-generic-http.md
+            - authorizationToken: api/consumerauthorization/authorization-token-generic-http.md
             - authorizationManagement: api/consumerauthorization/authorization-management-generic-http.md
         - MQTT:
             - authorization: api/consumerauthorization/authorization-generic-mqtt.md
+            - authorizationToken: api/consumerauthorization/authorization-token-generic-mqtt.md
             - authorizationManagement: api/consumerauthorization/authorization-management-generic-mqtt.md
       - DynamicServiceOrchestration:
         - HTTP:
@@ -68,6 +70,7 @@ nav:
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
+      - AuthorizationEncryptionKeyRegistrationRequest: api/data-models/authorization-encryption-key-registration-request.md
       - AuthorizationGrantRequest: api/data-models/authorization-grant-request.md
       - AuthorizationLookupRequest: api/data-models/authorization-lookup-request.md
       - AuthorizationMgmtGrantListRequest: api/data-models/authorization-mgmt-grant-list-request.md
@@ -82,6 +85,7 @@ nav:
       - AuthorizationPolicyResponse: api/data-models/authorization-policy-response.md
       - AuthorizationQueryRequest: api/data-models/authorization-query-request.md
       - AuthorizationTokenDescriptor: api/data-models/authorization-token-descriptor.md
+      - AuthorizationTokenGenerationRequest: api/data-models/authorization-token-generation-request.md
       - AuthorizationTokenMap: api/data-models/authorization-token-map.md
       - AuthorizationVerifyRequest: api/data-models/authorization-verify-request.md
       - BlacklistCreateListRequest: api/data-models/blacklist-create-list-request.md

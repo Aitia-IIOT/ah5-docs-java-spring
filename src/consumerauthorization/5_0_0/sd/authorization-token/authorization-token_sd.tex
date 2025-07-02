@@ -173,9 +173,9 @@ Operation \textit{verify} checks whether a given simple type token is valid or n
 
 Verifying self-contained type of tokens with this operation is not possible.
 
-\fsubsection{public-key}{Identity}{PublicKeyResponse}{}{ErrorResponse}
+\fsubsection{get-public-key}{Identity}{PublicKeyResponse}{}{ErrorResponse}
 
-Operation \textit{public-key} returns the \pref{PublicKey} of the implementing system, if available. Having a \pref{PublicKey} is only possible if the system supports an asymmetric encryption solution. Some self-contained token type also support asymmetric encryption, allowing the requester (provider) system to verify whether the token was created by the same system that the \pref{PublicKey} belongs to." 
+Operation \textit{get-public-key} returns the \pref{PublicKey} of the implementing system, if available. Having a \pref{PublicKey} is only possible if the system supports an asymmetric encryption solution. Some self-contained token type also support asymmetric encryption, allowing the requester (provider) system to verify whether the token was created by the same system that the \pref{PublicKey} belongs to.
 
 \fsubsection{register-encryption-key}{AuthorizationEncryptionKeyRegistrationRequest}{AuthorizationEncryptionKeyRegistrationResponse}{}{ErrorResponse}
 
@@ -328,7 +328,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{EventTypeName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
-\pdef{PublicKey} & TODO \\ \hline
+\pdef{PublicKey} & Cryptographic key that is used to encrypt data or verify digital signatures. It is part of a key pair in asymmetric encryption, where the public key is shared openly, while the private key is kept secret by the owner. \\ \hline
 \pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
 \pdef{ServiceOperationName} & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline

@@ -51,12 +51,45 @@ This service operation checks whether a consumer has access to a provider's spec
 The purpose of this service is to generate and validate authorization tokens. The service is offered for both application and Core/Support Systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization-token_sd.pdf) TODO<br />
-:material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-token-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-token-generic-http.md) TODO<br />
-:material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-token-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-token-generic-mqtt.md) TODO<br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization-token_sd.pdf)<br />
+:material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-token-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-token-generic-http.md)<br />
+:material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-token-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-token-generic-mqtt.md)<br />
 :material-tag: since: v5.0.0 
 
-TODO fill it with authorizationToken's operations
+**generate**
+
+Its purpose is to verify the requester’s permissions and produce a token of defined type for the targeted service consumption.
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-token-generic-http.md#generate) | [generic_https](../api/consumerauthorization/authorization-token-generic-http.md#generate)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-token-generic-mqtt.md#generate) | [generic_mqtts](../api/consumerauthorization/authorization-token-generic-mqtt.md#generate)
+
+**verify**
+
+Its purpose is to check whether a given token is valid or not, is associated with the requester or not and to provide the belonged token details.
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-token-generic-http.md#verify) | [generic_https](../api/consumerauthorization/authorization-token-generic-http.md#verify)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-token-generic-mqtt.md#verify) | [generic_mqtts](../api/consumerauthorization/authorization-token-generic-mqtt.md#verify)
+
+**get-public-key**
+
+Its purpose is to provide the public key of the implementing system if any (necessary for the verification of some token types).
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-token-generic-http.md#get-public-key) | [generic_https](../api/consumerauthorization/authorization-token-generic-http.md#get-public-key)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-token-generic-mqtt.md#get-public-key) | [generic_mqtts](../api/consumerauthorization/authorization-token-generic-mqtt.md#get-public-key)
+
+**register-encryption-key**
+
+Its purpose is to store an encryption key that can be used to encrypt the raw tokens generated for any service of the requester system.
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-token-generic-http.md#register-encryption-key) | [generic_https](../api/consumerauthorization/authorization-token-generic-http.md#register-encryption-key)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-token-generic-mqtt.md#register-encryption-key) | [generic_mqtts](../api/consumerauthorization/authorization-token-generic-mqtt.md#register-encryption-key)
+
+**unregister-encryption-key**
+
+Its purpose is to remove the encryption key belonged to the requester system.
+
+:material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-token-generic-http.md#unregister-encryption-key) | [generic_https](../api/consumerauthorization/authorization-token-generic-http.md#unregister-encryption-key)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-token-generic-mqtt.md#unregister-encryption-key) | [generic_mqtts](../api/consumerauthorization/authorization-token-generic-mqtt.md#unregister-encryption-key)
 
 ### generalManagement
 
