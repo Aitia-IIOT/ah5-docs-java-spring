@@ -20,6 +20,9 @@ nav:
     - QoSEvaluator: support_systems/qos_evaluator.md
     - TranslationManager: support_systems/translation_manager.md
   - API:
+    - Communication Profiles:
+      - Overview: api/communication-profiles/communication-profiles-overview.md
+      - Generic HTTP: api/communication-profiles/generic-http-template.md
     - Interface Descriptions:
       - General:
         - HTTP:
