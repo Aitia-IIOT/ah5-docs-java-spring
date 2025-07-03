@@ -121,8 +121,8 @@ The \textbf{serviceOrchestrationPushManagement} service contains the following o
 \begin{itemize}
     \item \textit{subscribe} creates subscriptions in bulk for other consumer systems that can be triggered anytime to perform the orchestration process and push newly orchestrated matching service instances to the subscribed consumers;
     \item \textit{unsubscribe} removes subscriptions in bulk;
-    \item \textit{trigger} initiates service orchestration processes based on consumer system names or subscription identifiers or creator system names;
-    \item \textit{query} lists the existing subscriptions that match to the filtering requirements
+    \item \textit{trigger} initiates service orchestration processes based on consumer system names or subscription identifiers or a creator system name;
+    \item \textit{query} lists the existing subscriptions that match the filtering requirements
 \end{itemize}
 
 The rest of this document is organized as follows.
@@ -133,7 +133,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 The purpose of the service is to handle the push orchestration related data and activities centrally and in bulk. 
 
-In certain use cases, the right of deciding when and how the service orchestration process should be executed is not belonged to the consumer system itself, but is assigned to a higher level entity (a dedicated system or a human operator). This higher entity invokes the \textit{trigger} operation when it deems that a re-orchestration is necessary.
+In certain use cases, the right of deciding when and how the service orchestration process should be executed does not belong to the consumer system itself, but is assigned to a higher level entity (a dedicated system or a human operator). This higher entity invokes the \textit{trigger} operation when it deems that a re-orchestration is necessary.
 
 Due to certain device or software constraints, it is also possible that consumer systems are not capable to define their own service requirements (supported interface, security level, service metadata, etc...). In these situations, the task and responsibility of creating - and removing - proper subscriptions, could also belong to the higher entity. To manage these tasks, the \textit{subscribe} and \textit{unsubscribe} operations could be invoked.
 
@@ -236,7 +236,7 @@ exclusivityDuration & \pref{Number} & no & The interval the service wanted to be
 \end{tabularx}
 \end{table}
 
-\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceRequirement} and \texttt{orchestrationFlags} fields. 
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceRequirement}, \texttt{orchestrationFlags} and \texttt{exclusivityDuration} fields. 
 
 \clearpage
 
@@ -250,7 +250,7 @@ operations & \pref{List}$<$\pref{ServiceOperationName}$>$ & yes/no & The require
 Exactly one operation must be defined, when the following orchestration flags are true: \newline \texttt{ONLY\_INTERCLOUD}, \texttt{ALLOW\_INTERCLOUD}, \texttt{ALLOW\_TRANSLATION} \\ \hline
 versions & \pref{List}$<$\pref{Version}$>$ & no & The required service versions. \\ \hline 
 alivesAt & \pref{DateTime} & no & The orchestrated service must be alive by this time. \\ \hline
-metadataRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must meet at least to one of the specified metadata requirement. \\ \hline
+metadataRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must meet at least to one of the specified metadata requirements. \\ \hline
 interfaceTemplateNames & \pref{List}$<$\pref{InterfaceName}$>$ & no & The orchestrated service must offer at least one from the specified interface template names. \\ \hline 
 interfaceAddressTypes & \pref{List}$<$\pref{AddressType}$>$ & no & The orchestrated service must offer at least one from the specified interface address types. \\ \hline
 interfacePropertyRequirements & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & The orchestrated service must offer at least one interface that meets with one of the specified property requirements. \\ \hline
@@ -259,7 +259,7 @@ preferredProviders & \pref{List}$<$\pref{SystemName}$>$ & no & Provider system n
 \end{tabularx}
 \end{table}
 
-\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceDefinition} field. 
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceDefinition} and \texttt{preferredProviders} fields. 
 
 \msubsection{struct}{MetadataRequirements}
 
@@ -277,7 +277,7 @@ An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or li
 
 \msubsection{struct}{OrchestrationFlag}
 
-Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process. Possible values:
+Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process. Possible keys:
 
 \begin{itemize}
     \item \texttt{MATCHMAKING}:
@@ -294,15 +294,15 @@ Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process.
 
     If \texttt{false}, but preferred providers are specified and have matching service instances, then orchestration process considers only those service instances that are provided by a preferred provider. Otherwise, non-preferred providers are considered.
 
-    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
+    Supporting strategies: \textit{simple-store}, \textit{flexible-store}, \textit{dynamic}
     
     \item \texttt{ONLY\_EXCLUSIVE}:
 
-    If \texttt{true}, orchestration process considers only those matching service instances that are allows exclusivity. It automatically results \texttt{MATCHMAKING:true} as well.
+    If \texttt{true}, orchestration process considers only those matching service instances that allow exclusivity. It automatically results \texttt{MATCHMAKING:true} as well.
 
     If \texttt{false}, but exclusivity duration is specified and there are matching services with exclusivity allowed, then orchestration process considers only those service instances that allows exclusivity. Otherwise, service instances without exclusivity are considered.
 
-    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
+    Supporting strategies: \textit{simple-store}, \textit{flexible-store}, \textit{dynamic}
     
     \item \texttt{ALLOW\_INTERCLOUD}:
 

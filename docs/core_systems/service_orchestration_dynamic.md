@@ -92,14 +92,14 @@ This service operation removes subscriptions in bulk.
 
 **trigger**
 
-This service operation initiates service orchestration processes based on consumer system names, subscription identifiers or creator system names.
+This service operation initiates service orchestration processes based on consumer system names, subscription identifiers or a creator system name.
 
 :material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#trigger) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#trigger)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#trigger) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#trigger)
 
 **query**
 
-This service operation lists the existing subscriptions that match to the filtering requirements.
+This service operation lists the existing subscriptions that match the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#query) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md#query)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#query) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md#query)
@@ -215,11 +215,11 @@ Enable or disable automatic gatepath creation between a consumer and a provider 
 
 :fontawesome-solid-wrench: **orchestration.history.max.age**
 
-Specifies after how long (in days) the orchestration history records can be automatically deleted.
+Specifies after how many days the orchestration history records can be automatically deleted.
 
 :fontawesome-solid-wrench: **cleaner.job.interval**
 
-Specifies how often (in milisec) the expired subscriptions and the orchestration history records can be automatically deleted and how often the expired orchestration locks can be released.
+Specifies in milisec, that how often the expired subscriptions and the orchestration history records can be automatically deleted and how often the expired orchestration locks can be released.
 
 :fontawesome-solid-wrench: **push.orchestration.max.thread**
 
