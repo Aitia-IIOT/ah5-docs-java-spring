@@ -1,10 +1,10 @@
 # X.509 Certificate Profiles
 
-X.509 is a certificate standard produced by the International Telecommunication Union - Telecommunication Standardization Sector (ITU-T) and is famously used by the TLS and DTLS protocols. 
+X.509 is a [certificate](../help/definitions.md#certificate) standard produced by the International Telecommunication Union - Telecommunication Standardization Sector (ITU-T) and is famously used by the TLS and DTLS protocols. 
 
 ## Profile Hierarchy
 
-In brief, an X.509 certificate represents the identity of its owner. It records required inputs to a secure key exchange algorithm, as well as how the identity it represents is endorsed by a hierarchy of issuers.
+In brief, an X.509 [certificate](../help/definitions.md#certificate) represents the identity of its owner. It records required inputs to a secure key exchange algorithm, as well as how the identity it represents is endorsed by a hierarchy of issuers.
 
 There are nine arrowhead certificate profiles defined and depicted in the following diagram:
 

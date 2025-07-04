@@ -23,6 +23,9 @@ nav:
     - Communication Profiles:
       - Overview: api/communication-profiles/communication-profiles-overview.md
       - Generic HTTP: api/communication-profiles/generic-http-template.md
+      - Generic HTTPS: api/communication-profiles/generic-https-template.md
+      - Generic MQTT: api/communication-profiles/generic-mqtt-template.md
+      - Generic MQTTS: api/communication-profiles/generic-mqtts-template.md
     - Interface Descriptions:
       - General:
         - HTTP:
@@ -163,6 +166,7 @@ nav:
       - SystemRequest: api/data-models/system-request.md
     - Primitives: api/primitives.md
   - Help:
+    - Definitions: help/definitions.md
     - Naming Convention: help/naming-convention.md
     - Certificate Profiles: help/certificate-profiles.md
     - Tutorials:
