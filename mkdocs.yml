@@ -40,8 +40,10 @@ nav:
       - DynamicServiceOrchestration:
         - HTTP:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
+          - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md
         - MQTT:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
+          - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
@@ -127,11 +129,19 @@ nav:
       - ServiceLookupResult: api/data-models/service-lookup-result.md
       - ServiceOrchestrationResponse: api/data-models/service-orchestration-response.md
       - ServiceOrchestrationFlag: api/data-models/service-orchestration-flag.md
+      - ServiceOrchestrationJobListResponse: api/data-models/service-orchestration-job-list-response.md
+      - ServiceOrchestrationJobResponse: api/data-models/service-orchestration-job-response.md
       - ServiceOrchestrationNotifyInterface: api/data-models/service-orchestration-notify-interface.md
+      - ServiceOrchestrationPushTriggerRequest:  api/data-models/service-orchestration-push-trigger-request.md
       - ServiceOrchestrationRequest: api/data-models/service-orchestration-request.md
       - ServiceOrchestrationRequirement: api/data-models/service-orchestration-requirement.md
       - ServiceOrchestrationResult: api/data-models/service-orchestration-result.md
+      - ServiceOrchestrationSubscriberListRequest: api/data-models/service-orchestration-subscriber-list-request.md
+      - ServiceOrchestrationSubscriberRequest: api/data-models/service-orchestration-subscriber-request.md
+      - ServiceOrchestrationSubscriptionListResponse: api/data-models/service-orchestration-subscription-list-response.md
+      - ServiceOrchestrationSubscriptionQueryRequest: api/data-models/service-orchestration-subscription-query-request.md
       - ServiceOrchestrationSubscriptionRequest: api/data-models/service-orchestration-subscription-request.md
+      - ServiceOrchestrationSubscriptionResponse: api/data-models/service-orchestration-subscription-response.md
       - ServiceQueryRequest: api/data-models/service-query-request.md
       - ServiceRegistrationRequest: api/data-models/service-registration-request.md
       - ServiceRegistrationResponse: api/data-models/service-registration-response.md

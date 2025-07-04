@@ -120,6 +120,14 @@ A **String** identifier that is intended to be both human and machine-readable. 
 
 A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (English alphabet only) and numbers and dash (`-`). A name has to start with a letter, cannot end with dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
 
+## ServiceOrchestrationJobStatus
+
+Alias for a **String** value that describes the actual state of a job. Can be: `PENDING`, `IN_PROGRESS`, `DONE`, `ERROR`.
+
+## ServiceOrchestrationType
+
+Alias for a **String** value that can be only `PULL` or `PUSH`.
+
 ## String
 
 A chain of UTF-8 characters.
