@@ -183,7 +183,7 @@ Operation \textit{device-create} registers the specified devices. The creation d
 
 \begin{itemize}
     \item Device names are case sensitive, must follow the UPPER\_SNAKE\_CASE naming convention and have to be unique within the Local Cloud.
-    \item Device names can contain maximum 63 character of uppercase letters (english alphabet), numbers and underscore (\_), and have to start with a letter (also cannot end with underscore).
+    \item Device names can contain maximum 63 character of uppercase letters (English alphabet), numbers and underscore (\_), and have to start with a letter (also cannot end with underscore).
     \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
     \item Keys in the metadata structure can not contain dot (.) character.
     \item Multiple devices can be created at once, but it is forbidden to specify devices with the same name.
@@ -196,7 +196,7 @@ Operation \textit{device-updates} updates the specified existing devices. The up
 
 \begin{itemize}
     \item Device names are case sensitive, must follow the UPPER\_SNAKE\_CASE naming convention and have to be unique within the Local Cloud.
-    \item Device names can contain maximum 63 character of uppercase letters (english alphabet), numbers and underscore (\_), and have to start with a letter (also cannot end with underscore).
+    \item Device names can contain maximum 63 character of uppercase letters (English alphabet), numbers and underscore (\_), and have to start with a letter (also cannot end with underscore).
     \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
     \item Keys in the metadata structure can not contain dot (.) character.
     \item Multiple devices can be updated at once, but it is forbidden to update devices with the same name.
@@ -229,7 +229,7 @@ Operation \textit{system-create} registers the specified systems. The creation d
 
 \begin{itemize}
     \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
-    \item System names can contain maximum 63 character of letters (english alphabet), and numbers, and have to start with a letter.
+    \item System names can contain maximum 63 character of letters (English alphabet), and numbers, and have to start with a letter.
     \item System has to have at least one address (including those that come from the referenced device, if any). It is recommended to use IP address. 
     \item Keys in the metadata structure can not contain dot (.) character.
     \item Device, if specified, has to be present in the Local Cloud.
@@ -243,7 +243,7 @@ Operation \textit{system-update} updates the specified existing systems. The upd
 
 \begin{itemize}
     \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
-    \item System names can contain maximum 63 character of letters (english alphabet), and numbers, and have to start with a letter.
+    \item System names can contain maximum 63 character of letters (English alphabet), and numbers, and have to start with a letter.
     \item System has to have at least one address (including those that come from the referenced device, if any). It is recommended to use IP address. 
     \item Keys in the metadata structure can not contain dot (.) character.
     \item Device, if specified, has to be present in the Local Cloud.
@@ -271,7 +271,7 @@ Operation \textit{service-definition-create} registers the specified service def
 
 \begin{itemize}
     \item Service definition names are case sensitive, must follow the camelCase naming convention and have to be unique within the Local Cloud.
-    \item Service definition names can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Service definition names can contain maximum 63 character of letters (English alphabet) and numbers, and have to start with a letter.
     \item Multiple service definitions can be created at once, but it is forbidden to specify service definitions with the same name.
     \item It is forbidden to create a service definition that is already registered into the Local Cloud.
 \end{itemize}
@@ -300,7 +300,7 @@ Operation \textit{service-create} registers the specified service instances. The
 \begin{itemize}
     \item The provider systems have to be present in the Local Cloud.
     \item Service definition names are case sensitive, must follow the camelCase naming convention and have to be unique within the Local Cloud.
-    \item Service definition names can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Service definition names can contain maximum 63 character of letters (English alphabet) and numbers, and have to start with a letter.
     \item If an expiration date is specified, it cannot point to a past date.
     \item Keys in the metadata structure can not contain dot (.) character.
     \item For every instance, at least one interface must be specified with its template name, the used policy and all the necessary template-specific properties.
@@ -345,7 +345,7 @@ Operation \textit{interface-template-create} registers the specified interface t
 
 \begin{itemize}
     \item Interface template names are case sensitive, must follow the snake\_case naming convention and have to be unique within the Local Cloud.
-    \item Interface template names can contain maximum 63 character of lowercase letters (english alphabet), numbers and underscore (\_), and have to start with a letter (also cannot end with underscore).
+    \item Interface template names can contain maximum 63 character of lowercase letters (English alphabet), numbers and underscore (\_), and have to start with a letter (also cannot end with underscore).
     \item Protocol names are case insensitive and can contain maximum 63 characters.
     \item Property names can contain maximum 63 characters and can not contain dot (.) character.
     \item It is forbidden to specify properties with the same name for the same interface templates.
