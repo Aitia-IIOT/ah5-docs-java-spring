@@ -154,11 +154,11 @@ Operation \textit{grant} creates a provider-level authorization policy. The gran
 \begin{itemize}
     \item With this operation the requester can only define authorization policy for its own services/event types. If a management-level policy for the same service instance/event type exists, this one will be ignored. 
     \item The target type can be a service definition or an event type. 
-    \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Target can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
-    \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Target can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+    \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
     \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
     \item The default policy is mandatory and describes who can use the target when a more specialized policy is not available. In case of event types, only the default policy is allowed to specify.
-    \item Scoped policies are optional and can contain the specialized policies. Scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (english alphabet), numbers and dash (-), have to start with a letter, and cannot end with a dash.
+    \item Scoped policies are optional and can contain the specialized policies. Scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (English alphabet), numbers and dash (-), have to start with a letter, and cannot end with a dash.
     \item Policies have types that describe how the policies are defined:
         \begin{itemize}
             \item \textit{Public in cloud}: All consumers of the specified cloud can use the specified target/scope.
@@ -166,7 +166,7 @@ Operation \textit{grant} creates a provider-level authorization policy. The gran
             \item \textit{Blacklist-based}: All consumers of the specified cloud but the specified ones (in a list) can use the specified target/scope.
             \item \textit{System-level metadata-based}: Consumers of the specified cloud with a matching system-level metadata can use the specified target/scope.
         \end{itemize}
-    \item Policies with type \textit{Whitelist-based} or \textit{Blacklist-based} have a mandatory system name list parameter. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Policies with type \textit{Whitelist-based} or \textit{Blacklist-based} have a mandatory system name list parameter. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (English alphabet) and numbers, and have to start with a letter.
     \item Evaluating policies with type \textit{System-level metadata-based} requires an online ServiceRegistry.
 \end{itemize}
 
@@ -196,13 +196,13 @@ Operation \textit{verify} checks whether a consumer can use a provider's service
 
 \begin{itemize}
     \item Only the provider OR a consumer can be the requester of this operation, which means that the appropriate field is optional (the other one is mandatory), however if both provider and consumer are specified, one of them must match the requester's name.
-    \item Provider and consumer field can contain a system name. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
-    \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Provider and consumer field can contain a system name. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (English alphabet) and numbers, and have to start with a letter.
+    \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
     \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
     \item The target type can be a service definition or an event type. 
-    \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Targets can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Targets can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
     \item Scope is optional and only mattered if target type is service definition. In this case, 
-    scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (english alphabet), numbers and dash (-), have to start with a letter and cannot ends with a dash.
+    scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (English alphabet), numbers and dash (-), have to start with a letter and cannot ends with a dash.
 \end{itemize}
 
 \clearpage
