@@ -107,7 +107,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{authorization} service, which enables service consumption permission validations for both providers and consumers.  Additionally, providers can lookup, grant and revoke those permissions. An example of this interaction when a provider system creates authorization policies about its offered service. An other example when a consumer can check whether a service is allowed to use before trying an actual service consumption. Event notification permission is also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This document describes the \textbf{authorization} service, which enables service consumption permission validations for both providers and consumers.  Additionally, providers can lookup, grant and revoke those permissions. An example of this interaction is when a provider system creates authorization policies about its offered service. An other example is when a consumer can check whether a service is allowed to use before trying an actual service consumption. Event notification permission is also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The \textbf{authorization} service contains the following operations:
 
@@ -123,9 +123,9 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-Provider systems should call the \textit{grant} operation to create authorization rules about its offered services. If the provider does not provide a service longer, it should use \textit{revoke} operation to remove the related policies. Rules can be changed by \textit{revoking} the existing ones and create the new ones using the \textit{grant} operation.
+Provider systems should call the \textit{grant} operation to create authorization rules about their offered services. If the provider no longer provides a service, it should use \textit{revoke} operation to remove the related policies. Rules can be changed by \textit{revoking} the existing ones and creating the new ones using the \textit{grant} operation.
 
-Consumer system should call the \textit{verify} to check whether a service instance (or a particular operation of that service instance) can be used before attempting the service consumption. Similarly, a provider system should use \textit{verify} when receive a request to decide whether the request should be fulfilled or not.
+Consumer systems should call the \textit{verify} operation to check whether a service instance (or a particular operation of that service instance) can be used before attempting the service consumption. Similarly, a provider system should use \textit{verify} when it receives a request to decide whether the request should be fulfilled or not.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -135,7 +135,7 @@ The requester has to identify itself to use any of the operations.
 \subsection{Access policy}
 \label{sec:accesspolicy}
 
-Available for anyone within the local cloud.
+Available for anyone within the Local Cloud.
 
 \newpage
 
@@ -153,12 +153,12 @@ Operation \textit{grant} creates a provider-level authorization policy. The gran
 
 \begin{itemize}
     \item With this operation the requester can only define authorization policy for its own services/event types. If a management-level policy for the same service instance/event type exists, this one will be ignored. 
-    \item Target type can be service definition or event type. 
+    \item The target type can be a service definition or an event type. 
     \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Target can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
     \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
     \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
     \item The default policy is mandatory and describes who can use the target when a more specialized policy is not available. In case of event types, only the default policy is allowed to specify.
-    \item Scoped policies is optional and can contain the specialized policies. Scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (english alphabet), numbers and dash (-), have to start with a letter, and cannot end with a dash.
+    \item Scoped policies are optional and can contain the specialized policies. Scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (english alphabet), numbers and dash (-), have to start with a letter, and cannot end with a dash.
     \item Policies have types that describe how the policies are defined:
         \begin{itemize}
             \item \textit{Public in cloud}: All consumers of the specified cloud can use the specified target/scope.
@@ -166,7 +166,7 @@ Operation \textit{grant} creates a provider-level authorization policy. The gran
             \item \textit{Blacklist-based}: All consumers of the specified cloud but the specified ones (in a list) can use the specified target/scope.
             \item \textit{System-level metadata-based}: Consumers of the specified cloud with a matching system-level metadata can use the specified target/scope.
         \end{itemize}
-    \item Policies with type \textit{Whitelist-based} or \textit{Blacklist-based} has a mandatory system name list parameter. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
+    \item Policies with type \textit{Whitelist-based} or \textit{Blacklist-based} have a mandatory system name list parameter. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item Evaluating policies with type \textit{System-level metadata-based} requires an online ServiceRegistry.
 \end{itemize}
 
@@ -183,7 +183,7 @@ Operation \textit{revoke} removes an authorization policy instance from the Loca
 Operation \textit{lookup} lists the provider-owned authorization policies that match the filtering requirements. The lookup data must meet the following criteria:
 
 \begin{itemize}
-    \item With this operation a requester system can only list authorization policies that created by the requester system.
+    \item With this operation a requester system can only list authorization policies that were created by the requester system.
     \item If a filter expects a list, there is an OR relation between the elements of the filter.
     \item There is an AND relation between different kind of filters.
     \item To use this operation, an application system must specify at least one policy instance id OR one target name OR one cloud identifier.
@@ -195,11 +195,11 @@ Operation \textit{lookup} lists the provider-owned authorization policies that m
 Operation \textit{verify} checks whether a consumer can use a provider's service/service operation or a subscriber can be notified when a publisher publishes a type of event. The input data must meet the following criteria:
 
 \begin{itemize}
-    \item Only the provider OR a consumer can be the requester of this operation, which means that the appropriate field is optional (the other one is mandatory), however if both provider and consumer is specified, one of them must match with the requester's name.
+    \item Only the provider OR a consumer can be the requester of this operation, which means that the appropriate field is optional (the other one is mandatory), however if both provider and consumer are specified, one of them must match the requester's name.
     \item Provider and consumer field can contain a system name. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (english alphabet) and numbers, and have to start with a letter.
     \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
     \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
-    \item Target type can be service definition or event type. 
+    \item The target type can be a service definition or an event type. 
     \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Targets can contain maximum 63 characters of letters (english alphabet) and numbers, and have to start with a letter.
     \item Scope is optional and only mattered if target type is service definition. In this case, 
     scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (english alphabet), numbers and dash (-), have to start with a letter and cannot ends with a dash.
@@ -225,7 +225,7 @@ cloud & \pref{CloudIdentifier} & no & The cloud of the potential consumers. Omit
 targetType & \pref{AuthorizationTargetType} & yes & The type of the target (service definition or event type). \\ \hline
 target & \pref{ServiceName} / \pref{EventTypeName} & yes & The target of the rule. \\ \hline
 description & \pref{String} & no & The description of the rule. \\ \hline
-defaultPolicy & \hyperref[sec:model:AuthorizationPolicyRequest]{AuthorizationPolicyRequest} & yes & The policy details of the rule which is used when no more specialized policy details are available. \\ \hline
+defaultPolicy & \hyperref[sec:model:AuthorizationPolicyRequest]{AuthorizationPolicyRequest} & yes & The policy details of the rule which are used when no more specialized policy details are available. \\ \hline
 scopedPolicies & \hyperref[sec:model:ScopedPoliciesRequest]{ScopedPoliciesRequest} & no & A structure that can contain specialized po-licy details. \\ \hline
 \end{tabularx}
 \end{table}
@@ -276,7 +276,7 @@ provider & \pref{SystemName} & The name of the system who provides the target of
 targetType & \pref{AuthorizationTargetType} & The type of the target (service definition or event type). \\ \hline
 target &  \pref{ServiceName} / \pref{EventTypeName} & The target of the rule. \\ \hline
 description & \pref{String} & The description of the rule. \\ \hline
-defaultPolicy & \hyperref[sec:model:AuthorizationPolicyDescriptor]{AuthorizationPolicyDescriptor} & The policy details of the rule which is used when no more specialized policy details are available. \\ \hline
+defaultPolicy & \hyperref[sec:model:AuthorizationPolicyDescriptor]{AuthorizationPolicyDescriptor} & The policy details of the rule which are used when no more specialized policy details are available. \\ \hline
 scopedPolicies & \hyperref[sec:model:ScopedPoliciesDescriptor]{ScopedPoliciesDescriptor} & A structure that can contain specialized po\-licy details. \\ \hline
 \end{tabularx}
 \end{table}
@@ -335,9 +335,9 @@ instanceId & \pref{AuthorizationPolicyInstanceID} & yes & Unique policy instance
 \begin{tabularx}{\textwidth}{| p{3cm} | p{5.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-instanceIds & \pref{List}$<$\pref{AuthorizationPolicyInstanceID}$>$ & no (yes) & Requester is looking for policy ins-tances with any of the specified identifiers. Mandatory if no cloudIdentifiers nor targetNames are specified. \\ \hline
-cloudIdentifiers & \pref{List}$<$\pref{CloudIdentifier}$>$ & no (yes) & Requester is looking for policy ins-tances that belongs to any of the specified clouds. Mandatory if no ins-tanceIds nor targetNames are specified. \\ \hline
-targetNames & \pref{List}$<$\pref{ServiceName}$>$ / \pref{List}$<$\pref{EventTypeName}$>$ & no (yes) & Requester is looking for policy ins-tances that belongs to any of the specified targets (either service definitions or event types). Mandatory if no instanceIds nor cloudIdentifiers are specified. \\ \hline
+instanceIds & \pref{List}$<$\pref{AuthorizationPolicyInstanceID}$>$ & no (yes) & Requester is looking for policy in-stances with any of the specified identifiers. Mandatory if no cloudIdentifiers nor targetNames are specified. \\ \hline
+cloudIdentifiers & \pref{List}$<$\pref{CloudIdentifier}$>$ & no (yes) & Requester is looking for policy in-stances that belong to any of the specified clouds. Mandatory if no ins-tanceIds nor targetNames are specified. \\ \hline
+targetNames & \pref{List}$<$\pref{ServiceName}$>$ / \pref{List}$<$\pref{EventTypeName}$>$ & no (yes) & Requester is looking for policy in-stances that belong to any of the specified targets (either service definitions or event types). Mandatory if no instanceIds nor cloudIdentifiers are specified. \\ \hline
 targetType & \pref{AuthorizationTargetType} & no (yes) & The type of the specified targets. Mandatory if targetNames are specified. \\ \hline
 \end{tabularx}
 \end{table}
@@ -370,7 +370,7 @@ cloud & \pref{CloudIdentifier} & no & The cloud of the consumer. Optional, if th
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 targetType & \pref{AuthorizationTargetType} & yes & The type of the target (service definition or event type). \\ \hline
 target & \pref{ServiceName} / \pref{EventTypeName} & yes & The name of the target. \\ \hline
-scope & \pref{ServiceOperationName} & no & The service operation that the consumer wants to use. Only mattered when the target is a service definition. \\ \hline
+scope & \pref{ServiceOperationName} & no & The service operation that the consumer wants to use. Only matters when the target is a service definition. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -394,12 +394,12 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{5cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
-\pdef{AuthorizationLevel} & String identifiers that specifies whether a rule is created by a provider for its service instances/event types (provider-level) or a higher entity does that (management-level). \\ \hline
+\pdef{AuthorizationLevel} & String identifier that specifies whether a rule is created by a provider for its service instances/event types (provider-level) or a higher entity does that (management-level). \\ \hline
 \pdef{AuthorizationPolicyInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance's level (provider or management), cloud identifier, provider name, target type and target, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline
-\pdef{AuthorizationPolicyType} & String identifiers of the various policy types: for whitelist-based policy, for blacklist-base policy, for cloud-level policy and for system-level metadata-based policy. \\ \hline
+\pdef{AuthorizationPolicyType} & String identifier of the various policy types: for whitelist-based policy, for blacklist-based policy, for cloud-level policy and for system-level metadata-based policy. \\ \hline
 \pdef{AuthorizationTargetType} & String identifiers that specifies whether a rule is about a service instance or an event type. \\ \hline
 \pdef{Boolean}          & One out of true or false. \\ \hline
-\pdef{CloudIdentifier} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name that managing the cloud. Each part must follow the PascalCase naming convention. \\ \hline
+\pdef{CloudIdentifier} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name that is managing the cloud. Each part must follow the PascalCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{EventTypeName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline

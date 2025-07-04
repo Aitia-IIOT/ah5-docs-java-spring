@@ -1,7 +1,7 @@
 # ConsumerAuthorization
 
-This Core system manages and to authorizes connections between various systems using authorization rules within an Eclipse Arrowhead Local Cloud (LC).
-It also provides various token generation functionalities that adds an extra layer of security.
+This Core system manages and authorizes connections between various systems using authorization rules within an Eclipse Arrowhead Local Cloud (LC).
+It also provides various token generation functionalities that add an extra layer of security.
 
 Learn more: <br />
 :material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_0_0/authorization_sysd.pdf)
@@ -10,7 +10,7 @@ Learn more: <br />
 
 ### authorization
 
-The purpose of this service is to validate service consumption permissions and to lookup, grant and revoke those permissions. The service is offered for both application and Core/Support Systems.
+The purpose of this service is to validate service consumption permissions and to lookup, grant and revoke those permissions. The service is offered for both application and Core/Support systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization_sd.pdf)<br />
@@ -27,7 +27,7 @@ This service operation enables a provider to grant access to various consumers t
 
 **revoke**
 
-This service operation enables a provider/publisher to remove existing authorization policies that was created by itself.
+This service operation enables a provider/publisher to remove existing authorization policies that were created by itself.
 
 :material-arrow-right-thin: Example: [generic_http](../api/consumerauthorization/authorization-generic-http.md#revoke) | [generic_https](../api/consumerauthorization/authorization-generic-http.md#revoke)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/consumerauthorization/authorization-generic-mqtt.md#revoke) | [generic_mqtts](../api/consumerauthorization/authorization-generic-mqtt.md#revoke)
@@ -48,7 +48,7 @@ This service operation checks whether a consumer has access to a provider's spec
 
 ### authorizationToken
 
-The purpose of this service is to generate and validate authorization tokens. The service is offered for both application and Core/Support Systems.
+The purpose of this service is to generate and validate authorization tokens. The service is offered for both application and Core/Support systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/authorization-token_sd.pdf) TODO<br />
@@ -189,7 +189,7 @@ authenticator.credentials={\
 
 :fontawesome-solid-wrench: **authenticator.secret.keys**
 
-Secret key for the authenticator servers when authentication policy is `outsourced`. The authenticator servers are able to use authorization check services by providing their system name hashed with the associated secret key.
+Secret key for the authenticator servers when authentication policy is `outsourced`. The authenticator servers are able to use authorization check services by providing an HMAC of their system name computed with the associated secret key.
 
 ```
 authenticator.secret.keys={\
@@ -219,7 +219,7 @@ Whether or not the service requests should be refused when the blacklist server 
 
 :fontawesome-solid-wrench: **blacklist.check.exclude.list**
 
-Comma-separated list that contains systems whose requests is served without checking the cloud level blacklist, even if blacklist is enabled.
+Comma-separated list that contains systems whose requests are served without checking the cloud level blacklist, even if blacklist is enabled.
 
 :fontawesome-solid-wrench: **max.page.size**
 

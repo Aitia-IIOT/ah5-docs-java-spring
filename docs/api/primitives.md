@@ -14,7 +14,7 @@ A **String** representation of an authentication method. Currently, only `PASSWO
 
 ## AuthorizationLevel
 
-A **String** representation of an authorization policy's priority level. Could be only `PR` (for policies that were created by their own providers), or `MGMT` (for policies that were created by a higher entity).
+A **String** representation of an authorization policy's priority level. Can only be `PR` (for policies that were created by their own providers), or `MGMT` (for policies that were created by a higher entity).
 
 ## AuthorizationPolicyInstanceID
 
@@ -22,11 +22,11 @@ A composite **String** identifier that is intended to be both human and machine-
 
 ## AuthorizationPolicyType
 
-A **String** representation of the type of the authorization policy. Could be only `ALL` (everybody can use the target in the appropriate cloud), `WHITELIST` (whitelist-based policy), `BLACKLIST` (blacklist-based policy) or `SYS_METADATA` (system-level metadata-based policy).
+A **String** representation of the type of the authorization policy. Can only be `ALL` (everybody can use the target in the appropriate cloud), `WHITELIST` (whitelist-based policy), `BLACKLIST` (blacklist-based policy) or `SYS_METADATA` (system-level metadata-based policy).
 
 ## AuthorizationTargetType
 
-A **String** representation of the type of target in authorization policies. Could be only `SERVICE_DEF` (for service definitions) or `EVENT_TYPE` (for event types).
+A **String** representation of the type of target in authorization policies. Can only be `SERVICE_DEF` (for service definitions) or `EVENT_TYPE` (for event types).
 
 ## BlacklistReason
 
