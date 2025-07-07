@@ -293,7 +293,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### device-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[DeviceName](../primitives.md#devicename)> as path parameter, which contains the names of the devices to delete.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[DeviceName](../primitives.md#devicename)> as query parameter using the key _names_, which contains the names of the devices to delete.
 
 ```
 DELETE /serviceregistry/mgmt/devices?names=ALARM1&names=ALARM2 HTTP/1.1
@@ -611,7 +611,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### system-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[SystemName](../primitives.md#systemname)> as path parameter, which contains the names of the systems to delete.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[SystemName](../primitives.md#systemname)> as query parameter using the key _names_, which contains the names of the systems to delete.
 
 ```
 DELETE /serviceregistry/mgmt/systems?names=AlertConsumer1&names=AlertConsumer2 HTTP/1.1
@@ -734,7 +734,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-definition-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[ServiceName](../primitives.md#servicename)> as path parameter, which contains the names of the service definitions to delete.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[ServiceName](../primitives.md#servicename)> as query parameter using the key _names_, which contains the names of the service definitions to delete.
 
 ```
 DELETE /serviceregistry/mgmt/service-definitions?names=alertService1&names=alertService2 HTTP/1.1
@@ -1274,7 +1274,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### service-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[ServiceInstanceID](../primitives.md#serviceinstanceid)> as path parameter, which contains the identitifers of the service instances that need to be removed.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[ServiceInstanceID](../primitives.md#serviceinstanceid)> as query parameter using the key _serviceInstances_, which contains the identitifers of the service instances that need to be removed.
 
 ```
 DELETE /serviceregistry/mgmt/service-instances?serviceInstances=AlertProvider1%7CalertService1%7C1.0.0&serviceInstances=AlertProvider2%7CalertService2%7C1.0.0 HTTP/1.1
@@ -1460,7 +1460,7 @@ The **error codes** are, `400` if the request is malformed, `401` if the request
 
 ### interface-template-remove
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[InterfaceName](../primitives.md#interfacename)> as path parameter, which contains the string identifier of the interface templates that need to be removed.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[InterfaceName](../primitives.md#interfacename)> as query parameter using the key _names_, which contains the string identifier of the interface templates that need to be removed.
 
 ```
 DELETE /serviceregistry/mgmt/interface-templates?names=custom_ftp&names=my_awesome_ftp HTTP/1.1

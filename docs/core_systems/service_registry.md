@@ -323,7 +323,7 @@ authenticator.credentials={\
 
 :fontawesome-solid-wrench: **authenticator.secret.keys**
 
-Secret key for the authenticator servers when authentication policy is `outsourced`. The authenticator servers are able to register their authentication-related services by providing their system name hashed with the associated secret key.
+Secret key for the authenticator servers when authentication policy is `outsourced`. The authenticator servers are able to register their authentication-related services by providing an HMAC of their system name computed with the associated secret key.
 
 ```
 authenticator.secret.keys={\
@@ -338,6 +338,10 @@ Enable/disable automatic service requester system name verification against to c
 :fontawesome-solid-wrench: **force.blacklist.filter**
 
 Whether or not the service requests should be refused when the blacklist server is not responding. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **blacklist.check.exclude.list**
+
+Comma-separated list that contains systems whose requests are served without checking the cloud level blacklist, even if blacklist is enabled.
 
 :fontawesome-solid-wrench: **enable.management.filter**
 

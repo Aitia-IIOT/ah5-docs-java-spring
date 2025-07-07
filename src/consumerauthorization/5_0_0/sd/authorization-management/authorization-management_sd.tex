@@ -1,0 +1,489 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+\hyphenation{Er-ror-Res-pon-se}
+\hyphenation{Au-thor-i-za-ti-on-Po-li-cy-List-Res-pon-se}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[5]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{authorizationManagement} % XXX = ServiceName 
+\ArrowheadServiceID{authorizationManagement} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Rajmund Bocsi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{rbocsi@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{authorizationManagement} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{authorizationManagement} service, which enables systems (with operator role or proper permissions) to handle (grant, revoke, query, check) authorization policies in bulk. An example of this interaction is when a higher entity (a dedicated system directly or a human operator indirectly via some tool) consumes this service to setup authorization policies manually before the related systems even register themselves. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+
+The \textbf{authorizationManagement} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{grant-policies} creates management-level authorization policies in bulk;
+    \item \textit{revoke-policies} removes provider- and/or management-level policies in bulk;
+    \item \textit{query-policies} lists the authorization policies that match the filtering requirements;
+    \item \textit{check-policies} checks whether a consumer can use a provider's service/service operation or a subscriber can be notified when a publisher publishes a type of event in bulk.
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+The service’s purpose is to handle the authorization policies centrally and in bulk. This approach makes possible that the individual provider systems do not have to do anything to make their services accessible for the consumers within the Local Cloud.
+
+Application systems should not use this service; only operators or dedicated Core/Support systems.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+The requester has to identify itself to use any of the operations.
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+The service is only available for operators, dedicated Core/Support systems and those who have the proper authorization rights to consume it.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operation of the service. In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\phantomsection
+\fsubsection{grant-policies}{AuthorizationMgmtGrantListRequest}{AuthorizationPolicyListResponse}{}{ErrorResponse}
+
+Operation \textit{grant-policies} creates management-level authorization policies in bulk. The grant data must meet the following criteria:
+
+\begin{itemize}
+    \item With this operation the requester can only define management-level authorization policies. \item The target type can be a service definition or an event type. 
+    \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Target can contain maximum 63 characters of letters (English alphabet) and numbers, and has to start with a letter.
+    \item The cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation-specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+    \item Cloud can be omitted if the policy is about the consumers of the Local Cloud.
+    \item Provider is a valid system name, which is case sensitive and must follow the PascalCase naming convention. Provider can contain maximum 63 characters of letters (English alphabet) and numbers, and has to start with a letter.
+    \item The default policy is mandatory and describes who can use the target when a more specialized policy is not available. In case of event types, only the default policy is allowed to specify.
+    \item Scoped policies are optional and can contain the specialized policies. Scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (English alphabet), numbers and dash (-), have to start with a letter, and cannot end with a dash.
+    \item Policies have types that describe how the policies are defined:
+        \begin{itemize}
+            \item \textit{Public in cloud}: All consumers of the specified cloud can use the specified target/scope.
+            \item \textit{Whitelist-based}: All specified consumers (in a list) of the specified cloud can use the specified target/scope.
+            \item \textit{Blacklist-based}: All consumers of the specified cloud but the specified ones (in a list) can use the specified target/scope.
+            \item \textit{System-level metadata-based}: Consumers of the specified cloud with a matching system-level metadata can use the specified target/scope.
+        \end{itemize}
+    \item Policies with type \textit{Whitelist-based} or \textit{Blacklist-based} have a mandatory system name list parameter. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (English alphabet) and numbers, and have to start with a letter.
+    \item Evaluating policies with type \textit{System-level metadata-based} requires an online ServiceRegistry.
+\end{itemize}
+
+\fsubsection{revoke-policies}{AuthorizationMgmtRevokeRequest}{}{OperationStatus}{ErrorResponse}
+
+Operation \textit{revoke-policies} removes provider- and/or management-level policies in bulk.
+
+\fsubsection{query-policies}{AuthorizationQueryRequest}{AuthorizationPolicyListResponse}{}{ErrorResponse}
+
+Operation \textit{query-policies} lists the authorization policies that match the filtering requirements. The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
+    \item There is an AND relation between different kind of filters.
+    \item Level filter is mandatory, which describes whether management-level or provider-level results are returned.
+    \item If target name filter is specified then target type is mandatory.
+\end{itemize}
+
+\fsubsection{check-policies}{AuthorizationMgmtVerifyListRequest}{AuthorizationMgmtVerifyListResponse}{}{ErrorResponse}
+
+Operation \textit{check-policies} checks whether a consumer can use a provider's service/service operation or a subscriber can be notified when a publisher publishes a type of event in bulk. The input data must meet the following criteria:
+
+\begin{itemize}
+    \item Provider and consumer are mandatory fields that contain system names. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (English alphabet) and numbers, and have to start with a letter.
+    \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+    \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
+    \item The target type can be a service definition or an event type.
+    \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Targets can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+    \item Scope is optional and only matters if target type is service definition. In this case, 
+    scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (English alphabet), numbers and dash (-), have to start with a letter and cannot end with a dash.
+\end{itemize}
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{authorizationManagement} service are listed and must be respected by the hosting system.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\phantomsection
+\msubsection{struct}{AuthorizationMgmtGrantListRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{6cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+list & \pref{List}$<$\hyperref[sec:model:AuthorizationMgmtGrantRequest]{AuthorizationMgmtGrantRequest}$>$ & yes & A list of authorization policies to create. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\msubsection{struct}{AuthorizationMgmtGrantRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+cloud & \pref{CloudIdentifier} & no & The cloud of the potential consumers. Omitted in case of the Local Cloud. \\ \hline
+provider & \pref{SystemName} & yes & The provider of the target. \\ \hline 
+targetType & \pref{AuthorizationTargetType} & yes & The type of the target (service definition or event type). \\ \hline
+target & \pref{ServiceName} / \pref{EventTypeName} & yes & The target of the rule. \\ \hline
+description & \pref{String} & no & The description of the rule. \\ \hline
+defaultPolicy & \hyperref[sec:model:AuthorizationPolicyRequest]{AuthorizationPolicyRequest} & yes & The policy details of the rule which is used when no more specialized policy details are available. \\ \hline
+scopedPolicies & \hyperref[sec:model:ScopedPoliciesRequest]{ScopedPoliciesRequest} & no & A structure that can contain specialized po-licy details. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{AuthorizationPolicyRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.1cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+policyType & \pref{AuthorizationPolicyType} & yes & The type of the policy. \\ \hline
+policyList & \pref{List}$<$\pref{SystemName}$>$ & no (yes) & A list of consumer system names. Mandatory in case of list-based policy type. \\ \hline
+policyMetadataRequirement & \hyperref[sec:model:MetadataRequirements]{MetadataRequirements} & no (yes) & System-level metadata requirements. Mandatory in case of metadata-based policy type. \\ \hline 
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{MetadataRequirements}
+
+A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
+
+\begin{itemize}
+    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which is associated with an embedded object and in this object we are looking for the key named "subkey").
+    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
+    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
+\end{itemize}
+
+\msubsection{struct}{Metadata}
+
+An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
+
+\msubsection{struct}{ScopedPoliciesRequest}
+
+An \pref{Object} which maps \pref{ServiceOperationName} keys to \hyperref[sec:model:AuthorizationPolicyRequest]{AuthorizationPolicyRequest} values.
+
+\msubsection{struct}{AuthorizationPolicyListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{5.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type    & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:AuthorizationPolicyResponse]{AuthorizationPolicyResponse}$>$  & List of policy instance results. \\ \hline
+count & \pref{Number} & Number of returned policy instances. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{AuthorizationPolicyResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+instanceId & \pref{AuthorizationPolicyInstanceID} & Unique identifier of the policy instance. \\ \hline
+authorizationLevel & \pref{AuthorizationLevel} & Level (provider or management) of the policy. \\ \hline
+cloud & \pref{CloudIdentifier} & The cloud of the potential consumers. In case of the Local Cloud the word LOCAL is used. \\ \hline
+provider & \pref{SystemName} & The name of the system who provides the target of the rule. \\ \hline
+targetType & \pref{AuthorizationTargetType} & The type of the target (service definition or event type). \\ \hline
+target &  \pref{ServiceName} / \pref{EventTypeName} & The target of the rule. \\ \hline
+description & \pref{String} & The description of the rule. \\ \hline
+defaultPolicy & \hyperref[sec:model:AuthorizationPolicyDescriptor]{AuthorizationPolicyDescriptor} & The policy details of the rule which is used when no more specialized policy details are available. \\ \hline
+scopedPolicies & \hyperref[sec:model:ScopedPoliciesDescriptor]{ScopedPoliciesDescriptor} & A structure that can contain specialized po\-licy details. \\ \hline
+createdBy & \pref{SystemName} & Authorization policy instance was created by this system. \\ \hline
+createdAt & \pref{DateTime} & Authorization policy instance was created at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationPolicyDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.1cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+policyType & \pref{AuthorizationPolicyType} & The type of the policy. \\ \hline
+policyList & \pref{List}$<$\pref{SystemName}$>$ & A list of consumer system names. Should only be filled in case of list-based policy type. \\ \hline
+policyMetadataRequirement & \hyperref[sec:model:MetadataRequirements]{MetadataRequirements} & System-level metadata requirements. Should only be filled in case of metadata-based policy type. \\ \hline 
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ScopedPoliciesDescriptor}
+
+An \pref{Object} which maps \pref{ServiceOperationName} keys to \hyperref[sec:model:AuthorizationPolicyDescriptor]{AuthorizationPolicyDescriptor} values.
+
+\clearpage
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationMgmtRevokeRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+instanceIds & \pref{List}$<$\pref{AuthorizationPolicyInstanceID}$>$ & yes & Unique policy instance id of the rules. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationQueryRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+level & \pref{AuthorizationLevel} & yes & Requester is looking for policy instances with the specified level (management-level or provider-level). \\ \hline
+providers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for policy in-stances that belong to any of the specified providers. \\ \hline
+instanceIds & \pref{List}$<$\pref{AuthorizationPolicyInstanceID}$>$ & no & Requester is looking for policy in-stances with any of the specified identifiers. \\ \hline
+cloudIdentifiers & \pref{List}$<$\pref{CloudIdentifier}$>$ & no & Requester is looking for policy in-stances that belongs to any of the specified clouds. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+targetNames & \pref{List}$<$\pref{ServiceName}$>$ / \pref{List}$<$\pref{EventTypeName}$>$ & no & Requester is looking for policy in-stances that belong to any of the specified targets (either service definitions or event types). \\ \hline
+targetType & \pref{AuthorizationTargetType} & no (yes) & The type of the specified targets. Mandatory if targetNames are specified. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationMgmtVerifyListRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{6cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+list & \pref{List}$<$\hyperref[sec:model:AuthorizationMgmtVerifyRequest]{AuthorizationMgmtVerifyRequest}$>$ & yes & A list of verify requests. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationMgmtVerifyRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+provider & \pref{SystemName} & yes & The name of the system that provides the target. \\ \hline
+consumer & \pref{SystemName} & yes & The name of the system that needs access to the target. \\ \hline
+cloud & \pref{CloudIdentifier} & no & The cloud of the consumer. Optional, if the consumer is in the Local Cloud. \\ \hline
+targetType & \pref{AuthorizationTargetType} & yes & The type of the target (service definition or event type). \\ \hline
+target & \pref{ServiceName} / \pref{EventTypeName} & yes & The name of the target. \\ \hline
+scope & \pref{ServiceOperationName} & no & The service operation that the consumer wants to use. Only matters when the target is a service definition. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationMgmtVerifyListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{6.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type    & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:AuthorizationMgmtVerifyResponse]{AuthorizationMgmtVerifyResponse}$>$  & List of policy verify results. \\ \hline
+count & \pref{Number} & Number of returned entries. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{AuthorizationMgmtVerifyResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+provider & \pref{SystemName} & The name of the system that provides the target. \\ \hline
+consumer & \pref{SystemName} & The name of the system that needs access to the target. \\ \hline
+cloud & \pref{CloudIdentifier} & The cloud of the consumer. In case of the Local Cloud the word LOCAL can be used. \\ \hline
+targetType & \pref{AuthorizationTargetType} & The type of the target (service definition or event type). \\ \hline
+target & \pref{ServiceName} / \pref{EventTypeName} & The name of the target. \\ \hline
+scope & \pref{ServiceOperationName} & The service operation that the consumer wants to use. Omitted, if it was not specified in the related request. \\ \hline
+granted & \pref{Boolean} & The result of the verification. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{5cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{AuthorizationLevel} & String identifier that specifies whether a rule is created by a provider for its service instances/event types (provider-level) or a higher entity does that (management-level). \\ \hline
+\pdef{AuthorizationPolicyInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance's level (provider or management), cloud identifier, provider name, target type and target, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline
+\pdef{AuthorizationPolicyType} & String identifier of the various policy types: for whitelist-based policy, for blacklist-based policy, for cloud-level policy and for system-level metadata-based policy. \\ \hline
+\pdef{AuthorizationTargetType} & String identifier that specifies whether a rule is about a service instance or an event type. \\ \hline
+\pdef{Boolean}          & One out of true or false. \\ \hline
+\pdef{CloudIdentifier} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name that is managing the cloud. Each part must follow the PascalCase naming convention. \\ \hline
+\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{5cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{EventTypeName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
+\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
+\pdef{ServiceOperationName} & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}
