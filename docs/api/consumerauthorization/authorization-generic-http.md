@@ -4,8 +4,8 @@
 ## Overview
 
 This page describes the generic_http and generic_https service interface of authorization, which enables service consumption permission validations
-for both providers and consumers. Additionally, providers can lookup, grant and revoke those permissions. An example of this interaction when a provider system creates authorization policies about its offered service. An
-other example when a consumer can check whether a service is allowed to use before trying an actual service consumption. Event notification permission is also handled by this service in an event publisher/subscriber
+for both providers and consumers. Additionally, providers can lookup, grant and revoke those permissions. An example of this interaction is when a provider system creates authorization policies about its offered service. An
+other example is when a consumer can check whether a service is allowed to use before trying an actual service consumption. Event notification permission is also handled by this service in an event publisher/subscriber
 scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry. 
 
 The interfaces are implemented using protocol, encoding as stated in the following tables:
@@ -103,7 +103,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### revoke
 
-The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http), and an [AuthorizationPolicyInstanceID](../primitives.md#authorizationpolicyinstanceid) as path parameter, which is a unique identifier of the policy instance to be deleted.
+The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationPolicyInstanceID](../primitives.md#authorizationpolicyinstanceid) as path parameter, which is a unique identifier of the policy instance to be deleted.
 
 ```
 DELETE /consumerauthorization/authorization/revoke/PR%7CLOCAL%7CTemperatureProvider%7CSERVICE_DEF%7CcelsiusInfo HTTP1.1
@@ -203,7 +203,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully and with a [Boolean](../primitives.md#boolean) JSON encoded body.
+The service operation **responds** with the status code `200` if called successfully and with a [Boolean](../primitives.md#boolean) value.
 
 ```
 true

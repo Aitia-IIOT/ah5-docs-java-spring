@@ -49,15 +49,15 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{deviceDiscovery} % XXX = ServiceName 
-\ArrowheadServiceID{deviceDiscovery} % ID name of service
+\ArrowheadTitle{blacklistManagement} % XXX = ServiceName 
+\ArrowheadServiceID{blacklistManagement} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
 \ArrowheadDate{\today}
-\ArrowheadAuthor{Rajmund Bocsi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadAuthor{Katinka Jakó} % Corresponding author e.g. Jerker Delsing
 \ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
-\ArrowheadContact{rbocsi@aitia.ai} % Email of corresponding author
+\ArrowheadContact{jako.katinka@aitia.ai} % Email of corresponding author
 \ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
 \ArrowheadSetup
 %%
@@ -82,7 +82,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{deviceDiscovery} service. 
+    This document provides service description for the \textbf{blacklistManagement} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -106,14 +106,14 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{deviceDiscovery} service, which enables both application and Core/Support systems to lookup, register and revoke devices on which the Local Cloud's systems are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain use cases (e.g. enabling onboarding) is needed therefore it is an integral part of the implementation of the requirements in ServiceRegistry Core System. An example of this interaction is the Onboarding support system that has the capability to dynamically add new systems (and devices on which those systems are running) to the Local Cloud. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This document describes the \textbf{blacklistManagement} service, which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries in bulk. An example of this interaction is when an operator bans a consumer because it is flooding the Local Cloud with thousands of requests. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
-The \textbf{deviceDiscovery} service contains the following operations:
+The \textbf{blacklistManagement} service contains the following operations:
 
 \begin{itemize}
-    \item \textit{register} adds new device to the Local Cloud;
-    \item \textit{revoke} removes a device from the Local Cloud;
-    \item \textit{lookup} lists the devices that match the filtering requirements;
+    \item \textit{query} lists the entries that match the filtering requirements;
+    \item \textit{create} adds the specified entries to the blacklist;
+    \item \textit{remove} deactivates the entries that apply to the systems with the specified names.
 \end{itemize}
 
 The rest of this document is organized as follows.
@@ -121,7 +121,9 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-In some use cases, the topology of the Local Cloud can be important. In these situations, an application system can use the \textit{register} operation of \textbf{deviceDiscovery} service to register the device on which the system is running. Before that, the application system should use the \textit{lookup} operation to check whether the device is already registered or not. When a device is removed from the Local Cloud, the \textit{revoke} operation should be called.
+The service's purpose is to handle the blacklist entries centrally and in bulk. Thus, the \textbf{blacklistManagement} service makes it possible to manage who is (not) banned from the Local Cloud.
+
+Application systems should not use this service, only human operators (indirectly via some tool, for example) or dedicated Support systems.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -131,67 +133,74 @@ The requester has to identify itself to use any of the operations.
 \subsection{Access policy}
 \label{sec:accesspolicy}
 
-Available for anyone within the local cloud.
+The service is only available for operators, dedicated Support systems and those who have the proper authorization rights to consume it.
 
 \newpage
 
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{deviceDiscovery} service is used to \textit{register}, \textit{lookup} and \textit{revoke} devices.
+This section describes the abstract signatures of each operations of the service. The \textbf{blacklistManagement} service is used to \textit{query}, \textit{create} and \textit{remove} blacklist entries.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
 
 \phantomsection
-\fsubsection{register}{DeviceRegistrationRequest}{DeviceRegistrationResponse}{}{ErrorResponse}
+\fsubsection{query}{BlacklistQueryRequest}{BlacklistEntryListResponse}{}{ErrorResponse}
 
-Operation \textit{register} adds new device to the Local Cloud. The registration data must meet the following criteria:
-
-\begin{itemize}
-    \item Device names are case sensitive, must follow the UPPER\_SNAKE\_CASE naming convention and have to be unique within the Local Cloud.
-    \item Device names can contain maximum 63 character of uppercase letters (English alphabet), numbers and underscore (\_), and have to start with a letter (also cannot end with underscore).
-    \item Device has to have at least one address. It is recommended to use MAC address and/or IP address.
-    \item Keys in the metadata structure can not contain dot (.) character.
-    \item Devices can register multiple times, but only if they are identical (same addresses, same metadata).
-\end{itemize}
-
-\fsubsection{lookup}{DeviceLookupRequest}{DeviceLookupResponse}{}{ErrorResponse}
-
-Operation \textit{lookup} lists the devices that match the filtering requirements. The lookup data must meet the following criteria:
+Operation \textit{query} lists the blacklist entries that match the filtering requirements. The query data must meet the following criteria:
 
 \begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
     \item If a filter expects a list, there is an OR relation between the elements of the filter.
     \item There is an AND relation between different kind of filters.
+    \item If \textit{alivesAt} is set, inactive records will not be returned.
 \end{itemize}
 
-\fsubsection{revoke}{DeviceRevokeRequest}{}{OperationStatus}{ErrorResponse}
+\fsubsection{create}{BlacklistCreateListRequest}{BlacklistEntryListResponse}{}{ErrorResponse}
 
-Operation \textit{revoke} removes a device from the Local Cloud. The input operation data must meet the following criteria:
+Operation \textit{create} creates the specified blacklist entries. The creation data must meet the following criteria:
 
 \begin{itemize}
-    \item Devices that have system assignment can not be revoked.
+    \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (English alphabet), and numbers, and have to start with a letter.
+    \item The expiration date has to be in the future.
+    \item Reason must always be specified and can contain maximum 1024 characters.
 \end{itemize}
+
+\fsubsection{remove}{BlacklistRemoveRequest}{OperationStatus}{}{ErrorResponse}
+
+Operation \textit{remove} deactivates the entries that apply to the specified system names. The entries will stay in the database and it is possible to query them later as inactive records.
 
 \clearpage
 
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{deviceDiscovery} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{blacklistManagement} service are listed and must be respected by the hosting system.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
 \phantomsection
-\msubsection{struct}{DeviceRegistrationRequest}
+
+\msubsection{struct}{BlacklistQueryRequest}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3.5cm} | p{1.75cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-name & \pref{DeviceName} & yes & Unique identifier of the device. \\ \hline
-metadata &\hyperref[sec:model:Metadata]{Metadata} & no & Additional information about the device. \\ \hline
-addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses of the device.  \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+systemNames & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that apply to systems with any of the specified names. \\ \hline
+mode & \pref{Mode} & no & Requester is looking for blacklist entries with the specified activity. \\ \hline
+issuers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that were created by systems with any of the specified names. \\ \hline
+revokers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that were revoked by systems with any of the specified names. \\ \hline
+reason & \pref{String} & no & Requester is looking for blacklist entries that were created for the specified reason or the reason contains this text. \\ \hline
+alivesAt & \pref{DateTime} & no & Requester is looking for active blacklist records that are not expired at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -199,33 +208,33 @@ addresses &  \pref{List}$<$\pref{Address}$>$ & yes & Different kind of addresses
 
 An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
 
-\msubsection{struct}{Metadata}
+\clearpage
 
-An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
-
-\msubsection{struct}{DeviceRegistrationResponse}
+\msubsection{struct}{BlacklistEntryListResponse}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{5cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-name & \pref{DeviceName} & Unique identifier of the registered device. \\ \hline
-metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the registered device. \\ \hline
-addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the registered device.  \\ \hline
-createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:BlacklistEntryResponse]{BlacklistEntryResponse}$>$ & List of blacklist entry results. \\ \hline
+count & \pref{Number} & The total number of corresponding entries. \\ \hline
 \end{tabularx}
 \end{table}
 
-\clearpage
-
-\msubsection{struct}{AddressDescriptor}
+\msubsection{struct}{BlacklistEntryResponse}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-type & \pref{AddressType} & Type of the address. \\ \hline
-address & \pref{Address} & Address. \\ \hline
+systemName & \pref{SystemName} & Unique identifier of the blacklisted system. \\ \hline
+createdBy & \pref{SystemName} & Unique identifier of the system that created the record. \\ \hline
+revokedBy & \pref{SystemName} & Unique identifier of the system that revoked the record. Only appears if the record was revoked. \\ \hline
+createdAt & \pref{DateTime} & Blacklist record was created at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Blacklist record was updated at this timestamp. \\ \hline
+reason & \pref{String} & The system was blacklisted because of this reason. \\ \hline
+expiresAt & \pref{DateTime} & Blacklist record expires at this timestamp. Only appears if the record can expire. \\ \hline
+active & \pref{Boolean} & Indicates if the rule defined by the entry is active. Only false if the rule has been explicitly revoked. \\ \hline
+
 \end{tabularx}
 \end{table}
 
@@ -242,62 +251,40 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{DeviceLookupRequest}
+\clearpage
 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.2cm} | p{4.8cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-deviceNames &  \pref{List}$<$\pref{DeviceName}$>$ & no & Requester is looking for devices with any of the specified names. \\ \hline
-addresses &  \pref{List}$<$\pref{Address}$>$ & no & Requester is looking for devices with any of the specified add\-resses.   \\ \hline
-addressType &  \pref{AddressType} & no & Requester is looking for devices with the specified type of address. \\ \hline
-metadataRequirementsList & \pref{List}$<$\hyperref[sec:model:MetadataRequirements]{MetadataRequirements}$>$ & no & Requester is looking for devices that are matching any of the spe\-cified metadata requirements. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{MetadataRequirements}
-
-A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
-
-\begin{itemize}
-    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which is associated with an embedded object and in this object we are looking for the key named "subkey").
-    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
-    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
-\end{itemize}
-
-\msubsection{struct}{DeviceLookupResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{6cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-entries & \pref{List}$<$\hyperref[sec:model:DeviceLookupResult]{DeviceLookupResult}$>$     & List of device results. \\ \hline
-count & \pref{Number} & Number of returned devices. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{DeviceLookupResult}
+\msubsection{struct}{BlacklistCreateListRequest}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-name & \pref{DeviceName} & Unique identifier of the device. \\ \hline
-metadata & \hyperref[sec:model:Metadata]{Metadata} & Additional information about the device. \\ \hline
-addresses &  \pref{List}$<$\hyperref[sec:model:AddressDescriptor]{AddressDescriptor}$>$ & Different kind of addresses of the device.  \\ \hline
-createdAt & \pref{DateTime} & Device was registered at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Device was modified at this timestamp. \\ \hline
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:BlacklistCreateRequest]{BlacklistCreateRequest}$>$ & yes & List of blacklist entries to create. \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{DeviceRevokeRequest}
+\msubsection{struct}{BlacklistCreateRequest}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-name & \pref{DeviceName} & yes & Unique identifier of the device. \\ \hline
+systemName & \pref{SystemName} & yes & The name of the system to be blacklisted. \\ \hline
+expiresAt & \pref{DateTime} & no & This rule will expire at this timestamp. \\ \hline
+reason & \pref{String} & yes & The system is blacklisted because of this reason. \\ \hline
 \end{tabularx}
 \end{table}
+
+\msubsection{struct}{BlacklistRemoveRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3.5cm} | p{1.75cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+systemNames & \pref{List}$<$\pref{SystemName}$>$ & yes & The names of the systems to remove from the blacklist. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
 
 \subsection{Primitives}
 \label{sec:model:primitives}
@@ -309,16 +296,17 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
-\pdef{Address}          & A string representation of the address. \\ \hline
-\pdef{AddressType}      & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{Boolean}          & One out of true or false. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
-\pdef{DeviceName}       & A string identifier that is intended to be both human and machine-readable. Must follow the UPPER\_SNAKE\_CASE naming convention. \\ \hline
+\pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Mode}             & Specifies whether the queried records should have the \textit{active} flag set. The possible values are: ALL, ACTIVES, INACTIVES. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
 \end{tabularx}
 \end{table}
 

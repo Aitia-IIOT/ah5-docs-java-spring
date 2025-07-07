@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the generic_mqtt and generic_mqtts service interface of authorizationManagement, which enables systems (with operator role or proper permissions) to handle (grant, revoke, query, check) authorization policies in bulk. An example of this interaction is that an operator uses the Management Tool to setup authorization policies manually before the related systems even register itself. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This page describes the generic_mqtt and generic_mqtts service interface of authorizationManagement, which enables systems (with operator role or proper permissions) to handle (grant, revoke, query, check) authorization policies in bulk. An example of this interaction is when an operator uses the Management Tool to set up authorization policies manually before the related systems even register themselves. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The interfaces are implemented using protocol, encoding as stated in the following tables:
 

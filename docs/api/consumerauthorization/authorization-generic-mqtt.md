@@ -4,8 +4,8 @@
 ## Overview
 
 This page describes the generic_mqtt and generic_mqtts service interface of authorization, which enables service consumption permission validations
-for both providers and consumers. Additionally, providers can lookup, grant and revoke those permissions. An example of this interaction when a provider system creates authorization policies about its offered service. An
-other example when a consumer can check whether a service is allowed to use before trying an actual service consumption. Event notification permission is also handled by this service in an event publisher/subscriber
+for both providers and consumers. Additionally, providers can lookup, grant and revoke those permissions. An example of this interaction is when a provider system creates authorization policies about its offered service. An
+other example is when a consumer can check whether a service is allowed to use before trying an actual service consumption. Event notification permission is also handled by this service in an event publisher/subscriber
 scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry. 
 
 The interfaces are implemented using protocol, encoding as stated in the following tables:
@@ -132,7 +132,7 @@ Topic: arrowhead/consumer-authorization/authorization/revoke
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and an existing policy instance entity was removed and `204` if no matching entity was found. 
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and an existing policy instance entity was removed or `204` if no matching entity was found. 
 
 ```
 {

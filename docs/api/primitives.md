@@ -22,7 +22,7 @@ A **String** representation of an authentication method. Currently, only `PASSWO
 
 ## AuthorizationLevel
 
-A **String** representation of an authorization policy's priority level. Could be only `PR` (for policies that were created by their own providers), or `MGMT` (for policies that were created by a higher entity).
+A **String** representation of an authorization policy's priority level. Can only be `PR` (for policies that were created by their own providers), or `MGMT` (for policies that were created by a higher entity).
 
 ## AuthorizationPolicyInstanceID
 
@@ -30,11 +30,11 @@ A composite **String** identifier that is intended to be both human and machine-
 
 ## AuthorizationPolicyType
 
-A **String** representation of the type of the authorization policy. Could be only `ALL` (everybody can use the target in the appropriate cloud), `WHITELIST` (whitelist-based policy), `BLACKLIST` (blacklist-based policy) or `SYS_METADATA` (system-level metadata-based policy).
+A **String** representation of the type of the authorization policy. Can only be `ALL` (everybody can use the target in the appropriate cloud), `WHITELIST` (whitelist-based policy), `BLACKLIST` (blacklist-based policy) or `SYS_METADATA` (system-level metadata-based policy).
 
 ## AuthorizationTargetType
 
-A **String** representation of the type of target in authorization policies. Could be only `SERVICE_DEF` (for service definitions) or `EVENT_TYPE` (for event types).
+A **String** representation of the type of target in authorization policies. Can only be `SERVICE_DEF` (for service definitions) or `EVENT_TYPE` (for event types).
 
 ## BlacklistReason
 
@@ -58,7 +58,7 @@ between date and time part, ”hh” denotes hour in the 24-hour format (00-23),
 
 ## DeviceName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are uppercase letters (english alphabet only), numbers and underscore (\_). A name has to start with a letter, cannot end with an underscore and must follow the _UPPER\_SNAKE\_CASE_ naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are uppercase letters (English alphabet only), numbers and underscore (\_). A name has to start with a letter, cannot end with an underscore and must follow the _UPPER\_SNAKE\_CASE_ naming convention. The identifier maximum length is 63 characters.
 
 ## Direction
 The direction of a sorting operation. Possible values are the **String** representation of ascending (`ASC`) or descending (`DESC`) order.
@@ -84,7 +84,7 @@ A unique and expiring **String** data issued by a central component to verify a 
 
 ## InterfaceName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and underscore (_). A name has to start with a letter and must follow the snake_case naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (English alphabet only), numbers and underscore (_). A name has to start with a letter and must follow the snake_case naming convention. The identifier maximum length is 63 characters.
 
 ## KeyValuePair
 
@@ -152,11 +152,11 @@ A **String** representation of security policies. The possible values are: `NONE
 A **String** identifier of a service instance. It consists of the instance's provider name, service definition and version, each separated by pipe, as follows: `<provider-name>|<service-definition>|<version>`. An example for a valid service instance ID: _AlertProvider1|alertService1|1.0.0_. (Here the provider name is _AlertProvider1_, the service definition is _alertService1_, and the version is _1.0.0_.)
 
 ## ServiceName
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (English alphabet only) and numbers. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## ServiceOperationName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only), numbers and dash (-). A name has to start with a letter, cannot end with a dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (English alphabet only) and numbers and dash (`-`). A name has to start with a letter, cannot end with dash and must follow the kebab-case naming convention. The identifier maximum length is 63 characters.
 
 ## ServiceOrchestrationJobStatus
 
@@ -172,7 +172,7 @@ A chain of UTF-8 characters.
 
 ## SystemName
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the _PascalCase_ naming convention. The identifier maximum length is 63 characters.
+A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (English alphabet only) and numbers. A name has to start with a letter and must follow the _PascalCase_ naming convention. The identifier maximum length is 63 characters.
 
 ## TokenType
 
