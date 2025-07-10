@@ -5954,7 +5954,7 @@
 </code></pre>
 <h3 id="remove-encryption-keys">remove-encryption-keys</h3>
 <p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the authentication is a proper <a href="../../authentication_policy/#mqtt">identity info</a> and the payload is a List&lt;<a href="../../primitives/#systemname">SystemName</a>&gt; which contains the names of the systems of the keys to be deleted.</p>
-<pre><code>Topic: arrowhead/consumer-authorization/authorization-token/management/revoke-tokens
+<pre><code>Topic: arrowhead/consumer-authorization/authorization-token/management/remove-encryption-keys
 
 {
    &quot;traceId&quot;:&quot;&lt;trace-id&gt;&quot;,
@@ -5982,7 +5982,7 @@
      &quot;errorMessage&quot;:&quot;No authentication info has been provided&quot;,
      &quot;errorCode&quot;:401,
      &quot;exceptionType&quot;:&quot;AUTH&quot;,
-     &quot;origin&quot;:&quot;arrowhead/consumer-authorization/authorization-token/management/revoke-tokens&quot;
+     &quot;origin&quot;:&quot;arrowhead/consumer-authorization/authorization-token/management/remove-encryption-keys&quot;
    }
 }
 </code></pre>
