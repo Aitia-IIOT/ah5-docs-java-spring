@@ -172,7 +172,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### add-encryption-keys
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationEncryptionKeyListRequest](../data-models/authorization-encryption-key-list-request) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationEncryptionKeyListRequest](../data-models/authorization-encryption-key-list-request.md) JSON encoded body.
 
 ```
 POST /consumerauthorization/authorization/mgmt/token/encryption-key HTTP/1.1
@@ -200,3 +200,26 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "exceptionType": "INVALID_PARAMETER",
   "origin":"POST /consumerauthorization/authorization/mgmt/token/encryption-key"
 }
+```
+
+### remove-encryption-keys
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a query parameter _systemNames_, which is a List<[SystemName](../primitives.md#systemname)>. It contains the names of the systems of the keys to be deleted.
+
+```
+DELETE /consumerauthorization/authorization/mgmt/token/encryption-key?systemNames=TemperatureProvider1&systemNames=TemperatureProvider2 HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage":"No authentication info has been provided",
+  "errorCode":401,
+  "exceptionType":"AUTH",
+  "origin":"DELETE /consumerauthorization/authorization/mgmt/token/encryption-key"
+}
+```

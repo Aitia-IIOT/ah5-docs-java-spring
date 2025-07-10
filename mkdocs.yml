@@ -42,7 +42,7 @@ nav:
             - authorization: api/consumerauthorization/authorization-generic-http.md
             - authorizationToken: api/consumerauthorization/authorization-token-generic-http.md
             - authorizationManagement: api/consumerauthorization/authorization-management-generic-http.md
-            - authorizationToken: api/consumerauthorization/authorization-token-management-generic-http.md
+            - authorizationTokenManagement: api/consumerauthorization/authorization-token-management-generic-http.md
         - MQTT:
             - authorization: api/consumerauthorization/authorization-generic-mqtt.md
             - authorizationToken: api/consumerauthorization/authorization-token-generic-mqtt.md
@@ -71,7 +71,11 @@ nav:
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
+      - AuthorizationEncryptionKeyListRequest: api/data-models/authorization-encryption-key-list-request.md
+      - AuthorizationEncryptionKeyListResponse: api/data-models/authorization-encryption-key-list-response.md
       - AuthorizationEncryptionKeyRegistrationRequest: api/data-models/authorization-encryption-key-registration-request.md
+      - AuthorizationEncryptionKeyReqest: api/data-models/authorization-encryption-key-request.md
+      - AuthorizationEncryptionKeyResponse: api/data-models/authorization-encryption-key-response.md
       - AuthorizationGrantRequest: api/data-models/authorization-grant-request.md
       - AuthorizationLookupRequest: api/data-models/authorization-lookup-request.md
       - AuthorizationMgmtGrantListRequest: api/data-models/authorization-mgmt-grant-list-request.md
