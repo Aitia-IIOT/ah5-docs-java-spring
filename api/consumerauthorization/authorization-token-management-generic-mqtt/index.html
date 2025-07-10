@@ -5974,18 +5974,18 @@
 }
 </code></pre>
 <p>The <strong>error codes</strong> are <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful, <code>403</code> if the authenticated requester has no permission and <code>500</code> Error if an unexpected error happens. In these cases the response template payload is an <a href="../../data-models/error-response/">ErrorResponse</a> JSON.</p>
-<p>```
-{
-   "status":401,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureManager",
-   "payload":{
-     "errorMessage":"No authentication info has been provided",
-     "errorCode":401,
-     "exceptionType":"AUTH",
-     "origin":"arrowhead/consumer-authorization/authorization-token/management/revoke-tokens"
+<pre><code>{
+   &quot;status&quot;:401,
+   &quot;traceId&quot;:&quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;:&quot;TemperatureManager&quot;,
+   &quot;payload&quot;:{
+     &quot;errorMessage&quot;:&quot;No authentication info has been provided&quot;,
+     &quot;errorCode&quot;:401,
+     &quot;exceptionType&quot;:&quot;AUTH&quot;,
+     &quot;origin&quot;:&quot;arrowhead/consumer-authorization/authorization-token/management/revoke-tokens&quot;
    }
-}</p>
+}
+</code></pre>
 
 
 
