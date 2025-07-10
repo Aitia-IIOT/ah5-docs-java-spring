@@ -47,6 +47,7 @@ nav:
             - authorization: api/consumerauthorization/authorization-generic-mqtt.md
             - authorizationToken: api/consumerauthorization/authorization-token-generic-mqtt.md
             - authorizationManagement: api/consumerauthorization/authorization-management-generic-mqtt.md
+            - authorizationTokenManagement: api/consumerauthorization/authorization-token-management-generic-mqtt.md
       - DynamicServiceOrchestration:
         - HTTP:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md

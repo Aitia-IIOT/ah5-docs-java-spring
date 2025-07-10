@@ -191,6 +191,21 @@ Authorization: Bearer <identity-info>
 
 The service operation **responds** with `201` if called successfully and encryption key has been saved. The response also contains an [AuthorizationEncryptionKeyListResponse](../data-models/authorization-encryption-key-list-response.md) JSON encoded body.
 
+```
+{
+  "entries": [
+    {
+      "systemName": "TemperatureProvider2",
+      "rawKey": "abc1234",
+      "algorithm": "AES/ECB/PKCS5Padding",
+      "keyAdditive": "",
+      "createdAt": "2025-06-18T13:51:20Z"
+    }
+  ],
+  "count": 1
+}
+```
+
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
