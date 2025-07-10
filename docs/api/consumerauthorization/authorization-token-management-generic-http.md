@@ -147,3 +147,56 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "origin":"POST /consumerauthorization/authorization/mgmt/token/query"
 }
 ```
+
+### revoke-tokens
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a query parameter _tokenReferences_, which is a List<[String](../primitives.md#string)>. It contains the references associated with the token records to be removed.
+
+```
+DELETE /consumerauthorization/authorization/mgmt/token/revoke?tokenReferences=a4626c853f0c0c8989757bb0ecc7b992&tokenReferences=a573c531f0b0b8789757bb0ecc5b882 HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage":"No authentication info has been provided",
+  "errorCode":401,
+  "exceptionType":"AUTH",
+  "origin":"DELETE /consumerauthorization/authorization/mgmt/token/revoke"
+}
+```
+
+### add-encryption-keys
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationEncryptionKeyListRequest](../data-models/authorization-encryption-key-list-request) JSON encoded body.
+
+```
+POST /consumerauthorization/authorization/mgmt/token/encryption-key HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+  "list": [
+    {
+      "systemName": "TemperatureProvider2",
+      "key": "abc1234",
+      "algorithm": "AES/ECB/PKCS5Padding"
+    }
+  ]
+}
+```
+
+The service operation **responds** with `201` if called successfully and encryption key has been saved. The response also contains an [AuthorizationEncryptionKeyListResponse](../data-models/authorization-encryption-key-list-response.md) JSON encoded body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage":"Unsupported algorithm",
+  "errorCode":400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin":"POST /consumerauthorization/authorization/mgmt/token/encryption-key"
+}
