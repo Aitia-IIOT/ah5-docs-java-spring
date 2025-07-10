@@ -53,7 +53,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with 201 if called successfully and tokens has been generated. The response also contains an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md) JSON encoded body.
+The service operation **responds** with `201` if called successfully and tokens has been generated. The response also contains an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md) JSON encoded body.
 
 ```
 {
@@ -86,5 +86,64 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "errorCode":400,
   "exceptionType": "INVALID_PARAMETER",
   "origin":"POST /consumerauthorization/authorization/mgmt/token/generate"
+}
+```
+
+### query-tokens
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationTokenQueryRequest](../data-models/authorization-token-query-request.md) JSON encoded body.
+
+```
+POST /consumerauthorization/authorization/mgmt/token/query HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "pagination": {
+    "page": 0,
+    "size": 10
+  },
+  "requester": "TemperatureManager",
+  "tokenType": "TIME_LIMITED_TOKEN",
+  "consumerCloud": "LOCAL",
+  "consumer": "TemperatureConsumer",
+  "provider": "TemperatureProvider",
+  "targetType": "SERVICE_DEF",
+  "target": "kelvinInfo"
+}
+```
+
+The service operation **responds** with `200` if called successfully and tokens has been queried. The response also contains an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "tokenType": "TIME_LIMITED_TOKEN",
+      "variant": "TIME_LIMITED_TOKEN_AUTH",
+      "token": "dsalefb521vdjkdsae633",
+      "tokenReference": "a4626c853f0c0c8989757bb0ecc7b992",
+      "requester": "TemperatureManager",
+      "consumerCloud": "LOCAL",
+      "consumer": "TemperatureConsumer",
+      "provider": "TemperatureProvider1",
+      "targetType": "SERVICE_DEF",
+      "target": "kelvinInfo",
+      "scope": "query-temperature",
+      "createdAt": "2025-06-18T13:40:20Z",
+      "expiresAt": "2025-06-18T13:51:20Z"
+    }
+  ],
+  "count": 1
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage":"Invalid token type: SOMETHING",
+  "errorCode":400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin":"POST /consumerauthorization/authorization/mgmt/token/query"
 }
 ```

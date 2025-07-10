@@ -47,7 +47,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with 201 if called successfully and token has been generated. The response also contains an [AuthorizationTokenDescriptor](../data-models/authorization-token-descriptor.md) JSON encoded body.
+The service operation **responds** with `201` if called successfully and token has been generated. The response also contains an [AuthorizationTokenDescriptor](../data-models/authorization-token-descriptor.md) JSON encoded body.
 
 ```
 {
