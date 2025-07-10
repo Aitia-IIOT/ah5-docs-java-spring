@@ -293,7 +293,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[SystemName](../primitives.md#systemname)> which contains the names of the systems of the keys to be deleted.
 
 ```
-Topic: arrowhead/consumer-authorization/authorization-token/management/revoke-tokens
+Topic: arrowhead/consumer-authorization/authorization-token/management/remove-encryption-keys
 
 {
    "traceId":"<trace-id>",
@@ -327,7 +327,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
      "errorMessage":"No authentication info has been provided",
      "errorCode":401,
      "exceptionType":"AUTH",
-     "origin":"arrowhead/consumer-authorization/authorization-token/management/revoke-tokens"
+     "origin":"arrowhead/consumer-authorization/authorization-token/management/remove-encryption-keys"
    }
 }
 ```
