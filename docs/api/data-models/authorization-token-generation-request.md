@@ -1,4 +1,4 @@
-# AuthorizationMgmtVerifyRequest
+# AuthorizationTokenGenerationRequest
 
 Field | Type | Mandatory | Description
 --- | --- | --- | ---
