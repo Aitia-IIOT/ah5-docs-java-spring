@@ -330,3 +330,4 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
      "origin":"arrowhead/consumer-authorization/authorization-token/management/revoke-tokens"
    }
 }
+```
