@@ -48,6 +48,7 @@ nav:
         - HTTP:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md
+          - serviceOrchestrationLockManagement: api/serviceorchestration/service-orchestration-lock-management-generic-http_dynamic.md
         - MQTT:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md
@@ -154,6 +155,10 @@ nav:
       - ServiceOrchestrationFlag: api/data-models/service-orchestration-flag.md
       - ServiceOrchestrationJobListResponse: api/data-models/service-orchestration-job-list-response.md
       - ServiceOrchestrationJobResponse: api/data-models/service-orchestration-job-response.md
+      - ServiceOrchestrationLockListRequest: api/data-models/service-orchestration-lock-list-request.md
+      - ServiceOrchestrationLockListResponse: api/data-models/service-orchestration-lock-list-response.md
+      - ServiceOrchestrationLockRequest: api/data-models/service-orchestration-lock-request.md
+      - ServiceOrchestrationLockResponse: api/data-models/service-orchestration-lock-response.md
       - ServiceOrchestrationNotifyInterface: api/data-models/service-orchestration-notify-interface.md
       - ServiceOrchestrationPushTriggerRequest:  api/data-models/service-orchestration-push-trigger-request.md
       - ServiceOrchestrationRequest: api/data-models/service-orchestration-request.md
