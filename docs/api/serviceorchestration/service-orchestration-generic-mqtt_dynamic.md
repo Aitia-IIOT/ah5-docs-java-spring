@@ -166,7 +166,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### subscribe
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [ServiceOrchestrationSubscriptionRequest](../data-models/service-orchestration-subscription-request.md).
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [ServiceOrchestrationSubscriptionRequest](../data-models/service-orchestration-subscription-request.md). Optionally a `trigger` parameter can be provider with a [Boolean](../primitives.md#boolean) value which if true, then the orchestration process also will be executed.
 
 ```
 Topic: arrowhead/serviceorchestration/orchestration/subscribe
@@ -176,6 +176,9 @@ Topic: arrowhead/serviceorchestration/orchestration/subscribe
    "authentication":"<authentication-data>",
    "responseTopic":"<response-topic>",
    "qosRequirement":<0|1|2>,
+   "params": {
+      "trigger":true
+   },
    "payload":{
       "orchestrationRequest":{
          "serviceRequirement":{

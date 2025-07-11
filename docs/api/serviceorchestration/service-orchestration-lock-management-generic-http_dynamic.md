@@ -154,6 +154,6 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "errorMessage": "Owner is missing",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin": "POST /serviceorchestration/orchestration/mgmt/lock/create"
+  "origin": "POST /serviceorchestration/orchestration/mgmt/lock/remove"
 }
 ```

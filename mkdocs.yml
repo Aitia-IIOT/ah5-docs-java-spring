@@ -52,6 +52,7 @@ nav:
         - MQTT:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md
+          - serviceOrchestrationLockManagement: api/serviceorchestration/service-orchestration-lock-management-generic-mqtt_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
