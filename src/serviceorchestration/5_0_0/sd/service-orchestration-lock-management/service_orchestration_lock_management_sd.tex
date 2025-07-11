@@ -1,0 +1,332 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+\hyphenation{Er-ror-Res-pon-se}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[5]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{serviceOrchestrationLockManagement} % XXX = ServiceName 
+\ArrowheadServiceID{serviceOrchestrationLockManagement} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Tamás Bordi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{tbordi@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{serviceOrchestrationLockManagement} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{serviceOrchestrationLockManagement} service, which enables systems (with operator role or proper permissions) to create, remove and query active orchestration locks. An example of this interaction is that a higher entity (a dedicated system directly or a human operator indirectly via some tool) with management access creates orchestration locks in order to prevent the specified services from being orchestrated for a certain period of time. Also, an orchestration lock can be made automatically during the orchestration process in order to reserve an actual service when requested by a consumer system.
+
+The \textbf{serviceOrchestrationLockManagement} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{create} creates orchestration lock records in bulk;
+    \item \textit{query} lists the existing orchestration lock records that match the filtering requirements;
+    \item \textit{remove} deletes the specified orchestration lock records;
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+
+The purpose of the service is to manage the orchestration locks that allows to exclude services from the orchestration process.
+
+It may happen that a certain service instance should not be orchestrated to the consumer systems for any reason, therefore a higher entity creates an ocrhestration lock with the service istance identifier by consuming the \textit{create} service operation.
+
+It also can happen that a certain service instance is reserved (locked) upon a consumer system request, but for any reason it needs to be released. In this case a higher entity can search for the associated orchestration lock record by consuming the \textit{query} service operation in order to check the expiration time and the owner of the lock. If the service instance is need to be released before the expiration time of the lock, then the \textit{remove} service operation can be consumed.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+The requester has to identify itself to use any of the operations. 
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+The service is only available for operators, dedicated Core/Support systems and those who have the proper authorization rights to consume it.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operations of the service. The \textbf{serviceOrchestrationLockManagement} service is used to \textit{create}, \textit{remove} and \textit{query} orchestration lock records.
+In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\phantomsection
+\fsubsection{create}{OrchestrationLockListRequest}{OrchestrationLockListResponse}{}{ErrorResponse}
+
+Operation \textit{create} creates orchestration lock records in bulk. Each lock requires a service instance identifier, the owner system name and an expiration time. 
+
+\fsubsection{query}{OrchestrationLockQueryRequest}{OrchestrationLockListResponse}{}{ErrorResponse}
+
+Operation \textit{query} lists the orchestration lock records that match the filtering requirements. The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
+    \item There is an AND relation between different kind of filters.
+\end{itemize}
+
+\fsubsection{remove}{OrchestrationLockRemoveRequest}{}{OperationStatus}{ErrorResponse}
+
+Operation \textit{remove} deletes the orchestration lock records by owner system name and service instance identifiers.
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{serviceOrchestrationLockManagement} service are listed and must be respected by the hosting System.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\phantomsection
+
+\msubsection{struct}{OrchestrationLockListRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{6.3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+locks &  \pref{List}$<$\hyperref[sec:model:OrchestrationLockRequest]{OrchestrationLockRequest}$>$ & yes & List of lock request details. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\msubsection{struct}{OrchestrationLockRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.2cm} | p{3.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+serviceInstanceId & \pref{ServiceInstanceID} & yes & Service instance to be locked. \\ \hline
+owner & \pref{SystemName} & yes & The system the lock belongs to. \\ \hline
+expiresAt & \pref{DateTime} & yes & The lock will be active until this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{OrchestrationLockListResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{6.8cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:OrchestrationLockResponse]{OrchestrationLockResponse}$>$ & List of lock records. \\ \hline
+count & \pref{Number} & Total number of lock records. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{OrchestrationLockResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{6.8cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+id & \pref{Number} & Lock record unique ID. \\ \hline
+orchestrationJobId & \pref{OrchestrationJobId} & ID of the associated orchestration job if any. \\ \hline
+serviceInstanceId & \pref{ServiceInstanceID} & ID of the locked service instance. \\ \hline
+owner & \pref{SystemName} & The system the lock belongs to. \\ \hline
+expiresAt & \pref{DateTime} & The lock is active until this timestamp. \\ \hline
+temporary & \pref{Boolean} & If true, the lock was made during an orchestration process and possibly will be released automatically within a short time. (If service instance is not chosen to be reserved.) \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{OrchestrationLockQueryRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+ids & \pref{List}$<$\pref{Number}$>$ & no &  Requester is looking for lock records with any of the specified record identifiers. \\ \hline
+orchestrationJobIds & \pref{List}$<$\pref{OrchestrationJobId}$>$ & no &  Requester is looking for lock records with any of the specified orchestration job identifiers. \\ \hline
+serviceInstanceIds & \pref{List}$<$\pref{ServiceInstanceID}$>$ & no & Requester is looking for lock records with any of the specified service instance identifier. \\ \hline
+owners & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for lock records with any of the specified owner system names. \\ \hline
+expiresBefore & \pref{DateTime} & no & Requester is looking for lock records that expires before this timestamp. \\ \hline
+expiresAfter & \pref{DateTime} & no & Requester is looking for lock records that expires after this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{OrchestrationLockRemoveRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+owner & \pref{SystemName} & yes & System name the locks belongs. \\ \hline 
+serviceInstanceIds &  \pref{List}$<$\pref{ServiceInstanceID}$>$ & yes & List of service identifiers. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.3cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{Boolean}          & One out of true or false. \\ \hline
+\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{OrchestrationJobId} & Unique string identifier. \\ \hline
+\pdef{ServiceInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance’s provider name, service definition and version, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}             & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}
