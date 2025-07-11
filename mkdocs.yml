@@ -157,6 +157,7 @@ nav:
       - ServiceOrchestrationJobResponse: api/data-models/service-orchestration-job-response.md
       - ServiceOrchestrationLockListRequest: api/data-models/service-orchestration-lock-list-request.md
       - ServiceOrchestrationLockListResponse: api/data-models/service-orchestration-lock-list-response.md
+      - ServiceOrchestrationLockQueryRequest: api/data-models/service-orchestration-lock-query-request.md
       - ServiceOrchestrationLockRequest: api/data-models/service-orchestration-lock-request.md
       - ServiceOrchestrationLockResponse: api/data-models/service-orchestration-lock-response.md
       - ServiceOrchestrationNotifyInterface: api/data-models/service-orchestration-notify-interface.md

@@ -74,3 +74,64 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "origin": "POST /serviceorchestration/orchestration/mgmt/lock/create"
 }
 ```
+
+### query
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationLockQueryRequest](../data-models/service-orchestration-lock-query-request.md) JSON encoded body.
+
+```
+POST /serviceorchestration/orchestration/mgmt/lock/query HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+  "pagination": {
+    "page": 0,
+    "size": 10,
+    "direction": "ASC",
+    "sortField": "owner"
+  },
+  "ids": [
+    5
+  ],
+  "orchestrationJobIds": [
+    "091cc9c3-e704-4d0a-8d70-96fb2c11da55"
+  ],
+  "serviceInstanceIds": [
+    "TemperatureProvider2|kelvinInfo|1.0.0"
+  ],
+  "owners": [
+    "TemperatureManager"
+  ],
+  "expiresBefore": "2025-11-08T12:00:00Z",
+  "expiresAfter": "2025-11-08T11:00:00Z"
+}
+```
+
+The service operation **responds** with the status code `200` if locks were successfully queried. The response also contains a [ServiceOrchestrationLockListResponse](../data-models/service-orchestration-lock-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+      "id": 5,
+      "orchestrationJobId": "091cc9c3-e704-4d0a-8d70-96fb2c11da55",
+      "serviceInstanceId": "TemperatureProvider2|kelvinInfo|1.0.0",
+      "owner": "TemperatureManager",
+      "expiresAt": "2025-11-08T11:24:43Z",
+      "temporary": false
+    }
+  ],
+  "count": 1
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid orchestration job id: abc123",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceorchestration/orchestration/mgmt/lock/query"
+}
+```
