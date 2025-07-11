@@ -190,7 +190,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "errorMessage": "a44ab333-cfb5-420b-a7cf-b327904e243b is not owned by the requester",
   "errorCode": 403,
   "exceptionType": "FORBIDDEN",
-  "origin": "POST /serviceorchestration/orchestration/mgmt/push/unsubscribe"
+  "origin": "DELETE /serviceorchestration/orchestration/mgmt/push/unsubscribe"
 }
 ```
 

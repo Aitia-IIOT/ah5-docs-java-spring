@@ -135,3 +135,25 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "origin": "POST /serviceorchestration/orchestration/mgmt/lock/query"
 }
 ```
+
+### remove
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http), an owner [SystemName](../primitives.md#systemname) path variable and a query parameter _instanceIds_, which is a List<[ServiceInstanceID](../primitives.md#serviceinstanceid)>.
+
+```
+DELETE /serviceorchestration/orchestration/mgmt/lock/remove/TemperatureManager?instanceIds=TemperatureProvider2%7CkelvinInfo%7C1.0.0 HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Owner is missing",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /serviceorchestration/orchestration/mgmt/lock/create"
+}
+```
