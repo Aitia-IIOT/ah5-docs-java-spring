@@ -49,10 +49,12 @@ nav:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md
           - serviceOrchestrationLockManagement: api/serviceorchestration/service-orchestration-lock-management-generic-http_dynamic.md
+          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md
         - MQTT:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md
           - serviceOrchestrationLockManagement: api/serviceorchestration/service-orchestration-lock-management-generic-mqtt_dynamic.md
+          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
@@ -154,6 +156,8 @@ nav:
       - ServiceLookupResult: api/data-models/service-lookup-result.md
       - ServiceOrchestrationResponse: api/data-models/service-orchestration-response.md
       - ServiceOrchestrationFlag: api/data-models/service-orchestration-flag.md
+      - ServiceOrchestrationHistoryQueryRequest: api/data-models/service-orchestration-history-query-request.md
+      - ServiceOrchestrationHistoryResponse: api/data-models/service-orchestration-history-response.md
       - ServiceOrchestrationJobListResponse: api/data-models/service-orchestration-job-list-response.md
       - ServiceOrchestrationJobResponse: api/data-models/service-orchestration-job-response.md
       - ServiceOrchestrationLockListRequest: api/data-models/service-orchestration-lock-list-request.md
