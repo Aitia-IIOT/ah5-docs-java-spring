@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of authorizationToken, which enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction is when a consumer system with proper permissions obtains an expiring token of the appropriate type, which it then attaches to its service consumption attempt. The provider system verifies the received token and performs the service operation only if the token has not expired and is valid for the actual service operation. Additionally, provider systems can choose to have the tokens generated for its services encrypted. Tokens for Event notification is also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This page describes the generic_http and generic_https service interface of authorizationToken, which enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction is when a consumer system with proper permissions obtains an expiring token of the appropriate type, which is then attached to its service consumption attempt. The provider system verifies the received token and performs the service operation only if the token has not expired and is valid for the actual service operation. Additionally, provider systems can choose to have the tokens generated for their services encrypted. Tokens for Event notification are also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The interfaces are implemented using protocol, encoding as stated in the following tables:
 
@@ -31,7 +31,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [authorizat
 
 ### generate
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationMgmtVerifyRequest](../data-models/authorization-token-generation-request.md) JSON encoded body.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationTokenGenerationRequest](../data-models/authorization-token-generation-request.md) JSON encoded body.
 
 
 ```
@@ -107,7 +107,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http).
 
 ```
-GET /consumerauthorization/authorization-token/public-key/dsalefb521vdjkdsae633 HTTP/1.1
+GET /consumerauthorization/authorization-token/public-key HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 
@@ -142,7 +142,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with `201` if called successfully and the record has been created. The response might contains a Base64 [String](../primitives.md#string) cryptographic addition plain text body (depending on the specified [EncryptionAlgorithmName](../primitives.md#encryptionalgorithmname)).
+The service operation **responds** with `201` if called successfully and the record has been created. The response might contain a Base64 [String](../primitives.md#string) cryptographic addition plain text body (depending on the specified [EncryptionAlgorithmName](../primitives.md#encryptionalgorithmname)).
 
 ```
 41iBDSW1YHgiFG8P2TqaTqNScrfLtKye

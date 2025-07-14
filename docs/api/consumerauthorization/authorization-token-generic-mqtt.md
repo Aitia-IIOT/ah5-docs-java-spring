@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the generic_mqtt and generic_mqtts service interface of authorizationToken, which enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction is when a consumer system with proper permissions obtains an expiring token of the appropriate type, which it then attaches to its service consumption attempt. The provider system verifies the received token and performs the service operation only if the token has not expired and is valid for the actual service operation. Additionally, provider systems can choose to have the tokens generated for its services encrypted. Tokens for Event notification is also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This page describes the generic_mqtt and generic_mqtts service interface of authorizationToken, which enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction is when a consumer system with proper permissions obtains an expiring token of the appropriate type, which is then attached to its service consumption attempt. The provider system verifies the received token and performs the service operation only if the token has not expired and is valid for the actual service operation. Additionally, provider systems can choose to have the tokens generated for their services encrypted. Tokens for Event notification are also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The interfaces are implemented using protocol, encoding as stated in the following tables:
 
@@ -166,7 +166,7 @@ The **error codes** are `401` if the requester authentication was unsuccessful, 
 {
    "status":404,
    "traceId":"<trace-id>",
-   "receiver":"TemperatureCTemperatureProvider2onsumer",
+   "receiver":"TemperatureProvider2",
    "payload":{
      "errorMessage":"Public key is not available",
      "errorCode":404,
@@ -195,7 +195,7 @@ Topic: arrowhead/consumer-authorization/authorization-token/register-encryption-
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if called successfully and the record has been created. The response template payload might contains a Base64 [String](../primitives.md#string) cryptographic addition (depending on the specified [EncryptionAlgorithmName](../primitives.md#encryptionalgorithmname)).
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if called successfully and the record has been created. The response template payload might contain a Base64 [String](../primitives.md#string) cryptographic addition (depending on the specified [EncryptionAlgorithmName](../primitives.md#encryptionalgorithmname)).
 
 ```
 {

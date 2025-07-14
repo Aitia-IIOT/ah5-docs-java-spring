@@ -107,7 +107,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{authorizationTokenManagement} service, which allows systems (with operator role or proper permission) to manage the service access tokens in bulk and on behalf of the consumer and provider systems. Access tokens enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction when a Core/Support system generates tokens for a consumer system for multiple service instances.
+This document describes the \textbf{authorizationTokenManagement} service, which allows systems (with operator role or proper permission) to manage the service access tokens in bulk and on behalf of the consumer and provider systems. Access tokens enable the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction when a Core/Support system generates tokens for a consumer system for multiple service instances.
 
 The \textbf{authorizationTokenManagement} service contains the following operations:
 
@@ -125,14 +125,13 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 \subsection{How This Service Is Meant to Be Used}
 
-The purpose of this service is to handle the access tokens centrally and in bulk. This approach makes
-possible that the consumer systems don't have to generate tokens for multiple service instances individually. Also, provider systems don't have to register/unregister their token encryption keys on their own, it can be outsourced.
+The purpose of this service is to handle the access tokens centrally and in bulk. This approach makes it possible for consumer systems to avoid generating tokens for multiple service instances individually. Also, provider systems don't have to register/unregister their token encryption keys on their own, it can be outsourced.
 
-Several token variant could be available, that are gouped into the following types:
+Several token variants could be available, that are gouped into the following types:
 
 \textbf{Simple token}s are not holding any kind of information. These can only be verified by consulting the system implementing the authorizationToken service.
 
-\textbf{Self-contained token}s are holding all the necessary information for the provider system to verify it independently. However, the way of accessing to the token payload could differ according to the exact self-contained token variant. Since these kind of tokens are holding sensitive information, there is an option to encrypt the tokens using an encryption key associated with the provider.
+\textbf{Self-contained token}s are holding all the necessary information for the provider system to verify it independently. However, the way of accessing to the token payload could differ according to the exact self-contained token variant. Since these kinds of tokens are holding sensitive information, there is an option to encrypt the tokens using an encryption key associated with the provider.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -161,7 +160,7 @@ Operation \textit{generate-tokens} verifies the given consumer systems' permissi
 
 \fsubsection{query-tokens}{AuthorizationTokenQueryRequest}{AuthorizationTokenMgmtListResponse}{}{ErrorResponse}
 
-Operation \textit{query-tokens} lists the access token that match the filtering requirements. The query data must meet the following criteria.
+Operation \textit{query-tokens} lists the access tokens that match the filtering requirements. The query data must meet the following criteria:
 
 \begin{itemize}
     \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
@@ -177,7 +176,7 @@ Operation \textit{revoke-tokens} deletes the access token records associated wit
 
 \fsubsection{add-encryption-keys}{AuthorizationEncryptionKeyMgmtListRequest}{AuthorizationEncryptionKeyMgmtListResponse}{}{ErrorResponse}
 
-Operation \textit{add-encryption-keys} saves and stores \pref{String} key and encryption algorithm identifier pairs belonging to the given provider systems. If the given algorithm is using any addition (beside the encryption key) for the encryption process, such as salt or initialization vector for example, then this addition is returned to the requester system. Any time when a self-contained token is generated that is associated with a provider that has an encryption key saved, the token will be provided to the token requester encrypted, using the specified key and encryption algorithm.
+Operation \textit{add-encryption-keys} saves and stores \pref{String} key and encryption algorithm identifier pairs belonging to the given provider systems. If the given algorithm is using any addition (besides the encryption key) for the encryption process, such as salt or initialization vector for example, then this addition is returned to the requester system. Any time when a self-contained token is generated that is associated with a provider that has an encryption key saved, the token will be provided to the token requester encrypted, using the specified key and encryption algorithm.
 
 \fsubsection{remove-encryption-keys}{AuthorizationEncryptionKeyRemoveMgmtRequest}{OperationStatus}{}{ErrorResponse}
 
@@ -200,7 +199,7 @@ As a complement to the explicitly defined types in this section, there is also a
 \begin{tabularx}{\textwidth}{| p{3cm} | p{8cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-list & \pref{List}$<$\hyperref[sec:model:AuthorizationTokenGeneratioMgtmnRequest]{AuthorizationTokenGeneratioMgtmnRequest}$>$ & yes & List of token requests. \\ \hline
+list & \pref{List}$<$\hyperref[sec:model:AuthorizationTokenGenerationMgtmRequest]{AuthorizationTokenGenerationMgtmRequest}$>$ & yes & List of token requests. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -208,7 +207,7 @@ list & \pref{List}$<$\hyperref[sec:model:AuthorizationTokenGeneratioMgtmnRequest
 
 An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
 
-\msubsection{struct}{AuthorizationTokenGeneratioMgtmnRequest}
+\msubsection{struct}{AuthorizationTokenGenerationMgtmRequest}
 
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
@@ -240,12 +239,12 @@ pageSize & \pref{Number} & no (yes) & The number of entries on the requested pag
 pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 requester & \pref{SystemName} & no & Requester is looking for tokens that were generated by the request of the specified system. \\ \hline
-tokenType & \pref{AccessTokenType} & no &  Requester is looking for tokens that belongs to the specified technology group. \\ \hline
-consumerCloud & \pref{CloudIndetifier} & no &  Requester is looking for tokens that belongs to the specified consumer cloud. \\ \hline
-consumer & \pref{SystemName} & no &  Requester is looking for tokens that belongs to the specified consumer system. \\ \hline
-provider & \pref{SystemName} & no &  Requester is looking for tokens that belongs to the specified provider system. \\ \hline
-targetType & \pref{AccessTargetType} & no &  Requester is looking for tokens that belongs to the specified target type. \\ \hline
-target & \pref{ServiceName} / \pref{EventTypeName} & no &  Requester is looking for tokens that belongs to the specified service-operation. \\ \hline
+tokenType & \pref{AccessTokenType} & no &  Requester is looking for tokens that belong to the specified technology group. \\ \hline
+consumerCloud & \pref{CloudIndetifier} & no &  Requester is looking for tokens that belong to the specified consumer cloud. \\ \hline
+consumer & \pref{SystemName} & no &  Requester is looking for tokens that belong to the specified consumer system. \\ \hline
+provider & \pref{SystemName} & no &  Requester is looking for tokens that belong to the specified provider system. \\ \hline
+targetType & \pref{AccessTargetType} & no &  Requester is looking for tokens that belong to the specified target type. \\ \hline
+target & \pref{ServiceName} / \pref{EventTypeName} & no &  Requester is looking for tokens that belong to the specified service-operation. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -362,7 +361,7 @@ count & \pref{Number} & Numer of the result entries. \\ \hline
 systemName & \pref{SystemName} & Name of the associated system. \\ \hline
 rawKey & \pref{String} & The raw string key. \\ \hline
 algorithm & \pref{EncryptionAlgorithmName} & Name of the ecnryption algorithm. \\ \hline
-keyAdditive & \pref{String} & Any string addition what the defined algorithm is using, if any. \\ \hline
+keyAdditive & \pref{String} & Any string addition that the defined algorithm is using, if any. \\ \hline
 createdAt & \pref{DateTime} & The encryprtion key was registered at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
@@ -384,7 +383,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{AccessTokenReference} & A string reference that is associated with the access token record. \\ \hline
 \pdef{AccessTokenType} & A string reference that specifies a token technology group.\\ \hline
 \pdef{AccessTokenVariant} & A string reference that specifies an exact token technology variant.\\ \hline
-\pdef{CloudIdentifier} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name that managing the cloud. Each part must follow the PascalCase naming convention. \\ \hline
+\pdef{CloudIdentifier} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name that is managing the cloud. Each part must follow the PascalCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline

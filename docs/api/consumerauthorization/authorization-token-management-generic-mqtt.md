@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the generic_mqtt and generic_mqtts service interface of authorizationTokenManagement, which allows systems (with operator role or proper permission) to manage the service access tokens in bulk and on behalf of the consumer and provider systems. Access tokens enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction when a Core/Support system generates tokens for a consumer system for multiple service instances. Tokens for Event notification is also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This page describes the generic_mqtt and generic_mqtts service interface of authorizationTokenManagement, which allows systems (with operator role or proper permission) to manage the service access tokens in bulk and on behalf of the consumer and provider systems. Access tokens enable the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction when a Core/Support system generates tokens for a consumer system for multiple service instances. Tokens for Event notification are also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The interfaces are implemented using protocol, encoding as stated in the following tables:
 
@@ -32,7 +32,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [authorizat
 
 ### generate-tokens
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an [AuthorizationTokenGenerationListMgmtRequest](../data-models/authorization-token-generation-list-mgmt-request.md). The params can contain an optional [KeyValuePair](../primitives.md/#keyvaluepair) with the key "_unbound_" and a [Boolean](../primitives.md#boolean) value. If _unbound_ is true, the consumers' service permission check will be skipped if the requester system name is present in the _unbounded.token.generation.whitelist_ system cunfiguration.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an [AuthorizationTokenGenerationListMgmtRequest](../data-models/authorization-token-generation-list-mgmt-request.md). The params can contain an optional [KeyValuePair](../primitives.md/#keyvaluepair) with the key "_unbound_" and a [Boolean](../primitives.md#boolean) value. If _unbound_ is true, the consumers' service permission check will be skipped if the requester system name is present in the _unbounded.token.generation.whitelist_ system configuration.
 
 ```
 Topic: arrowhead/consumer-authorization/authorization-token/management/generate-tokens
@@ -62,7 +62,7 @@ Topic: arrowhead/consumer-authorization/authorization-token/management/generate-
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if called successfully and tokens has been generated. The response template payload is an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md).
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if called successfully and tokens have been generated. The response template payload is an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md).
 
 ```
 {
@@ -129,14 +129,14 @@ Topic: arrowhead/consumer-authorization/authorization-token/management/query-tok
       "tokenType":"TIME_LIMITED_TOKEN",
       "consumerCloud":"LOCAL",
       "consumer":"TemperatureConsumer",
-      "provider":"TemperatureProvider",
+      "provider":"TemperatureProvider1",
       "targetType":"SERVICE_DEF",
       "target":"kelvinInfo"
    }
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and tokens has been queried. The response template payload is an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md).
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and tokens have been queried. The response template payload is an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md).
 
 ```
 {
@@ -200,7 +200,7 @@ Topic: arrowhead/consumer-authorization/authorization-token/management/revoke-to
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and tokens has been revoked.
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully and tokens have been revoked.
 
 ```
 {
@@ -250,7 +250,7 @@ Topic: arrowhead/consumer-authorization/authorization-token/management/add-encry
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if called successfully and enryption keys has been saved. The response template payload is an [AuthorizationEncryptionKeyListResponse](../data-models/authorization-encryption-key-list-response.md).
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if called successfully and enryption keys have been saved. The response template payload is an [AuthorizationEncryptionKeyListResponse](../data-models/authorization-encryption-key-list-response.md).
 
 ```
 {
@@ -290,7 +290,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### remove-encryption-keys
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[SystemName](../primitives.md#systemname)> which contains the names of the systems of the keys to be deleted.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[SystemName](../primitives.md#systemname)> which contains the names of the systems to which the keys to be deleted belong.
 
 ```
 Topic: arrowhead/consumer-authorization/authorization-token/management/remove-encryption-keys

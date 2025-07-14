@@ -107,7 +107,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{authorizationToken} service, which enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction is when a consumer system with proper permissions obtains an expiring token of the appropriate type, which it then attaches to its service consumption attempt. The provider system verifies the received token and performs the service operation only if the token has not expired and is valid for the actual service operation. Additionally, provider systems can choose to have the tokens generated for its services encrypted.
+This document describes the \textbf{authorizationToken} service, which enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction is when a consumer system with proper permissions obtains an expiring token of the appropriate type, which it then attaches to its service consumption attempt. The provider system verifies the received token and performs the service operation only if the token has not expired and is valid for the actual service operation. Additionally, provider systems can choose to have the tokens generated for their services encrypted.
 
 The \textbf{authorizationToken} service contains the following operations:
 
@@ -137,7 +137,7 @@ When a provider system requires token level security for its provided service, a
 
 \textbf{Simple token}s are not holding any kind of information. These can only be verified by consulting the system implementing the authorizationToken service. The \textit{verify} operation should be called by the provider.
 
-\textbf{Self-contained token}s are holding all the necessary information for the provider system to verify it independently. However, the way of accessing to the token payload could differ according to the exact self-contained token variant. Since these kind of tokens are holding sensitive information, there is an option to provide the tokens for the consumers encrypted using a secret shared by the provider with the token creator entity (the system implementing the authorizationToken service). For registering a shared secret, the \textit{register-encryption-key} operation can be called. Some self-contained token enables the verification of its creator entity. In order to do such a verification, a public key from the creator entity will be required. In order to obtain a public key the \textit{get-public-key} operation can be called.
+\textbf{Self-contained token}s are holding all the necessary information for the provider system to verify it independently. However, the way of accessing the token payload could differ according to the exact self-contained token variant. Since these kinds of tokens are holding sensitive information, there is an option to provide the tokens for the consumers encrypted using a secret shared by the provider with the token creator entity (the system implementing the authorizationToken service). For registering a shared secret, the \textit{register-encryption-key} operation can be called. Some self-contained token enable the verification of its creator entity. In order to do such a verification, a public key from the creator entity will be required. In order to obtain a public key the \textit{get-public-key} operation can be called.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -175,11 +175,11 @@ Verifying self-contained type of tokens with this operation is not possible.
 
 \fsubsection{get-public-key}{Identity}{PublicKeyResponse}{}{ErrorResponse}
 
-Operation \textit{get-public-key} returns the \pref{PublicKey} of the implementing system, if available. Having a \pref{PublicKey} is only possible if the system supports an asymmetric encryption solution. Some self-contained token type also support asymmetric encryption, allowing the requester (provider) system to verify whether the token was created by the same system that the \pref{PublicKey} belongs to.
+Operation \textit{get-public-key} returns the \pref{PublicKey} of the implementing system, if available. Having a \pref{PublicKey} is only possible if the system supports an asymmetric encryption solution. Some self-contained token types also support asymmetric encryption, allowing the requester (provider) system to verify whether the token was created by the same system that the \pref{PublicKey} belongs to.
 
 \fsubsection{register-encryption-key}{AuthorizationEncryptionKeyRegistrationRequest}{AuthorizationEncryptionKeyRegistrationResponse}{}{ErrorResponse}
 
-Operation \textit{register-encryption-key} saves and stores a \pref{String} key and an encryption algorithm identifier, that is provided by and belongs to the requester (provider) system. Any time when a self-contained token is generated that is associated with the same provider, the token will be provided to the consumer system encrypted, using the specified key and encryption algorithm. If the given algorithm is using any addition (beside the encryption key) for the encryption process, such as salt or initialization vector for example, then this addition is returned to the requester (provider) system. Once a consumer systems sends a service request with an encrypted self-signed token, the provider system can decrypt it with the encryption key defined by itslef and with the addition received as the response of this operation if any.
+Operation \textit{register-encryption-key} saves and stores a \pref{String} key and an encryption algorithm identifier, that is provided by and belongs to the requester (provider) system. Any time when a self-contained token is generated that is associated with the same provider, the token will be provided to the consumer system encrypted, using the specified key and encryption algorithm. If the given algorithm is using any addition (besides the encryption key) for the encryption process, such as salt or initialization vector for example, then this addition is returned to the requester (provider) system. Once a consumer system sends a service request with an encrypted self-signed token, the provider system can decrypt it with the encryption key defined by itslef and with the addition received as the response of this operation if any.
 
 \fsubsection{unregister-encryption-key}{Identity}{OperationStatus}{}{ErrorResponse}
 
@@ -285,7 +285,7 @@ publicKey & \pref{PublicKey} & The public key. \\ \hline
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-addition & \pref{String} & Any string addition what the defined algorithm is using, if any. \\ \hline
+addition & \pref{String} & Any string addition that the defined algorithm is using, if any. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -321,7 +321,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{AccessTokenType} & A string reference that specifies a token technology group.\\ \hline
 \pdef{AccessTokenVariant} & A string reference that specifies an exact token technology variant.\\ \hline
 \pdef{Boolean}          & One out of true or false. \\ \hline
-\pdef{CloudIdentifier} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name that managing the cloud. Each part must follow the PascalCase naming convention. \\ \hline
+\pdef{CloudIdentifier} & A composite string identifier that is intended to be both human and machine-readable. It consists of the cloud name and the organization name that is managing the cloud. Each part must follow the PascalCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{EncryptionAlgorithmName} & A string identifier that belongs to an encryption algorithm. \\ \hline

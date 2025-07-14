@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of authorizationTokenManagement, which allows systems (with operator role or proper permission) to manage the service access tokens in bulk and on behalf of the consumer and provider systems. Access tokens enables the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction when a Core/Support system generates tokens for a consumer system for multiple service instances. Tokens for Event notification is also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This page describes the generic_http and generic_https service interface of authorizationTokenManagement, which allows systems (with operator role or proper permission) to manage the service access tokens in bulk and on behalf of the consumer and provider systems. Access tokens enable the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction when a Core/Support system generates tokens for a consumer system for multiple service instances. Tokens for Event notification are also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 The interfaces are implemented using protocol, encoding as stated in the following tables:
 
@@ -53,7 +53,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with `201` if called successfully and tokens has been generated. The response also contains an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md) JSON encoded body.
+The service operation **responds** with `201` if called successfully and tokens have been generated. The response also contains an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md) JSON encoded body.
 
 ```
 {
@@ -112,7 +112,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-The service operation **responds** with `200` if called successfully and tokens has been queried. The response also contains an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md) JSON encoded body.
+The service operation **responds** with `200` if called successfully and tokens have been queried. The response also contains an [AuthorizationTokenListMgmtResponse](../data-models/authorization-token-list-mgmt-response.md) JSON encoded body.
 
 ```
 {
@@ -189,7 +189,7 @@ Authorization: Bearer <identity-info>
 }
 ```
 
-The service operation **responds** with `201` if called successfully and encryption key has been saved. The response also contains an [AuthorizationEncryptionKeyListResponse](../data-models/authorization-encryption-key-list-response.md) JSON encoded body.
+The service operation **responds** with `201` if called successfully and the encryption key has been saved. The response also contains an [AuthorizationEncryptionKeyListResponse](../data-models/authorization-encryption-key-list-response.md) JSON encoded body.
 
 ```
 {
@@ -219,7 +219,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ### remove-encryption-keys
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a query parameter _systemNames_, which is a List<[SystemName](../primitives.md#systemname)>. It contains the names of the systems of the keys to be deleted.
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a query parameter _systemNames_, which is a List<[SystemName](../primitives.md#systemname)>. It contains the names of the systems to which the keys to be deleted belong.
 
 ```
 DELETE /consumerauthorization/authorization/mgmt/token/encryption-key?systemNames=TemperatureProvider1&systemNames=TemperatureProvider2 HTTP/1.1
