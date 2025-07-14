@@ -106,7 +106,7 @@ Authorization: Bearer <authorization-info>
   "tokenType": "TIME_LIMITED_TOKEN",
   "consumerCloud": "LOCAL",
   "consumer": "TemperatureConsumer",
-  "provider": "TemperatureProvider",
+  "provider": "TemperatureProvider1",
   "targetType": "SERVICE_DEF",
   "target": "kelvinInfo"
 }

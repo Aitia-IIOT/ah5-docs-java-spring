@@ -32,7 +32,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [authorizat
 
 ### generate
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an [AuthorizationMgmtVerifyRequest](../data-models/authorization-token-generation-request.md).
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is an [AuthorizationTokenGenerationRequest](../data-models/authorization-token-generation-request.md).
 
 ```
 Topic: arrowhead/consumer-authorization/authorization-token/generate
