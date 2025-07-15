@@ -124,7 +124,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 The purpose of the service is to list the stored orchestration jobs according to given filtering requirements.
 
-The most common use case when a higher entity has triggered some push orchestration and wants to verify that all of them were executed without any issue and matching service instances were orchestrated and successfully pushed to the consumer systems.
+The most common use case when a higher entity has triggered some push orchestration and wants to verify that all of them were executed without any issues and matching service instances were orchestrated and successfully pushed to the consumer systems.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -182,11 +182,11 @@ pageSize & \pref{Number} & no (yes) & The number of entries on the requested pag
 pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 ids & \pref{List}$<$\pref{OrchestrationJobId}$>$ & no &  Requester is looking for job records with any of the specified job identifiers. \\ \hline
-statuses & \pref{List}$<$\pref{OrchestrationJobStatus}$>$ & no &  Requester is looking for job records with any of the specified job status. \\ \hline
+statuses & \pref{List}$<$\pref{OrchestrationJobStatus}$>$ & no &  Requester is looking for job records with any of the specified job statuses. \\ \hline
 type & \pref{OrchestrationType} & no &  Requester is looking for job records with the specified type. \\ \hline
-requesterSystems & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for job records with any of the specified requester system. \\ \hline
-taregtSystems & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for job records with any of the specified target system. \\ \hline
-serviceDefinitions & \pref{List}$<$\pref{ServciceName}$>$ & no & Requester is looking for job records with any of the specified service definition. \\ \hline
+requesterSystems & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for job records with any of the specified requester systems. \\ \hline
+taregtSystems & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for job records with any of the specified target systems. \\ \hline
+serviceDefinitions & \pref{List}$<$\pref{ServciceName}$>$ & no & Requester is looking for job records with any of the specified service definitions. \\ \hline
 subscriptionIds & \pref{List}$<$\pref{OrchestrationSubscriptionId}$>$ & no &  Requester is looking for job records with any of the specified subscription identifiers. \\ \hline
 \end{tabularx}
 \end{table}

@@ -132,7 +132,7 @@ This service operation lists the existing lock records that match the filtering 
 
 **remove**
 
-This revice operation deletes the specified lock records.
+This service operation deletes the specified lock records.
 
 :material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-lock-management-generic-http_dynamic.md#remove) | [generic_https](../api/serviceorchestration/service-orchestration-lock-management-generic-http_dynamic.md#remove)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-lock-management-generic-mqtt_dynamic.md#remove) | [generic_mqtts](../api/serviceorchestration/service-orchestration-lock-management-generic-mqtt_dynamic.md#remove)

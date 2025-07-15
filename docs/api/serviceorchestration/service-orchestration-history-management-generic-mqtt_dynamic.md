@@ -35,35 +35,35 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/serviceorchestration/orchestration/management/history/query
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":{
-      "pagination":{
-         "page":0,
-         "size":10,
-         "direction":"ASC",
-         "sortField":"createdAt"
+   "traceId": "<trace-id>",
+   "authentication": "<authentication-data>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": {
+      "pagination": {
+         "page": 0,
+         "size": 10,
+         "direction": "ASC",
+         "sortField": "createdAt"
       },
-      "ids":[
+      "ids": [
          "5cf0f11a-6bea-46c7-8550-403c96d27bbc"
       ],
-      "statuses":[
+      "statuses": [
          "PENDING",
          "IN_PROGRESS"
       ],
-      "type":"PUSH",
-      "requesterSystems":[
+      "type": "PUSH",
+      "requesterSystems": [
          "TemperatureManager"
       ],
-      "targetSystems":[
+      "targetSystems": [
          "TemperatureConsumer"
       ],
-      "serviceDefinitions":[
+      "serviceDefinitions": [
          "kelvinInfo"
       ],
-      "subscriptionIds":[
+      "subscriptionIds": [
          "3a07c069-e070-4831-a5ad-5307c112354f"
       ]
    }
@@ -74,26 +74,26 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":200,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureManager",
-   "payload":{
-      "entries":[
+   "status": 200,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureManager",
+   "payload": {
+      "entries": [
          {
-            "id":"5cf0f11a-6bea-46c7-8550-403c96d27bbc",
-            "status":"IN_PROGRESS",
-            "type":"PUSH",
-            "requesterSystem":"TemperatureManager",
-            "targetSystem":"TemperatureConsumer",
-            "serviceDefinition":"kelvinInfo",
-            "subscriptionId":"3a07c069-e070-4831-a5ad-5307c112354f",
-            "message":"",
-            "createdAt":"2025-11-08T12:00:00Z",
-            "startedAt":"2025-11-08T12:01:00Z",
-            "finishedAt":""
+            "id": "5cf0f11a-6bea-46c7-8550-403c96d27bbc",
+            "status": "IN_PROGRESS",
+            "type": "PUSH",
+            "requesterSystem": "TemperatureManager",
+            "targetSystem": "TemperatureConsumer",
+            "serviceDefinition": "kelvinInfo",
+            "subscriptionId": "3a07c069-e070-4831-a5ad-5307c112354f",
+            "message": "",
+            "createdAt": "2025-11-08T12:00:00Z",
+            "startedAt": "2025-11-08T12:01:00Z",
+            "finishedAt": ""
          }
       ],
-      "count":1
+      "count": 1
    }
 }
 ```
@@ -102,14 +102,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureManager",
-   "payload":{
-      "errorMessage":"Invalid orchestration job id: abc123",
-      "errorCode":400,
-      "exceptionType":"INVALID_PARAMETER",
-      "origin":"arrowhead/serviceorchestration/orchestration/management/history/query"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureManager",
+   "payload": {
+      "errorMessage": "Invalid orchestration job id: abc123",
+      "errorCode": 400,
+      "exceptionType": "INVALID_PARAMETER",
+      "origin": "arrowhead/serviceorchestration/orchestration/management/history/query"
    }
 }
 ```

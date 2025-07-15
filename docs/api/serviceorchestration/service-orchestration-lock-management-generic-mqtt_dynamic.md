@@ -35,16 +35,16 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/serviceorchestration/orchestration/management/lock/create
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":{
-      "locks":[
+   "traceId": "<trace-id>",
+   "authentication": "<authentication-data>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": {
+      "locks": [
          {
-            "serviceInstanceId":"TemperatureProvider2|kelvinInfo|1.0.0",
-            "owner":"TemperatureManager",
-            "expiresAt":"2025-11-08T11:24:43Z"
+            "serviceInstanceId": "TemperatureProvider2|kelvinInfo|1.0.0",
+            "owner": "TemperatureManager",
+            "expiresAt": "2025-11-08T11:24:43Z"
          }
       ]
    }
@@ -55,21 +55,21 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":201,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureManager",
-   "payload":{
-      "entries":[
+   "status": 201,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureManager",
+   "payload": {
+      "entries": [
          {
-            "id":5,
-            "orchestrationJobId":"091cc9c3-e704-4d0a-8d70-96fb2c11da55",
-            "serviceInstanceId":"TemperatureProvider2|kelvinInfo|1.0.0",
-            "owner":"TemperatureManager",
-            "expiresAt":"2025-11-08T11:24:43Z",
-            "temporary":false
+            "id": 5,
+            "orchestrationJobId": "091cc9c3-e704-4d0a-8d70-96fb2c11da55",
+            "serviceInstanceId": "TemperatureProvider2|kelvinInfo|1.0.0",
+            "owner": "TemperatureManager",
+            "expiresAt": "2025-11-08T11:24:43Z",
+            "temporary": false
          }
       ],
-      "count":1
+      "count": 1
    }
 }
 ```
@@ -78,14 +78,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureManager",
-   "payload":{
-      "errorMessage":"Owner is missing",
-      "errorCode":400,
-      "exceptionType":"INVALID_PARAMETER",
-      "origin":"arrowhead/serviceorchestration/orchestration/management/lock/create"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureManager",
+   "payload": {
+      "errorMessage": "Owner is missing",
+      "errorCode": 400,
+      "exceptionType": "INVALID_PARAMETER",
+      "origin": "arrowhead/serviceorchestration/orchestration/management/lock/create"
    }
 }
 ```
@@ -98,31 +98,31 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/serviceorchestration/orchestration/management/lock/query
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":{
-      "pagination":{
-         "page":0,
-         "size":10,
-         "direction":"ASC",
-         "sortField":"owner"
+   "traceId": "<trace-id>",
+   "authentication": "<authentication-data>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": {
+      "pagination": {
+         "page": 0,
+         "size": 10,
+         "direction": "ASC",
+         "sortField": "owner"
       },
-      "ids":[
+      "ids": [
          5
       ],
-      "orchestrationJobIds":[
+      "orchestrationJobIds": [
          "091cc9c3-e704-4d0a-8d70-96fb2c11da55"
       ],
-      "serviceInstanceIds":[
+      "serviceInstanceIds": [
          "TemperatureProvider2|kelvinInfo|1.0.0"
       ],
-      "owners":[
+      "owners": [
          "TemperatureManager"
       ],
-      "expiresBefore":"2025-11-08T12:00:00Z",
-      "expiresAfter":"2025-11-08T11:00:00Z"
+      "expiresBefore": "2025-11-08T12:00:00Z",
+      "expiresAfter": "2025-11-08T11:00:00Z"
    }
 }
 ```
@@ -131,21 +131,21 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":200,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureManager",
-   "payload":{
-      "entries":[
+   "status": 200,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureManager",
+   "payload": {
+      "entries": [
          {
-            "id":5,
-            "orchestrationJobId":"091cc9c3-e704-4d0a-8d70-96fb2c11da55",
-            "serviceInstanceId":"TemperatureProvider2|kelvinInfo|1.0.0",
-            "owner":"TemperatureManager",
-            "expiresAt":"2025-11-08T11:24:43Z",
-            "temporary":false
+            "id": 5,
+            "orchestrationJobId": "091cc9c3-e704-4d0a-8d70-96fb2c11da55",
+            "serviceInstanceId": "TemperatureProvider2|kelvinInfo|1.0.0",
+            "owner": "TemperatureManager",
+            "expiresAt": "2025-11-08T11:24:43Z",
+            "temporary": false
          }
       ],
-      "count":1
+      "count": 1
    }
 }
 ```
@@ -154,32 +154,32 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureManager",
-   "payload":{
-      "errorMessage":"Invalid orchestration job id: abc123",
-      "errorCode":400,
-      "exceptionType":"INVALID_PARAMETER",
-      "origin":"arrowhead/serviceorchestration/orchestration/management/lock/query"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureManager",
+   "payload": {
+      "errorMessage": "Invalid orchestration job id: abc123",
+      "errorCode": 400,
+      "exceptionType": "INVALID_PARAMETER",
+      "origin": "arrowhead/serviceorchestration/orchestration/management/lock/query"
    }
 }
 ```
 
 ### remove
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[ServiceInstanceID](../primitives.md#serviceinstanceid)>. An `owner` parameter also has to be provider with a [SystemName](../primitives.md#systemname) value.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[ServiceInstanceID](../primitives.md#serviceinstanceid)>. An `owner` parameter also has to be provided with a [SystemName](../primitives.md#systemname) value.
 
 ```
 Topic: arrowhead/serviceorchestration/orchestration/management/lock/remove
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
+   "traceId": "<trace-id>",
+   "authentication": "<authentication-data>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
    "params": {
-      "owner":"TemperatureManager"
+      "owner": "TemperatureManager"
    },
    "payload": [
         "TemperatureProvider2|kelvinInfo|1.0.0"
@@ -191,9 +191,9 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-  "status":200,
-  "traceId":"<trace-id>",
-  "receiver":"TemperatureManager"
+  "status": 200,
+  "traceId": "<trace-id>",
+  "receiver": "TemperatureManager"
 }
 ```
 
@@ -201,14 +201,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureManager",
-   "payload":{
-      "errorMessage":"Owner is missing",
-      "errorCode":400,
-      "exceptionType":"INVALID_PARAMETER",
-      "origin":"arrowhead/serviceorchestration/orchestration/management/lock/remove"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureManager",
+   "payload": {
+      "errorMessage": "Owner is missing",
+      "errorCode": 400,
+      "exceptionType": "INVALID_PARAMETER",
+      "origin": "arrowhead/serviceorchestration/orchestration/management/lock/remove"
    }
 }
 ```

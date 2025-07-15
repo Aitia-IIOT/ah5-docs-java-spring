@@ -122,9 +122,9 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 \subsection{How This Service Is Meant to Be Used}
 
-The purpose of the service is to manage the orchestration locks that allows to exclude services from the orchestration process.
+The purpose of the service is to manage the orchestration locks that allow to exclude services from the orchestration process.
 
-It may happen that a certain service instance should not be orchestrated to the consumer systems for any reason, therefore a higher entity creates an ocrhestration lock with the service istance identifier by consuming the \textit{create} service operation.
+It may happen that a certain service instance should not be orchestrated to the consumer systems for any reason, therefore a higher entity creates an ocrhestration lock with the service instance identifier by consuming the \textit{create} service operation.
 
 It also can happen that a certain service instance is reserved (locked) upon a consumer system request, but for any reason it needs to be released. In this case a higher entity can search for the associated orchestration lock record by consuming the \textit{query} service operation in order to check the expiration time and the owner of the lock. If the service instance is need to be released before the expiration time of the lock, then the \textit{remove} service operation can be consumed.
 
@@ -228,39 +228,7 @@ orchestrationJobId & \pref{OrchestrationJobId} & ID of the associated orchestrat
 serviceInstanceId & \pref{ServiceInstanceID} & ID of the locked service instance. \\ \hline
 owner & \pref{SystemName} & The system the lock belongs to. \\ \hline
 expiresAt & \pref{DateTime} & The lock is active until this timestamp. \\ \hline
-temporary & \pref{Boolean} & If true, the lock was made during an orchestration process and possibly will be released automatically within a short time. (If service instance is not chosen to be reserved.) \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{OrchestrationLockQueryRequest}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{4cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
-pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
-pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
-pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
-ids & \pref{List}$<$\pref{Number}$>$ & no &  Requester is looking for lock records with any of the specified record identifiers. \\ \hline
-orchestrationJobIds & \pref{List}$<$\pref{OrchestrationJobId}$>$ & no &  Requester is looking for lock records with any of the specified orchestration job identifiers. \\ \hline
-serviceInstanceIds & \pref{List}$<$\pref{ServiceInstanceID}$>$ & no & Requester is looking for lock records with any of the specified service instance identifier. \\ \hline
-owners & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for lock records with any of the specified owner system names. \\ \hline
-expiresBefore & \pref{DateTime} & no & Requester is looking for lock records that expires before this timestamp. \\ \hline
-expiresAfter & \pref{DateTime} & no & Requester is looking for lock records that expires after this timestamp. \\ \hline
-\end{tabularx}
-\end{table}
-
-\clearpage
-
-\msubsection{struct}{OrchestrationLockRemoveRequest}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-owner & \pref{SystemName} & yes & System name the locks belongs. \\ \hline 
-serviceInstanceIds &  \pref{List}$<$\pref{ServiceInstanceID}$>$ & yes & List of service identifiers. \\ \hline
+temporary & \pref{Boolean} & If true, the lock was made during an orchestration process and possibly will be released automatically within a short time (if service instance is not chosen to be reserved). \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -274,6 +242,38 @@ errorMessage & \pref{String} & Description of the error. \\ \hline
 errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
 type & \pref{ErrorType} & Type of the error. \\ \hline
 origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{OrchestrationLockQueryRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+ids & \pref{List}$<$\pref{Number}$>$ & no &  Requester is looking for lock records with any of the specified record identifiers. \\ \hline
+orchestrationJobIds & \pref{List}$<$\pref{OrchestrationJobId}$>$ & no &  Requester is looking for lock records with any of the specified orchestration job identifiers. \\ \hline
+serviceInstanceIds & \pref{List}$<$\pref{ServiceInstanceID}$>$ & no & Requester is looking for lock records with any of the specified service instance identifiers. \\ \hline
+owners & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for lock records with any of the specified owner system names. \\ \hline
+expiresBefore & \pref{DateTime} & no & Requester is looking for lock records that expires before this timestamp. \\ \hline
+expiresAfter & \pref{DateTime} & no & Requester is looking for lock records that expires after this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{OrchestrationLockRemoveRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+owner & \pref{SystemName} & yes & System name the locks belongs. \\ \hline 
+serviceInstanceIds &  \pref{List}$<$\pref{ServiceInstanceID}$>$ & yes & List of service identifiers. \\ \hline
 \end{tabularx}
 \end{table}
 
