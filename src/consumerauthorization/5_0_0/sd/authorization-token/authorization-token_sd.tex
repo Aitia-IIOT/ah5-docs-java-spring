@@ -175,15 +175,15 @@ Verifying self-contained type of tokens with this operation is not possible.
 
 \fsubsection{get-public-key}{Identity}{PublicKeyResponse}{}{ErrorResponse}
 
-Operation \textit{get-public-key} returns the \pref{PublicKey} of the implementing system, if available. Having a \pref{PublicKey} is only possible if the system supports an asymmetric encryption solution. Some self-contained token types also support asymmetric encryption, allowing the requester (provider) system to verify whether the token was created by the same system that the \pref{PublicKey} belongs to.
+Operation \textit{get-public-key} returns the \pref{PublicKey} of the implementing system, if available. Some self-contained token types also support signatures, allowing the requester (provider) system to verify whether the token was created by the same system that the \pref{PublicKey} belongs to.
 
 \fsubsection{register-encryption-key}{AuthorizationEncryptionKeyRegistrationRequest}{AuthorizationEncryptionKeyRegistrationResponse}{}{ErrorResponse}
 
-Operation \textit{register-encryption-key} saves and stores a \pref{String} key and an encryption algorithm identifier, that is provided by and belongs to the requester (provider) system. Any time when a self-contained token is generated that is associated with the same provider, the token will be provided to the consumer system encrypted, using the specified key and encryption algorithm. If the given algorithm is using any addition (besides the encryption key) for the encryption process, such as salt or initialization vector for example, then this addition is returned to the requester (provider) system. Once a consumer system sends a service request with an encrypted self-signed token, the provider system can decrypt it with the encryption key defined by itslef and with the addition received as the response of this operation if any.
+Operation \textit{register-encryption-key} saves and stores a \pref{String} key and an encryption algorithm identifier, that is provided by and belongs to the requester (provider) system. Any time when a self-contained token is generated that is associated with the same provider, the token will be provided to the consumer system encrypted, using the specified key and encryption algorithm. If the given algorithm is using any addition (besides the encryption key) for the encryption process, such as salt or initialization vector for example, then this addition is returned to the requester (provider) system. Once a consumer system sends a service request with an encrypted self-signed token, the provider system can decrypt it with the encryption key defined by itself and with the addition received as the response of this operation if any.
 
 \fsubsection{unregister-encryption-key}{Identity}{OperationStatus}{}{ErrorResponse}
 
-Operation \textit{unregister-encryption-key} removes the stored encryption key and algorithm identifier associated with the requester (provider) system. The result of this operation is that further tokens generated to any of the provider's service, won't be encrypted. 
+Operation \textit{unregister-encryption-key} removes the stored encryption key and algorithm identifier associated with the requester (provider) system. The result of this operation is that further tokens generated to any of the provider's services, won't be encrypted. 
 
 \clearpage
 
@@ -217,29 +217,6 @@ An \pref{Object} which describes the identity of a system. It also contains whet
 
 A \pref{String} which specifies the scope of the token. It can be \pref{ServiceOperationName} if the token target is a \pref{ServiceName} and the token is limited to one particular service-operation or it can be empty if the token is not limited or the target is an \pref{EventTypeName}. 
 
-\msubsection{struct}{AuthorizationTokenVerifyRequest}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-token & \pref{AccessToken} & yes & The token requested to being verified. \\ \hline
-\end{tabularx}
-\end{table}
-
-\clearpage
-
-\msubsection{struct}{AuthorizationEncryptionKeyRegistrationRequest}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-key & \pref{String} & yes & A secret key. \\ \hline
-algorithm & \pref{EncryptionAlgorithmName} & yes & A specific algorithm. \\ \hline
-\end{tabularx}
-\end{table}
-
 \msubsection{struct}{AuthorizationTokenGenerationResponse}
 
 \begin{table}[ht!]
@@ -267,25 +244,13 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{PublicKeyResponse}
+\msubsection{struct}{AuthorizationTokenVerifyRequest}
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-publicKey & \pref{PublicKey} & The public key. \\ \hline
-\end{tabularx}
-\end{table}
-
-\clearpage
-
-\msubsection{struct}{AuthorizationEncryptionKeyRegistrationResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-addition & \pref{String} & Any string addition that the defined algorithm is using, if any. \\ \hline
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+token & \pref{AccessToken} & yes & The token requested to being verified. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -304,6 +269,39 @@ scope & \hyperref[sec:model:AccessTokenScope]{AccessTokenScope} & Scope of the t
 \end{tabularx}
 \end{table}
 
+\msubsection{struct}{PublicKeyResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+publicKey & \pref{PublicKey} & The public key. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{AuthorizationEncryptionKeyRegistrationRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+key & \pref{String} & yes & A secret key. \\ \hline
+algorithm & \pref{EncryptionAlgorithmName} & yes & A specific algorithm. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationEncryptionKeyRegistrationResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+addition & \pref{String} & Any string addition that the defined algorithm is using, if any. \\ \hline
+\end{tabularx}
+\end{table}
+
 \newpage
 
 \subsection{Primitives}
@@ -317,7 +315,7 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{tabularx}{\textwidth}{| p{5cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{AccessTargetType} & A string reference that specifies the type of the targeted resource. \\ \hline
-\pdef{AccessToken} & A random and possibly unique string of characters that is issued for a beneficiary system and is associated at least with a target system, a scope and is expiring.\\ \hline
+\pdef{AccessToken} & A possibly unique string of characters that is issued for a beneficiary system and is associated at least with a provider system, a target and is expiring.\\ \hline
 \pdef{AccessTokenType} & A string reference that specifies a token technology group.\\ \hline
 \pdef{AccessTokenVariant} & A string reference that specifies an exact token technology variant.\\ \hline
 \pdef{Boolean}          & One out of true or false. \\ \hline
@@ -326,6 +324,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{EncryptionAlgorithmName} & A string identifier that belongs to an encryption algorithm. \\ \hline
 \pdef{EventTypeName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{PublicKey} & Cryptographic key that is used to encrypt data or verify digital signatures. It is part of a key pair in asymmetric encryption, where the public key is shared openly, while the private key is kept secret by the owner. \\ \hline

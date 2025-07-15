@@ -2,7 +2,7 @@
 
 ## AccessToken
 
-A random and unique **String** of characters that is issued for a beneficiary system and is associated with a target, a target system, a scope and is expiring.
+A unique **String** of characters that is issued for a beneficiary system and is associated with a target, a target system, a scope and is expiring.
 
 ## AccessTokenVariant
 

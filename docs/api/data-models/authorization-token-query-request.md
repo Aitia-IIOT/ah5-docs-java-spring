@@ -9,4 +9,4 @@ consumerCloud | [CloudIdentifier](../primitives.md#cloudidentifier) | no | Reque
 consumer | [SystemName](../primitives.md#systemname) | no | Requester is looking for tokens that belong to the specified consumer system.
 provider | [SystemName](../primitives.md#systemname) | no | Requester is looking for tokens that belong to the specified provider system.
 targetType | [AuthorizationTargetType](../primitives.md#authorizationtargettype) | no | Requester is looking for tokens that belong to the specified target type.
-target | [ServiceName](../primitives.md#servicename) or [EventTypeName](../primitives.md#eventtypename) | no | Requester is looking for tokens that belong to the specified service-operation or event type.
+target | [ServiceName](../primitives.md#servicename) or [EventTypeName](../primitives.md#eventtypename) | no | Requester is looking for tokens that belong to the specified service definition or event type.

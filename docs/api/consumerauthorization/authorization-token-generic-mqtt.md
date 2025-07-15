@@ -38,16 +38,16 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/consumer-authorization/authorization-token/generate
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<identity-info>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":{
-      "tokenVariant":"USAGE_LIMITED_TOKEN_AUTH",
-      "provider":"TemperatureProvider2",
-      "targetType":"SERVICE_DEF",
-      "target":"kelvinInfo",
-      "scope":"query-temperature"
+   "traceId": "<trace-id>",
+   "authentication": "<identity-info>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": {
+      "tokenVariant": "USAGE_LIMITED_TOKEN_AUTH",
+      "provider": "TemperatureProvider2",
+      "targetType": "SERVICE_DEF",
+      "target": "kelvinInfo",
+      "scope": "query-temperature"
    }
 }
 ```
@@ -56,14 +56,14 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":201,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureConsumer",
-   "payload":{
-      "tokenType":"USAGE_LIMITED_TOKEN",
-      "targetType":"SERVICE_DEF",
-      "token":"dsalefb521vdjkdsae633",
-      "usageLimit":10
+   "status": 201,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureConsumer",
+   "payload" :{
+      "tokenType": "USAGE_LIMITED_TOKEN",
+      "targetType": "SERVICE_DEF",
+      "token": "dsalefb521vdjkdsae633",
+      "usageLimit": 10
    }
 }
 ```
@@ -72,14 +72,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureConsumer",
-   "payload":{
-     "errorMessage":"Target is missing",
-     "errorCode":400,
-     "exceptionType":"INVALID_PARAMETER",
-     "origin":"arrowhead/consumer-authorization/authorization-token/generate"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureConsumer",
+   "payload": {
+     "errorMessage": "Target is missing",
+     "errorCode": 400,
+     "exceptionType": "INVALID_PARAMETER",
+     "origin": "arrowhead/consumer-authorization/authorization-token/generate"
    }
 }
 ```
@@ -92,11 +92,11 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/consumer-authorization/authorization-token/verify
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<identity-info>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":"dsalefb521vdjkdsae633"
+   "traceId": "<trace-id>",
+   "authentication": "<identity-info>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": "dsalefb521vdjkdsae633"
 }
 ```
 
@@ -104,16 +104,16 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":200,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureProvider2",
-   "payload":{
-      "verified":true,
-      "consumerCloud":"LOCAL",
-      "consumer":"TemperatureConsumer",
-      "targetType":"SERVICE_DEF",
-      "target":"kelvinInfo",
-      "scope":"query-temperature"
+   "status": 200,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureProvider2",
+   "payload": {
+      "verified": true,
+      "consumerCloud": "LOCAL",
+      "consumer": "TemperatureConsumer",
+      "targetType": "SERVICE_DEF",
+      "target": "kelvinInfo",
+      "scope": "query-temperature"
    }
 }
 ```
@@ -122,14 +122,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureProvider2",
-   "payload":{
-     "errorMessage":"Self contained tokens can't be verified this way",
-     "errorCode":400,
-     "exceptionType":"INVALID_PARAMETER",
-     "origin":"arrowhead/consumer-authorization/authorization-token/verify"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureProvider2",
+   "payload": {
+     "errorMessage": "Self contained tokens can't be verified this way",
+     "errorCode": 400,
+     "exceptionType": "INVALID_PARAMETER",
+     "origin": "arrowhead/consumer-authorization/authorization-token/verify"
    }
 }
 ```
@@ -142,10 +142,10 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/consumer-authorization/authorization-token/get-public-key
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<identity-info>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>
+   "traceId": "<trace-id>",
+   "authentication": "<identity-info>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>
 }
 ```
 
@@ -153,10 +153,10 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":200,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureProvider2",
-   "payload":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7D8z7doc95vY0uAx8JXwvrcl+Q7MykFoFIF1tn4fesvPIXo5eCGDS8FCONW0S5igQ+l00GdN/SlE0o85lI08TvepGEkTOtm1J+hsAHRD65OpPTjzWDVzP4+GzjZSUJl41iBDSW1YHgiFG8P2TqaTqNScrfLtKyekSzy/m24uh+zX5tjNoJ4GdSUeTNttHUuCH39MBxEo5E6KpzFGbC4105WHIH1MGWozOrZ3k7udvCLbCTvZ8PFtbDN4Ymjir0PE+6E2N4I+kagL1Py/DmNpKvLLI6m+YWJh2ErOAc56ThVvbCDeLOihacb26Y9Icrda1jOa30/xGsS3CmFLIpZjWwIDAQAB"
+   "status": 200,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureProvider2",
+   "payload": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7D8z7doc95vY0uAx8JXwvrcl+Q7MykFoFIF1tn4fesvPIXo5eCGDS8FCONW0S5igQ+l00GdN/SlE0o85lI08TvepGEkTOtm1J+hsAHRD65OpPTjzWDVzP4+GzjZSUJl41iBDSW1YHgiFG8P2TqaTqNScrfLtKyekSzy/m24uh+zX5tjNoJ4GdSUeTNttHUuCH39MBxEo5E6KpzFGbC4105WHIH1MGWozOrZ3k7udvCLbCTvZ8PFtbDN4Ymjir0PE+6E2N4I+kagL1Py/DmNpKvLLI6m+YWJh2ErOAc56ThVvbCDeLOihacb26Y9Icrda1jOa30/xGsS3CmFLIpZjWwIDAQAB"
 }
 ```
 
@@ -164,14 +164,14 @@ The **error codes** are `401` if the requester authentication was unsuccessful, 
 
 ```
 {
-   "status":404,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureProvider2",
-   "payload":{
-     "errorMessage":"Public key is not available",
-     "errorCode":404,
-     "exceptionType":"DATA_NOT_FOUND",
-     "origin":"arrowhead/consumer-authorization/authorization-token/get-public-key"
+   "status": 404,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureProvider2",
+   "payload": {
+     "errorMessage": "Public key is not available",
+     "errorCode": 404,
+     "exceptionType": "DATA_NOT_FOUND",
+     "origin": "arrowhead/consumer-authorization/authorization-token/get-public-key"
    }
 }
 ```
@@ -184,13 +184,13 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/consumer-authorization/authorization-token/register-encryption-key
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<identity-info>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":{
-      "key":"zFGbC4105WHIH1MGWozOrZ3k7udv",
-      "algorithm":"AES/CBC/PKCS5Padding"
+   "traceId": "<trace-id>",
+   "authentication": "<identity-info>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": {
+      "key": "zFGbC4105WHIH1MGWozOrZ3k7udv",
+      "algorithm": "AES/CBC/PKCS5Padding"
    }
 }
 ```
@@ -199,10 +199,10 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":201,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureProvider2",
-   "payload":"41iBDSW1YHgiFG8P2TqaTqNScrfLtKye"
+   "status": 201,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureProvider2",
+   "payload": "41iBDSW1YHgiFG8P2TqaTqNScrfLtKye"
 }
 ```
 
@@ -210,14 +210,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureProvider2",
-   "payload":{
-     "errorMessage":"Unsupported algorithm",
-     "errorCode":400,
-     "exceptionType":"INVALID_PARAMETER",
-     "origin":"arrowhead/consumer-authorization/authorization-token/register-encryption-key"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureProvider2",
+   "payload": {
+     "errorMessage": "Unsupported algorithm",
+     "errorCode": 400,
+     "exceptionType": "INVALID_PARAMETER",
+     "origin": "arrowhead/consumer-authorization/authorization-token/register-encryption-key"
    }
 }
 ```
@@ -230,10 +230,10 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/consumer-authorization/authorization-token/unregister-encryption-key
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<identity-info>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>
+   "traceId": "<trace-id>",
+   "authentication": "<identity-info>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>
 }
 ```
 
@@ -241,9 +241,9 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":200,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureProvider2"
+   "status": 200,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureProvider2"
 }
 ```
 
@@ -251,14 +251,14 @@ The **error codes** are `401` if the requester authentication was unsuccessful, 
 
 ```
 {
-   "status":401,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureProvider2",
-   "payload":{
-     "errorMessage":"No authentication info has been provided",
-     "errorCode":401,
-     "exceptionType":"AUTH",
-     "origin":"arrowhead/consumer-authorization/authorization-token/unregister-encryption-key"
+   "status": 401,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureProvider2",
+   "payload": {
+     "errorMessage": "No authentication info has been provided",
+     "errorCode": 401,
+     "exceptionType": "AUTH",
+     "origin": "arrowhead/consumer-authorization/authorization-token/unregister-encryption-key"
    }
 }
 ```

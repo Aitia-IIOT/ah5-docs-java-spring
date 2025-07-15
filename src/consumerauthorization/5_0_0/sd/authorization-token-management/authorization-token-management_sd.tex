@@ -83,7 +83,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{authorizationToken} service. 
+    This document provides service description for the \textbf{authorizationTokenManagement} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -156,7 +156,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{generate-tokens}{AuthorizationTokenGenerationListMgmtRequest}{AuthorizationTokenMgmtListResponse}{}{ErrorResponse}
 
-Operation \textit{generate-tokens} verifies the given consumer systems' permissions to the targeted service/service-operation instance and produces expiring tokens of defined types associated with the consumer system, service provider system and  service instance triplets. The operation returns the generated tokens and the belonged details.
+Operation \textit{generate-tokens} verifies the given consumer systems' permissions to the targeted service/service-operation instances and produces expiring tokens of defined types associated with the consumer system, service provider system and  service instance triplets. The operation returns the generated tokens and the belonged details.
 
 \fsubsection{query-tokens}{AuthorizationTokenQueryRequest}{AuthorizationTokenMgmtListResponse}{}{ErrorResponse}
 
@@ -166,7 +166,6 @@ Operation \textit{query-tokens} lists the access tokens that match the filtering
     \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
     \item If page number is specified, the page size must be specified as well and vice versa.
     \item In some Local Clouds there is a maximum page size.
-    \item If a filter expects a list, there is an OR relation between the elements of the filter.
     \item There is an AND relation between different kind of filters
 \end{itemize}
 
@@ -228,6 +227,55 @@ usageLimit & \pref{Number} & no & How many times the token will be valid. Only i
 
 A \pref{String} which specifies the scope of the token. It can be \pref{ServiceOperationName} if the token target is a \pref{ServiceName} and the token is limited to one particular service-operation or it can be empty if the token is not limited or the target is an \pref{EventTypeName}. 
 
+\msubsection{struct}{AuthorizationTokenMgmtListResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{1.5cm} | p{8.2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:AuthorizationTokenMgmtResponse]{AuthorizationTokenMgmtResponse}$>$ & List of token results. \\ \hline
+count & \pref{Number} & Number of returned results. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationTokenMgmtResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+tokenType & \pref{AccessTokenType} & Type of token technology group. \\ \hline
+variant & \pref{AccesTokenVariant} & Exact type of token technology. \\ \hline
+token & \pref{AccessToken} & The token itself. \\ \hline
+tokenReference & \pref{AccessTokenReference} & Reference of the token record. \\ \hline
+requester & \pref{SystemName} & Name of the system that requested the token. \\ \hline
+consumerCloud & \pref{CloudIdentifier} & Cloud of the consumer. \\ \hline
+consumer & \pref{SystemName} & Name of the consumer system. \\ \hline
+provider & \pref{SystemName} & Name of the provider system. \\ \hline
+targetType & \pref{AccessTargetType} & Type of the targeted resource. \\ \hline
+target & \pref{ServiceName} / \pref{EventTypeName} & Target of the token. \\ \hline
+scope & \hyperref[sec:model:AccessTokenScope]{AccessTokenScope} & Scope of the token. \\ \hline
+createdAt & \pref{DateTime} & Token was generated at this timestamp. \\ \hline
+usageLimit & \pref{Number} & Maximum number of token usage, if any. \\ \hline
+usageLeft & \pref{Numer} & The token can still be used this many times, if any. \\ \hline
+expiresAt & \pref{DateTime} & Token is valid until this timestamp, if any. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
 \msubsection{struct}{AuthorizationTokenQueryRequest}
 
 \begin{table}[ht!]
@@ -244,7 +292,7 @@ consumerCloud & \pref{CloudIndetifier} & no &  Requester is looking for tokens t
 consumer & \pref{SystemName} & no &  Requester is looking for tokens that belong to the specified consumer system. \\ \hline
 provider & \pref{SystemName} & no &  Requester is looking for tokens that belong to the specified provider system. \\ \hline
 targetType & \pref{AccessTargetType} & no &  Requester is looking for tokens that belong to the specified target type. \\ \hline
-target & \pref{ServiceName} / \pref{EventTypeName} & no &  Requester is looking for tokens that belong to the specified service-operation. \\ \hline
+target & \pref{ServiceName} / \pref{EventTypeName} & no &  Requester is looking for tokens that belong to the specified service definition or event type. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -266,7 +314,7 @@ list & \pref{List}$<$\pref{AccessTokenReference}$>$ & yes & List of token refere
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{7.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-list & \pref{List}$<$\hyperref[sec:model:AuthorizationEncryptionKeyMgmtRequest]{AuthorizationEncryptionKeyMgmtRequest}$>$ & yes & List of encryption key request. \\ \hline
+list & \pref{List}$<$\hyperref[sec:model:AuthorizationEncryptionKeyMgmtRequest]{AuthorizationEncryptionKeyMgmtRequest}$>$ & yes & List of encryption key requests. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -281,65 +329,6 @@ algorithm & \pref{EncryptionAlgorithmName} & yes & A specific algorithm. \\ \hli
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{AuthorizationEncryptionKeyRemoveMgmtRequest}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{4cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-list & \pref{List}$<$\pref{SystemName}$>$ & yes & System name list of associated keys to be deleted. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{AuthorizationTokenMgmtListResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{1.5cm} | p{8.2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Description \\ \hline
-entries & \pref{List}$<$\hyperref[sec:model:AuthorizationTokenMgmtResponse]{AuthorizationTokenMgmtResponse}$>$ & List of token results. \\ \hline
-count & \pref{Number} & Number of returned results. \\ \hline
-\end{tabularx}
-\end{table}
-
-\clearpage
-
-\msubsection{struct}{AuthorizationTokenMgmtResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-tokenType & \pref{AccessTokenType} & Type of token technology group. \\ \hline
-variant & \pref{AccesTokenVariant} & Exact type of token technology. \\ \hline
-token & \pref{AccessToken} & The token itself. \\ \hline
-tokenReference & \pref{String} & Reference of the token record. \\ \hline
-requester & \pref{SystemName} & Name of the system that requested the token. \\ \hline
-consumerCloud & \pref{CloudIdentifier} & Cloud of the consumer. \\ \hline
-consumer & \pref{SystemName} & Name of the consumer system. \\ \hline
-provider & \pref{SystemName} & Name of the provider system. \\ \hline
-targetType & \pref{AccessTargetType} & Type of the targeted resource. \\ \hline
-target & \pref{ServiceName} / \pref{EventTypeName} & Target of the token. \\ \hline
-scope & \hyperref[sec:model:AccessTokenScope]{AccessTokenScope} & Scope of the token. \\ \hline
-createdAt & \pref{DateTime} & Token was generated at this timestamp. \\ \hline
-usageLimit & \pref{Number} & Maximum number of token usage, if any. \\ \hline
-usageLeft & \pref{Numer} & The token can still be used this many times, if any. \\ \hline
-expiresAt & \pref{DateTime} & Token is valid until this timestamp, if any. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{ErrorResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-errorMessage & \pref{String} & Description of the error. \\ \hline
-errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
-type & \pref{ErrorType} & Type of the error. \\ \hline
-origin & \pref{String} & Origin of the error. \\ \hline
-\end{tabularx}
-\end{table}
-
 \msubsection{struct}{AuthorizationEncryptionKeyMgmtListResponse}
 
 \begin{table}[ht!]
@@ -351,8 +340,6 @@ count & \pref{Number} & Numer of the result entries. \\ \hline
 \end{tabularx}
 \end{table}
 
-\clearpage
-
 \msubsection{struct}{AuthorizationEncryptionKeyMgmtResponse}
 
 \begin{table}[ht!]
@@ -363,6 +350,16 @@ rawKey & \pref{String} & The raw string key. \\ \hline
 algorithm & \pref{EncryptionAlgorithmName} & Name of the ecnryption algorithm. \\ \hline
 keyAdditive & \pref{String} & Any string addition that the defined algorithm is using, if any. \\ \hline
 createdAt & \pref{DateTime} & The encryprtion key was registered at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AuthorizationEncryptionKeyRemoveMgmtRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+list & \pref{List}$<$\pref{SystemName}$>$ & yes & System name list of associated keys to be deleted. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -379,7 +376,7 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{tabularx}{\textwidth}{| p{5cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{AccessTargetType} & A string reference that specifies the type of the targeted resource. \\ \hline
-\pdef{AccessToken} & A random and possibly unique string of characters that is issued for a beneficiary system and is associated at least with a target system, a scope and is expiring.\\ \hline
+\pdef{AccessToken} & A possibly unique string of characters that is issued for a beneficiary system and is associated at least with a provider system, a target and is expiring.\\ \hline
 \pdef{AccessTokenReference} & A string reference that is associated with the access token record. \\ \hline
 \pdef{AccessTokenType} & A string reference that specifies a token technology group.\\ \hline
 \pdef{AccessTokenVariant} & A string reference that specifies an exact token technology variant.\\ \hline
@@ -390,6 +387,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{EncryptionAlgorithmName} & A string identifier that belongs to an encryption algorithm. \\ \hline
 \pdef{EventTypeName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{ServiceName}      & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline

@@ -31,7 +31,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [authorizat
 
 ### generate-tokens
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationTokenGenerationListMgmtRequest](../data-models/authorization-token-generation-list-mgmt-request.md) JSON encoded body. The URI can contain an optional query parameter with the key "_unbound_" and a [Boolean](../primitives.md#boolean) value. If `true` the consumers' service permission check will be skipped if the requester system name is present in the _unbounded.token.generation.whitelist_ system cunfiguration. 
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationTokenGenerationListMgmtRequest](../data-models/authorization-token-generation-list-mgmt-request.md) JSON encoded body. The URI can contain an optional query parameter with the key "_unbound_" and a [Boolean](../primitives.md#boolean) value. If `true` the consumers' service permission check will be skipped if the requester system name is present in the _unbounded.token.generation.whitelist_ system configuration. 
 
 ```
 POST /consumerauthorization/authorization/mgmt/token/generate?unbound=true HTTP/1.1
@@ -82,10 +82,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage":"Token variant is missing",
-  "errorCode":400,
+  "errorMessage":" Token variant is missing",
+  "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin":"POST /consumerauthorization/authorization/mgmt/token/generate"
+  "origin": "POST /consumerauthorization/authorization/mgmt/token/generate"
 }
 ```
 
@@ -141,10 +141,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage":"Invalid token type: SOMETHING",
-  "errorCode":400,
+  "errorMessage": "Invalid token type: SOMETHING",
+  "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin":"POST /consumerauthorization/authorization/mgmt/token/query"
+  "origin": "POST /consumerauthorization/authorization/mgmt/token/query"
 }
 ```
 
@@ -163,10 +163,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage":"No authentication info has been provided",
-  "errorCode":401,
-  "exceptionType":"AUTH",
-  "origin":"DELETE /consumerauthorization/authorization/mgmt/token/revoke"
+  "errorMessage": "No authentication info has been provided",
+  "errorCode": 401,
+  "exceptionType": "AUTH",
+  "origin": "DELETE /consumerauthorization/authorization/mgmt/token/revoke"
 }
 ```
 
@@ -210,10 +210,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage":"Unsupported algorithm",
-  "errorCode":400,
+  "errorMessage": "Unsupported algorithm",
+  "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin":"POST /consumerauthorization/authorization/mgmt/token/encryption-key"
+  "origin": "POST /consumerauthorization/authorization/mgmt/token/encryption-key"
 }
 ```
 
@@ -232,9 +232,9 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage":"No authentication info has been provided",
-  "errorCode":401,
-  "exceptionType":"AUTH",
-  "origin":"DELETE /consumerauthorization/authorization/mgmt/token/encryption-key"
+  "errorMessage": "No authentication info has been provided",
+  "errorCode": 401,
+  "exceptionType": "AUTH",
+  "origin": "DELETE /consumerauthorization/authorization/mgmt/token/encryption-key"
 }
 ```

@@ -39,11 +39,11 @@ POST /consumerauthorization/authorization-token/generate HTTP/1.1
 Authorization: Bearer <authorization-info>
 
 {
-   "tokenVariant":"USAGE_LIMITED_TOKEN_AUTH",
-   "provider":"TemperatureProvider2",
-   "targetType":"SERVICE_DEF",
-   "target":"kelvinInfo",
-   "scope":"query-temperature"
+   "tokenVariant": "USAGE_LIMITED_TOKEN_AUTH",
+   "provider": "TemperatureProvider2",
+   "targetType": "SERVICE_DEF",
+   "target": "kelvinInfo",
+   "scope": "query-temperature"
 }
 ```
 
@@ -51,10 +51,10 @@ The service operation **responds** with `201` if called successfully and token h
 
 ```
 {
-   "tokenType":"USAGE_LIMITED_TOKEN",
-   "targetType":"SERVICE_DEF",
-   "token":"dsalefb521vdjkdsae633",
-   "usageLimit":10
+   "tokenType": "USAGE_LIMITED_TOKEN",
+   "targetType": "SERVICE_DEF",
+   "token": "dsalefb521vdjkdsae633",
+   "usageLimit": 10
 }
 ```
 
@@ -62,10 +62,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage":"Target is missing",
-  "errorCode":400,
+  "errorMessage": "Target is missing",
+  "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin":"POST /consumerauthorization/authorization-token/generate"
+  "origin": "POST /consumerauthorization/authorization-token/generate"
 }
 ```
 
@@ -82,12 +82,12 @@ The service operation **responds** with `200` if called successfully and token h
 
 ```
 {
-   "verified":true,
-   "consumerCloud":"LOCAL",
-   "consumer":"TemperatureConsumer",
-   "targetType":"SERVICE_DEF",
-   "target":"kelvinInfo",
-   "scope":"query-temperature"
+   "verified": true,
+   "consumerCloud": "LOCAL",
+   "consumer": "TemperatureConsumer",
+   "targetType": "SERVICE_DEF",
+   "target": "kelvinInfo",
+   "scope": "query-temperature"
 }
 ```
 
@@ -95,10 +95,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage":"Self contained tokens can't be verified this way",
-  "errorCode":400,
-  "exceptionType":"INVALID_PARAMETER",
-  "origin":"GET /consumerauthorization/authorization-token/verify"
+  "errorMessage": "Self contained tokens can't be verified this way",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "GET /consumerauthorization/authorization-token/verify"
 }
 ```
 
@@ -121,10 +121,10 @@ The **error codes** are `401` if the requester authentication was unsuccessful, 
 
 ```
 {
-  "errorMessage":"Public key is not available",
-  "errorCode":404,
-  "exceptionType":"DATA_NOT_FOUND",
-  "origin":"GET /consumerauthorization/authorization-token/public-key"
+  "errorMessage": "Public key is not available",
+  "errorCode": 404,
+  "exceptionType": "DATA_NOT_FOUND",
+  "origin": "GET /consumerauthorization/authorization-token/public-key"
 }
 ```
 
@@ -137,8 +137,8 @@ POST /consumerauthorization/authorization-token/encryption-key
 Authorization: Bearer <authorization-info>
 
 {
-  "key":"zFGbC4105WHIH1MGWozOrZ3k7udv",
-  "algorithm":"AES/CBC/PKCS5Padding"
+  "key": "zFGbC4105WHIH1MGWozOrZ3k7udv",
+  "algorithm": "AES/CBC/PKCS5Padding"
 }
 ```
 
@@ -152,10 +152,10 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage":"Unsupported algorithm",
-  "errorCode":400,
-  "exceptionType":"INVALID_PARAMETER",
-  "origin":"POST /consumerauthorization/authorization-token/encryption-key"
+  "errorMessage": "Unsupported algorithm",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /consumerauthorization/authorization-token/encryption-key"
 }
 ```
 
@@ -174,9 +174,9 @@ The **error codes** are `401` if the requester authentication was unsuccessful, 
 
 ```
 {
-  "errorMessage":"No authentication info has been provided",
-  "errorCode":401,
-  "exceptionType":"AUTH",
-  "origin":"DELETE /consumerauthorization/authorization-token/encryption-key"
+  "errorMessage": "No authentication info has been provided",
+  "errorCode": 401,
+  "exceptionType": "AUTH",
+  "origin": "DELETE /consumerauthorization/authorization-token/encryption-key"
 }
 ```

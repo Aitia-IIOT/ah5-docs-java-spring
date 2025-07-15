@@ -12,7 +12,7 @@ consumer | [SystemName](../primitives.md#systemname) | Name of the consumer syst
 provider | [SystemName](../primitives.md#systemname) | Name of the provider system.
 targetType | [AuthorizationTargetType](../primitives.md#authorizationtargettype) | Type of the targeted resource.
 target | [ServiceName](../primitives.md#servicename) or [EventTypeName](../primitives.md#eventtypename) | Target of the token.
-scope | [ServiceOperationName](../primitives.md#serviceoperationname) | Scope of the token. Only matters when the target is a service definition. If null, the token is valid for all the service-operation.
+scope | [ServiceOperationName](../primitives.md#serviceoperationname) | Scope of the token. Only matters when the target is a service definition. If null, the token is valid for all the operations of the service definition target.
 createdAt | [DateTime](../primitives.md#datetime) | Token was generated at this timestamp.
 usageLimit | [Number](../primitives.md#number) | Maximum number of token usage, if any.
 usageLeft | [Number](../primitives.md#number) | The token can still be used this many times, if any.
