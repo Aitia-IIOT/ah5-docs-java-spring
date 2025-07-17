@@ -1,0 +1,338 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+\hyphenation{Er-ror-Res-pon-se}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[5]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{blacklistManagement} % XXX = ServiceName 
+\ArrowheadServiceID{blacklistManagement} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Katinka Jakó} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{jako.katinka@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{blacklistManagement} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{blacklistManagement} service, which enables systems (with operator role or proper permissions) to handle (query, create, remove) blacklist entries in bulk. An example of this interaction is when an operator bans a consumer because it is flooding the Local Cloud with thousands of requests. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+
+The \textbf{blacklistManagement} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{query} lists the entries that match the filtering requirements;
+    \item \textit{create} adds the specified entries to the blacklist;
+    \item \textit{remove} deactivates the entries that apply to the systems with the specified names.
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+The service's purpose is to handle the blacklist entries centrally and in bulk. Thus, the \textbf{blacklistManagement} service makes it possible to manage who is (not) banned from the Local Cloud.
+
+Application systems should not use this service, only human operators (indirectly via some tool, for example) or dedicated Support systems.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+The requester has to identify itself to use any of the operations.
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+The service is only available for operators, dedicated Support systems and those who have the proper authorization rights to consume it.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operations of the service. The \textbf{blacklistManagement} service is used to \textit{query}, \textit{create} and \textit{remove} blacklist entries.
+In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\phantomsection
+\fsubsection{query}{BlacklistQueryRequest}{BlacklistEntryListResponse}{}{ErrorResponse}
+
+Operation \textit{query} lists the blacklist entries that match the filtering requirements. The query data must meet the following criteria:
+
+\begin{itemize}
+    \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
+    \item If page number is specified, the page size must be specified as well and vice versa.
+    \item In some Local Clouds there is a maximum page size.
+    \item If a filter expects a list, there is an OR relation between the elements of the filter.
+    \item There is an AND relation between different kind of filters.
+    \item If \textit{alivesAt} is set, inactive records will not be returned.
+\end{itemize}
+
+\fsubsection{create}{BlacklistCreateListRequest}{BlacklistEntryListResponse}{}{ErrorResponse}
+
+Operation \textit{create} creates the specified blacklist entries. The creation data must meet the following criteria:
+
+\begin{itemize}
+    \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item System names can contain maximum 63 character of letters (English alphabet), and numbers, and have to start with a letter.
+    \item The expiration date has to be in the future.
+    \item Reason must always be specified and can contain maximum 1024 characters.
+\end{itemize}
+
+\fsubsection{remove}{BlacklistRemoveRequest}{OperationStatus}{}{ErrorResponse}
+
+Operation \textit{remove} deactivates the entries that apply to the specified system names. The entries will stay in the database and it is possible to query them later as inactive records.
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{blacklistManagement} service are listed and must be respected by the hosting system.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\phantomsection
+
+\msubsection{struct}{BlacklistQueryRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3.5cm} | p{1.75cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
+systemNames & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that apply to systems with any of the specified names. \\ \hline
+mode & \pref{Mode} & no & Requester is looking for blacklist entries with the specified activity. \\ \hline
+issuers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that were created by systems with any of the specified names. \\ \hline
+revokers & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for blacklist entries that were revoked by systems with any of the specified names. \\ \hline
+reason & \pref{String} & no & Requester is looking for blacklist entries that were created for the specified reason or the reason contains this text. \\ \hline
+alivesAt & \pref{DateTime} & no & Requester is looking for active blacklist records that are not expired at this timestamp. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\clearpage
+
+\msubsection{struct}{BlacklistEntryListResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:BlacklistEntryResponse]{BlacklistEntryResponse}$>$ & List of blacklist entry results. \\ \hline
+count & \pref{Number} & The total number of corresponding entries. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{BlacklistEntryResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+systemName & \pref{SystemName} & Unique identifier of the blacklisted system. \\ \hline
+createdBy & \pref{SystemName} & Unique identifier of the system that created the record. \\ \hline
+revokedBy & \pref{SystemName} & Unique identifier of the system that revoked the record. Only appears if the record was revoked. \\ \hline
+createdAt & \pref{DateTime} & Blacklist record was created at this timestamp. \\ \hline
+updatedAt & \pref{DateTime} & Blacklist record was updated at this timestamp. \\ \hline
+reason & \pref{String} & The system was blacklisted because of this reason. \\ \hline
+expiresAt & \pref{DateTime} & Blacklist record expires at this timestamp. Only appears if the record can expire. \\ \hline
+active & \pref{Boolean} & Indicates if the rule defined by the entry is active. Only false if the rule has been explicitly revoked. \\ \hline
+
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{BlacklistCreateListRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+entries & \pref{List}$<$\hyperref[sec:model:BlacklistCreateRequest]{BlacklistCreateRequest}$>$ & yes & List of blacklist entries to create. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{BlacklistCreateRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+systemName & \pref{SystemName} & yes & The name of the system to be blacklisted. \\ \hline
+expiresAt & \pref{DateTime} & no & This rule will expire at this timestamp. \\ \hline
+reason & \pref{String} & yes & The system is blacklisted because of this reason. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{BlacklistRemoveRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3.5cm} | p{1.75cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+systemNames & \pref{List}$<$\pref{SystemName}$>$ & yes & The names of the systems to remove from the blacklist. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{Boolean}          & One out of true or false. \\ \hline
+\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Mode}             & Specifies whether the queried records should have the \textit{active} flag set. The possible values are: ALL, ACTIVES, INACTIVES. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}
