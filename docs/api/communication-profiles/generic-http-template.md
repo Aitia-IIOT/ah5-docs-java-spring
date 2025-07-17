@@ -14,31 +14,31 @@ This page describes the Generic HTTP Communication Profile (CP), which templates
 
 ## Service Interface Template
 
-This section lists the interface properties that are necessarry to apply the Generic HTTP - CP as [Service](../../help/definitions.md#service) interface and that Interface Design Descriptions (IDD) and/or the service registration should include. 
+This section lists the interface properties that are necessarry to apply the Generic HTTP - CP as [Service](../../help/definitions.md#microservice-or-service) interface and that Interface Design Descriptions (IDD) and/or the service registration should include. 
 
 ---
 
 ### Access Address List
 
-List of unique identifiers assigned to the same device or node on a network where the given [Service](../../help/definitions.md#service) is hosted from. An access address can be a Hostname, an IPv4 address, an IPv6 address or a MAC address. It is mandatory to publish them (at least one) in the [Local Cloud](../../help/definitions.md#local-cloud).
+List of unique identifiers assigned to the same device or node on a network where the given [Service](../../help/definitions.md#microservice-or-service) is hosted from. An access address can be a hostname, an IPv4 address or an IPv6 address. It is mandatory to publish them (at least one) in the [Local Cloud](../../help/definitions.md#local-cloud).
 
 ---
 
 ### Access Port
 
-A numerical identifier within a device or node on a network where the given [Service](../../help/definitions.md#service) can be accessed. Valid port number range is 0-65535. It is mandatory to publish it in the [Local Cloud](../../help/definitions.md#local-cloud).
+A numerical identifier within a device or node on a network where the given [Service](../../help/definitions.md#microservice-or-service) can be accessed. Valid port number range is 1-65535. It is mandatory to publish it in the [Local Cloud](../../help/definitions.md#local-cloud).
 
 ---
 
 ### Base Path
 
-The root [URL](https://datatracker.ietf.org/doc/html/rfc2616#section-3.2.2) segment that serves as a common prefix for a given [Service](../../help/definitions.md#service) that goups a set of [service-operations](../../help/definitions.md#service-operation) (endpoints). It is mandatory to specify it in IDDs and to publish in the [Local Cloud](../../help/definitions.md#local-cloud).
+The root [URL](https://datatracker.ietf.org/doc/html/rfc2616#section-3.2.2) segment that serves as a common prefix for a given [Service](../../help/definitions.md#microservice-or-service) that goups a set of [service-operations](../../help/definitions.md#service-operation) (endpoints). It is mandatory to specify it in IDDs and to publish in the [Local Cloud](../../help/definitions.md#local-cloud).
 
 ---
 
 ### Operations
 
-Set of endpoints, each of them is performing some kind of action related to the given [Service](../../help/definitions.md#service). An operation constists of a _method_ and a _path_. It is mandatory to specify them in IDDs and is optional to publish in the [Local Cloud](../../help/definitions.md#local-cloud).
+Set of endpoints, each of them is performing some kind of action related to the given [Service](../../help/definitions.md#microservice-or-service). An operation constists of a _method_ and a _path_. It is mandatory to specify them in IDDs and is optional to publish in the [Local Cloud](../../help/definitions.md#local-cloud).
 
 #### Method
 
@@ -52,15 +52,15 @@ The [service-operation](../../help/definitions.md#service-operation) specific [U
 
 ### Authorization Header
 
-[HTTP Authorization request header](https://datatracker.ietf.org/doc/html/rfc2616#section-14.8) with [Bearer scheme](https://datatracker.ietf.org/doc/html/rfc6750#section-2.1) must be used for providing identity or access related data if required in case of a given [Service](../../help/definitions.md#service). It is mandatory to specify it in IDDs if authentication or access validation is required by a given service instance.
+[HTTP Authorization request header](https://datatracker.ietf.org/doc/html/rfc2616#section-14.8) with [Bearer scheme](https://datatracker.ietf.org/doc/html/rfc6750#section-2.1) must be used for providing identity or access related data if required in case of a given [Service](../../help/definitions.md#microservice-or-service). It is mandatory to specify it in IDDs if authentication or access validation is required by a given service instance.
 
 #### Identity
 
-If requester identity is reqired to be proven, then an [Identity Info](../../help/definitions.md#identity-info) or [Identiy Token](../../help/definitions.md#identity-token) should be provided in this header. The exact Identity data to be provided is depending on the applied [Authentication Policy](../authentication_policy.md).
+If requester identity is required to be proven, then an [Identity Info](../../help/definitions.md#identity-info) or [Identiy Token](../../help/definitions.md#identity-token) should be provided in this header. The exact Identity data to be provided is depending on the applied [Authentication Policy](../authentication_policy.md).
 
 #### Access
 
-If the access right is required to be proven, then an [Access Token](../../help/definitions.md#access-token) should be provided in this heder.
+If the access right is required to be proven, then an [Access Token](../../help/definitions.md#access-token) should be provided in this header.
 
 ---
 
@@ -88,6 +88,8 @@ Content-Type: application/json
 <body>
 ```
 
+---
+
 ```
 POST /kelvinInfo/query-temperature/sensor-abc?scale=celsius HTTP/1.1
 Host: 192.168.0.103:4132
@@ -112,6 +114,8 @@ Content-Type: application/json; charset=UTF-8
 
 <body>
 ```
+
+---
 
 ```
 HTTP/1.1 200 OK
