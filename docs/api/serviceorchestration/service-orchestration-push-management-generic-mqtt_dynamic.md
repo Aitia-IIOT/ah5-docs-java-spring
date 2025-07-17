@@ -35,64 +35,64 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/serviceorchestration/orchestration/management/push/subscribe
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":{
-      "subscriptions":[
+   "traceId": "<trace-id>",
+   "authentication": "<authentication-data>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": {
+      "subscriptions": [
          {
-            "targetSystemName":"TemperatureConsumer",
-            "orchestrationRequest":{
-               "serviceRequirement":{
-                  "serviceDefinition":"kelvinInfo",
-                  "operations":[
+            "targetSystemName": "TemperatureConsumer",
+            "orchestrationRequest": {
+               "serviceRequirement": {
+                  "serviceDefinition": "kelvinInfo",
+                  "operations": [
                      "query-temperature"
                   ],
-                  "versions":[
+                  "versions": [
                      
                   ],
-                  "alivesAt":"2025-10-05T11:35:14Z",
-                  "metadataRequirements":[
+                  "alivesAt": "2025-10-05T11:35:14Z",
+                  "metadataRequirements": [
                      
                   ],
-                  "interfaceTemplateNames":[
+                  "interfaceTemplateNames": [
                      "generic_https"
                   ],
-                  "interfaceAddressTypes":[
+                  "interfaceAddressTypes": [
                      "HOSTNAME",
                      "IPV4"
                   ],
-                  "interfacePropertyRequirements":[
+                  "interfacePropertyRequirements": [
                      
                   ],
-                  "securityPolicies":[
+                  "securityPolicies": [
                      "TIME_LIMITED_TOKEN_AUTH"
                   ],
-                  "preferredProviders":[
+                  "preferredProviders": [
                      
                   ]
                },
-               "orchestrationFlags":{
-                  "MATCHMAKING":"true",
-                  "ALLOW_TRANSLATION":"true",
-                  "ONLY_PREFERRED":"false",
-                  "ONLY_EXCLUSIVE":"false",
-                  "ALLOW_INTERCLOUD":"false",
-                  "ONLY_INTERCLOUD":"false"
+               "orchestrationFlags": {
+                  "MATCHMAKING": "true",
+                  "ALLOW_TRANSLATION": "true",
+                  "ONLY_PREFERRED": "false",
+                  "ONLY_EXCLUSIVE": "false",
+                  "ALLOW_INTERCLOUD": "false",
+                  "ONLY_INTERCLOUD": "false"
                },
-               "qosRequirements":{
-                  "maxLatencyMs":"10"
+               "qosRequirements": {
+                  "maxLatencyMs": "10"
                },
-               "exclusivityDuration":600
+               "exclusivityDuration": 600
             },
-            "notifyInterface":{
-               "protocol":"mqtt",
-               "properties":{
-                  "topic":"arrowhead/orchestration-push"
+            "notifyInterface": {
+               "protocol": "mqtt",
+               "properties": {
+                  "topic": "arrowhead/orchestration-push"
                }
             },
-            "duration":100000
+            "duration": 100000
          }
       ]
    }
@@ -103,69 +103,69 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":201,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureSensorManager",
-   "payload":{
-      "entries":[
+   "status": 201,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureSensorManager",
+   "payload": {
+      "entries": [
          {
-            "id":"d2fefc6a-f563-40a2-9ce4-3512c2887755",
-            "ownerSystemName":"TemperatureSensorManager",
-            "targetSystemName":"TemperatureConsumer",
-            "orchestrationRequest":{
-               "serviceRequirement":{
-                  "serviceDefinition":"kelvinInfo",
-                  "operations":[
+            "id": "d2fefc6a-f563-40a2-9ce4-3512c2887755",
+            "ownerSystemName": "TemperatureSensorManager",
+            "targetSystemName": "TemperatureConsumer",
+            "orchestrationRequest": {
+               "serviceRequirement": {
+                  "serviceDefinition": "kelvinInfo",
+                  "operations": [
                      "query-temperature"
                   ],
-                  "versions":[
+                  "versions": [
                      
                   ],
-                  "alivesAt":"2025-10-05T11:35:14Z",
-                  "metadataRequirements":[
+                  "alivesAt": "2025-10-05T11:35:14Z",
+                  "metadataRequirements": [
                      
                   ],
-                  "interfaceTemplateNames":[
+                  "interfaceTemplateNames": [
                      "generic_https"
                   ],
-                  "interfaceAddressTypes":[
+                  "interfaceAddressTypes": [
                      "HOSTNAME",
                      "IPV4"
                   ],
-                  "interfacePropertyRequirements":[
+                  "interfacePropertyRequirements": [
                      
                   ],
-                  "securityPolicies":[
+                  "securityPolicies": [
                      "TIME_LIMITED_TOKEN_AUTH"
                   ],
-                  "preferredProviders":[
+                  "preferredProviders": [
                      
                   ]
                },
-               "orchestrationFlags":{
-                  "MATCHMAKING":"true",
-                  "ALLOW_TRANSLATION":"true",
-                  "ONLY_PREFERRED":"false",
-                  "ONLY_EXCLUSIVE":"false",
-                  "ALLOW_INTERCLOUD":"false",
-                  "ONLY_INTERCLOUD":"false"
+               "orchestrationFlags": {
+                  "MATCHMAKING": "true",
+                  "ALLOW_TRANSLATION": "true",
+                  "ONLY_PREFERRED": "false",
+                  "ONLY_EXCLUSIVE": "false",
+                  "ALLOW_INTERCLOUD": "false",
+                  "ONLY_INTERCLOUD": "false"
                },
-               "qosRequirements":{
-                  "maxLatencyMs":"10"
+               "qosRequirements": {
+                  "maxLatencyMs": "10"
                },
-               "exclusivityDuration":600
+               "exclusivityDuration": 600
             },
-            "notifyInterface":{
-               "protocol":"mqtt",
-               "properties":{
-                  "topic":"arrowhead/orchestration-push"
+            "notifyInterface": {
+               "protocol": "mqtt",
+               "properties": {
+                  "topic": "arrowhead/orchestration-push"
                }
             },
-            "expiredAt":"2025-10-08T11:35:14Z",
-            "createdAt":"2025-10-05T11:30:14Z"
+            "expiredAt": "2025-10-08T11:35:14Z",
+            "createdAt": "2025-10-05T11:30:14Z"
          }
       ],
-      "count":1
+      "count": 1
    }
 }
 ```
@@ -174,14 +174,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureSensorManager",
-   "payload":{
-      "errorMessage":"Subscription request list is empty",
-      "errorCode":400,
-      "exceptionType":"INVALID_PARAMETER",
-      "origin":"arrowhead/serviceorchestration/orchestration/management/push/subscribe"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureSensorManager",
+   "payload": {
+      "errorMessage": "Subscription request list is empty",
+      "errorCode": 400,
+      "exceptionType": "INVALID_PARAMETER",
+      "origin": "arrowhead/serviceorchestration/orchestration/management/push/subscribe"
    }
 }
 ```
@@ -194,11 +194,11 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/serviceorchestration/orchestration/management/push/unsubscribe
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":[
+   "traceId": "<trace-id>",
+   "authentication": "<authentication-data>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": [
       "d2fefc6a-f563-40a2-9ce4-3512c2887755",
       "a44ab333-cfb5-420b-a7cf-b327904e243b"
    ]
@@ -209,10 +209,10 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":200,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureSensorManager",
-   "payload":""
+   "status": 200,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureSensorManager",
+   "payload": ""
 }
 ```
 
@@ -220,14 +220,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":403,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureSensorManager",
-   "payload":{
-      "errorMessage":"a44ab333-cfb5-420b-a7cf-b327904e243b is not owned by the requester",
-      "errorCode":403,
-      "exceptionType":"FORBIDDEN",
-      "origin":"arrowhead/serviceorchestration/orchestration/management/push/unsubscribe"
+   "status": 403,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureSensorManager",
+   "payload": {
+      "errorMessage": "a44ab333-cfb5-420b-a7cf-b327904e243b is not owned by the requester",
+      "errorCode": 403,
+      "exceptionType": "FORBIDDEN",
+      "origin": "arrowhead/serviceorchestration/orchestration/management/push/unsubscribe"
    }
 }
 ```
@@ -240,15 +240,15 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/serviceorchestration/orchestration/management/push/trigger
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":{
-      "targetSystems":[
+   "traceId": <trace-id>",
+   "authentication": "<authentication-data>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": {
+      "targetSystems": [
          "TemperatureConsumer"
       ],
-      "subscriptionIds":[
+      "subscriptionIds": [
          
       ]
    }
@@ -259,23 +259,23 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":201,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureSensorManager",
-   "payload":{
-      "jobs":[
+   "status": 201,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureSensorManager",
+   "payload": {
+      "jobs": [
          {
-            "id":"1fac8a1c-aa4b-456e-b501-01289035fcc6",
-            "status":"IN_PROGRESS",
-            "type":"PUSH",
-            "requesterSystem":"TemperatureSensorManager",
-            "targetSystem":"TemperatureConsumer",
-            "serviceDefinition":"kelvinInfo",
-            "subscriptionId":"d2fefc6a-f563-40a2-9ce4-3512c2887755",
-            "message":"",
-            "createdAt":"2025-10-05T11:30:14Z",
-            "startedAt":"2025-10-05T11:30:17Z",
-            "finishedAt":""
+            "id": "1fac8a1c-aa4b-456e-b501-01289035fcc6",
+            "status": "IN_PROGRESS",
+            "type": "PUSH",
+            "requesterSystem": "TemperatureSensorManager",
+            "targetSystem": "TemperatureConsumer",
+            "serviceDefinition": "kelvinInfo",
+            "subscriptionId": "d2fefc6a-f563-40a2-9ce4-3512c2887755",
+            "message": "",
+            "createdAt": "2025-10-05T11:30:14Z",
+            "startedAt": "2025-10-05T11:30:17Z",
+            "finishedAt": ""
          }
       ]
    }
@@ -286,14 +286,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureSensorManager",
-   "payload":{
-      "errorMessage":"Invalid subscription id: a44ab333-cfb5-420b-a7cf-b327904e243b",
-      "errorCode":400,
-      "exceptionType":"INVALID_PARAMETER",
-      "origin":"arrowhead/serviceorchestration/orchestration/management/push/trigger"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureSensorManager",
+   "payload": {
+      "errorMessage": "Invalid subscription id: a44ab333-cfb5-420b-a7cf-b327904e243b",
+      "errorCode": 400,
+      "exceptionType": "INVALID_PARAMETER",
+      "origin": "arrowhead/serviceorchestration/orchestration/management/push/trigger"
    }
 }
 ```
@@ -306,24 +306,24 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/serviceorchestration/orchestration/management/push/query
 
 {
-   "traceId":"<trace-id>",
-   "authentication":"<authentication-data>",
-   "responseTopic":"<response-topic>",
-   "qosRequirement":<0|1|2>,
-   "payload":{
-      "pagination":{
-         "page":0,
-         "size":20,
-         "direction":"ASC",
-         "sortField":"createdAt"
+   "traceId": "<trace-id>",
+   "authentication": "<authentication-data>",
+   "responseTopic": "<response-topic>",
+   "qosRequirement": <0|1|2>,
+   "payload": {
+      "pagination": {
+         "page": 0,
+         "size": 20,
+         "direction": "ASC",
+         "sortField": "createdAt"
       },
-      "ownerSystems":[
+      "ownerSystems": [
          "TemperatureSensorManager"
       ],
-      "targetSystems":[
+      "targetSystems": [
          "TemperatureConsumer"
       ],
-      "serviceDefinitions":[
+      "serviceDefinitions": [
          "kelvinInfo"
       ]
    }
@@ -334,69 +334,69 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status":200,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureSensorManager",
-   "payload":{
-      "entries":[
+   "status": 200,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureSensorManager",
+   "payload": {
+      "entries": [
          {
-            "id":"d2fefc6a-f563-40a2-9ce4-3512c2887755",
-            "ownerSystemName":"TemperatureSensorManager",
-            "targetSystemName":"TemperatureConsumer",
-            "orchestrationRequest":{
-               "serviceRequirement":{
-                  "serviceDefinition":"kelvinInfo",
-                  "operations":[
+            "id": "d2fefc6a-f563-40a2-9ce4-3512c2887755",
+            "ownerSystemName": "TemperatureSensorManager",
+            "targetSystemName": "TemperatureConsumer",
+            "orchestrationRequest": {
+               "serviceRequirement": {
+                  "serviceDefinition": "kelvinInfo",
+                  "operations": [
                      "query-temperature"
                   ],
-                  "versions":[
+                  "versions": [
                      
                   ],
-                  "alivesAt":"2025-10-05T11:35:14Z",
-                  "metadataRequirements":[
+                  "alivesAt": "2025-10-05T11:35:14Z",
+                  "metadataRequirements": [
                      
                   ],
-                  "interfaceTemplateNames":[
+                  "interfaceTemplateNames": [
                      "generic_https"
                   ],
-                  "interfaceAddressTypes":[
+                  "interfaceAddressTypes": [
                      "HOSTNAME",
                      "IPV4"
                   ],
-                  "interfacePropertyRequirements":[
+                  "interfacePropertyRequirements": [
                      
                   ],
-                  "securityPolicies":[
+                  "securityPolicies": [
                      "TIME_LIMITED_TOKEN_AUTH"
                   ],
-                  "preferredProviders":[
+                  "preferredProviders": [
                      
                   ]
                },
-               "orchestrationFlags":{
-                  "MATCHMAKING":"true",
-                  "ALLOW_TRANSLATION":"true",
-                  "ONLY_PREFERRED":"false",
-                  "ONLY_EXCLUSIVE":"false",
-                  "ALLOW_INTERCLOUD":"false",
-                  "ONLY_INTERCLOUD":"false"
+               "orchestrationFlags": {
+                  "MATCHMAKING": "true",
+                  "ALLOW_TRANSLATION": "true",
+                  "ONLY_PREFERRED": "false",
+                  "ONLY_EXCLUSIVE": "false",
+                  "ALLOW_INTERCLOUD": "false",
+                  "ONLY_INTERCLOUD": "false"
                },
-               "qosRequirements":{
-                  "maxLatencyMs":"10"
+               "qosRequirements": {
+                  "maxLatencyMs": "10"
                },
-               "exclusivityDuration":600
+               "exclusivityDuration": 600
             },
-            "notifyInterface":{
-               "protocol":"mqtt",
-               "properties":{
-                  "topic":"arrowhead/orchestration-push"
+            "notifyInterface": {
+               "protocol": "mqtt",
+               "properties": {
+                  "topic": "arrowhead/orchestration-push"
                }
             },
-            "expiredAt":"2025-10-08T11:35:14Z",
-            "createdAt":"2025-10-05T11:30:14Z"
+            "expiredAt": "2025-10-08T11:35:14Z",
+            "createdAt": "2025-10-05T11:30:14Z"
          }
       ],
-      "count":1
+      "count": 1
    }
 }
 ```
@@ -405,14 +405,14 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-   "status":400,
-   "traceId":"<trace-id>",
-   "receiver":"TemperatureSensorManager",
-   "payload":{
-      "errorMessage":"Owner system list contains empty element",
-      "errorCode":400,
-      "exceptionType":"INVALID_PARAMETER",
-      "origin":"arrowhead/serviceorchestration/orchestration/management/push/query"
+   "status": 400,
+   "traceId": "<trace-id>",
+   "receiver": "TemperatureSensorManager",
+   "payload": {
+      "errorMessage": "Owner system list contains empty element",
+      "errorCode": 400,
+      "exceptionType": "INVALID_PARAMETER",
+      "origin": "arrowhead/serviceorchestration/orchestration/management/push/query"
    }
 }
 ```
