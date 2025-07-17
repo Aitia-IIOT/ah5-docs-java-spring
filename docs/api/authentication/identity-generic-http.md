@@ -140,7 +140,7 @@ error code `503` can also be used if there was a problem with the external serve
 
 ### verify
 
-The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and the `token` that has to be verified as a path parameter.
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and the [IdentityToken](../primitives.md/#identitytoken) that has to be verified as a path parameter.
 
 
 ```
