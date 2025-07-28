@@ -36,39 +36,39 @@ POST /serviceorchestration/orchestration/pull HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {
-   "serviceRequirement":{
-      "serviceDefinition":"kelvinInfo",
-      "operations":[
+   "serviceRequirement": {
+      "serviceDefinition": "kelvinInfo",
+      "operations": [
          "query-temperature"
       ],
-      "versions":[],
-      "alivesAt":"2025-10-05T11:35:14Z",
-      "metadataRequirements":[],
-      "interfaceTemplateNames":[
+      "versions": [],
+      "alivesAt": "2025-10-05T11:35:14Z",
+      "metadataRequirements": [],
+      "interfaceTemplateNames": [
          "generic_https"
       ],
-      "interfaceAddressTypes":[
+      "interfaceAddressTypes": [
          "HOSTNAME",
          "IPV4"
       ],
-      "interfacePropertyRequirements":[],
-      "securityPolicies":[
+      "interfacePropertyRequirements": [],
+      "securityPolicies": [
          "TIME_LIMITED_TOKEN_AUTH"
       ],
-      "preferredProviders":[]
+      "preferredProviders": []
    },
-   "orchestrationFlags":{
-      "MATCHMAKING":"true",
-      "ALLOW_TRANSLATION":"true",
-      "ONLY_PREFERRED":"false",
-      "ONLY_EXCLUSIVE":"false",
-      "ALLOW_INTERCLOUD":"false",
-      "ONLY_INTERCLOUD":"false"
+   "orchestrationFlags": {
+      "MATCHMAKING": "true",
+      "ALLOW_TRANSLATION": "true",
+      "ONLY_PREFERRED": "false",
+      "ONLY_EXCLUSIVE": "false",
+      "ALLOW_INTERCLOUD": "false",
+      "ONLY_INTERCLOUD": "false"
    },
-   "qosRequirements":{
-      "maxLatencyMs":"10"
+   "qosRequirements": {
+      "maxLatencyMs": "10"
    },
-   "exclusivityDuration":600
+   "exclusivityDuration": 600
 }
 ```
 
@@ -76,36 +76,36 @@ The service operation **responds** with the status code `200` if called successf
 
 ```
 {
-   "results":[
+   "results": [
       {
-         "serviceInstanceId":"TemperatureProvider2|kelvinInfo|1.0.0",
-         "providerName":"TemperatureProvider2",
-         "serviceDefinitition":"kelvinInfo",
-         "version":"1.0.0",
-         "cloudIdentitifer":"LOCAL",
-         "aliveUntil":"2028-11-08T10:21:11Z",
-         "exclusiveUntil":"2025-10-05T11:35:14Z",
-         "metadata":{
-            "marginOfError":0.5
+         "serviceInstanceId": "TemperatureProvider2|kelvinInfo|1.0.0",
+         "providerName": "TemperatureProvider2",
+         "serviceDefinitition": "kelvinInfo",
+         "version": "1.0.0",
+         "cloudIdentitifer": "LOCAL",
+         "aliveUntil": "2028-11-08T10:21:11Z",
+         "exclusiveUntil": "2025-10-05T11:35:14Z",
+         "metadata": {
+            "marginOfError": 0.5
          },
-         "interfaces":[
+         "interfaces": [
             {
-               "templateName":"generic_https",
-               "protocol":"https",
-               "policy":"TIME_LIMITED_TOKEN_AUTH",
-               "properties":{
-                  "accessAddresses":[
+               "templateName": "generic_https",
+               "protocol": "https",
+               "policy": "TIME_LIMITED_TOKEN_AUTH",
+               "properties": {
+                  "accessAddresses": [
                      "192.168.56.116",
                      "tp2.greenhouse.com"
                   ],
-                  "accessPort":8080,
-                  "operations":{
-                     "query-temperature":{
-                        "path":"/query",
-                        "method":"GET"
+                  "accessPort": 8080,
+                  "operations": {
+                     "query-temperature": {
+                        "path": "/query",
+                        "method": "GET"
                      }
                   },
-                  "basePath":"/kelvin"
+                  "basePath": "/kelvin"
                }
             }
          ],
@@ -121,7 +121,7 @@ The service operation **responds** with the status code `200` if called successf
          }
       }
    ],
-   "warnings":[
+   "warnings": [
       "part_time_exclusivity"
    ]
 }
@@ -151,56 +151,56 @@ POST /serviceorchestration/orchestration/subscribe?trigger=<trigger-value> HTTP/
 Authorization: Bearer <identity-info>
 
 {
-   "orchestrationRequest":{
-      "serviceRequirement":{
-         "serviceDefinition":"kelvinInfo",
-         "operations":[
+   "orchestrationRequest": {
+      "serviceRequirement": {
+         "serviceDefinition": "kelvinInfo",
+         "operations": [
             "query-temperature"
          ],
-         "versions":[
+         "versions": [
             
          ],
-         "alivesAt":"2025-10-05T11:35:14Z",
-         "metadataRequirements":[
+         "alivesAt": "2025-10-05T11:35:14Z",
+         "metadataRequirements": [
             
          ],
-         "interfaceTemplateNames":[
+         "interfaceTemplateNames": [
             "generic_https"
          ],
-         "interfaceAddressTypes":[
+         "interfaceAddressTypes": [
             "HOSTNAME",
             "IPV4"
          ],
-         "interfacePropertyRequirements":[
+         "interfacePropertyRequirements": [
             
          ],
-         "securityPolicies":[
+         "securityPolicies": [
             "TIME_LIMITED_TOKEN_AUTH"
          ],
-         "preferredProviders":[
+         "preferredProviders": [
             
          ]
       },
-      "orchestrationFlags":{
-         "MATCHMAKING":"true",
-         "ALLOW_TRANSLATION":"true",
-         "ONLY_PREFERRED":"false",
-         "ONLY_EXCLUSIVE":"false",
-         "ALLOW_INTERCLOUD":"false",
-         "ONLY_INTERCLOUD":"false"
+      "orchestrationFlags": {
+         "MATCHMAKING": "true",
+         "ALLOW_TRANSLATION": "true",
+         "ONLY_PREFERRED": "false",
+         "ONLY_EXCLUSIVE": "false",
+         "ALLOW_INTERCLOUD": "false",
+         "ONLY_INTERCLOUD": "false"
       },
-      "qosRequirements":{
-         "maxLatencyMs":"10"
+      "qosRequirements": {
+         "maxLatencyMs": "10"
       },
-      "exclusivityDuration":600
+      "exclusivityDuration": 600
    },
-   "notifyInterface":{
-      "protocol":"mqtt",
-      "properties":{
-         "topic":"arrowhead/orchestration-push"
+   "notifyInterface": {
+      "protocol": "mqtt",
+      "properties": {
+         "topic": "arrowhead/orchestration-push"
       }
    },
-   "duration":100000
+   "duration": 100000
 }
 ```
 
