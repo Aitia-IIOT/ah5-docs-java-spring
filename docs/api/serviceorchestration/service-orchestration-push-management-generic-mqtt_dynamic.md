@@ -240,7 +240,7 @@ The service operation **request** requires an [MQTTRequestTemplate](../data-mode
 Topic: arrowhead/serviceorchestration/orchestration/management/push/trigger
 
 {
-   "traceId": <trace-id>",
+   "traceId": "<trace-id>",
    "authentication": "<authentication-data>",
    "responseTopic": "<response-topic>",
    "qosRequirement": <0|1|2>,

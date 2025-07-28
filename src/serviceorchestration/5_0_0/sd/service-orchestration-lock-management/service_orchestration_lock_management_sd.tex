@@ -126,7 +126,7 @@ The purpose of the service is to manage the orchestration locks that allow to ex
 
 It may happen that a certain service instance should not be orchestrated to the consumer systems for any reason, therefore a higher entity creates an ocrhestration lock with the service instance identifier by consuming the \textit{create} service operation.
 
-It also can happen that a certain service instance is reserved (locked) upon a consumer system request, but for any reason it needs to be released. In this case a higher entity can search for the associated orchestration lock record by consuming the \textit{query} service operation in order to check the expiration time and the owner of the lock. If the service instance is need to be released before the expiration time of the lock, then the \textit{remove} service operation can be consumed.
+It can also happen that a certain service instance is reserved (locked) upon a consumer system request, but for any reason it needs to be released. In this case a higher entity can search for the associated orchestration lock record by consuming the \textit{query} service operation in order to check the expiration time and the owner of the lock. If the service instance needs to be released before the expiration time of the lock, then the \textit{remove} service operation can be consumed.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -174,7 +174,7 @@ Operation \textit{remove} deletes the orchestration lock records by owner system
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{serviceOrchestrationLockManagement} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{serviceOrchestrationLockManagement} service are listed and must be respected by the hosting system.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
@@ -261,8 +261,8 @@ ids & \pref{List}$<$\pref{Number}$>$ & no &  Requester is looking for lock recor
 orchestrationJobIds & \pref{List}$<$\pref{OrchestrationJobId}$>$ & no &  Requester is looking for lock records with any of the specified orchestration job identifiers. \\ \hline
 serviceInstanceIds & \pref{List}$<$\pref{ServiceInstanceID}$>$ & no & Requester is looking for lock records with any of the specified service instance identifiers. \\ \hline
 owners & \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for lock records with any of the specified owner system names. \\ \hline
-expiresBefore & \pref{DateTime} & no & Requester is looking for lock records that expires before this timestamp. \\ \hline
-expiresAfter & \pref{DateTime} & no & Requester is looking for lock records that expires after this timestamp. \\ \hline
+expiresBefore & \pref{DateTime} & no & Requester is looking for lock records that expire before this timestamp. \\ \hline
+expiresAfter & \pref{DateTime} & no & Requester is looking for lock records that expire after this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -272,7 +272,7 @@ expiresAfter & \pref{DateTime} & no & Requester is looking for lock records that
 \begin{tabularx}{\textwidth}{| p{3cm} | p{5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-owner & \pref{SystemName} & yes & System name the locks belongs. \\ \hline 
+owner & \pref{SystemName} & yes & System name the locks belong to. \\ \hline 
 serviceInstanceIds &  \pref{List}$<$\pref{ServiceInstanceID}$>$ & yes & List of service identifiers. \\ \hline
 \end{tabularx}
 \end{table}
