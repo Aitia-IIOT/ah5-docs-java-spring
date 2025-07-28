@@ -1,5 +1,13 @@
 # Primitives
 
+## AccessToken
+
+A unique **String** of characters that is issued for a beneficiary system and is associated with a target, a target system, a scope and is expiring.
+
+## AccessTokenVariant
+
+**String** value that specifies an exact token technology variant. The possible values are `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `BASE64_SELF_CONTAINED_TOKEN_AUTH`, `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, `RSA_SHA512_JSON_WEB_TOKEN_AUTH`.
+
 ## Address 
 
 A **String** representation of a network address. An address can be a version 4 IP address, a version 6 IP address, DNS name or MAC address.
@@ -55,6 +63,12 @@ A **String** identifier that is intended to be both human and machine-readable. 
 ## Direction
 The direction of a sorting operation. Possible values are the **String** representation of ascending (`ASC`) or descending (`DESC`) order.
 
+## EncryptionAlgorithmName 
+
+A **String** identifier that belongs to an encryption algorithm. Possible values are:
+* `AES/ECB/PKCS5Padding`: encryption without any addition to the encryption key.
+* `AES/CBC/PKCS5Padding`: encryption with a generated initialization vector as an addition to the encryption key.
+
 ## ErrorType
 
 **String** value of the error type. Could be `ARROWHEAD`, `INVALID_PARAMETER`, `AUTH`, `FORBIDDEN`, `DATA_NOT_FOUND`,
@@ -63,6 +77,10 @@ The direction of a sorting operation. Possible values are the **String** represe
 ## EventTypeName
 
 A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (english alphabet only) and numbers. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
+
+## IdentityToken
+
+A unique and expiring **String** data issued by a central component to verify a system's identity during the interactions with the trusted Core and Support systems, allowing access without sharing the credentials with each and every Core/Support system at each and every interaction.  
 
 ## InterfaceName
 
@@ -120,6 +138,10 @@ A **String** identifier of any suitable validator function chosen by the impleme
 ## Protocol
 
 A **String** representation of a communication protocol. Examples: _http_, _https_, _tcp_, _ssl_...
+
+## PublicKey
+
+A Base64 **String** representation of the public byte array cryptographic key retrieved from an X.509 certificate.
 
 ## SecurityPolicy
 

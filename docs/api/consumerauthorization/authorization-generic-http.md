@@ -94,7 +94,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 
 ```
 {
-  "errorMessage": "Target is missing"",
+  "errorMessage": "Target is missing",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /consumerauthorization/authorization/grant"

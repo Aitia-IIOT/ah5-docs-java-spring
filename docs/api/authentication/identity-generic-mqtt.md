@@ -191,7 +191,7 @@ error code `503` can also be used if there was a problem with the external serve
 
 ### verify
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is the token (as a string) that has to be verified.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper outsourced [identity info](../../api/authentication_policy.md/#mqtt) and the payload is the [IdentityToken](../primitives.md/#identitytoken) (as a string) that has to be verified.
 
 
 ```
