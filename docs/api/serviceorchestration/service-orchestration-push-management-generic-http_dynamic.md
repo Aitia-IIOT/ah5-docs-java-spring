@@ -203,7 +203,7 @@ POST /serviceorchestration/orchestration/mgmt/push/trigger HTTP/1.1
 Authorization: Bearer <identity-info>
 
 {
-   "targetSystems" [
+   "targetSystems": [
       "TemperatureConsumer"
    ],
    "subscriptionIds": [
