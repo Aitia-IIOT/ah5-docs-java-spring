@@ -3,26 +3,7 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of blacklistDiscovery which enables both Application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system is blacklisted. Note that a record is in force if it is `ACTIVE` _and_ not expired.
-This service interface is implemented using protocol, encoding as stated in the following tables:
-
-**generic_http**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTP | 1.1
-Data encryption | N/A | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-**generic_https**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTPS | 1.1
-Data encryption | TLS | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
+This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of blacklistDiscovery which enables both Application and Core/Support systems to query the blacklist entries in force that apply to them, or check if a system is blacklisted. Note that a record is in force if it is `ACTIVE` _and_ not expired.
 
 Hereby the **Interface Design Description** (IDD) is provided to the [blacklistDiscovery - Service Description](../../assets/sd/5_0_0/blacklistDiscovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 

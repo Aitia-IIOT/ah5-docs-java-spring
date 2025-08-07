@@ -3,7 +3,7 @@
 
 ## Overview
 
-This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-http-template.md) service interface of deviceDiscovery, which enables both
+This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of deviceDiscovery, which enables both
 application and Core/Support systems to lookup, register and revoke devices on which the Local Cloud’s systems
 are running. Device representation is not necessary for the base functionalities of a Local Cloud but in certain
 use cases (e.g. enabling onboarding) is needed. 
