@@ -1,4 +1,4 @@
-# Impementation
+# Implementation
 
 ## Technology Stack
 

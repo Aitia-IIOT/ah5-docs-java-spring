@@ -21,10 +21,10 @@ See details [here](../home/implementation.md).
 
 * Make sure you have the proper values in the configuration file before starting the required core systems.
     
-    > The system configuration properties can be found in the `application.properties` file which is located next to the executabel `.jar` file of the system. Look for the configuration possibilities in the system descriptions ([example](../core_systems/service_registry.md#configuration)). 
+    > The system configuration properties can be found in the `application.properties` file which is located next to the executable `.jar` file of the system. Look for the configuration possibilities in the system descriptions ([example](../core_systems/service_registry.md#configuration)). 
 
 * Execute `java -jar arrowhead-{core-system}-{version}.jar` from the same folder.
-* Note that always the ServiceRegistry Core System have to be started first. The other ones should be started only when ServiceRegistry is up and running.
+* Note that always the ServiceRegistry Core System has to be started first. The other ones should be started only when ServiceRegistry is up and running.
 
 ## Docker
 
