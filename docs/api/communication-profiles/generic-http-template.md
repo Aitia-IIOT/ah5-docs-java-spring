@@ -91,7 +91,7 @@ Content-Type: application/json
 ---
 
 ```
-POST /kelvinInfo/query-temperature/sensor-abc?scale=celsius HTTP/1.1
+POST /temperatureInfo/query-temperature/sensor-abc?scale=celsius HTTP/1.1
 Host: 192.168.0.103:4132
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsI.eyJzdWIiOiIxMjM0NTY3ODkw.SflKxwRJSMeKKF2QT4fwpMeJ

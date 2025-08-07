@@ -33,7 +33,7 @@ A numerical identifier within a device or node on a network where the [MQTT Brok
 
 ### Base Topic
 
-The root topic segment that serves as a common prefix for a given [Service](../../help/definitions.md#microservice-or-service) that goups a set of [service-operations](../../help/definitions.md#service-operation). It is mandatory to specify it in IDDs and to publish in the [Local Cloud](../../help/definitions.md#local-cloud).
+The root topic segment that serves as a common prefix for a given [Service](../../help/definitions.md#microservice-or-service) that groups a set of [service-operations](../../help/definitions.md#service-operation). It is mandatory to specify it in IDDs and to publish in the [Local Cloud](../../help/definitions.md#local-cloud).
 
 ---
 
@@ -47,7 +47,7 @@ Set of operation names. Together with the base topic prefix, each of them is a f
 
 #### Request Message Template
 
-Messagees with request intent always have to follow the [MQTTRequestTemplate](../data-models/mqtt-request-template.md) data model in [JSON](https://datatracker.ietf.org/doc/html/rfc8259) format.
+Messages with request intent always have to follow the [MQTTRequestTemplate](../data-models/mqtt-request-template.md) data model in [JSON](https://datatracker.ietf.org/doc/html/rfc8259) format.
 
 #### Reponse Message Template
 
@@ -55,7 +55,7 @@ Messages with response intent always have to follow the [MQTTResponseTemplate](.
 
 #### Trace ID
 
-A string reference choosen by the requester party to identifiy the request message (not manadory). Service porviders are obliged to present the received trace id in the response messages.
+A string reference choosen by the requester party to identifiy the request message (not mandatory). Service porviders are obliged to present the received trace id in the response messages.
 
 #### Authentication
 
@@ -116,7 +116,7 @@ QoS: <0|1|2>
 ```
 
 ```
-Topic: kelvinInfo/query-temperature
+Topic: temperatureInfo/query-temperature
 QoS: 2
 
 {
