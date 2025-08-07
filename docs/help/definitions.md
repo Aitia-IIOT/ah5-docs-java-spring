@@ -35,7 +35,7 @@ A [system](./definitions.md#microsystem-or-system) that wants use [services](./d
 
 ### Event
 
-A short notification about a significant occurrence or change in state that is recognized within a [system](./definitions.md#microsystem-or-system) by itself and is boradcasted within the [Local Cloud](./definitions.md#local-cloud). The notification is not holding any other data, than an [event-type], a timestamp, a sender system reference and a short(!) payload if really necessary.
+A short notification about a significant occurrence or change in state that is recognized within a [system](./definitions.md#microsystem-or-system) by itself and is boradcasted within the [Local Cloud](./definitions.md#local-cloud). The notification is not holding any other data, than an [event-type], a timestamp, a sender system reference and a small(!) payload if really necessary.
 
 ### Event-Type
 
