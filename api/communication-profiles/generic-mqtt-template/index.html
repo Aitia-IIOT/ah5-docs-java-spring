@@ -459,11 +459,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../home/implementation/" class="md-nav__link">
+      <a href="../../../home/getting_started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Implementation
+    Getting Started
   </span>
   
 
@@ -480,11 +480,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../home/getting_started/" class="md-nav__link">
+      <a href="../../../home/implementation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Getting Started
+    Implementation
   </span>
   
 
@@ -6341,18 +6341,18 @@
 <p>A numerical identifier within a device or node on a network where the <a href="https://en.wikipedia.org/wiki/MQTT#MQTT_broker">MQTT Broker</a> and therfore the given <a href="../../../help/definitions/#microservice-or-service">Service</a> can be accessed. Valid port number range is 1-65535. It is mandatory to publish it in the <a href="../../../help/definitions/#local-cloud">Local Cloud</a>.</p>
 <hr />
 <h3 id="base-topic">Base Topic</h3>
-<p>The root topic segment that serves as a common prefix for a given <a href="../../../help/definitions/#microservice-or-service">Service</a> that goups a set of <a href="../../../help/definitions/#service-operation">service-operations</a>. It is mandatory to specify it in IDDs and to publish in the <a href="../../../help/definitions/#local-cloud">Local Cloud</a>.</p>
+<p>The root topic segment that serves as a common prefix for a given <a href="../../../help/definitions/#microservice-or-service">Service</a> that groups a set of <a href="../../../help/definitions/#service-operation">service-operations</a>. It is mandatory to specify it in IDDs and to publish in the <a href="../../../help/definitions/#local-cloud">Local Cloud</a>.</p>
 <hr />
 <h3 id="operations">Operations</h3>
 <p>Set of operation names. Together with the base topic prefix, each of them is a fully qualified MQTT Topic and is performing some kind of action related to the given <a href="../../../help/definitions/#microservice-or-service">Service</a>. It is mandatory to specify them in IDDs and is optional to publish in the <a href="../../../help/definitions/#local-cloud">Local Cloud</a>.</p>
 <hr />
 <h3 id="message-templates">Message Templates</h3>
 <h4 id="request-message-template">Request Message Template</h4>
-<p>Messagees with request intent always have to follow the <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> data model in <a href="https://datatracker.ietf.org/doc/html/rfc8259">JSON</a> format.</p>
+<p>Messages with request intent always have to follow the <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> data model in <a href="https://datatracker.ietf.org/doc/html/rfc8259">JSON</a> format.</p>
 <h4 id="reponse-message-template">Reponse Message Template</h4>
 <p>Messages with response intent always have to follow the <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> data model in <a href="https://datatracker.ietf.org/doc/html/rfc8259">JSON</a> format.</p>
 <h4 id="trace-id">Trace ID</h4>
-<p>A string reference choosen by the requester party to identifiy the request message (not manadory). Service porviders are obliged to present the received trace id in the response messages.</p>
+<p>A string reference choosen by the requester party to identifiy the request message (not mandatory). Service porviders are obliged to present the received trace id in the response messages.</p>
 <h4 id="authentication">Authentication</h4>
 <p>Authentication property must be used for providing identity or access related data if required in case of a given <a href="../../../help/definitions/#microservice-or-service">Service</a>. It is mandatory to specify it in IDDs if authentication or access validation is required by a given service instance.</p>
 <h5 id="identity">Identity</h5>
@@ -6389,7 +6389,7 @@ QoS: &lt;0|1|2&gt;
    }
 }
 </code></pre>
-<pre><code>Topic: kelvinInfo/query-temperature
+<pre><code>Topic: temperatureInfo/query-temperature
 QoS: 2
 
 {
