@@ -18,6 +18,10 @@ Why Maven? Because it is one of the most popular build tools in Java, designed t
 
 Why MySQL? Beacuse it was developed for speed, and maintains a reputation for being fast, even if this may come at the expense of some additional features. It is also known for its reliability, backed by a large community of programmers that have put the code through tough testing over the years. 
 
+## Implementation structure
+
+![image of structure](../assets/pics/implementation_structure.jpg)
+
 ## Hardware Requirements
 
 The hardware requirements **really depend on the expected workload**. Faster CPU / more cores / more RAM is likely to lead to improved performance.

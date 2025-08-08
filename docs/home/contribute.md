@@ -30,6 +30,7 @@ _(Creating and pushing new branches within a cloned repository is allowed only f
 
 3) **Take care of coding clean!**
 
+   - Stick to the [Implementation Structure](./implementation.md#implementation-structure)
    - [Clean coding in Java](https://www.baeldung.com/java-clean-code)
    - [A short summary of Java coding best practices](https://rhamedy.medium.com/a-short-summary-of-java-coding-best-practices-31283d0167d3)
 
