@@ -87,7 +87,7 @@ The request parameters (alias params) are string key-value pairs to be transmitt
 
 #### Response Status
 
-Numerical values that indicates the result of a [service-operation](../../help/definitions.md#service-operation). It is mandatory to specify it in IDDs.
+Numerical values that indicate the result of a [service-operation](../../help/definitions.md#service-operation). It is mandatory to specify them in IDDs.
 
 #### Receiver
 
