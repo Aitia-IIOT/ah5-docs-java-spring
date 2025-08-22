@@ -3,34 +3,14 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of authorization, which enables service consumption permission validations
+This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of authorization, which enables service consumption permission validations
 for both providers and consumers. Additionally, providers can lookup, grant and revoke those permissions. An example of this interaction is when a provider system creates authorization policies about its offered service. An
 other example is when a consumer can check whether a service is allowed to use before trying an actual service consumption. Event notification permission is also handled by this service in an event publisher/subscriber
 scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry. 
 
-The interfaces are implemented using protocol, encoding as stated in the following tables:
+Hereby the **Interface Design Description** (IDD) is provided to the [authorization – Service Description](../../assets/sd/5_0_0/authorization_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
-
-**generic_http**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTP | 1.1
-Data encryption | N/A | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-**generic_https**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTPS | 1.1
-Data encryption | TLS | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-Hereby the **Interface Design Description** (IDD) is provided to the [authorization – Service Description](../../assets/sd/5_0_0/authorization_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ### grant
 

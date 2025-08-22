@@ -3,31 +3,11 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of authorizationManagement, which enables systems (with operator role or proper permissions) to handle (grant, revoke, query, check) authorization policies in bulk. An example of this interaction is when an operator uses the Management Tool to set up authorization policies manually before the related systems even register themselves. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry. 
-
-The interfaces are implemented using protocol, encoding as stated in the following tables:
-
-## Interface Description
-
-**generic_http**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTP | 1.1
-Data encryption | N/A | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-**generic_https**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTPS | 1.1
-Data encryption | TLS | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
+This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of authorizationManagement, which enables systems (with operator role or proper permissions) to handle (grant, revoke, query, check) authorization policies in bulk. An example of this interaction is when an operator uses the Management Tool to set up authorization policies manually before the related systems even register themselves. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry. 
 
 Hereby the **Interface Design Description** (IDD) is provided to the [authorizationManagement – Service Description](../../assets/sd/5_0_0/authorization-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+
+## Interface Description
 
 ### grant-policies
 

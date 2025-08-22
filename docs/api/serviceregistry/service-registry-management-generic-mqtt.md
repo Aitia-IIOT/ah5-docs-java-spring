@@ -4,25 +4,7 @@
 
 ## Overview
 
-This page describes the generic_mqtt and generic_mqtts service interface of the serviceRegistryManagement service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface templates](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually. The interfaces are implemented using protocol, encoding as stated in the following tables:
-
-**generic_mqtt**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | MQTT | 3.1 and 3.1.1
-Data encryption | N/A | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-**generic_mqtts**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | MQTT | 3.1 and 3.1.1
-Data encryption | TLS | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
+TThis page describes the [generic_mqtt](../communication-profiles/generic-mqtt-template.md) and [generic_mqtts](../communication-profiles/generic-mqtts-template.md) service interface of the serviceRegistryManagement service, which enables systems (with operator role or proper permissions) to handle (register, update, revoke, lookup) [devices](#device-query), [systems](#system-query), [service instances](#service-query), [service definitions](#service-definition-query) and [interface templates](#interface-template-query) in bulk. An example of this interaction is that an operator uses the Management Tool to register interface templates, systems, and service instances manually.
 
 Hereby the **Interface Design Description** (IDD) is provided to the [serviceRegistryManagement – Service Description](../../assets/sd/5_0_0/service-registry-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 

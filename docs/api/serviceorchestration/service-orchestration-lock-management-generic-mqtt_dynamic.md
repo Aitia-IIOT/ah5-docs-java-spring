@@ -3,25 +3,7 @@
 
 ## Overview
 
-This page describes the generic_mqtt and generic_mqtts service interface of serviceOrchestrationLockManagement, which enables systems to manage orchestration lock records in bulk. It’s implemented using protocol, encoding as stated in the following tables:
-
-**generic_mqtt**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | MQTT | 3.1 and 3.1.1
-Data encryption | N/A | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-**generic_mqtts**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | MQTT | 3.1 and 3.1.1
-Data encryption | TLS | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
+This page describes the [generic_mqtt](../communication-profiles/generic-mqtt-template.md) and [generic_mqtts](../communication-profiles/generic-mqtts-template.md) service interface of serviceOrchestrationLockManagement, which enables systems to manage orchestration lock records in bulk.
 
 Hereby the **Interface Design Description** (IDD) is provided to the [serviceOrchestrationLockManagement – Service Description](../../assets/sd/5_0_0/service-orchestration-lock-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 

@@ -3,27 +3,8 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of identity-management which enables systems (with operator role or
-proper permissions) to handle identities (create, update, remove, query) and active sessions (close, query) in bulk. It is implemented using protocol, encoding as stated in the
-following tables:
-
-**generic_http**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTP | 1.1
-Data encryption | N/A | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-**generic_https**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTPS | 1.1
-Data encryption | TLS | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
+This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of identity-management which enables systems (with operator role or
+proper permissions) to handle identities (create, update, remove, query) and active sessions (close, query) in bulk.
 
 Hereby the **Interface Design Description** (IDD) is provided to the [identityManagement – Service Description](../../assets/sd/5_0_0/identity-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 

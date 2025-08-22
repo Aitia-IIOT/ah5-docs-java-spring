@@ -3,32 +3,11 @@
 
 ## Overview
 
-This page describes the generic_mqtt and generic_mqtts service interface of authorizationTokenManagement, which allows systems (with operator role or proper permission) to manage the service access tokens in bulk and on behalf of the consumer and provider systems. Access tokens enable the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction when a Core/Support system generates tokens for a consumer system for multiple service instances. Tokens for Event notification are also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
-
-The interfaces are implemented using protocol, encoding as stated in the following tables:
-
-## Interface Description
-
-**generic_mqtt**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | MQTT | 3.1 and 3.1.1
-Data encryption | N/A | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-
-**generic_mqtts**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | MQTT | 3.1 and 3.1.1
-Data encryption | TLS | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
+This page describes the [generic_mqtt](../communication-profiles/generic-mqtt-template.md) and [generic_mqtts](../communication-profiles/generic-mqtts-template.md) service interface of authorizationTokenManagement, which allows systems (with operator role or proper permission) to manage the service access tokens in bulk and on behalf of the consumer and provider systems. Access tokens enable the verification of service consumption permissions on the provider system side, and the application of session-based service consumption control between the consumer and provider systems. An example of this interaction when a Core/Support system generates tokens for a consumer system for multiple service instances. Tokens for Event notification are also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 Hereby the **Interface Design Description** (IDD) is provided to the [authorizationTokenManagement – Service Description](../../assets/sd/5_0_0/authorization-token-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+
+## Interface Description
 
 ### generate-tokens
 

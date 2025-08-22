@@ -3,28 +3,9 @@
 
 ## Overview
 
-This page describes the generic_http and generic_https service interface of identity which enables both application and Core/Support systems to
+This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of identity which enables both application and Core/Support systems to
 get and release a proof of identity token which also can be verified. Furthermore, it also allows a system to
-change its own credentials. It is implemented using protocol, encoding as stated in the
-following tables:
-
-**generic_http**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTP | 1.1
-Data encryption | N/A | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
-
-**generic_https**
-
-Profile type | type | Version
---- | --- | ---
-Transfer protocol | HTTPS | 1.1
-Data encryption | TLS | -
-Encoding | JSON | RFC 8259
-Compression | N/A | -
+change its own credentials. 
 
 Hereby the **Interface Design Description** (IDD) is provided to the [identity – Service Description](../../assets/sd/5_0_0/identity_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
