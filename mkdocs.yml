@@ -4,8 +4,8 @@ repo_url: https://github.com/eclipse-arrowhead
 nav:
   - Home:
     - Welcome: home/welcome.md
-    - Implementation: home/implementation.md
     - Getting Started: home/getting_started.md
+    - Implementation: home/implementation.md
     - Contribute: home/contribute.md 
   - Core Systems:
     - ServiceRegistry: core_systems/service_registry.md
