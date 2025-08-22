@@ -1,0 +1,205 @@
+# systemDiscovery IDD
+**generic_http & generic_https**
+
+## Overview
+
+This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of systemDiscovery, which enables both application and Core/Support systems to lookup, register and revoke systems that are part of the Local Cloud.  System representation is mandatory for the base functionalities of a Local Cloud, e.g. the systems have to be registered in order to interact with each other.
+
+Hereby the **Interface Design Description** (IDD) is provided to the [systemDiscovery – Service Description](../../assets/sd/5_0_0/system-discovery_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+
+## Interface Description
+
+### register
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [SystemRegistrationRequest](../data-models/system-registration-request.md)
+JSON encoded body.
+
+```
+POST /serviceregistry/system-discovery/register HTTP/1.1
+Authorization:  Bearer <identity-info>
+
+{
+  "metadata":  {
+    "scales":  ["kelvin", "celsius"],
+    "location":  {"side":  "North", "block":  2},
+    "indoor":  true
+  },
+  "version":  "",
+  "addresses":  [
+    "192.168.56.116",
+    "tp2.greenhouse.com"
+  ],
+  "deviceName":  "THERMOMETER2"
+}
+```
+
+The service operation **responds** with the status code `200` if called successfully and the system
+entity is already existing or `201` if the entity was newly created. The response also contains a
+[SystemRegistrationResponse](../data-models/system-registration-response.md) JSON encoded body.
+
+```
+{
+  "name":  "TemperatureProvider2",
+  "metadata":  {
+    "scales":  [
+      "kelvin",
+      "celsius"
+    ],
+    "location":  {
+      "side":  "North",
+      "block":  2
+    },
+    "indoor":  true
+  },
+  "version":  "1.0.0",
+  "addresses":  [
+    {
+      "type":  "IPV4",
+      "address":  "192.168.56.116"
+    },
+    {
+      "type":  "HOSTNAME",
+      "address":  "tp2.greenhouse.com"
+    }
+  ],
+  "device":  {
+    "name":  "THERMOMETER2",
+    "metadata":  {
+      "scales":  [
+        "kelvin",
+        "celsius"
+      ],
+      "maxTemperature":  {
+        "kelvin":  310,
+        "celsius":  40
+      },
+      "minTemperature":  {
+        "kelvin":  260,
+        "celsius":  -10
+      }
+    },
+    "addresses":  [
+      {
+        "type":  "MAC",
+        "address":  "81:ef:1a:44:7a:f5"
+      }
+    ],
+    "createdAt":  "2024-11-04T01:53:02Z",
+    "updatedAt":  "2024-11-04T01:53:02Z"
+  },
+  "createdAt":  "2024-11-08T10:21:10.950683800Z",
+  "updatedAt":  "2024-11-08T10:21:10.950683800Z"
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and
+`500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage":  "Device names do not exist:  THERMOMETER2",
+  "errorCode":  400,
+  "exceptionType":  "INVALID_PARAMETER",
+  "origin":  "POST /serviceregistry/system-discovery/register"
+}
+```
+
+### lookup
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http). The URI can contain an optional query parameter with the key "_verbose_" and a [Boolean](../primitives.md#boolean) value. If verbose is true, detailed device information also returns (only if the provider supports it). The request may optionally include a [SystemLookupRequest](../data-models/system-lookup-request.md) JSON encoded body.
+
+```
+POST /serviceregistry/system-discovery/lookup?verbose=false HTTP/1.1
+Authorization:  Bearer <identity-info>
+
+{
+  "systemNames":  [
+  ],
+  "addresses":  [
+  ],
+  "addressType":  "",
+  "metadataRequirementList":  [
+  ],
+  "versions":  [
+  ],
+  "deviceNames":  [
+    "THERMOMETER2"
+  ]
+}
+```
+
+The service operation **responds** with the status code `200` if called successfully and with a [SystemLookupResponse](../data-models/system-lookup-response.md) JSON encoded body.
+
+```
+{
+  "entries":  [
+    {
+      "name":  "TemperatureProvider1",
+      "metadata":  {
+        "scales":  [
+          "kelvin",
+          "celsius"
+        ],
+        "location":  {
+          "side":  "North",
+          "block":  2
+        },
+        "indoor":  true
+      },
+      "version":  "1.0.0",
+      "addresses":  [
+        {
+          "type":  "IPV4",
+          "address":  "192.168.56.116"
+        },
+        {
+          "type":  "HOSTNAME",
+          "address":  "tp2.greenhouse.com"
+        }
+      ],
+      "device":  {
+        "name":  "THERMOMETER2"
+      },
+      "createdAt":  "2025-02-27T18:32:45Z",
+      "updatedAt":  "2025-02-27T18:32:45Z"
+    }
+  ],
+  "count":  1
+}
+```
+
+The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` Error if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage":  "Invalid address type:  IPV5",
+  "errorCode":  400,
+  "exceptionType":  "INVALID_PARAMETER",
+  "origin":  "POST /serviceregistry/system-discovery/lookup"
+}
+```
+
+### revoke
+
+The service operation **request** only requires an [identity related header or certificate](../authentication_policy.md/#http). The name of the system to be revoked will be identified during authentication.
+
+```
+DELETE /serviceregistry/system-discovery/revoke HTTP1.1
+Authorization:  Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully and an existing system
+entity was removed and `204` if no matching entity was found. The success response does not contain
+any response body.
+
+The error codes are, `400` if the request is malformed, `401` if the requester authentication was unsuccessful, `403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage":  "No authorization header has been provided",
+  "errorCode":  401,
+  "exceptionType":  "AUTH"
+}
+```

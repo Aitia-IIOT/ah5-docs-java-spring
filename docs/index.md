@@ -1,3 +1,5 @@
-Here comes the landing page
+---
+title: Redirect
+---
 
-[Service Registry](./serviceregistry/sr-index.md)
+<meta http-equiv="refresh" content="0; url='./home/welcome'">

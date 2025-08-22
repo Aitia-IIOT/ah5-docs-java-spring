@@ -1,0 +1,319 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+\hyphenation{Er-ror-Res-pon-se}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[5]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{identity} % XXX = ServiceName 
+\ArrowheadServiceID{identity} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Rajmund Bocsi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{rbocsi@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{identity} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{identity} service, which enables both application and Core/Support systems to get and release a proof of identity token which also can be verified. Furthermore, it also allows a system to change its own credentials. A provider system for this service is necessary if other Core/Support systems are using \textit{outsourced} authentication policy. An example of this interaction when an application system gets a proof of identity before registering itself into the ServiceRegistry. An other example when the ServiceRegistry verifies the proof of identity before accepting that registration request. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+
+The \textbf{identity} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{login} acquires a proof of identity token;
+    \item \textit{logout} invalidates a proof of identity token;
+    \item \textit{change} changes the credentials;
+    \item \textit{verify} checks the validity of a provided token and acquires information about the verified system.
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+Systems should call the \textit{login} operation to acquire a proof of identity token. To get the necessary information about the \textit{identity} service, systems can lookup for it in the ServiceRegistry without any authentication. When a system wants to use a service of the Core/Support systems it has to include its token to the request. Core/Support systems should use the \textit{verify} operation to check the validation of the identity token and to acquire information about the requester before serving the response. Systems should call the \textit{logout} operation when finishing their work.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+To avoid possible identity theft, it is important that systems only share their identity tokens with trusted systems: these are the Core/Support systems of the Arrowhead Local Cloud. 
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+Available for anyone within the local cloud.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operations of the service. In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\phantomsection
+\fsubsection{login}{IdentityRequest}{IdentityLoginResponse}{}{ErrorResponse}
+
+Operation \textit{login} acquires a proof of identity token. The login data must meet the following criteria:
+
+\begin{itemize}
+    \item System name is mandatory. System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
+\end{itemize}
+
+\fsubsection{logout}{IdentityRequest}{}{OperationStatus}{ErrorResponse}
+
+Operation \textit{logout} invalidates a proof of identity token. The logout data must meet the following criteria:
+
+\begin{itemize}
+    \item It requires the same input data as \textit{login} operation to avoid the possibility of session invalidation by an outside actor (without proper permissions). 
+    \item System name is mandatory. System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
+\end{itemize}
+
+\fsubsection{change}{IdentityChangeRequest}{}{OperationStatus}{ErrorResponse}
+
+Operation \textit{change} changes the credentials. The change data must meet the following criteria:
+
+\begin{itemize}
+    \item With this operation a requester system can only change its own credentials and only after a successful authentication.
+    \item This operation does not allow to change the assigned authentication method.
+    \item System name is mandatory. System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
+    \item Credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed.
+    \item New credential map is mandatory. Since the operation can support various authentication methods (or more than one), only the implementation can specify what kind of credentials are needed (same requirements are applied than in case of the previous credential map). 
+\end{itemize}
+
+\fsubsection{verify}{IdentityVerifyRequest}{IdentityVerifyResponse}{}{ErrorResponse}
+
+Operation \textit{verify} checks the validity of a provided token and acquires information about the verified system. The input data must meet the following criteria:
+
+\begin{itemize}
+    \item The requester must have a valid identity to use this operation
+\end{itemize}
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{identity} service are listed and must be respected by the hosting system.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\phantomsection
+\msubsection{struct}{IdentityRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+systemName & \pref{SystemName} & yes & The requester of the operation. \\ \hline
+credentials & \hyperref[sec:model:Credentials]{Credentials} & yes & Credential information related to the system. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Credentials}
+
+An \pref{Object} which maps \pref{String} keys  \pref{String} values.
+
+\msubsection{struct}{IdentityLoginResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+token & \hyperref[sec:model:Identity]{Identity} & Proof of identity token that is assigned to the requester system for a session. \\ \hline
+expirationTime & \pref{DateTime} & Token is valid until this time. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Identity}
+
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentityChangeRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+systemName & \pref{SystemName} & yes & The requester of the operation. \\ \hline
+credentials & \hyperref[sec:model:Credentials]{Credentials} & yes & Credential information related to the system. \\ \hline
+newCredentials &\hyperref[sec:model:Credentials]{Credentials} & yes & The new credential information that replaces the current one. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentityVerifyRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+token &\hyperref[sec:model:Identity]{Identity} & yes & The target identity token that the requester wants to verify. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{IdentityVerifyResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+verified & \pref{Boolean} & The result of the verification. \\ \hline
+systemName & \pref{SystemName} & The name of the verified system. Empty if the verification was unsuccessful. \\ \hline
+sysop & \pref{Boolean} & A flag that determines whether the verified system has higher level administrative rights. Empty if the verification was unsuccessful. \\ \hline
+loginTime & \pref{DateTime} & The system started its active session at this time. Empty if the verification was unsuccessful. \\ \hline
+expirationTime & \pref{DateTime} & The verified token is valid until this time. Empty if the verification was unsuccessful. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{Boolean}          & One out of true or false. \\ \hline
+\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}

@@ -1,0 +1,11 @@
+# IdentityResult
+
+Field | Type | Description
+--- | --- | --- 
+systemName | [SystemName](../primitives.md#systemname) | Unique identifier of the identified system.
+authenticationMethod | [AuthenticationMethod](../primitives.md#authenticationmethod) | The authentication method the identity uses.
+sysop | [Boolean](../primitives.md#boolean) | It determines whether the identified system has higher level administration rights or not.
+createdBy | [SystemName](../primitives.md#systemname) | The identity was created by this identified system.
+createdAt | [DateTime](../primitives.md#datetime) | Identity was created at this timestamp.
+updatedBy | [SystemName](../primitives.md#systemname) | The identity was modified by this identified system.
+updatedAt | [DateTime](../primitives.md#datetime) | Identity was modified at this timestamp.

@@ -1,0 +1,276 @@
+site_name: Arrowhead 5 | java-spring
+repo_name: eclipse-arrowhead
+repo_url: https://github.com/eclipse-arrowhead
+nav:
+  - Home:
+    - Welcome: home/welcome.md
+    - Getting Started: home/getting_started.md
+    - Implementation: home/implementation.md
+    - Contribute: home/contribute.md 
+  - Core Systems:
+    - ServiceRegistry: core_systems/service_registry.md
+    - ConsumerAuthorization: core_systems/authorization.md
+    - DynamicServiceOrchestration: core_systems/service_orchestration_dynamic.md
+    - FlexibleStoreServiceOrchestration: core_systems/service_orchestration_flexible_store.md
+    - SimpleStoreServiceOrchestration: core_systems/service_orchestration_simple_store.md
+    - Authentication: core_systems/authentication.md
+  - Support Systems: 
+    - Blacklist: support_systems/blacklist.md
+    - Configuration: support_systems/configuration.md
+    - QoSEvaluator: support_systems/qos_evaluator.md
+    - TranslationManager: support_systems/translation_manager.md
+  - API:
+    - Communication Profiles:
+      - Overview: api/communication-profiles/communication-profiles-overview.md
+      - Generic HTTP: api/communication-profiles/generic-http-template.md
+      - Generic HTTPS: api/communication-profiles/generic-https-template.md
+      - Generic MQTT: api/communication-profiles/generic-mqtt-template.md
+      - Generic MQTTS: api/communication-profiles/generic-mqtts-template.md
+    - Interface Descriptions:
+      - General:
+        - HTTP:
+          - generalManagement: api/general/general-management-generic-http.md
+        - MQTT:
+          - generalManagement: api/general/general-management-generic-mqtt.md
+      - ServiceRegistry:
+        - HTTP:
+          - deviceDiscovery: api/serviceregistry/device-discovery-generic-http.md
+          - systemDiscovery: api/serviceregistry/system-discovery-generic-http.md
+          - serviceDiscovery: api/serviceregistry/service-discovery-generic-http.md
+          - serviceRegistryManagement: api/serviceregistry/service-registry-management-generic-http.md
+        - MQTT:
+          - deviceDiscovery: api/serviceregistry/device-discovery-generic-mqtt.md
+          - systemDiscovery: api/serviceregistry/system-discovery-generic-mqtt.md
+          - serviceDiscovery: api/serviceregistry/service-discovery-generic-mqtt.md
+          - serviceRegistryManagement: api/serviceregistry/service-registry-management-generic-mqtt.md
+      - ConsumerAuthorization:
+        - HTTP:
+            - authorization: api/consumerauthorization/authorization-generic-http.md
+            - authorizationToken: api/consumerauthorization/authorization-token-generic-http.md
+            - authorizationManagement: api/consumerauthorization/authorization-management-generic-http.md
+            - authorizationTokenManagement: api/consumerauthorization/authorization-token-management-generic-http.md
+        - MQTT:
+            - authorization: api/consumerauthorization/authorization-generic-mqtt.md
+            - authorizationToken: api/consumerauthorization/authorization-token-generic-mqtt.md
+            - authorizationManagement: api/consumerauthorization/authorization-management-generic-mqtt.md
+            - authorizationTokenManagement: api/consumerauthorization/authorization-token-management-generic-mqtt.md
+      - DynamicServiceOrchestration:
+        - HTTP:
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
+          - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md
+          - serviceOrchestrationLockManagement: api/serviceorchestration/service-orchestration-lock-management-generic-http_dynamic.md
+          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md
+        - MQTT:
+          - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
+          - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md
+          - serviceOrchestrationLockManagement: api/serviceorchestration/service-orchestration-lock-management-generic-mqtt_dynamic.md
+          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md
+      - Authentication:
+        - HTTP:
+          - identity: api/authentication/identity-generic-http.md
+          - identityManagement: api/authentication/identity-management-generic-http.md
+        - MQTT:
+          - identity: api/authentication/identity-generic-mqtt.md
+          - identityManagement: api/authentication/identity-management-generic-mqtt.md
+      - Blacklist:
+        - HTTP:
+          - blacklistDiscovery: api/blacklist/blacklistDiscovery-generic-http.md
+          - blacklistManagement: api/blacklist/blacklistManagement-generic-http.md
+        - MQTT:
+          - blacklistDiscovery: api/blacklist/blacklistDiscovery-generic-mqtt.md
+          - blacklistManagement: api/blacklist/blacklistManagement-generic-mqtt.md
+    - Authentication Policy: api/authentication_policy.md
+    - Data Models:
+      - AddressDescriptor: api/data-models/address-descriptor.md
+      - AuthorizationEncryptionKeyListRequest: api/data-models/authorization-encryption-key-list-request.md
+      - AuthorizationEncryptionKeyListResponse: api/data-models/authorization-encryption-key-list-response.md
+      - AuthorizationEncryptionKeyRegistrationRequest: api/data-models/authorization-encryption-key-registration-request.md
+      - AuthorizationEncryptionKeyReqest: api/data-models/authorization-encryption-key-request.md
+      - AuthorizationEncryptionKeyResponse: api/data-models/authorization-encryption-key-response.md
+      - AuthorizationGrantRequest: api/data-models/authorization-grant-request.md
+      - AuthorizationLookupRequest: api/data-models/authorization-lookup-request.md
+      - AuthorizationMgmtGrantListRequest: api/data-models/authorization-mgmt-grant-list-request.md
+      - AuthorizationMgmtGrantRequest: api/data-models/authorization-mgmt-grant-request.md
+      - AuthorizationMgmtVerifyListRequest: api/data-models/authorization-mgmt-verify-list-request.md
+      - AuthorizationMgmtVerifyListResponse: api/data-models/authorization-mgmt-verify-list-response.md
+      - AuthorizationMgmtVerifyRequest: api/data-models/authorization-mgmt-verify-request.md
+      - AuthorizationMgmtVerifyResponse: api/data-models/authorization-mgmt-verify-response.md
+      - AuthorizationPolicyDescriptor: api/data-models/authorization-policy-descriptor.md
+      - AuthorizationPolicyListResponse: api/data-models/authorization-policy-list-response.md
+      - AuthorizationPolicyRequest: api/data-models/authorization-policy-request.md
+      - AuthorizationPolicyResponse: api/data-models/authorization-policy-response.md
+      - AuthorizationQueryRequest: api/data-models/authorization-query-request.md
+      - AuthorizationTokenDescriptor: api/data-models/authorization-token-descriptor.md
+      - AuthorizationTokenGenerationListMgmtRequest: api/data-models/authorization-token-generation-list-mgmt-request.md
+      - AuthorizationTokenGenerationMgmtRequest: api/data-models/authorization-token-generation-mgmt-request.md
+      - AuthorizationTokenGenerationRequest: api/data-models/authorization-token-generation-request.md
+      - AuthorizationTokenListMgmtResponse: api/data-models/authorization-token-list-mgmt-response.md
+      - AuthorizationTokenMap: api/data-models/authorization-token-map.md
+      - AuthorizationTokenMgmtResponse: api/data-models/authorization-token-mgmt-response.md
+      - AuthorizationTokenQueryRequest: api/data-models/authorization-token-query-request.md
+      - AuthorizationVerifyRequest: api/data-models/authorization-verify-request.md
+      - BlacklistCreateListRequest: api/data-models/blacklist-create-list-request.md
+      - BlacklistCreateRequest: api/data-models/blacklist-create-request.md
+      - BlacklistEntryListResponse: api/data-models/blacklist-entry-list-response.md
+      - BlacklistEntryResponse: api/data-models/blacklist-entry-response.md
+      - BlacklistQueryRequest: api/data-models/blacklist-query-request.md
+      - ConfigMap: api/data-models/config-map.md
+      - ConfigResponse: api/data-models/config-response.md
+      - Credentials: api/data-models/credentials.md
+      - DeviceDescriptor: api/data-models/device-descriptor.md
+      - DeviceListRequest: api/data-models/device-list-request.md
+      - DeviceListResponse: api/data-models/device-list-response.md
+      - DeviceLookupRequest: api/data-models/device-lookup-request.md
+      - DeviceLookupResponse: api/data-models/device-lookup-response.md
+      - DeviceLookupResult: api/data-models/device-lookup-result.md
+      - DeviceQueryRequest: api/data-models/device-query-request.md
+      - DeviceRegistrationRequest: api/data-models/device-registration-request.md
+      - DeviceRegistrationResponse: api/data-models/device-registration-response.md
+      - ErrorResponse: api/data-models/error-response.md
+      - Identity: api/data-models/identity.md
+      - IdentityChangeRequest: api/data-models/identity-change-request.md
+      - IdentityListCreateRequest: api/data-models/identity-list-create-request.md
+      - IdentityListResponse: api/data-models/identity-list-response.md
+      - IdentityListUpdateRequest: api/data-models/identity-list-update-request.md
+      - IdentityLoginResponse: api/data-models/identity-login-response.md
+      - IdentityMgmtRequest: api/data-models/identity-mgmt-request.md
+      - IdentityQueryRequest: api/data-models/identity-query-request.md
+      - IdentityRequest: api/data-models/identity-request.md
+      - IdentityResult: api/data-models/identity-result.md
+      - IdentitySessionListResponse: api/data-models/identity-session-list-response.md
+      - IdentitySessionQueryRequest: api/data-models/identity-session-query-request.md
+      - IdentitySessionResult: api/data-models/identity-session-result.md
+      - IdentityVerifyResponse: api/data-models/identity-verify-response.md
+      - InterfaceTemplateDescriptor: api/data-models/interface-template-descriptor.md
+      - InterfaceTemplateListRequest: api/data-models/interface-template-list-request.md
+      - InterfaceTemplateListResponse: api/data-models/interface-template-list-response.md
+      - InterfaceTemplatePropertyDescriptor: api/data-models/interface-template-property-descriptor.md
+      - InterfaceTemplatePropertyRequest: api/data-models/interface-template-property-request.md
+      - InterfaceTemplateQueryRequest: api/data-models/interface-template-query-request.md
+      - InterfaceTemplateRequest: api/data-models/interface-template-request.md
+      - LogEntry: api/data-models/log-entry.md
+      - LogRequest: api/data-models/log-request.md
+      - LogResponse: api/data-models/log-response.md
+      - LogEntry: api/data-models/log-entry.md
+      - LogRequest: api/data-models/log-request.md
+      - LogResponse: api/data-models/log-response.md
+      - Metadata: api/data-models/metadata.md
+      - MetadataRequirements: api/data-models/metadata-requirements.md
+      - Metadata: api/data-models/metadata.md
+      - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
+      - MQTTResponseTemplate: api/data-models/mqtt-response-template.md
+      - PageRequest: api/data-models/page-request.md
+      - PropertyMap: api/data-models/property-map.md
+      - ScopedPoliciesDescriptor: api/data-models/scoped-policies-descriptor.md
+      - ScopedPoliciesRequest: api/data-models/scoped-policies-request.md
+      - ServiceCreateListRequest: api/data-models/service-create-list-request.md
+      - ServiceDefinitionDescriptor: api/data-models/service-definition-descriptor.md
+      - ServiceDefinitionListRequest: api/data-models/service-definition-list-request.md
+      - ServiceDefinitionListResponse: api/data-models/service-definition-list-response.md
+      - ServiceDefinitionRemoveRequest: api/data-models/service-definition-remove-request.md
+      - ServiceInstanceDescriptor: api/data-models/service-instance-descriptor.md
+      - ServiceInterfaceDescriptor: api/data-models/service-interface-descriptor.md
+      - ServiceInterfaceRequest: api/data-models/service-interface-request.md
+      - ServiceListResponse: api/data-models/service-list-response.md
+      - ServiceLookupRequest: api/data-models/service-lookup-request.md
+      - ServiceLookupResponse: api/data-models/service-lookup-response.md
+      - ServiceLookupResult: api/data-models/service-lookup-result.md
+      - ServiceOrchestrationResponse: api/data-models/service-orchestration-response.md
+      - ServiceOrchestrationFlag: api/data-models/service-orchestration-flag.md
+      - ServiceOrchestrationHistoryQueryRequest: api/data-models/service-orchestration-history-query-request.md
+      - ServiceOrchestrationHistoryResponse: api/data-models/service-orchestration-history-response.md
+      - ServiceOrchestrationJobListResponse: api/data-models/service-orchestration-job-list-response.md
+      - ServiceOrchestrationJobResponse: api/data-models/service-orchestration-job-response.md
+      - ServiceOrchestrationLockListRequest: api/data-models/service-orchestration-lock-list-request.md
+      - ServiceOrchestrationLockListResponse: api/data-models/service-orchestration-lock-list-response.md
+      - ServiceOrchestrationLockQueryRequest: api/data-models/service-orchestration-lock-query-request.md
+      - ServiceOrchestrationLockRequest: api/data-models/service-orchestration-lock-request.md
+      - ServiceOrchestrationLockResponse: api/data-models/service-orchestration-lock-response.md
+      - ServiceOrchestrationNotifyInterface: api/data-models/service-orchestration-notify-interface.md
+      - ServiceOrchestrationPushTriggerRequest:  api/data-models/service-orchestration-push-trigger-request.md
+      - ServiceOrchestrationRequest: api/data-models/service-orchestration-request.md
+      - ServiceOrchestrationRequirement: api/data-models/service-orchestration-requirement.md
+      - ServiceOrchestrationResult: api/data-models/service-orchestration-result.md
+      - ServiceOrchestrationSubscriberListRequest: api/data-models/service-orchestration-subscriber-list-request.md
+      - ServiceOrchestrationSubscriberRequest: api/data-models/service-orchestration-subscriber-request.md
+      - ServiceOrchestrationSubscriptionListResponse: api/data-models/service-orchestration-subscription-list-response.md
+      - ServiceOrchestrationSubscriptionQueryRequest: api/data-models/service-orchestration-subscription-query-request.md
+      - ServiceOrchestrationSubscriptionRequest: api/data-models/service-orchestration-subscription-request.md
+      - ServiceOrchestrationSubscriptionResponse: api/data-models/service-orchestration-subscription-response.md
+      - ServiceQueryRequest: api/data-models/service-query-request.md
+      - ServiceRegistrationRequest: api/data-models/service-registration-request.md
+      - ServiceRegistrationResponse: api/data-models/service-registration-response.md
+      - ServiceRequest: api/data-models/service-request.md
+      - ServiceUpdateListRequest: api/data-models/service-update-list-request.md
+      - ServiceUpdateRequest: api/data-models/service-update-request.md
+      - SystemDescriptor: api/data-models/system-descriptor.md
+      - SystemListRequest: api/data-models/system-list-request.md
+      - SystemListResponse: api/data-models/system-list-response.md
+      - SystemLookupRequest: api/data-models/system-lookup-request.md
+      - SystemLookupResponse: api/data-models/system-lookup-response.md
+      - SystemLookupResult: api/data-models/system-lookup-result.md
+      - SystemQueryRequest: api/data-models/system-query-request.md
+      - SystemRegistrationRequest: api/data-models/system-registration-request.md
+      - SystemRegistrationResponse: api/data-models/system-registration-response.md
+      - SystemRequest: api/data-models/system-request.md
+    - Primitives: api/primitives.md
+  - Help:
+    - Definitions: help/definitions.md
+    - Naming Convention: help/naming-convention.md
+    - Certificate Profiles: help/certificate-profiles.md
+    - Tutorials:
+      - ServiceRegistry Demo: help/tutorials/serviceregistry-http-demo.md
+      - Mosquitto MQTT Broker: help/tutorials/mosquitto-mqtt-broker.md
+      - Create Certificates: help/tutorials/create-certificates.md
+    - FAQ: help/faq.md
+  - Client Libraries: client_libraries.md
+  - Downloads:
+    - Releases: downloads/releases.md
+    - Test Builds: downloads/test_builds.md
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  icon:
+      repo: fontawesome/brands/github 
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.tracking
+    - toc.follow
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - icons
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: blue
+      accent: green 
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: blue
+      accent: green
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/eclipse-arrowhead
+
+markdown_extensions:
+  - attr_list
+  - toc:
+      toc_depth: 4
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg

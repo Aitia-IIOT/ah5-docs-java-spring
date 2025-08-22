@@ -1,0 +1,319 @@
+# identityManagement IDD
+**generic_http & generic_https**
+
+## Overview
+
+This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of identity-management which enables systems (with operator role or
+proper permissions) to handle identities (create, update, remove, query) and active sessions (close, query) in bulk.
+
+Hereby the **Interface Design Description** (IDD) is provided to the [identityManagement – Service Description](../../assets/sd/5_0_0/identity-management_sd.pdf). For further details about how this service is meant to be used, please consult that document.
+
+## Interface Description
+
+### identity-mgmt-query
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and an [IdentityQueryRequest](../data-models/identity-query-request.md) JSON encoded body.
+
+```
+POST /authentication/mgmt/identities/query HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+  "pagination": {
+    "page": 0,
+    "size": 10,
+    "direction": "ASC",
+    "sortField": "name"
+  },
+  "createdBy": "Sysop",
+  "creationFrom": "2025-03-07T06:00:00Z"
+}
+```
+
+The service operation **responds** with the status code `200` if called successfully. The response also contains an
+[IdentityListResponse](../data-models/identity-list-response.md) JSON encoded body.
+
+```
+{
+  "identities": [
+    {
+      "systemName": "Consumer1",
+      "authenticationMethod": "PASSWORD",
+      "sysop": false,
+      "createdBy": "Sysop",
+      "createdAt": "2025-03-07T12:52:30Z",
+      "updatedBy": "Sysop",
+      "updatedAt": "2025-03-07T12:52:30Z"
+    },
+    {
+      "systemName": "Provider1",
+      "authenticationMethod": "PASSWORD",
+      "sysop": false,
+      "createdBy": "Sysop",
+      "createdAt": "2025-03-07T12:52:30Z",
+      "updatedBy": "Sysop",
+      "updatedAt": "2025-03-07T12:52:30Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and
+`500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "If size parameter is defined then page parameter cannot be undefined",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /authentication/mgmt/identities/query"
+}
+```
+
+### identity-mgmt-create
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and an [IdentityListCreateRequest](../data-models/identity-list-create-request.md) JSON encoded body.
+
+```
+POST /authentication/mgmt/identities HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+  "authenticationMethod": "PASSWORD",
+  "identities": [
+	{
+	  "systemName": "Consumer1",
+	  "credentials": {
+		"password": "abcdef"
+	  },
+	  "sysop": false
+	},
+	{
+	  "systemName": "Provider1",
+	  "credentials": {
+		"password": "123456"
+	  },
+	  "sysop": false
+	}
+  ]
+}
+
+```
+
+The service operation **responds** with the status code `201` if called successfully. The response also contains an
+[IdentityListResponse](../data-models/identity-list-response.md) JSON encoded body.
+
+```
+{
+  "identities": [
+    {
+      "systemName": "Consumer1",
+      "authenticationMethod": "PASSWORD",
+      "sysop": false,
+      "createdBy": "Sysop",
+      "createdAt": "2025-03-07T12:52:30Z",
+      "updatedBy": "Sysop",
+      "updatedAt": "2025-03-07T12:52:30Z"
+    },
+    {
+      "systemName": "Provider1",
+      "authenticationMethod": "PASSWORD",
+      "sysop": false,
+      "createdBy": "Sysop",
+      "createdAt": "2025-03-07T12:52:30Z",
+      "updatedBy": "Sysop",
+      "updatedAt": "2025-03-07T12:52:30Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and `500` if an unexpected error happens.
+If the Authentication System needs contacting an external server during the creation process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Missing credentials",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /authentication/mgmt/identities"
+}
+```
+
+### identity-mgmt-update
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and an [IdentityListUpdateRequest](../data-models/identity-list-update-request.md) JSON encoded body.
+
+```
+PUT /authentication/mgmt/identities HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+  "identities": [
+	{
+	  "systemName": "Consumer1",
+	  "credentials": {
+		"password": "123456"
+	  },
+	  "sysop": false
+	},
+	{
+	  "systemName": "Provider1",
+	  "credentials": {
+		"password": "123456"
+	  },
+	  "sysop": true
+	}
+  ]
+}
+
+```
+
+The service operation **responds** with the status code `200` if called successfully. The response also contains an
+[IdentityListResponse](../data-models/identity-list-response.md) JSON encoded body.
+
+```
+{
+  "identities": [
+    {
+      "systemName": "Consumer1",
+      "authenticationMethod": "PASSWORD",
+      "sysop": false,
+      "createdBy": "Sysop",
+      "createdAt": "2025-03-07T12:52:30",
+      "updatedBy": "Sysop",
+      "updatedAt": "2025-03-07T12:59:01"
+    },
+    {
+      "systemName": "Provider1",
+      "authenticationMethod": "PASSWORD",
+      "sysop": true,
+      "createdBy": "Sysop",
+      "createdAt": "2025-03-07T12:52:30Z",
+      "updatedBy": "Sysop",
+      "updatedAt": "2025-03-07T12:59:01Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and `500` if an unexpected error happens.
+If the Authentication System needs contacting an external server during the update process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Missing credentials",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "PUT /authentication/mgmt/identities"
+}
+```
+
+### identity-mgmt-remove
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[SystemName](../primitives.md#systemname)> as query parameter, which contains the names of systems that needs to be removed.
+```
+DELETE /authentication/mgmt/identities?names=Provider1&names=Provider2 HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and `500` if an unexpected error happens.
+If the Authentication System needs contacting an external server during the deletion process, error code `503` can also be used if there was a problem with the external server. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid identity token",
+  "errorCode": 401,
+  "exceptionType": "AUTH"
+}
+```
+
+### identity-mgmt-session-query
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and an [IdentitySessionQueryRequest](../data-models/identity-session-query-request.md) JSON encoded body.
+
+```
+POST /authentication/mgmt/sessions HTTP/1.1
+Authorization: Bearer <identity-info>
+
+{
+  "pagination": {
+    "page": 0,
+    "size": 10,
+    "direction": "ASC",
+    "sortField": "name"
+  },
+  "loginFrom": "2025-03-07T10:00:00Z"
+}
+```
+
+The service operation **responds** with the status code `200` if called successfully. The response also contains an
+[IdentitySessionListResponse](../data-models/identity-session-list-response.md) JSON encoded body.
+
+```
+{
+  "sessions": [
+    {
+      "systemName": "Consumer1",
+      "loginTime": "2025-03-07T11:54:01Z",
+      "expirationTime": "2025-03-08T11:59:01Z"
+    },
+    {
+      "systemName": "Sysop",
+      "loginTime": "2025-03-07T12:40:54Z",
+      "expirationTime": "2025-03-08T12:45:54Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and
+`500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "If size parameter is defined then page parameter cannot be undefined",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST /authentication/mgmt/sessions"
+}
+```
+
+### identity-mgmt-session-close
+
+The service operation **request** requires an outsourced [identity related header](../authentication_policy.md/#outsourced-http) and a List<[SystemName](../primitives.md#systemname)> as query parameter, which contains the names of systems whose sessions needs to be closed.
+
+```
+DELETE /authentication/mgmt/sessions?names=Consumer1 HTTP/1.1
+Authorization: Bearer <identity-info>
+```
+
+The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Invalid identity token",
+  "errorCode": 401,
+  "exceptionType": "AUTH"
+}
+```
