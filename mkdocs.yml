@@ -4,7 +4,10 @@ repo_url: https://github.com/eclipse-arrowhead
 nav:
   - Home:
     - Welcome: home/welcome.md
-    - Getting Started: home/getting_started.md
+    - Getting Started:
+      - Downlad Excutables: home/getting_started/download_executables.md
+      - Docker: home/getting_started/docker.md
+      - Compile Code: home/getting_started/compile_code.md
     - Implementation: home/implementation.md
     - Contribute: home/contribute.md 
   - Core Systems:
