@@ -56,3 +56,14 @@ _(Creating and pushing new branches within a cloned repository is allowed only f
 9) **Deal with the requested fixes if any.**
 
 10) **When your Pull Request is approved, then it will be merged by a committer and will be contained by the coming release**
+
+## GitHUB Repositories
+
+**Core Systems**
+
+:material-github: [eclipse-arrowhead/ah5-common-java-spring](https://github.com/eclipse-arrowhead/ah5-common-java-spring) <br />
+:material-github: [eclipse-arrowhead/ah5-core-java-spring](https://github.com/eclipse-arrowhead/ah5-core-java-spring)
+
+**Supporting Systems**
+
+:material-github: [eclipse-arrowhead/ah5-blacklist-java-spring](https://github.com/eclipse-arrowhead/ah5-blacklist-java-spring)
