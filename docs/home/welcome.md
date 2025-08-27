@@ -1,7 +1,5 @@
 **This site** provides all the specification, description and example what is necessary for dealing with the **java-spring implementation** of Eclipse Arrowhead Framework.
 
-:material-github: [eclipse-arrowhead/java-spring](https://github.com/Aitia-IIOT/ah5-core-java-spring)
-
 ## What is it?
 
 The **Eclipse Arrowhead Framework** is addressing IoT based automation and digitalisation. The generic concept is based on the principles of Service Oriented Architectures, and aims at enabling all of its users to work in a common and unified approach – leading towards high levels of interoperability. The approach taken is that the information exchange of elements in the Internet of Things is abstracted to loosely coupled services. This is to enable IoT interoperability in-between almost any IoT elements.
