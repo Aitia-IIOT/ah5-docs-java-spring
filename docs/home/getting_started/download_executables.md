@@ -2,6 +2,7 @@
 
 ## Requirements
 
+* Make sure you are familiar with the [basics](../../help/definitions.md).
 * Make sure you have the proper version of **Java** installed.
 * Make sure you have the proper version of **MySQL** installed.
 

@@ -6,7 +6,11 @@ nav:
     - Welcome: home/welcome.md
     - Getting Started:
       - Downlad Excutables: home/getting_started/download_executables.md
-      - Docker: home/getting_started/docker.md
+      - Docker: 
+        - Overview: home/getting_started/docker.md
+        - Aggregated Compose: home/getting_started/docker/docker_aggregated.md
+        - Coupled Compose: home/getting_started/docker/docker_coupled.md
+        - Coupled Dispersed: home/getting_started/docker/docker_dispersed.md
       - Compile Code: home/getting_started/compile_code.md
     - Implementation: home/implementation.md
     - Contribute: home/contribute.md 
