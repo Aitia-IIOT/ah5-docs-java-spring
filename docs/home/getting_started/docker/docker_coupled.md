@@ -11,7 +11,7 @@ Compose a [Core](../../../help/definitions.md#core-system)/[Support](../../../he
 
 In this scenario we will deploy one Core System container with its database container.
 
-1) Create a folder to store your setup. In this example let's have an `ah-serviceregistry` folder under the `opt` in a Linux system.
+1) Create a folder to store your setup. In this example let's have an `ah-serviceregistry` folder under the `opt` in a Linux system (the method is same for every OS and every Arrowhead Core/Support system).
 
 3) Create the [coupled compose files](#compose-files) under the system folder.
 
@@ -57,6 +57,9 @@ opt/
 * `SERVICE_REGISTRY_ADDRESS` environment variable overides the `service.registry.address` in the `application.properties`.
 * `SERVICE_REGISTRY_PORT` environment variable overides the `service.registry.port` in the `application.properties`.
 * Do not use `localhost` or `127.0.0.1` to address the Arrowhead Core or Support systems! Use always the real IP address of the given host machine. Or alternatively you can use the `172.17.0.1` docker bridge gateway address, but only within the same host machine that runs the docker engine.
+* To change any environment variable requires to recreate the related container.
+    * Recreating a system container always overrides the bind mounts, so the `/config` folder content will be set back to the defaults. Always make sure to backup your configuration before system container recreation.
+    * Recreating a database container does not effect the named volumes, so the new container will use the same persistent database files.  
 
 ### ServiceRegistry
 
@@ -189,4 +192,94 @@ services:
             
 volumes:
     arrowhead_consumerauthorization_db_volume:
+```
+
+### Authentication
+
+```
+version: "3.9"
+
+services:
+    
+    authentication-db:
+        image: arrowhead-authentication-db:5.0.0
+        container_name: arrowhead-authentication-db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_USER: ah-operator
+            MYSQL_PASSWORD: <define-an-operator-password>
+        volumes:
+            - arrowhead_authentication_db_volume:/var/lib/mysql
+        ports:
+            - "7444:3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 4s
+            retries: 5
+
+    authentication:
+        image: arrowhead-authentication:5.0.0
+        container_name: arrowhead-authentication
+        restart: unless-stopped
+        depends_on:
+            authentication-db:
+                condition: service_healthy
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://authentication-db:3306/ah_authentication?serverTimezone=UTC
+            DOMAIN_NAME: <real-ip-of-the-host>
+            SERVICE_REGISTRY_ADDRESS: <real-ip-of-the-serviceregistry-host>
+            SERVICE_REGISTRY_PORT: <exposed-port-of-the-serviceregistry-to-its-host>
+        volumes:
+            - <path/to/your/system/folder>/config:/app/config
+        ports:
+            - "8444:8444"
+            
+volumes:
+    arrowhead_authentication_db_volume:
+```
+
+### Blacklist
+
+```
+version: "3.9"
+
+services:
+    
+    blacklist-db:
+        image: arrowhead-blacklist-db:5.0.0
+        container_name: arrowhead-blacklist-db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_USER: ah-operator
+            MYSQL_PASSWORD: <define-an-operator-password>
+        volumes:
+            - arrowhead_blacklist_db_volume:/var/lib/mysql
+        ports:
+            - "7464:3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 4s
+            retries: 5
+
+    blacklist:
+        image: arrowhead-blacklist:5.0.0
+        container_name: arrowhead-blacklist
+        restart: unless-stopped
+        depends_on:
+            blacklist-db:
+                condition: service_healthy
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://blacklist-db:3306/ah_blacklist?serverTimezone=UTC
+            DOMAIN_NAME: <real-ip-of-the-host>
+            SERVICE_REGISTRY_ADDRESS: <real-ip-of-the-serviceregistry-host>
+            SERVICE_REGISTRY_PORT: <exposed-port-of-the-serviceregistry-to-its-host>
+        volumes:
+            - <path/to/your/system/folder>/config:/app/config
+        ports:
+            - "8464:8464"
+            
+volumes:
+    arrowhead_blacklist_db_volume:
 ```
