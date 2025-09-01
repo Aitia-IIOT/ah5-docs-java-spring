@@ -22,7 +22,7 @@ opt/
 ```
 4) Complete the compose file with your variables! Only the ones marked as `<your-variable-goes-here>`.
 
-5) Run `docker copmose up -d` command in the `ah-serviceregistry` folder in order to start the component with default config.
+5) Run `docker compose up -d` command in the `ah-serviceregistry` folder in order to start the component with default config.
 
    - _Data persistance_: Named volume for the database will be created automatically into docker's default volume location.
    - _System configuration_: Configuration files will be synced from the container to the host's file system (bind mount).
@@ -99,4 +99,94 @@ services:
             
 volumes:
     arrowhead_serviceregistry_db_volume:
+```
+
+### DynamicServiceOrchestration
+
+```
+version: "3.9"
+
+services:
+    
+    serviceorchestration-dynamic-db:
+        image: arrowhead-serviceorchestration-dynamic-db:5.0.0
+        container_name: arrowhead-serviceorchestration-dynamic-db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_USER: ah-operator
+            MYSQL_PASSWORD: <define-an-operator-password>
+        volumes:
+            - arrowhead_serviceorchestration_dynamic_db_volume:/var/lib/mysql
+        ports:
+            - "7441:3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 4s
+            retries: 5
+
+    serviceorchestration-dynamic:
+        image: arrowhead-serviceorchestration-dynamic:5.0.0
+        container_name: arrowhead-serviceorchestration-dynamic
+        restart: unless-stopped
+        depends_on:
+            serviceorchestration-dynamic-db:
+                condition: service_healthy
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://serviceorchestration-dynamic-db:3306/ah_serviceorchestration_dynamic?serverTimezone=UTC
+            DOMAIN_NAME: <real-ip-of-the-host>
+            SERVICE_REGISTRY_ADDRESS: <real-ip-of-the-serviceregistry-host>
+            SERVICE_REGISTRY_PORT: <exposed-port-of-the-serviceregistry-to-its-host>
+        volumes:
+            - <path/to/your/system/folder>/config:/app/config
+        ports:
+            - "8441:8441"
+            
+volumes:
+    arrowhead_serviceorchestration_dynamic_db_volume:
+```
+
+### ConsumerAuthorization
+
+```
+version: "3.9"
+
+services:
+    
+    consumerauthorization-db:
+        image: arrowhead-consumerauthorization-db:5.0.0
+        container_name: arrowhead-consumerauthorization-db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_USER: ah-operator
+            MYSQL_PASSWORD: <define-an-operator-password>
+        volumes:
+            - arrowhead_consumerauthorization_db_volume:/var/lib/mysql
+        ports:
+            - "7445:3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 4s
+            retries: 5
+
+    consumerauthorization:
+        image: arrowhead-consumerauthorization:5.0.0
+        container_name: arrowhead-consumerauthorization
+        restart: unless-stopped
+        depends_on:
+            consumerauthorization-db:
+                condition: service_healthy
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://consumerauthorization-db:3306/ah_consumer_authorization?serverTimezone=UTC
+            DOMAIN_NAME: <real-ip-of-the-host>
+            SERVICE_REGISTRY_ADDRESS: <real-ip-of-the-serviceregistry-host>
+            SERVICE_REGISTRY_PORT: <exposed-port-of-the-serviceregistry-to-its-host>
+        volumes:
+            - <path/to/your/system/folder>/config:/app/config
+        ports:
+            - "8445:8445"
+            
+volumes:
+    arrowhead_consumerauthorization_db_volume:
 ```
