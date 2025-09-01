@@ -5,15 +5,14 @@ nav:
   - Home:
     - Welcome: home/welcome.md
     - Getting Started:
-      - Downlad Excutables: home/getting_started/download_executables.md
       - Docker: 
         - Overview: home/getting_started/docker.md
         - Aggregated Compose: home/getting_started/docker/docker_aggregated.md
         - Coupled Compose: home/getting_started/docker/docker_coupled.md
         - Coupled Dispersed: home/getting_started/docker/docker_dispersed.md
+      - Downlad Excutables: home/getting_started/download_executables.md
       - Compile Code: home/getting_started/compile_code.md
-    - Implementation: home/implementation.md
-    - Contribute: home/contribute.md 
+    - Implementation: home/implementation.md 
   - Core Systems:
     - ServiceRegistry: core_systems/service_registry.md
     - ConsumerAuthorization: core_systems/authorization.md
@@ -234,6 +233,10 @@ nav:
   - Downloads:
     - Releases: downloads/releases.md
     - Test Builds: downloads/test_builds.md
+  - Contribute: 
+    - Known Issues: contribute/known-issues.md
+    - Bug Report: contribute/bug-report.md
+    - Code Contribution: contribute/code-contribution.md
 theme:
   name: material
   logo: assets/logo.png

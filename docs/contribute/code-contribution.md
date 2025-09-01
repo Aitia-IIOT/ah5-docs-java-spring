@@ -1,8 +1,8 @@
-# Contribute
+# Code Contribution
 
 ## Eclipse Contributor Agreement
 
-Since Arrowhead project is governed within the Eclipse Foundation, the authors of any contribution must agree and accept the [Eclipse Contributor Agreement ("ECA")](https://www.eclipse.org/legal/ECA.php).
+Since Arrowhead project is governed within the [Eclipse Foundation](https://projects.eclipse.org/projects/iot.arrowhead), the authors of any contribution must agree and accept the [Eclipse Contributor Agreement ("ECA")](https://www.eclipse.org/legal/ECA.php).
 
 Technically it means that contributors need an [Eclipse Fundation Account](https://accounts.eclipse.org/user/register?destination=user/edit) which makes possible to submit a signed ECA! GitHub Pull Requests could be accepted only when all the authors own an Eclipse Foundation Account with the signed ECA!
 
@@ -17,6 +17,8 @@ Use the command below to configure your git client globally:
 `$ git config --global user.email anybody@example.com`
 
 Whithout the `--global` flag you can set the email address only for that specific project where the command was executed.
+
+[Learn more from Eclipse Handbook.](https://www.eclipse.org/projects/handbook/#resources-commit)
 
 ## Way of contributing
 
