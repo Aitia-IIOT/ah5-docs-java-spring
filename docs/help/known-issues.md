@@ -2,7 +2,7 @@
 
 ## v5.0.0
 
-### Authentication Core System
+### Authentication Core System 5.0.0
 
 Summary | Ticket | Fixed in version
 --- | --- | ---

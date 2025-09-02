@@ -52,6 +52,8 @@ Subject Key Identifier | No | Hash of subject public key.
 Basic Constraints | Yes | `cA: true`, `pathLenConstraint: 2`
 Key Usage | Yes | Bits `keyCertSign` and `cRLSign` must be set.
 
+[:material-download: Get a test certificate](../downloads/test-certificates.md)
+
 ## Gate Profile
 
 A Gate certificate is associated with a message relay or bus that exists to guarantee delivery of messages
@@ -119,6 +121,8 @@ Key Usage | Yes | Bits `digitalSignature` and `keyEncipherment` must be set in a
 Extended Key Usage | No | Purposes `serverAuth` and `clientAuth` must be specified.
 Subject Alternative Name | No | At least one IP address, DNS name or other identifier to which CSRs can be sent.
 
+[:material-download: Get a test certificate](../downloads/test-certificates.md)
+
 ## Local Cloud Profile
 
 A Local Cloud certificate is maintained by a single local cloud, enabling it to issue end entity certificates for on-boarding and on-boarded devices, as well as for systems and operators.
@@ -154,6 +158,8 @@ Extension | Critical | Value
 Key Usage | Yes | Bits `digitalSignature` and `keyEncipherment` must be set in addititon.
 Extended Key Usage | No | Purposes `serverAuth` and `clientAuth` must be specified.
 Subject Alternative Name | No | At least one IP address, DNS name or other identifier to which CSRs can be sent.
+
+[:material-download: Get a test certificate](../downloads/test-certificates.md)
 
 ## On-Boarding Profile
 
@@ -245,6 +251,8 @@ Key Usage | Yes | Bits `digitalSignature` and `keyEncipherment` must be set.
 Extended Key Usage | No | Purposes `serverAuth` and `clientAuth` must be specified.
 Subject Alternative Name | No | At least one IP address, DNS name or other identifier through which the system can be reached.
 
+[:material-download: Get a test certificate](../downloads/test-certificates.md)
+
 ## System Profile
 
 A System certificate allows for a device in an Arrowhead local cloud to provide the services associated with a
@@ -304,3 +312,5 @@ Basic Constraints | Yes | `cA: false`
 Key Usage | Yes | Bits `digitalSignature` and `keyEncipherment` must be set.
 Extended Key Usage | No | Purposes `serverAuth` and `clientAuth` must be specified.
 Subject Alternative Name | No | At least one IP address, DNS name or other identifier through which the system can be reached.
+
+[:material-download: Get a test certificate](../downloads/test-certificates.md)

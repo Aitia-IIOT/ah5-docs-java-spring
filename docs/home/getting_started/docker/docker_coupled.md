@@ -13,16 +13,16 @@ In this scenario we will deploy one Core System container with its database cont
 
 1) Create a folder to store your setup. In this example let's have an `ah-serviceregistry` folder under the `opt` in a Linux system (the method is same for every OS and every Arrowhead Core/Support system).
 
-3) Create the [coupled compose files](#compose-files) under the system folder.
+2) Create the [coupled compose files](#compose-files) under the system folder.
 
 ```
 opt/
 └── ah-serviceregistry/
     └── compose.yaml
 ```
-4) Complete the compose file with your variables! Only the ones marked as `<your-variable-goes-here>`.
+3) Complete the compose file with your variables! Only the ones marked as `<your-variable-goes-here>`.
 
-5) Run `docker compose up -d` command in the `ah-serviceregistry` folder in order to start the component with default config.
+4) Run `docker compose up -d` command in the `ah-serviceregistry` folder in order to start the component with default config.
 
    - _Data persistance_: Named volume for the database will be created automatically into docker's default volume location.
    - _System configuration_: Configuration files will be synced from the container to the host's file system (bind mount).
@@ -38,7 +38,7 @@ opt/
     └── compose.yaml
 ```
 
-6) Change the configurations if required
+5) Change the configurations if required
 
    - Stop the containers with `docker compose stop`.
    - Edit the `application.properties` and/or `log4j2.xml` and/or change the certificates.
