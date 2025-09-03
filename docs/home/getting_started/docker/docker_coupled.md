@@ -11,31 +11,38 @@ Compose a [Core](../../../help/definitions.md#core-system)/[Support](../../../he
 
 In this scenario we will deploy one Core System container with its database container.
 
-1) Create a folder to store your setup. In this example let's have an `ah-serviceregistry` folder under the `opt` in a Linux system (the method is same for every OS and every Arrowhead Core/Support system).
+1) Create a folder in your host to store your system setup. (Core/Support system names are recommended).
 
-2) Create the [coupled compose files](#compose-files) under the system folder.
+2) Create a `.env` file under your system setup folder and include the following constants:
 
 ```
-opt/
-└── ah-serviceregistry/
-    └── compose.yaml
-```
-3) Complete the compose file with your variables! Only the ones marked as `<your-variable-goes-here>`.
+SYSTEM_SETUP_DIR=<absolute/path/to/your/system/setup/folder>
+DOMAIN_NAME=<real-ip-of-your-host-machine>
+DB_ROOT_PSW=<define-root-database-password>
+DB_AH_OPERATOR_PSW=<define-root-database-password>
 
-4) Run `docker compose up -d` command in the `ah-serviceregistry` folder in order to start the component with default config.
+// For every systems that is not ServiceRegistry
+SERVICE_REGISTRY_ADDRESS=<real-ip-of-the-serviceregistry-host>
+SERVICE_REGISTRY_PORT=<exposed-port-of-the-serviceregistry-to-its-host>
+```
+
+3) Create a `compose.yaml` file under your system setup folder and copy the selected sysytem's [compose file](#compose-files) contet into.
+>**Learn more** about the [compose file](./about_compose_file.md).
+
+4) Run `docker compose up -d` command in the system setup folder in order to start the component with default config.
 
    - _Data persistance_: Named volume for the database will be created automatically into docker's default volume location.
-   - _System configuration_: Configuration files will be synced from the container to the host's file system (bind mount).
+   - _System configuration_: Configuration files will be synced automatically from the container to the host's file system (bind mount). Example:
+
 ```
-opt/
-└── ah-serviceregistry/
-    └── config/
-        └── certificate/
-            └── ServiceRegistry.p12
-            └── truststore.p12 
-        └── application.properties
-        └── log4j2.xml
-    └── compose.yaml
+ServiceRegistry/
+└── config/
+    └── certificate/
+        └── ServiceRegistry.p12
+        └── truststore.p12 
+    └── application.properties
+    └── log4j2.xml
+└── compose.yaml
 ```
 
 5) Change the configurations if required
@@ -46,20 +53,6 @@ opt/
    - Start the containers with `docker compose start`.
 
 ## Compose Files
-
-**IMPORTANT:**
-
-* `application.properties`, `log4j2.xml` and certificate folder will be copied to the host at first time.
-* DB schema will be created on first startup when `/var/lib/mysql` in the docker container is empty.
-* `SPRING_DATASOURCE_URL` environment variable overides the `spring.datasource.url` in the `application.properties` and the system is accessing the database through an internal docker network.
-* The database can be accessed by the human operators via the exposed port and with the given credentials (`MYSQL_USER`, `MYSQL_PASSWORD`) if necesarry.
-* `DOMAIN_NAME` environment variable overides the `domain.name` in the `application.properties`. 
-* `SERVICE_REGISTRY_ADDRESS` environment variable overides the `service.registry.address` in the `application.properties`.
-* `SERVICE_REGISTRY_PORT` environment variable overides the `service.registry.port` in the `application.properties`.
-* Do not use `localhost` or `127.0.0.1` to address the Arrowhead Core or Support systems! Use always the real IP address of the given host machine. Or alternatively you can use the `172.17.0.1` docker bridge gateway address, but only within the same host machine that runs the docker engine.
-* To change any environment variable requires to recreate the related container.
-    * Recreating a system container always overrides the bind mounts, so the `/config` folder content will be set back to the defaults. Always make sure to backup your configuration before system container recreation.
-    * Recreating a database container does not effect the named volumes, so the new container will use the same persistent database files.  
 
 ### ServiceRegistry
 
@@ -73,9 +66,9 @@ services:
         container_name: arrowhead-serviceregistry-db
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSW}
             MYSQL_USER: ah-operator
-            MYSQL_PASSWORD: <define-an-operator-password>
+            MYSQL_PASSWORD: ${DB_AH_OPERATOR_PSW}
         volumes:
             - arrowhead_serviceregistry_db_volume:/var/lib/mysql
         ports:
@@ -94,9 +87,9 @@ services:
                 condition: service_healthy
         environment:
             SPRING_DATASOURCE_URL: jdbc:mysql://serviceregistry-db:3306/ah_serviceregistry?serverTimezone=UTC
-            DOMAIN_NAME: <real-ip-of-the-host>
+            DOMAIN_NAME: ${DOMAIN_NAME}
         volumes:
-            - <path/to/your/system/folder>/config:/app/config
+            - ${SYSTEM_SETUP_DIR}/config:/app/config
         ports:
             - "8443:8443"
             
@@ -116,9 +109,9 @@ services:
         container_name: arrowhead-serviceorchestration-dynamic-db
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSW}
             MYSQL_USER: ah-operator
-            MYSQL_PASSWORD: <define-an-operator-password>
+            MYSQL_PASSWORD: ${DB_AH_OPERATOR_PSW}
         volumes:
             - arrowhead_serviceorchestration_dynamic_db_volume:/var/lib/mysql
         ports:
@@ -137,11 +130,11 @@ services:
                 condition: service_healthy
         environment:
             SPRING_DATASOURCE_URL: jdbc:mysql://serviceorchestration-dynamic-db:3306/ah_serviceorchestration_dynamic?serverTimezone=UTC
-            DOMAIN_NAME: <real-ip-of-the-host>
-            SERVICE_REGISTRY_ADDRESS: <real-ip-of-the-serviceregistry-host>
-            SERVICE_REGISTRY_PORT: <exposed-port-of-the-serviceregistry-to-its-host>
+            DOMAIN_NAME: ${DOMAIN_NAME}
+            SERVICE_REGISTRY_ADDRESS: ${SERVICE_REGISTRY_ADDRESS}
+            SERVICE_REGISTRY_PORT: ${SERVICE_REGISTRY_PORT}
         volumes:
-            - <path/to/your/system/folder>/config:/app/config
+            - ${SYSTEM_SETUP_DIR}/config:/app/config
         ports:
             - "8441:8441"
             
@@ -161,9 +154,9 @@ services:
         container_name: arrowhead-consumerauthorization-db
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSW}
             MYSQL_USER: ah-operator
-            MYSQL_PASSWORD: <define-an-operator-password>
+            MYSQL_PASSWORD: ${DB_AH_OPERATOR_PSW}
         volumes:
             - arrowhead_consumerauthorization_db_volume:/var/lib/mysql
         ports:
@@ -182,11 +175,11 @@ services:
                 condition: service_healthy
         environment:
             SPRING_DATASOURCE_URL: jdbc:mysql://consumerauthorization-db:3306/ah_consumer_authorization?serverTimezone=UTC
-            DOMAIN_NAME: <real-ip-of-the-host>
-            SERVICE_REGISTRY_ADDRESS: <real-ip-of-the-serviceregistry-host>
-            SERVICE_REGISTRY_PORT: <exposed-port-of-the-serviceregistry-to-its-host>
+            DOMAIN_NAME: ${DOMAIN_NAME}
+            SERVICE_REGISTRY_ADDRESS: ${SERVICE_REGISTRY_ADDRESS}
+            SERVICE_REGISTRY_PORT: ${SERVICE_REGISTRY_PORT}
         volumes:
-            - <path/to/your/system/folder>/config:/app/config
+            - ${SYSTEM_SETUP_DIR}/config:/app/config
         ports:
             - "8445:8445"
             
@@ -206,9 +199,9 @@ services:
         container_name: arrowhead-authentication-db
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSW}
             MYSQL_USER: ah-operator
-            MYSQL_PASSWORD: <define-an-operator-password>
+            MYSQL_PASSWORD: ${DB_AH_OPERATOR_PSW}
         volumes:
             - arrowhead_authentication_db_volume:/var/lib/mysql
         ports:
@@ -227,11 +220,11 @@ services:
                 condition: service_healthy
         environment:
             SPRING_DATASOURCE_URL: jdbc:mysql://authentication-db:3306/ah_authentication?serverTimezone=UTC
-            DOMAIN_NAME: <real-ip-of-the-host>
-            SERVICE_REGISTRY_ADDRESS: <real-ip-of-the-serviceregistry-host>
-            SERVICE_REGISTRY_PORT: <exposed-port-of-the-serviceregistry-to-its-host>
+            DOMAIN_NAME: ${DOMAIN_NAME}
+            SERVICE_REGISTRY_ADDRESS: ${SERVICE_REGISTRY_ADDRESS}
+            SERVICE_REGISTRY_PORT: ${SERVICE_REGISTRY_PORT}
         volumes:
-            - <path/to/your/system/folder>/config:/app/config
+            - ${SYSTEM_SETUP_DIR}/config:/app/config
         ports:
             - "8444:8444"
             
@@ -251,9 +244,9 @@ services:
         container_name: arrowhead-blacklist-db
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: <define-a-root-password>
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSW}
             MYSQL_USER: ah-operator
-            MYSQL_PASSWORD: <define-an-operator-password>
+            MYSQL_PASSWORD: ${DB_AH_OPERATOR_PSW}
         volumes:
             - arrowhead_blacklist_db_volume:/var/lib/mysql
         ports:
@@ -272,11 +265,11 @@ services:
                 condition: service_healthy
         environment:
             SPRING_DATASOURCE_URL: jdbc:mysql://blacklist-db:3306/ah_blacklist?serverTimezone=UTC
-            DOMAIN_NAME: <real-ip-of-the-host>
-            SERVICE_REGISTRY_ADDRESS: <real-ip-of-the-serviceregistry-host>
-            SERVICE_REGISTRY_PORT: <exposed-port-of-the-serviceregistry-to-its-host>
+            DOMAIN_NAME: ${DOMAIN_NAME}
+            SERVICE_REGISTRY_ADDRESS: ${SERVICE_REGISTRY_ADDRESS}
+            SERVICE_REGISTRY_PORT: ${SERVICE_REGISTRY_PORT}
         volumes:
-            - <path/to/your/system/folder>/config:/app/config
+            - ${SYSTEM_SETUP_DIR}/config:/app/config
         ports:
             - "8464:8464"
             

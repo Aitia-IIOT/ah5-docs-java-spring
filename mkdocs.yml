@@ -9,7 +9,8 @@ nav:
         - Overview: home/getting_started/docker.md
         - Aggregated Compose: home/getting_started/docker/docker_aggregated.md
         - Coupled Compose: home/getting_started/docker/docker_coupled.md
-        - Coupled Dispersed: home/getting_started/docker/docker_dispersed.md
+        - Dispersed Compose: home/getting_started/docker/docker_dispersed.md
+        - About Compose File: home/getting_started/docker/about_compose_file.md
       - Download Excutables: home/getting_started/download_executables.md
       - Compile Code: home/getting_started/compile_code.md
     - Implementation: home/implementation.md
