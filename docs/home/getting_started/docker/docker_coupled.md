@@ -60,7 +60,7 @@ version: "3.9"
 services:
     
     serviceregistry-db:
-        image: arrowhead-serviceregistry-db:5.0.0
+        image: aitiaiiot/arrowhead-serviceregistry-db:5.0.0
         container_name: arrowhead-serviceregistry-db
         restart: unless-stopped
         environment:
@@ -77,7 +77,7 @@ services:
             retries: 5
 
     serviceregistry:
-        image: arrowhead-serviceregistry:5.0.0
+        image: aitiaiiot/arrowhead-serviceregistry:5.0.0
         container_name: arrowhead-serviceregistry
         restart: unless-stopped
         depends_on:
@@ -103,7 +103,7 @@ version: "3.9"
 services:
     
     serviceorchestration-dynamic-db:
-        image: arrowhead-serviceorchestration-dynamic-db:5.0.0
+        image: aitiaiiot/arrowhead-serviceorchestration-dynamic-db:5.0.0
         container_name: arrowhead-serviceorchestration-dynamic-db
         restart: unless-stopped
         environment:
@@ -120,7 +120,7 @@ services:
             retries: 5
 
     serviceorchestration-dynamic:
-        image: arrowhead-serviceorchestration-dynamic:5.0.0
+        image: aitiaiiot/arrowhead-serviceorchestration-dynamic:5.0.0
         container_name: arrowhead-serviceorchestration-dynamic
         restart: unless-stopped
         depends_on:
@@ -148,7 +148,7 @@ version: "3.9"
 services:
     
     consumerauthorization-db:
-        image: arrowhead-consumerauthorization-db:5.0.0
+        image: aitiaiiot/arrowhead-consumerauthorization-db:5.0.0
         container_name: arrowhead-consumerauthorization-db
         restart: unless-stopped
         environment:
@@ -165,7 +165,7 @@ services:
             retries: 5
 
     consumerauthorization:
-        image: arrowhead-consumerauthorization:5.0.0
+        image: aitiaiiot/arrowhead-consumerauthorization:5.0.0
         container_name: arrowhead-consumerauthorization
         restart: unless-stopped
         depends_on:
@@ -193,7 +193,7 @@ version: "3.9"
 services:
     
     authentication-db:
-        image: arrowhead-authentication-db:5.0.0
+        image: aitiaiiot/arrowhead-authentication-db:5.0.0
         container_name: arrowhead-authentication-db
         restart: unless-stopped
         environment:
@@ -210,7 +210,7 @@ services:
             retries: 5
 
     authentication:
-        image: arrowhead-authentication:5.0.0
+        image: aitiaiiot/arrowhead-authentication:5.0.0
         container_name: arrowhead-authentication
         restart: unless-stopped
         depends_on:
@@ -238,7 +238,7 @@ version: "3.9"
 services:
     
     blacklist-db:
-        image: arrowhead-blacklist-db:5.0.0
+        image: aitiaiiot/arrowhead-blacklist-db:5.0.0
         container_name: arrowhead-blacklist-db
         restart: unless-stopped
         environment:
@@ -255,7 +255,7 @@ services:
             retries: 5
 
     blacklist:
-        image: arrowhead-blacklist:5.0.0
+        image: aitiaiiot/arrowhead-blacklist:5.0.0
         container_name: arrowhead-blacklist
         restart: unless-stopped
         depends_on:
