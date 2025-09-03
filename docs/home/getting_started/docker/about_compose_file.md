@@ -2,7 +2,8 @@
 
 * `application.properties`, `log4j2.xml` and certificate folder will be copied to the host at first time.
 * DB schema will be created on first startup when `/var/lib/mysql` in the docker container is empty.
-* `SPRING_DATASOURCE_URL` environment variable overides the `spring.datasource.url` in the `application.properties` and the system is accessing the database through an internal docker network.
+* `SPRING_DATASOURCE_URL` environment variable overides the `spring.datasource.url` in the `application.properties`.
+* In case of aggregated and coupled compose the system is accessing the database through an internal docker network.
 * The database can be accessed by the human operators via the exposed port and with the given credentials (`MYSQL_USER`, `MYSQL_PASSWORD`) if necesarry.
 * `DOMAIN_NAME` environment variable overides the `domain.name` in the `application.properties`. 
 * `SERVICE_REGISTRY_ADDRESS` environment variable overides the `service.registry.address` in the `application.properties`.
