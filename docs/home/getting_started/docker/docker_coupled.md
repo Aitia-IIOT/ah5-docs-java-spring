@@ -9,8 +9,6 @@ Compose a [Core](../../../help/definitions.md#core-system)/[Support](../../../he
 
 ## How to do it?
 
-In this scenario we will deploy one Core System container with its database container.
-
 1) Create a folder in your host to store your system setup. (Core/Support system names are recommended).
 
 2) Create a `.env` file under your system setup folder and include the following constants:
@@ -21,7 +19,7 @@ DOMAIN_NAME=<real-ip-of-your-host-machine>
 DB_ROOT_PSW=<define-root-database-password>
 DB_AH_OPERATOR_PSW=<define-root-database-password>
 
-// For every systems that is not ServiceRegistry
+# For every systems that is not ServiceRegistry
 SERVICE_REGISTRY_ADDRESS=<real-ip-of-the-serviceregistry-host>
 SERVICE_REGISTRY_PORT=<exposed-port-of-the-serviceregistry-to-its-host>
 ```

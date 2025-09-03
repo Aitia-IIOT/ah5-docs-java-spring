@@ -1,6 +1,6 @@
 # Docker
 
-Necesarry docker images to easily deploy an Arrowhead Local Cloud are aviable in Docker Hub. What you need is to create your own [docker-compose](https://docs.docker.com/compose/) setup that fulfills your requirements the most.
+Docker images for deploying an Arrowhead Local Cloud are available on Docker Hub. What you need is to create your own [docker compose](https://docs.docker.com/compose/) setup that fulfills your requirements the most.
 
 ## Startegies
 
