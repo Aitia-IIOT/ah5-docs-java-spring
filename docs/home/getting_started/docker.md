@@ -2,7 +2,7 @@
 
 Docker images for deploying an Arrowhead Local Cloud are available on [Docker Hub](https://hub.docker.com/u/aitiaiiot?page=1&search=arrowhead). What you need is to create your own [docker compose](https://docs.docker.com/compose/) setup that fulfills your requirements the most.
 
-## Startegies
+## Strategies
 
 There are multiple proper approches that are requiring different docker compose solutions. Most common approaches:
 

@@ -11,13 +11,13 @@ Compose every  [Core](../../../help/definitions.md#core-system)/[Support](../../
 
 ### Database Container
 
-1) Creat a folder in your host to store your database setup. (Core/Support system names with '-db' suffix are recommended).
+1) Create a folder in your host to store your database setup. (Core/Support system names with '-db' suffix are recommended).
 
 2) Create a `.env` file under your database setup folder and include the following constants:
 
 ```
 DB_ROOT_PSW=<define-root-database-password>
-DB_AH_OPERATOR_PSW=<define-root-database-password>
+DB_AH_OPERATOR_PSW=<define-ah-operator-database-password>
 ```
 
 3) Create a `compose.yaml` file under your database setup folder and copy the selected system's [database compose file](#database-compose-files) content into.
@@ -44,7 +44,7 @@ SERVICE_REGISTRY_ADDRESS=<real-ip-of-the-serviceregistry-host>
 SERVICE_REGISTRY_PORT=<exposed-port-of-the-serviceregistry-to-its-host>
 ```
 
-3) Create a `compose.yaml` file under your system setup folder and copy the selected sysytem's [compose file](#system-compose-files) contet into.
+3) Create a `compose.yaml` file under your system setup folder and copy the selected sysytem's [compose file](#system-compose-files) content into.
 >**Learn more** about the [compose file](./about_compose_file.md).
 
 4) Run `docker compose up -d` command in the system setup folder in order to start the system with default config.

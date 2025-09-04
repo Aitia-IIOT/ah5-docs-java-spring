@@ -17,10 +17,10 @@ Compose all [Core](../../../help/definitions.md#core-system)/[Support](../../../
 CLOUD_DIR=<absolute/path/to/your/cloud/folder>
 DOMAIN_NAME=<real-ip-of-your-host-machine>
 DB_ROOT_PSW=<define-root-database-password>
-DB_AH_OPERATOR_PSW=<define-root-database-password>
+DB_AH_OPERATOR_PSW=<define-ah-operator-database-password>
 ```
 
-3) Create a `compose.yaml` file under your cloud folder and copy the compose file contet into for a [Basic](./docker_aggregated.md#basic-arrowhead-cloud) or a [Full](./docker_aggregated.md#full-arrowhead-cloud) Arrowhead Local Cloud. 
+3) Create a `compose.yaml` file under your cloud folder and copy the compose file content into for a [Basic](./docker_aggregated.md#basic-arrowhead-cloud) or a [Full](./docker_aggregated.md#full-arrowhead-cloud) Arrowhead Local Cloud. 
 >**Learn more** about the [compose file](./about_compose_file.md).
 
 >**Hint:** You might exclude certain Support Systems by removing the associated sections from the Full cloud compose file.
@@ -28,7 +28,7 @@ DB_AH_OPERATOR_PSW=<define-root-database-password>
 4) Run `docker compose up -d` command in your cloud folder in order to launch your Local Cloud with default config.
 
    - _Data persistance_: Named volume for the databases will be created automatically into docker's default volume location.
-   - _System configuration_: Configuration files will be synced automatically from the container to the host's file system (bind mount) under to `<your-cloud-folder>/<arrowhed-system-folder>/config`. Examlple:
+   - _System configuration_: Configuration files will be synced automatically from the container to the host's file system (bind mount) under the `<your-cloud-folder>/<arrowhed-system-folder>/config`. Examlple:
 
 ```
 MyArrowheadCloud/
