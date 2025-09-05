@@ -25,6 +25,7 @@ Whithout the `--global` flag you can set the email address only for that specifi
 1) **Fork (and not clone) the project repository.**
 
    - [Working with forks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks)
+   - For developing a completely new components, [open a ticket](https://github.com/eclipse-arrowhead/roadmap/issues/new)
 
 2) **Create a new branch in your fork and from the `development` branch for your contribution.**
 
