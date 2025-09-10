@@ -2,7 +2,7 @@
 
 #### :material-tag: 5.0.0
 
-:material-note-text: 07/08/2025
+:material-calendar: 07/08/2025
 
 System Name | File
 --- | ---  
