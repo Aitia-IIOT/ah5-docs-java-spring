@@ -23,7 +23,7 @@
 
 ### Management Access
 
-:fontawesome-solid-circle-exclamation: Management services are no longer only for the System Operator, but for anyone with the proper privileges. Also, in v5 multiple entities can have the System Operator role (except in case of `declared` authenticaion policy).
+:fontawesome-solid-circle-exclamation: Management services are no longer only for the System Operator, but for anyone with the proper privileges. Also, in v5 multiple entities can have the System Operator role (except in case of `declared` authentication policy).
 
 :fontawesome-solid-gears: In case you maintained an insecure Local Cloud, only one system can be System Operator, the one that named `Sysop`. It needs to authenticate as described in the [declared policy](../api/authentication_policy.md#declared-http).
 
