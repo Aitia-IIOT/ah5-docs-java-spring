@@ -10,7 +10,10 @@ This page describes the Generic MQTT Communication Profile (CP), which templates
 | Transfer protocol | [MQTT 3.1](https://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html) [MQTT 3.1.1](https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html) |
 | Data Encryption | N/A |
 | Data Compression | N/A |
-| Payload Format | [JSON](https://datatracker.ietf.org/doc/html/rfc8259) |
+
+## Payload
+
+Generic MQTT - CP regulates the message payload format and data model to be used, and it also regulates the service payload format (see the [message templates section](#message-templates)). However it does not regulate the service payload data model. All payload formats and data models are mandatory to specify in the Interface Design Descriptions (IDD).
 
 ## Service Interface Template
 
