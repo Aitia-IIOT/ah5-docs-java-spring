@@ -11,7 +11,7 @@ This page describes the Generic MQTT Communication Profile (CP), which templates
 | Data Encryption | N/A |
 | Data Compression | N/A |
 
-## Payload
+## Payload Aspects
 
 Generic MQTT - CP regulates the message payload format and data model to be used, and it also regulates the service payload format (see the [message templates section](#message-templates)). However it does not regulate the service payload data model. All payload formats and data models are mandatory to specify in the Interface Design Descriptions (IDD).
 

@@ -19,6 +19,10 @@ An identifiable set of [service-operations](./definitions.md#service-operation) 
 
 An individually identifiable component of a [service](./definitions.md#microservice-or-service), that can be consumed by a collaborating [system](./definitions.md#microsystem-or-system). An operation performs a single physical or virtual action related to its [service](./definitions.md#microservice-or-service) scope, while producing output data and possibly processing input data. 
 
+### Service Interface
+
+A boundary across which the underlying capabilities of a [service](#microservice-or-service) are accessible. It specifies the [operations](#service-operation) available, the protocols used, and the input and output aspects.
+
 ### Core System
 
 A fundamental [system](#microsystem-or-system) component of a [Local Cloud](#local-cloud) that addresses essential needs. No Local Cloud can be established without at least one Core System.

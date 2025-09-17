@@ -225,6 +225,7 @@ nav:
   - Help:
     - Definitions: help/definitions.md
     - Naming Convention: help/naming-convention.md
+    - Service Security: help/service-security.md
     - Certificate Profiles: help/certificate-profiles.md
     - Tutorials:
       - ServiceRegistry Demo: help/tutorials/serviceregistry-http-demo.md

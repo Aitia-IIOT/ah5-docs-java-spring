@@ -11,7 +11,7 @@ This page describes the Generic HTTPS Communication Profile (CP), which template
 | Data Encryption | [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) |
 | Data Compression | N/A |
 
-## Payload
+## Payload Aspects
 
 Generic HTTPS - CP does not regulate the service payload format. Any format (JSON, XML, Plain Text, etc.) may be used that best fits the requirements of the given [Service](../../help/definitions.md#microservice-or-service). The chosen data format and implemented data model are mandatory to specify in the Interface Design Descriptions (IDD).
 
