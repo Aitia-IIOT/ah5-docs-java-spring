@@ -4,9 +4,17 @@ repo_url: https://github.com/eclipse-arrowhead
 nav:
   - Home:
     - Welcome: home/welcome.md
-    - Getting Started: home/getting_started.md
+    - Getting Started:
+      - Docker: 
+        - Overview: home/getting_started/docker.md
+        - Aggregated Compose: home/getting_started/docker/docker_aggregated.md
+        - Coupled Compose: home/getting_started/docker/docker_coupled.md
+        - Dispersed Compose: home/getting_started/docker/docker_dispersed.md
+        - About Compose File: home/getting_started/docker/about_compose_file.md
+      - Download Excutables: home/getting_started/download_executables.md
+      - Compile Code: home/getting_started/compile_code.md
     - Implementation: home/implementation.md
-    - Contribute: home/contribute.md 
+    - Release Versions: home/release-versions.md
   - Core Systems:
     - ServiceRegistry: core_systems/service_registry.md
     - ConsumerAuthorization: core_systems/authorization.md
@@ -223,10 +231,15 @@ nav:
       - Mosquitto MQTT Broker: help/tutorials/mosquitto-mqtt-broker.md
       - Create Certificates: help/tutorials/create-certificates.md
     - FAQ: help/faq.md
+    - Known Issues: help/known-issues.md
   - Client Libraries: client_libraries.md
+  - Contribute: 
+    - Bug Report: contribute/bug-report.md
+    - Code Contribution: contribute/code-contribution.md
   - Downloads:
     - Releases: downloads/releases.md
     - Test Builds: downloads/test_builds.md
+    - Test Certificates: downloads/test-certificates.md
 theme:
   name: material
   logo: assets/logo.png
