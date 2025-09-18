@@ -16,7 +16,7 @@ Among other things, specifies the required encryption for data exchange and the 
 
 ## Security Policies
 
-The Service Security Policy must be defined during service registration for each [interface](./definitions.md#service-interface) of the given [service](./definitions.md#microservice-or-service) by every provider System.
+The Service Security Policy must be defined during service registration for each [interface](./definitions.md#service-interface) of the given [service](./definitions.md#microservice-or-service).
 
 > See the **register** operation of [serviceDiscovery](../core_systems/service_registry.md#servicediscovery) service.
 
@@ -24,7 +24,7 @@ The Service Security Policy must be defined during service registration for each
 
 #### NONE
 
-If the service provider applies the `NONE` security policy:
+If `NONE` security policy is applied:
 
 - Service consumption attempts SHALL NOT be verified on the provider side.
 - Consumers SHALL NOT be required to attach any access credentials to their [service operation](./definitions.md#service-operation) requests.
@@ -33,7 +33,7 @@ If the service provider applies the `NONE` security policy:
 
 #### CERT_AUTH
 
-If the service provider applies the `CERT_AUTH` security policy:
+If `CERT_AUTH` security policy is applied:
 
 - Service consumption attempts SHALL be verified on the provider side.
 - An Arrowhead-compliant [system profile certificate](./certificate-profiles.md#system-profile) SHALL be attached to the [service operation](./definitions.md#service-operation) request by the consumer systems.
@@ -45,7 +45,7 @@ If the service provider applies the `CERT_AUTH` security policy:
 
 This type of token expires within a given time.
 
-If the service provider applies the `TIME_LIMITED_TOKEN_AUTH` security policy:
+If `TIME_LIMITED_TOKEN_AUTH` security policy is applied:
 
 - Service consumption attempts SHALL be verified on the provider side.
 - A time-limited [access token](./definitions.md#access-token), issued by the ConsumerAuthorization Core System, SHALL be included in the [service operation](./definitions.md#service-operation) request by the consumer systems.
@@ -56,7 +56,7 @@ If the service provider applies the `TIME_LIMITED_TOKEN_AUTH` security policy:
 
 This type of token expires after a certain number of uses.
 
-If the service provider applies the `USAGE_LIMITED_TOKEN_AUTH` security policy:
+If `USAGE_LIMITED_TOKEN_AUTH` security policy is applied:
 
 - Service consumption attempts SHALL be verified on the provider side.
 - A usage-limited [access token](./definitions.md#access-token), issued by the ConsumerAuthorization Core System, SHALL be included in the [service operation](./definitions.md#service-operation) request by the consumer systems.
@@ -67,7 +67,7 @@ If the service provider applies the `USAGE_LIMITED_TOKEN_AUTH` security policy:
 
 This type of token expires within a given time and holds a payload.
 
-If the service provider applies the `BASE64_SELF_CONTAINED_TOKEN_AUTH` security policy:
+If `BASE64_SELF_CONTAINED_TOKEN_AUTH` security policy is applied:
 
 - Service consumption attempts SHALL be verified on the provider side.
 - A self-contained [access token](./definitions.md#access-token), issued by the ConsumerAuthorization Core System, SHALL be included in the [service operation](./definitions.md#service-operation) request by the consumer systems.
@@ -89,14 +89,14 @@ _Token payload structure:_
 _Token payload example:_
 
 ```
-LOCAL|TemperatureConsumer|TeperatureProvider|kelvinInfo|query-temperature|SERVICE-DEF|2025-06-23T08:35:43.217717900Z
+LOCAL|TemperatureConsumer|TemperatureProvider|kelvinInfo|query-temperature|SERVICE-DEF|2025-06-23T08:35:43.217717900Z
 ```
 
 #### RSA_SHA256_JSON_WEB_TOKEN_AUTH
 
 This type of token expires within a given time, holds a header, a payload and is signed by ConsumerAuthorization Core System using RSA-SHA256 algorithm. Available only, when Core/Support systems are SSL enabled.
 
-If the service provider applies the `RSA_SHA256_JSON_WEB_TOKEN_AUTH` security policy:
+If `RSA_SHA256_JSON_WEB_TOKEN_AUTH` security policy is applied:
 
 - Service consumption attempts SHALL be verified on the provider side.
 - A self-contained [access token](./definitions.md#access-token), issued by the ConsumerAuthorization Core System, SHALL be included in the [service operation](./definitions.md#service-operation) request by the consumer systems.
@@ -129,19 +129,19 @@ _Token payload example:_
   "iat": 1758144278,                -> issued at (unix epoch)
   "nbf": 1758144218,                -> not valid before (unix epoch)
   "exp": 1758144338,                -> expiration time (unix epoch)
-  "psn": "TeperatureProvider",      -> provider system name
+  "psn": "TemperatureProvider",     -> provider system name
   "csn": "TemperatureConsumer",     -> consumer system name
   "ccn": "LOCAL",                   -> consumer cloud name
   "tat": "SERVICE_DEF",             -> target type
   "tan": "kelvinInfo",              -> target name (service definition)
-  "sco": "query-temperature"        -> scope (not defined if token scope covers all the service operation)
+  "sco": "query-temperature"        -> scope (not defined if token scope covers all the service operations)
 }
 ```
 
 #### RSA_SHA512_JSON_WEB_TOKEN_AUTH
 
-This token is exactly the same as `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, except the signing algorithm which is **RSA-SHA512** (id: `RS512`), therfore signature verification is slightly slower, but the token itself is stronger.
+This token is exactly the same as `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, except the signing algorithm which is **RSA-SHA512** (id: `RS512`), therefore signature verification is slightly slower, but the token itself is stronger.
 
 #### TRANSLATION_BRIDGE_TOKEN_AUTH
 
-This token type is NOT applicable by reuglar service providers. This token type is issued by the TranslationManager Support System, when a translation bridge is created between a consumer and a proivder. Consumer SHALL include this token in its [service operation](./definitions.md#service-operation) request when the service consumption happens with translation.
+This token type is NOT applicable during regular service registrations. This token type is issued by the TranslationManager Support System, when a translation bridge is created between a consumer and a provider. Consumer SHALL include this token in its [service operation](./definitions.md#service-operation) request when the service consumption happens with translation.
