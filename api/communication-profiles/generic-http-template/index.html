@@ -1336,9 +1336,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#payload" class="md-nav__link">
+  <a href="#body" class="md-nav__link">
     <span class="md-ellipsis">
-      Payload
+      Body
     </span>
   </a>
   
@@ -6590,9 +6590,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#payload" class="md-nav__link">
+  <a href="#body" class="md-nav__link">
     <span class="md-ellipsis">
-      Payload
+      Body
     </span>
   </a>
   
@@ -6720,8 +6720,8 @@
 <h4 id="access">Access</h4>
 <p>If the access right is required to be proven, then an <a href="../../../help/definitions/#access-token">Access Token</a> should be provided in this header.</p>
 <hr />
-<h3 id="payload">Payload</h3>
-<p>The data to be transmitted to or from a given <a href="../../../help/definitions/#service-operation">service-operation</a> (endpoint). In case of hierarchical data, the payload must be in <a href="https://datatracker.ietf.org/doc/html/rfc8259">JSON</a> data format and must be placed into the <a href="https://datatracker.ietf.org/doc/html/rfc2616#section-4.3">HTTP Meassage Body</a>. In case of non-hierarchical data, text data format can be used and placed into the <a href="https://datatracker.ietf.org/doc/html/rfc2616#section-4.3">HTTP Meassage Body</a> or into the request <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URI</a> as URI encoded path variable or query parameter. It is mandatory to specify it in IDDs.</p>
+<h3 id="body">Body</h3>
+<p>The data to be transmitted to or from a given <a href="../../../help/definitions/#service-operation">service-operation</a> (endpoint). In case of hierarchical data, the body could be in <a href="https://datatracker.ietf.org/doc/html/rfc8259">JSON</a> or in <a href="https://en.wikipedia.org/wiki/XML">XML</a> or in any other suitable  data format and should be placed into the <a href="https://datatracker.ietf.org/doc/html/rfc2616#section-4.3">HTTP Meassage Body</a>. In case of simple and non-hierarchical data, text data format can be used and placed into the <a href="https://datatracker.ietf.org/doc/html/rfc2616#section-4.3">HTTP Meassage Body</a> or into the request <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URI</a> as URI encoded path variable or query parameter. It is mandatory to specify it in IDDs.</p>
 <hr />
 <h3 id="response-status">Response Status</h3>
 <p>The <a href="https://datatracker.ietf.org/doc/html/rfc2616#section-6.1.1">HTTP Response Status</a> that indicates the result of a <a href="../../../help/definitions/#service-operation">service-operation</a>. It is mandatory to specify it in IDDs.</p>
