@@ -67,9 +67,9 @@ If the access right is required to be proven, then an [Access Token](../../help/
 
 ---
 
-### Payload
+### Body
 
-The data to be transmitted to or from a given [service-operation](../../help/definitions.md#service-operation) (endpoint). In case of hierarchical data, the payload must be in [JSON](https://datatracker.ietf.org/doc/html/rfc8259) data format and must be placed into the [HTTP Meassage Body](https://datatracker.ietf.org/doc/html/rfc2616#section-4.3). In case of non-hierarchical data, text data format can be used and placed into the [HTTP Meassage Body](https://datatracker.ietf.org/doc/html/rfc2616#section-4.3) or into the request [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) as URI encoded path variable or query parameter. It is mandatory to specify it in IDDs.
+The data to be transmitted to or from a given [service-operation](../../help/definitions.md#service-operation) (endpoint). In case of hierarchical data, the body could be in [JSON](https://datatracker.ietf.org/doc/html/rfc8259) or in [XML](https://en.wikipedia.org/wiki/XML) or in any other suitable  data format and should be placed into the [HTTP Meassage Body](https://datatracker.ietf.org/doc/html/rfc2616#section-4.3). In case of simple and non-hierarchical data, text data format can be used and placed into the [HTTP Meassage Body](https://datatracker.ietf.org/doc/html/rfc2616#section-4.3) or into the request [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) as URI encoded path variable or query parameter. It is mandatory to specify it in IDDs.
 
 ---
 
