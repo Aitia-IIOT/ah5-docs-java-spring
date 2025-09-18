@@ -6587,20 +6587,20 @@ Among other things, specifies the required encryption for data exchange and the 
 <p>Learn more about the <a href="../../api/communication-profiles/communication-profiles-overview/">communication profiles</a></p>
 </blockquote>
 <h2 id="security-policies">Security Policies</h2>
-<p>The Service Security Policy must be defined during service registration for each <a href="../definitions/#service-interface">interface</a> of the given <a href="../definitions/#microservice-or-service">service</a> by every provider System.</p>
+<p>The Service Security Policy must be defined during service registration for each <a href="../definitions/#service-interface">interface</a> of the given <a href="../definitions/#microservice-or-service">service</a>.</p>
 <blockquote>
 <p>See the <strong>register</strong> operation of <a href="../../core_systems/service_registry/#servicediscovery">serviceDiscovery</a> service.</p>
 </blockquote>
 <h3 id="insecure">Insecure</h3>
 <h4 id="none">NONE</h4>
-<p>If the service provider applies the <code>NONE</code> security policy:</p>
+<p>If <code>NONE</code> security policy is applied:</p>
 <ul>
 <li>Service consumption attempts SHALL NOT be verified on the provider side.</li>
 <li>Consumers SHALL NOT be required to attach any access credentials to their <a href="../definitions/#service-operation">service operation</a> requests.</li>
 </ul>
 <h3 id="certificated-based">Certificated based</h3>
 <h4 id="cert_auth">CERT_AUTH</h4>
-<p>If the service provider applies the <code>CERT_AUTH</code> security policy:</p>
+<p>If <code>CERT_AUTH</code> security policy is applied:</p>
 <ul>
 <li>Service consumption attempts SHALL be verified on the provider side.</li>
 <li>An Arrowhead-compliant <a href="../certificate-profiles/#system-profile">system profile certificate</a> SHALL be attached to the <a href="../definitions/#service-operation">service operation</a> request by the consumer systems.</li>
@@ -6609,7 +6609,7 @@ Among other things, specifies the required encryption for data exchange and the 
 <h3 id="token-based">Token based</h3>
 <h4 id="time_limited_token_auth">TIME_LIMITED_TOKEN_AUTH</h4>
 <p>This type of token expires within a given time.</p>
-<p>If the service provider applies the <code>TIME_LIMITED_TOKEN_AUTH</code> security policy:</p>
+<p>If <code>TIME_LIMITED_TOKEN_AUTH</code> security policy is applied:</p>
 <ul>
 <li>Service consumption attempts SHALL be verified on the provider side.</li>
 <li>A time-limited <a href="../definitions/#access-token">access token</a>, issued by the ConsumerAuthorization Core System, SHALL be included in the <a href="../definitions/#service-operation">service operation</a> request by the consumer systems.</li>
@@ -6618,7 +6618,7 @@ Among other things, specifies the required encryption for data exchange and the 
 </ul>
 <h4 id="usage_limited_token_auth">USAGE_LIMITED_TOKEN_AUTH</h4>
 <p>This type of token expires after a certain number of uses.</p>
-<p>If the service provider applies the <code>USAGE_LIMITED_TOKEN_AUTH</code> security policy:</p>
+<p>If <code>USAGE_LIMITED_TOKEN_AUTH</code> security policy is applied:</p>
 <ul>
 <li>Service consumption attempts SHALL be verified on the provider side.</li>
 <li>A usage-limited <a href="../definitions/#access-token">access token</a>, issued by the ConsumerAuthorization Core System, SHALL be included in the <a href="../definitions/#service-operation">service operation</a> request by the consumer systems.</li>
@@ -6627,7 +6627,7 @@ Among other things, specifies the required encryption for data exchange and the 
 </ul>
 <h4 id="base64_self_contained_token_auth">BASE64_SELF_CONTAINED_TOKEN_AUTH</h4>
 <p>This type of token expires within a given time and holds a payload.</p>
-<p>If the service provider applies the <code>BASE64_SELF_CONTAINED_TOKEN_AUTH</code> security policy:</p>
+<p>If <code>BASE64_SELF_CONTAINED_TOKEN_AUTH</code> security policy is applied:</p>
 <ul>
 <li>Service consumption attempts SHALL be verified on the provider side.</li>
 <li>A self-contained <a href="../definitions/#access-token">access token</a>, issued by the ConsumerAuthorization Core System, SHALL be included in the <a href="../definitions/#service-operation">service operation</a> request by the consumer systems.</li>
@@ -6648,11 +6648,11 @@ Among other things, specifies the required encryption for data exchange and the 
 <pre><code>&lt;consumer-cloud-name&gt;|&lt;consumer-name&gt;|&lt;provider-name&gt;|&lt;service-definition&gt;|&lt;scope&gt;|SERVICE-DEF|&lt;expiration-time-ISO8601&gt;
 </code></pre>
 <p><em>Token payload example:</em></p>
-<pre><code>LOCAL|TemperatureConsumer|TeperatureProvider|kelvinInfo|query-temperature|SERVICE-DEF|2025-06-23T08:35:43.217717900Z
+<pre><code>LOCAL|TemperatureConsumer|TemperatureProvider|kelvinInfo|query-temperature|SERVICE-DEF|2025-06-23T08:35:43.217717900Z
 </code></pre>
 <h4 id="rsa_sha256_json_web_token_auth">RSA_SHA256_JSON_WEB_TOKEN_AUTH</h4>
 <p>This type of token expires within a given time, holds a header, a payload and is signed by ConsumerAuthorization Core System using RSA-SHA256 algorithm. Available only, when Core/Support systems are SSL enabled.</p>
-<p>If the service provider applies the <code>RSA_SHA256_JSON_WEB_TOKEN_AUTH</code> security policy:</p>
+<p>If <code>RSA_SHA256_JSON_WEB_TOKEN_AUTH</code> security policy is applied:</p>
 <ul>
 <li>Service consumption attempts SHALL be verified on the provider side.</li>
 <li>A self-contained <a href="../definitions/#access-token">access token</a>, issued by the ConsumerAuthorization Core System, SHALL be included in the <a href="../definitions/#service-operation">service operation</a> request by the consumer systems.</li>
@@ -6686,18 +6686,18 @@ Among other things, specifies the required encryption for data exchange and the 
   &quot;iat&quot;: 1758144278,                -&gt; issued at (unix epoch)
   &quot;nbf&quot;: 1758144218,                -&gt; not valid before (unix epoch)
   &quot;exp&quot;: 1758144338,                -&gt; expiration time (unix epoch)
-  &quot;psn&quot;: &quot;TeperatureProvider&quot;,      -&gt; provider system name
+  &quot;psn&quot;: &quot;TemperatureProvider&quot;,     -&gt; provider system name
   &quot;csn&quot;: &quot;TemperatureConsumer&quot;,     -&gt; consumer system name
   &quot;ccn&quot;: &quot;LOCAL&quot;,                   -&gt; consumer cloud name
   &quot;tat&quot;: &quot;SERVICE_DEF&quot;,             -&gt; target type
   &quot;tan&quot;: &quot;kelvinInfo&quot;,              -&gt; target name (service definition)
-  &quot;sco&quot;: &quot;query-temperature&quot;        -&gt; scope (not defined if token scope covers all the service operation)
+  &quot;sco&quot;: &quot;query-temperature&quot;        -&gt; scope (not defined if token scope covers all the service operations)
 }
 </code></pre>
 <h4 id="rsa_sha512_json_web_token_auth">RSA_SHA512_JSON_WEB_TOKEN_AUTH</h4>
-<p>This token is exactly the same as <code>RSA_SHA256_JSON_WEB_TOKEN_AUTH</code>, except the signing algorithm which is <strong>RSA-SHA512</strong> (id: <code>RS512</code>), therfore signature verification is slightly slower, but the token itself is stronger.</p>
+<p>This token is exactly the same as <code>RSA_SHA256_JSON_WEB_TOKEN_AUTH</code>, except the signing algorithm which is <strong>RSA-SHA512</strong> (id: <code>RS512</code>), therefore signature verification is slightly slower, but the token itself is stronger.</p>
 <h4 id="translation_bridge_token_auth">TRANSLATION_BRIDGE_TOKEN_AUTH</h4>
-<p>This token type is NOT applicable by reuglar service providers. This token type is issued by the TranslationManager Support System, when a translation bridge is created between a consumer and a proivder. Consumer SHALL include this token in its <a href="../definitions/#service-operation">service operation</a> request when the service consumption happens with translation.</p>
+<p>This token type is NOT applicable during regular service registrations. This token type is issued by the TranslationManager Support System, when a translation bridge is created between a consumer and a provider. Consumer SHALL include this token in its <a href="../definitions/#service-operation">service operation</a> request when the service consumption happens with translation.</p>
 
 
 
