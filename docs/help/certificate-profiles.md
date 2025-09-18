@@ -299,7 +299,7 @@ The subject field DN must contain the following attributes exactly once.
 Attribute Type | Value
 --- | ---
 Common Name (CN) | `<operator-name>.<cloud-name>.<organization-name>.arrowhead.eu`
-DN Qualifier (DN) | `sy`
+DN Qualifier (DN) | `op`
 
 **Extensions**
 
