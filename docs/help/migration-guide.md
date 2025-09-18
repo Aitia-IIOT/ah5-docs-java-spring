@@ -6,7 +6,7 @@
 
 ### Security & System Authentication
 
-:fontawesome-solid-circle-exclamation: In version 4, users could choose between an insecure and secure Local Cloud depolyment. In a secure cloud, application systems authenticated their identities with X.509 certificates, and network communication was encrypted also with the same certificates. Now in version 5, authenticaction and secure communication is separated.
+:fontawesome-solid-circle-exclamation: In version 4, users could choose between an insecure and secure Local Cloud depolyment. In a secure cloud, application systems authenticated their identities with X.509 certificates, and network communication was encrypted also with the same certificates. Now in version 5, authentication and secure communication is separated.
 > Learn more about [v5 authentication policies](../api/authentication_policy.md).
 
 #### I had an insecure cloud
@@ -109,7 +109,7 @@
 
 ## Orchestrator
 
-:fontawesome-solid-circle-exclamation: In v4, the Orchestrator Core Systems supported three orchestration strategies: `store`, `felxible-store` and `dynamic`. In v5, these startegies has been implemented as individual Core Systems.
+:fontawesome-solid-circle-exclamation: In v4, the Orchestrator Core Systems supported three orchestration strategies: `store`, `felxible-store` and `dynamic`. In v5, these startegies have been implemented as individual Core Systems.
 
 :fontawesome-solid-gears: In case you maintained a Local Cloud with `store` orchestration, now to achive the same, deploy the [SimpleStoreServiceOrchestration Core System](../core_systems/service_orchestration_simple_store.md). _**[not released yet]**_
 
