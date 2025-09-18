@@ -24,7 +24,7 @@ SERVICE_REGISTRY_ADDRESS=<real-ip-of-the-serviceregistry-host>
 SERVICE_REGISTRY_PORT=<exposed-port-of-the-serviceregistry-to-its-host>
 ```
 
-3) Create a `compose.yaml` file under your system setup folder and copy the selected system's [compose file](#compose-files) content into.
+3) Create a `compose.yaml` file under your system setup folder and copy the selected system's [compose file](#compose-files) content into it.
 >**Learn more** about the [compose file](./about_compose_file.md).
 
 4) Run `docker compose up -d` command in the system setup folder in order to start the component with default config.

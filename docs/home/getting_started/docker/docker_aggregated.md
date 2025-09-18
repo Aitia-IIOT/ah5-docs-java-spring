@@ -9,7 +9,7 @@ Compose all [Core](../../../help/definitions.md#core-system)/[Support](../../../
 
 ## How to do it?
 
-1) Creat a folder to store your Local Cloud setup.
+1) Create a folder to store your Local Cloud setup.
 
 2) Create a `.env` file under your cloud folder and include the following constants:
 
@@ -20,7 +20,7 @@ DB_ROOT_PSW=<define-root-database-password>
 DB_AH_OPERATOR_PSW=<define-ah-operator-database-password>
 ```
 
-3) Create a `compose.yaml` file under your cloud folder and copy the compose file content into for a [Basic](./docker_aggregated.md#basic-arrowhead-cloud) or a [Full](./docker_aggregated.md#full-arrowhead-cloud) Arrowhead Local Cloud. 
+3) Create a `compose.yaml` file under your cloud folder and copy the compose file content into it for a [Basic](./docker_aggregated.md#basic-arrowhead-cloud) or a [Full](./docker_aggregated.md#full-arrowhead-cloud) Arrowhead Local Cloud. 
 >**Learn more** about the [compose file](./about_compose_file.md).
 
 >**Hint:** You might exclude certain Support Systems by removing the associated sections from the Full cloud compose file.
