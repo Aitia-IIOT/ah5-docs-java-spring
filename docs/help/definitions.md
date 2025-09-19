@@ -9,11 +9,11 @@ A preferably private and protected network of loosely coupled collaborating [sys
 
 ### Microsystem or System
 
-An identifiable software instance that collaborates within a [Local Cloud](./definitions.md#local-cloud). A system can play a [consumer](./definitions.md#consumer) role, a [provider](./definitions.md#provider) role or both.
+An identifiable software instance that is hosted by a [device](#device) and collaborates within a [Local Cloud](./definitions.md#local-cloud). A system can play a [consumer](./definitions.md#consumer) role, a [provider](./definitions.md#provider) role or both.
 
 ### Microservice or Service
 
-An identifiable set of [service-operations](./definitions.md#service-operation) that covers a well-definied scope of activities. 
+An identifiable set of [service-operations](./definitions.md#service-operation) offered by a [system](#microsystem-or-system) that covers a well-definied scope of activities. 
 
 ### Service Operation
 
@@ -48,6 +48,10 @@ A digital certificiate that securely holds the identity of its owner and also ca
 ### Consumer 
 
 A [system](./definitions.md#microsystem-or-system) that wants use [services](./definitions.md#microservice-or-service).
+
+### Device
+
+A physical or virtual entity with certain automation and compute capabilities. Devices are capable of hosting at least one [system](#microsystem-or-system).
 
 ### Event
 
