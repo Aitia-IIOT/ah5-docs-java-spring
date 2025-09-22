@@ -71,7 +71,7 @@ If `BASE64_SELF_CONTAINED_TOKEN_AUTH` security policy is applied:
 
 - Service consumption attempts SHALL be verified on the provider side.
 - A self-contained [access token](./definitions.md#access-token), issued by the ConsumerAuthorization Core System, SHALL be included in the [service operation](./definitions.md#service-operation) request by the consumer systems.
-- The provider SHALL verify the given access token itself by [Base64](https://en.wikipedia.org/wiki/Base64) decoding it and reading the payload content.
+- The provider SHALL verify the given access token itself by [Base64](https://en.wikipedia.org/wiki/Base64) decoding it with [ISO 8859-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) charset and reading the payload content.
 - Based on the payload content, the provider SHALL verify whether
     - the token is not expired,
     - the token is issued for its system name,
