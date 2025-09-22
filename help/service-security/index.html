@@ -6631,7 +6631,7 @@ Among other things, specifies the required encryption for data exchange and the 
 <ul>
 <li>Service consumption attempts SHALL be verified on the provider side.</li>
 <li>A self-contained <a href="../definitions/#access-token">access token</a>, issued by the ConsumerAuthorization Core System, SHALL be included in the <a href="../definitions/#service-operation">service operation</a> request by the consumer systems.</li>
-<li>The provider SHALL verify the given access token itself by <a href="https://en.wikipedia.org/wiki/Base64">Base64</a> decoding it and reading the payload content.</li>
+<li>The provider SHALL verify the given access token itself by <a href="https://en.wikipedia.org/wiki/Base64">Base64</a> decoding it with <a href="https://en.wikipedia.org/wiki/ISO/IEC_8859-1">ISO 8859-1</a> charset and reading the payload content.</li>
 <li>Based on the payload content, the provider SHALL verify whether<ul>
 <li>the token is not expired,</li>
 <li>the token is issued for its system name,</li>
