@@ -1,3 +1,8 @@
+---
+name: "🚀 AH Release Checklist"
+about: "Use this checklist for tracking a new Arrowhead FW release"
+---
+
 # 🚀 Release Checklist
 
 ## Release-plan
