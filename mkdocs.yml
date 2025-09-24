@@ -234,7 +234,11 @@ nav:
     - FAQ: help/faq.md
     - Known Issues: help/known-issues.md
     - Migrate from v4:  help/migration-guide.md
-  - Client Libraries: client_libraries.md
+  - Tools & Assets:
+    - Client Libraries: tools_assets/client_libraries.md
+    - Translation:
+      - Translation Providers: tools_assets/translation/translation_providers.md
+      - Translation Provider Dev: tools_assets/translation/translation_provider_dev.md
   - Contribute: 
     - Bug Report: contribute/bug-report.md
     - Code Contribution: contribute/code-contribution.md
