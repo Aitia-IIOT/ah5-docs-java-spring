@@ -6,7 +6,7 @@ A unique **String** of characters that is issued for a beneficiary system and is
 
 ## AccessTokenVariant
 
-**String** value that specifies an exact token technology variant. The possible values are `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `BASE64_SELF_CONTAINED_TOKEN_AUTH`, `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, `RSA_SHA512_JSON_WEB_TOKEN_AUTH`.
+**String** value that specifies an exact token technology variant. The possible values are `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `BASE64_SELF_CONTAINED_TOKEN_AUTH`, `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, `RSA_SHA512_JSON_WEB_TOKEN_AUTH`, `TRANSLATION_BRIDGE_TOKEN_AUTH`.
 
 ## Address 
 
@@ -133,7 +133,6 @@ A **String** identifier of any suitable validator function chosen by the impleme
             }
     ```
     The validation and normalization happens according to the HTTP standards.
-
   
 ## Protocol
 
@@ -145,7 +144,7 @@ A Base64 **String** representation of the public byte array cryptographic key re
 
 ## SecurityPolicy
 
-A **String** representation of security policies. The possible values are: `NONE`, `CERT_AUTH`, `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `BASE64_SELF_CONTAINED_TOKEN_AUTH`, `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, `RSA_SHA512_JSON_WEB_TOKEN_AUTH`.
+A **String** representation of security policies. The possible values are: `NONE`, `CERT_AUTH`, `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `BASE64_SELF_CONTAINED_TOKEN_AUTH`, `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, `RSA_SHA512_JSON_WEB_TOKEN_AUTH`, `TRANSLATION_BRIDGE_TOKEN_AUTH`.
 
 ## ServiceInstanceID
 
@@ -176,7 +175,7 @@ A **String** identifier that is intended to be both human and machine-readable. 
 
 ## TokenType
 
-A **String** name that groups token technologies by usage characteristics. Can be `USAGE_LIMITED_TOKEN`, `TIME_LIMITED_TOKEN` or `SELF_CONTAINED_TOKEN`.
+A **String** name that groups token technologies by usage characteristics. Can be `USAGE_LIMITED_TOKEN`, `TIME_LIMITED_TOKEN`, `SELF_CONTAINED_TOKEN` or `TRANSLATION_BRIDGE_TOKEN`.
 
 ## UUID
 

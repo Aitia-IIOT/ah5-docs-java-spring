@@ -55,7 +55,7 @@
 
 :fontawesome-solid-circle-exclamation: In v4, the security policy cloud be defined on service instance level. In v5, the security policy has to be defined on service instance interface level.
 
-:fontawesome-solid-circle-exclamation: In v4, only one type of `TOKEN` security policy was available. In v5, [multiple token related security policies](../api/primitives.md#securitypolicy) are available.
+:fontawesome-solid-circle-exclamation: In v4, only one type of `TOKEN` security policy was available. In v5, [multiple token related security policies](../help/service-security.md#token-based) are available.
 
 :fontawesome-solid-circle-exclamation: In v4, system registration could happen together with service instance registration. In v5, this is no longer supported. Application systems must register first as systems, and service registration is only possible afterward.
 
@@ -103,7 +103,7 @@
 
 :fontawesome-solid-circle-exclamation: In v4, peer-to-peer authorization rules could be applied. In v5, policy-based authorization rules can be defined. 
 
-:fontawesome-solid-circle-exclamation: In v4, only one type of authorization token was available. In v5, [multiple authorization tokens](../api/primitives.md#accesstokenvariant) are available.
+:fontawesome-solid-circle-exclamation: In v4, only one type of authorization token was available. In v5, [multiple authorization tokens](../help/service-security.md#token-based) are available.
 
 :fontawesome-solid-gears: Application systems need to be updated to use the [get-public-key](../api/consumerauthorization/authorization-token-generic-http.md#get-public-key) service-operation of [authorizationToken](../core_systems/authorization.md#authorizationtoken) replacing the `auth-public-key` service used in v4. (Consider using other type of tokens beside the signed JWT.)
 
