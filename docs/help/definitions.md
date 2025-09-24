@@ -13,7 +13,7 @@ An identifiable software instance that is hosted by a [device](#device) and coll
 
 ### Microservice or Service
 
-An identifiable set of [service-operations](./definitions.md#service-operation) offered by a [system](#microsystem-or-system) that covers a well-definied scope of activities. 
+An identifiable set of [service-operations](./definitions.md#service-operation) offered by a [system](#microsystem-or-system) that covers a well-defined scope of activities. 
 
 ### Service Operation
 
