@@ -1,8 +1,8 @@
-# Contribute
+# Code Contribution
 
 ## Eclipse Contributor Agreement
 
-Since Arrowhead project is governed within the Eclipse Foundation, the authors of any contribution must agree and accept the [Eclipse Contributor Agreement ("ECA")](https://www.eclipse.org/legal/ECA.php).
+Since Arrowhead project is governed within the [Eclipse Foundation](https://projects.eclipse.org/projects/iot.arrowhead), the authors of any contribution must agree and accept the [Eclipse Contributor Agreement ("ECA")](https://www.eclipse.org/legal/ECA.php).
 
 Technically it means that contributors need an [Eclipse Fundation Account](https://accounts.eclipse.org/user/register?destination=user/edit) which makes possible to submit a signed ECA! GitHub Pull Requests could be accepted only when all the authors own an Eclipse Foundation Account with the signed ECA!
 
@@ -18,11 +18,14 @@ Use the command below to configure your git client globally:
 
 Whithout the `--global` flag you can set the email address only for that specific project where the command was executed.
 
+[Learn more from Eclipse Handbook.](https://www.eclipse.org/projects/handbook/#resources-commit)
+
 ## Way of contributing
 
 1) **Fork (and not clone) the project repository.**
 
    - [Working with forks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks)
+   - For developing a completely new components, [open a ticket](https://github.com/eclipse-arrowhead/roadmap/issues/new)
 
 2) **Create a new branch in your fork and from the `development` branch for your contribution.**
 
@@ -30,7 +33,7 @@ _(Creating and pushing new branches within a cloned repository is allowed only f
 
 3) **Take care of coding clean!**
 
-   - Stick to the [Implementation Structure](./implementation.md#implementation-structure)
+   - Stick to the [Implementation Structure](../home/implementation.md#implementation-structure)
    - [Clean coding in Java](https://www.baeldung.com/java-clean-code)
    - [A short summary of Java coding best practices](https://rhamedy.medium.com/a-short-summary-of-java-coding-best-practices-31283d0167d3)
 

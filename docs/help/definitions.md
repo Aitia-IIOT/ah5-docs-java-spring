@@ -9,15 +9,31 @@ A preferably private and protected network of loosely coupled collaborating [sys
 
 ### Microsystem or System
 
-An identifiable software instance that collaborates within a [Local Cloud](./definitions.md#local-cloud). A system can play a [consumer](./definitions.md#consumer) role, a [provider](./definitions.md#provider) role or both.
+An identifiable software instance that is hosted by a [device](#device) and collaborates within a [Local Cloud](./definitions.md#local-cloud). A system can play a [consumer](./definitions.md#consumer) role, a [provider](./definitions.md#provider) role or both.
 
 ### Microservice or Service
 
-An identifiable set of [service-operations](./definitions.md#service-operation) that covers a well-definied scope of activities. 
+An identifiable set of [service-operations](./definitions.md#service-operation) offered by a [system](#microsystem-or-system) that covers a well-defined scope of activities. 
 
 ### Service Operation
 
 An individually identifiable component of a [service](./definitions.md#microservice-or-service), that can be consumed by a collaborating [system](./definitions.md#microsystem-or-system). An operation performs a single physical or virtual action related to its [service](./definitions.md#microservice-or-service) scope, while producing output data and possibly processing input data. 
+
+### Service Interface
+
+A boundary across which the underlying capabilities of a [service](#microservice-or-service) are accessible. It specifies the [operations](#service-operation) available, the protocols used, and the input and output aspects.
+
+### Core System
+
+A fundamental [system](#microsystem-or-system) component of a [Local Cloud](#local-cloud) that addresses essential needs. No Local Cloud can be established without at least one Core System.
+
+### Support System
+
+Additional [system](#microsystem-or-system) component to a [Local Cloud](#local-cloud) that addresses general, but not essential needs. 
+
+### Application system
+
+A [micro system](#microsystem-or-system) that joins to a [Local Cloud](#local-cloud) to provide and/or to consume [micro services](#microservice-or-service).
 
 ## Supplementary
 
@@ -32,6 +48,10 @@ A digital certificiate that securely holds the identity of its owner and also ca
 ### Consumer 
 
 A [system](./definitions.md#microsystem-or-system) that wants use [services](./definitions.md#microservice-or-service).
+
+### Device
+
+A physical or virtual entity with certain automation and compute capabilities. Devices are capable of hosting at least one [system](#microsystem-or-system).
 
 ### Event
 
