@@ -14,6 +14,13 @@ Built by Material for MkDocs
 
 - start dev server: `mkdocs serve`
 
+## Release
+
+**Versioning**
+- PATCH: Corrections on existing resources
+- MINOR: Creations of new pages
+- MAJOR: New Core/Support system docs due to new AH release or structural changes of the site
+
 ## Deploy
 
 - run: `mkdocs gh-deploy`
