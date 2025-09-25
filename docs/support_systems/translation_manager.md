@@ -9,7 +9,7 @@ Learn more: <br />
 
 ### translationBridge
 
-The purpose of translationBridge is to find providers whose service operation is accessible via a translation bridge using the currently available translators and to build/abort such bridges. This service is offered for Application systems (consumers). 
+The purpose of translationBridge is to find providers whose service operation is accessible by the requester via a translation bridge using the currently available translators and to build/abort such bridges. This service is offered for Application systems (consumers). 
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-bridge_sd.pdf) TODO<br />
@@ -19,14 +19,14 @@ Learn more: <br />
 
 **discovery**
 
-This service operation checks a list of possible providers for a service operation and returns only those that can be used by the requester via a translation bridge using the currently available translators. 
+This service operation checks a list of possible providers for a service operation and returns only those that can be consumed by the requester via a translation bridge using the currently available translators. 
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#discovery) TODO | [generic_https]((../api/translationmanager/translation-bridge-generic-http.md#discovery) TODO <br />
-:material-arrow-right-thin: Example: [generic_mqtt]((../api/translationmanager/translation-bridge-generic-mqtt.md#discovery) TODO | [generic_mqtts]((../api/translationmanager/translation-bridge-generic-mqtt.md#discovery) TODO
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#discovery) TODO | [generic_https](../api/translationmanager/translation-bridge-generic-http.md#discovery) TODO <br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-generic-mqtt.md#discovery) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-generic-mqtt.md#discovery) TODO
 
 **negotiation**
 
-This service operation allows consumers to create a translation bridge to one selected provider's one particular service operation. It ia possible to do discovery during the negotiation if no prior discovery is happened.
+This service operation allows consumers to create a translation bridge to one selected provider's one particular service operation. It is possible to do discovery during the negotiation if no prior discovery is happened.
 
 :material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#negotiation) TODO | [generic_https](../api/translationmanager/translation-bridge-generic-http.md#negotiation) TODO<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-generic-mqtt.md#negotiation) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-generic-mqtt.md#negotiation) TODO
@@ -42,7 +42,7 @@ This service operation aborts an existing bridge created by the requester. After
 
 ### translationReport
 
-The purpose of translationReport service is to provide a tool for the interface translators to send events about their related translation bridges.
+The purpose of translationReport service is to provide a tool to send events about translation bridges. This service is offered for interface translator systems.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-report_sd.pdf) TODO<br />
@@ -59,36 +59,43 @@ This service operation reports about an event related to a translation bridge. E
 
 -----
 
-### blacklistManagement
+### translationBridgeManagement
 
-Its purpose is to manage (query, create and remove) blacklist entries in bulk. The service is offered for administrative Support systems.
+The main purpose of translationBridgeManagement is to find providers whose service operation is accessible by a specified consumer via a translation bridge using the currently available translators and to build such bridges. It also offers bulk abortion and query functionalities. This service is offered for Core/Support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/blacklistManagement_sd.pdf) <br />
-:material-api: [generic_http (IDD)](../api/blacklist/blacklistManagement-generic-http.md) | [generic_https (IDD)](../api/blacklist/blacklistManagement-generic-http.md) <br />
-:material-api: [generic_mqtt (IDD)](../api/blacklist/blacklistManagement-generic-mqtt.md) | [generic_mqtts (IDD)](../api/blacklist/blacklistManagement-generic-mqtt.md) <br />
-:material-tag: since: v5.0.0 
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-bridge-management_sd.pdf) TODO<br />
+:material-api: [generic_http (IDD)](../api/translationmanager/translation-bridge-management-generic-http.md) TODO | [generic_https (IDD)](../api/translationmanager/translation-bridge-management-generic-http.md) TODO<br />
+:material-api: [generic_mqtt (IDD)](../api/translationmanager/translation-bridge-management-generic-mqtt.md) TODO | [generic_mqtts (IDD)](../api/translationmanager/translation-bridge-management-generic-mqtt.md) TODO<br />
+:material-tag: since: v5.1.0
+
+**discovery**
+
+This service operation checks a list of possible providers for a service operation and returns only those that can be consumed by the specified consumer via a translation bridge using the currently available translators. 
+
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#discovery) TODO | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#discovery) TODO <br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-management-generic-mqtt.md#discovery) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-management-generic-mqtt.md#discovery) TODO
+
+**negotiation**
+
+This service operation allows to create a translation bridge for a specified consumer to one specified provider's one particular service operation.
+
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#negotiation) TODO | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#negotiation) TODO<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-management-generic-mqtt.md#negotiation) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-management-generic-mqtt.md#negotiation) TODO
+
+**abort**
+
+This service operation aborts a list of existing bridges. After abortion the targeted service operations will not be available via the bridges.
+
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#abort) TODO | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#abort) TODO<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-management-generic-mqtt.md#abort) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-management-generic-mqtt.md#abort) TODO
 
 **query**
 
-This service operation returns existing blacklist entries according to the given filters.
+This service operation returns bridge details according to the given filters. It is possible to get information about bridges that no longer exists.
 
-:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#query) | [generic_https](../api/blacklist/blacklistManagement-generic-http.md#query)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistManagement-generic-mqtt.md#query) | [generic_mqtts](../api/blacklist/blacklistManagement-generic-mqtt.md#query)
-
-**create**
-
-This service operation creates active blacklist entries in bulk.
-
-:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#create) | [generic_https](../api/blacklist/blacklistManagement-generic-http.md#create)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistManagement-generic-mqtt.md#create) | [generic_mqtts](../api/blacklist/blacklistManagement-generic-mqtt.md#create)
-
-**remove**
-
-This service operation inactivates every entry that applies to the specified systems. Note that this will not remove the entry from the database.
-
-:material-arrow-right-thin: Example: [generic_http](../api/blacklist/blacklistManagement-generic-http.md#remove) | [generic_https](../api/blacklist/blacklistManagement-generic-http.md#remove)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/blacklist/blacklistManagement-generic-mqtt.md#remove) | [generic_mqtts](../api/blacklist/blacklistManagement-generic-mqtt.md#remove)
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#query) TODO | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#query) TODO<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-management-generic-mqtt.md#query) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-management-generic-mqtt.md#query) TODO
 
 -----
 
@@ -159,6 +166,16 @@ Auto initialization of database tables. Value must be always 'none'.
 
 ### Custom parameters
 
+:fontawesome-solid-wrench: **authenticator.credentials**
+
+The credentials that this system will use for performing the login operation when the authentication policy is `outsourced`.
+
+```
+authenticator.credentials={\
+	'<credential-name>': '<credential-value>' \
+}
+```
+
 :fontawesome-solid-wrench: **enable.management.filter**
 
 Enable or disable authorization for accessing the management services. Can be `true` of `false`.
@@ -175,13 +192,45 @@ Way of authorizing the management service requester systems. Can be:
 
 Name of the systems which can access to management services in case of `whitelist` policy is effective.
 
+:fontawesome-solid-wrench: **enable.blacklist.filter**
+
+Enable/disable automatic service requester system name verification against to cloud level blacklist. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **force.blacklist.filter**
+
+Whether or not the service requests should be refused when the blacklist server is not responding. Can be `true` or `false`.
+
+:fontawesome-solid-wrench: **blacklist.check.exclude.list**
+
+Comma-separated list that contains systems whose requests are served without checking the cloud level blacklist, even if blacklist is enabled.
+
+:fontawesome-solid-wrench: **enable.authorization**
+
+Enable or disable the authorization cross-checking during the discovery phase. (when ConsumerAuthorization Arrowhead Core System is deployed to the Local Cloud).
+
+:fontawesome-solid-wrench: **enable.custom.configuration**
+
+Enable or disable the feature to load custom configurations for the translators (when Configuration Arrowhead Support System is deployed to the Local Cloud).
+
+:fontawesome-solid-wrench: **allow.discovery.flags**
+
+Enable or disable the feature to fine-tune the checking behavior of the translationBridgeManagement/discovery operation by the requester (blacklist and authorization checks).
+
+:fontawesome-solid-wrench: **translator.service.min.availability**
+
+Specifies what is the minimum availability time of the interface- and data model translator services in minutes. If the value is non-positive, then service availability won't be checked.
+
 :fontawesome-solid-wrench: **max.page.size**
 
 Specifies the maximum number of records a page can contain in case of pageable service responses.
 
-:fontawesome-solid-wrench: **whitelist**
+:fontawesome-solid-wrench: **translation.discovery.max.age**
 
-Name of the systems that cannot be blacklisted. By starting the application, existing blacklist records belonging to these systems will be inactivated as well.
+Specifies after how many hours the translation discovery records can be deleted.
+
+:fontawesome-solid-wrench: **cleaner.job.interval**
+
+Specifies how often (in miliseconds) to check the database for obsoleted discovery records.
 
 ### Logging configuration
 
@@ -191,7 +240,7 @@ folder.
 **_Note:_** During the build process this file is going to be built into the executable JAR, but it is also possible to
 override it by an external file. For that use the following command when starting the system:
 ```
-java -jar arrowhead-blacklist-x.x.x.jar
+java -jar arrowhead-translation-manager-x.x.x.jar
      -Dlog4j.configurationFile=path-to-external-file
 ```
 
@@ -208,14 +257,3 @@ INFO, WARN, ERROR, FATAL, OFF.
 :fontawesome-solid-wrench: **LOG_DIR**
 
 Set this to change the directory of log files.
-
-## Changelog
-
-#### :material-tag: v5.0.0 
-
-Related in CL-5.0.0
-
-- [general](../general/changelogs/cl500.md#general)
-- [arrowhead-common-utils](../general/changelogs/cl500.md#arrowhead-common-utils)
-- [arrowhead-data-transfer-objects](../general/changelogs/cl500.md#arrowhead-data-transfer-objects)
-- [arrowhead-blacklist](../general/changelogs/cl500.md#arrowhead-blacklist)
