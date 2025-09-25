@@ -15,7 +15,7 @@ about: "Use this checklist for tracking a new Arrowhead FW release"
 
 ## Pre-release
 - [ ] Update documentation site with relevant contents (SysD, SD, API Page, Tutorials, etc.)
-- [ ] Finalize the changelog on the documentation site
+- [ ] Finalize the changelog on the documentation site and refer it from Release Versions page
 - [ ] Make sure that every Core/Support systems have working docker build files (system and database)
 - [ ] Update the docker compose examples to refer the proper version number and make new compose examples for new systems if any
 - [ ] Update the NOTICE file in every repository with new repositories (if any) and new 3rd party libraries if any
