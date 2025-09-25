@@ -1,3 +1,3 @@
 # Translation Provider Development
 
-TODO
+TODO SysD + SD + IDD-k (kicvétel a dynamic interface)
