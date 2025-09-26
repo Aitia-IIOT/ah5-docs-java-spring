@@ -217,14 +217,3 @@ Set this to change the level of log messages in console and the log file. Levels
 :fontawesome-solid-wrench: **LOG_DIR**
 
 Set this to change the directory of log files.
-
-## Changelog
-
-#### :material-tag: v5.0.0 
-
-Related in CL-5.0.0
-
-- [general](../general/changelogs/cl500.md#general)
-- [arrowhead-common-utils](../general/changelogs/cl500.md#arrowhead-common-utils)
-- [arrowhead-data-transfer-objects](../general/changelogs/cl500.md#arrowhead-data-transfer-objects)
-- [arrowhead-authentication](../general/changelogs/cl500.md#arrowhead-authentication)
