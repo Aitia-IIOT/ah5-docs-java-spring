@@ -116,6 +116,7 @@ nav:
       - AuthorizationTokenMap: api/data-models/authorization-token-map.md
       - AuthorizationTokenMgmtResponse: api/data-models/authorization-token-mgmt-response.md
       - AuthorizationTokenQueryRequest: api/data-models/authorization-token-query-request.md
+      - AuthorizationTokenVerifyResponse: api/data-models/authorization-token-verify-response.md
       - AuthorizationVerifyRequest: api/data-models/authorization-verify-request.md
       - BlacklistCreateListRequest: api/data-models/blacklist-create-list-request.md
       - BlacklistCreateRequest: api/data-models/blacklist-create-request.md
