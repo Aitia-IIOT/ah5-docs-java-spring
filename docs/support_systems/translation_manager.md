@@ -3,7 +3,7 @@
 This Support system can discover whether a consumer can consume possible providers' service operation even if there is no common interface between them or are using different data models. If an appropriate provider is selected, the Support System can build a translation bridge between the consumer and the provider using an independent interface translator and optionally one or two data model translators. The Translation Manager is also storing information about the translation bridges.
 
 Learn more: <br />
-:material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_1_0/translationmanager_sysd.pdf) TODO
+:material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_1_0/translationmanager_sysd.pdf) 
 
 ## Services
 

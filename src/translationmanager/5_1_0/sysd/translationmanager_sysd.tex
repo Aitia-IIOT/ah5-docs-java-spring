@@ -89,7 +89,7 @@
 \section{Overview}
 \label{sec:overview}
 \color{black}
-This document describes the TranslationManager Support system, which exists to help the communication between a consumer and a provider if there is no common interface between them and/or are using different data models.  The TranslationManager achieves this goal by building a translation bridge using various translator systems (application systems) as building blocks. An other example of such help is the ability to determine is there a possibility to build such bridge with the currently available translators.
+This document describes the TranslationManager Support system, which exists to help the communication between a consumer and a provider if there is no common interface between them and/or are using different data models.  The TranslationManager achieves this goal by building a translation bridge using various translator systems (application systems) as building blocks. An other example of such help is the ability to determine the possibility to build such bridge with the currently available translators.
 
 The rest of this document is organized as follows.
 In Section \ref{sec:prior_art}, we reference major prior art capabilities
@@ -112,7 +112,7 @@ One of the main issue when realizing such Local Cloud is that multiple applicati
 
 The TranslationManager Support system can build such proxies by utilizing various translator components (application systems that can translate between interfaces or between different data models).
 
-The previous versions of the Arrowhead Framework (4.6.x) have a similar system (translator) that offers similar functionality, but it want to contain all translation related logic in one system. It provides very limited options for translation and every new option would require additional code to the translator Support system.
+The previous versions of the Arrowhead Framework (4.6.x) have a system (translator) that offers similar functionality, but it want to contain all translation related logic in one system. It provides very limited options for translation and every new option would require additional coding in the translator Support system.
 
 In case of the TranslationManager system, its usefulness can be increased by deploying new interface and/or data model translators into the Local Cloud, and the Support system can use them without any additional requirement.
 
@@ -121,9 +121,16 @@ In case of the TranslationManager system, its usefulness can be increased by dep
 
 TranslationManager is a Support system of Eclipse Arrowhead Local Cloud and is responsible for building communication bridges between application systems that can't communicate each other directly. 
 
-An service orchestration Core system can use the TranslationManager's functionality to offer a service instance for the consumer even there is no exact match for the interface requirements.
+A service orchestration Core system can use the TranslationManager's functionality to offer a service instance for the consumer even there is no exact match for the interface requirements. Figure \ref{fig:translation_process} describes this use case.
 
 Additionally, a consumer can consume the TranslationManager's translationBridge service to determine which service instance candidates can be use via translation bridge. If such service instance exists, the consumer can ask the TranslationManager to build the translation bridge.
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=\textwidth]{figures/TranslatorManagerv5.jpg}
+  \caption{Translation process with a service orchestration system}
+  \label{fig:translation_process}
+\end{figure}
 
 \subsection{System functionalities and properties}
 \label{sec:properties}
@@ -164,12 +171,10 @@ In order to achieve the mentioned functionalities, TranslationManager is capable
 \subsection{Important Delimitations}
 \label{sec:delimitations}
 
-TODO: continue from here
-
 \begin{itemize}
-    \item Names (device name, system name, service definition name, service instance name, interface name) must be unique in the Local Cloud.
-    \item If the Local Cloud does not contain an Authentication system or does not using X.509 certificates, there is no way for the ServiceRegistry to verify the requester system. In that case, the ServiceRegistry will consider the authentication data that comes from the requester as valid.
-    \item If ServiceRegistry's lookup is strict, only "public" services (such as the \textit{serviceOrchestration} service) can be queried directly from the ServiceRegistry by the application systems. For any "non-public" services the application systems need to orchestrate. "Public" services should be marked in the ServiceRegistry, for example using a service instance meta data entry.
+    \item If the Local Cloud does not contain an Authentication system or does not using X.509 certificates, there is no way for the TranslationManager to verify the requester system. In that case, the TranslationManager will consider the authentication data that comes from the requester as valid.
+    \item TranslationManager can't work alone. For every translation bridge it needs an appropriate 
+    interface translator and optionally one or two data model translators. These translators are ordinary providers registered in the ServiceRegistry.
 \end{itemize}
 
 \newpage
@@ -178,17 +183,14 @@ TODO: continue from here
 \label{sec:services}
 
 \phantomsection
-\msubsection{service}{serviceDiscovery}
-The purpose of this service is to lookup, publish and revoke provided services. The service is offered for both application and Core/Support systems. 
+\msubsection{service}{translationBridge}
+The purpose of this service is to find providers whose service operation is accessible by the requester via a translation bridge using the currently available translators and to build/abort such bridges. This service is offered for Application systems (consumers). 
 
-\msubsection{service}{systemDiscovery}
-The purpose of this service is to lookup, publish and revoke systems that are part of (or want to be part of) the Local Cloud. The service is offered for both application and Core/Support systems. 
+\msubsection{service}{translationReport}
+The purpose of this service is to provide a tool to send events about translation bridges. This service is offered for interface translator systems.
 
-\msubsection{service}{deviceDiscovery}
-The purpose of this service is to lookup, publish and revoke devices on which the Local Cloud's systems are running. The service is offered for both application and Core/Support systems. 
-
-\msubsection{service}{serviceRegistryManagement}
-Recommended service.  Its purpose is to manage service definitions, service instances, interfaces, systems and devices in bulk. The different operations provide querying, registering and unregistering functionalities. The service is offered for administrative Support systems. 
+\msubsection{service}{translationBridgeManagement}
+The purpose of this service is to find providers whose service operation is accessible by a specified consumer via a translation bridge using the currently available translators and to build such bridges. It also offers bulk abortion and query functionalities. This service is offered for Core/Support systems.
 
 \msubsection{service}{monitor}
 Recommended service. Its purpose is to give information about the provider system. The service is offered for both application and Core/Support systems.
@@ -198,11 +200,11 @@ Recommended service. Its purpose is to give information about the provider syste
 \section{Security}
 \label{sec:security}
 
-For authentication, the ServiceRegistry can utilize an other core system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the ServiceRegistry can accept X.509 certificates for identification. If none of these are available, the ServiceRegistry trusts the requester system's self-provided identity.
+For authentication, the TranslationManager can utilize an other core system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the TranslationManager can accept X.509 certificates for identification. If none of these are available, the TranslationManager trusts the requester system's self-provided identity.
 
-For authorization, in strict lookup, the ServiceRegistry only allows to lookup "public" services. Information about all other services (including the \textit{serviceRegistryManagement}) are only available through orchestration or using the \textit{serviceRegistryManagement} service. Systems can only register/unregister themselves and their services/device. In open mode, information about all the services are available for lookup.
+For authorization, \textit{translationBridge} is available for everyone who can get access information via service orchestration (or directly from the ServiceRegistry, if direct lookup is allowed in the Local Cloud). The \textit{translationBridgeManagement} service is available those who has the appropriate permissions. The \textit{translationReport} is only available for interface translators and every interface translator can only report about their own translation bridges.
 
-The implementation of the ServiceRegistry can decide about the encryption of the connection between the ServiceRegistry and other systems. 
+The implementation of the TranslationManager can decide about the encryption of the connection between the TranslationManager and other systems. 
 
 \newpage
 
