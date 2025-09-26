@@ -264,14 +264,3 @@ Specifies in milisec, that how often the expired subscriptions and the orchestra
 :fontawesome-solid-wrench: **push.orchestration.max.thread**
 
 Specifies the maximum number of threads that can be allocated to process push orchestration tasks.
-
-## Changelog
-
-#### :material-tag: v5.0.0 
-
-Related in CL-5.0.0
-
-- [general](../general/changelogs/cl500.md#general)
-- [arrowhead-common-utils](../general/changelogs/cl500.md#arrowhead-common-utils)
-- [arrowhead-data-transfer-objects](../general/changelogs/cl500.md#arrowhead-data-transfer-objects)
-- [arrowhead-serviceorchestration-dynamic](../general/changelogs/cl500.md#arrowhead-serviceorchestration-dynamic)
