@@ -50,11 +50,11 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{authorization} % XXX = ServiceName 
-\ArrowheadServiceID{authorization} % ID name of service
+\ArrowheadTitle{translationBridge} % XXX = ServiceName 
+\ArrowheadServiceID{translationBridge} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
-\ArrowheadVersion{5.0.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadVersion{5.1.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
 \ArrowheadDate{\today}
 \ArrowheadAuthor{Rajmund Bocsi} % Corresponding author e.g. Jerker Delsing
 \ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
@@ -83,7 +83,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{authorization} service. 
+    This document provides service description for the \textbf{translationBridge} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -107,15 +107,16 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{authorization} service, which enables service consumption permission validations for both providers and consumers.  Additionally, providers can lookup, grant and revoke those permissions. An example of this interaction is when a provider system creates authorization policies about its offered service. An other example is when a consumer can check whether a service is allowed to use before trying an actual service consumption. Event notification permission is also handled by this service in an event publisher/subscriber scenario. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+This document describes the \textbf{translationBridge} service, which enables to find providers whose service operation is accessible by the requester via a translation bridge using the currently available translators and to build/abort such bridges. An example of this interaction is when a consumer system can't find a suitable provider for a specified service operation and try to determine whether it is possible to use one of the providers utilizing various translators.
 
-The \textbf{authorization} service contains the following operations:
+To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+
+The \textbf{translationBridge} service contains the following operations:
 
 \begin{itemize}
-    \item \textit{grant} creates a provider-level authorization policy;
-    \item \textit{revoke} removes such policy;
-    \item \textit{lookup} lists the provider-owned authorization policies that match the filtering requirements;
-    \item \textit{verify} checks whether a consumer can use a provider's service/service operation or a subscriber can be notified when a publisher publishes a type of event.
+    \item \textit{discovery} checks a list of possible providers for a service operation and returns only those that can be consumed by the requester via a translation bridge using the currently available translators;
+    \item \textit{negotiation} allows consumers to create a translation bridge to one selected provider's one particular service operation (should be used after a successful discovery but it is possible to do that during the negotiation if no prior discovery is happened);
+    \item \textit{abort} aborts an existing bridge created by the requester.
 \end{itemize}
 
 The rest of this document is organized as follows.
@@ -123,9 +124,16 @@ In Section \ref{sec:functions}, we describe the abstract message operations prov
 In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
 
 \subsection{How This Service Is Meant to Be Used}
-Provider systems should call the \textit{grant} operation to create authorization rules about their offered services. If the provider no longer provides a service, it should use \textit{revoke} operation to remove the related policies. Rules can be changed by \textit{revoking} the existing ones and creating the new ones using the \textit{grant} operation.
 
-Consumer systems should call the \textit{verify} operation to check whether a service instance (or a particular operation of that service instance) can be used before attempting the service consumption. Similarly, a provider system should use \textit{verify} when it receives a request to decide whether the request should be fulfilled or not.
+This service should be used by a consumer system in Local Clouds where simple rule-based service orchestration is available or there is no service orchestration at all.
+
+Consumer systems should call the \textit{discovery} operation with "almost good" service instance candidates that comes from the Service Registry. "Almost good" means that these candidates provides the required service operation but the direct communication is not possible because of missing common interfaces and/or different data models. Operation \textit{discovery} returns the identifiers those candidates that can be accessed by the consumer via a translation bridge alongside with an identifier.
+
+Consumer systems then should call the \textit{negotiation} operation with the above-mentioned identifier and one of the candidates and the operation builds the translation bridge (based on the data collected during the \textit{discovery}) and return its access information.
+
+Please note that it is possible to use the \textit{negotiation} operation without using the \textit{discovery} operation first. In that case consumer can't provide the identifier mentioned before, but needs to specify additional requirements. If no identifier is provided, the \textit{negotiation} automatically executes the \textit{discovery} operation on that one candidate that is specified before trying to build a translation bridge.
+
+After the consumer has finished the work with the translation bridge, it should call the \textit{abort} to eliminate the bridge and free up resources.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -147,62 +155,48 @@ The input type is named inside parentheses, while the output type is preceded by
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
 
 \phantomsection
-\fsubsection{grant}{AuthorizationGrantRequest}{AuthorizationPolicyResponse}{}{ErrorResponse}
+\fsubsection{discovery}{TranslationDiscoveryRequest}{TranslationDiscoveryResponse}{}{ErrorResponse}
 
-Operation \textit{grant} creates a provider-level authorization policy. The grant data must meet the following criteria:
+Operation \textit{discovery} checks a list of possible providers for a service operation and returns only those that can be consumed by the requester via a translation bridge using the currently available translators. The request data must meet the following criteria:
 
 \begin{itemize}
-    \item With this operation the requester can only define authorization policy for its own services/event types. If a management-level policy for the same service instance/event type exists, this one will be ignored. 
-    \item The target type can be a service definition or an event type. 
-    \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Target can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
-    \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
-    \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
-    \item The default policy is mandatory and describes who can use the target when a more specialized policy is not available. In case of event types, only the default policy is allowed to specify.
-    \item Scoped policies are optional and can contain the specialized policies. Scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (English alphabet), numbers and dash (-), have to start with a letter, and cannot end with a dash.
-    \item Policies have types that describe how the policies are defined:
+    \item With this operation the requester can only found good candidates to accessing one of their service operation via a translation bridge for itself. 
+    \item The target operation is mandatory and must follow the kebab-case naming convention.  Operation can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+    \item Interface template name list is mandatory and can not be empty. Every interface template name must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and have to start with a letter.
+    \item Candidates list is mandatory can not be empty. Every candidate has to specify its service instance id, provider's name, service definition name and information about its interfaces:
+    \begin{itemize}
+        \item Service instance id must be a valid \pref{ServiceInstanceID}.
+        \item Provider's name must follow the PascalCase naming convention, can contain maximum of 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+        \item Service definition must follow the camelCase naming convention can contain maximum of 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+        \item Interface list can not be empty and its every element must meet the following criteria:
         \begin{itemize}
-            \item \textit{Public in cloud}: All consumers of the specified cloud can use the specified target/scope.
-            \item \textit{Whitelist-based}: All specified consumers (in a list) of the specified cloud can use the specified target/scope.
-            \item \textit{Blacklist-based}: All consumers of the specified cloud but the specified ones (in a list) can use the specified target/scope.
-            \item \textit{System-level metadata-based}: Consumers of the specified cloud with a matching system-level metadata can use the specified target/scope.
+            \item Template name is mandatory and must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and have to start with a letter.
+            \item Policy is mandatory and must be a valid \pref{SecurityPolicy}.
+            \item Properties must contain a structure that is a valid \hyperref[sec:model:DataModelMap]{DataModelMap} and contains an entry for the specified operation. This is not necessary for operations without any input or output payload.
+            \item Properties must contain every interface-dependent information that is necessary for access (for example, address, port, path, topic, etc.).
         \end{itemize}
-    \item Policies with type \textit{Whitelist-based} or \textit{Blacklist-based} have a mandatory system name list parameter. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (English alphabet) and numbers, and have to start with a letter.
-    \item Evaluating policies with type \textit{System-level metadata-based} requires an online ServiceRegistry.
+    \end{itemize}
 \end{itemize}
 
-\fsubsection{revoke}{AuthorizationRevokeRequest}{}{OperationStatus}{ErrorResponse}
+\fsubsection{negotiation}{TranslationNegotiationRequest}{TranslationNegotiationResponse}{}{ErrorResponse}
 
-Operation \textit{revoke} removes an authorization policy instance from the Local Cloud. The input operation data must meet the following criteria:
+Operation \textit{negotiation} allows consumers to create a translation bridge to one selected provider's one particular service operation. The request data must meet the following criteria:
 
 \begin{itemize}
-    \item The requester can only remove its own authorization policies.
+    \item Target is mandatory.
+    \item If bridge identifier is specified only the service instance identifier of the target is necessary.
+    \item In either case, service instance identifier is mandatory and  must be a valid \pref{ServiceInstanceID}.
+    \item If bridge identifier is missing, a \textit{discovery} operation is automatically called before the negotiation steps where the only candidate is the target. That means target must meet the criteria about candidates mentioned at operation \textit{discovery}. 
+    \item The same is true in the case of operation and interface template names parameters.
 \end{itemize}
 
-\fsubsection{lookup}{AuthorizationLookupRequest}{AuthorizationPolicyListResponse}{}{ErrorResponse}
+\fsubsection{abort}{BridgeIdentifier}{}{OperationStatus}{ErrorResponse}
 
-Operation \textit{lookup} lists the provider-owned authorization policies that match the filtering requirements. The lookup data must meet the following criteria:
-
-\begin{itemize}
-    \item With this operation a requester system can only list authorization policies that were created by the requester system.
-    \item If a filter expects a list, there is an OR relation between the elements of the filter.
-    \item There is an AND relation between different kind of filters.
-    \item To use this operation, an application system must specify at least one policy instance id OR one target name OR one cloud identifier.
-    \item If target name is specified then target type is mandatory.
-\end{itemize}
-
-\fsubsection{verify}{AuthorizationVerifyRequest}{AuthorizationVerifyResponse}{}{ErrorResponse}
-
-Operation \textit{verify} checks whether a consumer can use a provider's service/service operation or a subscriber can be notified when a publisher publishes a type of event. The input data must meet the following criteria:
+Operation \textit{abort} aborts an existing bridge. The abort data must meet the following criteria:
 
 \begin{itemize}
-    \item Only the provider OR a consumer can be the requester of this operation, which means that the appropriate field is optional (the other one is mandatory), however if both provider and consumer are specified, one of them must match the requester's name.
-    \item Provider and consumer field can contain a system name. System names are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 character of letters (English alphabet) and numbers, and have to start with a letter.
-    \item Cloud is a valid cloud identifier which contains a name part and an organization part delimited with an implementation specific delimiter. Both parts are case sensitive, must follow the PascalCase naming convention, can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
-    \item Cloud can be omitted if the policy is about the consumers of the Local Cloud. 
-    \item The target type can be a service definition or an event type. 
-    \item Target is mandatory. Whether it is a service definition name or an event type name, it is case sensitive and must follow the camelCase naming convention. Targets can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
-    \item Scope is optional and only mattered if target type is service definition. In this case, 
-    scope is a valid operation name. Operation names are case sensitive, must follow the kebab-case naming convention, can contain maximum 63 character of lowercase letters (English alphabet), numbers and dash (-), have to start with a letter and cannot ends with a dash.
+    \item The bridge identifier is mandatory.
+    \item Requester can only abort translation bridges that was created by its request.
 \end{itemize}
 
 \clearpage
@@ -210,17 +204,20 @@ Operation \textit{verify} checks whether a consumer can use a provider's service
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{authorization} service are listed and must be respected by the hosting system.
+Here, all data objects that can be part of the \textbf{translationBridge} service are listed and must be respected by the hosting system.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
 \phantomsection
-\msubsection{struct}{AuthorizationGrantRequest}
+\msubsection{struct}{TranslationDiscoveryRequest}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+
+TODO: cont
+
 cloud & \pref{CloudIdentifier} & no & The cloud of the potential consumers. Omitted in case of the Local Cloud. \\ \hline
 targetType & \pref{AuthorizationTargetType} & yes & The type of the target (service definition or event type). \\ \hline
 target & \pref{ServiceName} / \pref{EventTypeName} & yes & The target of the rule. \\ \hline
