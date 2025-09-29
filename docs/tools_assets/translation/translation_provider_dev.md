@@ -19,4 +19,4 @@ The following specifications must be met to develop a compliant [Data Model Tran
 | Specifications |     |
 | -------------- | --- |
 | **DataModelTranslator** System | [System Description](../../assets/sysd/5_1_0/DataModelTranslator_sysd.pdf) |
-| **dataModelTranslation** Service | [Service Description](../../assets/sd/5_1_0/dataModelTranslation_sd.pdf), [Interface Design Description](TODO) |
+| **dataModelTranslation** Service | [Service Description](../../assets/sd/5_1_0/dataModelTranslation_sd.pdf), [Interface Design Description](../../api/add-on/dataModelTranslation-generic-http.md) |
