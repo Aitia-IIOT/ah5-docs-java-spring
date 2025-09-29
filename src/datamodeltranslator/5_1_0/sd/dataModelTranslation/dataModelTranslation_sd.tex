@@ -105,7 +105,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{dataModelTranslation} service, which provides functionality for translating between one or more data models. A data model is expected to be referenced by a unique ID, and it defines both a specific format (e.g., JSON, XML) and its associated semantics. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry and the handled data model IDs have to be included as part of the service metadata.
+This document describes the \textbf{dataModelTranslation} service, which provides functionality for translating between one or more data model pairs. A data model is expected to be referenced by a unique ID, and it defines both a specific format (e.g., JSON, XML) and its associated semantics. To enable other systems to consume this service, it needs to be offered through the ServiceRegistry and the handled data model IDs have to be included as part of the service metadata.
 
 The \textbf{dataModelTranslation} service contains the following operations:
 
@@ -121,7 +121,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 \subsection{How This Service Is Meant to Be Used}
 
-The data model translation process occurs asynchronously. Service consumers must first call the \textit{init-translation} operation with the data payload to be translated. If the translation task is successfully initialized, the operation returns a unique task identifier. Using the received task ID, the \textit{get-translation-result} operation has to be polled at a chosen frequency. Until the translation task is completed, the operation returns only the current status; once the task is finished, it returns the translated data payload.
+The data model translation process occurs asynchronously. Service consumers have to first call the \textit{init-translation} operation with the data payload to be translated. If the translation task is successfully initialized, the operation returns a unique task identifier. Using the received task ID, the \textit{get-translation-result} operation has to be polled at a chosen frequency. Until the translation task is completed, the operation returns only the current status; once the task is finished, it returns the translated data payload or an error message if the task has been failed.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -138,72 +138,54 @@ Available for anyone within the Local Cloud with proper permissions.
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{blacklistDiscovery} service is used to \textit{lookup} for blacklist entries and to \textit{check} if another system is on the blacklist.
+This section describes the abstract signatures of each operations of the service. The \textbf{dataModelTranslation} service is used to initialize, check and abort a translation task.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
 
 \phantomsection
-\fsubsection{lookup}{Identity}{BlacklistEntryListResponse}{}{ErrorResponse}
+\fsubsection{init-translation}{DataModelTranslationInitRequest}{TaskID}{}{ErrorResponse}
 
-Operation \textit{lookup} returns the blacklist entries that are in force and apply to the system that the provided identity belongs to. This is the only operation that is available for a system even if it's blacklisted. The input operation data must meet the following criteria:
+Operation \textit{init-translation} returns a unique task ID when the translation task has been successfully initialized. The operation returns immediately and the translation task is executed asynchronously.
 
-\begin{itemize}
-    \item It is not possible with this operation to lookup for other system's entries.
-    \item It is not possible with this operation to lookup for records that are expired or inactive.
-\end{itemize}
+\fsubsection{get-translation-result}{TaskID}{DataModelTranslationResultResponse}{}{ErrorResponse}
 
-\fsubsection{check}{CheckRequest}{CheckResponse}{}{ErrorResponse}
+Operation \textit{get-translation-result} returns the actual status of a given translation task, the translated data payload if the task has completed successfully, or an error message if the task has failed.
 
-Operation \textit{check} returns if an arbitrary system is on the blacklist. The input operation data must meet the following criteria:
-\begin{itemize}
-    \item System names are case sensitive, must follow the PascalCase naming convention and have to be unique within the Local Cloud.
-    \item System names can contain maximum 63 character of letters (English alphabet), and numbers, and have to start with a letter.
-\end{itemize}
+\fsubsection{abort-translation}{TaskID}{Void}{}{ErrorResponse}
+
+Operation \textit{abort-translation} terminates and removes a given translation task.
+
 \clearpage
 
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{blacklistDiscovery} service are listed and must be respected by the hosting system.
+Here, all data objects that can be part of the \textbf{dataModelTranslation} service are listed and must be respected by the hosting system.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
 \phantomsection
+\msubsection{struct}{DataModelTranslationInitRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.6cm} | p{4.9cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+inputModelId & \pref{String} & yes & The identifier of the data model to be translated. \\ \hline
+outputModelId & \pref{String} & yes & The identifier of the required result data model. \\ \hline
+payload & \pref{Object} & yes & The input data to be translated. \\ \hline
+settings & \hyperref[sec:model:Map]{Map}  & no & Any configuration data that might be required by a translation process. \\ \hline
+\end{tabularx}
+\end{table}
 
 \msubsection{struct}{Identity}
 
-An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+An \pref{Object} which describes the identity of a system.
 
-\msubsection{struct}{BlacklistEntryListResponse}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-entries & \pref{List}$<$\hyperref[sec:model:BlacklistEntryResponse]{BlacklistEntryResponse}$>$ & List of blacklist entry results. \\ \hline
-count & \pref{Number} & The total number of corresponding entries. \\ \hline
-\end{tabularx}
-\end{table}
+\msubsection{struct}{Map}
 
-\clearpage
-
-\msubsection{struct}{BlacklistEntryResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-systemName & \pref{SystemName} & Unique identifier of the blacklisted system. \\ \hline
-createdBy & \pref{SystemName} & Unique identifier of the system that created the record. \\ \hline
-revokedBy & \pref{SystemName} & Unique identifier of the system that revoked the record. Only appears if the record was revoked. \\ \hline
-createdAt & \pref{DateTime} & Blacklist record was created at this timestamp. \\ \hline
-updatedAt & \pref{DateTime} & Blacklist record was updated at this timestamp. \\ \hline
-reason & \pref{String} & The system was blacklisted because of this reason. \\ \hline
-expiresAt & \pref{DateTime} & Blacklist record expires at this timestamp. Only appears if the record can expire. \\ \hline
-active & \pref{Boolean} & Indicates if the rule defined by the entry is active. Only false if the rule has been explicitly revoked. \\ \hline
-
-\end{tabularx}
-\end{table}
+An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
 
 \msubsection{struct}{ErrorResponse}
 
@@ -218,27 +200,18 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{CheckRequest}
- 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-name & \pref{SystemName} & yes & Unique identifier of system to check. \\ \hline
-\end{tabularx}
-\end{table}
+\clearpage
 
-\msubsection{struct}{CheckResponse}
+\msubsection{struct}{DataModelTranslationResultResponse}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-isBlacklisted & \pref{Boolean} & Indicates if the system is on the blacklist or not. \\ \hline
+status & \pref{TaskStatus} & Status of the translation task. \\ \hline
+result & \pref{Object} & The result (translated) data payload. \\ \hline
+mimeType & \pref{MimeType} & The MIME type of the result data payload. \\ \hline
 \end{tabularx}
 \end{table}
-
-\clearpage
 
 \subsection{Primitives}
 \label{sec:model:primitives}
@@ -250,15 +223,14 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
-\pdef{Boolean}          & One out of true or false. \\ \hline
-\pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
-\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{MimeType}         & Standardized identifier that defines the nature and format of a data payload. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
 \pdef{Object}           & Set of primitives and possible further objects. \\ \hline
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
-\pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\pdef{TaskID}           & A unique string identifier that belongs to a translation task. \\ \hline
+\pdef{TaskStatus}       & Logical, textual or numerical value that indicates whether a translation task is pending, in progress, finished or failed. \\ \hline
 \end{tabularx}
 \end{table}
 
