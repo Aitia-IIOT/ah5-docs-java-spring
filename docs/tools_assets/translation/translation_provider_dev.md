@@ -6,11 +6,10 @@ TODO SysD + SD + IDD-k (kicvétel a dynamic interface)
 
 The following specifications must be met to develop a compliant [Interface Translation Provider](./translation_providers.md#interface-translation-providers):
 
-| Specifications |
-| -------------- |
-| [System Description](TODO) |
-| [Service Description](TODO) |
-| [Interface Design Description](TODO) |
+| Specifications |     |
+| -------------- | --- |
+| **InterfaceTranslator** System | [System Description](TODO) |
+| **interfaceBridgeManagement** Service | [Service Description](../../assets/sd/5_1_0/interfaceBridgeManagement_sd.pdf), [Interface Design Description](TODO) |
 
 ## Data Model Translation Provider
 

@@ -144,15 +144,15 @@ The input type is named inside parentheses, while the output type is preceded by
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
 
 \phantomsection
-\fsubsection{init-translation}{DataModelTranslationInitRequest}{TaskID}{}{ErrorResponse}
+\fsubsection{init-translation}{DataModelTranslationInitRequest}{DataModelTranslationInitResponse}{}{ErrorResponse}
 
 Operation \textit{init-translation} returns a unique task ID when the translation task has been successfully initialized. The operation returns immediately and the translation task is executed asynchronously.
 
-\fsubsection{get-translation-result}{TaskID}{DataModelTranslationResultResponse}{}{ErrorResponse}
+\fsubsection{get-translation-result}{TaskIDRequest}{DataModelTranslationResultResponse}{}{ErrorResponse}
 
 Operation \textit{get-translation-result} returns the actual status of a given translation task, the translated data payload if the task has completed successfully, or an error message if the task has failed.
 
-\fsubsection{abort-translation}{TaskID}{Void}{}{ErrorResponse}
+\fsubsection{abort-translation}{TaskIDRequest}{OperationStatus}{}{ErrorResponse}
 
 Operation \textit{abort-translation} terminates and removes a given translation task.
 
@@ -171,21 +171,27 @@ As a complement to the explicitly defined types in this section, there is also a
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3.6cm} | p{4.9cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-inputModelId & \pref{String} & yes & The identifier of the data model to be translated. \\ \hline
-outputModelId & \pref{String} & yes & The identifier of the required result data model. \\ \hline
+accessToken & \pref{String} & no & The access token that might be required. \\ \hline
+inputModelId & \pref{DataModelID} & yes & The identifier of the data model to be translated. \\ \hline
+outputModelId & \pref{DataModelID} & yes & The identifier of the required result data model. \\ \hline
 payload & \pref{Object} & yes & The input data to be translated. \\ \hline
 settings & \hyperref[sec:model:Map]{Map}  & no & Any configuration data that might be required by a translation process. \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{Identity}
-
-An \pref{Object} which describes the identity of a system.
-
 \msubsection{struct}{Map}
 
 An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
+
+\msubsection{struct}{DataModelTranslationInitResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+taskId & \pref{TaskID} & Identifier of the initialized translation task. \\ \hline
+\end{tabularx}
+\end{table}
 
 \msubsection{struct}{ErrorResponse}
 
@@ -200,13 +206,22 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
 
-\clearpage
+\msubsection{struct}{TaskIDRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.6cm} | p{4.9cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+accessToken & \pref{String} & no & The access token that might be required. \\ \hline
+taskId & \pref{TaskID} & yes & Identifier of the translation task. \\ \hline
+\end{tabularx}
+\end{table}
 
 \msubsection{struct}{DataModelTranslationResultResponse}
  
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | p{3cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
+operationStatus & \pref{OperationStatus} & Status of the operation. \\ \hline
 status & \pref{TaskStatus} & Status of the translation task. \\ \hline
 result & \pref{Object} & The result (translated) data payload. \\ \hline
 mimeType & \pref{MimeType} & The MIME type of the result data payload. \\ \hline
@@ -223,6 +238,7 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
+\pdef{DataModelID}      & A unique string identifier that defines both, a specific format and its associated semantics. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{MimeType}         & Standardized identifier that defines the nature and format of a data payload. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline

@@ -1,0 +1,347 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\prref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:primitives:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[5]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+    \notblank{#4}{: \prref{#4}}{}
+    \notblank{#5}{/ \mref{#5}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+\newrobustcmd\msubsubsection[3]{
+  \addtocounter{subsubsection}{1}
+  \addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsubsection*{\thesubsubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s}
+}
+%%
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{interfaceBridgeManagement} % XXX = ServiceName 
+\ArrowheadServiceID{interfaceBridgeManagement} % ID name of service
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.1.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Tamás Bordi} % Corresponding author e.g. Jerker Delsing
+\ArrowheadStatus{DRAFT} % e..g. RELEASE, RELEASE CONDIDATE, PROTOTYPE
+\ArrowheadContact{tbordi@aitia.ai} % Email of corresponding author
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides service description for the \textbf{interfaceBridgeManagement} service. 
+  \end{abstract}
+
+  \vspace*{1cm}
+
+%   \scriptsize
+%   \begin{tabularx}{\textwidth}{l X}
+%     \raisebox{-0.5\height}{\includegraphics[width=2cm]{figures/artemis_logo}} & {ARTEMIS Innovation Pilot Project: Arrowhead\newline
+%     THEME [SP1-JTI-ARTEMIS-2012-AIPP4 SP1-JTI-ARTEMIS-2012-AIPP6]\newline
+%     [Production and Energy System Automation Intelligent-Built environment and urban infrastructure for sustainable and friendly cities]}
+%   \end{tabularx}
+%   \vspace*{-0.2cm}
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+This document describes the \textbf{interfaceBridgeManagement} service, which provides functionality to translate between interface templates independently and to leverage other providers for data model translation, in order to create a translation bridge between incompatible consumers and providers. To enable other systems to consume this service, it needs to be offered through the ServiceRegistry and the handled interface template names have to be included as part of the service metadata.
+
+The \textbf{interfaceBridgeManagement} service contains the following operations:
+
+\begin{itemize}
+    \item \textit{check-targets} removes the incompatible interfaces from target providers (or the target provider if all of its interfaces are incompatible);
+    \item \textit{initialize-bridge} prepares a translation bridge and returns its service interface details;
+    \item \textit{abort-bridge} destroys a translation bridge;
+\end{itemize}
+
+The rest of this document is organized as follows.
+In Section \ref{sec:functions}, we describe the abstract message operations provided by the service.
+In Section \ref{sec:model}, we end the document by presenting the data types used by the mentioned operations.
+
+\subsection{How This Service Is Meant to Be Used}
+
+This service is primarily provided to the TranslationManager Support System to enable the organization of a translation bridge. The TranslationManager makes the target provider candidates for a specific service filtered using the \textit{check-targets} operation that cleans the candidate provider list from untranslatable interfaces (therefore from incompatible providers as well).
+
+When the TranslationManager calculates the possible translation bridges and one is chosen to be initialized, it calls the \textit{initilaize-bridge} operation. The init request describes the entire translation bridge: the target service interface to connect; the input data model translation service (if necessary) to use; the result data model translation service (if necessary) to use and the authorization tokens (if required). Once the translation bridge is ready to use, a dynamically created access interface is returned.
+
+The \textit{abort-bridge} operation can be used to destroy existing bridges, however unused translation bridges are dismantled automatically.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+Interface translation is only possible between interface templates and in the directions that are defined in the service metadata; and if proper data model translator systems are available when required.  
+
+\subsection{Access policy}
+\label{sec:accesspolicy}
+
+Available for systems with management role, primarily for the TranslationManger Support System.
+
+\newpage
+
+\section{Service Operations}
+\label{sec:functions}
+
+This section describes the abstract signatures of each operations of the service. The \textbf{interfaceBridgeManagement} service is used to initialize  and abort interface translation bridges.
+In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
+The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
+Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
+
+\phantomsection
+\fsubsection{check-targets}{TranslationCheckTargetsRequest}{TranslationCheckTargetsResponse}{}{ErrorResponse}
+
+Operation \textit{check-targets} validates a target provider list by removing untranslatable service interfaces. An interface is considered translatable only if all required properties are present. Any provider left without interfaces is removed from the list.
+
+\fsubsection{initialize-bridge}{TranslationBridgeInitializationRequest}{AccessInterfaceResponse}{}{ErrorResponse}
+
+Operation \textit{initialize-bridge} sets up a translation bridge based on the given interfaces, additional data model translation services (if necessary) and returns a dynamically generated access interface. Accessing this interface requires the client to supply the translation bridge ID as an access token.
+
+\fsubsection{abort-translation}{TranslationBridgeAbortRequest}{OperationStatus}{}{ErrorResponse}
+
+Operation \textit{abort-translation} terminates an existing translation bridge without checking whether it is actively used or not.
+
+\clearpage
+
+\section{Information Model}
+\label{sec:model}
+
+Here, all data objects that can be part of the \textbf{interfaceBridgeManagement} service are listed and must be respected by the hosting system.
+Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
+As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
+
+\phantomsection
+\msubsection{struct}{TranslationCheckTargetsRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4.9cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+accessToken & \pref{String} & no & The access token that might be required. \\ \hline
+targetOperation & \pref{ServiceOperationName} & yes & The target service-operation. \\ \hline
+targets & \pref{List}$<$\hyperref[sec:model:TranslationTargetDTO]{TranslationTargetDTO}$>$ & yes & List of candidate service providers to filter based on translatable interfaces. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{TranslationTargetDTO}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{5.5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+instanceId & \pref{ServiceInstanceID} & yes & The service instance identifier. \\ \hline
+interfaces & \pref{List}$<$\hyperref[sec:model:ServiceInterfaceDescriptor]{ServiceInterfaceDescriptor}$>$ & yes & List of available interfaces. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{ServiceInterfaceDescriptor}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+templateName & \pref{InterfaceName} & yes & The name of the interface template that describes the interface structure. \\ \hline
+protocol & \pref{Protocol} & yes & The communication protocol of the interface.  \\ \hline
+policy & \pref{SecurityPolicy} & yes & The security level of the interface. \\ \hline
+properties &\hyperref[sec:model:Map]{Map} & yes & Interface template-specific data. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{TranslationCheckTargetsResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{1.5cm} | p{4.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+targets & \pref{List}$<$\hyperref[sec:model:TranslationTargetDTO]{TranslationTargetDTO}$>$ & List of candidate service providers with translatable interfaces. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{Map}
+
+An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
+
+\msubsection{struct}{ErrorResponse}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{3.5cm} | X |} \hline
+\rowcolor{gray!33} Field & Type      & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+errorMessage & \pref{String} & Description of the error. \\ \hline
+errorCode &\pref{Number}  & Numerical code of the error. \\ \hline
+type & \pref{ErrorType} & Type of the error. \\ \hline
+origin & \pref{String} & Origin of the error. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{TranslationBridgeInitializationRequest}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{4.7cm} | p{5cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+accessToken & \pref{String} & no & The access token that might be required. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & yes & The given identifier of the intended translation bridge. \\ \hline
+operation & \pref{ServiceOperationName} & yes & The target service-operation. \\ \hline
+inputInterface & \pref{InterfaceName} & yes & The name of the interface template to be translated. \\ \hline
+targetInterface & \pref{InterfaceName} & yes & The name of the interface template of the target service-operation. \\ \hline 
+targetInterfaceProperties &\hyperref[sec:model:Map]{Map} & yes & Interface specific data of the target service-operation. \\ \hline
+inputDataModelRequirement & \pref{DataModelID} & no & The data model identifier of what the consumer can provide as the target service-operation input. \\ \hline
+inputDataModelTranslator & \hyperref[sec:model:DataModelTranslationDescriptor]{DataModelTranslationDescriptor}  & no & The data model translation provider for translating the input of the target service-operation.\\ \hline
+resultDataModelRequirement & \pref{DataModelID} & no & The data model identifier of what the consumer can handle as the target service-operation result. \\ \hline
+outputDataModelTranslator & \hyperref[sec:model:DataModelTranslationDescriptor]{DataModelTranslationDescriptor}  & no & The data model translation provider for translating the output of the target service-operation.\\ \hline
+authorizationToken & \pref{String} & no & Authorization token for the target service-operation if required. \\ \hline
+interfaceTranslatorSettings & \hyperref[sec:model:Map]{Map}  & no & Any configuration data that might be required by the interface translation process. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\msubsection{struct}{DataModelTranslationDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.3cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+fromModelId & \pref{DataModelID} & yes & The identifier of the data model to be translated. \\ \hline
+toModelId & \pref{DataModelID} & yes & The identifier of the required result data model. \\ \hline
+interfaceProperties &\hyperref[sec:model:Map]{Map} & yes & Interface specific data of the model translation provider. \\ \hline
+configurationSettings & \hyperref[sec:model:Map]{Map}  & no & Any configuration data that might be required by the model translation provider. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{AccessInterfaceResponse}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Description \\ \hline
+status & \pref{OperationStatus} & Status of the operation. \\ \hline
+templateName & \pref{InterfaceName} & The name of the interface template. \\ \hline
+protocol & \pref{Protocol} & The communication protocol of the interface.  \\ \hline
+policy & \pref{SecurityPolicy} & The security level of the interface. \\ \hline
+properties &\hyperref[sec:model:Map]{Map} & Interface template-specific data. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{TranslationBridgeAbortRequest}
+ 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3cm} | p{4.9cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+accessToken & \pref{String} & no & The access token that might be required. \\ \hline
+bridgeID & \pref{TranslationBridgeID} & yes & The identifier of the translation bridge to be terminated. \\ \hline
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\subsection{Primitives}
+\label{sec:model:primitives}
+
+Types and structures mentioned throughout this document that are assumed to be available to implementations of this service.
+The concrete interpretations of each of these types and structures must be provided by any IDD document claiming to implement this service.
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.7cm} | X |} \hline
+\rowcolor{gray!33} Type & Description \\ \hline
+\pdef{DataModelID}      & A unique string identifier that defines both, a specific format and its associated semantics. \\ \hline
+\pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
+\pdef{InterfaceName}    & A string identifier of an interface descriptor. Must follow snake\_case naming convention. \\ \hline
+\pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
+\pdef{Number}           & Decimal number. \\ \hline
+\pdef{Object}           & Set of primitives and possible further objects. \\ \hline
+\pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
+\pdef{Protocol}         & A string representation of a communication protocol. \\ \hline
+\pdef{SecurityPolicy}   & Any suitable security policy chosen by the implementor of service. \\ \hline
+\pdef{ServiceInstanceID} & A composite string identifier that is intended to be both human and machine-readable. It consists of the instance's provider name, service definition and version, each separated by a special delimiter character. Each part must follow its related naming convention. \\ \hline
+\pdef{ServiceOperationName}      & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
+\pdef{String}           & A chain of characters. \\ \hline
+\pdef{TaskID}           & A unique string identifier that belongs to a translation task. \\ \hline
+\pdef{TranslationBridgeID}       & A string identifier that is associated with an existing translation bridge. \\ \hline
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}
