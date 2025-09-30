@@ -1,14 +1,12 @@
 # Translation Provider Development
 
-TODO SysD + SD + IDD-k (kicvétel a dynamic interface)
-
 ## Interface Translation Provider
 
 The following specifications must be met to develop a compliant [Interface Translation Provider](./translation_providers.md#interface-translation-providers):
 
 | Specifications |     |
 | -------------- | --- |
-| **InterfaceTranslator** System | [System Description](TODO) |
+| **InterfaceTranslator** System | [System Description](../../assets/sysd/5_1_0/InterfaceTranslator_sysd.pdf) |
 | **interfaceBridgeManagement** Service | [Service Description](../../assets/sd/5_1_0/interfaceBridgeManagement_sd.pdf), [Interface Design Description](TODO) |
 
 ## Data Model Translation Provider
@@ -20,7 +18,7 @@ The following specifications must be met to develop a compliant [Data Model Tran
 | **DataModelTranslator** System | [System Description](../../assets/sysd/5_1_0/DataModelTranslator_sysd.pdf) |
 | **dataModelTranslation** Service | [Service Description](../../assets/sd/5_1_0/dataModelTranslation_sd.pdf), [Interface Design Description](../../api/add-on/dataModelTranslation-generic-http.md) |
 
-### Service registration
+### Service registration requirements
 
 As stated in the dataModelTranslation Service Description, the supported data model IDs and the translation direction must be inclued in the service metadata when the system registers its service into the [ServiceRegistry Core System](../../core_systems/service_registry.md).
 
