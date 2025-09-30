@@ -172,7 +172,7 @@ Operation \textit{discovery} checks a list of possible providers for a service o
         \begin{itemize}
             \item Template name is mandatory and must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and have to start with a letter.
             \item Policy is mandatory and must be a valid \pref{SecurityPolicy}.
-            \item Properties must contain a structure that is a valid \hyperref[sec:model:DataModelMap]{DataModelMap} and contains an entry for the specified operation. This is not necessary for operations without any input or output payload.
+            \item Properties must contain a structure that is a valid \hyperref[sec:model:DataModelMap]{DataModelMap} which contains an entry for the specified operation. This is not necessary for operations without any input or output payload.
             \item Properties must contain every interface-dependent information that is necessary for access (for example, address, port, path, topic, etc.).
         \end{itemize}
     \end{itemize}
@@ -190,7 +190,7 @@ Operation \textit{negotiation} allows consumers to create a translation bridge t
     \item The same is true in the case of operation and interface template names parameters.
 \end{itemize}
 
-\fsubsection{abort}{BridgeIdentifier}{}{OperationStatus}{ErrorResponse}
+\fsubsection{abort}{TranslationAbortRequest}{}{OperationStatus}{ErrorResponse}
 
 Operation \textit{abort} aborts an existing bridge. The abort data must meet the following criteria:
 
@@ -208,22 +208,17 @@ Here, all data objects that can be part of the \textbf{translationBridge} servic
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 
-\phantomsection
 \msubsection{struct}{TranslationDiscoveryRequest}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3.9cm} | p{6.2cm} | p{1.3cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-
-TODO: cont
-
-cloud & \pref{CloudIdentifier} & no & The cloud of the potential consumers. Omitted in case of the Local Cloud. \\ \hline
-targetType & \pref{AuthorizationTargetType} & yes & The type of the target (service definition or event type). \\ \hline
-target & \pref{ServiceName} / \pref{EventTypeName} & yes & The target of the rule. \\ \hline
-description & \pref{String} & no & The description of the rule. \\ \hline
-defaultPolicy & \hyperref[sec:model:AuthorizationPolicyRequest]{AuthorizationPolicyRequest} & yes & The policy details of the rule which are used when no more specialized policy details are available. \\ \hline
-scopedPolicies & \hyperref[sec:model:ScopedPoliciesRequest]{ScopedPoliciesRequest} & no & A structure that can contain specialized po-licy details. \\ \hline
+candidates & \pref{List}$<$\hyperref[sec:model:TranslationDiscoveryServiceInstanceDescriptor]{Translation\-Discovery\-Service\-Instance\-Descriptor}$>$ & yes & Possible service instances for con\-sum\-ing via a translation bridge. \\ \hline
+operation & \pref{ServiceOperationName} & yes & The operation that the requester wants to consume. \\ \hline
+interfaceTemplateNames & \pref{List}$<$\pref{InterfaceName}$>$ & yes & The name of the interfaces that the consumer can use. \\ \hline
+inputDataModelId & \pref{DataModelIdentifier} & yes (no) & The identifier of the data model that the specified operation uses as input payload. Must be omitted if there is no input payload. \\ \hline
+outputDataModelId & \pref{DataModelIdentifier} & yes (no) & The identifier of the data model that the specified operation uses as response payload. Must be omitted if there is no res\-ponse payload. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -231,75 +226,77 @@ scopedPolicies & \hyperref[sec:model:ScopedPoliciesRequest]{ScopedPoliciesReques
 
 An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
 
-\msubsection{struct}{AuthorizationPolicyRequest}
+\msubsection{struct}{TranslationDiscoveryServiceInstanceDescriptor}
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.1cm} | p{2cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3.9cm} | p{6.2cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-policyType & \pref{AuthorizationPolicyType} & yes & The type of the policy. \\ \hline
-policyList & \pref{List}$<$\pref{SystemName}$>$ & no (yes) & A list of consumer system names. Mandatory in case of list-based policy type. \\ \hline
-policyMetadataRequirement & \hyperref[sec:model:MetadataRequirements]{MetadataRequirements} & no (yes) & System-level metadata requirements. Mandatory in case of metadata-based policy type. \\ \hline 
+instanceId & \pref{ServiceInstanceID} & yes & Unique identifier of the service instance. \\ \hline
+provider & \hyperref[sec:model:TranslationDiscoverySystemDescriptor]{Translation\-Discovery\-System\-Descriptor} & yes & Provider system. \\ \hline
+serviceDefinition & \hyperref[sec:model:TranslationDiscoveryServiceDefinitionDescriptor]{Translation\-Discovery\-Service\-Definition\-Descriptor} & yes & Service definition. \\ \hline
+\end{tabularx}
+\end{table}
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.9cm} | p{6.2cm} | p{2cm} | X |} \hline
+interfaces & \pref{List}$<$\hyperref[sec:model:TranslationDiscoveryServiceInstanceInterfaceDescriptor]{Translation\-Discovery\-Service\-Instance\-Interface\-Descriptor}$>$ & yes & Available access interfaces of the service instance. \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{MetadataRequirements}
+\msubsection{struct}{TranslationDiscoverySystemDescriptor}
 
-A special \pref{Object} which maps \pref{String} keys to \pref{Object}, primitive or list values, where 
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.9cm} | p{4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+name & \pref{SystemName} & yes & Unique name of the system. \\ \hline
+\end{tabularx}
+\end{table}
 
-\begin{itemize}
-    \item Keys can be paths (or multi-level keys) which access a specific value in a \hyperref[sec:model:Metadata]{Metadata} structure, where parts of the path are delimited with dot character (e.g. in case of "key.subkey" path we are looking for the key named "key" in the metadata, which is associated with an embedded object and in this object we are looking for the key named "subkey").
-    \item Values are special \pref{Object}s with two fields: an operation (e.g. less than) and an actual value (e.g. a number). A metadata is matching a requirement if the specified operation returns true using the metadata value referenced by a key path as first and the actual value as second operands. 
-    \item Alternatively, values can be ordinary primitives, lists or \pref{Object}s. In this case the operation is equals by default.
-\end{itemize}
+\msubsection{struct}{TranslationDiscoveryServiceDefinitionDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.9cm} | p{4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+name & \pref{ServiceName} & yes & Unique name of the service definition. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{TranslationDiscoveryServiceInstanceInterfaceDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.9cm} | p{4cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+templateName & \pref{InterfaceName} & yes & The name of the interface template that describes the interface structure. \\ \hline
+policy & \pref{SecurityPolicy} & yes & The security of the interface. \\ \hline
+properties &\hyperref[sec:model:Metadata]{Metadata} & yes & Interface template-specific data. \\ \hline
+\end{tabularx}
+\end{table}
 
 \msubsection{struct}{Metadata}
 
 An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
 
-\msubsection{struct}{ScopedPoliciesRequest}
+\msubsection{struct}{TranslationDiscoveryResponse}
 
-An \pref{Object} which maps \pref{ServiceOperationName} keys to \hyperref[sec:model:AuthorizationPolicyRequest]{AuthorizationPolicyRequest} values.
-
-\msubsection{struct}{AuthorizationPolicyResponse}
- 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{6.1cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-instanceId & \pref{AuthorizationPolicyInstanceID} & Unique identifier of the policy instance. \\ \hline
-authorizationLevel & \pref{AuthorizationLevel} & Level (provider or management) of the policy. \\ \hline
-cloud & \pref{CloudIdentifier} & The cloud of the potential consumers. In case of the Local Cloud the word LOCAL is used. \\ \hline
-provider & \pref{SystemName} & The name of the system who provides the target of the rule. \\ \hline
-targetType & \pref{AuthorizationTargetType} & The type of the target (service definition or event type). \\ \hline
-target &  \pref{ServiceName} / \pref{EventTypeName} & The target of the rule. \\ \hline
-description & \pref{String} & The description of the rule. \\ \hline
-defaultPolicy & \hyperref[sec:model:AuthorizationPolicyDescriptor]{AuthorizationPolicyDescriptor} & The policy details of the rule which are used when no more specialized policy details are available. \\ \hline
-scopedPolicies & \hyperref[sec:model:ScopedPoliciesDescriptor]{ScopedPoliciesDescriptor} & A structure that can contain specialized po\-licy details. \\ \hline
+bridgeId & \pref{BridgeIdentifier} & Unique identifier related to discovery results \\ \hline
+candidates & \pref{List}$<$\hyperref[sec:model:TranslationBridgeCandidate]{TranslationBridgeCandidate}$>$ & Information about service instances that can be accessed via a translation bridge. \\ \hline
 \end{tabularx}
 \end{table}
+
+\clearpage
+
+\msubsection{struct}{TranslationBridgeCandidate}
 
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4.5cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{4.25cm} | p{6.1cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-createdBy & \pref{SystemName} & Authorization policy instance was created by this system. \\ \hline
-createdAt & \pref{DateTime} & Authorization policy instance was created at this timestamp. \\ \hline
+serviceInstanceId & \pref{ServiceInstanceID} & Unique identifier of the service instance. \\ \hline
+interfaceTemplateName & \pref{InterfaceName} & Name of the interface that can be used to access the specified operation of the service instance. \\ \hline
 \end{tabularx}
 \end{table}
-
-\msubsection{struct}{AuthorizationPolicyDescriptor}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.3cm} | p{4.1cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-policyType & \pref{AuthorizationPolicyType} & The type of the policy. \\ \hline
-policyList & \pref{List}$<$\pref{SystemName}$>$ & A list of consumer system names. Should only be filled in case of list-based policy type. \\ \hline
-policyMetadataRequirement & \hyperref[sec:model:MetadataRequirements]{MetadataRequirements} & System-level metadata requirements. Should only be filled in case of metadata-based policy type. \\ \hline 
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{ScopedPoliciesDescriptor}
-
-An \pref{Object} which maps \pref{ServiceOperationName} keys to \hyperref[sec:model:AuthorizationPolicyDescriptor]{AuthorizationPolicyDescriptor} values.
 
 \msubsection{struct}{ErrorResponse}
 
@@ -314,70 +311,46 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{AuthorizationRevokeRequest}
+\msubsection{struct}{DataModelMap}
 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{4.5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-instanceId & \pref{AuthorizationPolicyInstanceID} & yes & Unique policy instance id of the rule. \\ \hline
-\end{tabularx}
-\end{table}
+An \pref{Object} that maps the key \textit{dataModels} to an \pref{Object}, in which keys are \pref{ServiceOperationName}s and the values are \pref{Object}s containing \pref{DataModelIdentifier}s using keys \textit{input} and \textit{output}. If an operation has input payload then the identifier of the input data model is assigned to the key \textit{input}. If the operation has response payload then the identifier of the response data model is assigned to the key \textit{output}. If an operation has no input and/or response payload, the appropriate key-value pair must be omitted. If an operation has no payload at all, then that operation can be omitted from the structure.
+
+Should looks like this:
+\begin{verbatim}
+        dataModels: { 
+            <operation name>: { 
+                input: <input data model id> 
+                output: <output data model id>
+            } 
+        }
+\end{verbatim}
 
 \clearpage
 
-\msubsection{struct}{AuthorizationLookupRequest}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{5.5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-instanceIds & \pref{List}$<$\pref{AuthorizationPolicyInstanceID}$>$ & no (yes) & Requester is looking for policy in-stances with any of the specified identifiers. Mandatory if no cloudIdentifiers nor targetNames are specified. \\ \hline
-cloudIdentifiers & \pref{List}$<$\pref{CloudIdentifier}$>$ & no (yes) & Requester is looking for policy in-stances that belong to any of the specified clouds. Mandatory if no ins-tanceIds nor targetNames are specified. \\ \hline
-targetNames & \pref{List}$<$\pref{ServiceName}$>$ / \pref{List}$<$\pref{EventTypeName}$>$ & no (yes) & Requester is looking for policy in-stances that belong to any of the specified targets (either service definitions or event types). Mandatory if no instanceIds nor cloudIdentifiers are specified. \\ \hline
-targetType & \pref{AuthorizationTargetType} & no (yes) & The type of the specified targets. Mandatory if targetNames are specified. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{AuthorizationPolicyListResponse}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{5.5cm} | X |} \hline
-\rowcolor{gray!33} Field & Type    & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-entries & \pref{List}$<$\hyperref[sec:model:AuthorizationPolicyResponse]{AuthorizationPolicyResponse}$>$  & List of policy instance results. \\ \hline
-count & \pref{Number} & Number of returned policy instances. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{AuthorizationVerifyRequest}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{4cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication &\hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-provider & \pref{SystemName} & no (yes) & The name of the system that provides the target. Mandatory if the consumer is the requester. \\ \hline
-consumer & \pref{SystemName} & no (yes) & The name of the system that needs access to the target. Mandatory if the provider is the requester. \\ \hline
-cloud & \pref{CloudIdentifier} & no & The cloud of the consumer. Optional, if the consumer is in the Local Cloud. \\ \hline
-\end{tabularx}
-\end{table}
-
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{4cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-targetType & \pref{AuthorizationTargetType} & yes & The type of the target (service definition or event type). \\ \hline
-target & \pref{ServiceName} / \pref{EventTypeName} & yes & The name of the target. \\ \hline
-scope & \pref{ServiceOperationName} & no & The service operation that the consumer wants to use. Only matters when the target is a service definition. \\ \hline
-\end{tabularx}
-\end{table}
-
-\msubsection{struct}{AuthorizationVerifyResponse}
+\msubsection{struct}{TranslationNegotiationRequest}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{4.25cm} | p{4cm} | X |} \hline
-\rowcolor{gray!33} Field & Type      & Description \\ \hline
-status & \pref{OperationStatus} & Status of the operation. \\ \hline
-verified & \pref{Boolean} & The result of the verification. \\ \hline
+\begin{tabularx}{\textwidth}{| p{3.9cm} | p{6.2cm} | p{1.3cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+bridgeId & \pref{BridgeIdentifier} & no & The unique identifier of the results of a previously executed discovery operation. \\ \hline
+target & \hyperref[sec:model:TranslationNegotiationServiceInstanceDescriptor]{Translation\-Negotiation\-Service\-Instance\-Descriptor}$>$ & yes & Information about the target service instance. \\ \hline
+operation & \pref{ServiceOperationName} & no (yes) & The operation that the requester wants to consume. Mandatory if bridgeId is not specified. \\ \hline
+interfaceTemplateName & \pref{InterfaceName} & no (yes) & The name of the interface that the consumer can use. Mandatory if bridgeId is not specified \\ \hline
+inputDataModelId & \pref{DataModelIdentifier} & no (yes) & The identifier of the data model that the target operation uses as input payload. Can be omitted if bridgeId is specified and must be omitted if there is no input payload. \\ \hline
+outputDataModelId & \pref{DataModelIdentifier} & no (yes) & The identifier of the data model that the target operation uses as response payload. Can be omitted if bridgeId is specified and must be omitted if there is no res\-ponse payload. \\ \hline
+\end{tabularx}
+\end{table}
+
+\msubsection{struct}{TranslationNegotiationServiceInstanceDescriptor}
+
+\begin{table}[ht!]
+\begin{tabularx}{\textwidth}{| p{3.9cm} | p{6.2cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+instanceId & \pref{ServiceInstanceID} & yes & Unique identifier of the service instance. \\ \hline
+provider & \hyperref[sec:model:TranslationDiscoverySystemDescriptor]{Translation\-Discovery\-System\-Descriptor} & no (yes) & Provider system. Mandatory if the bridgeId is not specified in the containing model. \\ \hline
+serviceDefinition & \hyperref[sec:model:TranslationDiscoveryServiceDefinitionDescriptor]{Translation\-Discovery\-Service\-Definition\-Descriptor} & no (yes) & Service definition.  Mandatory if the bridgeId is not specified in the containing model. \\ \hline
+interfaces & \pref{List}$<$\hyperref[sec:model:TranslationDiscoveryServiceInstanceInterfaceDescriptor]{Translation\-Discovery\-Service\-Instance\-Interface\-Descriptor}$>$ & no (yes) & Available access interfaces of the service instance.  Mandatory if the bridgeId is not specified in the containing model. \\ \hline
 \end{tabularx}
 \end{table}
 
