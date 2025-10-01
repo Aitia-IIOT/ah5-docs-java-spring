@@ -12,8 +12,8 @@ Learn more: <br />
 The purpose of translationBridge is to find providers whose service operation is accessible by the requester via a translation bridge using the currently available translators and to build/abort such bridges. This service is offered for Application systems (consumers). 
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-bridge_sd.pdf) TODO<br />
-:material-api: [generic_http (IDD)](../api/translationmanager/translation-bridge-generic-http.md) TODO | [generic_https (IDD)](../api/translationmanager/translation-bridge-generic-http.md) TODO<br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-bridge_sd.pdf)<br />
+:material-api: [generic_http (IDD)](../api/translationmanager/translation-bridge-generic-http.md) | [generic_https (IDD)](../api/translationmanager/translation-bridge-generic-http.md) <br />
 :material-api: [generic_mqtt (IDD)](../api/translationmanager/translation-bridge-generic-mqtt.md) TODO | [generic_mqtts (IDD)](../api/translationmanager/translation-bridge-generic-mqtt.md) TODO<br />
 :material-tag: since: v5.1.0
 
