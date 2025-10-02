@@ -9,6 +9,65 @@ The following specifications must be met to develop a compliant [Interface Trans
 | **InterfaceTranslator** System | [System Description](../../assets/sysd/5_1_0/InterfaceTranslator_sysd.pdf) |
 | **interfaceBridgeManagement** Service | [Service Description](../../assets/sd/5_1_0/interfaceBridgeManagement_sd.pdf), [Interface Design Description](../../api/add-on/interfaceBridgeManagement-generic-http.md) |
 
+### Service registration requirements
+
+As stated in the interfaceBridgeManagement Service Description, the supported interface temlate names and the translation direction must be inclued in the service metadata when the system registers its service into the [ServiceRegistry Core System](../../core_systems/service_registry.md).
+
+The key must be **interfaceBridge** and its value must be an object with **form** and **to** keys. The _from_ is always a list of interface template names and _to_ is always one practicular interface template name. For example:
+
+```
+{
+   "interfaceBridge": {
+      "from": ["generic_mqtt", "generic_http"],
+      "to": "generic_http"
+   }
+}
+```
+
+[Service registration](../../core_systems/service_registry.md#servicediscovery) example:
+
+```
+{
+   "serviceDefinitionName":"interfaceBridgeManagement",
+   "version":"1.0.0",
+   "metadata":{
+         "interfaceBridge": {
+            "from": ["generic_mqtts", "generic_https"],
+            "to": "generic_https"
+      }
+   },
+   "interfaces":[
+      {
+         "templateName":"generic_https",
+         "protocol":"https",
+         "policy":"CERTIFICATE",
+         "properties":{
+            "accessAddresses":[
+               "192.168.56.116",
+               "itb.example.com"
+            ],
+            "accessPort":8080,
+            "basePath":"/translation",
+            "operations":{
+               "check-targets":{
+                  "method":"POST",
+                  "path":"/check"
+               },
+               "initialize-bridge":{
+                  "method":"POST",
+                  "path":"/init"
+               },
+               "abort-translation":{
+                  "method":"DELETE",
+                  "path":"/abort"
+               }
+            }
+         }
+      }
+   ]
+}
+```
+
 ## Data Model Translation Provider
 
 The following specifications must be met to develop a compliant [Data Model Translation Provider](./translation_providers.md#data-model-translation-providers):
@@ -55,9 +114,9 @@ pair. For example:
    },
    "interfaces":[
       {
-         "templateName":"generic_http",
-         "protocol":"http",
-         "policy":"NONE",
+         "templateName":"generic_https",
+         "protocol":"https",
+         "policy":"CERTIFICATE",
          "properties":{
             "accessAddresses":[
                "192.168.56.116",
