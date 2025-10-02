@@ -36,7 +36,7 @@ The service operation **responds** with the status code `200` if called successf
 <any-unique-string>
 ```
 
-The **error codes** are `400` if the request is malformed, `403` if the access validation failed,
+The **error codes** are `400` if the request is malformed, `401` if credentials were requested but not presented, `403` if the access validation failed,
 `500` if an unexpected error happens and `503` if the provider is overloaded with tasks. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
@@ -69,7 +69,7 @@ The service operation **responds** with the status code `200` if called successf
 }
 ```
 
-The **error codes** are `400` if the request is malformed or "_taskId_" is missing, `403` if the access validation failed,
+The **error codes** are `400` if the request is malformed or "_taskId_" is missing, `401` if credentials were requested but not presented, `403` if the access validation failed,
 `404` if the "_taskId_" in unkown and `500` if an unexpected error happens. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
@@ -93,7 +93,7 @@ Authorization: Bearer <access-token>
 
 The service operation **responds** with the status code `200` if called successfully and the translation task has been aborted.
 
-The **error codes** are `400` if the request is malformed or "_taskId_" is missing, `403` if the access validation failed,
+The **error codes** are `400` if the request is malformed or "_taskId_" is missing, `401` if credentials were requested but not presented, `403` if the access validation failed,
 `404` if the "_taskId_" in unkown and `500` if an unexpected error happens. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 

@@ -90,6 +90,7 @@ nav:
       - Add-on Services:
           - HTTP:
             - dataModelTranslation: api/add-on/dataModelTranslation-generic-http.md
+            - interfaceBridgeManagement: api/add-on/interfaceBridgeManagement-generic-http.md
 
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
@@ -129,6 +130,9 @@ nav:
       - ConfigMap: api/data-models/config-map.md
       - ConfigResponse: api/data-models/config-response.md
       - Credentials: api/data-models/credentials.md
+      - DataModelTranslationDescriptor: api/data-models/data-model-translation-descriptor.md
+      - DataModelTranslationInitRequest: api/data-models/data-model-translation-init-request.md
+      - DataTranslationResultResponse: api/data-models/data-translation-result-response.md
       - DeviceDescriptor: api/data-models/device-descriptor.md
       - DeviceListRequest: api/data-models/device-list-request.md
       - DeviceListResponse: api/data-models/device-list-response.md
@@ -225,6 +229,11 @@ nav:
       - SystemRegistrationRequest: api/data-models/system-registration-request.md
       - SystemRegistrationResponse: api/data-models/system-registration-response.md
       - SystemRequest: api/data-models/system-request.md
+      - TranslationBridgeInitializationRequest: api/data-models/translation-bridge-initialization-request.md
+      - TranslationCheckTargetsRequest: api/data-models/translation-check-targets-request.md
+      - TranslationCheckTargetsResponse: api/data-models/translation-check-targets-response.md
+      - TranslationTargetRequest: api/data-models/translation-target-request.md
+      - TranslationTargetResponse: api/data-models/translation-target-response.md
     - Primitives: api/primitives.md
   - Help:
     - Definitions: help/definitions.md

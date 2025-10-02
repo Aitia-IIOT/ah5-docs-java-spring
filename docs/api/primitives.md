@@ -194,6 +194,10 @@ A **String** identifier that is intended to be both human and machine-readable. 
 
 A **String** name that groups token technologies by usage characteristics. Can be `USAGE_LIMITED_TOKEN`, `TIME_LIMITED_TOKEN`, `SELF_CONTAINED_TOKEN` or `TRANSLATION_BRIDGE_TOKEN`.
 
+## TranslationBridgeID
+
+A **string** identifier that is unique within the Local Cloud and associated with an prospective or existing translation bridge.
+
 ## UUID
 
 A UUID (Universally Unique Identifier) is a 128-bit **String** identifier used to uniquely distinguish objects in distributed systems (e.g.: `550e8400-e29b-41d4-a716-446655440000`)

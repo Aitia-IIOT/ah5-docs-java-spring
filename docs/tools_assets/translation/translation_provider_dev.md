@@ -7,7 +7,7 @@ The following specifications must be met to develop a compliant [Interface Trans
 | Specifications |     |
 | -------------- | --- |
 | **InterfaceTranslator** System | [System Description](../../assets/sysd/5_1_0/InterfaceTranslator_sysd.pdf) |
-| **interfaceBridgeManagement** Service | [Service Description](../../assets/sd/5_1_0/interfaceBridgeManagement_sd.pdf), [Interface Design Description](TODO) |
+| **interfaceBridgeManagement** Service | [Service Description](../../assets/sd/5_1_0/interfaceBridgeManagement_sd.pdf), [Interface Design Description](../../api/add-on/interfaceBridgeManagement-generic-http.md) |
 
 ## Data Model Translation Provider
 
