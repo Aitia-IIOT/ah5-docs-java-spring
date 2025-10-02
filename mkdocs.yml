@@ -129,6 +129,7 @@ nav:
       - ConfigMap: api/data-models/config-map.md
       - ConfigResponse: api/data-models/config-response.md
       - Credentials: api/data-models/credentials.md
+      - DataModelMap: api/data-models/data-model-map.md
       - DeviceDescriptor: api/data-models/device-descriptor.md
       - DeviceListRequest: api/data-models/device-list-request.md
       - DeviceListResponse: api/data-models/device-list-response.md
@@ -225,8 +226,17 @@ nav:
       - SystemRegistrationRequest: api/data-models/system-registration-request.md
       - SystemRegistrationResponse: api/data-models/system-registration-response.md
       - SystemRequest: api/data-models/system-request.md
+      - TranslationBridgeCandidate: api/data-models/translation-bridge-candidate.md
       - TranslationDiscoveryRequest: api/data-models/translation-discovery-request.md
+      - TranslationDiscoveryResponse: api/data-models/translation-discovery-response.md
+      - TranslationDiscoveryServiceDefinitionDescriptor: api/data-models/translation-discovery-service-definition-descriptor.md
       - TranslationDiscoveryServiceInstanceDescriptor: api/data-models/translation-discovery-service-instance-descriptor.md
+      - TranslationDiscoveryServiceInstanceInterfaceDescriptor: api/data-models/translation-discovery-service-instance-interface-descriptor.md
+      - TranslationDiscoverySystemDescriptor: api/data-models/translation-discovery-system-descriptor.md
+      - TranslationNegotiationRequest: api/data-models/translation-negotiation-request.md
+      - TranslationNegotiationResponse: api/data-models/translation-negotiation-response.md
+      - TranslationNegotiationServiceInstanceDescriptor: api/data-models/translation-negotiation-service-instance-descriptor.md
+      - TranslationNegotiationServiceInstanceInterfaceDescriptor: api/data-models/translation-negotiation-service-instance-interface-descriptor.md
     - Primitives: api/primitives.md
   - Help:
     - Definitions: help/definitions.md

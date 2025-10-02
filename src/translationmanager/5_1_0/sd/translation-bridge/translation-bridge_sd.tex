@@ -335,7 +335,7 @@ Should looks like this:
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
 bridgeId & \pref{BridgeIdentifier} & no & The unique identifier of the results of a previously executed discovery operation. \\ \hline
-target & \hyperref[sec:model:TranslationNegotiationServiceInstanceDescriptor]{Translation\-Negotiation\-Service\-Instance\-Descriptor}$>$ & yes & Information about the target service instance. \\ \hline
+target & \hyperref[sec:model:TranslationNegotiationServiceInstanceDescriptor]{Translation\-Negotiation\-Service\-Instance\-Descriptor} & yes & Information about the target service instance. \\ \hline
 operation & \pref{ServiceOperationName} & no (yes) & The operation that the requester wants to consume. Mandatory if \textit{bridgeId} is not specified. \\ \hline
 interfaceTemplateName & \pref{InterfaceName} & no (yes) & The name of the interface that the consumer can use. Mandatory if \textit{bridgeId} is not specified \\ \hline
 inputDataModelId & \pref{DataModelIdentifier} & no (yes) & The identifier of the data model that the requester can use as input payload of the specified operation. Can be omitted if \textit{bridgeId} is specified and must be omitted if there is no input payload. \\ \hline
