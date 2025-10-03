@@ -4,7 +4,7 @@
 ## Overview
 
 This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of translationBridge, which enables to find providers whose service
-operation is accessible by the requester via a translation bridge using the currently available translators. The service also allows to build or abort such bridges. o enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
+operation is accessible by the requester via a translation bridge using the currently available translators. The service also allows to build or abort such bridges. To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
 Hereby the **Interface Design Description** (IDD) is provided to the [translationBridge – Service Description](../../assets/sd/5_1_0/translation-bridge_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
@@ -65,7 +65,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-> Note: The service operation can only work with candidates with interfaces that describe their data models. Data models must describe as a [DataModelMap](../data-models/data-model-map.md) inside the interface _properties_. See the example above.
+> Note: The service operation can only work on candidates with interfaces that describe their data models. Data models must describe as a [DataModelMap](../data-models/data-model-map.md) inside the interface _properties_. See the example above.
 
 The service operation **responds** with the status code `200` and with a [TranslationDiscoveryResponse](../data-models/translation-discovery-response.md) JSON encoded body.
 
@@ -103,7 +103,7 @@ JSON encoded body.
 Operation _negotiation_ can be used two ways. 
 
 - A. Using the results of a previously executed _discovery_ by specifing a valid _bridgeId_.
-- B. Creating the _discovery_ results during the _negotiation_ by not specifing a valud _bridgeId_, but providing additional information about the translation task in the requests.
+- B. Creating the _discovery_ results during the _negotiation_ by not specifing a valid _bridgeId_. This case requires additional information about the translation task in the request.
 
 #### Example request for case A
 

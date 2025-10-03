@@ -5,10 +5,10 @@ An Object that maps the key _dataModels_ to an Object, in which keys are [Servic
 Should looks like this:
 
 ```
-dataModels: {
+"dataModels": {
   <operation name>: {
-    input: <input data model id>
-    output: <output data model id>
+    "input": <input data model id>
+    "output": <output data model id>
   }
 }
 ```
