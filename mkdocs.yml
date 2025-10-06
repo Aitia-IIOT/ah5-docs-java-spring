@@ -227,6 +227,8 @@ nav:
       - SystemRegistrationResponse: api/data-models/system-registration-response.md
       - SystemRequest: api/data-models/system-request.md
       - TranslationBridgeCandidate: api/data-models/translation-bridge-candidate.md
+      - TranslationDiscoveryFlagMap: api/data-models/translation-discovery-flag-map.md
+      - TranslationDiscoveryMgmtRequest: api/data-models/translation-discovery-mgmt-request.md
       - TranslationDiscoveryRequest: api/data-models/translation-discovery-request.md
       - TranslationDiscoveryResponse: api/data-models/translation-discovery-response.md
       - TranslationDiscoveryServiceDefinitionDescriptor: api/data-models/translation-discovery-service-definition-descriptor.md

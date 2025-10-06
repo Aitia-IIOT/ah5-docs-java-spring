@@ -64,7 +64,7 @@ This service operation reports about an event related to a translation bridge. E
 The main purpose of translationBridgeManagement is to find providers whose service operation is accessible by a specified consumer via a translation bridge using the currently available translators and to build such bridges. It also offers bulk abortion and query functionalities. This service is offered for Core/Support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-bridge-management_sd.pdf) TODO<br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-bridge-management_sd.pdf)<br />
 :material-api: [generic_http (IDD)](../api/translationmanager/translation-bridge-management-generic-http.md) TODO | [generic_https (IDD)](../api/translationmanager/translation-bridge-management-generic-http.md) TODO<br />
 :material-api: [generic_mqtt (IDD)](../api/translationmanager/translation-bridge-management-generic-mqtt.md) TODO | [generic_mqtts (IDD)](../api/translationmanager/translation-bridge-management-generic-mqtt.md) TODO<br />
 :material-tag: since: v5.1.0
