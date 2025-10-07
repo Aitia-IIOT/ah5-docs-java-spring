@@ -11,11 +11,10 @@ Hereby the **Interface Design Description** (IDD) is provided to the [dataModelT
 
 ### init-translation
 
-The service operation **request** may require an [access token](../primitives.md#accesstoken) (depending on the applied [service security](../../help/service-security.md)) and a [DataModelTranslationInitRequest](../data-models/data-model-translation-init-request.md) JSON encoded body.
+The service operation **request** requires a [DataModelTranslationInitRequest](../data-models/data-model-translation-init-request.md) JSON encoded body.
 
 ```
 POST /<path>/<to>/<init> HTTP/1.1
-Authorization: Bearer <access-token>
 
 {
    "inputModelId":"abcJson",
@@ -42,7 +41,7 @@ The **error codes** are `400` if the request is malformed, `401` if credentials 
 
 ```
 {
-  "errorMessage":  "Translation payload is empty!",
+  "errorMessage":  "Translation payload is empty",
   "errorCode":  400,
   "exceptionType":  "INVALID_PARAMETER",
   "origin":  "POST /<path>/<to>/<init>"
@@ -51,11 +50,10 @@ The **error codes** are `400` if the request is malformed, `401` if credentials 
 
 ### get-translation-result
 
-The service operation **request** may require an [access token](../primitives.md#accesstoken) (depending on the applied [service security](../../help/service-security.md)) and a [DataModelTranslationTaskID](../primitives.md#datamodeltranslationtaskid) as "_taskId_" query parameter.
+The service operation **request** requires a [DataModelTranslationTaskID](../primitives.md#datamodeltranslationtaskid) as "_taskId_" query parameter.
 
 ```
 GET /<path>/<to>/<get-result>?taskId=<unique-task-id-string> HTTP/1.1
-Authorization: Bearer <access-token>
 ```
 
 The service operation **responds** with the status code `200` if called successfully and the translation task exists. The response also contains a
@@ -69,13 +67,12 @@ The service operation **responds** with the status code `200` if called successf
 }
 ```
 
-The **error codes** are `400` if the request is malformed or "_taskId_" is missing, `401` if credentials were requested but not presented, `403` if the access validation failed,
-`404` if the "_taskId_" in unkown and `500` if an unexpected error happens. The error response also contains an
+The **error codes** are `400` if the request is malformed or "_taskId_" is missing, `401` if credentials were requested but not presented, `403` if the access validation failed, `404` if the "_taskId_" in unknown and `500` if an unexpected error happens. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
-  "errorMessage":  "Task ID is missing!",
+  "errorMessage":  "Task ID is missing",
   "errorCode":  400,
   "exceptionType":  "INVALID_PARAMETER",
   "origin":  "GET /<path>/<to>/<get-result>"
@@ -84,22 +81,20 @@ The **error codes** are `400` if the request is malformed or "_taskId_" is missi
 
 ### abort-translation
 
-The service operation **request** may require an [access token](../primitives.md#accesstoken) (depending on the applied [service security](../../help/service-security.md)) and a [DataModelTranslationTaskID](../primitives.md#datamodeltranslationtaskid) as "_taskId_" query parameter.
+The service operation **request** requires a [DataModelTranslationTaskID](../primitives.md#datamodeltranslationtaskid) as "_taskId_" query parameter.
 
 ```
 DELETE /<path>/<to>/<abort>?taskId=<unique-task-id-string> HTTP/1.1
-Authorization: Bearer <access-token>
 ```
 
 The service operation **responds** with the status code `200` if called successfully and the translation task has been aborted.
 
-The **error codes** are `400` if the request is malformed or "_taskId_" is missing, `401` if credentials were requested but not presented, `403` if the access validation failed,
-`404` if the "_taskId_" in unkown and `500` if an unexpected error happens. The error response also contains an
+The **error codes** are `400` if the request is malformed or "_taskId_" is missing, `401` if credentials were requested but not presented, `403` if the access validation failed, `404` if the "_taskId_" in unknown and `500` if an unexpected error happens. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
-  "errorMessage":  "Task ID is missing!",
+  "errorMessage":  "Task ID is missing",
   "errorCode":  400,
   "exceptionType":  "INVALID_PARAMETER",
   "origin":  "DELETE /<path>/<to>/<abort>"

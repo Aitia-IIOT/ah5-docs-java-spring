@@ -51,7 +51,7 @@ Authorization: Bearer <access-token>
 }
 ```
 
-The service operation **responds** with the status code `200` if called successfully and the tragtes have been filtered. The response also contains a
+The service operation **responds** with the status code `200` if called successfully and the targets have been filtered. The response also contains a
 [TranslationCheckTargetsResponse](../data-models/translation-check-targets-response.md) JSON encoded body.
 
 ```
@@ -69,8 +69,8 @@ The service operation **responds** with the status code `200` if called successf
                      "192.168.56.116",
                      "tp2.greenhouse.com"
                   ],
-                  "accessPort": 8080,
-                  "basePath": "/kelvin/",
+                  "accessPort": 1883,
+                  "baseTopic": "/kelvin/",
                   "operations": [
                     "query-temperature"
                   ],
@@ -119,8 +119,8 @@ Authorization: Bearer <access-token>
          "92.168.56.116",
          "tp2.greenhouse.com"
       ],
-      "accessPort": 8080,
-      "basePath": "/kelvin/",
+      "accessPort": 1883,
+      "baseTopic": "/kelvin/",
       "operations": [
          "query-temperature"
       ],
@@ -140,7 +140,7 @@ Authorization: Bearer <access-token>
             "92.168.56.103"
          ],
          "accessPort": 8080,
-         "basePath": "/model-translation/",
+         "basePath": "/model-translation",
          "operations": {
             "init-translation": {
                "path": "/init",
@@ -169,7 +169,7 @@ Authorization: Bearer <access-token>
             "92.168.56.103"
          ],
          "accessPort": 8080,
-         "basePath": "/model-translation/",
+         "basePath": "/model-translation",
          "operations": {
             "init-translation": {
                "path": "/init",

@@ -50,7 +50,7 @@ A **String** identifier of a Local Cloud. It consists of the cloud name and the 
 
 ## DataModelID
 
-A **string** identifier of a data model that defines both a specific format (e.g., JSON, XML) and its associated semantics. The allowed characters are letters (English alphabet only) and numbers and it must follow the camelCase naming convention.
+A String identifier of a data model that defines both a specific format (e.g., JSON, XML) and its associated semantics. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## DataModelTranslationTaskID
 
@@ -196,7 +196,7 @@ A **String** name that groups token technologies by usage characteristics. Can b
 
 ## TranslationBridgeID
 
-A **string** identifier that is unique within the Local Cloud and associated with an prospective or existing translation bridge.
+A **UUID** that associated with a prospective or existing translation bridge.
 
 ## UUID
 

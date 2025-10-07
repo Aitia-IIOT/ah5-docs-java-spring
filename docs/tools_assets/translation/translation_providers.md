@@ -5,7 +5,7 @@
 The interface translation providers are individual [application systems](../../help/definitions.md#application-system) that are capable
 
 - to translate from one or more [interface templates](../../api/communication-profiles/communication-profiles-overview.md) to one specific interface template,
-- to cooperate with the [Translation Manager Support System](../../support_systems/translation_manager.md) by providing the [interfaceBridgeManagement](./translation_provider_dev.md#interface-translation-provider) service and
+- to cooperate with the [TranslationManager Support System](../../support_systems/translation_manager.md) by providing the [interfaceBridgeManagement](./translation_provider_dev.md#interface-translation-provider) service and
 - to cooperate with data model translation providers by consuming the [dataModelTranslation](./translation_provider_dev.md#data-model-translation-provider) service
 
 in order to create a translation bridge between consumer and provider systems.
