@@ -110,8 +110,8 @@ This document describes the \textbf{dataModelTranslation} service, which provide
 The \textbf{dataModelTranslation} service contains the following operations:
 
 \begin{itemize}
-    \item \textit{init-translation} accepts the data payload that need to be translated, creates and internal task for it and immediately returns a unique task ID;
-    \item \textit{get-translation-result} returns the actual status of a given task and the translated data payload if the task has already finished;
+    \item \textit{init-translation} accepts the data payload that need to be translated, creates an internal task for it and immediately returns a unique task ID;
+    \item \textit{get-translation-result} returns the actual status of a given task and the translated data payload (or an error message) if the task has already finished;
     \item \textit{abort-translation} terminates and removes a given task;
 \end{itemize}
 
@@ -171,13 +171,16 @@ As a complement to the explicitly defined types in this section, there is also a
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3.6cm} | p{4.9cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-accessToken & \pref{String} & no & The access token that might be required. \\ \hline
 inputModelId & \pref{DataModelID} & yes & The identifier of the data model to be translated. \\ \hline
 outputModelId & \pref{DataModelID} & yes & The identifier of the required result data model. \\ \hline
-payload & \pref{Object} & yes & The input data to be translated. \\ \hline
+payload & \hyperref[sec:model:Payload]{Payload} & yes & The input data to be translated. \\ \hline
 settings & \hyperref[sec:model:Map]{Map}  & no & Any configuration data that might be required by a translation process. \\ \hline
 \end{tabularx}
 \end{table}
+
+\msubsection{struct}{Payload}
+
+A byte array encoded with Base64 string (using UTF-8 character set).
 
 \msubsection{struct}{Map}
 
@@ -192,6 +195,8 @@ status & \pref{OperationStatus} & Status of the operation. \\ \hline
 taskId & \pref{TaskID} & Identifier of the initialized translation task. \\ \hline
 \end{tabularx}
 \end{table}
+
+\clearpage
 
 \msubsection{struct}{ErrorResponse}
 
@@ -211,7 +216,6 @@ origin & \pref{String} & Origin of the error. \\ \hline
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3.6cm} | p{4.9cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-accessToken & \pref{String} & no & The access token that might be required. \\ \hline
 taskId & \pref{TaskID} & yes & Identifier of the translation task. \\ \hline
 \end{tabularx}
 \end{table}
@@ -223,10 +227,12 @@ taskId & \pref{TaskID} & yes & Identifier of the translation task. \\ \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 operationStatus & \pref{OperationStatus} & Status of the operation. \\ \hline
 status & \pref{TaskStatus} & Status of the translation task. \\ \hline
-result & \pref{Object} & The result (translated) data payload. \\ \hline
+result & \hyperref[sec:model:Payload]{Payload} or \pref{String} & The result (translated) data payload or an error message. \\ \hline
 mimeType & \pref{MimeType} & The MIME type of the result data payload. \\ \hline
 \end{tabularx}
 \end{table}
+
+\clearpage
 
 \subsection{Primitives}
 \label{sec:model:primitives}
@@ -238,7 +244,7 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
-\pdef{DataModelID}      & A unique string identifier that defines both, a specific format and its associated semantics. \\ \hline
+\pdef{DataModelID}      & A string identifier that is intended to be both human and machine-readable. It also defines the specific format and the associated semantics. Must follow camelCase naming convention. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{MimeType}         & Standardized identifier that defines the nature and format of a data payload. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline

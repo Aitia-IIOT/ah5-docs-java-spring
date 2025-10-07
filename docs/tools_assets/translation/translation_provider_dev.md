@@ -11,7 +11,7 @@ The following specifications must be met to develop a compliant [Interface Trans
 
 ### Service security requirements
 
-TODO
+The interfaceBridgeManagement service can be provided with any of the available [security policies](../../help/service-security.md#security-policies).
 
 ### Service registration requirements
 

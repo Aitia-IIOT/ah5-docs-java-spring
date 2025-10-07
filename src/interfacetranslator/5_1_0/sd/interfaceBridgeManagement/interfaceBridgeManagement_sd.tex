@@ -125,7 +125,7 @@ This service is primarily provided to the TranslationManager Support System to e
 
 When the TranslationManager calculates the possible translation bridges and one is chosen to be initialized, it calls the \textit{initilaize-bridge} operation. The init request describes the entire translation bridge: the target service interface to connect; the input data model translation service (if necessary) to use; the result data model translation service (if necessary) to use and the authorization tokens (if required). Once the translation bridge is ready to use, a dynamically created access interface is returned.
 
-The \textit{abort-bridge} operation can be used to destroy existing bridges, however unused translation bridges are dismantled automatically.
+The \textit{abort-bridge} operation can be used to destroy existing bridges, however inactive translation bridges should be dismantled automatically.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -135,7 +135,7 @@ Interface translation is only possible between interface templates and in the di
 \subsection{Access policy}
 \label{sec:accesspolicy}
 
-Available for systems with management role, primarily for the TranslationManger Support System.
+Available for systems with management role, primarily for the TranslationManager Support System.
 
 \newpage
 
@@ -205,6 +205,10 @@ properties &\hyperref[sec:model:Map]{Map} & yes & Interface template-specific da
 
 \clearpage
 
+\msubsection{struct}{Map}
+
+An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
+
 \msubsection{struct}{TranslationCheckTargetsResponse}
  
 \begin{table}[ht!]
@@ -214,10 +218,6 @@ status & \pref{OperationStatus} & Status of the operation. \\ \hline
 targets & \pref{List}$<$\hyperref[sec:model:TranslationTargetDTO]{TranslationTargetDTO}$>$ & List of candidate service providers with translatable interfaces. \\ \hline
 \end{tabularx}
 \end{table}
-
-\msubsection{struct}{Map}
-
-An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or list values.
 
 \msubsection{struct}{ErrorResponse}
 
@@ -245,10 +245,10 @@ operation & \pref{ServiceOperationName} & yes & The target service-operation. \\
 inputInterface & \pref{InterfaceName} & yes & The name of the interface template to be translated. \\ \hline
 targetInterface & \pref{InterfaceName} & yes & The name of the interface template of the target service-operation. \\ \hline 
 targetInterfaceProperties &\hyperref[sec:model:Map]{Map} & yes & Interface specific data of the target service-operation. \\ \hline
-inputDataModelRequirement & \pref{DataModelID} & no & The data model identifier of what the consumer can provide as the target service-operation input. \\ \hline
+inputDataModelRequirement & \pref{DataModelID} & no (yes) & The data model identifier of what the consumer can provide as the target service-operation input. It is mandatory if the target operation has input payload and input needs to be translated. \\ \hline
 inputDataModelTranslator & \hyperref[sec:model:DataModelTranslationDescriptor]{DataModelTranslationDescriptor}  & no & The data model translation provider for translating the input of the target service-operation.\\ \hline
-resultDataModelRequirement & \pref{DataModelID} & no & The data model identifier of what the consumer can handle as the target service-operation result. \\ \hline
-outputDataModelTranslator & \hyperref[sec:model:DataModelTranslationDescriptor]{DataModelTranslationDescriptor}  & no & The data model translation provider for translating the output of the target service-operation.\\ \hline
+resultDataModelRequirement & \pref{DataModelID} & no (yes) & The data model identifier of what the consumer can handle as the target service-operation result. It is mandatory if the target operation has result payload and result needs to be translated. \\ \hline
+resultDataModelTranslator & \hyperref[sec:model:DataModelTranslationDescriptor]{DataModelTranslationDescriptor}  & no & The data model translation provider for translating the output of the target service-operation.\\ \hline
 authorizationToken & \pref{String} & no & Authorization token for the target service-operation if required. \\ \hline
 interfaceTranslatorSettings & \hyperref[sec:model:Map]{Map}  & no & Any configuration data that might be required by the interface translation process. \\ \hline
 \end{tabularx}
@@ -302,7 +302,7 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{3.7cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
-\pdef{DataModelID}      & A unique string identifier that defines both, a specific format and its associated semantics. \\ \hline
+\pdef{DataModelID}      & A string identifier that is intended to be both human and machine-readable. It also defines the specific format and the associated semantics. Must follow camelCase naming convention. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{InterfaceName}    & A string identifier of an interface descriptor. Must follow snake\_case naming convention. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
@@ -315,7 +315,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{ServiceOperationName}      & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
 \pdef{TaskID}           & A unique string identifier that belongs to a translation task. \\ \hline
-\pdef{TranslationBridgeID}       & A string identifier that is associated with an existing translation bridge. \\ \hline
+\pdef{TranslationBridgeID}       & A unique character sequence that is associated with an existing translation bridge. \\ \hline
 \end{tabularx}
 \end{table}
 
