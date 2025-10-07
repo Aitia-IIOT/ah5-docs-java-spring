@@ -90,6 +90,7 @@ nav:
       - TranslationManager:
         - HTTP:
             - translationBridge: api/translationmanager/translation-bridge-generic-http.md
+            - translationBridgeManagement: api/translationmanager/translation-bridge-management-generic-http.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
@@ -226,6 +227,8 @@ nav:
       - SystemRegistrationRequest: api/data-models/system-registration-request.md
       - SystemRegistrationResponse: api/data-models/system-registration-response.md
       - SystemRequest: api/data-models/system-request.md
+      - TranslationAbortMgmtResponse: api/data-models/translation-abort-mgmt-response.md
+      - TranslationAbortResults: api/data-models/translation-abort-mgmt-results.md
       - TranslationBridgeCandidate: api/data-models/translation-bridge-candidate.md
       - TranslationDiscoveryFlagMap: api/data-models/translation-discovery-flag-map.md
       - TranslationDiscoveryMgmtRequest: api/data-models/translation-discovery-mgmt-request.md
@@ -235,6 +238,7 @@ nav:
       - TranslationDiscoveryServiceInstanceDescriptor: api/data-models/translation-discovery-service-instance-descriptor.md
       - TranslationDiscoveryServiceInstanceInterfaceDescriptor: api/data-models/translation-discovery-service-instance-interface-descriptor.md
       - TranslationDiscoverySystemDescriptor: api/data-models/translation-discovery-system-descriptor.md
+      - TranslationNegotiationMgmtRequest: api/data-models/translation-negotiation-mgmt-request.md
       - TranslationNegotiationRequest: api/data-models/translation-negotiation-request.md
       - TranslationNegotiationResponse: api/data-models/translation-negotiation-response.md
       - TranslationNegotiationServiceInstanceDescriptor: api/data-models/translation-negotiation-service-instance-descriptor.md

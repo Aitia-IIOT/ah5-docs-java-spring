@@ -21,21 +21,21 @@ Learn more: <br />
 
 This service operation checks a list of possible providers for a service operation and returns only those that can be consumed by the requester via a translation bridge using the currently available translators. 
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#discovery) TODO | [generic_https](../api/translationmanager/translation-bridge-generic-http.md#discovery) TODO <br />
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#discovery) | [generic_https](../api/translationmanager/translation-bridge-generic-http.md#discovery) <br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-generic-mqtt.md#discovery) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-generic-mqtt.md#discovery) TODO
 
 **negotiation**
 
 This service operation allows consumers to create a translation bridge to one selected provider's one particular service operation. It is possible to do discovery during the negotiation if no prior discovery is happened.
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#negotiation) TODO | [generic_https](../api/translationmanager/translation-bridge-generic-http.md#negotiation) TODO<br />
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#negotiation) | [generic_https](../api/translationmanager/translation-bridge-generic-http.md#negotiation) <br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-generic-mqtt.md#negotiation) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-generic-mqtt.md#negotiation) TODO
 
 **abort**
 
 This service operation aborts an existing bridge created by the requester. After abortion the targeted service operation will not be available via the bridge.
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#abort) TODO | [generic_https](../api/translationmanager/translation-bridge-generic-http.md#abort) TODO<br />
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-generic-http.md#abort) | [generic_https](../api/translationmanager/translation-bridge-generic-http.md#abort) <br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-generic-mqtt.md#abort) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-generic-mqtt.md#abort) TODO
 
 -----

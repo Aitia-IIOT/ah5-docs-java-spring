@@ -15,10 +15,8 @@ Hereby the **Interface Design Description** (IDD) is provided to the [translatio
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationDiscoveryMgmtRequest](../data-models/translation-discovery-mgmt-request.md)
 JSON encoded body.
 
-TODO continue from here
-
 ```
-POST /translation/bridge/discovery HTTP/1.1
+POST /translation/bridge/mgmt/discovery HTTP/1.1
 Authorization: Bearer <authorization-info>
 
 {
@@ -58,12 +56,20 @@ Authorization: Bearer <authorization-info>
       ]
     }
   ],
+  "consumer": "TestConsumer",
   "operation": "make-double",
   "interfaceTemplateNames": [
     "generic_http"
   ],
   "inputDataModelId": "testJson01",
-  "outputDataModelId": "testJson01"
+  "outputDataModelId": "testJson01",
+  "flags": {
+    "CONSUMER_BLACKLIST_CHECK": false,
+	"CANDIDATES_BLACKLIST_CHECK": false,
+	"CANDIDATES_AUTH_CHECK": true,
+	"TRANSLATORS_BLACKLIST_CHECK": false,
+	"TRANSLATORS_AUTH_CHECK": true
+  }
 }
 ```
 
@@ -93,80 +99,22 @@ and `503` if an unexpected error happens while communicating other systems. The 
   "errorMessage": "operation is missing",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin": "POST  /translation/bridge/discovery"
+  "origin": "POST  /translation/bridge/mgmt/discovery"
 }
 ```
 
 ### negotiation
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationNegotiationRequest](../data-models/translation-negotiation-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationNegotiationMgmtRequest](../data-models/translation-negotiation-mgmt-request.md)
 JSON encoded body.
 
-Operation _negotiation_ can be used two ways. 
-
-- A. Using the results of a previously executed _discovery_ by specifing a valid _bridgeId_.
-- B. Creating the _discovery_ results during the _negotiation_ by not specifing a valid _bridgeId_. This case requires additional information about the translation task in the request.
-
-#### Example request for case A
-
 ```
-POST /translation/bridge/negotiation HTTP/1.1
+POST /translation/bridge/mgmt/negotiation HTTP/1.1
 Authorization: Bearer <authorization-info>
 
 {
   "bridgeId": "2240efa3-fde4-4f81-a625-04f1234acee7",
-  "target": {
-    "instanceId": "DoubleProvider|doubleService|1.0.0"
-  }
-}
-```
-
-#### Example request for case B
-
-```
-POST /translation/bridge/negotiation HTTP/1.1
-Authorization: Bearer <authorization-info>
-
-{
-  "target": {
-    "instanceId": "DoubleProvider|doubleService|1.0.0",
-    "provider": {
-      "name": "DoubleProvider"
-      
-    },
-    "serviceDefinition": {
-      "name": "doubleService"
-    },
-    "interfaces": [
-      {
-        "templateName": "generic_http",
-        "policy": "USAGE_LIMITED_TOKEN_AUTH",
-        "properties": {
-          "accessAddresses": [
-            "127.0.0.1"
-          ],
-          "accessPort": 23456,
-          "operations": {
-            "make-double": {
-              "path": "/make-double",
-              "method": "POST"
-            }
-          },
-          "basePath": "/double",
-          "dataModels": {
-            "make-double": {
-              "input": "testXml01",
-              "output": "testXml01"
-            }
-          }
-        }
-      }
-    ]
-  },
-  "operation": "make-double",
-  "interfaceTemplateName": "generic_http",
-  "inputDataModelId": "testJson01",
-  "outputDataModelId": "testJson01"
+  "targetInstanceId": "DoubleProvider|doubleService|1.0.0"
 }
 ```
 
@@ -213,20 +161,29 @@ and `503` if an unexpected error happens while communicating other systems. The 
   "errorMessage": "Service instance id is missing",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin": "POST  /translation/bridge/negotiation"
+  "origin": "POST  /translation/bridge/mgmt/negotiation"
 }
 ```
 
 ### abort
 
-The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http) and a [BridgeIdentifier](../primitives.md#bridgeidentifier) as path parameter, which is a unique identifier of the translation bridge to be aborted.
-
+The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http) and a List<[BridgeIdentifier](../primitives.md#bridgeidentifier)> as query parameter using the key ids, which contains the identitifers of the translation bridgies that need to aborted.
+ 
 ```
-DELETE /translation/bridge/abort/2240efa3-fde4-4f81-a625-04f1234acee7 HTTP/1.1
+DELETE /translation/bridge/mgmt/abort?ids=2240efa3-fde4-4f81-a625-04f1234acee7&ids=f098f234-e071-4e60-9827-b67656b2cc82 HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 
-The service operation **responds** with the status code `200` if called successfully and an existing translation bridge was aborted and `204` if no translation bridge was found. The success response does not contain any response body.
+The service operation **responds** with the status code `200` if called successfully and a [TranslationAbortMgmtResponse](../data-models/translation-abort-mgmt-response.md) JSON encoded body.
+
+```
+{
+  "results": {
+    "2240efa3-fde4-4f81-a625-04f1234acee7": true,
+	"f098f234-e071-4e60-9827-b67656b2cc82": false
+  }
+}
+```
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
@@ -235,9 +192,11 @@ and `503` if an unexpected error happens while communicating other systems. The 
 
 ```
 {
-  "errorMessage": "No permission to abort bridge: 2240efa3-fde4-4f81-a625-04f1234acee7",
-  "errorCode": 403,
-  "exceptionType": "FORBIDDEN",
-  "origin": "DELETE  /translation/bridge/abort/2240efa3-fde4-4f81-a625-04f1234acee7"
+  "errorMessage": "Bridge identifier is invalid: 2240efa3-fde4-4f81-a625-04f1234acee",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "DELETE  /translation/bridge/mgmt/abort"
 }
 ```
+
+TODO: continue with query

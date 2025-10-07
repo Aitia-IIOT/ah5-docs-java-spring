@@ -217,7 +217,7 @@ and `503` if an unexpected error happens while communicating other systems. The 
 
 ### abort
 
-The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http) and a [BridgeIdentifier](../primitives.md#bridgeidentifier) as path parameter, which is a unique identifier of the translation bridge to be aborted.
+The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http) and a [TranslationBridgeID](../primitives.md#translationbridgeid) as path parameter, which is a unique identifier of the translation bridge to be aborted.
 
 ```
 DELETE /translation/bridge/abort/2240efa3-fde4-4f81-a625-04f1234acee7 HTTP/1.1

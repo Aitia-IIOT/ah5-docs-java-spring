@@ -187,7 +187,7 @@ Operation \textit{discovery} checks a list of possible providers for a service o
 Operation \textit{negotiation} allows to create a translation bridge for a specified consumer to one selected provider's one particular service operation. The request data must meet the following criteria:
 
 \begin{itemize}
-    \item Bridge identifier is mandatory and must be a valid \pref{BridgeIdentifier}.
+    \item Bridge identifier is mandatory and must be a valid \pref{TranslationBridgeID}.
     \item Target instance identifier is mandatory and  must be a valid \pref{ServiceInstanceID}.
 \end{itemize}
 
@@ -197,7 +197,7 @@ Operation \textit{abort} aborts a list of existing bridges. The abort data must 
 
 \begin{itemize}
     \item At least one bridge identifier is mandatory.
-    \item All specified identifier must be a valid \pref{BridgeIdentifier}.
+    \item All specified identifier must be a valid \pref{TranslationBridgeID}.
 \end{itemize}
 
 \fsubsection{query}{TranslationQueryRequest}{TranslationQueryListResponse}{}{ErrorResponse}
@@ -232,8 +232,8 @@ candidates & \pref{List}$<$\hyperref[sec:model:TranslationDiscoveryServiceInstan
 consumer & \pref{SystemName} & yes & The system that needs a translation bridge. \\ \hline
 operation & \pref{ServiceOperationName} & yes & The operation that the consumer wants to consume. \\ \hline
 interfaceTemplateNames & \pref{List}$<$\pref{InterfaceName}$>$ & yes & The name of the interfaces that the consumer can use. \\ \hline
-inputDataModelId & \pref{DataModelIdentifier} & yes (no) & The identifier of the data model that the consumer can use as input payload of the specified operation. Must be omitted if there is no input payload. \\ \hline
-outputDataModelId & \pref{DataModelIdentifier} & yes (no) & The identifier of the data model that the consumer can use as response payload of the specified operation. Must be omitted if there is no res\-ponse payload. \\ \hline
+inputDataModelId & \pref{DataModelID} & yes (no) & The identifier of the data model that the consumer can use as input payload of the specified operation. Must be omitted if there is no input payload. \\ \hline
+outputDataModelId & \pref{DataModelID} & yes (no) & The identifier of the data model that the consumer can use as response payload of the specified operation. Must be omitted if there is no res\-ponse payload. \\ \hline
 flags & \hyperref[sec:model:TranslationDiscoveryFlagMap]{Translation\-Discovery\-Flag\-Map} & no & Flags to fine tune the discovery process. \\ \hline
 \end{tabularx}
 \end{table}
@@ -301,7 +301,7 @@ An \pref{Object} which maps \pref{TranslationDiscoveryFlag} keys to \pref{Boolea
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{6.1cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-bridgeId & \pref{BridgeIdentifier} & Unique identifier related to discovery results. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & Unique identifier related to discovery results. \\ \hline
 candidates & \pref{List}$<$\hyperref[sec:model:TranslationBridgeCandidate]{TranslationBridgeCandidate}$>$ & Information about service instances that can be accessed via a translation bridge. \\ \hline
 \end{tabularx}
 \end{table}
@@ -331,7 +331,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 
 \msubsection{struct}{DataModelMap}
 
-An \pref{Object} that maps the key \textit{dataModels} to an \pref{Object}, in which keys are \pref{ServiceOperationName}s and the values are \pref{Object}s containing \pref{DataModelIdentifier}s using keys \textit{input} and \textit{output}. If an operation has input payload then the identifier of the input data model is assigned to the key \textit{input}. If the operation has response payload then the identifier of the response data model is assigned to the key \textit{output}. If an operation has no input and/or response payload, the appropriate key-value pair must be omitted. If an operation has no payload at all, then that operation can be omitted from the structure.
+An \pref{Object} that maps the key \textit{dataModels} to an \pref{Object}, in which keys are \pref{ServiceOperationName}s and the values are \pref{Object}s containing \pref{DataModelID}s using keys \textit{input} and \textit{output}. If an operation has input payload then the identifier of the input data model is assigned to the key \textit{input}. If the operation has response payload then the identifier of the response data model is assigned to the key \textit{output}. If an operation has no input and/or response payload, the appropriate key-value pair must be omitted. If an operation has no payload at all, then that operation can be omitted from the structure.
 
 \clearpage
 
@@ -351,7 +351,7 @@ Should looks like this:
 \begin{tabularx}{\textwidth}{| p{3.9cm} | p{5.5cm} | p{1.3cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-bridgeId & \pref{BridgeIdentifier} & yes & The unique identifier of the results of a previously executed discovery operation. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & yes & The unique identifier of the results of a previously executed discovery operation. \\ \hline
 targetInstanceId & \pref{ServiceInstanceID} & yes & Identifier of the target service instance. \\ \hline
 \end{tabularx}
 \end{table}
@@ -362,7 +362,7 @@ targetInstanceId & \pref{ServiceInstanceID} & yes & Identifier of the target ser
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{5.5cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-bridgeId & \pref{BridgeIdentifier} & Unique identifier of the translation bridge. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & Unique identifier of the translation bridge. \\ \hline
 bridgeInterface & \hyperref[sec:model:TranslationNegotiationServiceInstanceInterfaceDescriptor]{Translation\-Negotiation\-Service\-Instance\-Interface\-Descriptor}  & Access information for the translation bridge. \\ \hline
 tokenExpiresAt & \pref{DateTime} & Token expiry date. Only filled if target pro\-vider's operation needs an expirable token. \\ \hline
 tokenUsageLimit & \pref{Number} & A number about how many times a token can be used. Only filled if target provider's operation needs a usage limited token. \\ \hline
@@ -389,7 +389,7 @@ properties &\hyperref[sec:model:Metadata]{Metadata} & Interface template-specifi
 \begin{tabularx}{\textwidth}{| p{3.9cm} | p{5.0cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-ids & \pref{List}$<$\pref{BridgeIdentifier}$>$ & yes & Unique identifiers of the translation bridges to delete. \\ \hline
+ids & \pref{List}$<$\pref{TranslationBridgeID}$>$ & yes & Unique identifiers of the translation bridges to delete. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -405,7 +405,7 @@ results & \hyperref[sec:model:TranslationAbortResults]{TranslationAbortResults} 
 
 \msubsection{struct}{TranslationAbortResults}
 
-An \pref{Object} which maps \pref{BridgeIdentifier} keys to \pref{Boolean} values. The value is true if and only if the appropriate translation bridge in not working after the operation.
+An \pref{Object} which maps \pref{TranslationBridgeID} keys to \pref{Boolean} values. The value is true if and only if the appropriate translation bridge in not working after the operation.
 
 \msubsection{struct}{TranslationQueryRequest}
 
@@ -417,7 +417,7 @@ pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is 
 pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
 pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
 pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
-bridgeIds &  \pref{List}$<$\pref{BridgeIdentifier}$>$ & no & Requester is looking for translation bridges with any of the spe\-cified identifiers. \\ \hline
+bridgeIds &  \pref{List}$<$\pref{TranslationBridgeID}$>$ & no & Requester is looking for translation bridges with any of the spe\-cified identifiers. \\ \hline
 creators &  \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for translation bridges that are created by any of the specified systems. \\ \hline
 statuses & \pref{List}$<$\pref{TranslationBridgeStatus}$>$ & no & Requester is looking for translation bridges with any of the specified statuses. \\ \hline
 consumers &  \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for translation bridges that are created for any of the specified systems. \\ \hline
@@ -456,7 +456,7 @@ count & \pref{Number} & Total number of translation bridges that match the filte
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{5cm} | p{5.2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-bridgeId & \pref{BridgeIdentifier} & Unique identifier of the translation bridge. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & Unique identifier of the translation bridge. \\ \hline
 status & \pref{TranslationBridgeStatus} & Status of the translation bridge. \\ \hline
 usageReportCount &  \pref{Number} & Information about how many times the translation bridge was used. \\ \hline
 alivesAt & \pref{DateTime} & The moment when the translation was used last time. \\ \hline
@@ -497,8 +497,8 @@ configurationSettings &\hyperref[sec:model:Metadata]{Metadata} & Additional conf
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{4.5cm} | p{3.5cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
-fromModelId & \pref{DataModelIdentifier} & Translator needs to translate from this data model.  \\ \hline
-toModelId & \pref{DataModelIdentifier} & Translator needs to translate to this data model. \\ \hline
+fromModelId & \pref{DataModelID} & Translator needs to translate from this data model.  \\ \hline
+toModelId & \pref{DataModelID} & Translator needs to translate to this data model. \\ \hline
 interfaceProperties &\hyperref[sec:model:Metadata]{Metadata} & Access interface data of the data model translator. \\ \hline
 configurationSettings &\hyperref[sec:model:Metadata]{Metadata} & Additional configuration of the data model translator. \\ \hline
 \end{tabularx}
@@ -514,8 +514,7 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{tabularx}{\textwidth}{| p{5cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{Boolean} & One out of \textit{true} or \textit{false}. \\ \hline
-\pdef{BridgeIdentifier} & A unique character sequence that identifies translation bridges and/or discovery information about potential translation bridges. \\ \hline
-\pdef{DataModelIdentifier} & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
+\pdef{DataModelID} & A string identifier that is intended to be both human and machine-readable. It also defines the specific format and the associated semantics. Must follow camelCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
@@ -534,6 +533,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{ServiceOperationName} & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
 \pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\pdef{TranslationBridgeID} & A unique character sequence that identifies translation bridges and/or discovery information about potential translation bridges. \\ \hline
 \pdef{TranslationBridgeStatus} & Any suitable status chosen by the implementor of service. \\ \hline
 \pdef{TranslationDiscoveryFlag} & Specific string values to fine tune the translation discovery process. Possible values are: \textit{CONSUMER\_BLACKLIST\_CHECK}, \textit{CANDIDATES\_BLACKLIST\_CHECK}, \textit{TRANSLATORS\_BLACKLIST\_CHECK}, \textit{CANDIDATES\_AUTH\_CHECK},  \textit{TRANSLATORS\_AUTH\_CHECK}. The first three (when true) uses the Blacklist Support system and the other two (when true) uses the ConsumerAuthorization Core system to check whether the translation bridge is possible or not. \\ \hline
 \end{tabularx}

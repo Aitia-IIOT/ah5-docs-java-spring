@@ -218,8 +218,8 @@ authentication &\hyperref[sec:model:Identity]{Identity} & yes & The re\-ques\-te
 candidates & \pref{List}$<$\hyperref[sec:model:TranslationDiscoveryServiceInstanceDescriptor]{Translation\-Discovery\-Service\-Instance\-Descriptor}$>$ & yes & Possible service instances for con\-sum\-ing via a translation bridge. \\ \hline
 operation & \pref{ServiceOperationName} & yes & The operation that the requester wants to consume. \\ \hline
 interfaceTemplateNames & \pref{List}$<$\pref{InterfaceName}$>$ & yes & The name of the interfaces that the consumer can use. \\ \hline
-inputDataModelId & \pref{DataModelIdentifier} & yes (no) & The identifier of the data model that the requester can use as input payload of the specified operation. Must be omitted if there is no input payload. \\ \hline
-outputDataModelId & \pref{DataModelIdentifier} & yes (no) & The identifier of the data model that the requester can use as response payload of the specified operation. Must be omitted if there is no res\-ponse payload. \\ \hline
+inputDataModelId & \pref{DataModelID} & yes (no) & The identifier of the data model that the requester can use as input payload of the specified operation. Must be omitted if there is no input payload. \\ \hline
+outputDataModelId & \pref{DataModelID} & yes (no) & The identifier of the data model that the requester can use as response payload of the specified operation. Must be omitted if there is no res\-ponse payload. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -282,7 +282,7 @@ An \pref{Object} which maps \pref{String} keys to primitive, \pref{Object} or li
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{6.1cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-bridgeId & \pref{BridgeIdentifier} & Unique identifier related to discovery results. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & Unique identifier related to discovery results. \\ \hline
 candidates & \pref{List}$<$\hyperref[sec:model:TranslationBridgeCandidate]{TranslationBridgeCandidate}$>$ & Information about service instances that can be accessed via a translation bridge. \\ \hline
 \end{tabularx}
 \end{table}
@@ -314,7 +314,7 @@ origin & \pref{String} & Origin of the error. \\ \hline
 
 \msubsection{struct}{DataModelMap}
 
-An \pref{Object} that maps the key \textit{dataModels} to an \pref{Object}, in which keys are \pref{ServiceOperationName}s and the values are \pref{Object}s containing \pref{DataModelIdentifier}s using keys \textit{input} and \textit{output}. If an operation has input payload then the identifier of the input data model is assigned to the key \textit{input}. If the operation has response payload then the identifier of the response data model is assigned to the key \textit{output}. If an operation has no input and/or response payload, the appropriate key-value pair must be omitted. If an operation has no payload at all, then that operation can be omitted from the structure.
+An \pref{Object} that maps the key \textit{dataModels} to an \pref{Object}, in which keys are \pref{ServiceOperationName}s and the values are \pref{Object}s containing \pref{DataModelID}s using keys \textit{input} and \textit{output}. If an operation has input payload then the identifier of the input data model is assigned to the key \textit{input}. If the operation has response payload then the identifier of the response data model is assigned to the key \textit{output}. If an operation has no input and/or response payload, the appropriate key-value pair must be omitted. If an operation has no payload at all, then that operation can be omitted from the structure.
 
 Should looks like this:
 \begin{verbatim}
@@ -334,12 +334,12 @@ Should looks like this:
 \begin{tabularx}{\textwidth}{| p{3.9cm} | p{5.5cm} | p{1.3cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-bridgeId & \pref{BridgeIdentifier} & no & The unique identifier of the results of a previously executed discovery operation. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & no & The unique identifier of the results of a previously executed discovery operation. \\ \hline
 target & \hyperref[sec:model:TranslationNegotiationServiceInstanceDescriptor]{Translation\-Negotiation\-Service\-Instance\-Descriptor} & yes & Information about the target service instance. \\ \hline
 operation & \pref{ServiceOperationName} & no (yes) & The operation that the requester wants to consume. Mandatory if \textit{bridgeId} is not specified. \\ \hline
-interfaceTemplateName & \pref{InterfaceName} & no (yes) & The name of the interface that the consumer can use. Mandatory if \textit{bridgeId} is not specified \\ \hline
-inputDataModelId & \pref{DataModelIdentifier} & no (yes) & The identifier of the data model that the requester can use as input payload of the specified operation. Can be omitted if \textit{bridgeId} is specified and must be omitted if there is no input payload. \\ \hline
-outputDataModelId & \pref{DataModelIdentifier} & no (yes) & The identifier of the data model that the requester can use as response payload of the spe\-cified operation. Can be omitted if \textit{bridgeId} is specified and must be omitted if there is no res\-ponse payload. \\ \hline
+interfaceTemplateName & \pref{InterfaceName} & no (yes) & The name of the interface that the consumer can use. Mandatory if \textit{bridgeId} is not specified. \\ \hline
+inputDataModelId & \pref{DataModelID} & no (yes) & The identifier of the data model that the requester can use as input payload of the specified operation. Can be omitted if \textit{bridgeId} is specified and must be omitted if there is no input payload. \\ \hline
+outputDataModelId & \pref{DataModelID} & no (yes) & The identifier of the data model that the requester can use as response payload of the spe\-cified operation. Can be omitted if \textit{bridgeId} is specified and must be omitted if there is no res\-ponse payload. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -363,7 +363,7 @@ interfaces & \pref{List}$<$\hyperref[sec:model:TranslationDiscoveryServiceInstan
 \begin{tabularx}{\textwidth}{| p{4.25cm} | p{5.5cm} | X |} \hline
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 status & \pref{OperationStatus} & Status of the operation. \\ \hline
-bridgeId & \pref{BridgeIdentifier} & Unique identifier of the translation bridge. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & Unique identifier of the translation bridge. \\ \hline
 bridgeInterface & \hyperref[sec:model:TranslationNegotiationServiceInstanceInterfaceDescriptor]{Translation\-Negotiation\-Service\-Instance\-Interface\-Descriptor}  & Access information for the translation bridge. \\ \hline
 tokenExpiresAt & \pref{DateTime} & Token expiry date. Only filled if target pro\-vider's operation needs an expirable token. \\ \hline
 tokenUsageLimit & \pref{Number} & A number about how many times a token can be used. Only filled if target provider's operation needs a usage limited token. \\ \hline
@@ -388,7 +388,7 @@ properties &\hyperref[sec:model:Metadata]{Metadata} & Interface template-specifi
 \begin{tabularx}{\textwidth}{| p{3.9cm} | p{5.5cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
 authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-bridgeId & \pref{BridgeIdentifier} & yes & The unique identifier of the translation bridge. \\ \hline
+bridgeId & \pref{TranslationBridgeID} & yes & The unique identifier of the translation bridge. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -402,8 +402,7 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{5cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
-\pdef{BridgeIdentifier} & A unique character sequence that identifies translation bridges and/or discovery information about potential translation bridges. \\ \hline
-\pdef{DataModelIdentifier} & A string identifier that is intended to be both human and machine-readable. Must follow camelCase naming convention. \\ \hline
+\pdef{DataModelID} & A string identifier that is intended to be both human and machine-readable. It also defines the specific format and the associated semantics. Must follow camelCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{InterfaceName}    & A string identifier of an interface descriptor. Must follow snake\_case naming convention. \\ \hline
@@ -418,6 +417,7 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{ServiceOperationName} & A string identifier that is intended to be both human and machine-readable. Must follow kebab-case naming convention. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
 \pdef{SystemName}       & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
+\pdef{TranslationBridgeID} & A unique character sequence that identifies translation bridges and/or discovery information about potential translation bridges. \\ \hline
 \end{tabularx}
 \end{table}
 

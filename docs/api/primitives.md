@@ -44,17 +44,13 @@ A chain of UTF-8 characters with a maximum length of 1024.
 
 A **boolean** value, one out of `true` or `false`.
 
-## BridgeIdentifier
-
-A [UUID](#uuid) that identifies translation bridges and/or discovery information about potential translation bridges. 
-
 ## CloudIdentifier
 
 A **String** identifier of a Local Cloud. It consists of the cloud name and the organization name separated by a pipe, as follows: `<CloudName>|<OrganizationName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the organization name is _AitiaInc_.) In certain cases, the word `LOCAL` is also considered valid and it references the Local Cloud.
 
-## DataModelIdentifier
+## DataModelID
 
-A **String** identifier that is intended to be both human and machine-readable. The allowed characters are letters (English alphabet only) and numbers. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
+A **String** identifier of a data model that defines both a specific format (e.g., JSON, XML) and its associated semantics. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
 
 ## DateTime
 
@@ -184,6 +180,10 @@ A **String** identifier that is intended to be both human and machine-readable. 
 ## TokenType
 
 A **String** name that groups token technologies by usage characteristics. Can be `USAGE_LIMITED_TOKEN`, `TIME_LIMITED_TOKEN`, `SELF_CONTAINED_TOKEN` or `TRANSLATION_BRIDGE_TOKEN`.
+
+## TranslationBridgeID
+
+A [UUID](#uuid) that associated with an prospective or existing translation bridge.
 
 ## TranslationDiscoveryFlag
 
