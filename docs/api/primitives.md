@@ -50,7 +50,7 @@ A **String** identifier of a Local Cloud. It consists of the cloud name and the 
 
 ## DataModelID
 
-A String identifier of a data model that defines both a specific format (e.g., JSON, XML) and its associated semantics. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
+A **String** identifier of a data model that defines both a specific format (e.g., JSON, XML) and its associated semantics. A name has to start with a letter and must follow the camelCase naming convention. The identifier's maximum length is 63 characters.
 
 ## DataModelTranslationTaskID
 

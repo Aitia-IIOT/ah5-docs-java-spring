@@ -83,7 +83,7 @@ The following specifications must be met to develop a compliant [Data Model Tran
 
 ### Service security requirements
 
-The dataModelTranslation service must be provied with either the [NONE](../../help/service-security.md#none) or [CERT_AUTH](../../help/service-security.md#cert_auth) security policy. When the [TranlsationManager Support System](../../support_systems/translation_manager.md) applies the [CERT_AUTH](../../help/service-security.md#cert_auth) policy, then it looks for dataModelTranslation service instances configured with [CERT_AUTH](../../help/service-security.md#cert_auth). If it applies the [NONE](../../help/service-security.md#none) policy, it looks for dataModelTranslation service instances configured with [NONE](../../help/service-security.md#none).
+The dataModelTranslation service must be provied with either the [NONE](../../help/service-security.md#none) or [CERT_AUTH](../../help/service-security.md#cert_auth) security policy. When the [TranlsationManager Support System](../../support_systems/translation_manager.md) applies the [CERT_AUTH](../../help/service-security.md#cert_auth) policy, then it looks for dataModelTranslation service instances configured with [CERT_AUTH](../../help/service-security.md#cert_auth) or [NONE](../../help/service-security.md#none). If it applies the [NONE](../../help/service-security.md#none) policy, it looks only for dataModelTranslation service instances configured with [NONE](../../help/service-security.md#none).
 
 ### Service registration requirements
 
