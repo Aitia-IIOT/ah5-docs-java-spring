@@ -1,6 +1,6 @@
 # Communication Profiles
 
-A Communication Profile (CP) defines the rules to be followed and the properties to be applied to a given communication protocol.
+A Communication Profile (CP) defines the rules to follow and the properties to apply to a given communication protocol when specifying a [service interface](../../help/definitions.md#service-interface).
 
 This Arrowhead FW implementation is offering the following CPs to interact with services of the Core/Support systems and also to apply by the provider systems developers:
 
