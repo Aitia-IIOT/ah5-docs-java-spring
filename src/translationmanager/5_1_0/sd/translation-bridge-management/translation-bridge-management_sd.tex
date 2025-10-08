@@ -431,8 +431,8 @@ interfaceTranslators &  \pref{List}$<$\pref{SystemName}$>$ & no & Requester is l
 dataModelTranslators &  \pref{List}$<$\pref{SystemName}$>$ & no & Requester is looking for translation bridges where the input or result data model translator is in the specified list. \\ \hline
 creationFrom & \pref{DateTime} & no & Requester is looking for translation bridges that was created after the specified moment. \\ \hline
 creationTo & \pref{DateTime} & no & Requester is looking for translation bridges that was created before the specified moment. \\ \hline
-alivesFrom & \pref{DateTime} & no & Requester is looking for translation bridges that was used after the specified moment. \\ \hline
-alivesTo & \pref{DateTime} & no & Requester is looking for translation bridges that was used before the specified moment. \\ \hline
+alivesFrom & \pref{DateTime} & no & Requester is looking for translation bridges that was last used after the specified moment. \\ \hline
+alivesTo & \pref{DateTime} & no & Requester is looking for translation bridges that was last used before the specified moment. \\ \hline
 minUsage & \pref{Number} & no & Requester is looking for translation bridges was used \textit{minUsage} times at least. \\ \hline
 maxUsage & \pref{Number} & no & Requester is looking for translation bridges was used \textit{maxUsage} times at the most. \\ \hline
 \end{tabularx}
@@ -459,7 +459,7 @@ count & \pref{Number} & Total number of translation bridges that match the filte
 bridgeId & \pref{TranslationBridgeID} & Unique identifier of the translation bridge. \\ \hline
 status & \pref{TranslationBridgeStatus} & Status of the translation bridge. \\ \hline
 usageReportCount &  \pref{Number} & Information about how many times the translation bridge was used. \\ \hline
-alivesAt & \pref{DateTime} & The moment when the translation was used last time. \\ \hline
+alivesAt & \pref{DateTime} & The moment when the translation bridge was used last time. \\ \hline
 message & \pref{String} & Error message if the translation bridge is in error state. \\ \hline
 consumer & \pref{SystemName} & The translation bridge is constructed for this consumer. \\ \hline
 provider & \pref{SystemName} & The translation bridge is constructed to use this system. \\ \hline
@@ -472,7 +472,7 @@ inputDataModelTranslatorData & \hyperref[sec:model:TranslationDataModelTranslati
 outputDataModelTranslator & \pref{SystemName} & The translation bridge is using this system as output data model translator. \\ \hline
 outputDataModelTranslatorData & \hyperref[sec:model:TranslationDataModelTranslationDataDescriptor]{Translation\-Data\-Model\-Translation\-Data\-Descriptor} & Additional information about the data model translator for output translation. \\ \hline
 createdBy & \pref{SystemName} & The system that requested the translation bridge construction. \\ \hline
-createdAt & \pref{DateTime} & Translation bridge was registered at this timestamp. \\ \hline
+createdAt & \pref{DateTime} & Translation bridge was constructed at this timestamp. \\ \hline
 updatedAt & \pref{DateTime} & Translation bridge was modified at this timestamp. \\ \hline
 \end{tabularx}
 \end{table}
@@ -486,7 +486,7 @@ updatedAt & \pref{DateTime} & Translation bridge was modified at this timestamp.
 \rowcolor{gray!33} Field & Type      & Description \\ \hline
 fromInterfaceTemplate & \pref{InterfaceName} & Translator accepts requests using this interface. \\ \hline
 toInterfaceTemplate & \pref{InterfaceName} & Translator sends requests to target provider using this interface. \\ \hline
-token & \pref{String} & An authorization token for the target operation (if required). \\ \hline
+token & \pref{AccessToken} & An authorization token for the target operation (if required). \\ \hline
 interfaceProperties &\hyperref[sec:model:Metadata]{Metadata} & Access interface data of the interface translator. \\ \hline
 configurationSettings &\hyperref[sec:model:Metadata]{Metadata} & Additional configuration of the interface translator. \\ \hline
 \end{tabularx}
@@ -513,6 +513,8 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{5cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
+\pdef{AccessToken} & A possibly unique string of characters that is issued for a beneficiary system
+and is associated at least with a provider system, a target and is expiring. \\ \hline
 \pdef{Boolean} & One out of \textit{true} or \textit{false}. \\ \hline
 \pdef{DataModelID} & A string identifier that is intended to be both human and machine-readable. It also defines the specific format and the associated semantics. Must follow camelCase naming convention. \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline

@@ -185,6 +185,10 @@ A **String** name that groups token technologies by usage characteristics. Can b
 
 A [UUID](#uuid) that associated with an prospective or existing translation bridge.
 
+## TranslationBridgeStatus
+
+Alias for a **String** value that describes the actual state of a translation bridge. Can be: `NEW`, `DISCOVERED`, `PENDING`, `INITIALIZED`, `USED`, `ABORTED`, `CLOSED`, `ERROR`.
+
 ## TranslationDiscoveryFlag
 
 A **String** name for flag that is used in translation discovery. Possible values are:

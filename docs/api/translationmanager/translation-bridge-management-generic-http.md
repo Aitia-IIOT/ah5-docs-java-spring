@@ -199,4 +199,150 @@ and `503` if an unexpected error happens while communicating other systems. The 
 }
 ```
 
-TODO: continue with query
+### query
+
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationQueryRequest](../data-models/translation-query-request.md)
+JSON encoded body.
+
+```
+POST /translation/bridge/mgmt/query HTTP/1.1
+Authorization: Bearer <authorization-info>
+
+{
+  "pagination": {
+    "page": 0,
+    "size": 2,
+    "direction": "ASC",
+    "sortField": "createdAt"
+  },
+  "bridgeIds": [ "2240efa3-fde4-4f81-a625-04f1234acee7" ],
+  "creators": [ "TestConsumer" ],
+  "statuses": [ "INITIALIZED", "USED" ],
+  "consumers": [ "TestConsumer" ],
+  "providers": [ "DoubleProvider" ],
+  "serviceDefinitions": [ "doubleService" ],
+  "interfaceTranslators": [ "InterfaceTranslatorToGenericHTTP" ],
+  "dataModelTranslators": [ "DummyJsonXmlTranslator" ],
+  "creationFrom": "2025-10-07T10:00:00Z",
+  "creationTo": "2025-10-07T19:00:00Z",
+  "alivesFrom": "2025-10-07T11:00:00Z",
+  "alivesTo": "2025-10-07T13:00:00Z"
+  "minUsage": 1,
+  "maxUsage": 100
+}
+```
+
+The service operation **responds** with the status code `200` and with a [TranslationQueryListResponse](../data-models/translation-query-list-response.md) JSON encoded body.
+
+```
+{
+  "entries": [
+    {
+	  "bridgeId": "2240efa3-fde4-4f81-a625-04f1234acee7",
+	  "status": "USED",
+	  "usageReportCount": 13,
+	  "alivesAt": "2025-10-07T12:46:12Z",
+	  "consumer": "TestConsumer",
+	  "provider": "DoubleProvider",
+	  "serviceDefinition": "doubleService",
+	  "operation": "make-double",
+	  "interfaceTranslator": "InterfaceTranslatorToGenericHTTP",
+	  "interfaceTranslatorData": {
+	    "fromInterfaceTemplate": "generic_http",
+		"toInterfaceTemplate": "generic_http",
+		"token": "BjS7VQTRXfsBQngr8eM02a1ZB8Zt3jxr5XefhKqfadZLTOHDH4amxcskXLRGRsoW5upmiX1d+MPZ4S6R2wltFUUROH6SXPoue+OReSfoUeGgcFDxVe9RFXEmxCpRQPoMhwk2FyGlMmNMIAUHCU++MW9iuGzlARNrfOl3UUF14H+ch0GopXQYDB6KxzRF8iHTXQ9OEK//M9ZRbSW0QXXoyRZMa73VB1PHL+yaTFrKWBw=",
+		"interfaceProperties": {
+          "accessAddresses": [
+            "127.0.0.1"
+          ],
+          "accessPort": 12501,
+          "operations": {
+            "initialize-bridge": {
+              "path": "/initialize-bridge",
+              "method": "POST"
+            },
+            "abort-bridge": {
+              "path": "/abort-bridge",
+              "method": "DELETE"
+            },
+            "check-targets": {
+              "path": "/check-targets",
+              "method": "POST"
+            }
+          },
+          "basePath": "/interface/translator/bridge/mgmt"
+        }
+	  },
+	  "inputDataModelTranslator": "DummyJsonXmlTranslator",
+	  "inputDataModelTranslatorData": {
+        "fromModelId": "testJson01",
+        "toModelId": "testXml01",
+        "interfaceProperties": {
+          "accessAddresses": [
+              "127.0.0.1"
+          ],
+          "accessPort": 22222,
+          "operations": {
+            "abort-translation": {
+              "path": "/abort",
+              "method": "DELETE"
+            },
+            "init-translation": {
+              "path": "/init",
+              "method": "POST"
+            },
+            "get-translation-result": {
+              "path": "/get",
+              "method": "GET"
+            }
+          },
+          "basePath": "/data-model/translation"
+        }
+      },
+	  "outputDataModelTranslator": "DummyJsonXmlTranslator",
+	  "outputDataModelTranslatorData": {
+        "fromModelId": "testXml01",
+        "toModelId": "testJson01",
+        "interfaceProperties": {
+          "accessAddresses": [
+              "127.0.0.1"
+          ],
+          "accessPort": 22222,
+          "operations": {
+            "abort-translation": {
+              "path": "/abort",
+              "method": "DELETE"
+            },
+            "init-translation": {
+              "path": "/init",
+              "method": "POST"
+            },
+            "get-translation-result": {
+              "path": "/get",
+              "method": "GET"
+            }
+          },
+          "basePath": "/data-model/translation"
+        }
+      },
+	  "createdBy": "TestConsumer",
+	  "createdAt": "2025-10-07T10:36:47Z",
+	  "updatedAt": "2025-10-07T12:46:12Z"
+ 	}
+  ],
+  "count": 1
+}
+```
+
+The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
+`403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an
+[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+
+```
+{
+  "errorMessage": "Bridge id is invalid: 2240efa3-fde4-4f81-a625-04f1234acee",
+  "errorCode": 400,
+  "exceptionType": "INVALID_PARAMETER",
+  "origin": "POST  /translation/bridge/mgmt/query"
+}
+```

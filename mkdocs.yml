@@ -230,6 +230,7 @@ nav:
       - TranslationAbortMgmtResponse: api/data-models/translation-abort-mgmt-response.md
       - TranslationAbortResults: api/data-models/translation-abort-mgmt-results.md
       - TranslationBridgeCandidate: api/data-models/translation-bridge-candidate.md
+      - TranslationDataModelTranslationDataDescriptor: api/data-models/translation-data-model-translation-data-descriptor.md
       - TranslationDiscoveryFlagMap: api/data-models/translation-discovery-flag-map.md
       - TranslationDiscoveryMgmtRequest: api/data-models/translation-discovery-mgmt-request.md
       - TranslationDiscoveryRequest: api/data-models/translation-discovery-request.md
@@ -238,11 +239,15 @@ nav:
       - TranslationDiscoveryServiceInstanceDescriptor: api/data-models/translation-discovery-service-instance-descriptor.md
       - TranslationDiscoveryServiceInstanceInterfaceDescriptor: api/data-models/translation-discovery-service-instance-interface-descriptor.md
       - TranslationDiscoverySystemDescriptor: api/data-models/translation-discovery-system-descriptor.md
+      - TranslationInterfaceTranslationDataDescriptor: api/data-models/translation-interface-translation-data-descriptor.md
       - TranslationNegotiationMgmtRequest: api/data-models/translation-negotiation-mgmt-request.md
       - TranslationNegotiationRequest: api/data-models/translation-negotiation-request.md
       - TranslationNegotiationResponse: api/data-models/translation-negotiation-response.md
       - TranslationNegotiationServiceInstanceDescriptor: api/data-models/translation-negotiation-service-instance-descriptor.md
       - TranslationNegotiationServiceInstanceInterfaceDescriptor: api/data-models/translation-negotiation-service-instance-interface-descriptor.md
+      - TranslationQueryListResponse: api/data-models/translation-query-list-response.md
+      - TranslationQueryRequest: api/data-models/translation-query-request.md
+      - TranslationQueryResponse: api/data-models/translation-query-response.md
     - Primitives: api/primitives.md
   - Help:
     - Definitions: help/definitions.md

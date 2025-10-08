@@ -65,7 +65,7 @@ The main purpose of translationBridgeManagement is to find providers whose servi
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-bridge-management_sd.pdf)<br />
-:material-api: [generic_http (IDD)](../api/translationmanager/translation-bridge-management-generic-http.md) TODO | [generic_https (IDD)](../api/translationmanager/translation-bridge-management-generic-http.md) TODO<br />
+:material-api: [generic_http (IDD)](../api/translationmanager/translation-bridge-management-generic-http.md) | [generic_https (IDD)](../api/translationmanager/translation-bridge-management-generic-http.md) <br />
 :material-api: [generic_mqtt (IDD)](../api/translationmanager/translation-bridge-management-generic-mqtt.md) TODO | [generic_mqtts (IDD)](../api/translationmanager/translation-bridge-management-generic-mqtt.md) TODO<br />
 :material-tag: since: v5.1.0
 
@@ -73,28 +73,28 @@ Learn more: <br />
 
 This service operation checks a list of possible providers for a service operation and returns only those that can be consumed by the specified consumer via a translation bridge using the currently available translators. 
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#discovery) TODO | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#discovery) TODO <br />
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#discovery) | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#discovery) <br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-management-generic-mqtt.md#discovery) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-management-generic-mqtt.md#discovery) TODO
 
 **negotiation**
 
 This service operation allows to create a translation bridge for a specified consumer to one specified provider's one particular service operation.
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#negotiation) TODO | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#negotiation) TODO<br />
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#negotiation) | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#negotiation) <br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-management-generic-mqtt.md#negotiation) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-management-generic-mqtt.md#negotiation) TODO
 
 **abort**
 
 This service operation aborts a list of existing bridges. After abortion the targeted service operations will not be available via the bridges.
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#abort) TODO | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#abort) TODO<br />
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#abort) | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#abort) <br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-management-generic-mqtt.md#abort) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-management-generic-mqtt.md#abort) TODO
 
 **query**
 
 This service operation returns bridge details according to the given filters. It is possible to get information about bridges that no longer exists.
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#query) TODO | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#query) TODO<br />
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-bridge-management-generic-http.md#query) | [generic_https](../api/translationmanager/translation-bridge-management-generic-http.md#query) <br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-bridge-management-generic-mqtt.md#query) TODO | [generic_mqtts](../api/translationmanager/translation-bridge-management-generic-mqtt.md#query) TODO
 
 -----
@@ -107,7 +107,7 @@ Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
 :material-api: [generic_http (IDD)](../api/general/general-management-generic-http.md) | [generic_https (IDD)](../api/general/general-management-generic-http.md) <br />
 :material-api: [generic_mqtt (IDD)](../api/general/general-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/general/general-management-generic-mqtt.md) <br />
-:material-tag: since: v5.0.0 
+:material-tag: since: v5.1.0 
 
 **get-log**
 
