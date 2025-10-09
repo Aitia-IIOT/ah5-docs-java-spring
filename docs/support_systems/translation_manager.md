@@ -45,8 +45,8 @@ This service operation aborts an existing bridge created by the requester. After
 The purpose of translationReport service is to provide a tool to send events about translation bridges. This service is offered for interface translator systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-report_sd.pdf) TODO<br />
-:material-api: [generic_http (IDD)](../api/translationmanager/translation-report-generic-http.md) TODO | [generic_https (IDD)](../api/translationmanager/translation-report-generic-http.md) TODO<br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_1_0/translation-report_sd.pdf)<br />
+:material-api: [generic_http (IDD)](../api/translationmanager/translation-report-generic-http.md) | [generic_https (IDD)](../api/translationmanager/translation-report-generic-http.md)<br />
 :material-api: [generic_mqtt (IDD)](../api/translationmanager/translation-report-generic-mqtt.md) TODO | [generic_mqtts (IDD)](../api/translationmanager/translation-report-generic-mqtt.md) TODO<br />
 :material-tag: since: v5.1.0
 
@@ -54,7 +54,7 @@ Learn more: <br />
 
 This service operation reports about an event related to a translation bridge. Events can be about usage, closing or some kind of error.
 
-:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-report-generic-http.md#report) TODO | [generic_https](../api/translationmanager/translation-report-generic-http.md#report) TODO<br />
+:material-arrow-right-thin: Example: [generic_http](../api/translationmanager/translation-report-generic-http.md#report) | [generic_https](../api/translationmanager/translation-report-generic-http.md#report)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/translationmanager/translation-report-generic-mqtt.md#report) TODO | [generic_mqtts](../api/translationmanager/translation-report-generic-mqtt.md#report) TODO
 
 -----

@@ -185,6 +185,10 @@ A **String** name that groups token technologies by usage characteristics. Can b
 
 A [UUID](#uuid) that associated with an prospective or existing translation bridge.
 
+## TranslationBridgeEventState
+
+Alias for a **String** value that describes the type of an event related to a translation bridge. Can be: `USED`, `INTERNAL_CLOSED`, `INTERNAL_ERROR`, `EXTERNAL_ERROR`.
+
 ## TranslationBridgeStatus
 
 Alias for a **String** value that describes the actual state of a translation bridge. Can be: `NEW`, `DISCOVERED`, `PENDING`, `INITIALIZED`, `USED`, `ABORTED`, `CLOSED`, `ERROR`.

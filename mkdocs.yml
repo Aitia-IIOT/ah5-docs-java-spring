@@ -91,6 +91,7 @@ nav:
         - HTTP:
             - translationBridge: api/translationmanager/translation-bridge-generic-http.md
             - translationBridgeManagement: api/translationmanager/translation-bridge-management-generic-http.md
+            - translationReport: api/translationmanager/translation-report-generic-http.md
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
@@ -228,7 +229,7 @@ nav:
       - SystemRegistrationResponse: api/data-models/system-registration-response.md
       - SystemRequest: api/data-models/system-request.md
       - TranslationAbortMgmtResponse: api/data-models/translation-abort-mgmt-response.md
-      - TranslationAbortResults: api/data-models/translation-abort-mgmt-results.md
+      - TranslationAbortResults: api/data-models/translation-abort-results.md
       - TranslationBridgeCandidate: api/data-models/translation-bridge-candidate.md
       - TranslationDataModelTranslationDataDescriptor: api/data-models/translation-data-model-translation-data-descriptor.md
       - TranslationDiscoveryFlagMap: api/data-models/translation-discovery-flag-map.md
@@ -248,6 +249,7 @@ nav:
       - TranslationQueryListResponse: api/data-models/translation-query-list-response.md
       - TranslationQueryRequest: api/data-models/translation-query-request.md
       - TranslationQueryResponse: api/data-models/translation-query-response.md
+      - TranslationReportRequest: api/data-models/translation-report-request.md
     - Primitives: api/primitives.md
   - Help:
     - Definitions: help/definitions.md
