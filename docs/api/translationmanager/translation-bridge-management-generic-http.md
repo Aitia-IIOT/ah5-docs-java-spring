@@ -12,7 +12,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [translatio
 
 ### discovery
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationDiscoveryMgmtRequest](../data-models/translation-discovery-mgmt-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [TranslationDiscoveryMgmtRequest](../data-models/translation-discovery-mgmt-request.md)
 JSON encoded body.
 
 ```
@@ -105,7 +105,7 @@ and `503` if an unexpected error happens while communicating other systems. The 
 
 ### negotiation
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationNegotiationMgmtRequest](../data-models/translation-negotiation-mgmt-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [TranslationNegotiationMgmtRequest](../data-models/translation-negotiation-mgmt-request.md)
 JSON encoded body.
 
 ```
@@ -201,7 +201,7 @@ and `503` if an unexpected error happens while communicating other systems. The 
 
 ### query
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationQueryRequest](../data-models/translation-query-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [TranslationQueryRequest](../data-models/translation-query-request.md)
 JSON encoded body.
 
 ```

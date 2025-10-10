@@ -94,6 +94,8 @@ nav:
             - translationReport: api/translationmanager/translation-report-generic-http.md
         - MQTT:
             - translationBridge: api/translationmanager/translation-bridge-generic-mqtt.md
+            - translationBridgeManagement: api/translationmanager/translation-bridge-management-generic-mqtt.md
+            - translationReport: api/translationmanager/translation-report-generic-mqtt.md
 
     - Authentication Policy: api/authentication_policy.md
     - Data Models:

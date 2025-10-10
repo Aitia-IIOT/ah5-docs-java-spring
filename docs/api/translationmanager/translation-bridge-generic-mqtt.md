@@ -65,7 +65,7 @@ Topic: arrowhead/translation/bridge/discovery
      ],
      "inputDataModelId": "testJson01",
      "outputDataModelId": "testJson01"
-   }
+  }
 }
 ```
 
@@ -195,7 +195,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 ```
 {
-   "status": 200,
+   "status": 201,
    "traceId": "<trace-id>",
    "receiver": "<receiver-system-identifier>",
    "payload": {
