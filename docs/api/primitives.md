@@ -48,6 +48,10 @@ A **boolean** value, one out of `true` or `false`.
 
 A **String** identifier of a Local Cloud. It consists of the cloud name and the organization name separated by a pipe, as follows: `<CloudName>|<OrganizationName>`. An example for a valid cloud identifier: _TestCloud|AitiaInc_. (Here the cloud name is _TestCloud_ and the organization name is _AitiaInc_.) In certain cases, the word `LOCAL` is also considered valid and it references the Local Cloud.
 
+## DataModelID
+
+A **String** identifier of a data model that defines both a specific format (e.g., JSON, XML) and its associated semantics. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
+
 ## DateTime
 
 A **String** value that pinpoints a moment in time in the format of ISO8601 standard `yyyy-mm-ddThh:MM:ssZ`, where ”yyyy” denotes
@@ -176,6 +180,28 @@ A **String** identifier that is intended to be both human and machine-readable. 
 ## TokenType
 
 A **String** name that groups token technologies by usage characteristics. Can be `USAGE_LIMITED_TOKEN`, `TIME_LIMITED_TOKEN`, `SELF_CONTAINED_TOKEN` or `TRANSLATION_BRIDGE_TOKEN`.
+
+## TranslationBridgeID
+
+A [UUID](#uuid) that associated with an prospective or existing translation bridge.
+
+## TranslationBridgeEventState
+
+Alias for a **String** value that describes the type of an event related to a translation bridge. Can be: `USED`, `INTERNAL_CLOSED`, `INTERNAL_ERROR`, `EXTERNAL_ERROR`.
+
+## TranslationBridgeStatus
+
+Alias for a **String** value that describes the actual state of a translation bridge. Can be: `NEW`, `DISCOVERED`, `PENDING`, `INITIALIZED`, `USED`, `ABORTED`, `CLOSED`, `ERROR`.
+
+## TranslationDiscoveryFlag
+
+A **String** name for flag that is used in translation discovery. Possible values are:
+
+- `ONSUMER_BLACKLIST_CHECK`: If **true**, consumer should be cross-checked using the Blacklist Support system before anything else.
+- `CANDIDATES BLACKLIST CHECK`: If **true**, all candidates should be cross-checked using the Blacklist Support system. Blacklisted candidates will be removed from the candidates list.
+- `TRANSLATORS BLACKLIST CHECK`: If **true**, all appropriate interface and data model translators should be cross-checked using the Blacklist Support system. Blacklisted candidates will not be used in a translation bridge.
+- `CANDIDATES AUTH CHECK`: If **true**, discovery process should check whether the consumer can use the candidate's specified operation using the ConsumerAuthorization Core system. Candidates whose operation can't be accessed because of missing permission will be removed from the candidates list.
+- `TRANSLATORS AUTH CHECK`: If **true**, discovery process should check which translators are accessable according to the ConsumerAuthorization Core system. Interface translators must be accessible by the TranslationManager Support system, and data model translators must be accessible by the selected interface translator. Translators that does not match these requirements will not be used in a translation bridge.
 
 ## UUID
 

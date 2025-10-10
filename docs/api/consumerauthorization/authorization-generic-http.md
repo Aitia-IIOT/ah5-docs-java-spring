@@ -86,7 +86,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request**  requires an [identity related header or certificate](../authentication_policy.md/#http) and an [AuthorizationPolicyInstanceID](../primitives.md#authorizationpolicyinstanceid) as path parameter, which is a unique identifier of the policy instance to be deleted.
 
 ```
-DELETE /consumerauthorization/authorization/revoke/PR%7CLOCAL%7CTemperatureProvider%7CSERVICE_DEF%7CcelsiusInfo HTTP1.1
+DELETE /consumerauthorization/authorization/revoke/PR%7CLOCAL%7CTemperatureProvider%7CSERVICE_DEF%7CcelsiusInfo HTTP/1.1
 Authorization: Bearer <authorization-info>
 ```
 
