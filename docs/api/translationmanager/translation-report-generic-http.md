@@ -12,7 +12,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [translatio
 
 ### report
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationReportRequest](../data-models/translation-report-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [TranslationReportRequest](../data-models/translation-report-request.md)
 JSON encoded body.
 
 

@@ -12,7 +12,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [translatio
 
 ### discovery
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationDiscoveryRequest](../data-models/translation-discovery-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [TranslationDiscoveryRequest](../data-models/translation-discovery-request.md)
 JSON encoded body.
 
 ```
@@ -97,7 +97,7 @@ and `503` if an unexpected error happens while communicating other systems. The 
 
 ### negotiation
 
-The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and an [TranslationNegotiationRequest](../data-models/translation-negotiation-request.md)
+The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [TranslationNegotiationRequest](../data-models/translation-negotiation-request.md)
 JSON encoded body.
 
 Operation _negotiation_ can be used two ways. 
