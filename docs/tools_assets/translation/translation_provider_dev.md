@@ -17,7 +17,7 @@ The interfaceBridgeManagement service can be provided with any of the available 
 
 As stated in the interfaceBridgeManagement Service Description, the supported interface template names and the translation direction must be included in the service metadata when the system registers its service into the [ServiceRegistry Core System](../../core_systems/service_registry.md).
 
-The key must be **interfaceBridge** and its value must be an object with **form** and **to** keys. The _from_ is always a list of interface template names and _to_ is always one practicular interface template name. For example:
+The key must be **interfaceBridge** and its value must be an object with **form** and **to** keys. The _from_ is always a list of interface template names and _to_ is always one particular interface template name. For example:
 
 ```
 {

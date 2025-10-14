@@ -110,7 +110,7 @@ This document describes the \textbf{dataModelTranslation} service, which provide
 The \textbf{dataModelTranslation} service contains the following operations:
 
 \begin{itemize}
-    \item \textit{init-translation} accepts the data payload that need to be translated, creates an internal task for it and immediately returns a unique task ID;
+    \item \textit{init-translation} accepts the data payload that needs to be translated, creates an internal task for it and immediately returns a unique task ID;
     \item \textit{get-translation-result} returns the actual status of a given task and the translated data payload (or an error message) if the task has already finished;
     \item \textit{abort-translation} terminates and removes a given task;
 \end{itemize}

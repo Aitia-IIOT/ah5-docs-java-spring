@@ -248,7 +248,7 @@ DELETE /<path>/<to>/<abort>/4d1dcec8-e375-448b-bb01-95e9e9d5ee35 HTTP/1.1
 Authorization: Bearer <access-token>
 ```
 
-The service operation **responds** with the status code `200` if called successfully and the translation task has been aborted or with `204` if the referenced translation bridge not exists.
+The service operation **responds** with the status code `200` if called successfully and the translation task has been aborted or with `204` if the referenced translation bridge doesn't exist.
 
 The **error codes** are `400` if the request is malformed or bridge id is missing, `401` if credentials were requested but not presented, `403` if the access validation failed, `500` if an unexpected error happens and `503` if an external error happens. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.

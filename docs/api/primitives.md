@@ -196,7 +196,7 @@ A **String** name that groups token technologies by usage characteristics. Can b
 
 ## TranslationBridgeID
 
-A **UUID** that associated with a prospective or existing translation bridge.
+A **UUID** that is associated with a prospective or existing translation bridge.
 
 ## UUID
 
