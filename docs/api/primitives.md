@@ -183,7 +183,7 @@ A **String** name that groups token technologies by usage characteristics. Can b
 
 ## TranslationBridgeID
 
-A [UUID](#uuid) that associated with an prospective or existing translation bridge.
+A [UUID](#uuid) that is associated with a prospective or existing translation bridge.
 
 ## TranslationBridgeEventState
 
@@ -197,11 +197,11 @@ Alias for a **String** value that describes the actual state of a translation br
 
 A **String** name for flag that is used in translation discovery. Possible values are:
 
-- `ONSUMER_BLACKLIST_CHECK`: If **true**, consumer should be cross-checked using the Blacklist Support system before anything else.
-- `CANDIDATES BLACKLIST CHECK`: If **true**, all candidates should be cross-checked using the Blacklist Support system. Blacklisted candidates will be removed from the candidates list.
-- `TRANSLATORS BLACKLIST CHECK`: If **true**, all appropriate interface and data model translators should be cross-checked using the Blacklist Support system. Blacklisted candidates will not be used in a translation bridge.
-- `CANDIDATES AUTH CHECK`: If **true**, discovery process should check whether the consumer can use the candidate's specified operation using the ConsumerAuthorization Core system. Candidates whose operation can't be accessed because of missing permission will be removed from the candidates list.
-- `TRANSLATORS AUTH CHECK`: If **true**, discovery process should check which translators are accessable according to the ConsumerAuthorization Core system. Interface translators must be accessible by the TranslationManager Support system, and data model translators must be accessible by the selected interface translator. Translators that does not match these requirements will not be used in a translation bridge.
+- `CONSUMER_BLACKLIST_CHECK`: If **true**, consumer should be cross-checked using the Blacklist Support system before anything else.
+- `CANDIDATES_BLACKLIST_CHECK`: If **true**, all candidates should be cross-checked using the Blacklist Support system. Blacklisted candidates will be removed from the candidates list.
+- `TRANSLATORS_BLACKLIST_CHECK`: If **true**, all appropriate interface and data model translators should be cross-checked using the Blacklist Support system. Blacklisted candidates will not be used in a translation bridge.
+- `CANDIDATES_AUTH_CHECK`: If **true**, discovery process should check whether the consumer can use the candidate's specified operation using the ConsumerAuthorization Core system. Candidates whose operation can't be accessed because of missing permission will be removed from the candidates list.
+- `TRANSLATORS_AUTH_CHECK`: If **true**, discovery process should check which translators are accessable according to the ConsumerAuthorization Core system. Interface translators must be accessible by the TranslationManager Support system, and data model translators must be accessible by the selected interface translator. Translators that do not match these requirements will not be used in a translation bridge.
 
 ## UUID
 

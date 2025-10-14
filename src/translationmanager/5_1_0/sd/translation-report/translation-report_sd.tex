@@ -137,7 +137,7 @@ Interface translators should call the \textit{report} operation whenever somethi
 \subsection{Important Delimitations}
 \label{sec:delimitations}
 
-The requester has to identify itself to use any of the operations.
+The requester has to identify itself to use the operation.
 
 \subsection{Access policy}
 \label{sec:accesspolicy}
@@ -156,7 +156,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{report}{TranslationReportRequest}{}{OperationStatus}{ErrorResponse}
 
-Operation \textit{reports} sends a message about an event related to a translation bridge. The request data must meet the following criteria:
+Operation \textit{report} sends a message about an event related to a translation bridge. The request data must meet the following criteria:
 
 \begin{itemize}
     \item Bridge identifier is mandatory and must be a valid \pref{TranslationBridgeID}.

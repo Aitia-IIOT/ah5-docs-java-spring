@@ -65,7 +65,7 @@ Authorization: Bearer <authorization-info>
 }
 ```
 
-> Note: The service operation can only work on candidates with interfaces that describe their data models. Data models must describe as a [DataModelMap](../data-models/data-model-map.md) inside the interface _properties_. See the example above.
+> Note: The service operation can only work on candidates with interfaces that describe their data models. Data models must be described as a [DataModelMap](../data-models/data-model-map.md) inside the interface _properties_. See the example above.
 
 The service operation **responds** with the status code `200` and with a [TranslationDiscoveryResponse](../data-models/translation-discovery-response.md) JSON encoded body.
 
@@ -83,7 +83,7 @@ The service operation **responds** with the status code `200` and with a [Transl
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems. The error response also contains an
+and `503` if an unexpected error happens while communicating with other systems. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
@@ -203,7 +203,7 @@ The service operation **responds** with the status code `201` if called successf
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems. The error response also contains an
+and `503` if an unexpected error happens while communicating with other systems. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
@@ -228,7 +228,7 @@ The service operation **responds** with the status code `200` if called successf
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems. The error response also contains an
+and `503` if an unexpected error happens while communicating with other systems. The error response also contains an
 [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```

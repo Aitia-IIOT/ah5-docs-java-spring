@@ -112,18 +112,18 @@ One of the main issue when realizing such Local Cloud is that multiple applicati
 
 The TranslationManager Support system can build such proxies by utilizing various translator components (application systems that can translate between interfaces or between different data models).
 
-The previous versions of the Arrowhead Framework (4.6.x) have a system (translator) that offers similar functionality, but it want to contain all translation related logic in one system. It provides very limited options for translation and every new option would require additional coding in the translator Support system.
+The previous versions of the Arrowhead Framework (4.6.x) have a system (translator) that offers similar functionality, but it wants to contain all translation related logic in one system. It provides very limited options for translation and every new option would require additional coding in the translator Support system.
 
 In case of the TranslationManager system, its usefulness can be increased by deploying new interface and/or data model translators into the Local Cloud, and the Support system can use them without any additional requirement.
 
 \subsection{How This System Is Meant to Be Used}
 \label{sec:use}
 
-TranslationManager is a Support system of Eclipse Arrowhead Local Cloud and is responsible for building communication bridges between application systems that can't communicate each other directly. 
+TranslationManager is a Support system of Eclipse Arrowhead Local Cloud and is responsible for building communication bridges between application systems that can't communicate with each other directly. 
 
-A service orchestration Core system can use the TranslationManager's functionality to offer a service instance for the consumer even there is no exact match for the interface requirements. Figure \ref{fig:translation_process} describes this use case.
+A service orchestration Core system can use the TranslationManager's functionality to offer a service instance for the consumer even when there is no exact match for the interface requirements. Figure \ref{fig:translation_process} describes this use case.
 
-Additionally, a consumer can consume the TranslationManager's translationBridge service to determine which service instance candidates can be use via translation bridge. If such service instance exists, the consumer can ask the TranslationManager to build the translation bridge.
+Additionally, a consumer can consume the TranslationManager's translationBridge service to determine which service instance candidates can be used via translation bridge. If such service instance exists, the consumer can ask the TranslationManager to build the translation bridge.
 
 \begin{figure}[ht!]
   \centering
@@ -139,14 +139,14 @@ Additionally, a consumer can consume the TranslationManager's translationBridge 
 TranslationManager solves the following needs to fulfill the requirements of handling translation bridges.
 
 \begin{itemize}
-    \item Enables to consumers to discover translation bridge building possibilities for a service operation.
-    \item Enables to consumers to build a translation bridge for a service operation.
-    \item Enables to consumers to abort previously built translation bridges.
-    \item Enables to Core/Support systems to discover translation bridge building possibilities for a service operation in the name of a consumer.
-    \item Enables to Core/Support systems to build a translation bridge for a service operation in the name of a consumer.
-    \item Enables to Core/Support systems to abort existing translation bridges in bulk.
-    \item Enables to Core/Support systems to query translation bridge (currently active and old ones) details using various filters.
-    \item Enables to interface translators to send reports about their translation bridges.
+    \item Enables consumers to discover translation bridge building possibilities for a service operation.
+    \item Enables consumers to build a translation bridge for a service operation.
+    \item Enables consumers to abort previously built translation bridges.
+    \item Enables Core/Support systems to discover translation bridge building possibilities for a service operation in the name of a consumer.
+    \item Enables Core/Support systems to build a translation bridge for a service operation in the name of a consumer.
+    \item Enables Core/Support systems to abort existing translation bridges in bulk.
+    \item Enables Core/Support systems to query translation bridge (currently active and old ones) details using various filters.
+    \item Enables interface translators to send reports about their translation bridges.
 \end{itemize}
 
 \subsubsection {Non functional properties of the system}
@@ -172,8 +172,8 @@ In order to achieve the mentioned functionalities, TranslationManager is capable
 \label{sec:delimitations}
 
 \begin{itemize}
-    \item If the Local Cloud does not contain an Authentication system or does not using X.509 certificates, there is no way for the TranslationManager to verify the requester system. In that case, the TranslationManager will consider the authentication data that comes from the requester as valid.
-    \item TranslationManager can't work alone. For every translation bridge it needs an appropriate 
+    \item If the Local Cloud does not contain an Authentication system or is not using X.509 certificates, there is no way for the TranslationManager to verify the requester system. In that case, the TranslationManager will consider the authentication data that comes from the requester as valid.
+    \item TranslationManager can't work alone. Each translation bridge needs an appropriate 
     interface translator and optionally one or two data model translators. These translators are ordinary providers registered in the ServiceRegistry.
 \end{itemize}
 

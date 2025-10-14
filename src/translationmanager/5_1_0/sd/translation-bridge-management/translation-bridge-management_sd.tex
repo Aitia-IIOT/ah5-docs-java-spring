@@ -130,7 +130,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 This service should be used primarily by service orchestration systems.
 
-During service orchestration, if no candidates are found that matches all the requirements and the requester allows translation, an orchestration system should call the \textit{discovery} operation with "almost good" service instance candidates. "Almost good" means that these candidates provides the required service operation but the direct communication with the specified consumer is not possible because of missing common interfaces and/or different data models. Operation \textit{discovery} returns the identifiers those candidates that can be accessed by the consumer via a translation bridge alongside with an identifier.
+During service orchestration, if no candidates are found that matches all the requirements and the requester allows translation, an orchestration system should call the \textit{discovery} operation with "almost good" service instance candidates. "Almost good" means that these candidates provide the required service operation but the direct communication with the specified consumer is not possible because of missing common interfaces and/or different data models. Operation \textit{discovery} returns the identifiers of those candidates that can be accessed by the consumer via a translation bridge alongside with an identifier.
 
 Service orchestration systems then should call the \textit{negotiation} operation with the above-mentioned identifier and one of the candidates and the operation builds the translation bridge (based on the data collected during the \textit{discovery}) and return its access information.
 
@@ -164,16 +164,16 @@ Operation \textit{discovery} checks a list of possible providers for a service o
 
 \begin{itemize}
     \item The consumer's name must follow the PascalCase naming convention, can contain maximum of 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
-    \item The target operation is mandatory and must follow the kebab-case naming convention.  Operation can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+    \item The target operation is mandatory and must follow the kebab-case naming convention. Operation can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
     \item Interface template name list is mandatory and can not be empty. Every interface template name must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and have to start with a letter.
-    \item Candidates list is mandatory can not be empty. Every candidate has to specify its service instance id, provider's name, service definition name and information about its interfaces:
+    \item Candidates list is mandatory and can not be empty. Every candidate has to specify its service instance id, provider's name, service definition name and information about its interfaces:
     \begin{itemize}
         \item Service instance id must be a valid \pref{ServiceInstanceID}.
-        \item Provider's name must follow the PascalCase naming convention, can contain maximum of 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
-        \item Service definition must follow the camelCase naming convention can contain maximum of 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+        \item Provider's name must follow the PascalCase naming convention, can contain maximum of 63 characters of letters (English alphabet) and numbers, and has to start with a letter.
+        \item Service definition must follow the camelCase naming convention, can contain maximum of 63 characters of letters (English alphabet) and numbers, and has to start with a letter.
         \item Interface list can not be empty and its every element must meet the following criteria:
         \begin{itemize}
-            \item Template name is mandatory and must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and have to start with a letter.
+            \item Template name is mandatory and must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and has to start with a letter.
             \item Policy is mandatory and must be a valid \pref{SecurityPolicy}.
             \item Properties must contain a structure that is a valid \hyperref[sec:model:DataModelMap]{DataModelMap} which contains an entry for the specified operation. This is not necessary for operations without any input or output payload.
             \item Properties must contain every interface-dependent information that is necessary for access (for example, address, port, path, topic, etc.).
@@ -188,7 +188,7 @@ Operation \textit{negotiation} allows to create a translation bridge for a speci
 
 \begin{itemize}
     \item Bridge identifier is mandatory and must be a valid \pref{TranslationBridgeID}.
-    \item Target instance identifier is mandatory and  must be a valid \pref{ServiceInstanceID}.
+    \item Target instance identifier is mandatory and must be a valid \pref{ServiceInstanceID}.
 \end{itemize}
 
 \fsubsection{abort}{TranslationAbortMgmtRequest}{TranslationAbortMgmtResponse}{}{ErrorResponse}

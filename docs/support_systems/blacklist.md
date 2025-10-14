@@ -80,7 +80,7 @@ Learn more: <br />
 
 **get-log**
 
-This service operation lists the log entries of the system that matches the filtering requirements.
+This service operation lists the log entries of the system that match the filtering requirements.
 
 :material-arrow-right-thin: Example: [generic_http](../api/general/general-management-generic-http.md#get-log) | [generic_https](../api/general/general-management-generic-http.md#get-log)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/general/general-management-generic-mqtt.md#get-log) | [generic_mqtts](../api/general/general-management-generic-mqtt.md#get-log)

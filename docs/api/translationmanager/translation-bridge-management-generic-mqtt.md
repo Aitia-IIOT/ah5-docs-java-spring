@@ -12,7 +12,7 @@ Hereby the **Interface Design Description** (IDD) is provided to the [translatio
 
 ### discovery
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [TranslationDiscoveryMgmtRequest](../data-models/translation-discovery-mqtt-request.md).
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [TranslationDiscoveryMgmtRequest](../data-models/translation-discovery-mgmt-request.md).
 
 ```
 Topic: arrowhead/translation/bridge/management/discovery 
@@ -77,7 +77,7 @@ Topic: arrowhead/translation/bridge/management/discovery
 }
 ```
 
-> Note: The service operation can only work on candidates with interfaces that describe their data models. Data models must describe as a [DataModelMap](../data-models/data-model-map.md) inside the interface _properties_. See the example above.
+> Note: The service operation can only work on candidates with interfaces that describe their data models. Data models must be described as a [DataModelMap](../data-models/data-model-map.md) inside the interface _properties_. See the example above.
 
 The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [TranslationDiscoveryResponse](../data-models/translation-discovery-response.md).
 
@@ -100,7 +100,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems.  In these cases the response template payload is an
+and `503` if an unexpected error happens while communicating with other systems.  In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```
@@ -171,7 +171,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems. In these cases the response template payload is an
+and `503` if an unexpected error happens while communicating with other systems. In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```
@@ -190,7 +190,7 @@ and `503` if an unexpected error happens while communicating other systems. In t
 
 ### abort
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a a List<[TranslationBridgeID](../primitives.md#translationbridgeid)>, which contains the identitifers of the translation bridgies that need to aborted.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a List<[TranslationBridgeID](../primitives.md#translationbridgeid)>, which contains the identitifers of the translation bridgies that need to aborted.
 
 ```
 Topic:  arrowhead/translation/bridge/management/abort
@@ -225,7 +225,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems. In these cases the response template payload is an
+and `503` if an unexpected error happens while communicating with other systems. In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```

@@ -108,7 +108,7 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{translationBridge} service, which enables to find providers whose service operation is accessible by the requester via a translation bridge using the currently available translators. The service also allows to build or abort such bridges. An example of this interaction is when a consumer system can't find a suitable provider for a specified service operation and try to determine whether it is possible to use one of the available providers utilizing various translators.
+This document describes the \textbf{translationBridge} service, which enables to find providers whose service operation is accessible by the requester via a translation bridge using the currently available translators. The service also allows to build or abort such bridges. An example of this interaction is when a consumer system can't find a suitable provider for a specified service operation and tries to determine whether it is possible to use one of the available providers utilizing various translators.
 
 To enable other systems to use, to consume it, this service needs to be offered through the ServiceRegistry.
 
@@ -128,9 +128,9 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 This service should be used by a consumer system in Local Clouds where simple rule-based service orchestration is available or there is no service orchestration at all.
 
-Consumer systems should call the \textit{discovery} operation with "almost good" service instance candidates that comes from the Service Registry. "Almost good" means that these candidates provides the required service operation but the direct communication is not possible because of missing common interfaces and/or different data models. Operation \textit{discovery} returns the identifiers those candidates that can be accessed by the consumer via a translation bridge alongside with an identifier.
+Consumer systems should call the \textit{discovery} operation with "almost good" service instance candidates that come from the Service Registry. "Almost good" means that these candidates provide the required service operation but the direct communication is not possible because of missing common interfaces and/or different data models. Operation \textit{discovery} returns the identifiers of those that can be accessed by the consumer via a translation bridge alongside with an identifier.
 
-Consumer systems then should call the \textit{negotiation} operation with the above-mentioned identifier and one of the candidates and the operation builds the translation bridge (based on the data collected during the \textit{discovery}) and return its access information.
+Consumer systems then should call the \textit{negotiation} operation with the above-mentioned identifier and one of the candidates. The operation builds the translation bridge (based on the data collected during the \textit{discovery}) and return its access information.
 
 Please note that it is possible to use the \textit{negotiation} operation without using the \textit{discovery} operation first. In that case consumer can't provide the identifier mentioned before, but needs to specify additional requirements. If no identifier is provided, the \textit{negotiation} automatically executes the \textit{discovery} operation on that one candidate that is specified before trying to build a translation bridge.
 
@@ -161,19 +161,19 @@ Input and output types are only denoted when accepted or returned, respectively,
 Operation \textit{discovery} checks a list of possible providers for a service operation and returns only those that can be consumed by the requester via a translation bridge using the currently available translators. The request data must meet the following criteria:
 
 \begin{itemize}
-    \item With this operation the requester can only found good candidates to accessing one of their service operation via a translation bridge for itself. 
-    \item The target operation is mandatory and must follow the kebab-case naming convention.  Operation can contain maximum 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
-    \item Interface template name list is mandatory and can not be empty. Every interface template name must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and have to start with a letter.
-    \item Candidates list is mandatory can not be empty. Every candidate has to specify its service instance id, provider's name, service definition name and information about its interfaces:
+    \item With this operation the requester can only find good candidates to accessing one of their service operations via a translation bridge for itself. 
+    \item The target operation is mandatory and must follow the kebab-case naming convention. Operation can contain maximum 63 characters of letters (English alphabet) and numbers, and has to start with a letter.
+    \item Interface template name list is mandatory and can not be empty. Every interface template name must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and has to start with a letter.
+    \item Candidates list is mandatory and can not be empty. Every candidate has to specify its service instance id, provider's name, service definition name and information about its interfaces:
     \begin{itemize}
         \item Service instance id must be a valid \pref{ServiceInstanceID}.
-        \item Provider's name must follow the PascalCase naming convention, can contain maximum of 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
-        \item Service definition must follow the camelCase naming convention can contain maximum of 63 characters of letters (English alphabet) and numbers, and have to start with a letter.
+        \item Provider's name must follow the PascalCase naming convention, can contain maximum of 63 characters of letters (English alphabet) and numbers, and has to start with a letter.
+        \item Service definition must follow the camelCase naming convention can contain maximum of 63 characters of letters (English alphabet) and numbers, and has to start with a letter.
         \item Interface list can not be empty and its every element must meet the following criteria:
         \begin{itemize}
-            \item Template name is mandatory and must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and have to start with a letter.
+            \item Template name is mandatory and must follow the snake\_case naming convention, can contain maximum 63 characters of lower-case letters (English alphabet) and numbers, and has to start with a letter.
             \item Policy is mandatory and must be a valid \pref{SecurityPolicy}.
-            \item Properties must contain a structure that is a valid \hyperref[sec:model:DataModelMap]{DataModelMap} which contains an entry for the specified operation. This is not necessary for operations without any input or output payload.
+            \item Properties must contain a structure that is a valid \hyperref[sec:model:DataModelMap]{DataModelMap} which contains an entry for the specified operation. This is not necessary for operations without any input and output payload.
             \item Properties must contain every interface-dependent information that is necessary for access (for example, address, port, path, topic, etc.).
         \end{itemize}
     \end{itemize}
@@ -197,7 +197,7 @@ Operation \textit{abort} aborts an existing bridge. The abort data must meet the
 
 \begin{itemize}
     \item The bridge identifier is mandatory.
-    \item Requester can only abort translation bridges that was created by its request.
+    \item Requester can only abort translation bridges that were created by its request.
 \end{itemize}
 
 \clearpage

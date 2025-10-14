@@ -69,7 +69,7 @@ Topic: arrowhead/translation/bridge/discovery
 }
 ```
 
-> Note: The service operation can only work on candidates with interfaces that describe their data models. Data models must describe as a [DataModelMap](../data-models/data-model-map.md) inside the interface _properties_. See the example above.
+> Note: The service operation can only work on candidates with interfaces that describe their data models. Data models must be described as a [DataModelMap](../data-models/data-model-map.md) inside the interface _properties_. See the example above.
 
 The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `200` if called successfully. The response template payload is a [TranslationDiscoveryResponse](../data-models/translation-discovery-response.md).
 
@@ -92,7 +92,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems. In these cases the response template payload is an
+and `503` if an unexpected error happens while communicating with other systems. In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 
@@ -191,7 +191,7 @@ Topic: arrowhead/translation/bridge/negotiation
 }
 ```
 
-The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if called successfully. The response template payload is  a [TranslationNegotiationResponse](../data-models/translation-negotiation-response.md).
+The service operation **responds** with an [MQTTResponseTemplate](../data-models/mqtt-response-template.md) JSON encoded message in which the status code is `201` if called successfully. The response template payload is a [TranslationNegotiationResponse](../data-models/translation-negotiation-response.md).
 
 ```
 {
@@ -226,7 +226,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems.In these cases the response template payload is an
+and `503` if an unexpected error happens while communicating with other systems.In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```
@@ -245,7 +245,7 @@ and `503` if an unexpected error happens while communicating other systems.In th
 
 ### abort
 
-The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a a [TranslationBridgeID](../primitives.md#translationbridgeid), which is a unique identifier of the translation bridge to be aborted.
+The service operation **request** requires an [MQTTRequestTemplate](../data-models/mqtt-request-template.md) JSON encoded message in which the authentication is a proper [identity info](../../api/authentication_policy.md/#mqtt) and the payload is a [TranslationBridgeID](../primitives.md#translationbridgeid), which is a unique identifier of the translation bridge to be aborted.
 
 
 ```
@@ -264,7 +264,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
 `403` if the authenticated requester has no permission, `500` if an unexpected internal error happens
-and `503` if an unexpected error happens while communicating other systems. In these cases the response template payload is an
+and `503` if an unexpected error happens while communicating with other systems. In these cases the response template payload is an
 [ErrorResponse](../data-models/error-response.md) JSON.
 
 
