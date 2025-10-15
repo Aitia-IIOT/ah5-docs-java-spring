@@ -50,7 +50,15 @@ A **String** identifier of a Local Cloud. It consists of the cloud name and the 
 
 ## DataModelID
 
-A **String** identifier of a data model that defines both a specific format (e.g., JSON, XML) and its associated semantics. A name has to start with a letter and must follow the camelCase naming convention. The identifier maximum length is 63 characters.
+A **String** identifier of a data model that defines both a specific format (e.g., JSON, XML) and its associated semantics. A name has to start with a letter and must follow the camelCase naming convention. The identifier's maximum length is 63 characters.
+
+## DataModelTranslationTaskID
+
+A **string** identifier that is unique within the task owner system and associated with an existing model translation task.
+
+## DataModelTranslationTaskStatus
+
+Alias for a **string** value that describes the actual state of a task. Can be: `PENDING`, `IN_PROGRESS`, `DONE`, `ERROR`.
 
 ## DateTime
 
@@ -104,6 +112,11 @@ Association of a key of type [String](#string) and a value of any type. It is re
 ## LogSeverity
 
 Alias for a **String** value that describes the kind and seriousness of a log message. Could be `ALL`, `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`.
+
+## MimeType
+
+Standardized identifier that defines the nature and format of a data payload. Example: `application/json`, `text/xml`<br />
+[Learn more](https://en.wikipedia.org/wiki/Media_type)
 
 ## Mode
 

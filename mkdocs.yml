@@ -97,6 +97,11 @@ nav:
             - translationBridgeManagement: api/translationmanager/translation-bridge-management-generic-mqtt.md
             - translationReport: api/translationmanager/translation-report-generic-mqtt.md
 
+      - Add-on Services:
+          - HTTP:
+            - dataModelTranslation: api/add-on/dataModelTranslation-generic-http.md
+            - interfaceBridgeManagement: api/add-on/interfaceBridgeManagement-generic-http.md
+
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
       - AddressDescriptor: api/data-models/address-descriptor.md
@@ -137,6 +142,9 @@ nav:
       - ConfigResponse: api/data-models/config-response.md
       - Credentials: api/data-models/credentials.md
       - DataModelMap: api/data-models/data-model-map.md
+      - DataModelTranslationDescriptor: api/data-models/data-model-translation-descriptor.md
+      - DataModelTranslationInitRequest: api/data-models/data-model-translation-init-request.md
+      - DataTranslationResultResponse: api/data-models/data-translation-result-response.md
       - DeviceDescriptor: api/data-models/device-descriptor.md
       - DeviceListRequest: api/data-models/device-list-request.md
       - DeviceListResponse: api/data-models/device-list-response.md
@@ -236,6 +244,9 @@ nav:
       - TranslationAbortMgmtResponse: api/data-models/translation-abort-mgmt-response.md
       - TranslationAbortResults: api/data-models/translation-abort-results.md
       - TranslationBridgeCandidate: api/data-models/translation-bridge-candidate.md
+      - TranslationBridgeInitializationRequest: api/data-models/translation-bridge-initialization-request.md
+      - TranslationCheckTargetsRequest: api/data-models/translation-check-targets-request.md
+      - TranslationCheckTargetsResponse: api/data-models/translation-check-targets-response.md
       - TranslationDataModelTranslationDataDescriptor: api/data-models/translation-data-model-translation-data-descriptor.md
       - TranslationDiscoveryFlagMap: api/data-models/translation-discovery-flag-map.md
       - TranslationDiscoveryMgmtRequest: api/data-models/translation-discovery-mgmt-request.md
@@ -255,6 +266,8 @@ nav:
       - TranslationQueryRequest: api/data-models/translation-query-request.md
       - TranslationQueryResponse: api/data-models/translation-query-response.md
       - TranslationReportRequest: api/data-models/translation-report-request.md
+      - TranslationTargetRequest: api/data-models/translation-target-request.md
+      - TranslationTargetResponse: api/data-models/translation-target-response.md
     - Primitives: api/primitives.md
   - Help:
     - Definitions: help/definitions.md
@@ -268,7 +281,11 @@ nav:
     - FAQ: help/faq.md
     - Known Issues: help/known-issues.md
     - Migrate from v4:  help/migration-guide.md
-  - Client Libraries: client_libraries.md
+  - Tools & Assets:
+    - Client Libraries: tools_assets/client_libraries.md
+    - Translation:
+      - Translation Providers: tools_assets/translation/translation_providers.md
+      - Translation Provider Dev: tools_assets/translation/translation_provider_dev.md
   - Contribute: 
     - Bug Report: contribute/bug-report.md
     - Code Contribution: contribute/code-contribution.md
