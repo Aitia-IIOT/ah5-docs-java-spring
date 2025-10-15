@@ -29,7 +29,7 @@ POST /<path>/<to>/<init> HTTP/1.1
 ```
 
 The service operation **responds** with the status code `200` if called successfully and the translation task has been initialized. The response also contains a
-[DataModelTranslationTaskID](../primitives.md#datamodeltranslationtaskid.md) plain text body.
+[DataModelTranslationTaskID](../primitives.md#datamodeltranslationtaskid) plain text body.
 
 ```
 <any-unique-string>
