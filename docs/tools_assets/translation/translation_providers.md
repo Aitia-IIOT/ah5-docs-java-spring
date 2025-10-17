@@ -14,6 +14,8 @@ in order to create a translation bridge between consumer and provider systems.
 | ---------------------------- |
 | [InterfaceTranslatorToGenericHTTP:octicons-link-external-16:](https://github.com/Aitia-IIOT/ah5-app-aitia-interface-translator-to-generic-http-java-spring) |
 
+[Learn more about how to develop your own Interface Translation provider.](../translation/translation_provider_dev.md#interface-translation-provider)
+
 ## Data Model Translation Providers
 
 The data model translation providers are individual [application systems](../../help/definitions.md#application-system) that are capable 
@@ -26,3 +28,5 @@ in order to integrating into a translation bridge.
 | Public Data Model Translation Providers |
 | ---------------------------- |
 | [SemanticAITranslator:octicons-link-external-16:](https://github.com/Aitia-IIOT/ah5-app-aitia-datamodel-translator-python-wrapper-java-spring) |
+
+[Learn more about how to develop your own Data Model Translation provider.](../translation/translation_provider_dev.md#data-model-translation-provider)
