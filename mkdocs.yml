@@ -24,9 +24,9 @@ nav:
     - Authentication: core_systems/authentication.md
   - Support Systems: 
     - Blacklist: support_systems/blacklist.md
+    - TranslationManager: support_systems/translation_manager.md
     - Configuration: support_systems/configuration.md
     - QoSEvaluator: support_systems/qos_evaluator.md
-    - TranslationManager: support_systems/translation_manager.md
   - API:
     - Communication Profiles:
       - Overview: api/communication-profiles/communication-profiles-overview.md
