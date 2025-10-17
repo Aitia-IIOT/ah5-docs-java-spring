@@ -1,0 +1,32 @@
+# Translation Providers
+
+## Interface Translation Providers
+
+The interface translation providers are individual [application systems](../../help/definitions.md#application-system) that are capable
+
+- to translate from one or more [interface templates](../../api/communication-profiles/communication-profiles-overview.md) to one specific interface template,
+- to cooperate with the [TranslationManager Support System](../../support_systems/translation_manager.md) by providing the [interfaceBridgeManagement](./translation_provider_dev.md#interface-translation-provider) service and
+- to cooperate with data model translation providers by consuming the [dataModelTranslation](./translation_provider_dev.md#data-model-translation-provider) service
+
+in order to create a translation bridge between consumer and provider systems.
+
+| Public Interface Translation Providers |
+| ---------------------------- |
+| [InterfaceTranslatorToGenericHTTP:octicons-link-external-16:](https://github.com/Aitia-IIOT/ah5-app-aitia-interface-translator-to-generic-http-java-spring) |
+
+[Learn more about how to develop your own Interface Translation provider.](../translation/translation_provider_dev.md#interface-translation-provider)
+
+## Data Model Translation Providers
+
+The data model translation providers are individual [application systems](../../help/definitions.md#application-system) that are capable 
+
+- to translate between different data models and
+- to cooperate with interface translation providers by providing the [dataModelTranslation](./translation_provider_dev.md#data-model-translation-provider) service
+
+in order to integrating into a translation bridge.
+
+| Public Data Model Translation Providers |
+| ---------------------------- |
+| [SemanticAITranslator:octicons-link-external-16:](https://github.com/Aitia-IIOT/ah5-app-aitia-datamodel-translator-python-wrapper-java-spring) |
+
+[Learn more about how to develop your own Data Model Translation provider.](../translation/translation_provider_dev.md#data-model-translation-provider)

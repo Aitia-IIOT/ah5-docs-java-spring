@@ -1,0 +1,178 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[3]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}operation \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{InterfaceTranslator Application System}
+\ArrowheadType{System Description}
+\ArrowheadTypeShort{SysD}
+\ArrowheadVersion{5.1.0}
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Tamás Bordi}
+\ArrowheadStatus{DRAFT}
+\ArrowheadContact{tbordi@aitia.ai}
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides system description for the \textbf{InterfaceTranslator Application System}.
+  \end{abstract}
+
+  \vspace*{1cm}
+
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+\color{black}
+This document provides a \textbf{general description} of the InterfaceTranslator Application System, which enables the creation of translation bridges in order to connect incompatible consumer and provider systems.
+
+The rest of this document is organized as follows.
+In Section \ref{sec:use}, we describe the intended usage of the system.
+In Section \ref{sec:properties}, we describe fundamental properties
+provided by the system.
+In Section \ref{sec:delimitations}, we describe delimitations of capabilities
+of the system.
+In Section \ref{sec:services}, we describe the abstract services produced by the system.
+In Section \ref{sec:security}, we describe the security capabilities
+of the system.
+
+
+\subsection{How This System Is Meant to Be Used}
+\label{sec:use}
+
+InterfaceTranslator is a provider system that has the capability to translate between different interface templates and also to leverage specified \textit{DataModelTranslator} providers for data model translation, in order to create a translation bridge between incompatible consumers and providers. InterfaceTranslator providers are primarily designed to be controlled by the \textit{TranslationManager Support System}, which creates translation bridge plans and instructs the appropriate InterfaceTranslator to establish the selected bridge.
+
+When only data model translation is necessary between a consumer and a provider, then an InterfaceTranslator provider can act as a proxy for interface translation and manage the data model translations with the appropriate DataModelTranslator providers.
+
+\subsection{System functionalities and properties}
+\label{sec:properties}
+
+\subsubsection {Functional properties of the system}
+An InterfaceTranslator solves the following needs to fulfill the translation functionality.
+
+\begin{itemize}
+    \item Enables other management level systems to filter target service providers on translatable interface templates.
+    \item Enables other management level systems to initialize translation bridges.
+    \item Enables other application systems to connect to a translation bridge.
+    \item Enables other management level systems to terminate existing translation bridges.
+\end{itemize}
+
+\textbf{Note:} This specification does not define the exact interface templates to be handled. InterfaceTranslator provider instances can differ in the interface templates they support, but they are always required to expose their capabilities through the common \textbf{interfaceBridgeManagement} service.
+
+\subsubsection {Non functional properties of the system}
+-
+
+\subsubsection {Data stored by the system}
+
+An InterfaceTranslator shall not persist any data about individual translation processes, but it may store data necessary for the translation process itself.
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+If selected data model translation providers are failing during their service operation, then the translation bridge fails as well.
+
+\section{Services produced}
+\label{sec:services}
+
+\phantomsection
+\msubsection{service}{interfaceBridgeManagement}
+
+The purpose of this service is to provide functionality for translating between incompatible consumer and provider systems.
+
+\section{Security}
+\label{sec:security}
+
+InterfaceTranslator provider instances shall support all security levels enabled by a given Local Cloud.
+Instances may limit their access to the TranslationManager Support System and require encrypted communication.
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}

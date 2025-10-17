@@ -4,6 +4,10 @@ The purpose of test builds is to allow the community to test the release candida
 
 ## LATEST
 
+No recent TESTBUILD is available.
+
+## OUTDATED
+
 #### :material-tag: 5.1.0-TESTBUILD-0
 
 :material-calendar: 26/09/2025 <br/>
@@ -18,15 +22,13 @@ Authentication Core System | [AH-authentication-5.1.0-TESTBUILD-0.zip](https://g
 Blacklist Support System | [AH-blacklist-5.1.0-TESTBUILD-0.zip](https://github.com/eclipse-arrowhead/ah5-blacklist-java-spring/releases/download/v5.1.0-TESTBUILD-0/AH-blacklist-5.1.0-TESTBUILD-0.zip)
 TranslationManager Support System | [AH-translationmanager-5.1.0-TESTBUILD-0.zip](https://github.com/eclipse-arrowhead/ah5-translation-manager-java-spring/releases/download/v5.1.0-TESTBUILD-0/AH-translationmanager-5.1.0-TESTBUILD-0.zip)
 
-_**Interface Translation Provider**_
+| Interface Translation Provider |
+| ------------------------------ |
+| [AH-interface-translator-to-generic-http-1.0.0-TESTBUILD-0](https://github.com/Aitia-IIOT/ah5-app-aitia-interface-translator-to-generic-http-java-spring/releases/download/v1.0.0/AH-interface-translator-to-generic-http-1.0.0-TESTBUILD-0.zip) |
 
-[AH-interface-translator-to-generic-http-1.0.0-TESTBUILD-0](https://github.com/Aitia-IIOT/ah5-app-aitia-interface-translator-to-generic-http-java-spring/releases/download/v1.0.0/AH-interface-translator-to-generic-http-1.0.0-TESTBUILD-0.zip)
-
-_**Data Model Translation Test Suite**_
-
-[AH-data-model-translation-test-suite-1.0.0-TESTBUILD-0](https://github.com/Aitia-IIOT/ah5-aitia-translation-test-suite/releases/download/v1.0.0-TESTBUILD-0/AH-data-model-translation-test-suite-1.0.0-TESTBUILD-0.zip)
-
-## OUTDATED
+ | Data Model Translation Test Suite |
+ | --------------------------------- |
+ | [AH-data-model-translation-test-suite-1.0.0-TESTBUILD-0](https://github.com/Aitia-IIOT/ah5-aitia-translation-test-suite/releases/download/v1.0.0-TESTBUILD-0/AH-data-model-translation-test-suite-1.0.0-TESTBUILD-0.zip) |
 
 #### :material-tag: 5.0.0-TESTBUILD-2
 

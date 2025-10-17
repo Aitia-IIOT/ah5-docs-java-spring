@@ -1,5 +1,19 @@
 # Release Versions
 
+## :material-tag: 5.1.0
+
+:material-calendar: 17/10/2025 <br />
+:material-note-text: [CL-5.1.0](../general/changelogs/cl510.md)
+
+| System | Changelog | Known issues |
+| ------ | --------- | ------------ |
+| ServiceRegistry Core System | [CL-5.1.0:material-note-text:](../general/changelogs/cl510.md#arrowhead-serviceregistry) | - |
+| DynamicServiceOrchestration Core System | [CL-5.1.0:material-note-text:](../general/changelogs/cl510.md#arrowhead-serviceorchestration-dynamic) | - |
+| ConsumerAuthorization Core System | [CL-5.1.0:material-note-text:](../general/changelogs/cl510.md#arrowhead-consumer-authorization) | - |
+| Authentication Core System | [CL-5.1.0:material-note-text:](../general/changelogs/cl510.md#arrowhead-authentication) | - |
+| Blacklist Support System | [CL-5.1.0:material-note-text:](../general/changelogs/cl510.md#arrowhead-blacklist) | - |
+| TranslationManager Support System | [CL-5.1.0:material-note-text:](../general/changelogs/cl510.md#arrowhead-translation-manager) | - |
+
 ## :material-tag: 5.0.0
 
 :material-calendar: 07/08/2025 <br />

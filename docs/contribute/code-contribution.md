@@ -70,3 +70,4 @@ _(Creating and pushing new branches within a cloned repository is allowed only f
 **Supporting Systems**
 
 :material-github: [eclipse-arrowhead/ah5-blacklist-java-spring](https://github.com/eclipse-arrowhead/ah5-blacklist-java-spring)
+:material-github: [eclipse-arrowhead/ah5-translation-manager-java-spring](https://github.com/eclipse-arrowhead/ah5-translation-manager-java-spring)
