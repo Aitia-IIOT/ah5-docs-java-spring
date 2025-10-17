@@ -79,7 +79,7 @@ version: "3.9"
 services:
     
     serviceregistry-db:
-        image: aitiaiiot/arrowhead-serviceregistry-db:5.0.0
+        image: aitiaiiot/arrowhead-serviceregistry-db:5.1.0
         container_name: arrowhead-serviceregistry-db
         restart: unless-stopped
         environment:
@@ -103,7 +103,7 @@ version: "3.9"
 services:
 
     serviceorchestration-dynamic-db:
-        image: aitiaiiot/arrowhead-serviceorchestration-dynamic-db:5.0.0
+        image: aitiaiiot/arrowhead-serviceorchestration-dynamic-db:5.1.0
         container_name: arrowhead-serviceorchestration-dynamic-db
         restart: unless-stopped
         environment:
@@ -127,7 +127,7 @@ version: "3.9"
 services:
 
     consumerauthorization-db:
-        image: aitiaiiot/arrowhead-consumerauthorization-db:5.0.0
+        image: aitiaiiot/arrowhead-consumerauthorization-db:5.1.0
         container_name: arrowhead-consumerauthorization-db
         restart: unless-stopped
         environment:
@@ -151,7 +151,7 @@ version: "3.9"
 services:
 
     authentication-db:
-        image: aitiaiiot/arrowhead-authentication-db:5.0.0
+        image: aitiaiiot/arrowhead-authentication-db:5.1.0
         container_name: arrowhead-authentication-db
         restart: unless-stopped
         environment:
@@ -175,7 +175,7 @@ version: "3.9"
 services:
 
     blacklist-db:
-        image: aitiaiiot/arrowhead-blacklist-db:5.0.0
+        image: aitiaiiot/arrowhead-blacklist-db:5.1.0
         container_name: arrowhead-blacklist-db
         restart: unless-stopped
         environment:
@@ -191,6 +191,30 @@ volumes:
     arrowhead_blacklist_db_volume:
 ```
 
+### TranslationManager-DB
+
+```
+version: "3.9"
+
+services:
+
+    translation-manager-db:
+        image: aitiaiiot/arrowhead-translation-manager-db:5.1.0
+        container_name: arrowhead-translation-manager-db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSW}
+            MYSQL_USER: ah-operator
+            MYSQL_PASSWORD: ${DB_AH_OPERATOR_PSW}
+        volumes:
+            - arrowhead_translation_manager_db_volume:/var/lib/mysql
+        ports:
+            - "7465:3306"
+
+volumes:
+    rrowhead_translation_manager_db_volume:
+```
+
 ## System Compose Files
 
 ### ServiceRegistry
@@ -201,7 +225,7 @@ version: "3.9"
 services:
 
     serviceregistry:
-        image: aitiaiiot/arrowhead-serviceregistry:5.0.0
+        image: aitiaiiot/arrowhead-serviceregistry:5.1.0
         container_name: arrowhead-serviceregistry
         restart: unless-stopped
         environment:
@@ -221,7 +245,7 @@ version: "3.9"
 services:
 
     serviceorchestration-dynamic:
-        image: aitiaiiot/arrowhead-serviceorchestration-dynamic:5.0.0
+        image: aitiaiiot/arrowhead-serviceorchestration-dynamic:5.1.0
         container_name: arrowhead-serviceorchestration-dynamic
         restart: unless-stopped
         environment:
@@ -243,7 +267,7 @@ version: "3.9"
 services:
 
     consumerauthorization:
-        image: aitiaiiot/arrowhead-consumerauthorization:5.0.0
+        image: aitiaiiot/arrowhead-consumerauthorization:5.1.0
         container_name: arrowhead-consumerauthorization
         restart: unless-stopped
         environment:
@@ -265,7 +289,7 @@ version: "3.9"
 services:
 
     authentication:
-        image: aitiaiiot/arrowhead-authentication:5.0.0
+        image: aitiaiiot/arrowhead-authentication:5.1.0
         container_name: arrowhead-authentication
         restart: unless-stopped
         environment:
@@ -287,7 +311,7 @@ version: "3.9"
 services:
 
     blacklist:
-        image: aitiaiiot/arrowhead-blacklist:5.0.0
+        image: aitiaiiot/arrowhead-blacklist:5.1.0
         container_name: arrowhead-blacklist
         restart: unless-stopped
         environment:
@@ -299,4 +323,26 @@ services:
             - ${SYSTEM_SETUP_DIR}/config:/app/config
         ports:
             - "8464:8464"
+```
+
+### TranslationManager
+
+```
+version: "3.9"
+
+services:
+
+    translation-manager:
+        image: aitiaiiot/arrowhead-translation-manager:5.1.0
+        container_name: arrowhead-translation-manager
+        restart: unless-stopped
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://${DB_ADDRESS}:${DB_PORT}/ah_translation_manager?serverTimezone=UTC
+            DOMAIN_NAME: ${DOMAIN_NAME}
+            SERVICE_REGISTRY_ADDRESS: ${SERVICE_REGISTRY_ADDRESS}
+            SERVICE_REGISTRY_PORT: ${SERVICE_REGISTRY_PORT}
+        volumes:
+            - ${SYSTEM_SETUP_DIR}/config:/app/config
+        ports:
+            - "8465:8465"
 ```

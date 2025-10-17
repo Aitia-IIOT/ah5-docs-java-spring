@@ -1,5 +1,18 @@
 # Releases
 
+#### :material-tag: 5.1.0
+
+:material-calendar: 17/10/2025
+
+System Name | File
+--- | ---  
+ServiceRegistry Core System | [AH-serviceregistry-5.1.0.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.1.0/AH-serviceregistry-5.1.0.zip)
+DynamicServiceOrchestration Core System | [AH-serviceorchestration-dynamic-5.1.0.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.1.0/AH-serviceorchestration-dynamic-5.1.0.zip)
+ConsumerAuthorization Core System | [AH-consumerauthorization-5.1.0.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.1.0/AH-consumerauthorization-5.1.0.zip)
+Authentication Core System | [AH-authentication-5.1.0.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.1.0/AH-authentication-5.1.0.zip)
+Blacklist Support System | [AH-blacklist-5.1.0.zip](https://github.com/eclipse-arrowhead/ah5-blacklist-java-spring/releases/download/v5.1.0/AH-blacklist-5.1.0.zip)
+TranslationManager Support System | [AH-translation-manager-5.1.0.zip](https://github.com/eclipse-arrowhead/ah5-translation-manager-java-spring/releases/download/v5.1.0/AH-translation-manager-5.1.0.zip)
+
 #### :material-tag: 5.0.0
 
 :material-calendar: 07/08/2025
