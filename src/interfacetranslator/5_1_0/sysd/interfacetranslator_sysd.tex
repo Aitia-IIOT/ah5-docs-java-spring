@@ -137,12 +137,25 @@ An InterfaceTranslator shall not persist any data about individual translation p
 If selected data model translation providers are failing during their service operation, then the translation bridge fails as well.
 
 \section{Services produced}
-\label{sec:services}
+\label{sec:services-produced}
 
 \phantomsection
 \msubsection{service}{interfaceBridgeManagement}
 
 The purpose of this service is to provide functionality for translating between incompatible consumer and provider systems.
+
+\section{Services consumed}
+\label{sec:services-consumed}
+
+\phantomsection
+\msubsection{service}{translationReport}
+
+The purpose of this service is to enable InterfaceTranslator systems to send events about the life cycle of translation bridges. 
+
+\msubsection{service}{dataModelTranslation}
+
+The purpose of this service is to provide functionality for translating between
+one or more data model pairs. A data model is expected to be referenced by a unique ID, and it defines both a specific format (e.g., JSON, XML) and its associated semantics.
 
 \section{Security}
 \label{sec:security}
