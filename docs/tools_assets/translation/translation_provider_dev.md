@@ -7,7 +7,9 @@ The following specifications must be met to develop a compliant [Interface Trans
 | Specifications |     |
 | -------------- | --- |
 | **InterfaceTranslator** System | [System Description](../../assets/sysd/5_1_0/InterfaceTranslator_sysd.pdf) |
-| **interfaceBridgeManagement** Service | [Service Description](../../assets/sd/5_1_0/interfaceBridgeManagement_sd.pdf), [Interface Design Description](../../api/add-on/interfaceBridgeManagement-generic-http.md) |
+| **interfaceBridgeManagement** Service (provide) | [Service Description](../../assets/sd/5_1_0/interfaceBridgeManagement_sd.pdf), [Interface Design Description](../../api/add-on/interfaceBridgeManagement-generic-http.md) |
+| **translationReport** Service (consume) | [Service Description](../../support_systems/translation_manager.md#translationreport), [Interface Design Description](../../api/translationmanager/translation-report-generic-http.md) |
+| **dataModelTranslation** Service (consume) | [Service Description](../../assets/sd/5_1_0/dataModelTranslation_sd.pdf), [Interface Design Description](../../api/add-on/dataModelTranslation-generic-http.md) |
 
 ### Service security requirements
 
@@ -79,7 +81,7 @@ The following specifications must be met to develop a compliant [Data Model Tran
 | Specifications |     |
 | -------------- | --- |
 | **DataModelTranslator** System | [System Description](../../assets/sysd/5_1_0/DataModelTranslator_sysd.pdf) |
-| **dataModelTranslation** Service | [Service Description](../../assets/sd/5_1_0/dataModelTranslation_sd.pdf), [Interface Design Description](../../api/add-on/dataModelTranslation-generic-http.md) |
+| **dataModelTranslation** Service (provide) | [Service Description](../../assets/sd/5_1_0/dataModelTranslation_sd.pdf), [Interface Design Description](../../api/add-on/dataModelTranslation-generic-http.md) |
 
 ### Service security requirements
 
