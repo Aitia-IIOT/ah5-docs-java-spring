@@ -17,6 +17,15 @@ Learn more: <br />
 :material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md) <br />
 :material-tag: since: v5.0.0 
 
+Service metadata: <br />
+
+```
+{
+    "orchestrationStrategy": "dynamic",
+    "unrestrictedDiscovery": true
+}
+```
+
 **pull**
 
 This service operation performs the orchestration process and returns the matching service instances.

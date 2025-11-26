@@ -24,9 +24,9 @@ nav:
     - Authentication: core_systems/authentication.md
   - Support Systems: 
     - Blacklist: support_systems/blacklist.md
+    - DeviceQoSEvaluator: support_systems/device_qos_evaluator.md
     - TranslationManager: support_systems/translation_manager.md
     - Configuration: support_systems/configuration.md
-    - QoSEvaluator: support_systems/qos_evaluator.md
   - API:
     - Communication Profiles:
       - Overview: api/communication-profiles/communication-profiles-overview.md
@@ -189,6 +189,7 @@ nav:
       - MQTTResponseTemplate: api/data-models/mqtt-response-template.md
       - PageRequest: api/data-models/page-request.md
       - PropertyMap: api/data-models/property-map.md
+      - QoSRequirement: api/data-models/qos-requirement.md
       - ScopedPoliciesDescriptor: api/data-models/scoped-policies-descriptor.md
       - ScopedPoliciesRequest: api/data-models/scoped-policies-request.md
       - ServiceCreateListRequest: api/data-models/service-create-list-request.md
