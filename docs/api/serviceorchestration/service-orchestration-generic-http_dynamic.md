@@ -110,9 +110,7 @@ The service operation **responds** with the status code `200` if called successf
 ```
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
-`403` if the authenticated requester has no permission and
-`500` if an unexpected error happens. The error response also contains an
-[ErrorResponse](../data-models/error-response.md) JSON encoded body.
+`403` if the authenticated requester has no permission, `500` if an unexpected error happens and `503` if an unexpected error happens while communicating with other systems. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {

@@ -128,9 +128,7 @@ The service operation **responds** with an [MQTTResponseTemplate](../data-models
 ```
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
-`403` if the authenticated requester has no permission and
-`500` if an unexpected error happens. In these cases the response template payload is an
-[ErrorResponse](../data-models/error-response.md) JSON.
+`403` if the authenticated requester has no permission, `500` if an unexpected error happens and `503` if an unexpected error happens while communicating with other systems. In these cases the response template payload is an [ErrorResponse](../data-models/error-response.md) JSON.
 
 ```
 {
