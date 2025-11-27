@@ -159,6 +159,14 @@ A **String** representation of a communication protocol. Examples: _http_, _http
 
 A Base64 **String** representation of the public byte array cryptographic key retrieved from an X.509 certificate.
 
+## QoSEvaluationType
+
+A **String** name of a specific quality of service evaluation method.
+
+## QoSOperation
+
+A **String** name that specifies how to handle quality of service evaluation results. The possible values are: `FILTER`, `SORT`.
+
 ## SecurityPolicy
 
 A **String** representation of security policies. The possible values are: `NONE`, `CERT_AUTH`, `TIME_LIMITED_TOKEN_AUTH`, `USAGE_LIMITED_TOKEN_AUTH`, `BASE64_SELF_CONTAINED_TOKEN_AUTH`, `RSA_SHA256_JSON_WEB_TOKEN_AUTH`, `RSA_SHA512_JSON_WEB_TOKEN_AUTH`, `TRANSLATION_BRIDGE_TOKEN_AUTH`.
