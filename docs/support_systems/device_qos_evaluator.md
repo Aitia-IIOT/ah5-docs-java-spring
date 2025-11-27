@@ -1,6 +1,6 @@
 # DeviceQoSEvaluator
 
-TODO
+This Support System has the purpose of  collecting and calculating Key Performance Indicators (KPIs) from the devices operating within a Local Cloud. Based on the calculated KPIs this system can assist in finding the best service provider system(s) to fulfill specific requirements.
 
 Learn more: <br />
 :material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_2_0/DeviceQoSEvaluator_sysd.pdf)
@@ -55,14 +55,34 @@ This service operation lists the current values of the specified configuration s
 
 ### Basic
 
-- timeout is the worst case
-- timeout must be less than rtt job interval
+Round-Trip Time (RTT) measurements are performed towards the Local Cloud’s devices without requiring any additional effort. For detailed information about the RTT measurement process, refer to the [SysD](../assets/sysd/5_2_0/DeviceQoSEvaluator_sysd.pdf) document. In order to calculating proper RTT based KPIs, a reasonable `rtt.measurement.timeout` shall be configured. 
+
+This timeout defines the maximum allowed duration for a connection attempt and is treated as the upper bound of the measurement window, meaning that all RTT measurements are normalized relative to this value. Also, this timeout must be always less than the `augmented.measurement.job.interval`.
 
 ### Augmented
 
-- OIDs
-- device client install
-- systems' qos metadata
+Augmented measurement groups and types are uniquely identified by hierarchical, [OID-like unique identifiers](./device_qos_evaluator/augmented_measurement_oid.md).
+
+Performing augmented measurements requires two thing:
+
+- Installing a device agent on the hosting devices (hardwares, virtual machines or contaniers).
+- Specifying the supported measurements on system level by using system metadata.
+
+**Device Agent**
+
+The device-side agent is a lightweight monitoring server implemented in Python. It continuously samples the current performance in every second per [OID sub-groups](./device_qos_evaluator/augmented_measurement_oid.md#sub-group) and caches the collected values in a 30-second time window. The DeviceQoSEvaluator system periodically retrieves these samples and computes the corresponding [OID statistical](./device_qos_evaluator/augmented_measurement_oid.md#statistics) values, which are then stored for a configurable retention period. Operators can enable or disable specific OID sub-groups through the agent’s configuration.
+
+**System Metadata**
+
+If a system of the Local Cloud is being hosted on a device that running the device agent, it shall advertiese its enabled [OID sub-groups](./device_qos_evaluator/augmented_measurement_oid.md#sub-group) through the ServiceRegistry Core System by using the system metadata the following way:
+
+```
+{
+    "qos": {
+        "deviceAugmented": [ "1.4", "2.1", "3.1", "3.2" ]
+    }
+}
+```
 
 ## Configuration
 

@@ -161,7 +161,7 @@ A Base64 **String** representation of the public byte array cryptographic key re
 
 ## QoSEvaluationType
 
-A **String** name of a specific quality of service evaluation method.
+A **String** name of a specific quality of service evaluation method. Example: `basic-device-kpi`.
 
 ## QoSOperation
 
