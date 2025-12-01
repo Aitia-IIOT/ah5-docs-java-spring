@@ -1,0 +1,231 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[3]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}function \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{SimpleStoreServiceOrchestration Core System}
+\ArrowheadType{System Description}
+\ArrowheadTypeShort{SysD}
+\ArrowheadVersion{5.2.0}
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Katinka Jakó}
+\ArrowheadStatus{DRAFT}
+\ArrowheadContact{jako.katinka@aitia.ai}
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides system description for the \textbf{SimpleStoreServiceOrchestration Core System}.
+  \end{abstract}
+
+  \vspace*{1cm}
+
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+\color{black}
+This document describes the SimpleStoreServiceOrchestration Core System, which exists to find matching providers for the consumer's specification within an Eclipse Arrowhead Local Cloud (LC). This can be achieved by various strategies, but the SimpleStoreServiceOrchestration Core System implements the simple-store orchestration strategy. This recommended system uses predefined rules to find appropriate providers for the customer.
+
+The rest of this document is organized as follows.
+In Section \ref{sec:prior_art}, we reference major prior art capabilities
+of the system.
+In Section \ref{sec:use}, we describe the intended usage of the system.
+In Section \ref{sec:properties}, we describe fundamental properties
+provided by the system.
+In Section \ref{sec:delimitations}, we describe delimitations of capabilities
+of the system.
+In Section \ref{sec:services}, we describe the abstract services produced by the system.
+In Section \ref{sec:security}, we describe the security capabilities
+of the system.
+
+\subsection{Significant Prior Art}
+\label{sec:prior_art}
+
+The strong development on cloud technology and various requirements for digitisation and automation has led to the concept of Local Clouds (LC).
+
+\textit{"The concept takes the view that specific geographically local automation tasks should be encapsulated and protected."} \cite{jerker2017localclouds}
+
+A service orchestration system is a central component in any Service-Oriented Architecture (SOA). In applications, the use of SOA for a massive distributed System of Systems requires orchestration. It is utilised to dynamically allow the re-use of existing services and systems in order to create new services and functionality. 
+
+There are some key differences, even on conceptual level, between the previous versions (Orchestrator 4.6.x) and this version:
+
+\begin{itemize}
+    \item The previous versions contained three (or two in earlier versions) kind of orchestration strategies: a store containing simple, peer-to-peer rules, another store containing more flexible rules and a dynamic orchestration method which used the live data of the Service Registry to achieve its goal. The current version separates the three strategies into three different systems (but with the same orchestration service operations), and the Local Cloud's administrator can decide which strategy to support for their use case.
+    \item The previous versions were named the system as Orchestrator. Because this expression has a different meaning in some related domains, it is decided that the current version uses the name \newline {\textless}Strategy{\textgreater}ServiceOrchestration to avoid confusion.
+    \item There was no data storage separation requirement: the Orchestrator's data storage was interconnected to other systems' storage. In the current version, data storage separation is mandatory.
+    \item Only the orchestration pull was supported in which the consumer could start an orchestration process for itself. The current version also supports orchestration push: the consumers can subscribe to a service orchestration (or another Support/Application system can subscribe them) and after the subscription and whenever a system notifies the SimpleStoreServiceOrchestration system, it performs the orchestration for the related subscribers.
+    \item The Quality-of-Service (QoS) Manager component was embedded into the Orchestrator (only QoS data comes from a Support system). The current version moves these functionalities into a separate Support system (which also be responsible to collect and store QoS data).
+    \item X.509 certificate trust chains was used as authentication mechanism. The current version can support any type of authentication methods by using a dedicated Authentication Core system. 
+\end{itemize}
+
+\subsection{How This System Is Meant to Be Used}
+\label{sec:use}
+
+SimpleStoreServiceOrchestration is a recommended core system of Eclipse Arrowhead Local Cloud and is responsible for finding and pairing service consumers and providers. 
+
+There are two ways to use the offered functionality:
+
+\begin{itemize}
+    \item An application that wants to consume a service should ask the SimpleStoreServiceOrchestration to find one or more accessible providers that meet the necessary requirements. The SimpleStoreServiceOrchestration returns the information that the application needs to consume the specified service.
+    \item An application can subscribe for orchestration with the necessary requirements (or can be subscribed by another Application/Support system). Whenever a system notifies the SimpleStoreServiceOrchestration system, it does the orchestration and sends the orchestration information to the subscriber on the specified channel. Optionally, subscribers can ask that an orchestration process run and return immediately after the subscription.
+\end{itemize}
+
+The \textit{information} that is provided to the consumer whenever an orchestration is done depends on the orchestration strategy. In case of simple-store orchestration strategy, the SimpleStoreServiceOrchestration relies on the predefined rules that are stored in its database. Since this system does not contact the ServiceRegistry or any other Core/Support system, the orchestration response does not contain all the information that is needed for the consumer to perform a service operation consumption (access details, authorization tokens, etc...). It is the consumer's responsibility to collect the additional information.
+
+\subsection{System functionalities and properties}
+\label{sec:properties}
+
+\subsubsection {Functional properties of the system}
+SimpleStoreServiceOrchestration solves the following needs to fulfill the requirements of orchestration.
+
+\begin{itemize}
+    \item Enables the application and Core/Support systems to find the appropriate providers to consume their services.
+    \item Enables the application and Core/Support systems to subscribe/unsubscribe to repeated orchestration (orchestration push).
+    \item Enables the application and Core/Support systems with administrative rights to notify the ServiceOrchestration system to orchestrate for the related subscribers.
+    \item Enables the application and Core/Support systems with administrative rights to subscribe/unsubscribe consumers to repeated orchestrations.
+    \item Enables the application and Core/Support systems with administrative rights to manage the orchestration rules.
+\end{itemize}
+
+\subsubsection {Data stored by the system}
+In order to achieve the mentioned functionalities, SimpleStoreServiceOrchestration is capable to store the following information set:
+
+\begin{itemize}
+    \item \textbf{Orchestration store}: A storage to manage the predefined orchestration rules. It consists of the consumer system name, the service definition, the service instance identifier, the priority of the rule, the creator of the rule, the timestamp of the creation, the modifier of the rule and the timestamp of the last update.
+    \item \textbf{Orchestration history}: A storage to save data about the performed orchestration processes. It consists of an orchestration type, a requester system name, a target system name, a service definition and a timestamp.
+\end{itemize}
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+\begin{itemize}
+    \item If the Local Cloud does not contain an Authentication system or does not using X.509 certificates, there is no way for the SimpleStoreServiceOrchestration to verify the requester system. In that case, the SimpleStoreServiceOrchestration will consider the authentication data that comes from the requester as valid.
+\end{itemize} 
+
+\newpage
+
+\section{Services produced}
+\label{sec:services}
+
+\msubsection{service}{serviceOrchestration}
+The purpose of this service is to find information about providers that meet the requirements. It also provided subscription functionality to repeated orchestrations (orchestration push). The service is offered for both application and Core/Support systems. 
+
+\msubsection{service}{serviceOrchestrationPushManagement}
+The purpose of this service is to manage orchestration push subscriptions in bulk. It also allows to signal the SimpleStoreServiceOrchestration system to orchestrate for the related subscribers. The service is offered for Core/Support systems. 
+
+\msubsection{service}{serviceOrchestrationStoreManagement}
+The purpose of this service is to query, create, update and remove orchestration rules. The service is offered for Core/Support systems.
+
+\msubsection{service}{serviceOrchestrationHistoryManagement}
+Recommended service. Its purpose is to give information about the orchestration processes performed by the system. The service is offered for Core/Support systems.
+
+\msubsection{service}{monitor}
+Recommended service. Its purpose is to give information about the provider system. The service is offered for both application and Core/Support systems. 
+
+\newpage
+
+\section{Security}
+\label{sec:security}
+
+For authentication, the SimpleStoreServiceOrchestration utilizes another Core/Support system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the SimpleStoreServiceOrchestration trusts the requester system self-provided identity.
+
+For authorization, the system uses another Core System, the ConsumerAuthorization system to decide whether a consumer can use its services or not. If the ConsumerAuthorization Core System is not present in the Local Cloud, then the SimpleStoreServiceOrchestration may allow for anyone in the Local Cloud to use its services. The following service operations can always be used without any authorization rules:
+
+\begin{itemize}
+    \item \textit{serviceOrchestration} service's \textit{pull} operation,
+    \item \textit{serviceOrchestration} service's \textit{subscribe} operation,
+    \item \textit{serviceOrchestration} service's \textit{unsubscribe} operation.
+\end{itemize}
+
+The implementation of the SimpleStoreServiceOrchestration can decide about the encryption of the connection between the SimpleStoreServiceOrchestration and other systems. 
+
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}
