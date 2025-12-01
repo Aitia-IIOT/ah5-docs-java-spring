@@ -36,6 +36,10 @@ A **String** representation of the type of the authorization policy. Can only be
 
 A **String** representation of the type of target in authorization policies. Can only be `SERVICE_DEF` (for service definitions) or `EVENT_TYPE` (for event types).
 
+## BasicDeviceKpiMetric
+
+**String** representation of metrics supported by the `basic-device-kpi` type of qualityEvaluation service. Possible values are: `RTT_MINIMUM`, `RTT_MEAN`, `RTT_MEDIAN`, `RTT_MAXIMUM`, `RTT_CURRENT`, `CPU_TOTAL_LOAD_MINIMUM`, `CPU_TOTAL_LOAD_MEAN`, `CPU_TOTAL_LOAD_MEDIAN`, `CPU_TOTAL_LOAD_MAXIMUM`, `CPU_TOTAL_LOAD_CURRENT`, `MEMORY_USED_MINIMUM`, `MEMORY_USED_MEAN`, `MEMORY_USED_MEDIAN`, `MEMORY_USED_MAXIMUM`, `MEMORY_USED_CURRENT`, `NETWORK_EGRESS_LOAD_MINIMUM`, `NETWORK_EGRESS_LOAD_MEAN`, `NETWORK_EGRESS_LOAD_MEDIAN`, `NETWORK_EGRESS_LOAD_MAXIMUM`, `NETWORK_EGRESS_LOAD_CURRENT`, `NETWORK_INGRESS_LOAD_MINIMUM`, `NETWORK_INGRESS_LOAD_MEAN`, `NETWORK_INGRESS_LOAD_MEDIAN`, `NETWORK_INGRESS_LOAD_MAXIMUM`, `NETWORK_INGRESS_LOAD_CURRENT`
+
 ## BlacklistReason
 
 A chain of UTF-8 characters with a maximum length of 1024.
@@ -74,6 +78,10 @@ A **String** identifier that is intended to be both human and machine-readable. 
 
 ## Direction
 The direction of a sorting operation. Possible values are the **String** representation of ascending (`ASC`) or descending (`DESC`) order.
+
+## Double
+
+Decimal number with double-precision floating-point representation, used for values requiring fractional parts or
 
 ## EncryptionAlgorithmName 
 

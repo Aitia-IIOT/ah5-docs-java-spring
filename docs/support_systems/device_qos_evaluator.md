@@ -13,8 +13,8 @@ The purpose of this service is to filter or sort systems based on a specified KP
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/qualityEvaluation_sd.pdf) <br />
-:material-api: [generic_http (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-http.md) | [generic_https (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-http.md) <br />
-:material-api: [generic_mqtt (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md) | [generic_mqtts (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md) <br />
+:material-api: [generic_http (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-http_device.md) | [generic_https (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-http_device.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-mqtt_device.md) | [generic_mqtts (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-mqtt_device.md) <br />
 :material-tag: since: v5.2.0 
 
 Service metadata: <br />
@@ -29,15 +29,15 @@ Service metadata: <br />
 
 This service operation filters out any systems from a given list whose calculated QoS scores exceed a specified threshold.
 
-:material-arrow-right-thin: Example: [generic_http](../api/deviceqosevaluator/quality-evaluation-generic-http.md#filter) | [generic_https](../api/deviceqosevaluator/quality-evaluation-generic-http.md#filter)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md#filter) | [generic_mqtts](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md#filter)
+:material-arrow-right-thin: Example: [generic_http](../api/deviceqosevaluator/quality-evaluation-generic-http_device.md#filter) | [generic_https](../api/deviceqosevaluator/quality-evaluation-generic-http_device.md#filter)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/deviceqosevaluator/quality-evaluation-generic-mqtt_device.md#filter) | [generic_mqtts](../api/deviceqosevaluator/quality-evaluation-generic-mqtt_device.md#filter)
 
 **sort**
 
 This service operation sorts a given list of systems according to their calculated QoS scores.
 
-:material-arrow-right-thin: Example: [generic_http](../api/deviceqosevaluator/quality-evaluation-generic-http.md#sort) | [generic_https](../api/deviceqosevaluator/quality-evaluation-generic-http.md#sort)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md#sort) | [generic_mqtts](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md#sort)
+:material-arrow-right-thin: Example: [generic_http](../api/deviceqosevaluator/quality-evaluation-generic-http_device.md#sort) | [generic_https](../api/deviceqosevaluator/quality-evaluation-generic-http_device.md#sort)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/deviceqosevaluator/quality-evaluation-generic-mqtt_device.md#sort) | [generic_mqtts](../api/deviceqosevaluator/quality-evaluation-generic-mqtt_device.md#sort)
 
 -----
 
