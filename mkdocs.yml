@@ -197,6 +197,9 @@ nav:
       - PropertyListMap: api/data-models/property-list-map.md
       - PropertyMap: api/data-models/property-map.md
       - QoSDeviceDataEvaluationRequest: api/data-models/qos-device-data-evaluation-request.md
+      - QoSDeviceStatQueryRequest: api/data-models/qos-device-stat-query-request.md
+      - QoSDeviceStatQueryResponse: api/data-models/qos-device-stat-query-response.md
+      - QoSDeviceStatRecord: api/data-models/qos-device-stat-record.md
       - QoSEvaluationFilterResponse: api/data-models/qos-evaluation-filter-response.md
       - QoSEvaluationRequest: api/data-models/qos-evaluation-request.md
       - QoSEvaluationSortResponse: api/data-models/qos-evaluation-sort-response.md

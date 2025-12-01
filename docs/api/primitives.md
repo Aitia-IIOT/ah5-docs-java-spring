@@ -40,6 +40,14 @@ A **String** representation of the type of target in authorization policies. Can
 
 **String** representation of metrics supported by the `basic-device-kpi` type of qualityEvaluation service. Possible values are: `RTT_MINIMUM`, `RTT_MEAN`, `RTT_MEDIAN`, `RTT_MAXIMUM`, `RTT_CURRENT`, `CPU_TOTAL_LOAD_MINIMUM`, `CPU_TOTAL_LOAD_MEAN`, `CPU_TOTAL_LOAD_MEDIAN`, `CPU_TOTAL_LOAD_MAXIMUM`, `CPU_TOTAL_LOAD_CURRENT`, `MEMORY_USED_MINIMUM`, `MEMORY_USED_MEAN`, `MEMORY_USED_MEDIAN`, `MEMORY_USED_MAXIMUM`, `MEMORY_USED_CURRENT`, `NETWORK_EGRESS_LOAD_MINIMUM`, `NETWORK_EGRESS_LOAD_MEAN`, `NETWORK_EGRESS_LOAD_MEDIAN`, `NETWORK_EGRESS_LOAD_MAXIMUM`, `NETWORK_EGRESS_LOAD_CURRENT`, `NETWORK_INGRESS_LOAD_MINIMUM`, `NETWORK_INGRESS_LOAD_MEAN`, `NETWORK_INGRESS_LOAD_MEDIAN`, `NETWORK_INGRESS_LOAD_MAXIMUM`, `NETWORK_INGRESS_LOAD_CURRENT`
 
+## BasicDeviceKpiMetricAggregation
+
+**String** representation of metric aggregations supported by the `basic-device-kpi` type of qualityEvaluation service. Possible values are: `MINIMUM`, `MEAN`, `MEDIAN`, `MAXIMUM`, `CURRENT`
+
+## BasicDeviceKpiMetricGroup
+
+**String** representation of metric groups supported by the `basic-device-kpi` type of qualityEvaluation service. Possible values are: `RTT`, `CPU_TOTAL_LOAD`, `MEMORY_USED`, `NETWORK_EGRESS_LOAD`, `NETWORK_INGRESS_LOAD`
+
 ## BlacklistReason
 
 A chain of UTF-8 characters with a maximum length of 1024.
