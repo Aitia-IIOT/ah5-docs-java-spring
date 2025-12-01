@@ -9,7 +9,13 @@ Learn more: <br />
 
 ### qualityEvaluation
 
-TODO
+The purpose of this service is to filter or sort systems based on a specified KPI set with associated weighting factors over a defined time window. The service is offered for both application and Core/Support systems.
+
+Learn more: <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/qualityEvaluation_sd.pdf) <br />
+:material-api: [generic_http (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-http.md) | [generic_https (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-http.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md) | [generic_mqtts (IDD)](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md) <br />
+:material-tag: since: v5.2.0 
 
 Service metadata: <br />
 
@@ -19,11 +25,45 @@ Service metadata: <br />
 }
 ```
 
+**filter**
+
+This service operation filters out any systems from a given list whose calculated QoS scores exceed a specified threshold.
+
+:material-arrow-right-thin: Example: [generic_http](../api/deviceqosevaluator/quality-evaluation-generic-http.md#filter) | [generic_https](../api/deviceqosevaluator/quality-evaluation-generic-http.md#filter)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md#filter) | [generic_mqtts](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md#filter)
+
+**sort**
+
+This service operation sorts a given list of systems according to their calculated QoS scores.
+
+:material-arrow-right-thin: Example: [generic_http](../api/deviceqosevaluator/quality-evaluation-generic-http.md#sort) | [generic_https](../api/deviceqosevaluator/quality-evaluation-generic-http.md#sort)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md#sort) | [generic_mqtts](../api/deviceqosevaluator/quality-evaluation-generic-mqtt.md#sort)
+
 -----
 
 ### deviceQualityDataManagement
 
-TODO
+The purpose of this service is to query the measurement metric values and also to trigger the synchronization with ServiceRegistry Core System manually. This service is offered for Core/Support systems.
+
+Learn more: <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/deviceQualiyDataManagement_sd.pdf) <br />
+:material-api: [generic_http (IDD)](../api/deviceqosevaluator/device-quality-data-management-generic-http.md) | [generic_https (IDD)](../api/deviceqosevaluator/device-quality-data-management-generic-http.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md) <br />
+:material-tag: since: v5.2.0 
+
+**query**
+
+This service operation queries raw measurement data using the specified filters.
+
+:material-arrow-right-thin: Example: [generic_http](../api/deviceqosevaluator/device-quality-data-management-generic-http.md#query) | [generic_https](../api/deviceqosevaluator/device-quality-data-management-generic-http.md#query)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md#query) | [generic_mqtts](../api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md#query)
+
+**reload**
+
+This service operation initiates the synchronization of system and device entities
+
+:material-arrow-right-thin: Example: [generic_http](../api/deviceqosevaluator/device-quality-data-management-generic-http.md#reload) | [generic_https](../api/deviceqosevaluator/device-quality-data-management-generic-http.md#reload)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md#reload) | [generic_mqtts](../api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md#reload)
 
 -----
 
@@ -35,7 +75,7 @@ Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/general-management_sd.pdf) <br />
 :material-api: [generic_http (IDD)](../api/general/general-management-generic-http.md) | [generic_https (IDD)](../api/general/general-management-generic-http.md) <br />
 :material-api: [generic_mqtt (IDD)](../api/general/general-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/general/general-management-generic-mqtt.md) <br />
-:material-tag: since: v5.1.0 
+:material-tag: since: v5.2.0 
 
 **get-log**
 
@@ -55,9 +95,9 @@ This service operation lists the current values of the specified configuration s
 
 ### Basic
 
-Round-Trip Time (RTT) measurements are performed towards the Local Cloud’s devices without requiring any additional effort. For detailed information about the RTT measurement process, refer to the [SysD](../assets/sysd/5_2_0/DeviceQoSEvaluator_sysd.pdf) document. In order to calculating proper RTT based KPIs, a reasonable `rtt.measurement.timeout` shall be configured. 
+Round-Trip Time (RTT) measurements are performed towards the Local Cloud’s devices without requiring any additional effort. For detailed information about the RTT measurement process, refer to the [SysD](../assets/sysd/5_2_0/DeviceQoSEvaluator_sysd.pdf) document.
 
-This timeout defines the maximum allowed duration for a connection attempt and is treated as the upper bound of the measurement window, meaning that all RTT measurements are normalized relative to this value. Also, this timeout must be always less than the `augmented.measurement.job.interval`.
+In order to calculating proper RTT based KPIs, a reasonable `rtt.measurement.timeout` shall be configured. This timeout defines the maximum allowed duration for a connection attempt and is treated as the upper bound of the measurement window, meaning that all RTT measurements are normalized relative to this value. Also, this timeout must be always less than the `augmented.measurement.job.interval`.
 
 ### Augmented
 

@@ -87,6 +87,13 @@ nav:
         - MQTT:
           - blacklistDiscovery: api/blacklist/blacklistDiscovery-generic-mqtt.md
           - blacklistManagement: api/blacklist/blacklistManagement-generic-mqtt.md
+      - DeviceQoSEvaluator:
+        - HTTP:
+          - qualityEvaluation: api/deviceqosevaluator/quality-evaluation-generic-http.md
+          - deviceQualiyDataManagement: api/deviceqosevaluator/device-quality-data-management-generic-http.md
+        - MQTT:
+          - qualityEvaluation: api/deviceqosevaluator/quality-evaluation-generic-mqtt.md
+          - deviceQualiyDataManagement: api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md
       - TranslationManager:
         - HTTP:
             - translationBridge: api/translationmanager/translation-bridge-generic-http.md
@@ -96,7 +103,6 @@ nav:
             - translationBridge: api/translationmanager/translation-bridge-generic-mqtt.md
             - translationBridgeManagement: api/translationmanager/translation-bridge-management-generic-mqtt.md
             - translationReport: api/translationmanager/translation-report-generic-mqtt.md
-
       - Add-on Services:
           - HTTP:
             - dataModelTranslation: api/add-on/dataModelTranslation-generic-http.md
