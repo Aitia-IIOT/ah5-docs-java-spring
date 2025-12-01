@@ -169,7 +169,38 @@ Comma-separated list that contains systems whose requests are served without che
 
 Specifies the maximum number of records a page can contain in case of pageable service responses.
 
-TODO
+:fontawesome-solid-wrench: **measurement.organizer.job.interval**
+
+Specifies the interval (in seconds) at which the device and system tables are synchronized by querying the ServiceRegistry Core System, and the measurements are reorganized. The interval cannot be less than 10 seconds.
+
+:fontawesome-solid-wrench: **rtt.measurement.job.interval**
+
+Specifies the frequency (in seconds) for measuring the round-trip time to the devices. The frequency cannot be less than 5 seconds.
+
+:fontawesome-solid-wrench: **rtt.measurement.timeout**
+
+Specifies how long to wait (in milliseconds) for a response during a round-trip time measurement. This value cannot be less then 3000 milliseconds, must be less than the `rtt.measurement.job.interval` and is also treated as 100% (worst case) when scaling during the evaluation process. 
+
+:fontawesome-solid-wrench: **augmented.measurement.job.interval**
+
+Specifies the frequency (in seconds) of fetching the augmented measurement results from the devices. The frequency cannot be less than 5 seconds.</br>
+**_Note_**: The device agent caches measurements within a 30-second time window. Any frequency higher than 30 seconds will result measurement loss.
+
+:fontawesome-solid-wrench: **evaluation.time.window**
+
+Specifies the duration (in seconds) of the time window to be evaluated. The duration must be less than `raw.measurement.data.max.age`.
+
+:fontawesome-solid-wrench: **cleaning.job.interval**
+
+Specifies the interval (in seconds) at which the cleaning job is executed. The interval cannot be less than 60 seconds.
+
+:fontawesome-solid-wrench: **raw.measurement.data.max.age**
+
+Specifies after how many minutes the raw measurement data is removed from the database.
+
+:fontawesome-solid-wrench: **inactive.device.max.age**
+
+Specifies after how many minutes inactive devices are removed from the database. Removal occurs only if no raw measurement data is available for the device.
 
 ### Logging configuration
 
