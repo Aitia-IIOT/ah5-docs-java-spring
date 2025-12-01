@@ -53,7 +53,7 @@ Learn more: <br />
 
 ### serviceOrchestrationStoreManagement
 
-The purpose of the service is to manage the orchestration locks, that allows to exclude service instances from being orchestrated.
+The purpose of the service is to manage the peer-to-peer orchestration rules. These rules associate consumer systems to service instances and can be used during orchestration process in case of simple-store strategy.
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/service-orchestration-store-management_sd.pdf) <br />
@@ -66,16 +66,6 @@ The purpose of the service is to gather information about the performed orchestr
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-orchestration-history-management_sd.pdf) <br />
-:material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md) <br />
-:material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md) <br />
-:material-tag: since: v5.0.0 
-
-**query**
-
-This service operation lists the existing orchestration job records that match the filtering requirements.
-
-:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md#query) | [generic_https](../api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md#query)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md#query) | [generic_mqtts](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md#query)
 
 ## Configuration
 
@@ -132,11 +122,11 @@ authenticator.credentials={\
 
 :fontawesome-solid-wrench: **enable.blacklist.filter**
 
-Enable/disable automatic service requester system name verification against to cloud level blacklist, and also the provider candidate system names during the orchestration process. Can be `true` or `false`.
+Enable/disable automatic service requester system name verification against to cloud level blacklist. Can be `true` or `false`.
 
 :fontawesome-solid-wrench: **force.blacklist.filter**
 
-Whether or not the service requests should be refused when the blacklist server is not responding, and whether the provider candidates should be dropped during the orchstration process or not. Can be `true` or `false`.
+Whether or not the service requests should be refused when the blacklist server is not responding. Can be `true` or `false`.
 
 :fontawesome-solid-wrench: **enable.management.filter**
 
@@ -164,7 +154,7 @@ Specifies after how many days the orchestration history records can be automatic
 
 :fontawesome-solid-wrench: **cleaner.job.interval**
 
-Specifies in milisec, that how often the expired subscriptions and the orchestration history records can be automatically deleted and how often the expired orchestration locks can be released.
+Specifies in milisec, that how often the expired subscriptions and the orchestration history records can be automatically deleted.
 
 :fontawesome-solid-wrench: **push.orchestration.max.thread**
 

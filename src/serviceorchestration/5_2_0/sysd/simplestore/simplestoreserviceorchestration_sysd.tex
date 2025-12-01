@@ -119,7 +119,6 @@ There are some key differences, even on conceptual level, between the previous v
     \item The previous versions were named the system as Orchestrator. Because this expression has a different meaning in some related domains, it is decided that the current version uses the name \newline {\textless}Strategy{\textgreater}ServiceOrchestration to avoid confusion.
     \item There was no data storage separation requirement: the Orchestrator's data storage was interconnected to other systems' storage. In the current version, data storage separation is mandatory.
     \item Only the orchestration pull was supported in which the consumer could start an orchestration process for itself. The current version also supports orchestration push: the consumers can subscribe to a service orchestration (or another Support/Application system can subscribe them) and after the subscription and whenever a system notifies the SimpleStoreServiceOrchestration system, it performs the orchestration for the related subscribers.
-    \item The Quality-of-Service (QoS) Manager component was embedded into the Orchestrator (only QoS data comes from a Support system). The current version moves these functionalities into a separate Support system (which also be responsible to collect and store QoS data).
     \item X.509 certificate trust chains was used as authentication mechanism. The current version can support any type of authentication methods by using a dedicated Authentication Core system. 
 \end{itemize}
 
@@ -164,6 +163,7 @@ In order to achieve the mentioned functionalities, SimpleStoreServiceOrchestrati
 
 \begin{itemize}
     \item If the Local Cloud does not contain an Authentication system or does not using X.509 certificates, there is no way for the SimpleStoreServiceOrchestration to verify the requester system. In that case, the SimpleStoreServiceOrchestration will consider the authentication data that comes from the requester as valid.
+    \item An orchestration result does not contain enough information to consume a service instance. The consumer at least needs to contact the ServiceRegistry Core system using the service instance id to acquire the access information of the referenced service instance. If this instance requires authorization token as a security measure, the consumer also has to consult with the ConsumerAuthorization Core system to acquire one.
 \end{itemize} 
 
 \newpage
@@ -191,7 +191,7 @@ Recommended service. Its purpose is to give information about the provider syste
 \section{Security}
 \label{sec:security}
 
-For authentication, the SimpleStoreServiceOrchestration utilizes another Core/Support system, the Authentication system's service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the SimpleStoreServiceOrchestration trusts the requester system self-provided identity.
+For authentication, the SimpleStoreServiceOrchestration can utilize another Core system, the Authentication system's service to verify the identities of the requester systems.  If no Authentication system is deployed into the Local Cloud, the SimpleStoreServiceOrchestration can accept X.509 certificates for identification. If none of these are available, the SimpleStoreServiceOrchestration trusts the requester system’s self-provided identity.
 
 For authorization, the system uses another Core System, the ConsumerAuthorization system to decide whether a consumer can use its services or not. If the ConsumerAuthorization Core System is not present in the Local Cloud, then the SimpleStoreServiceOrchestration may allow for anyone in the Local Cloud to use its services. The following service operations can always be used without any authorization rules:
 

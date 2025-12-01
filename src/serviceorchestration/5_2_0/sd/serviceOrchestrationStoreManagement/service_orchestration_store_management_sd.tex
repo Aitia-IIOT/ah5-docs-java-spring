@@ -124,7 +124,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 \subsection{How This Service Is Meant to Be Used}
 
-This service can be used to define peer-to-peer rules that determine the orchestration in a Local Cloud that uses simple-store strategy. These rules associate a consumer system with a service instance identifier. Each rule has a priority, and higher-priority rules appear earlier in the orchestration results. Priority is the only attribute that can be modified in a rule.
+This service can be used to define peer-to-peer rules that determine the orchestration in a Local Cloud that uses simple-store strategy. These rules associate consumer systems with service instance identifiers. Each rule has a priority, and higher-priority rules appear earlier in the orchestration results. Priority is the only attribute that can be modified in a rule.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -149,7 +149,7 @@ Input and output types are only denoted when accepted or returned, respectively,
 \phantomsection
 \fsubsection{query}{OrchestrationSimpleStoreQueryRequest}{OrchestrationSimpleStoreListResponse}{}{ErrorResponse}
 
-Operation query lists the orchestration store records that match the filtering requirements. The query data must meet the following criteria:
+Operation \textit{query} lists the orchestration store records that match the filtering requirements. The query data must meet the following criteria:
 
 \begin{itemize}
     \item The operation returns results in pages. There are default page data settings, but the requester can provide a custom specification.
@@ -163,13 +163,13 @@ Operation query lists the orchestration store records that match the filtering r
 
 This operation requires at least the consumer's identity and the orchestration store entries to create. The result of this operation is a list of rules that were created. It is not allowed to store rules where the consumer system name, service instance identifier and priority all have the same value as in another rule.
 
-\fsubsection{modify-priorities}{PriorityRequest}{OrchestrationSimpleStoreListResponse}{}{ErrorResponse}
+\fsubsection{modify-priorities}{OrchestrationSimpleStorePriorityRequest}{OrchestrationSimpleStoreListResponse}{}{ErrorResponse}
 
 This operation requires at least the consumer's identity and the rule identifiers with their new priorities. The result of this operation is a list of all the rules referenced by the identifiers after the update (even if they were not actually modified). When specifying priorities, care must be taken to ensure that the rules remain unique according to consumer system name, service instance identifier and priority.
 
-\fsubsection{remove}{OrchestrationSimpleStoreRemoveRequest}{OperationStatus}{}{ErrorResponse}
+\fsubsection{remove}{OrchestrationSimpleStoreRemoveRequest}{}{OperationStatus}{ErrorResponse}
 
-Operation \textit{remove} requires the rule identifiers and removes their associated store orchestration records.
+Operation \textit{remove} requires the rule identifiers and removes their associated orchestration rule records.
 
 \clearpage
 
@@ -185,9 +185,13 @@ As a complement to the explicitly defined types in this section, there is also a
 \msubsection{struct}{OrchestrationSimpleStoreQueryRequest}
  
 \begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{3cm} | p{3.75cm} | p{1.75cm} | X |} \hline
+\begin{tabularx}{\textwidth}{| p{3cm} | p{3.8cm} | p{1.75cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-pagination & \hyperref[sec:model:PageRequest]{PageRequest} & yes & Paging information about the queried store records. \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
+pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
+pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
+pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
+pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
 ids & \pref{List}$<$\pref{StoreEntryID}$>$ & no (yes) & Requester is looking for store entries with any of the specified identifiers. \\ \hline
 consumerNames & \pref{List}$<$\pref{SystemName}$>$ & no (yes) & Requester is looking for store entries with any of the consumer system names. \\ \hline
 serviceDefinitions & \pref{List}$<$\pref{ServiceName}$>$ & no (yes) & Requester is looking for store entries with any of the specified service definition names.  \\ \hline
@@ -200,18 +204,11 @@ createdBy & \pref{SystemName} & no (yes) & Requester is looking for store entrie
 
 \textbf{\textit{Note}}: One of the following fields must be specified: \textit{ids, consumerNames, serviceDefinitions, serviceInstanceIds} or \textit{createdBy}.
 
-\msubsection{struct}{PageRequest}
+\msubsection{struct}{Identity}
 
-\begin{table}[ht!]
-\begin{tabularx}{\textwidth}{| p{2.5cm} | p{2.5cm} | p{2cm} | X |} \hline
-\rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
-authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
-pageNumber & \pref{Number} & no (yes) & The number of the requested page. It is mandatory, if page size is specified. \\ \hline
-pageSize & \pref{Number} & no (yes) & The number of entries on the requested page. It is mandatory, if page number is specified. \\ \hline
-pageSortField & \pref{String} & no & The identifier of the field which must be used to sort the entries. \\ \hline
-pageDirection & \pref{Direction} & no & The direction of the sorting. \\ \hline
-\end{tabularx}
-\end{table}
+An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+
+\clearpage
 
 % OrchestrationSimpleStoreListResponse %
 
@@ -272,9 +269,7 @@ entries & \pref{List}$<$\hyperref[sec:model:OrchestrationSimpleStoreRequest]{Orc
 \end{tabularx}
 \end{table}
 
-\msubsection{struct}{Identity}
-
-An \pref{Object} which describes the identity of a system. It also contains whether the identified system has higher level administrative rights.
+\clearpage
 
 \msubsection{struct}{OrchestrationSimpleStoreRequest}
 
@@ -301,7 +296,7 @@ priorities & \hyperref[sec:model:PriorityMap]{PriorityMap} & yes & The identifie
 
 \msubsection{struct}{PriorityMap}
 
-An \pref{Object} which maps \pref{StoreEntryID} identifiers to \pref{number} values.
+An \pref{Object} which maps \pref{StoreEntryID} identifiers to \pref{Number} values.
 
 % OrchestrationSimpleStoreRemoveRequest %
 
@@ -310,6 +305,7 @@ An \pref{Object} which maps \pref{StoreEntryID} identifiers to \pref{number} val
 \begin{table}[ht!]
 \begin{tabularx}{\textwidth}{| p{2.5cm} | p{3cm} | p{2cm} | X |} \hline
 \rowcolor{gray!33} Field & Type & Mandatory & Description \\ \hline
+authentication & \hyperref[sec:model:Identity]{Identity} & yes & The requester of the operation. \\ \hline
 ids & \pref{List}$<$\pref{StoreEntryID}$>$ & yes & A list of identifiers of the store entries to remove. \\ \hline
 \end{tabularx}
 \end{table}
@@ -327,6 +323,7 @@ The concrete interpretations of each of these types and structures must be provi
 \begin{tabularx}{\textwidth}{| p{4.3cm} | X |} \hline
 \rowcolor{gray!33} Type & Description \\ \hline
 \pdef{DateTime}         & Pinpoints a specific moment in time. \\ \hline
+\pdef{Direction}        & The direction of a sorting operation. Possible values are the representation of ascending or descending order. \\ \hline
 \pdef{ErrorType}        & Any suitable type chosen by the implementor of service. \\ \hline
 \pdef{List}$<$A$>$      & An \textit{array} of a known number of items, each having type A. \\ \hline
 \pdef{Number}           & Decimal number. \\ \hline
