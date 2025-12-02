@@ -1,0 +1,241 @@
+\documentclass[a4paper]{arrowhead}
+
+\usepackage[yyyymmdd]{datetime}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+\renewcommand{\dateseparator}{-}
+
+\setlength{\parskip}{1em}
+
+%% Special references
+\newcommand{\fref}[1]{{\textcolor{ArrowheadBlue}{\hyperref[sec:functions:#1]{#1}}}}
+\newcommand{\mref}[1]{{\textcolor{ArrowheadPurple}{\hyperref[sec:model:#1]{#1}}}}
+\newcommand{\pdef}[1]{{\textcolor{ArrowheadGrey}{#1\label{sec:model:primitives:#1}\label{sec:model:primitives:#1s}\label{sec:model:primitives:#1es}}}}
+\newcommand{\pref}[1]{{\textcolor{ArrowheadGrey}{\hyperref[sec:model:primitives:#1]{#1}}}}
+
+\newrobustcmd\fsubsection[3]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}function \textcolor{ArrowheadBlue}{#1}}
+  \renewcommand*{\do}[1]{\rref{##1},\ }
+  \subsection*{
+    \thesubsection\quad
+    operation
+    \textcolor{ArrowheadBlue}{#1}
+    (\notblank{#2}{\mref{#2}}{})
+    \notblank{#3}{: \mref{#3}}{}
+  }
+  \label{sec:functions:#1}
+}
+\newrobustcmd\msubsection[2]{
+  \addtocounter{subsection}{1}
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1 \textcolor{ArrowheadPurple}{#2}}
+  \subsection*{\thesubsection\quad#1 \textcolor{ArrowheadPurple}{#2}}
+  \label{sec:model:#2} \label{sec:model:#2s} \label{sec:model:#2es}
+}
+
+\begin{document}
+
+%% Arrowhead Document Properties
+\ArrowheadTitle{DeviceQoSEvaluator Support System}
+\ArrowheadType{System Description}
+\ArrowheadTypeShort{SysD}
+\ArrowheadVersion{5.2.0}
+\ArrowheadDate{\today}
+\ArrowheadAuthor{Tamás Bordi}
+\ArrowheadStatus{DRAFT}
+\ArrowheadContact{tbordi@aitia.ai}
+\ArrowheadFooter{\href{www.arrowhead.eu}{www.arrowhead.eu}}
+\ArrowheadSetup
+%%
+
+%% Front Page
+\begin{center}
+  \vspace*{1cm}
+  \huge{\arrowtitle}
+
+  \vspace*{0.2cm}
+  \LARGE{\arrowtype}
+  \vspace*{1cm}
+
+  %\Large{Service ID: \textit{"\arrowid"}}
+  \vspace*{\fill}
+
+  % Front Page Image
+  %\includegraphics{figures/TODO}
+
+  \vspace*{1cm}
+  \vspace*{\fill}
+
+  % Front Page Abstract
+  \begin{abstract}
+    This document provides system description for the \textbf{DeviceQoSEvaluator Support System}.
+  \end{abstract}
+
+  \vspace*{1cm}
+
+ \end{center}
+
+\newpage
+%%
+
+%% Table of Contents
+\tableofcontents
+\newpage
+%%
+
+\section{Overview}
+\label{sec:overview}
+\color{black}
+This document describes the DeviceQoSEvaluator Support System, which is responsible for collecting and calculating Key Performance Indicators (KPIs) from devices operating within a Local Cloud. Using these KPIs, the system can assist in selecting the most suitable service providers to meet specific requirements.
+
+The rest of this document is organized as follows.
+In Section \ref{sec:prior_art}, we reference major prior art capabilities
+of the system.
+In Section \ref{sec:use}, we describe the intended usage of the system.
+In Section \ref{sec:properties}, we describe fundamental properties
+provided by the system.
+In Section \ref{sec:delimitations}, we describe delimitations of capabilities
+of the system.
+In Section \ref{sec:services}, we describe the abstract services produced by the system.
+In Section \ref{sec:security}, we describe the security capabilities
+of the system.
+
+\subsection{Significant Prior Art}
+\label{sec:prior_art}
+
+The strong development on cloud technology and various requirements for digitisation and automation has led to the concept of Local Clouds (LC).
+
+\textit{"The concept takes the view that specific geographically local automation tasks should be encapsulated and protected."} \cite{jerker2017localclouds}
+
+One of the key building blocks in realising such a Local Cloud is the ability to ensure quality services across various aspects. The DeviceQoSEvaluator Support System is intended to provide this functionality at the device performance level.
+
+
+The previous versions of the Arrowhead Framework (4.6.x) have a system (qos monitor) that offers similar functionality, however there are some key differences, even on conceptual level:
+
+\begin{itemize}
+    \item The 5th generation of the Arrowhead Framework enables the integration of multiple service-quality evaluator systems through a common evaluation service, which this system also implements.
+    \item In addition to network communication latency, this system enables the measurement of CPU and RAM usage, as well as network interface throughput.
+\end{itemize}
+
+\subsection{How This System Is Meant to Be Used}
+\label{sec:use}
+
+The DeviceQoSEvaluator provides device-level performance measurement capabilities, as well as mechanisms for evaluating (filtering or ranking) systems based on their associated device KPIs. When deployed within a Local Cloud, this support system periodically queries the ServiceRegistry Core System to synchronize its internal data model of registered systems and their devices. This internal model serves as the basis for executing measurement routines and computing the corresponding KPIs. Device entities are derived from the set of registered system and device addresses. If multiple systems are registered with an identical network address, these systems are interpreted as being hosted on the same underlying device.
+
+Basic performance metrics are available by default; however, augmented measurement capabilities can be enabled by deploying a lightweight device-side agent that executes additional measurement routines.
+
+Based on the collected device-level performance metrics, the corresponding KPIs are derived, and systems can be filtered or ranked according to configurable KPI sets and weighting factors.
+
+\subsection{System functionalities and properties}
+\label{sec:properties}
+
+\subsubsection {Functional properties of the system}
+
+Based on the periodic measurements, the following KPIs are continuously calculated:
+
+\begin{itemize}
+    \item \textbf{Basic Measurement}
+    
+    \textit{Measurement:} \texttt{Round-Trip Time} \newline
+    \textit{Metrics:} \texttt{MIN}, \texttt{MAX}, \texttt{MEAN}, \texttt{MEDIAN}, \texttt{CURRENT}
+
+    The measurement is performed by initiating TCP connection attempts to a potentially closed port on the target device. The elapsed time between the connection request and the resulting “connection refused” response is recorded (in milliseconds). If the randomly selected port happens to be open, a new port is selected until a closed one is found. A single measurement consists of multiple connection attempts to produce stable metric values.    
+    
+    \item \textbf{Augmented Measurements}
+
+    \textit{Measurements:} \texttt{CPU Total Load}, \texttt{Memory Used}, \texttt{Network Egress Load}, \texttt{Network Ingress Load} \newline
+    \textit{Metrics:} \texttt{MIN}, \texttt{MAX}, \texttt{MEAN}, \texttt{MEDIAN}, \texttt{CURRENT}
+
+    The measurements are performed by the device-side agent, which continuously monitors the current load percentages and stores the sampled values within a configured time window. The DeviceQoSEvaluator system periodically retrieves these samples and computes the corresponding metric values, which are then stored for a configurable retention period.
+    
+\end{itemize}
+
+A device's QoS is calculated on demand and based on a given KPI set with associated weighting factors for a given time window. Example:
+
+ $Q_i(T) = w_1 \cdot RoundTripTime(T)_{current} + w_2 \cdot NetworkEgressLoad(T)_{max} + w_3 \cdot CpuTotalLoad(T)_{mean}$
+
+\subsubsection {Non functional properties of the system}
+
+\begin{itemize}
+    \item  If an Authentication system is present in the Local Cloud, the DeviceQoSEvaluator will use its service(s) to verify a requester system before responding to its request.
+    \item If X.509 authentication policy is used instead of a dedicated Authentication system, the DeviceQoSEvaluator will verify the provided certificate before any response.
+    \item If the Blacklist system is present in the Local Cloud, the DeviceQoSEvaluator may use its service(s) to check the requesters.
+\end{itemize}
+
+\subsubsection {Data stored by the system}
+
+In order to achieve the mentioned functionalities, DeviceQoSEvaluator is capable to store the following information set:
+
+\begin{itemize}
+    \item \textbf{Device entities: } The derived device entities and the associated network addresses, ports and other relevant data that are necessary for performing the measurements.
+    \item \textbf{System names: } The unique system names associated with a device entity.
+    \item \textbf{Measurement metrics: } Time series measurement data associated with a device entity.
+\end{itemize}
+
+\subsection{Important Delimitations}
+\label{sec:delimitations}
+
+\begin{itemize}
+    \item  If the Local Cloud does not contain an Authentication system or is not using X.509 certificates, there is no way for the DeviceQoSEvaluator to verify the requester system. In that case, the DeviceQoSEvaluator will consider the authentication data that comes from the requester as valid.
+
+    \item DeviceQoSEvaluator is not able to perform measurements without cooperating with the ServiceRegistry Core System.
+
+    \item DeviceQoSEvaluator instantiates internal routines for all derived device entities. As Local Cloud size increases, the system may require additional computational resources to execute measurements without incurring significant processing delays.
+    
+\end{itemize}
+
+\newpage
+
+\section{Services produced}
+\label{sec:services}
+
+\msubsection{service}{qualityEvaluation}
+The purpose of this service is to filter or sort systems based on a specified KPI set with associated weighting factors over a defined time window. The service is offered for both application and Core/Support systems.
+
+\msubsection{service}{deviceQualityDataManagement}
+The purpose of this service is to query the measurement metric values and also to trigger the synchronization with ServiceRegistry Core System manually. This service is offered for Core/Support systems.
+
+\msubsection{service}{monitor}
+Recommended service. Its purpose is to give information about the provider system. The service is offered for both application and Core/Support systems.
+
+\newpage
+
+\section{Security}
+\label{sec:security}
+
+For authentication, the DeviceQoSEvaluator can utilize an other core system, the Authentication system’s service to verify the identities of the requester systems. If no Authentication system is deployed into the Local Cloud, the DeviceQoSEvaluator can accept X.509 certificates for identification. If none of these are available, the
+DeviceQoSEvaluator trusts the requester system’s self-provided identity.
+
+For authorization, qualityEvaluation is available for everyone who can get access information via service orchestration (or directly from the ServiceRegistry, if direct lookup is allowed in the Local Cloud). The deviceQualityDataManagement service is available for those who has the appropriate permissions.
+
+The implementation of the DeviceQoSEvaluator can decide about the encryption of the connection between the DeviceQoSEvaluator and other systems.
+ 
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\newpage
+
+\section{Revision History}
+\subsection{Amendments}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X | p{4cm} |} \hline
+\rowcolor{gray!33} No. & Date & Version & Subject of Amendments & Author \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion & & Xxx Yyy \\ \hline
+\end{tabularx}
+
+\subsection{Quality Assurance}
+
+\noindent\begin{tabularx}{\textwidth}{| p{1cm} | p{3cm} | p{2cm} | X |} \hline
+\rowcolor{gray!33} No. & Date & Version & Approved by \\ \hline
+
+1 & YYYY-MM-DD & \arrowversion  &  \\ \hline
+
+\end{tabularx}
+
+\end{document}

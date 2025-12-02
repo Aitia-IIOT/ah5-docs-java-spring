@@ -17,6 +17,14 @@ Learn more: <br />
 :material-api: [generic_mqtt (IDD)](../api/authentication/identity-generic-mqtt.md) | [generic_mqtts (IDD)](../api/authentication/identity-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
+Service metadata: <br />
+
+```
+{
+    "unrestrictedDiscovery": true
+}
+```
+
 **login**
 
 This service operation acquires a proof of identity token.

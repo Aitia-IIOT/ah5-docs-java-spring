@@ -3,7 +3,7 @@
 This Core System exists to find matching service instances according to the consumer’s specification within an Eclipse Arrowhead Local Cloud (LC) and optionally, in other Arrowhead clouds by collaborating with other core/support Systems. 
 
 Learn more: <br />
-:material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_1_0/DynamicServiceOrchestration_sysd.pdf)
+:material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_2_0/DynamicServiceOrchestration_sysd.pdf)
 
 ## Services
 
@@ -12,10 +12,19 @@ Learn more: <br />
 The purpose of this service is to get matching service instances. The service is offered for both application and Core/Support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-orchestration_sd.pdf) <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/service-orchestration_sd.pdf) <br />
 :material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-generic-http_dynamic.md) <br />
 :material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md) <br />
 :material-tag: since: v5.0.0 
+
+Service metadata: <br />
+
+```
+{
+    "orchestrationStrategy": "dynamic",
+    "unrestrictedDiscovery": true
+}
+```
 
 **pull**
 

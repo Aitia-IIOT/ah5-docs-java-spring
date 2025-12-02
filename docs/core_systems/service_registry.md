@@ -17,6 +17,14 @@ Learn more: <br />
 :material-api: [generic_mqtt (IDD)](../api/serviceregistry/service-discovery-generic-mqtt.md) | [generic_mqtts (IDD)](../api/serviceregistry/service-discovery-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
+Service metadata: <br />
+
+```
+{
+    "unrestrictedDiscovery": true
+}
+```
+
 **register**
 
 This service operation adds new service instance to the Local Cloud.
@@ -50,6 +58,14 @@ Learn more: <br />
 :material-api: [generic_mqtt (IDD)](../api/serviceregistry/system-discovery-generic-mqtt.md) | [generic_mqtts (IDD)](../api/serviceregistry/system-discovery-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
+Service metadata: <br />
+
+```
+{
+    "unrestrictedDiscovery": true
+}
+```
+
 **register**
 
 This service operation adds new system to the Local Cloud.
@@ -82,6 +98,14 @@ Learn more: <br />
 :material-api: [generic_http (IDD)](../api/serviceregistry/device-discovery-generic-http.md) | [generic_https (IDD)](../api/serviceregistry/device-discovery-generic-http.md) <br />
 :material-api: [generic_mqtt (IDD)](../api/serviceregistry/device-discovery-generic-mqtt.md) | [generic_mqtts (IDD)](../api/serviceregistry/device-discovery-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
+
+Service metadata: <br />
+
+```
+{
+    "unrestrictedDiscovery": true
+}
+```
 
 **register**
 

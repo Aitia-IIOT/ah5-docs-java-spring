@@ -60,7 +60,7 @@ version: "3.9"
 services:
     
     serviceregistry-db:
-        image: aitiaiiot/arrowhead-serviceregistry-db:5.1.0
+        image: aitiaiiot/arrowhead-serviceregistry-db:5.2.0
         container_name: arrowhead-serviceregistry-db
         restart: unless-stopped
         environment:
@@ -77,7 +77,7 @@ services:
             retries: 5
 
     serviceregistry:
-        image: aitiaiiot/arrowhead-serviceregistry:5.1.0
+        image: aitiaiiot/arrowhead-serviceregistry:5.2.0
         container_name: arrowhead-serviceregistry
         restart: unless-stopped
         depends_on:
@@ -103,7 +103,7 @@ version: "3.9"
 services:
     
     serviceorchestration-dynamic-db:
-        image: aitiaiiot/arrowhead-serviceorchestration-dynamic-db:5.1.0
+        image: aitiaiiot/arrowhead-serviceorchestration-dynamic-db:5.2.0
         container_name: arrowhead-serviceorchestration-dynamic-db
         restart: unless-stopped
         environment:
@@ -120,7 +120,7 @@ services:
             retries: 5
 
     serviceorchestration-dynamic:
-        image: aitiaiiot/arrowhead-serviceorchestration-dynamic:5.1.0
+        image: aitiaiiot/arrowhead-serviceorchestration-dynamic:5.2.0
         container_name: arrowhead-serviceorchestration-dynamic
         restart: unless-stopped
         depends_on:
@@ -140,6 +140,51 @@ volumes:
     arrowhead_serviceorchestration_dynamic_db_volume:
 ```
 
+### SimpleStoreServiceOrchestration
+
+```
+version: "3.9"
+
+services:
+    
+    serviceorchestration-simple-db:
+        image: aitiaiiot/arrowhead-serviceorchestration-simple-db:5.2.0
+        container_name: arrowhead-serviceorchestration-simple-db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSW}
+            MYSQL_USER: ah-operator
+            MYSQL_PASSWORD: ${DB_AH_OPERATOR_PSW}
+        volumes:
+            - arrowhead_serviceorchestration_simple_db_volume:/var/lib/mysql
+        ports:
+            - "7456:3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 4s
+            retries: 5
+
+    serviceorchestration-simple:
+        image: aitiaiiot/arrowhead-serviceorchestration-simple:5.2.0
+        container_name: arrowhead-serviceorchestration-simple
+        restart: unless-stopped
+        depends_on:
+            serviceorchestration-simple-db:
+                condition: service_healthy
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://serviceorchestration-simple-db:3306/ah_serviceorchestration_simple?serverTimezone=UTC
+            DOMAIN_NAME: ${DOMAIN_NAME}
+            SERVICE_REGISTRY_ADDRESS: ${SERVICE_REGISTRY_ADDRESS}
+            SERVICE_REGISTRY_PORT: ${SERVICE_REGISTRY_PORT}
+        volumes:
+            - ${SYSTEM_SETUP_DIR}/config:/app/config
+        ports:
+            - "8456:8456"
+            
+volumes:
+    arrowhead_serviceorchestration_simple_db_volume:
+```
+
 ### ConsumerAuthorization
 
 ```
@@ -148,7 +193,7 @@ version: "3.9"
 services:
     
     consumerauthorization-db:
-        image: aitiaiiot/arrowhead-consumerauthorization-db:5.1.0
+        image: aitiaiiot/arrowhead-consumerauthorization-db:5.2.0
         container_name: arrowhead-consumerauthorization-db
         restart: unless-stopped
         environment:
@@ -165,7 +210,7 @@ services:
             retries: 5
 
     consumerauthorization:
-        image: aitiaiiot/arrowhead-consumerauthorization:5.1.0
+        image: aitiaiiot/arrowhead-consumerauthorization:5.2.0
         container_name: arrowhead-consumerauthorization
         restart: unless-stopped
         depends_on:
@@ -193,7 +238,7 @@ version: "3.9"
 services:
     
     authentication-db:
-        image: aitiaiiot/arrowhead-authentication-db:5.1.0
+        image: aitiaiiot/arrowhead-authentication-db:5.2.0
         container_name: arrowhead-authentication-db
         restart: unless-stopped
         environment:
@@ -210,7 +255,7 @@ services:
             retries: 5
 
     authentication:
-        image: aitiaiiot/arrowhead-authentication:5.1.0
+        image: aitiaiiot/arrowhead-authentication:5.2.0
         container_name: arrowhead-authentication
         restart: unless-stopped
         depends_on:
@@ -238,7 +283,7 @@ version: "3.9"
 services:
     
     blacklist-db:
-        image: aitiaiiot/arrowhead-blacklist-db:5.1.0
+        image: aitiaiiot/arrowhead-blacklist-db:5.2.0
         container_name: arrowhead-blacklist-db
         restart: unless-stopped
         environment:
@@ -255,7 +300,7 @@ services:
             retries: 5
 
     blacklist:
-        image: aitiaiiot/arrowhead-blacklist:5.1.0
+        image: aitiaiiot/arrowhead-blacklist:5.2.0
         container_name: arrowhead-blacklist
         restart: unless-stopped
         depends_on:
@@ -283,7 +328,7 @@ version: "3.9"
 services:
     
     translation-manager-db:
-        image: aitiaiiot/arrowhead-translation-manager-db:5.1.0
+        image: aitiaiiot/arrowhead-translation-manager-db:5.2.0
         container_name: arrowhead-translation-manager-db
         restart: unless-stopped
         environment:
@@ -300,7 +345,7 @@ services:
             retries: 5
 
     translation-manager:
-        image: aitiaiiot/arrowhead-translation-manager:5.1.0
+        image: aitiaiiot/arrowhead-translation-manager:5.2.0
         container_name: arrowhead-translation-manager
         restart: unless-stopped
         depends_on:
@@ -318,4 +363,49 @@ services:
             
 volumes:
     arrowhead_translation_manager_db_volume:
+```
+
+### DeviceQoSEvaluator
+
+```
+version: "3.9"
+
+services:
+    
+    device-qos-evaluator-db:
+        image: aitiaiiot/arrowhead-device-qos-evaluator-db:5.2.0
+        container_name: arrowhead-device-qos-evaluator-db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSW}
+            MYSQL_USER: ah-operator
+            MYSQL_PASSWORD: ${DB_AH_OPERATOR_PSW}
+        volumes:
+            - arrowhead_device_qos_evaluator_db_volume:/var/lib/mysql
+        ports:
+            - "7472:3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 4s
+            retries: 5
+
+    device-qos-evaluator:
+        image: aitiaiiot/arrowhead-device-qos-evaluator:5.2.0
+        container_name: arrowhead-device-qos-evaluator
+        restart: unless-stopped
+        depends_on:
+            device-qos-evaluator-db:
+                condition: service_healthy
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://device-qos-evaluator-db:3306/ah_device_qos_evaluator?serverTimezone=UTC
+            DOMAIN_NAME: ${DOMAIN_NAME}
+            SERVICE_REGISTRY_ADDRESS: ${SERVICE_REGISTRY_ADDRESS}
+            SERVICE_REGISTRY_PORT: ${SERVICE_REGISTRY_PORT}
+        volumes:
+            - ${SYSTEM_SETUP_DIR}/config:/app/config
+        ports:
+            - "8472:8472"
+            
+volumes:
+    arrowhead_device_qos_evaluator_db_volume:
 ```
