@@ -23,6 +23,7 @@ about: "Use this checklist for tracking a new Arrowhead FW release"
 - [ ] Make sure that every system configuration file contains the default config
 - [ ] Update the known issues in the documentation site if any has been fixed in the actual release
 - [ ] Update the repo list in the Code Contribution page in case of any new repo
+- [ ] Update the repo list in the Bug Report page in case of any new repo
 
 ## Release
 - [ ] Make sure that every contribution planned to the actual release have been merged to the developemnt branches in every repo
@@ -34,6 +35,7 @@ about: "Use this checklist for tracking a new Arrowhead FW release"
 - [ ] Create a download section for the actual release on the documentation site
 - [ ] Release and publish the new version of the documentation site
 - [ ] Build and publish new docker images with the version number of the actual release
+- [ ] Write overviews and add category tags in DockerHUB for the new systems
 - [ ] Update the [Eclipse Fundation Project Site](https://projects.eclipse.org/projects/iot.arrowhead) release plan with the links to the changelog on the documentation site and the to the release download section
 - [ ] Schedule a review with EMO in case of a major release, or if a review hasn’t been done for a year (dash-license tool with automatic issue creation has to be executed too)
 
