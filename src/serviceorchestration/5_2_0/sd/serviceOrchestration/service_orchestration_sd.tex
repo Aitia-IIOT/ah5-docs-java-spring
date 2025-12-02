@@ -223,7 +223,7 @@ exclusivityDuration & \pref{Number} & no & The interval the service wanted to be
 \end{tabularx}
 \end{table}
 
-\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceRequirement}, \texttt{orchestrationFlags} and \texttt{exclusivityDuration} fields. 
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceRequirement} and \texttt{orchestrationFlags} fields. If other fields are specified, their value will not be considered and the ignored fields will appear in a warning message.
 
 \clearpage
 
@@ -246,7 +246,7 @@ preferredProviders & \pref{List}$<$\pref{SystemName}$>$ & no & Provider system n
 \end{tabularx}
 \end{table}
 
-\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceDefinition} and \texttt{preferredProviders} fields. 
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceDefinition} and \texttt{preferredProviders} fields. If other fields are specified, their value will not be considered and the ignored fields will appear in a warning message.
 
 \msubsection{struct}{MetadataRequirements}
 
@@ -285,7 +285,7 @@ Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process.
 
     If \texttt{false}, but exclusivity duration is specified and there are matching services with exclusivity allowed, then orchestration process considers only those service instances that allows exclusivity. Otherwise, service instances without exclusivity are considered.
 
-    Supporting strategies: \textit{simple-store}, \textit{flexible-store}, \textit{dynamic}
+    Supporting strategies: \textit{flexible-store}, \textit{dynamic}
     
     \item \texttt{ALLOW\_INTERCLOUD}:
 
@@ -312,6 +312,8 @@ Specific \pdef{String}:\pdef{Boolean} pair to control the orchestration process.
      Supporting strategies: \textit{flexible-store}, \textit{dynamic}
     
 \end{itemize}
+
+\textbf{\textit{Note}}: in case of \textit{simple-store} strategy, not supported flags will not be considered and the ignored flags will appear in a warning message.
 
 \msubsection{struct}{QoSRequirement}
 
@@ -352,7 +354,7 @@ authorizationTokens & \hyperref[sec:model:AuthorizationTokenMap]{AuthorizationTo
 \end{tabularx}
 \end{table}
 
-\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceInctanceId} and \texttt{exclusiveUntil} fields. 
+\textbf{\textit{Note}}: \textit{simple-store} strategy supports only to provide the \texttt{serviceInctanceId, providerName, \allowbreak serviceDefinition, cloudIdentifier} and \texttt{version} fields.
 
 \msubsection{struct}{Metadata}
 
