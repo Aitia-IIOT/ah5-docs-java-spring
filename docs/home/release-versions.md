@@ -1,5 +1,21 @@
 # Release Versions
 
+## :material-tag: 5.2.0
+
+:material-calendar: 02/12/2025 <br />
+:material-note-text: [CL-5.2.0](../general/changelogs/cl520.md)
+
+| System | Changelog | Known issues |
+| ------ | --------- | ------------ |
+| ServiceRegistry Core System | [CL-5.2.0:material-note-text:](../general/changelogs/cl520.md#arrowhead-serviceregistry) | - |
+| DynamicServiceOrchestration Core System | [CL-5.2.0:material-note-text:](../general/changelogs/cl520.md#arrowhead-serviceorchestration-dynamic) | - |
+| SimpleStoreServiceOrchestration Core System | [CL-5.2.0:material-note-text:](../general/changelogs/cl520.md#arrowhead-serviceorchestration-simple) | - |
+| ConsumerAuthorization Core System | [CL-5.2.0:material-note-text:](../general/changelogs/cl520.md#arrowhead-consumer-authorization) | - |
+| Authentication Core System | [CL-5.2.0:material-note-text:](../general/changelogs/cl520.md#arrowhead-authentication) | - |
+| Blacklist Support System | - | - |
+| TranslationManager Support System | - | - |
+| DeviceQoSEvaluator Support System | [CL-5.2.0:material-note-text:](../general/changelogs/cl520.md#arrowhead-device-qos-evaluator) | - |
+
 ## :material-tag: 5.1.0
 
 :material-calendar: 17/10/2025 <br />

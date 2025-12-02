@@ -111,7 +111,7 @@
 
 :fontawesome-solid-circle-exclamation: In v4, the Orchestrator Core Systems supported three orchestration strategies: `store`, `felxible-store` and `dynamic`. In v5, these startegies have been implemented as individual Core Systems.
 
-:fontawesome-solid-gears: In case you maintained a Local Cloud with `store` orchestration, now to achive the same, deploy the [SimpleStoreServiceOrchestration Core System](../core_systems/service_orchestration_simple_store.md). _**[not released yet]**_
+:fontawesome-solid-gears: In case you maintained a Local Cloud with `store` orchestration, now to achive the same, deploy the [SimpleStoreServiceOrchestration Core System](../core_systems/service_orchestration_simple_store.md).
 
 :fontawesome-solid-gears: In case you maintained a Local Cloud with `flexible-store` orchestration, now to achive the same, deploy the [FlexibleStoreServiceOrchestration Core System](../core_systems/service_orchestration_flexible_store.md).  _**[not released yet]**_
 
