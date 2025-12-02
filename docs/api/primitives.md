@@ -89,7 +89,7 @@ The direction of a sorting operation. Possible values are the **String** represe
 
 ## Double
 
-Decimal number with double-precision floating-point representation, used for values requiring fractional parts or
+Decimal number with double-precision floating-point representation, used for values requiring fractional parts.
 
 ## EncryptionAlgorithmName 
 

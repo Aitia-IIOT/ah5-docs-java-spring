@@ -1,6 +1,6 @@
 # DeviceQoSEvaluator
 
-This Support System has the purpose of  collecting and calculating Key Performance Indicators (KPIs) from the devices operating within a Local Cloud. Based on the calculated KPIs this system can assist in finding the best service provider system(s) to fulfill specific requirements.
+This Support System has the purpose of collecting and calculating Key Performance Indicators (KPIs) from the devices operating within a Local Cloud. Based on the calculated KPIs this system can assist in finding the best service provider system(s) to fulfill specific requirements.
 
 Learn more: <br />
 :material-file-document: [Abstract System Description (SysD)](../assets/sysd/5_2_0/DeviceQoSEvaluator_sysd.pdf)
@@ -105,7 +105,7 @@ Augmented measurement groups and types are uniquely identified by hierarchical, 
 
 Performing augmented measurements requires two thing:
 
-- Installing a device agent on the hosting devices (hardwares, virtual machines or contaniers).
+- Installing a device agent on the hosting devices (hardwares, virtual machines or containers).
 - Specifying the supported measurements on system level by using system metadata.
 
 **Device Agent**
