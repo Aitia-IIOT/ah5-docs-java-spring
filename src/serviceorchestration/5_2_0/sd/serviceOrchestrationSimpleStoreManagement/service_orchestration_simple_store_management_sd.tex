@@ -49,8 +49,8 @@
 \begin{document}
 
 %% Arrowhead Document Properties
-\ArrowheadTitle{serviceOrchestrationStoreManagement} % XXX = ServiceName 
-\ArrowheadServiceID{serviceOrchestrationStoreManagement} % ID name of service
+\ArrowheadTitle{serviceOrchestrationSimpleStoreManagement} % XXX = ServiceName 
+\ArrowheadServiceID{serviceOrchestrationSimpleStoreManagement} % ID name of service
 \ArrowheadType{Service Description}
 \ArrowheadTypeShort{SD}
 \ArrowheadVersion{5.2.0} % Arrowhead version X.Y.Z, e..g. 4.4.1
@@ -82,7 +82,7 @@
 
   % Front Page Abstract
   \begin{abstract}
-    This document provides service description for the \textbf{serviceOrchestrationStoreManagement} service. 
+    This document provides service description for the \textbf{serviceOrchestrationSimpleStoreManagement} service. 
   \end{abstract}
 
   \vspace*{1cm}
@@ -106,10 +106,10 @@
 
 \section{Overview}
 \label{sec:overview}
-This document describes the \textbf{serviceOrchestrationStoreManagement} service, which enables systems with administrative rights to manage the peer-to-peer orchestration rules within an Eclipse Arrowhead Local Cloud (LC). These rules associate consumer systems to service instances and can be used during orchestration process in case of simple-store strategy.
+This document describes the \textbf{serviceOrchestrationSimpleStoreManagement} service, which enables systems with administrative rights to manage the peer-to-peer orchestration rules within an Eclipse Arrowhead Local Cloud (LC). These rules associate consumer systems to service instances and can be used during orchestration process in case of simple-store strategy.
 
 
-The \textbf{serviceOrchestrationStoreManagement} service contains the following operations:
+The \textbf{serviceOrchestrationSimpleStoreManagement} service contains the following operations:
 
 \begin{itemize}
     \item \textit{query} lists the stored rules that match the filtering requirements;
@@ -141,7 +141,7 @@ The service is only available for operators, dedicated Core/Support systems and 
 \section{Service Operations}
 \label{sec:functions}
 
-This section describes the abstract signatures of each operations of the service. The \textbf{serviceOrchestrationStoreManagement} service is used to perform \textit{query, create, modify-priorities} and \textit{remove} operations on orchestration rules.
+This section describes the abstract signatures of each operations of the service. The \textbf{serviceOrchestrationSimpleStoreManagement} service is used to perform \textit{query, create, modify-priorities} and \textit{remove} operations on orchestration rules.
 In particular, each subsection names an operation, an input type and one or two output types (unsuccessful operations can return different structure), in that order.
 The input type is named inside parentheses, while the output type is preceded by a colon. If the operation has two output types, they are separated by a slash.
 Input and output types are only denoted when accepted or returned, respectively, by the operation in question. All abstract data types named in this section are defined in Section 3.
@@ -176,7 +176,7 @@ Operation \textit{remove} requires the rule identifiers and removes their associ
 \section{Information Model}
 \label{sec:model}
 
-Here, all data objects that can be part of the \textbf{serviceOrchestration} service are listed and must be respected by the hosting System.
+Here, all data objects that can be part of the \textbf{serviceOrchestrationSimpleStoreManagement} service are listed and must be respected by the hosting System.
 Note that each subsection, which describes one type of object, begins with the \textit{struct} keyword, which is used to denote a collection of named fields, each with its own data type.
 As a complement to the explicitly defined types in this section, there is also a list of implicit primitive types in Section \ref{sec:model:primitives}, which are used to represent things like hashes and identifiers.
 

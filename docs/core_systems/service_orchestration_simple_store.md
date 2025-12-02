@@ -51,12 +51,12 @@ Learn more: <br />
 
 -----
 
-### serviceOrchestrationStoreManagement
+### serviceOrchestrationSimpleStoreManagement
 
 The purpose of the service is to manage the peer-to-peer orchestration rules. These rules associate consumer systems to service instances and can be used during orchestration process in case of simple-store strategy.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/service-orchestration-store-management_sd.pdf) <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/service-orchestration-simple-store-management_sd.pdf) <br />
 
 -----
 
