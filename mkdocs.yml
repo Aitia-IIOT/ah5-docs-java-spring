@@ -24,9 +24,9 @@ nav:
     - Authentication: core_systems/authentication.md
   - Support Systems: 
     - Blacklist: support_systems/blacklist.md
+    - DeviceQoSEvaluator: support_systems/device_qos_evaluator.md
     - TranslationManager: support_systems/translation_manager.md
     - Configuration: support_systems/configuration.md
-    - QoSEvaluator: support_systems/qos_evaluator.md
   - API:
     - Communication Profiles:
       - Overview: api/communication-profiles/communication-profiles-overview.md
@@ -87,6 +87,13 @@ nav:
         - MQTT:
           - blacklistDiscovery: api/blacklist/blacklistDiscovery-generic-mqtt.md
           - blacklistManagement: api/blacklist/blacklistManagement-generic-mqtt.md
+      - DeviceQoSEvaluator:
+        - HTTP:
+          - qualityEvaluation: api/deviceqosevaluator/quality-evaluation-generic-http_device.md
+          - deviceQualiyDataManagement: api/deviceqosevaluator/device-quality-data-management-generic-http.md
+        - MQTT:
+          - qualityEvaluation: api/deviceqosevaluator/quality-evaluation-generic-mqtt_device.md
+          - deviceQualiyDataManagement: api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md
       - TranslationManager:
         - HTTP:
             - translationBridge: api/translationmanager/translation-bridge-generic-http.md
@@ -96,7 +103,6 @@ nav:
             - translationBridge: api/translationmanager/translation-bridge-generic-mqtt.md
             - translationBridgeManagement: api/translationmanager/translation-bridge-management-generic-mqtt.md
             - translationReport: api/translationmanager/translation-report-generic-mqtt.md
-
       - Add-on Services:
           - HTTP:
             - dataModelTranslation: api/add-on/dataModelTranslation-generic-http.md
@@ -188,7 +194,16 @@ nav:
       - MQTTRequestTemplate: api/data-models/mqtt-request-template.md
       - MQTTResponseTemplate: api/data-models/mqtt-response-template.md
       - PageRequest: api/data-models/page-request.md
+      - PropertyListMap: api/data-models/property-list-map.md
       - PropertyMap: api/data-models/property-map.md
+      - QoSDeviceDataEvaluationRequest: api/data-models/qos-device-data-evaluation-request.md
+      - QoSDeviceStatQueryRequest: api/data-models/qos-device-stat-query-request.md
+      - QoSDeviceStatQueryResponse: api/data-models/qos-device-stat-query-response.md
+      - QoSDeviceStatRecord: api/data-models/qos-device-stat-record.md
+      - QoSEvaluationFilterResponse: api/data-models/qos-evaluation-filter-response.md
+      - QoSEvaluationRequest: api/data-models/qos-evaluation-request.md
+      - QoSEvaluationSortResponse: api/data-models/qos-evaluation-sort-response.md
+      - QoSRequirement: api/data-models/qos-requirement.md
       - ScopedPoliciesDescriptor: api/data-models/scoped-policies-descriptor.md
       - ScopedPoliciesRequest: api/data-models/scoped-policies-request.md
       - ServiceCreateListRequest: api/data-models/service-create-list-request.md

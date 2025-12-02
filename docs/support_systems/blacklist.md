@@ -19,6 +19,14 @@ Learn more: <br />
 :material-api: [generic_mqtt (IDD)](../api/blacklist/blacklistDiscovery-generic-mqtt.md) | [generic_mqtts (IDD)](../api/blacklist/blacklistDiscovery-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0
 
+Service metadata: <br />
+
+```
+{
+    "unrestrictedDiscovery": true
+}
+```
+
 **lookup**
 
 This service operation returns the blacklist entries that are in force and apply to the requester. Note that _lookup_ is enabled even if the requester is blacklisted.

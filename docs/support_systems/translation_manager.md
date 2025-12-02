@@ -1,4 +1,4 @@
-# Translation Manager
+# TranslationManager
 
 This Support system can discover whether a consumer can consume possible providers' service operation even if there is no common interface between them or are using different data models. If an appropriate provider is selected, the Support System can build a translation bridge between the consumer and the provider using an [independent interface translator](../tools_assets/translation/translation_providers.md#interface-translation-providers) and optionally one or two [data model translators](../tools_assets/translation/translation_providers.md#data-model-translation-providers). The Translation Manager is also storing information about the translation bridges.
 
@@ -49,6 +49,14 @@ Learn more: <br />
 :material-api: [generic_http (IDD)](../api/translationmanager/translation-report-generic-http.md) | [generic_https (IDD)](../api/translationmanager/translation-report-generic-http.md)<br />
 :material-api: [generic_mqtt (IDD)](../api/translationmanager/translation-report-generic-mqtt.md) | [generic_mqtts (IDD)](../api/translationmanager/translation-report-generic-mqtt.md)<br />
 :material-tag: since: v5.1.0
+
+Service metadata: <br />
+
+```
+{
+    "unrestrictedDiscovery": true
+}
+```
 
 **report**
 

@@ -18,6 +18,14 @@ Learn more: <br />
 :material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-generic-mqtt.md)<br />
 :material-tag: since: v5.0.0 
 
+Service metadata: <br />
+
+```
+{
+    "unrestrictedDiscovery": true
+}
+```
+
 **grant**
 
 This service operation enables a provider to grant access to various consumers to its service. It can also be used by a publisher to grant access to subscribers to its event with a specific type.
@@ -55,6 +63,14 @@ Learn more: <br />
 :material-api: [generic_http (IDD)](../api/consumerauthorization/authorization-token-generic-http.md) | [generic_https (IDD)](../api/consumerauthorization/authorization-token-generic-http.md)<br />
 :material-api: [generic_mqtt (IDD)](../api/consumerauthorization/authorization-token-generic-mqtt.md) | [generic_mqtts (IDD)](../api/consumerauthorization/authorization-token-generic-mqtt.md)<br />
 :material-tag: since: v5.0.0 
+
+Service metadata: <br />
+
+```
+{
+    "unrestrictedDiscovery": true
+}
+```
 
 **generate**
 
