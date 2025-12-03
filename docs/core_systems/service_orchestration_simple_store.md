@@ -81,6 +81,37 @@ The purpose of the service is to handle the push orchestration related data and 
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-orchestration-push-management_sd.pdf) <br />
+:material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md) <br />
+:material-tag: since: v5.0.0 
+
+**subscribe**
+
+This service operation creates subscriptions in bulk for other consumer systems that can be triggered anytime to perform the orchestration process and push newly orchestrated matching service instances to the subscribed consumers.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md#subscribe) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md#subscribe)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md#subscribe) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md#subscribe)
+
+**unsubscribe**
+
+This service operation removes subscriptions in bulk.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md#unsubscribe) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md#unsubscribe)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md#unsubscribe) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md#unsubscribe)
+
+**trigger**
+
+This service operation initiates service orchestration processes based on consumer system names, subscription identifiers or a creator system name.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md#trigger) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md#trigger)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md#trigger) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md#trigger)
+
+**query**
+
+This service operation lists the existing subscriptions that match the filtering requirements.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md#query) | [generic_https](../api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md#query)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md#query) | [generic_mqtts](../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md#query)
 
 -----
 

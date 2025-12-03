@@ -76,8 +76,10 @@ nav:
       - SimpleStoreServiceOrchestration:
         - HTTP:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_simple.md
+          - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md
         - MQTT:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_simple.md
+          - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
