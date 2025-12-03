@@ -13,6 +13,39 @@ The purpose of this service is to get matching service instances. The service is
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/service-orchestration_sd.pdf) <br />
+:material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-generic-http_simple.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-generic-http_simple.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-generic-mqtt_simple.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-generic-mqtt_simple.md) <br />
+:material-tag: since: v5.0.0 
+
+Service metadata: <br />
+
+```
+{
+    "orchestrationStrategy": "simpleStore",
+    "unrestrictedDiscovery": true
+}
+```
+
+**pull**
+
+This service operation performs the orchestration process and returns the matching service instances.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_simple.md#pull) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_simple.md#pull)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-generic-mqtt_simple.md#pull) | [generic_mqtts](../api/serviceorchestration/service-orchestration-generic-mqtt_simple.md#pull)
+
+**subscribe**
+
+This service operation creates a subscription that can be triggered anytime to perform the orchestration process and push the matching service instances for the subscriber.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_simple.md#subscribe) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_simple.md#subscribe)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-generic-mqtt_simple.md#subscribe) | [generic_mqtts](../api/serviceorchestration/service-orchestration-generic-mqtt_simple.md#subscribe)
+
+**unsubscribe**
+
+This service operation removes a subscription.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-generic-http_simple.md#unsubscribe) | [generic_https](../api/serviceorchestration/service-orchestration-generic-http_simple.md#unsubscribe)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-generic-mqtt_simple.md#unsubscribe) | [generic_mqtts](../api/serviceorchestration/service-orchestration-generic-mqtt_simple.md#unsubscribe)
 
 -----
 
