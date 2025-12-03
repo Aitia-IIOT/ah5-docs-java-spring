@@ -154,16 +154,16 @@ The purpose of the service is to gather information about the performed orchestr
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_0_0/service-orchestration-history-management_sd.pdf) <br />
-:material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md) <br />
-:material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md) <br />
+:material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-http.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-http.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt.md) <br />
 :material-tag: since: v5.0.0 
 
 **query**
 
 This service operation lists the existing orchestration job records that match the filtering requirements.
 
-:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md#query) | [generic_https](../api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md#query)<br />
-:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md#query) | [generic_mqtts](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md#query)
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-history-management-generic-http.md#query) | [generic_https](../api/serviceorchestration/service-orchestration-history-management-generic-http.md#query)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt.md#query) | [generic_mqtts](../api/serviceorchestration/service-orchestration-history-management-generic-mqtt.md#query)
 
 ## Configuration
 

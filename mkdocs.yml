@@ -67,19 +67,21 @@ nav:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_dynamic.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-http_dynamic.md
           - serviceOrchestrationLockManagement: api/serviceorchestration/service-orchestration-lock-management-generic-http_dynamic.md
-          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-http_dynamic.md
+          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-http.md
         - MQTT:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_dynamic.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_dynamic.md
           - serviceOrchestrationLockManagement: api/serviceorchestration/service-orchestration-lock-management-generic-mqtt_dynamic.md
-          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-mqtt_dynamic.md
+          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-mqtt.md
       - SimpleStoreServiceOrchestration:
         - HTTP:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_simple.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md
+          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-http.md
         - MQTT:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_simple.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md
+          - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-mqtt.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
