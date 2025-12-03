@@ -2626,6 +2626,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationPushManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2684,6 +2705,27 @@
   
   <span class="md-ellipsis">
     serviceOrchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationPushManagement
   </span>
   
 
@@ -8355,7 +8397,26 @@
 <h3 id="serviceorchestrationpushmanagement">serviceOrchestrationPushManagement</h3>
 <p>The purpose of the service is to handle the push orchestration related data and activities centrally and in bulk. The service is offered for administrative Support systems.</p>
 <p>Learn more: <br />
-<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h5.5L13 3.5zM6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2zm3-4v-2H6v2z"/></svg></span> <a href="../../assets/sd/5_0_0/service-orchestration-push-management_sd.pdf">Abstract Service Description (SD)</a> <br /></p>
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h5.5L13 3.5zM6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 16v-2H6v2zm3-4v-2H6v2z"/></svg></span> <a href="../../assets/sd/5_0_0/service-orchestration-push-management_sd.pdf">Abstract Service Description (SD)</a> <br />
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7H5a2 2 0 0 0-2 2v8h2v-4h2v4h2V9a2 2 0 0 0-2-2m0 4H5V9h2m7-2h-4v10h2v-4h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2m0 4h-2V9h2m6 0v6h1v2h-4v-2h1V9h-1V7h4v2Z"/></svg></span> <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/">generic_http (IDD)</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/">generic_https (IDD)</a> <br />
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 7H5a2 2 0 0 0-2 2v8h2v-4h2v4h2V9a2 2 0 0 0-2-2m0 4H5V9h2m7-2h-4v10h2v-4h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2m0 4h-2V9h2m6 0v6h1v2h-4v-2h1V9h-1V7h4v2Z"/></svg></span> <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/">generic_mqtt (IDD)</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/">generic_mqtts (IDD)</a> <br />
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.5 7A1.5 1.5 0 0 1 4 5.5 1.5 1.5 0 0 1 5.5 4 1.5 1.5 0 0 1 7 5.5 1.5 1.5 0 0 1 5.5 7m15.91 4.58-9-9C12.05 2.22 11.55 2 11 2H4c-1.11 0-2 .89-2 2v7c0 .55.22 1.05.59 1.41l8.99 9c.37.36.87.59 1.42.59s1.05-.23 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.56-.23-1.06-.59-1.42"/></svg></span> since: v5.0.0 </p>
+<p><strong>subscribe</strong></p>
+<p>This service operation creates subscriptions in bulk for other consumer systems that can be triggered anytime to perform the orchestration process and push newly orchestrated matching service instances to the subscribed consumers.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/#subscribe">generic_http</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/#subscribe">generic_https</a><br />
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/#subscribe">generic_mqtt</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/#subscribe">generic_mqtts</a></p>
+<p><strong>unsubscribe</strong></p>
+<p>This service operation removes subscriptions in bulk.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/#unsubscribe">generic_http</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/#unsubscribe">generic_https</a><br />
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/#unsubscribe">generic_mqtt</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/#unsubscribe">generic_mqtts</a></p>
+<p><strong>trigger</strong></p>
+<p>This service operation initiates service orchestration processes based on consumer system names, subscription identifiers or a creator system name.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/#trigger">generic_http</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/#trigger">generic_https</a><br />
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/#trigger">generic_mqtt</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/#trigger">generic_mqtts</a></p>
+<p><strong>query</strong></p>
+<p>This service operation lists the existing subscriptions that match the filtering requirements.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/#query">generic_http</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-http_simple/#query">generic_https</a><br />
+<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/#query">generic_mqtt</a> | <a href="../../api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple/#query">generic_mqtts</a></p>
 <hr />
 <h3 id="serviceorchestrationsimplestoremanagement">serviceOrchestrationSimpleStoreManagement</h3>
 <p>The purpose of the service is to manage the peer-to-peer orchestration rules. These rules associate consumer systems to service instances and can be used during orchestration process in case of simple-store strategy.</p>
