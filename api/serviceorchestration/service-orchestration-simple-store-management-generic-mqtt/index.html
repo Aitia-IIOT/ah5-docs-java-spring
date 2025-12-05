@@ -1,0 +1,8784 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../service-orchestration-history-management-generic-mqtt/">
+      
+      
+        <link rel="next" href="../../authentication/identity-generic-http/">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>serviceOrchestrationSimpleStoreManagement - Arrowhead 5 | java-spring</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#serviceorchestrationsimplestoremanagement-idd" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Arrowhead 5 | java-spring" class="md-header__button md-logo" aria-label="Arrowhead 5 | java-spring" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arrowhead 5 | java-spring
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              serviceOrchestrationSimpleStoreManagement
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/eclipse-arrowhead" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eclipse-arrowhead
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../home/welcome/" class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../core_systems/service_registry/" class="md-tabs__link">
+          
+  
+  Core Systems
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../support_systems/blacklist/" class="md-tabs__link">
+          
+  
+  Support Systems
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../communication-profiles/communication-profiles-overview/" class="md-tabs__link">
+          
+  
+  API
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../help/definitions/" class="md-tabs__link">
+          
+  
+  Help
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../tools_assets/client_libraries/" class="md-tabs__link">
+          
+  
+  Tools & Assets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../contribute/bug-report/" class="md-tabs__link">
+          
+  
+  Contribute
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../downloads/releases/" class="md-tabs__link">
+          
+  
+  Downloads
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Arrowhead 5 | java-spring" class="md-nav__button md-logo" aria-label="Arrowhead 5 | java-spring" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Arrowhead 5 | java-spring
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/eclipse-arrowhead" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eclipse-arrowhead
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/welcome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_1" id="__nav_1_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Docker
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/getting_started/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/getting_started/docker/docker_aggregated/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aggregated Compose
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/getting_started/docker/docker_coupled/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Coupled Compose
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/getting_started/docker/docker_dispersed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispersed Compose
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/getting_started/docker/about_compose_file/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Compose File
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/getting_started/download_executables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Download Excutables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/getting_started/compile_code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compile Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Implementation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/release-versions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Versions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Core Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Core Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../core_systems/service_registry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceRegistry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../core_systems/authorization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ConsumerAuthorization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../core_systems/service_orchestration_dynamic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DynamicServiceOrchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../core_systems/service_orchestration_flexible_store/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FlexibleStoreServiceOrchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../core_systems/service_orchestration_simple_store/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SimpleStoreServiceOrchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../core_systems/authentication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Support Systems
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Support Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../support_systems/blacklist/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blacklist
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../support_systems/device_qos_evaluator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceQoSEvaluator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../support_systems/translation_manager/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationManager
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../support_systems/configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    API
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Communication Profiles
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Communication Profiles
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../communication-profiles/communication-profiles-overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../communication-profiles/generic-http-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generic HTTP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../communication-profiles/generic-https-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generic HTTPS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../communication-profiles/generic-mqtt-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generic MQTT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../communication-profiles/generic-mqtts-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generic MQTTS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Interface Descriptions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Interface Descriptions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_1_1" id="__nav_4_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/general-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    generalManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_1_2" id="__nav_4_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/general-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    generalManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ServiceRegistry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            ServiceRegistry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2_1" id="__nav_4_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serviceregistry/device-discovery-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    deviceDiscovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serviceregistry/system-discovery-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    systemDiscovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serviceregistry/service-discovery-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceDiscovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serviceregistry/service-registry-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceRegistryManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2_2" id="__nav_4_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serviceregistry/device-discovery-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    deviceDiscovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serviceregistry/system-discovery-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    systemDiscovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serviceregistry/service-discovery-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceDiscovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../serviceregistry/service-registry-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceRegistryManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3" id="__nav_4_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ConsumerAuthorization
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            ConsumerAuthorization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3_1" id="__nav_4_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../consumerauthorization/authorization-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authorization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../consumerauthorization/authorization-token-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authorizationToken
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../consumerauthorization/authorization-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authorizationManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../consumerauthorization/authorization-token-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authorizationTokenManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3_2" id="__nav_4_2_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../consumerauthorization/authorization-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authorization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../consumerauthorization/authorization-token-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authorizationToken
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../consumerauthorization/authorization-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authorizationManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../consumerauthorization/authorization-token-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    authorizationTokenManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_4" id="__nav_4_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DynamicServiceOrchestration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            DynamicServiceOrchestration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_4_1" id="__nav_4_2_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-generic-http_dynamic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-push-management-generic-http_dynamic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationPushManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-lock-management-generic-http_dynamic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationLockManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-history-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationHistoryManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_4_2" id="__nav_4_2_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-generic-mqtt_dynamic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-push-management-generic-mqtt_dynamic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationPushManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-lock-management-generic-mqtt_dynamic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationLockManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-history-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationHistoryManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_5" id="__nav_4_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SimpleStoreServiceOrchestration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            SimpleStoreServiceOrchestration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_5_1" id="__nav_4_2_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-generic-http_simple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-push-management-generic-http_simple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationPushManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-history-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationHistoryManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-simple-store-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationSimpleStoreManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_5_2" id="__nav_4_2_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-generic-mqtt_simple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-push-management-generic-mqtt_simple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationPushManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-orchestration-history-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationHistoryManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationSimpleStoreManagement
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    serviceOrchestrationSimpleStoreManagement
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface Description
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface Description">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      query
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      create
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify-priorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      modify-priorities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      remove
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_6" id="__nav_4_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Authentication
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Authentication
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_6_1" id="__nav_4_2_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication/identity-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    identity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication/identity-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    identityManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_6_2" id="__nav_4_2_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication/identity-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    identity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication/identity-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    identityManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_7" id="__nav_4_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Blacklist
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Blacklist
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_7_1" id="__nav_4_2_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blacklist/blacklistDiscovery-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    blacklistDiscovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blacklist/blacklistManagement-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    blacklistManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_7_2" id="__nav_4_2_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blacklist/blacklistDiscovery-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    blacklistDiscovery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blacklist/blacklistManagement-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    blacklistManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_8" id="__nav_4_2_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DeviceQoSEvaluator
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            DeviceQoSEvaluator
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_8_1" id="__nav_4_2_8_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deviceqosevaluator/quality-evaluation-generic-http_device/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    qualityEvaluation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deviceqosevaluator/device-quality-data-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    deviceQualiyDataManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_8_2" id="__nav_4_2_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deviceqosevaluator/quality-evaluation-generic-mqtt_device/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    qualityEvaluation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deviceqosevaluator/device-quality-data-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    deviceQualiyDataManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_9" id="__nav_4_2_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    TranslationManager
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            TranslationManager
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_9_1" id="__nav_4_2_9_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../translationmanager/translation-bridge-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    translationBridge
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../translationmanager/translation-bridge-management-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    translationBridgeManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../translationmanager/translation-report-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    translationReport
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_9_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_9_2" id="__nav_4_2_9_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MQTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            MQTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../translationmanager/translation-bridge-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    translationBridge
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../translationmanager/translation-bridge-management-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    translationBridgeManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../translationmanager/translation-report-generic-mqtt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    translationReport
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_10" id="__nav_4_2_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Add-on Services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            Add-on Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_10_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_10_1" id="__nav_4_2_10_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTTP
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_10_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_10_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTTP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../add-on/dataModelTranslation-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    dataModelTranslation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../add-on/interfaceBridgeManagement-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    interfaceBridgeManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication_policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication Policy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data Models
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Data Models
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/address-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AddressDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-encryption-key-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationEncryptionKeyListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-encryption-key-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationEncryptionKeyListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-encryption-key-registration-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationEncryptionKeyRegistrationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-encryption-key-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationEncryptionKeyReqest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-encryption-key-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationEncryptionKeyResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-grant-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationGrantRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-lookup-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationLookupRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-mgmt-grant-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationMgmtGrantListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-mgmt-grant-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationMgmtGrantRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-mgmt-verify-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationMgmtVerifyListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-mgmt-verify-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationMgmtVerifyListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-mgmt-verify-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationMgmtVerifyRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-mgmt-verify-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationMgmtVerifyResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-policy-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationPolicyDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-policy-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationPolicyListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-policy-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationPolicyRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-policy-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationPolicyResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-generation-list-mgmt-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenGenerationListMgmtRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-generation-mgmt-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenGenerationMgmtRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-generation-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenGenerationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-list-mgmt-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenListMgmtResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenMap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-mgmt-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenMgmtResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-token-verify-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationTokenVerifyResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/authorization-verify-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AuthorizationVerifyRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/blacklist-create-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BlacklistCreateListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/blacklist-create-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BlacklistCreateRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/blacklist-entry-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BlacklistEntryListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/blacklist-entry-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BlacklistEntryResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/blacklist-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BlacklistQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/config-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ConfigMap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/config-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ConfigResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/data-model-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataModelMap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/data-model-translation-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataModelTranslationDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/data-model-translation-init-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataModelTranslationInitRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/data-translation-result-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataTranslationResultResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-lookup-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceLookupRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-lookup-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceLookupResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-lookup-result/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceLookupResult
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-registration-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceRegistrationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/device-registration-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DeviceRegistrationResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/error-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ErrorResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Identity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-change-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityChangeRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-list-create-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityListCreateRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-list-update-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityListUpdateRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-login-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityLoginResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-mgmt-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityMgmtRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-result/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityResult
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-session-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentitySessionListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-session-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentitySessionQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-session-result/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentitySessionResult
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/identity-verify-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IdentityVerifyResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/interface-template-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    InterfaceTemplateDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/interface-template-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    InterfaceTemplateListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/interface-template-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    InterfaceTemplateListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/interface-template-property-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    InterfaceTemplatePropertyDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/interface-template-property-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    InterfaceTemplatePropertyRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/interface-template-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    InterfaceTemplateQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/interface-template-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    InterfaceTemplateRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/log-entry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogEntry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/log-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/log-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/log-entry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogEntry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/log-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/log-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/metadata/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metadata
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/metadata-requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MetadataRequirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/metadata/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Metadata
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/mqtt-request-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MQTTRequestTemplate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/mqtt-response-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MQTTResponseTemplate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/page-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PageRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/property-list-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PropertyListMap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/property-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PropertyMap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/qos-device-data-evaluation-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QoSDeviceDataEvaluationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/qos-device-stat-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QoSDeviceStatQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/qos-device-stat-query-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QoSDeviceStatQueryResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/qos-device-stat-record/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QoSDeviceStatRecord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/qos-evaluation-filter-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QoSEvaluationFilterResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/qos-evaluation-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QoSEvaluationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/qos-evaluation-sort-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QoSEvaluationSortResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/qos-requirement/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QoSRequirement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/scoped-policies-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ScopedPoliciesDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/scoped-policies-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ScopedPoliciesRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-create-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceCreateListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-definition-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceDefinitionDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-definition-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceDefinitionListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-definition-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceDefinitionListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-definition-remove-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceDefinitionRemoveRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-instance-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceInstanceDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-interface-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceInterfaceDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-interface-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceInterfaceRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-lookup-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceLookupRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-lookup-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceLookupResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-lookup-result/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceLookupResult
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-flag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationFlag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-history-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationHistoryQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-history-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationHistoryResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-job-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationJobListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-job-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationJobResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-lock-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationLockListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-lock-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationLockListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-lock-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationLockQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-lock-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationLockRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-lock-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationLockResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-notify-interface/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationNotifyInterface
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-push-trigger-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationPushTriggerRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-requirement/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationRequirement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-result/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationResult
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-simple-store-create-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSimpleStoreCreateListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-simple-store-create-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSimpleStoreCreateRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-simple-store-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSimpleStoreListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-simple-store-priority-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSimpleStorePriorityMap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-simple-store-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSimpleStoreQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-simple-store-record/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSimpleStoreRecord
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-subscriber-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSubscriberListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-subscriber-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSubscriberRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-subscription-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSubscriptionListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-subscription-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSubscriptionQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-subscription-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSubscriptionRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-orchestration-subscription-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceOrchestrationSubscriptionResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-registration-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceRegistrationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-registration-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceRegistrationResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-update-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceUpdateListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/service-update-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceUpdateRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-list-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemListRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-lookup-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemLookupRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-lookup-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemLookupResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-lookup-result/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemLookupResult
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-registration-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemRegistrationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-registration-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemRegistrationResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/system-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SystemRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-abort-mgmt-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationAbortMgmtResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-abort-results/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationAbortResults
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-bridge-candidate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationBridgeCandidate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-bridge-initialization-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationBridgeInitializationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-check-targets-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationCheckTargetsRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-check-targets-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationCheckTargetsResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-data-model-translation-data-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDataModelTranslationDataDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-discovery-flag-map/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDiscoveryFlagMap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-discovery-mgmt-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDiscoveryMgmtRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-discovery-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDiscoveryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-discovery-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDiscoveryResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-discovery-service-definition-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDiscoveryServiceDefinitionDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-discovery-service-instance-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDiscoveryServiceInstanceDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-discovery-service-instance-interface-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDiscoveryServiceInstanceInterfaceDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-discovery-system-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationDiscoverySystemDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-interface-translation-data-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationInterfaceTranslationDataDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-negotiation-mgmt-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationNegotiationMgmtRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-negotiation-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationNegotiationRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-negotiation-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationNegotiationResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-negotiation-service-instance-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationNegotiationServiceInstanceDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-negotiation-service-instance-interface-descriptor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationNegotiationServiceInstanceInterfaceDescriptor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-query-list-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationQueryListResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-query-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationQueryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-query-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationQueryResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-report-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationReportRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-target-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationTargetRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-models/translation-target-response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TranslationTargetResponse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Primitives
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Help
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Help
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/definitions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Definitions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/naming-convention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Naming Convention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/service-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/certificate-profiles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Certificate Profiles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/tutorials/serviceregistry-http-demo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ServiceRegistry Demo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/tutorials/mosquitto-mqtt-broker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mosquitto MQTT Broker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/tutorials/create-certificates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create Certificates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/known-issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Known Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../help/migration-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migrate from v4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools & Assets
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Tools & Assets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools_assets/client_libraries/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Client Libraries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Translation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Translation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools_assets/translation/translation_providers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translation Providers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools_assets/translation/translation_provider_dev/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Translation Provider Dev
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Contribute
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Contribute
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contribute/bug-report/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bug Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contribute/code-contribution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Code Contribution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Downloads
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Downloads
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../downloads/releases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Releases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../downloads/test_builds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Builds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../downloads/test-certificates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Certificates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface Description
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface Description">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      query
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      create
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify-priorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      modify-priorities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      remove
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="serviceorchestrationsimplestoremanagement-idd">serviceOrchestrationSimpleStoreManagement IDD</h1>
+<p><strong>generic_mqtt &amp; generic_mqtts</strong></p>
+<h2 id="overview">Overview</h2>
+<p>This page describes the <a href="../../communication-profiles/generic-http-template/">generic_mqtt</a> and <a href="../../communication-profiles/generic-https-template/">generic_mqtts</a> service interface of serviceOrchestrationSimpleStoreManagement, which enables systems (with operator role or proper permissions) to manage orchestration rules.</p>
+<p>Hereby the <strong>Interface Design Description</strong> (IDD) is provided to the <a href="../../../assets/sd/5_2_0/service-orchestration-simple-store-management_sd.pdf">serviceOrchestrationSimpleStoreManagement – Service Description</a>. For further details about how this service is meant to be used, please consult that document.</p>
+<h2 id="interface-description">Interface Description</h2>
+<h3 id="query">query</h3>
+<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the authentication is a proper <a href="../../authentication_policy/#mqtt">identity info</a> and the payload is a <a href="../../data-models/service-orchestration-simple-store-query-request/">ServiceOrchestrationSimpleStoreQueryRequest</a>. </p>
+<pre><code>Topic: arrowhead/serviceorchestration/orchestration/management/store/query
+
+{
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;authentication&quot;: &quot;&lt;authentication-data&gt;&quot;,
+   &quot;responseTopic&quot;: &quot;&lt;response-topic&gt;&quot;,
+   &quot;qosRequirement&quot;: &lt;0|1|2&gt;,
+   &quot;payload&quot;: {
+      &quot;pagination&quot;: {
+         &quot;page&quot;: 0,
+         &quot;size&quot;: 10,
+         &quot;direction&quot;: &quot;ASC&quot;,
+         &quot;sortField&quot;: &quot;createdAt&quot;
+      },
+      &quot;ids&quot;: &quot;341f7626-bdee-4ec1-8cb9-23f88e04e374&quot;,
+      &quot;consumerNames&quot;: [
+         &quot;TestConsumerA&quot;,
+         &quot;TestConsumerB&quot;
+      ],
+      &quot;serviceDefinitions&quot;: [
+         &quot;testService&quot;
+      ],
+      &quot;serviceInstanceIds&quot;: [
+
+      ],
+      &quot;minPriority&quot;: 1,
+      &quot;maxPriority&quot;: 25,
+      &quot;createdBy&quot;: &quot;&quot;
+   }
+}
+</code></pre>
+<p>The service operation <strong>responds</strong> with an <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> JSON encoded message in which the status code is <code>200</code> if records were successfully queried. The response template payload is a <a href="../../data-models/service-orchestration-simple-store-list-response/">ServiceOrchestrationSimpleStoreListResponse</a>.</p>
+<pre><code>{
+   &quot;status&quot;: 200,
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;: &quot;Sysop&quot;,
+   &quot;payload&quot;: {
+      &quot;entries&quot;: [
+         {
+            &quot;id&quot;: &quot;0308e42e-af59-4206-8513-3414bb2dbc60&quot;,
+            &quot;consumer&quot;: &quot;TestConsumerB&quot;,
+            &quot;serviceDefinition&quot;: &quot;testService&quot;,
+            &quot;serviceInstanceId&quot;: &quot;TestProvider|testService|1.0.0&quot;,
+            &quot;priority&quot;: 2,
+            &quot;createdBy&quot;: &quot;Sysop&quot;,
+            &quot;updatedBy&quot;: &quot;Sysop&quot;,
+            &quot;createdAt&quot;: &quot;2025-11-08T12:00:00Z&quot;,
+            &quot;updatedAt&quot;: &quot;2025-11-08T15:14:00Z&quot;
+         }
+      ],
+      &quot;count&quot;: 1
+   }
+}
+</code></pre>
+<p>The <strong>error codes</strong> are <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful, <code>403</code> if the authenticated requester has no permission and <code>500</code> if an unexpected error happens. In these cases the response template payload is an <a href="../../data-models/error-response/">ErrorResponse</a> JSON.</p>
+<pre><code>{
+   &quot;status&quot;: 400,
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;: &quot;Sysop&quot;,
+   &quot;payload&quot;: {
+      &quot;errorMessage&quot;: &quot;Minimum priority should not be greater than maximum priority&quot;,
+      &quot;errorCode&quot;: 400,
+      &quot;exceptionType&quot;: &quot;INVALID_PARAMETER&quot;,
+      &quot;origin&quot;: &quot;arrowhead/serviceorchestration/orchestration/management/store/query&quot;
+   }
+}
+</code></pre>
+<h3 id="create">create</h3>
+<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the authentication is a proper <a href="../../authentication_policy/#mqtt">identity info</a> and the payload is a <a href="../../data-models/service-orchestration-simple-store-create-list-request/">ServiceOrchestrationSimpleStoreCreateListRequest</a>. </p>
+<pre><code>Topic: arrowhead/serviceorchestration/orchestration/management/store/create
+
+{
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;authentication&quot;: &quot;&lt;authentication-data&gt;&quot;,
+   &quot;responseTopic&quot;: &quot;&lt;response-topic&gt;&quot;,
+   &quot;qosRequirement&quot;: &lt;0|1|2&gt;,
+   &quot;payload&quot;: {
+      &quot;entries&quot;: [
+        {
+          &quot;consumer&quot;: &quot;TestConsumerB&quot;,
+          &quot;serviceInstanceId&quot;: &quot;TestProvider|testService|1.0.0&quot;,
+          &quot;priority&quot;: 2
+        }
+      ]
+   }
+}
+</code></pre>
+<p>The service operation <strong>responds</strong> with an <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> JSON encoded message in which the status code is <code>201</code> if records were successfully created. The response template payload is a <a href="../../data-models/service-orchestration-simple-store-list-response/">ServiceOrchestrationSimpleStoreListResponse</a>.</p>
+<pre><code>{
+   &quot;status&quot;: 201,
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;: &quot;Sysop&quot;,
+   &quot;payload&quot;: {
+      &quot;entries&quot;: [
+         {
+            &quot;id&quot;: &quot;0308e42e-af59-4206-8513-3414bb2dbc60&quot;,
+            &quot;consumer&quot;: &quot;TestConsumerB&quot;,
+            &quot;serviceDefinition&quot;: &quot;testService&quot;,
+            &quot;serviceInstanceId&quot;: &quot;TestProvider|testService|1.0.0&quot;,
+            &quot;priority&quot;: 2,
+            &quot;createdBy&quot;: &quot;Sysop&quot;,
+            &quot;updatedBy&quot;: &quot;Sysop&quot;,
+            &quot;createdAt&quot;: &quot;2025-11-08T12:00:00Z&quot;,
+            &quot;updatedAt&quot;: &quot;2025-11-08T15:14:00Z&quot;
+         }
+      ],
+      &quot;count&quot;: 1
+   }
+}
+</code></pre>
+<p>The <strong>error codes</strong> are <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful, <code>403</code> if the authenticated requester has no permission and <code>500</code> if an unexpected error happens. In these cases the response template payload is an <a href="../../data-models/error-response/">ErrorResponse</a> JSON.</p>
+<pre><code>{
+   &quot;status&quot;: 400,
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;: &quot;Sysop&quot;,
+   &quot;payload&quot;: {
+      &quot;errorMessage&quot;: &quot;Priority is missing&quot;,
+      &quot;errorCode&quot;: 400,
+      &quot;exceptionType&quot;: &quot;INVALID_PARAMETER&quot;,
+      &quot;origin&quot;: &quot;arrowhead/serviceorchestration/orchestration/management/store/create&quot;
+   }
+}
+</code></pre>
+<h3 id="modify-priorities">modify-priorities</h3>
+<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the authentication is a proper <a href="../../authentication_policy/#mqtt">identity info</a> and the payload is a <a href="../../data-models/service-orchestration-simple-store-priority-map/">ServiceOrchestrationSimpleStorePriorityMap</a>. </p>
+<pre><code>Topic: arrowhead/serviceorchestration/orchestration/management/store/modify-priorities
+
+{
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;authentication&quot;: &quot;&lt;authentication-data&gt;&quot;,
+   &quot;responseTopic&quot;: &quot;&lt;response-topic&gt;&quot;,
+   &quot;qosRequirement&quot;: &lt;0|1|2&gt;,
+   &quot;payload&quot;: {
+      &quot;0308e42e-af59-4206-8513-3414bb2dbc60&quot;: 1,
+      &quot;ace0f20b-b3aa-4935-adc7-d5dc58d4dc99&quot;: 2
+   }
+}
+</code></pre>
+<p>The service operation <strong>responds</strong> with an <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> JSON encoded message in which the status code is <code>200</code> if records were successfully modified. The response template payload is a <a href="../../data-models/service-orchestration-simple-store-list-response/">ServiceOrchestrationSimpleStoreListResponse</a>.</p>
+<pre><code>{
+   &quot;status&quot;: 200,
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;: &quot;Sysop&quot;,
+   &quot;payload&quot;: {
+      &quot;entries&quot;: [
+         {
+            &quot;id&quot;: &quot;0308e42e-af59-4206-8513-3414bb2dbc60&quot;,
+            &quot;consumer&quot;: &quot;TestConsumerB&quot;,
+            &quot;serviceDefinition&quot;: &quot;testService&quot;,
+            &quot;serviceInstanceId&quot;: &quot;TestProvider|testService|1.0.0&quot;,
+            &quot;priority&quot;: 1,
+            &quot;createdBy&quot;: &quot;Sysop&quot;,
+            &quot;updatedBy&quot;: &quot;Sysop&quot;,
+            &quot;createdAt&quot;: &quot;2025-11-08T12:00:00Z&quot;,
+            &quot;updatedAt&quot;: &quot;2025-11-08T12:00:00Z&quot;
+          },
+          {
+            &quot;id&quot;: &quot;ace0f20b-b3aa-4935-adc7-d5dc58d4dc99&quot;,
+            &quot;consumer&quot;: &quot;TestConsumerB&quot;,
+            &quot;serviceDefinition&quot;: &quot;testService&quot;,
+            &quot;serviceInstanceId&quot;: &quot;OtherProvider|testService|1.0.0&quot;,
+            &quot;priority&quot;: 2,
+            &quot;createdBy&quot;: &quot;Sysop&quot;,
+            &quot;updatedBy&quot;: &quot;Sysop&quot;,
+            &quot;createdAt&quot;: &quot;2025-11-08T12:00:00Z&quot;,
+            &quot;updatedAt&quot;: &quot;2025-11-08T12:00:00Z&quot;
+          }
+      ],
+      &quot;count&quot;: 2
+   }
+}
+</code></pre>
+<p>The <strong>error codes</strong> are <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful, <code>403</code> if the authenticated requester has no permission and <code>500</code> if an unexpected error happens. In these cases the response template payload is an <a href="../../data-models/error-response/">ErrorResponse</a> JSON.</p>
+<pre><code>{
+   &quot;status&quot;: 400,
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;: &quot;Sysop&quot;,
+   &quot;payload&quot;: {
+      &quot;errorMessage&quot;: &quot;Priority map contains null value&quot;,
+      &quot;errorCode&quot;: 400,
+      &quot;exceptionType&quot;: &quot;INVALID_PARAMETER&quot;,
+      &quot;origin&quot;: &quot;arrowhead/serviceorchestration/orchestration/management/store/modify-priorities&quot;
+   }
+}
+</code></pre>
+<h3 id="remove">remove</h3>
+<p>The service operation <strong>request</strong> requires an <a href="../../data-models/mqtt-request-template/">MQTTRequestTemplate</a> JSON encoded message in which the authentication is a proper <a href="../../authentication_policy/#mqtt">identity info</a> and the payload is a List&lt;<a href="../../primitives/#uuid">UUID</a>&gt;. It contains the identifiers of the store entries to remove.</p>
+<pre><code>Topic: arrowhead/serviceorchestration/orchestration/management/store/remove
+
+{
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;authentication&quot;: &quot;&lt;authentication-data&gt;&quot;,
+   &quot;responseTopic&quot;: &quot;&lt;response-topic&gt;&quot;,
+   &quot;qosRequirement&quot;: &lt;0|1|2&gt;,
+   &quot;payload&quot;: [
+      &quot;0308e42e-af59-4206-8513-3414bb2dbc60&quot;: 1,
+      &quot;ace0f20b-b3aa-4935-adc7-d5dc58d4dc99&quot;: 2
+   ]
+}
+</code></pre>
+<p>The service operation <strong>responds</strong> with an <a href="../../data-models/mqtt-response-template/">MQTTResponseTemplate</a> JSON encoded message in which the status code is <code>200</code> if called successfully. The response template payload is empty. </p>
+<pre><code>{
+   &quot;status&quot;: 200,
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;: &quot;Sysop&quot;,
+   &quot;payload&quot;: &quot;&quot;
+}
+</code></pre>
+<p>The <strong>error codes</strong> are <code>400</code> if the request is malformed, <code>401</code> if the requester authentication was unsuccessful, <code>403</code> if the authenticated requester has no permission and <code>500</code> if an unexpected error happens. In these cases the response template payload is an <a href="../../data-models/error-response/">ErrorResponse</a> JSON.</p>
+<pre><code>{
+   &quot;status&quot;: 400,
+   &quot;traceId&quot;: &quot;&lt;trace-id&gt;&quot;,
+   &quot;receiver&quot;: &quot;Sysop&quot;,
+   &quot;payload&quot;: {
+      &quot;errorMessage&quot;: &quot;Invalid UUID: notanid&quot;,
+      &quot;errorCode&quot;: 400,
+      &quot;exceptionType&quot;: &quot;INVALID_PARAMETER&quot;,
+      &quot;origin&quot;: &quot;arrowhead/serviceorchestration/orchestration/management/store/remove&quot;
+   }
+}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/eclipse-arrowhead" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "icons"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
