@@ -78,10 +78,12 @@ nav:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-http_simple.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-http_simple.md
           - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-http.md
+          - serviceOrchestrationSimpleStoreManagement: api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md
         - MQTT:
           - serviceOrchestration: api/serviceorchestration/service-orchestration-generic-mqtt_simple.md
           - serviceOrchestrationPushManagement: api/serviceorchestration/service-orchestration-push-management-generic-mqtt_simple.md
           - serviceOrchestrationHistoryManagement: api/serviceorchestration/service-orchestration-history-management-generic-mqtt.md
+          - serviceOrchestrationSimpleStoreManagement: api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md
       - Authentication:
         - HTTP:
           - identity: api/authentication/identity-generic-http.md
@@ -243,6 +245,12 @@ nav:
       - ServiceOrchestrationRequest: api/data-models/service-orchestration-request.md
       - ServiceOrchestrationRequirement: api/data-models/service-orchestration-requirement.md
       - ServiceOrchestrationResult: api/data-models/service-orchestration-result.md
+      - ServiceOrchestrationSimpleStoreCreateListRequest: api/data-models/service-orchestration-simple-store-create-list-request.md
+      - ServiceOrchestrationSimpleStoreCreateRequest: api/data-models/service-orchestration-simple-store-create-request.md
+      - ServiceOrchestrationSimpleStoreListResponse: api/data-models/service-orchestration-simple-store-list-response.md
+      - ServiceOrchestrationSimpleStorePriorityMap: api/data-models/service-orchestration-simple-store-priority-map.md
+      - ServiceOrchestrationSimpleStoreQueryRequest: api/data-models/service-orchestration-simple-store-query-request.md
+      - ServiceOrchestrationSimpleStoreRecord: api/data-models/service-orchestration-simple-store-record.md
       - ServiceOrchestrationSubscriberListRequest: api/data-models/service-orchestration-subscriber-list-request.md
       - ServiceOrchestrationSubscriberRequest: api/data-models/service-orchestration-subscriber-request.md
       - ServiceOrchestrationSubscriptionListResponse: api/data-models/service-orchestration-subscription-list-response.md
