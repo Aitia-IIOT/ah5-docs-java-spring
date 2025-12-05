@@ -239,8 +239,8 @@ Topic: arrowhead/serviceorchestration/orchestration/management/store/remove
    "responseTopic": "<response-topic>",
    "qosRequirement": <0|1|2>,
    "payload": [
-      "0308e42e-af59-4206-8513-3414bb2dbc60": 1,
-      "ace0f20b-b3aa-4935-adc7-d5dc58d4dc99": 2
+      "0308e42e-af59-4206-8513-3414bb2dbc60",
+      "ace0f20b-b3aa-4935-adc7-d5dc58d4dc99"
    ]
 }
 ```

@@ -121,6 +121,37 @@ The purpose of the service is to manage the peer-to-peer orchestration rules. Th
 
 Learn more: <br />
 :material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/service-orchestration-simple-store-management_sd.pdf) <br />
+:material-api: [generic_http (IDD)](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md) | [generic_https (IDD)](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md) <br />
+:material-api: [generic_mqtt (IDD)](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md) <br />
+:material-tag: since: v5.2.0 
+
+**query**
+
+This service operation lists the existing orchestration store records that match the filtering requirements.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md#query) | [generic_https](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md#query)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md#query) | [generic_mqtts](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md#query)
+
+**create**
+
+This service operation creates orchestration store rules in bulk.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md#create) | [generic_https](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md#create)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md#create) | [generic_mqtts](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md#create)
+
+**modify-priorities**
+
+This service operation modifies the priorities of the the given orchestration rules.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md#modify-priorities) | [generic_https](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md#modify-priorities)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md#modify-priorities) | [generic_mqtts](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md#modify-priorities)
+
+**remove**
+
+This service operation removes orchestration store rules in bulk.
+
+:material-arrow-right-thin: Example: [generic_http](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md#remove) | [generic_https](../api/serviceorchestration/service-orchestration-simple-store-management-generic-http.md#remove)<br />
+:material-arrow-right-thin: Example: [generic_mqtt](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md#remove) | [generic_mqtts](../api/serviceorchestration/service-orchestration-simple-store-management-generic-mqtt.md#remove)
 
 -----
 
