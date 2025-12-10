@@ -13,8 +13,8 @@ See details [here](../implementation.md).
 
 ## Compile the source code
 
-* Download or clone the source code repositories of the choosen Core/Support systems [from GitHUB](../../contribute/code-contribution.md#github-repositories).
-* Execute `mvn clean install -DskipTests` in the root folder of each repository.
+* Download or clone the source code repositories of the choosen Core/Support systems and the common library [from GitHUB](../../contribute/code-contribution.md#github-repositories).
+* Execute `mvn clean install -DskipTests` in the root folder of the common library first, and then in the root folder of each repository.
 * After the build is complete, the executable `jar` file with the appropriate `application.properites` and `log4j2.xml` configuration files will be available in `<system-folder>/target` directory.
     - By default the test certificates will be built into the executable jar files. If you want your own certificates being built-in, then place them into the `<system-folder>/src/main/resources/certificate` folder before executing the above mentioned maven command.
 * Execute `mysql -u <username> -p < create_empty_db.sql` command in the `<system-folder>/src/main/resources/database` folder for each system in order to create the database (if needed).
