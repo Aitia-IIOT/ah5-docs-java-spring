@@ -16,7 +16,7 @@ See details [here](../implementation.md).
 * Unzip the files.
 * Go to the `database` folder and execute `mysql -u {username} -p < create_empty_db.sql` command in order to create the database.
 
-## Start the core systems
+## Start the Core/Support systems
 
 * Make sure you have the proper values in the configuration file before starting the required core systems.
     
