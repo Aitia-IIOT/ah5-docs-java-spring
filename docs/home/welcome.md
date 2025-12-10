@@ -16,7 +16,7 @@ Each Local Cloud is recommended to host a set of core systems providing the mini
 - **ServiceRegistry** – Registers and discovers services, systems and optionally devices.
 - **ServiceOrchestration** – Selects suitable service providers based on the chosen orchestration strategy.
 - **ConsumerAuthorization** – Enforces access-control policies for service consumption.
-- **Authentication System** – Ensures trusted identity management within the Local Cloud.
+- **Authentication** – Ensures trusted identity management within the Local Cloud.
 
 **Supporting Systems**
 
