@@ -702,6 +702,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Compile Code
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -711,6 +722,52 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile-the-source-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile the source code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-coresupport-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start the Core/Support systems
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -8301,6 +8358,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile-the-source-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile the source code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-coresupport-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start the Core/Support systems
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -8318,7 +8410,40 @@
 
 
 <h1 id="compile-code">Compile Code</h1>
-<p>Coming soon...</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Make sure you are familiar with the <a href="../../../help/definitions/">basics</a>.</li>
+<li>Make sure you have the proper version of <strong>Java</strong> installed.</li>
+<li>Make sure you have the proper version of <strong>Maven</strong> installed.</li>
+<li>Make sure you have the proper version of <strong>MySQL</strong> installed.</li>
+</ul>
+<p>See details <a href="../../implementation/">here</a>.</p>
+<blockquote>
+<p><strong>Hint:</strong> <a href="../../../help/faq/#mysql-connections">MySQL connections configuration</a></p>
+</blockquote>
+<h2 id="compile-the-source-code">Compile the source code</h2>
+<ul>
+<li>Download or clone the source code repositories of the choosen Core/Support systems <a href="../../../contribute/code-contribution/#github-repositories">from GitHUB</a>.</li>
+<li>Execute <code>mvn clean install -DskipTests</code> in the root folder of each repository.</li>
+<li>After the build is complete, the executable <code>jar</code> file with the appropriate <code>application.properites</code> and <code>log4j2.xml</code> configuration files will be available in <code>&lt;system-folder&gt;/target</code> directory.<ul>
+<li>By default the test certificates will be built into the executable jar files. If you want your own certificates being built-in, then place them into the <code>&lt;system-folder&gt;/src/main/resources/certificate</code> folder before executing the above mentioned maven command.</li>
+</ul>
+</li>
+<li>Execute <code>mysql -u &lt;username&gt; -p &lt; create_empty_db.sql</code> command in the <code>&lt;system-folder&gt;/src/main/resources/database</code> folder for each system in order to create the database (if needed).</li>
+</ul>
+<h2 id="start-the-coresupport-systems">Start the Core/Support systems</h2>
+<ul>
+<li>
+<p>Make sure you have the proper values in the configuration file before starting the required core systems.</p>
+<blockquote>
+<p>The system configuration properties can be found in the <code>application.properties</code> file which is located next to the executable <code>.jar</code> file of the system. Look for the configuration possibilities in the system descriptions (<a href="../../../core_systems/service_registry/#configuration">example</a>). </p>
+</blockquote>
+</li>
+<li>
+<p>Execute <code>java -jar arrowhead-{core-system}-{version}.jar</code> from the same folder.</p>
+</li>
+<li>Note that always the ServiceRegistry Core System has to be started first. The other ones should be started only when ServiceRegistry is up and running.</li>
+</ul>
 
 
 
