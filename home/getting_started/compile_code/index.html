@@ -8423,8 +8423,8 @@
 </blockquote>
 <h2 id="compile-the-source-code">Compile the source code</h2>
 <ul>
-<li>Download or clone the source code repositories of the choosen Core/Support systems <a href="../../../contribute/code-contribution/#github-repositories">from GitHUB</a>.</li>
-<li>Execute <code>mvn clean install -DskipTests</code> in the root folder of each repository.</li>
+<li>Download or clone the source code repositories of the choosen Core/Support systems and the common library <a href="../../../contribute/code-contribution/#github-repositories">from GitHUB</a>.</li>
+<li>Execute <code>mvn clean install -DskipTests</code> in the root folder of the common library first, and then in the root folder of each repository.</li>
 <li>After the build is complete, the executable <code>jar</code> file with the appropriate <code>application.properites</code> and <code>log4j2.xml</code> configuration files will be available in <code>&lt;system-folder&gt;/target</code> directory.<ul>
 <li>By default the test certificates will be built into the executable jar files. If you want your own certificates being built-in, then place them into the <code>&lt;system-folder&gt;/src/main/resources/certificate</code> folder before executing the above mentioned maven command.</li>
 </ul>
