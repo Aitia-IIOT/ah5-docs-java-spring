@@ -3960,6 +3960,63 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#management-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Management API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Management API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Operator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Operator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declared_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      declared
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificate_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      certificate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outsourced_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      outsourced
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8619,6 +8676,63 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#management-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Management API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Management API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Operator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Operator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declared_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      declared
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificate_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      certificate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outsourced_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      outsourced
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8727,6 +8841,21 @@
 
 }
 </code></pre>
+<h2 id="management-api">Management API</h2>
+<p>Management-level APIs serve to provide administrative, governance and oversight operations within a Core/Support system and therefore require elevated access controls. Every Core/Support system that offers management services has the configuration possibility for management access control. See the <code>management.policy</code> configuration property.</p>
+<p>Three incremental policies are offered:</p>
+<ul>
+<li><code>sysop-only</code>, when the authenticated requester system has <em>system-operator</em> role that ensures overall management permission.</li>
+<li><code>whitelist</code>, <em>sysop-only</em> and when the authenticated requester system is whitelisted in the <code>management.whitelist</code> configuration property that ensures overall management permission.</li>
+<li><code>authorization</code>, <em>sysop-only</em> and <em>whitelist</em> and when the authenticated requester system has appropriate service permission according to the ConsumerAuthorization Core system.</li>
+</ul>
+<h3 id="system-operator">System Operator</h3>
+<h4 id="declared_1">declared</h4>
+<p>In <strong>declared</strong> authentication policy the <em>system-operator</em> role can be assigned by naming the requester system as <code>Sysop</code>.</p>
+<h4 id="certificate_1">certificate</h4>
+<p>In <strong>certificate</strong> authentication policy the <em>system-operator</em> role can be assigned by issuing a certificate with <a href="../../help/certificate-profiles/#operator-profile">operator profile</a>.</p>
+<h4 id="outsourced_1">outsourced</h4>
+<p>In <strong>outsourced</strong> authentication policy the requester system is considered as <em>system-operator</em> if the <a href="../../core_systems/authentication/#identity"><em>verify</em> operation of the <em>identity</em> serivce</a> results in a response where the <code>sysop</code> flag is <code>true</code>.</p>
 
 
 
