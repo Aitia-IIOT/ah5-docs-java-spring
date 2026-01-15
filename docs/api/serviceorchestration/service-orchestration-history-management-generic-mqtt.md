@@ -1,4 +1,4 @@
-# serviceOrchestrationHistoryManagement IDD (all strategy)
+# serviceOrchestrationHistoryManagement IDD (all strategies)
 **generic_mqtt & generic_mqtts**
 
 ## Overview

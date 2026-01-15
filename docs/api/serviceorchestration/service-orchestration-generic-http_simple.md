@@ -61,7 +61,8 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 ### subscribe
 
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a [ServiceOrchestrationSubscriptionRequest](../data-models/service-orchestration-subscription-request.md)
-JSON encoded body.
+JSON encoded body. The URI can contain an optional query parameter with the key "_trigger_" and a [Boolean](../primitives.md#boolean) value. If _trigger_ is true, then the orchestration process also will be executed.
+If we add this here, the dynamic orchestration http idd should be updated as well.
 
 ```
 POST /serviceorchestration/orchestration/subscribe?trigger=<trigger-value> HTTP/1.1
@@ -129,7 +130,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "errorMessage": "Invalid subscription id",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin": "DELETE /serviceorchestration/orchestration/unsubscribe"
+  "origin": "DELETE /serviceorchestration/orchestration/unsubscribe/d4d61873-07db-4e93-a16e-9465852bdabf"
 }
 ```
 

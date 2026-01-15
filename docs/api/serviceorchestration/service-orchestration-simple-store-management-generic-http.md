@@ -24,7 +24,9 @@ Authorization: Bearer <identity-info>
     "direction": "ASC",
     "sortField": "createdAt"
   },
-  "ids": "341f7626-bdee-4ec1-8cb9-23f88e04e374",
+  "ids": [
+    "341f7626-bdee-4ec1-8cb9-23f88e04e374"
+  ],
   "consumerNames": [
     "TestConsumerA",
     "TestConsumerB"
@@ -185,7 +187,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
 The service operation **request** requires an [identity related header or certificate](../authentication_policy.md/#http) and a query parameter _uuids_, which is a List<[UUID](../primitives.md#uuid)>. It contains the identifiers of the store entries to remove.
 
 ```
-DELETE /serviceorchestration/orchestration/mgmt/simple-store/query?uuids=d2fefc6a-f563-40a2-9ce4-3512c2887755&ids=a44ab333-cfb5-420b-a7cf-b327904e243b HTTP/1.1
+DELETE /serviceorchestration/orchestration/mgmt/simple-store/query?uuids=d2fefc6a-f563-40a2-9ce4-3512c2887755&uuids=a44ab333-cfb5-420b-a7cf-b327904e243b HTTP/1.1
 Authorization: Bearer <identity-info>
 ```
 The service operation **responds** with the status code `200` if called successfully. The success response does not contain any response body.

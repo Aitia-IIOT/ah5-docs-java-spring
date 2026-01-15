@@ -28,7 +28,9 @@ Topic: arrowhead/serviceorchestration/orchestration/management/store/query
          "direction": "ASC",
          "sortField": "createdAt"
       },
-      "ids": "341f7626-bdee-4ec1-8cb9-23f88e04e374",
+      "ids": [
+         "341f7626-bdee-4ec1-8cb9-23f88e04e374"
+      ],
       "consumerNames": [
          "TestConsumerA",
          "TestConsumerB"

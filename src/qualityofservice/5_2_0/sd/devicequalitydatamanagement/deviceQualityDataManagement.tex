@@ -123,7 +123,7 @@ In Section \ref{sec:model}, we end the document by presenting the data types use
 
 The most common use case is when a higher-level entity, such as a UI system, queries the actual metric values of a given system and visualizes them on a dashboard.
 
-Additionally, a higher-level entity that is aware that new systems have recently joined the LocalCloud can trigger the synchronization process before the automatic routine would start.
+Additionally, a higher-level entity that is aware that new systems have recently joined the Local Cloud can trigger the synchronization process before the automatic routine would start.
 
 \subsection{Important Delimitations}
 \label{sec:delimitations}
@@ -161,7 +161,7 @@ Operation \textit{query} lists the measurement metric value records that match t
 
 \fsubsection{reload}{QoSDeviceReloadRequest}{QoSDeviceReloadResponse}{}{ErrorResponse}
 
-Operation \textit{reload} triggers the synchronization process with the ServiceRegistry Core System
+Operation \textit{reload} triggers the synchronization process with the ServiceRegistry Core System.
 
 \clearpage
 
@@ -282,8 +282,8 @@ The concrete interpretations of each of these types and structures must be provi
 \pdef{OperationStatus}  & Logical, textual or numerical value that indicates whether an operation is a success or a failure. Multiple values can be used for success and error cases to give additional information about the nature of the result. \\ \hline
 \pdef{String}           & A chain of characters. \\ \hline
 \pdef{SystemName}             & A string identifier that is intended to be both human and machine-readable. Must follow PascalCase naming convention. \\ \hline
-\pdef{UUID}             & Universally Unique Identifier that is a 128-bit String identifier used to uniquely distinguish objects in distributed systems \\ \hline
-\end{tabularx}
+\pdef{UUID}             & Universally Unique Identifier that is a 128-bit String identifier used to uniquely distinguish objects in distributed systems. \\ \hline
+\end{tabularx}.
 \end{table}
 
 \newpage
