@@ -144,3 +144,27 @@ Topic: arrowhead/serviceregistry/system-discovery/revoke
    
 }
 ~~~
+
+## Management API
+
+Management-level APIs serve to provide administrative, governance and oversight operations within a Core/Support system and therefore require elevated access controls. Every Core/Support system that offers management services has the configuration possibility for management access control. See the `management.policy` configuration property.
+
+Three incremental policies are offered:
+
+- `sysop-only`, when the authenticated requester system has _system-operator_ role that ensures overall management permission.
+- `whitelist`, _sysop-only_ and when the authenticated requester system is whitelisted in the `management.whitelist` configuration property that ensures overall management permission.
+- `authorization`, _sysop-only_ and _whitelist_ and when the authenticated requester system has appropriate service permission according to the ConsumerAuthorization Core system.
+
+### System Operator
+
+#### declared
+
+In **declared** authentication policy the _system-operator_ role can be assigned by naming the requester system as `Sysop`.
+
+#### certificate
+
+In **certificate** authentication policy the _system-operator_ role can be assigned by issuing a certificate with [operator profile](../help/certificate-profiles.md#operator-profile).
+
+#### outsourced
+
+In **outsourced** authentication policy the requester system is considered as _system-operator_ if the [_verify_ operation of the _identity_ serivce](../core_systems/authentication.md#identity) results in a response where the `sysop` flag is `true`.

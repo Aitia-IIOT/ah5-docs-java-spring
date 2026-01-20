@@ -1,4 +1,4 @@
-# serviceOrchestrationHistoryManagement IDD (dynamic strategy)
+# serviceOrchestrationHistoryManagement IDD (all strategies)
 **generic_http & generic_https**
 
 ## Overview

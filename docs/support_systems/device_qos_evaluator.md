@@ -46,7 +46,7 @@ This service operation sorts a given list of systems according to their calculat
 The purpose of this service is to query the measurement metric values and also to trigger the synchronization with ServiceRegistry Core System manually. This service is offered for Core/Support systems.
 
 Learn more: <br />
-:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/deviceQualiyDataManagement_sd.pdf) <br />
+:material-file-document: [Abstract Service Description (SD)](../assets/sd/5_2_0/deviceQualityDataManagement_sd.pdf) <br />
 :material-api: [generic_http (IDD)](../api/deviceqosevaluator/device-quality-data-management-generic-http.md) | [generic_https (IDD)](../api/deviceqosevaluator/device-quality-data-management-generic-http.md) <br />
 :material-api: [generic_mqtt (IDD)](../api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md) | [generic_mqtts (IDD)](../api/deviceqosevaluator/device-quality-data-management-generic-mqtt.md) <br />
 :material-tag: since: v5.2.0 

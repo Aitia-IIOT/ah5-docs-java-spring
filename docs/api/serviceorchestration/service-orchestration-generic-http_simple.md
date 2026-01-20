@@ -1,4 +1,4 @@
-# serviceOrchestration IDD (dynamic strategy)
+# serviceOrchestration IDD (simple strategy)
 **generic_http & generic_https**
 
 ## Overview
@@ -20,37 +20,12 @@ Authorization: Bearer <identity-info>
 {
    "serviceRequirement": {
       "serviceDefinition": "kelvinInfo",
-      "operations": [
-         "query-temperature"
-      ],
-      "versions": [],
-      "alivesAt": "2025-10-05T11:35:14Z",
-      "metadataRequirements": [],
-      "interfaceTemplateNames": [
-         "generic_https"
-      ],
-      "interfaceAddressTypes": [
-         "HOSTNAME",
-         "IPV4"
-      ],
-      "interfacePropertyRequirements": [],
-      "securityPolicies": [
-         "TIME_LIMITED_TOKEN_AUTH"
-      ],
       "preferredProviders": []
    },
    "orchestrationFlags": {
       "MATCHMAKING": "true",
-      "ALLOW_TRANSLATION": "true",
-      "ONLY_PREFERRED": "false",
-      "ONLY_EXCLUSIVE": "false",
-      "ALLOW_INTERCLOUD": "false",
-      "ONLY_INTERCLOUD": "false"
-   },
-   "qosRequirements": {
-      "maxLatencyMs": "10"
-   },
-   "exclusivityDuration": 600
+      "ONLY_PREFERRED": "false"
+   }
 }
 ```
 
@@ -64,57 +39,19 @@ The service operation **responds** with the status code `200` if called successf
          "providerName": "TemperatureProvider2",
          "serviceDefinitition": "kelvinInfo",
          "version": "1.0.0",
-         "cloudIdentitifer": "LOCAL",
-         "aliveUntil": "2028-11-08T10:21:11Z",
-         "exclusiveUntil": "2025-10-05T11:35:14Z",
-         "metadata": {
-            "marginOfError": 0.5
-         },
-         "interfaces": [
-            {
-               "templateName": "generic_https",
-               "protocol": "https",
-               "policy": "TIME_LIMITED_TOKEN_AUTH",
-               "properties": {
-                  "accessAddresses": [
-                     "192.168.56.116",
-                     "tp2.greenhouse.com"
-                  ],
-                  "accessPort": 8080,
-                  "operations": {
-                     "query-temperature": {
-                        "path": "/query",
-                        "method": "GET"
-                     }
-                  },
-                  "basePath": "/kelvin"
-               }
-            }
-         ],
-         "authorizationTokens": {
-            "TIME_LIMITED_TOKEN_AUTH": {
-               "query-temperature": {
-                  "tokenType": "TIME_LIMITED_TOKEN",
-                  "targetType": "SERVICE_DEF",
-                  "token": "dsalefb521vdjkdsae633",
-                  "expiresAt": "2025-10-05T11:35:14Z"
-               }
-            }
-         }
+         "cloudIdentitifer": "LOCAL"
       }
    ],
-   "warnings": [
-      "part_time_exclusivity"
-   ]
+   "warnings": []
 }
 ```
 
 The **error codes** are `400` if the request is malformed, `401` if the requester authentication was unsuccessful,
-`403` if the authenticated requester has no permission, `500` if an unexpected error happens and `503` if an unexpected error happens while communicating with other systems. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
+`403` if the authenticated requester has no permission and `500` if an unexpected error happens. The error response also contains an [ErrorResponse](../data-models/error-response.md) JSON encoded body.
 
 ```
 {
-  "errorMessage": "QoS requirements are present, but QoS support is not enabled",
+  "errorMessage": "The specified service definition name does not match the naming convention: exampleservicename",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
   "origin": "POST /serviceorchestration/orchestration/pull"
@@ -134,45 +71,12 @@ Authorization: Bearer <identity-info>
    "orchestrationRequest": {
       "serviceRequirement": {
          "serviceDefinition": "kelvinInfo",
-         "operations": [
-            "query-temperature"
-         ],
-         "versions": [
-            
-         ],
-         "alivesAt": "2025-10-05T11:35:14Z",
-         "metadataRequirements": [
-            
-         ],
-         "interfaceTemplateNames": [
-            "generic_https"
-         ],
-         "interfaceAddressTypes": [
-            "HOSTNAME",
-            "IPV4"
-         ],
-         "interfacePropertyRequirements": [
-            
-         ],
-         "securityPolicies": [
-            "TIME_LIMITED_TOKEN_AUTH"
-         ],
-         "preferredProviders": [
-            
-         ]
+         "preferredProviders": []
       },
       "orchestrationFlags": {
          "MATCHMAKING": "true",
-         "ALLOW_TRANSLATION": "true",
-         "ONLY_PREFERRED": "false",
-         "ONLY_EXCLUSIVE": "false",
-         "ALLOW_INTERCLOUD": "false",
-         "ONLY_INTERCLOUD": "false"
-      },
-      "qosRequirements": {
-         "maxLatencyMs": "10"
-      },
-      "exclusivityDuration": 600
+         "ONLY_PREFERRED": "false"
+      }      
    },
    "notifyInterface": {
       "protocol": "mqtt",
@@ -225,7 +129,7 @@ The **error codes** are `400` if the request is malformed, `401` if the requeste
   "errorMessage": "Invalid subscription id",
   "errorCode": 400,
   "exceptionType": "INVALID_PARAMETER",
-  "origin": "DELETE /serviceorchestration/orchestration/unsubscribe"
+  "origin": "DELETE /serviceorchestration/orchestration/unsubscribe/d4d61873-07db-4e93-a16e-9465852bdabf"
 }
 ```
 

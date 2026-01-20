@@ -13,6 +13,7 @@ in order to create a translation bridge between consumer and provider systems.
 | Public Interface Translation Providers |
 | ---------------------------- |
 | [InterfaceTranslatorToGenericHTTP:octicons-link-external-16:](https://github.com/Aitia-IIOT/ah5-app-aitia-interface-translator-to-generic-http-java-spring) |
+| [InterfaceTranslatorToGenericMQTT:octicons-link-external-16:](https://github.com/Aitia-IIOT/ah5-app-aitia-interface-translator-to-generic-mqtt-java-spring) |
 
 [Learn more about how to develop your own Interface Translation provider.](../translation/translation_provider_dev.md#interface-translation-provider)
 
