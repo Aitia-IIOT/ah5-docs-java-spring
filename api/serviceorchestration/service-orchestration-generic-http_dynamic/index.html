@@ -8573,7 +8573,7 @@ Authorization: Bearer &lt;identity-info&gt;
 </code></pre>
 <h3 id="subscribe">subscribe</h3>
 <p>The service operation <strong>request</strong> requires an <a href="../../authentication_policy/#http">identity related header or certificate</a> and a <a href="../../data-models/service-orchestration-subscription-request/">ServiceOrchestrationSubscriptionRequest</a>
-JSON encoded body.</p>
+JSON encoded body. The URI can contain an optional query parameter with the key "<em>trigger</em>" and a <a href="../../primitives/#boolean">Boolean</a> value. If <em>trigger</em> is true, then the orchestration process also will be executed.</p>
 <pre><code>POST /serviceorchestration/orchestration/subscribe?trigger=&lt;trigger-value&gt; HTTP/1.1
 Authorization: Bearer &lt;identity-info&gt;
 

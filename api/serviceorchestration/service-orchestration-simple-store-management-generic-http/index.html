@@ -8499,7 +8499,9 @@ Authorization: Bearer &lt;identity-info&gt;
     &quot;direction&quot;: &quot;ASC&quot;,
     &quot;sortField&quot;: &quot;createdAt&quot;
   },
-  &quot;ids&quot;: &quot;341f7626-bdee-4ec1-8cb9-23f88e04e374&quot;,
+  &quot;ids&quot;: [
+    &quot;341f7626-bdee-4ec1-8cb9-23f88e04e374&quot;
+  ],
   &quot;consumerNames&quot;: [
     &quot;TestConsumerA&quot;,
     &quot;TestConsumerB&quot;
@@ -8629,7 +8631,7 @@ Authorization: Bearer &lt;identity-info&gt;
 </code></pre>
 <h3 id="remove">remove</h3>
 <p>The service operation <strong>request</strong> requires an <a href="../../authentication_policy/#http">identity related header or certificate</a> and a query parameter <em>uuids</em>, which is a List&lt;<a href="../../primitives/#uuid">UUID</a>&gt;. It contains the identifiers of the store entries to remove.</p>
-<pre><code>DELETE /serviceorchestration/orchestration/mgmt/simple-store/query?uuids=d2fefc6a-f563-40a2-9ce4-3512c2887755&amp;ids=a44ab333-cfb5-420b-a7cf-b327904e243b HTTP/1.1
+<pre><code>DELETE /serviceorchestration/orchestration/mgmt/simple-store/query?uuids=d2fefc6a-f563-40a2-9ce4-3512c2887755&amp;uuids=a44ab333-cfb5-420b-a7cf-b327904e243b HTTP/1.1
 Authorization: Bearer &lt;identity-info&gt;
 </code></pre>
 <p>The service operation <strong>responds</strong> with the status code <code>200</code> if called successfully. The success response does not contain any response body.</p>
