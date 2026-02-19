@@ -4,7 +4,16 @@ The purpose of test builds is to allow the community to test the release candida
 
 ## LATEST
 
-No recent TESTBUILD is available.
+#### :material-tag: 5.2.1-TESTBUILD-0
+
+:material-calendar: 19/02/2026 <br/>
+:material-note-text: [CL-5.2.1](../general/changelogs/cl521.md)
+
+System Name | Download
+--- | ---
+TranslationManager Support System | [AH-translationmanager-5.2.1-TESTBUILD-0.zip](https://github.com/Aitia-IIOT/ah5-translation-manager-java-spring/releases/download/v5.2.1-TESTBUILD-0/AH-translation-manager-5.2.1-TESTBUILD-0.zip)
+
+**Note:** Compatible with v5.2.0 release of other Core/Support systems.
 
 ## OUTDATED
 
