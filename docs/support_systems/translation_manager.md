@@ -131,6 +131,77 @@ This service operation lists the current values of the specified configuration s
 :material-arrow-right-thin: Example: [generic_http](../api/general/general-management-generic-http.md#get-config) | [generic_https](../api/general/general-management-generic-http.md#get-config)<br />
 :material-arrow-right-thin: Example: [generic_mqtt](../api/general/general-management-generic-mqtt.md#get-config) | [generic_mqtts](../api/general/general-management-generic-mqtt.md#get-config)
 
+## Way of working
+
+### The translation bridge
+
+This Support System can establish a translation bridge between a consumer and a provider using an independent [interface translator](../tools_assets/translation/translation_providers.md#interface-translation-providers) and, optionally, one or two [data model translators](../tools_assets/translation/translation_providers.md#data-model-translation-providers). Without an appropriate [interface translator](../tools_assets/translation/translation_providers.md#interface-translation-providers) provider, translation bridges cannot be established, even if no actual interface translation is required. The knowledge of how to use the [data model translator](../tools_assets/translation/translation_providers.md#data-model-translation-providers) providers is embedded in the [interface translator](../tools_assets/translation/translation_providers.md#interface-translation-providers) providers. Therefore, even when no interface translation is required, these providers are still necessary and effectively fulfill a proxy role.
+
+### Data model identifiers
+
+In order to successfully connect consumers and providers through translation bridges, they must reference common [data model identifiers](../api/primitives.md#datamodelid).
+
+Service provider systems have to publish their [data model identifiers](../api/primitives.md#datamodelid) as service interface properties at the time of service registration. Example:
+
+```
+{
+   "serviceDefinitionName": "kelvinInfo",
+   "interfaces": [
+      {
+         "templateName": "generic_http",
+         "protocol": "http",
+         "policy": "NONE",
+         "properties": {
+            "accessAddresses": [
+               "192.168.56.116",
+               "tp2.greenhouse.com"
+            ],
+            "accessPort": 8080,
+            "basePath": "/kelvin",
+            "operations": {
+               "query-temperature": {
+                  "method": "GET",
+                  "path": "/query"
+               }
+            },
+            "dataModels": {
+               "query-temperature": {
+                  "input": "abc123",
+                  "output": "def456"
+               }
+            }
+         }
+      }
+   ]
+}
+```
+
+Service consumer systems have to specify the required [data model identifiers](../api/primitives.md#datamodelid) as interface property requirements when orchestrating for a service provider or requesting a translation bridge directly from TranslationManager. Service orchestration example:
+
+```
+{
+   "serviceRequirement": {
+      "serviceDefinition": "kelvinInfo",
+      "operations": [
+         "query-temperature"
+      ],
+      "interfaceTemplateNames": [
+         "generic_https"
+      ],
+      "interfacePropertyRequirements": [
+        {
+          "dataModels.query-temperature.input": "xyz123",
+          "dataModels.query-temperature.output": "tuv123"
+        }
+      ]
+   },
+   "orchestrationFlags": {
+      "MATCHMAKING": "true",
+      "ALLOW_TRANSLATION": "true"
+   }
+}
+```
+
 ## Configuration
 
 The system configuration properties can be found in the `application.properties` file located at `/src/main/resources` folder.
