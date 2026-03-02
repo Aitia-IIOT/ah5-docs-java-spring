@@ -176,7 +176,7 @@ Service provider systems have to publish their [data model identifiers](../api/p
 }
 ```
 
-Service consumer systems have to specify the reqired [data model identifiers](../api/primitives.md#datamodelid) as interface property requirements when orchestrating for a service provider or requesting a translation bridge directly from TranslationManager. Service orchestration example:
+Service consumer systems have to specify the required [data model identifiers](../api/primitives.md#datamodelid) as interface property requirements when orchestrating for a service provider or requesting a translation bridge directly from TranslationManager. Service orchestration example:
 
 ```
 {
