@@ -1117,6 +1117,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#way-of-working" class="md-nav__link">
+    <span class="md-ellipsis">
+      Way of working
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Way of working">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-translation-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      The translation bridge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-model-identifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data model identifiers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Configuration
@@ -8489,6 +8522,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#way-of-working" class="md-nav__link">
+    <span class="md-ellipsis">
+      Way of working
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Way of working">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-translation-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      The translation bridge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-model-identifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data model identifiers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Configuration
@@ -8638,6 +8704,66 @@
 <p>This service operation lists the current values of the specified configuration settings.</p>
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/general/general-management-generic-http/#get-config">generic_http</a> | <a href="../../api/general/general-management-generic-http/#get-config">generic_https</a><br />
 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 16.94v-4H5.08l-.03-2.01H14V6.94l5 5Z"/></svg></span> Example: <a href="../../api/general/general-management-generic-mqtt/#get-config">generic_mqtt</a> | <a href="../../api/general/general-management-generic-mqtt/#get-config">generic_mqtts</a></p>
+<h2 id="way-of-working">Way of working</h2>
+<h3 id="the-translation-bridge">The translation bridge</h3>
+<p>This Support System can establish a translation bridge between a consumer and a provider using an independent <a href="../../tools_assets/translation/translation_providers/#interface-translation-providers">interface translator</a> and, optionally, one or two <a href="../../tools_assets/translation/translation_providers/#data-model-translation-providers">data model translators</a>. Without an appropriate <a href="../../tools_assets/translation/translation_providers/#interface-translation-providers">interface translator</a> provider, translation bridges cannot be established, even if no actual interface translation is required. The knowledge of how to use the <a href="../../tools_assets/translation/translation_providers/#data-model-translation-providers">data model translator</a> providers is embedded in the <a href="../../tools_assets/translation/translation_providers/#interface-translation-providers">interface translator</a> providers. Therefore, even when no interface translation is required, these providers are still necessary and effectively fulfill a proxy role.</p>
+<h3 id="data-model-identifiers">Data model identifiers</h3>
+<p>In order to successfully connect consumers and providers through translation bridges, they must reference common <a href="../../api/primitives/#datamodelid">data model identifiers</a>.</p>
+<p>Service provider systems have to publish their <a href="../../api/primitives/#datamodelid">data model identifiers</a> as service interface properties at the time of service registration. Example:</p>
+<pre><code>{
+   &quot;serviceDefinitionName&quot;: &quot;kelvinInfo&quot;,
+   &quot;interfaces&quot;: [
+      {
+         &quot;templateName&quot;: &quot;generic_http&quot;,
+         &quot;protocol&quot;: &quot;http&quot;,
+         &quot;policy&quot;: &quot;NONE&quot;,
+         &quot;properties&quot;: {
+            &quot;accessAddresses&quot;: [
+               &quot;192.168.56.116&quot;,
+               &quot;tp2.greenhouse.com&quot;
+            ],
+            &quot;accessPort&quot;: 8080,
+            &quot;basePath&quot;: &quot;/kelvin&quot;,
+            &quot;operations&quot;: {
+               &quot;query-temperature&quot;: {
+                  &quot;method&quot;: &quot;GET&quot;,
+                  &quot;path&quot;: &quot;/query&quot;
+               }
+            },
+            &quot;dataModels&quot;: {
+               &quot;query-temperature&quot;: {
+                  &quot;input&quot;: &quot;abc123&quot;,
+                  &quot;output&quot;: &quot;def456&quot;
+               }
+            }
+         }
+      }
+   ]
+}
+</code></pre>
+<p>Service consumer systems have to specify the required <a href="../../api/primitives/#datamodelid">data model identifiers</a> as interface property requirements when orchestrating for a service provider or requesting a translation bridge directly from TranslationManager. Service orchestration example:</p>
+<pre><code>{
+   &quot;serviceRequirement&quot;: {
+      &quot;serviceDefinition&quot;: &quot;kelvinInfo&quot;,
+      &quot;operations&quot;: [
+         &quot;query-temperature&quot;
+      ],
+      &quot;interfaceTemplateNames&quot;: [
+         &quot;generic_https&quot;
+      ],
+      &quot;interfacePropertyRequirements&quot;: [
+        {
+          &quot;dataModels.query-temperature.input&quot;: &quot;xyz123&quot;,
+          &quot;dataModels.query-temperature.output&quot;: &quot;tuv123&quot;
+        }
+      ]
+   },
+   &quot;orchestrationFlags&quot;: {
+      &quot;MATCHMAKING&quot;: &quot;true&quot;,
+      &quot;ALLOW_TRANSLATION&quot;: &quot;true&quot;
+   }
+}
+</code></pre>
 <h2 id="configuration">Configuration</h2>
 <p>The system configuration properties can be found in the <code>application.properties</code> file located at <code>/src/main/resources</code> folder.</p>
 <p><strong><em>Note:</em></strong> During the build process this file is going to be built into the executable JAR, but also going to be copied next to the JAR file. Any modification in the configuration file located next to the executable JAR file will override the built in configuration property value.</p>
