@@ -31,3 +31,12 @@ in order to integrating into a translation bridge.
 | [SemanticAITranslator:octicons-link-external-16:](https://github.com/Aitia-IIOT/ah5-app-aitia-datamodel-translator-python-wrapper-java-spring) |
 
 [Learn more about how to develop your own Data Model Translation provider.](../translation/translation_provider_dev.md#data-model-translation-provider)
+
+## Data Model Translator Factories
+
+The data model translator factories are individual [application systems](../../help/definitions.md#application-system) that are capable
+
+- to create, initialize and emulate [data model translation providers](#data-model-translation-providers) on demand and
+- to cooperate with the [TranslationManager Support System](../../support_systems/translation_manager.md) by providing the [dataModelTranslationFactoryControl](translation_provider_dev.md#data-model-translatior-factory) service
+
+in order to support the translation bridge creation process.

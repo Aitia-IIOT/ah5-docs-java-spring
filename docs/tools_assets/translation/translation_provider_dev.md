@@ -153,3 +153,16 @@ pair. For example:
    ]
 }
 ```
+
+## Data Model Translatior Factory
+
+The following specifications must be met to develop a compliant [Data Model Translatior Factory](./translation_providers.md#data-model-translator-factories):
+
+| Specifications |     |
+| -------------- | --- |
+| **DataModelTranslatorFactory** System | [System Description](../../assets/sysd/5_2_1/DataModelTranslatorFactory_SysD.pdf) |
+| **dataModelTranslatorFactoryControl** Service (provide) | [Service Description](../../assets/sd/5_2_1/dataModelTranslatorFactoryControl_sd.pdf), [Interface Design Description](../../api/add-on/dataModelTranslatorFactoryControl-generic-http.md) |
+
+### Service security requirements
+
+The dataModelTranslatorFactoryControl service must be provided with either the [NONE](../../help/service-security.md#none) or [CERT_AUTH](../../help/service-security.md#cert_auth) security policy. When the [TranlsationManager Support System](../../support_systems/translation_manager.md) applies the [CERT_AUTH](../../help/service-security.md#cert_auth) policy, then it looks for dataModelTranslatorFactoryControl service instances configured with [CERT_AUTH](../../help/service-security.md#cert_auth) or [NONE](../../help/service-security.md#none). If it applies the [NONE](../../help/service-security.md#none) policy, it looks only for dataModelTranslatorFactoryControl service instances configured with [NONE](../../help/service-security.md#none).
