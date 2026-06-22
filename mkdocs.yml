@@ -116,8 +116,9 @@ nav:
             - translationReport: api/translationmanager/translation-report-generic-mqtt.md
       - Add-on Services:
           - HTTP:
-            - dataModelTranslation: api/add-on/dataModelTranslation-generic-http.md
             - interfaceBridgeManagement: api/add-on/interfaceBridgeManagement-generic-http.md
+            - dataModelTranslation: api/add-on/dataModelTranslation-generic-http.md
+            - dataModelTranslatorFactoryControl: api/add-on/dataModelTranslatorFactoryControl-generic-http.md
 
     - Authentication Policy: api/authentication_policy.md
     - Data Models:
@@ -160,7 +161,9 @@ nav:
       - Credentials: api/data-models/credentials.md
       - DataModelMap: api/data-models/data-model-map.md
       - DataModelTranslationDescriptor: api/data-models/data-model-translation-descriptor.md
+      - DataModelTranslationFactoryRequest: api/data-models/data-model-translation-factory-request.md
       - DataModelTranslationInitRequest: api/data-models/data-model-translation-init-request.md
+      - DataModelTranslatorResult: api/data-models/data-model-translator-result.md
       - DataTranslationResultResponse: api/data-models/data-translation-result-response.md
       - DeviceDescriptor: api/data-models/device-descriptor.md
       - DeviceListRequest: api/data-models/device-list-request.md
