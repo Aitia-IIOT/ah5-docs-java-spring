@@ -3966,6 +3966,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../api/add-on/interfaceBridgeManagement-generic-http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    interfaceBridgeManagement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../api/add-on/dataModelTranslation-generic-http/" class="md-nav__link">
         
   
@@ -3987,11 +4008,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../api/add-on/interfaceBridgeManagement-generic-http/" class="md-nav__link">
+      <a href="../../../../api/add-on/dataModelTranslatorFactoryControl-generic-http/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    interfaceBridgeManagement
+    dataModelTranslatorFactoryControl
   </span>
   
 
@@ -4910,11 +4931,53 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../api/data-models/data-model-translation-factory-request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataModelTranslationFactoryRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../api/data-models/data-model-translation-init-request/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     DataModelTranslationInitRequest
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../api/data-models/data-model-translator-result/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataModelTranslatorResult
   </span>
   
 
@@ -8856,7 +8919,7 @@ SERVICE_REGISTRY_PORT=&lt;exposed-port-of-the-serviceregistry-to-its-host&gt;
 services:
 
     serviceregistry-db:
-        image: aitiaiiot/arrowhead-serviceregistry-db:5.2.0
+        image: aitiaiiot/arrowhead-serviceregistry-db:5.2.1
         container_name: arrowhead-serviceregistry-db
         restart: unless-stopped
         environment:
@@ -8877,7 +8940,7 @@ volumes:
 services:
 
     serviceorchestration-dynamic-db:
-        image: aitiaiiot/arrowhead-serviceorchestration-dynamic-db:5.2.0
+        image: aitiaiiot/arrowhead-serviceorchestration-dynamic-db:5.2.1
         container_name: arrowhead-serviceorchestration-dynamic-db
         restart: unless-stopped
         environment:
@@ -8898,7 +8961,7 @@ volumes:
 services:
 
     serviceorchestration-simple-db:
-        image: aitiaiiot/arrowhead-serviceorchestration-simple-db:5.2.0
+        image: aitiaiiot/arrowhead-serviceorchestration-simple-db:5.2.1
         container_name: arrowhead-serviceorchestration-simple-db
         restart: unless-stopped
         environment:
@@ -8919,7 +8982,7 @@ volumes:
 services:
 
     consumerauthorization-db:
-        image: aitiaiiot/arrowhead-consumerauthorization-db:5.2.0
+        image: aitiaiiot/arrowhead-consumerauthorization-db:5.2.1
         container_name: arrowhead-consumerauthorization-db
         restart: unless-stopped
         environment:
@@ -8940,7 +9003,7 @@ volumes:
 services:
 
     authentication-db:
-        image: aitiaiiot/arrowhead-authentication-db:5.2.0
+        image: aitiaiiot/arrowhead-authentication-db:5.2.1
         container_name: arrowhead-authentication-db
         restart: unless-stopped
         environment:
@@ -8961,7 +9024,7 @@ volumes:
 services:
 
     blacklist-db:
-        image: aitiaiiot/arrowhead-blacklist-db:5.2.0
+        image: aitiaiiot/arrowhead-blacklist-db:5.2.1
         container_name: arrowhead-blacklist-db
         restart: unless-stopped
         environment:
@@ -8982,7 +9045,7 @@ volumes:
 services:
 
     translation-manager-db:
-        image: aitiaiiot/arrowhead-translation-manager-db:5.2.0
+        image: aitiaiiot/arrowhead-translation-manager-db:5.2.1
         container_name: arrowhead-translation-manager-db
         restart: unless-stopped
         environment:
@@ -9003,7 +9066,7 @@ volumes:
 services:
 
     device-qos-evaluator-db:
-        image: aitiaiiot/arrowhead-device-qos-evaluator-db:5.2.0
+        image: aitiaiiot/arrowhead-device-qos-evaluator-db:5.2.1
         container_name: arrowhead-device-qos-evaluator-db
         restart: unless-stopped
         environment:
@@ -9025,7 +9088,7 @@ volumes:
 services:
 
     serviceregistry:
-        image: aitiaiiot/arrowhead-serviceregistry:5.2.0
+        image: aitiaiiot/arrowhead-serviceregistry:5.2.1
         container_name: arrowhead-serviceregistry
         restart: unless-stopped
         environment:
@@ -9042,7 +9105,7 @@ services:
 services:
 
     serviceorchestration-dynamic:
-        image: aitiaiiot/arrowhead-serviceorchestration-dynamic:5.2.0
+        image: aitiaiiot/arrowhead-serviceorchestration-dynamic:5.2.1
         container_name: arrowhead-serviceorchestration-dynamic
         restart: unless-stopped
         environment:
@@ -9061,7 +9124,7 @@ services:
 services:
 
     serviceorchestration-simple:
-        image: aitiaiiot/arrowhead-serviceorchestration-simple:5.2.0
+        image: aitiaiiot/arrowhead-serviceorchestration-simple:5.2.1
         container_name: arrowhead-serviceorchestration-simple
         restart: unless-stopped
         environment:
@@ -9080,7 +9143,7 @@ services:
 services:
 
     consumerauthorization:
-        image: aitiaiiot/arrowhead-consumerauthorization:5.2.0
+        image: aitiaiiot/arrowhead-consumerauthorization:5.2.1
         container_name: arrowhead-consumerauthorization
         restart: unless-stopped
         environment:
@@ -9099,7 +9162,7 @@ services:
 services:
 
     authentication:
-        image: aitiaiiot/arrowhead-authentication:5.2.0
+        image: aitiaiiot/arrowhead-authentication:5.2.1
         container_name: arrowhead-authentication
         restart: unless-stopped
         environment:
@@ -9118,7 +9181,7 @@ services:
 services:
 
     blacklist:
-        image: aitiaiiot/arrowhead-blacklist:5.2.0
+        image: aitiaiiot/arrowhead-blacklist:5.2.1
         container_name: arrowhead-blacklist
         restart: unless-stopped
         environment:
@@ -9137,7 +9200,7 @@ services:
 services:
 
     translation-manager:
-        image: aitiaiiot/arrowhead-translation-manager:5.2.0
+        image: aitiaiiot/arrowhead-translation-manager:5.2.1
         container_name: arrowhead-translation-manager
         restart: unless-stopped
         environment:
@@ -9156,7 +9219,7 @@ services:
 services:
 
     device-qos-evaluator:
-        image: aitiaiiot/arrowhead-device-qos-evaluator:5.2.0
+        image: aitiaiiot/arrowhead-device-qos-evaluator:5.2.1
         container_name: arrowhead-device-qos-evaluator
         restart: unless-stopped
         environment:
