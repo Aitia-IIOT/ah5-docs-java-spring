@@ -5,7 +5,7 @@
 
 This page describes the [generic_http](../communication-profiles/generic-http-template.md) and [generic_https](../communication-profiles/generic-https-template.md) service interface of dataModelTranslatorFactoryControl, which enables on-demand creation of DataModelTranslator providers.
 
-Hereby the **Interface Design Description** (IDD) is provided to the [dataModelTranslatorFactoryControl – Service Description](../../assets/sd/5_2_1/dataModelTranslatorFactoryControl_sd). For further details about how this service is meant to be used, please consult that document.
+Hereby the **Interface Design Description** (IDD) is provided to the [dataModelTranslatorFactoryControl – Service Description](../../assets/sd/5_2_1/dataModelTranslatorFactoryControl_sd.pdf). For further details about how this service is meant to be used, please consult that document.
 
 ## Interface Description
 
