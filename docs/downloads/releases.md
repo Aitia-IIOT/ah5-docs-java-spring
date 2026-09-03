@@ -1,5 +1,20 @@
 # Releases
 
+#### :material-tag: 5.2.2
+
+:material-calendar: 03/09/2026
+
+System Name | File
+--- | ---  
+ServiceRegistry Core System | [AH-serviceregistry-5.2.2.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.2.2/AH-serviceregistry-5.2.2.zip)
+DynamicServiceOrchestration Core System | [AH-serviceorchestration-dynamic-5.2.2.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.2.2/AH-serviceorchestration-dynamic-5.2.2.zip)
+SimpleStoreServiceOrchestration Core System | [AH-serviceorchestration-simple-5.2.2.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.2.2/AH-serviceorchestration-simple-5.2.2.zip)
+ConsumerAuthorization Core System | [AH-consumer-authorization-5.2.2.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.2.2/AH-consumer-authorization-5.2.2.zip)
+Authentication Core System | [AH-authentication-5.2.2.zip](https://github.com/eclipse-arrowhead/ah5-core-java-spring/releases/download/v5.2.2/AH-authentication-5.2.2.zip)
+Blacklist Support System | [AH-blacklist-5.2.2.zip](https://github.com/eclipse-arrowhead/ah5-blacklist-java-spring/releases/download/v5.2.2/AH-blacklist-5.2.2.zip)
+TranslationManager Support System | [AH-translation-manager-5.2.2.zip](https://github.com/eclipse-arrowhead/ah5-translation-manager-java-spring/releases/download/v5.2.2/AH-translation-manager-5.2.2.zip)
+DeviceQoSEvaluator Support System | [AH-device-qos-evaluator-5.2.2.zip](https://github.com/eclipse-arrowhead/ah5-device-qos-evaluator-java-spring/releases/download/v5.2.2/AH-device-qos-evaluator-5.2.2.zip)
+
 #### :material-tag: 5.2.1
 
 :material-calendar: 26/06/2026
